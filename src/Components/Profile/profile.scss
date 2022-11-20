@@ -1,0 +1,66 @@
+.pr-wrapper > div {
+  display: flex;
+
+  & > p {
+    font-size: 1.25rem;
+  }
+  & > p:nth-child(2n + 1) {
+    font-family: "Rubik-Semibold";
+    width: 20rem;
+    text-align: left;
+  }
+}
+.pr-wrapper {
+  display: inline-block;
+  border: 3px solid #1b1b1b80;
+  border-radius: 20px;
+  padding: 1rem;
+}
+
+.pr {
+  text-align: center;
+  padding-top: 1rem;
+  button {
+    margin-top: 0.5rem;
+    width: 12rem;
+    font-size: 1.25rem;
+    border: 1px solid #1b1b1b80;
+    border-radius: 5px;
+    background-color: rgba(97, 161, 153, 0.1);
+    &:hover {
+      font-weight: 800;
+      background-color: rgba(97, 161, 153, 0.2);
+    }
+  }
+}
+
+.pr-pass {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.5rem;
+  background-color: rgba(167, 173, 173, 0.2);
+  label {
+    margin: 0.25rem;
+  }
+  .pr-pass__control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .pr-error {
+    color: red;
+  }
+}
+
+.pr-ts {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  p {
+    text-align: left;
+  }
+  p:first-child {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+}

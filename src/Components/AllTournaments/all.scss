@@ -1,0 +1,136 @@
+.table {
+  width: fit-content;
+  margin: 2rem auto;
+}
+
+.table__body {
+  .table__line:nth-child(2n) {
+    background-color: rgba(97, 161, 153, 0.2);
+  }
+}
+
+.table__header {
+  display: flex;
+  .table__header_t {
+    border: 1px solid rgba(27, 27, 27, 0.4);
+    background-color: rgba(15, 110, 78, 0.5);
+    font-family: "Rubik-Semibold";
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    position: relative;
+    padding-left: 0.4rem;
+    div {
+      position: absolute;
+      width: 1.2rem;
+      bottom: 0.65rem;
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+  .table__header_t:nth-child(1) {
+    width: 3rem;
+    overflow: hidden;
+    text-align: center;
+    padding-left: unset;
+  }
+  .table__header_t:nth-child(2) {
+    width: 35rem;
+    text-align: start;
+    div {
+      left: 6.2rem;
+    }
+  }
+  .table__header_t:nth-child(3) {
+    width: 7.5rem;
+    div {
+      left: 3.4rem;
+    }
+  }
+  .table__header_t:nth-child(4) {
+    width: 7.3rem;
+    div {
+      left: 5.5rem;
+    }
+  }
+  .table__header_t:nth-child(5) {
+    width: 5.4rem;
+    div {
+      left: 3.6rem;
+    }
+  }
+  .table__header_t:nth-child(6) {
+    width: 9rem;
+    div {
+      left: 6.2rem;
+    }
+  }
+  .table__header_t:nth-child(7) {
+    width: 11rem;
+    overflow: hidden;
+    div {
+      left: 5.5rem;
+    }
+  }
+}
+
+.table__line {
+  display: flex;
+  .link {
+    border: 1px solid rgba(27, 27, 27, 0.4);
+    display: flex;
+    align-items: center;
+    width: 35rem;
+
+    a {
+      padding-left: 0.4rem;
+      font-size: 1.1rem;
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  p {
+    border: 1px solid rgba(27, 27, 27, 0.4);
+    text-align: center;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    position: relative;
+  }
+  p:nth-child(1) {
+    width: 3rem;
+    overflow: hidden;
+  }
+  p:nth-child(2) {
+    width: 35rem;
+    text-align: start;
+    padding-left: 0.5rem;
+    div {
+      left: 6.2rem;
+      bottom: 0.7rem;
+    }
+  }
+  p:nth-child(3) {
+    width: 7.5rem;
+    div {
+      left: 5.3rem;
+      bottom: 0.7rem;
+    }
+  }
+  p:nth-child(4) {
+    width: 7.3rem;
+  }
+  p:nth-child(5) {
+    width: 5.4rem;
+  }
+  p:nth-child(6) {
+    width: 9rem;
+  }
+  p:nth-child(7) {
+    width: 11rem;
+    text-align: start;
+    padding-left: 0.5rem;
+    overflow: hidden;
+  }
+}

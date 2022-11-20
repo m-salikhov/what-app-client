@@ -1,0 +1,64 @@
+@import "nullstyle.scss";
+
+@font-face {
+  src: url("Fonts/Rubik-SemiBold.ttf");
+  font-family: "Rubik-Semibold";
+}
+
+@font-face {
+  src: url("Fonts/Rubik-Regular.ttf");
+  font-family: "Rubik-Regular";
+}
+
+$font-stack: "Rubik-Regular", Arial, Helvetica;
+
+body {
+  font-family: $font-stack;
+  background-color: rgba(223, 223, 223, 0.1);
+}
+p {
+  font-size: 1.1rem;
+  line-height: 1.3;
+}
+h1 {
+  font-family: "Rubik-Semibold";
+  font-size: 2.125rem;
+}
+
+h2 {
+  font-family: "Rubik-Semibold";
+  font-size: 1.6rem;
+}
+h3,
+h4 {
+  font-size: 1.3rem;
+}
+
+#root {
+  height: 100%;
+  .layout {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    main {
+      margin: 1rem 3% 0rem;
+    }
+    footer {
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding-top: 2rem;
+    }
+  }
+}
+
+// @media (max-width: 800px) {
+//   #root {
+//     .layout {
+//       main {
+//         margin: unset;
+//       }
+//     }
+//   }
+// }

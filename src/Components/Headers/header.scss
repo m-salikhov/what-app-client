@@ -1,0 +1,47 @@
+header {
+  display: flex;
+  justify-content: space-between;
+  // border-bottom: 2px solid rgba(188, 74, 74, 0.4);
+  background-color: rgba(97, 161, 153, 0.2);
+  box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.3);
+  div {
+    display: flex;
+    height: 3rem;
+    cursor: pointer;
+    img {
+      padding: 0.4rem 0 0.4rem 0.4rem;
+    }
+    h2 {
+      padding-left: 0.5rem;
+      font-size: 2.25rem;
+      font-family: "Rubik-Semibold";
+      margin: auto 0rem;
+    }
+  }
+}
+
+nav {
+  display: flex;
+  ul {
+    display: flex;
+    align-items: center;
+
+    height: 100%;
+    li {
+      display: flex;
+      height: 100%;
+      font-size: 1.125rem;
+      font-weight: 600;
+      padding: 0rem 0.5rem;
+      color: rgba(134, 123, 123, 0.8);
+      &:hover {
+        color: rgb(127, 97, 97);
+      }
+      a {
+        padding-top: 1rem;
+
+        height: 100%;
+      }
+    }
+  }
+}
