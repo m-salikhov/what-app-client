@@ -25,22 +25,17 @@
 }
 
 .tournament__content {
-  // width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  .back {
-    align-self: flex-start;
-  }
   .question {
     max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 
-@media (max-width: 800px) {
-  .tournament_content {
-    .question {
-      width: unset;
-    }
-  }
-}
+// @media (max-width: 800px) {
+//   .tournament_content {
+//     .question {
+//       width: unset;
+//     }
+//   }
+// }

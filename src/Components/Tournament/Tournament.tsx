@@ -57,13 +57,10 @@ const Tournament = () => {
       </div>
       <div className="tournament__content">
         <div className="back">
-          {" "}
           <Back />
         </div>
         {loading && <SkeletonQuestion count={6} />}
-        {t.questions.map((v) => (
-          <Question q={v} key={v.id} />
-        ))}
+        {!loading && t.questions.map((v) => <Question q={v} key={v.id} />)}
       </div>
     </main>
   );

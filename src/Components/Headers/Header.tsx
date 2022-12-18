@@ -4,8 +4,10 @@ import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
 import { userSlice } from "../../Store/reducers/UserSlice";
 import owlBW from "./owlBW.svg";
+import { useState } from "react";
 
 const Header = () => {
+  const [openMobMenu, setOpenMobMenu] = useState(false);
   const { currentUser } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -26,14 +28,21 @@ const Header = () => {
         <h2>База вопросов</h2>
       </div>
 
-      <nav>
+      <nav
+        className={openMobMenu ? "mob-menu" : undefined}
+        onClick={() => {
+          if (openMobMenu === false) {
+            document.body.style.overflow = "hidden";
+          } else document.body.style.overflow = "visible";
+          setOpenMobMenu(false);
+        }}
+      >
         <ul>
-          {currentUser?.id === "superuser" && (
+          {currentUser?.role === "superuser" && (
             <li>
               <Link to="/edit"> Редактировать</Link>
             </li>
           )}
-          {/* Только админ */}
           {currentUser?.id && (
             <li>
               <Link to="/add"> Добавить турнир</Link>
@@ -46,13 +55,11 @@ const Header = () => {
           <li>
             <Link to="/all">Все турниры</Link>
           </li>
-          {/* TODO только у пользователя и админа */}
           {currentUser?.id && (
             <li>
               <Link to="/profile">Профиль</Link>
             </li>
           )}
-          {/* TODO войти/выйти  */}
           {currentUser?.id ? (
             <li>
               <Link to="/" onClick={logout}>
@@ -66,6 +73,19 @@ const Header = () => {
           )}
         </ul>
       </nav>
+      <div
+        className={openMobMenu ? "mob-btn open" : "mob-btn"}
+        onClick={() => {
+          if (openMobMenu === false) {
+            document.body.style.overflow = "hidden";
+          } else document.body.style.overflow = "visible";
+          setOpenMobMenu(!openMobMenu);
+        }}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </header>
   );
 };

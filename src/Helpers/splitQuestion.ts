@@ -35,7 +35,7 @@ function splitQuestion(str: string): Partial<QuestionType> {
 
   const author = normStr.substring(iAuthor + 7);
 
-  const sourceStr = normStr.substring(iSource + 14, iAuthor);
+  const sourceStr = normStr.substring(iSource + 13, iAuthor);
   const oneOrManySources = /\s\d.\s/.test(sourceStr);
   let source: string[] = [];
   if (!oneOrManySources) {

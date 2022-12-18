@@ -1,7 +1,7 @@
 header {
   display: flex;
   justify-content: space-between;
-  // border-bottom: 2px solid rgba(188, 74, 74, 0.4);
+
   background-color: rgba(97, 161, 153, 0.2);
   box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.3);
   div {
@@ -25,7 +25,6 @@ nav {
   ul {
     display: flex;
     align-items: center;
-
     height: 100%;
     li {
       display: flex;
@@ -39,9 +38,82 @@ nav {
       }
       a {
         padding-top: 1rem;
-
         height: 100%;
       }
     }
+  }
+}
+
+.mob-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 0.7rem;
+  span {
+    width: 25px;
+    height: 3px;
+    margin: 2px 0px;
+    background-color: black;
+    transition: 0.3s;
+  }
+}
+
+.mob-btn.open {
+  span:first-child {
+    transform: rotate(45deg) translateY(5px);
+    transition: 0.3s;
+  }
+  span:nth-child(2) {
+    display: none;
+  }
+  span:last-child {
+    transform: rotate(-45deg) translateY(-5px);
+    transition: 0.3s;
+  }
+}
+
+@media (max-width: 800px) {
+  header {
+    div {
+      h2 {
+        font-size: 1.75rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  nav {
+    position: absolute;
+    top: 3rem;
+    width: 100%;
+    height: 100%;
+    transform: translateX(-100%);
+
+    ul {
+      flex-direction: column;
+      width: 70%;
+      z-index: 10;
+      background-color: white;
+      li {
+        height: 3rem;
+        font-size: 1.4rem;
+      }
+    }
+  }
+  .mob-menu {
+    transform: translateX(0);
+    z-index: 1;
+    backdrop-filter: blur(2px);
+    transition: transform 0.5s;
+    ul {
+      z-index: 10;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .mob-btn {
+    display: none;
   }
 }
