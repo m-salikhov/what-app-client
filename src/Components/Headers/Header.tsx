@@ -20,6 +20,13 @@ const Header = () => {
 
     dispatch(userSlice.actions.resetCurrentUser());
   };
+  const onClick = () => {
+    if (window.innerWidth < 800 && !openMobMenu)
+      document.body.style.overflow = "hidden";
+    if (window.innerWidth < 800 && openMobMenu)
+      document.body.style.overflow = "visible";
+    setOpenMobMenu(!openMobMenu);
+  };
 
   return (
     <header>
@@ -28,15 +35,7 @@ const Header = () => {
         <h2>База вопросов</h2>
       </div>
 
-      <nav
-        className={openMobMenu ? "mob-menu" : undefined}
-        onClick={() => {
-          if (openMobMenu === false) {
-            document.body.style.overflow = "hidden";
-          } else document.body.style.overflow = "visible";
-          setOpenMobMenu(false);
-        }}
-      >
+      <nav className={openMobMenu ? "mob-menu" : undefined} onClick={onClick}>
         <ul>
           {currentUser?.role === "superuser" && (
             <li>
@@ -75,12 +74,7 @@ const Header = () => {
       </nav>
       <div
         className={openMobMenu ? "mob-btn open" : "mob-btn"}
-        onClick={() => {
-          if (openMobMenu === false) {
-            document.body.style.overflow = "hidden";
-          } else document.body.style.overflow = "visible";
-          setOpenMobMenu(!openMobMenu);
-        }}
+        onClick={onClick}
       >
         <span></span>
         <span></span>

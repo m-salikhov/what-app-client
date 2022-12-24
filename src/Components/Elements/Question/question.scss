@@ -52,10 +52,10 @@
     span {
       font-family: "Rubik-Semibold";
     }
-    .answer__source--one {
+    .answer__source_one {
       overflow-x: auto;
     }
-    .answer__source--many {
+    .answer__source_many {
       font-family: "Rubik-Semibold";
       & ~ p {
         padding-left: 0.5rem;
@@ -84,7 +84,7 @@
 }
 
 .ans {
-  max-height: 400px;
+  max-height: 500px;
   overflow: hidden;
   transition: max-height 0.7s;
   // transition-timing-function: linear;

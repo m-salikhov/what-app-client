@@ -18,13 +18,13 @@ const Answer: FC<{ q: QuestionType }> = ({ q }) => {
         </p>
       )}
       {q.source?.length === 1 && (
-        <p className="answer__source--one">
+        <p className="answer__source_one">
           <span>Источник:</span> {q.source}
         </p>
       )}
       {q.source && q.source.length > 1 && (
         <div>
-          <p className="answer__source--many">Источники:</p>
+          <p className="answer__source_many">Источники:</p>
           {q.source.map((v, i) => {
             return (
               <p key={i}>
