@@ -37,37 +37,37 @@ const All = () => {
           <div className="table__header_t">
             Название{" "}
             <div className="title" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Дата{" "}
             <div className="date" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Вопросы{" "}
             <div className="questionsQuantity" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Туры{" "}
             <div className="tours" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Добавлен{" "}
             <div className="dateUpload" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Добавил{" "}
             <div className="uploader" onClick={sort}>
-              <img src={chart} alt="обновить случайные" />
+              <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
         </div>

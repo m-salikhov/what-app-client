@@ -1,0 +1,31 @@
+.pm-info {
+  h2 {
+    text-align: center;
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+  }
+  div:nth-child(2) {
+    p {
+      padding: 0rem 1rem;
+    }
+  }
+  div:nth-child(3) {
+    p {
+      padding: 0rem 0.5rem;
+    }
+  }
+  button {
+    width: 300px;
+    height: 30px;
+    font-size: larger;
+    border: 1px solid #1b1b1b80;
+    border-radius: 5px;
+    &:hover {
+      font-weight: 800;
+      background-color: rgba(97, 161, 153, 0.2);
+    }
+  }
+}

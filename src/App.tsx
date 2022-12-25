@@ -13,6 +13,8 @@ import { _axios } from "./Helpers/_axios";
 import { useAppDispatch } from "./Hooks/redux";
 import { UserType } from "./Types/user";
 import { userSlice } from "./Store/reducers/UserSlice";
+import List from "./Components/PlayMode/List";
+import PlayMode from "./Components/PlayMode/PlayMode";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,6 +33,7 @@ function App() {
           <Route index element={<Main />} />
           <Route path="entry" element={<Entry />} />
           <Route path="all" element={<All />} />
+          <Route path="playmode" element={<List />} />
           <Route
             path="add"
             element={
@@ -40,6 +43,7 @@ function App() {
             }
           />
           <Route path="tournament/:id" element={<Tournament />} />
+          <Route path="playmode/:id" element={<PlayMode />} />
           <Route
             path="profile"
             element={

@@ -37,6 +37,9 @@ const Header = () => {
 
       <nav className={openMobMenu ? "mob-menu" : undefined} onClick={onClick}>
         <ul>
+          <li>
+            <Link to="/playmode">Игровой режим </Link>
+          </li>
           {currentUser?.role === "superuser" && (
             <li>
               <Link to="/edit"> Редактировать</Link>
