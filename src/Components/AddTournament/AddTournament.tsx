@@ -36,8 +36,6 @@ const AddTournament = () => {
     });
   };
 
-  console.log("tournament", tournament);
-
   return (
     <main className="add__wrapper">
       <div className="add">

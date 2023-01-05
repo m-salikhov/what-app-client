@@ -16,11 +16,8 @@ export enum Step {
 
 const PlayMode = () => {
   const { id } = useParams();
-  //Запрос выбранного турнира
-  const t = useTournamentById(id);
-  //Какой компонент отображается
+  const { t } = useTournamentById(id);
   const [step, setStep] = useState(Step.Start);
-  //Номер показываемого вопроса
   const [qCounter, setQCounter] = useState(0);
 
   function PlayModeChange(stepName: string) {

@@ -1,28 +1,14 @@
 import "./tournament.scss";
-import { useEffect, useState } from "react";
-import { TournamentType } from "../../Types/tournament";
 import { getDate } from "../../Helpers/getDate";
-import { initTournament } from "../../Helpers/initValues";
 import Question from "../Elements/Question/Question";
 import Back from "../Elements/Back/Back";
 import { useParams } from "react-router-dom";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
-import { _axios } from "../../Helpers/_axios";
+import { useTournamentById } from "../../Hooks/useTournamentById";
 
 const Tournament = () => {
-  const [t, setT] = useState<TournamentType>(initTournament);
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    _axios
-      .get(`/tournaments/${id}`)
-      .then((res) => {
-        setT(res.data);
-        setLoading(false);
-      })
-      .catch((e: any) => console.log(e.response.data.message));
-  }, [id]);
+  const { t, loading } = useTournamentById(id);
 
   return (
     <main className="tournament__container">
