@@ -1,44 +1,57 @@
-import { useEffect, useState } from "react";
-import { TournamentType } from "../../Types/tournament";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
-import { _axios } from "../../Helpers/_axios";
-
 import "./playmode.scss";
-import { initTournament } from "../../Helpers/initValues";
-import { getDate } from "../../Helpers/getDate";
+import Start from "./PlayModeParts/Start";
+import PMQuestion from "./PlayModeParts/PMQuestion";
+import TourEnd from "./PlayModeParts/TourEnd";
+import End from "./PlayModeParts/End";
+import { useTournamentById } from "../../Hooks/useTournamentById";
+
+export enum Step {
+  Start = "START",
+  Question = "QUESTION",
+  EndOfTour = "ENDOFTOUR",
+  End = "END",
+}
 
 const PlayMode = () => {
-  const [t, setT] = useState<TournamentType>(initTournament);
   const { id } = useParams();
+  //Запрос выбранного турнира
+  const t = useTournamentById(id);
+  //Какой компонент отображается
+  const [step, setStep] = useState(Step.Start);
+  //Номер показываемого вопроса
+  const [qCounter, setQCounter] = useState(0);
 
-  useEffect(() => {
-    _axios
-      .get(`/tournaments/${id}`)
-      .then((res) => {
-        setT(res.data);
-      })
-      .catch((e: any) => console.log(e.response.data.message));
-  }, [id]);
+  function PlayModeChange(stepName: string) {
+    switch (stepName) {
+      case Step.Start:
+        return <Start t={t} setStep={setStep} />;
+      case Step.Question:
+        return (
+          <PMQuestion
+            q={t.questions[qCounter]}
+            setQCounter={setQCounter}
+            setStep={setStep}
+            nextQTourNumber={t.questions[qCounter + 1]?.tourNumber}
+          />
+        );
+      case Step.EndOfTour:
+        return (
+          <TourEnd
+            setQCounter={setQCounter}
+            qCounter={qCounter}
+            setStep={setStep}
+          />
+        );
+      case Step.End:
+        return <End />;
+      default:
+        return null;
+    }
+  }
 
-  return (
-    <main className="pm-info">
-      <h2>{t.title}</h2>
-      <div>
-        <p>Вопросов: {t.questionsQuantity}</p>
-        <p>Туров: {t.tours}</p>
-        <p>Дата: {getDate(t.date)}</p>
-      </div>
-      <div>
-        <p>Редактор(ы):</p>
-        {t.editors.map((v) => {
-          return <p key={v}>{v}</p>;
-        })}
-      </div>
-      <div>
-        <button>Начать игру</button>
-      </div>
-    </main>
-  );
+  return PlayModeChange(step);
 };
 
 export default PlayMode;
