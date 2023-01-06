@@ -9,8 +9,7 @@ interface Props {
 
 const Start = ({ t, setStep }: Props) => {
   return (
-    <main className="pm-info">
-      <h2>{t.title}</h2>
+    <div className="pm-info">
       <div>
         <p>Вопросов: {t.questionsQuantity}</p>
         <p>Туров: {t.tours}</p>
@@ -25,7 +24,7 @@ const Start = ({ t, setStep }: Props) => {
       <div>
         <button onClick={() => setStep(Step.Question)}>Начать игру</button>
       </div>
-    </main>
+    </div>
   );
 };
 

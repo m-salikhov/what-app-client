@@ -24,7 +24,7 @@ function App() {
       .get<UserType>("/auth/logfirst")
       .then((res) => dispatch(userSlice.actions.setCurrentUser(res.data)))
       .catch(() => console.log("Не авторизован"));
-  }, []);
+  }, [dispatch]);
 
   return (
     <BrowserRouter>

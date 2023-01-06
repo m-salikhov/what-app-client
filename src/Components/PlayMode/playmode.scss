@@ -7,12 +7,12 @@
     justify-content: center;
     padding-top: 1rem;
   }
-  div:nth-child(2) {
+  div:nth-child(1) {
     p {
       padding: 0rem 1rem;
     }
   }
-  div:nth-child(3) {
+  div:nth-child(2) {
     p {
       padding: 0rem 0.5rem;
     }
@@ -26,6 +26,84 @@
     &:hover {
       font-weight: 800;
       background-color: rgba(97, 161, 153, 0.2);
+    }
+  }
+}
+main {
+  & > h2 {
+    text-align: center;
+    padding-bottom: 0.4rem;
+  }
+}
+
+.timer {
+  padding: 1rem 0rem;
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    padding: 0rem 0.5rem;
+    max-width: 17rem;
+    height: 3rem;
+    border: 3px solid rgba(97, 161, 153, 0.5);
+    border-radius: 5px;
+    p {
+      font-weight: 800;
+    }
+  }
+}
+
+.pmq {
+  h3 {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  .answer {
+    p {
+      padding: 0.2rem 0;
+      span {
+        font-weight: 800;
+      }
+    }
+    .answer__source_many {
+      font-weight: 800;
+    }
+  }
+  .isanswer {
+    display: flex;
+    justify-content: center;
+    button:first-child {
+      margin-right: 1rem;
+    }
+    button:last-child {
+      margin-left: 1rem;
+    }
+  }
+  .isanswer__header {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 800;
+    padding-top: 1rem;
+  }
+  & > .btn-elem {
+    margin-top: 1.2rem;
+  }
+  .question__add {
+    padding-top: 0.5rem;
+    p {
+      padding-left: 0.5rem;
+    }
+    .content {
+      display: flex;
+      justify-content: center;
+      padding: 1rem 0rem;
+      img {
+        max-width: 30%;
+      }
+      p {
+        font-size: 1.25rem;
+      }
     }
   }
 }

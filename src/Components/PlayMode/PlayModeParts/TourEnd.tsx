@@ -12,12 +12,12 @@ const TourEnd = ({ qCounter, setQCounter, setStep }: Props) => {
     setStep(Step.Question);
   }
   return (
-    <main>
+    <div>
       {" "}
       <div>
         <button onClick={onClick}>Следующий тур</button>
       </div>
-    </main>
+    </div>
   );
 };
 

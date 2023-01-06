@@ -48,7 +48,12 @@ const PlayMode = () => {
     }
   }
 
-  return PlayModeChange(step);
+  return (
+    <main>
+      <h2>{t.title}</h2>
+      {PlayModeChange(step)}
+    </main>
+  );
 };
 
 export default PlayMode;

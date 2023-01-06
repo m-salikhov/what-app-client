@@ -33,17 +33,19 @@ const Timer = ({ setIsTimeOver, qNumber }: Props) => {
   }, [time, qNumber, flag, setIsTimeOver, prevQNumber]);
 
   return (
-    <div>
-      {flag ? (
-        time === 0 ? (
-          <p>Время вышло</p>
+    <div className="timer">
+      <div>
+        {flag ? (
+          time === 0 ? (
+            <p>Время вышло</p>
+          ) : (
+            <p>Время найти ответ</p>
+          )
         ) : (
-          <p>Время найти ответ</p>
-        )
-      ) : (
-        <p>Время прочитать вопрос</p>
-      )}
-      <h2>{time}</h2>
+          <p>Время прочитать вопрос</p>
+        )}
+        <h2>{time}</h2>
+      </div>
     </div>
   );
 };

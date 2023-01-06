@@ -42,13 +42,13 @@ const AddQuestion = ({
   };
 
   const onAddQ = () => {
+    console.log("question", question);
     handleChangeQuestion(question);
     setIsSaved(true);
   };
 
   return (
     <div className="add-q">
-      <button onClick={() => console.log("question", question)}>button</button>
       <div className="add-q__header">
         <label className="add-q__number">
           <p> Номер вопроса:</p>
