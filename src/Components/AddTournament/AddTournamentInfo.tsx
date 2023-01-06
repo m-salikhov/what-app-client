@@ -1,11 +1,11 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { TournamentType } from "../../Types/tournament";
 
 interface AddTournamentInfoProp {
   handleChange: (field: Partial<TournamentType>) => void;
 }
 
-const AddTournamentInfo: FC<AddTournamentInfoProp> = ({ handleChange }) => {
+const AddTournamentInfo = ({ handleChange }: AddTournamentInfoProp) => {
   const [editors, setEditors] = useState<string[]>([]);
   const [editorsCount, setEditorsCount] = useState([1]);
 

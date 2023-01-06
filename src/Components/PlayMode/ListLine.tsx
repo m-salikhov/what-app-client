@@ -1,5 +1,4 @@
 import { TournamentShortType } from "../../Types/tournament";
-import { FC } from "react";
 import { Link } from "react-router-dom";
 
 interface LineProp {
@@ -7,7 +6,7 @@ interface LineProp {
   index: number;
 }
 
-const ListLine: FC<LineProp> = ({ item, index }) => {
+const ListLine = ({ item, index }: LineProp) => {
   return (
     <div className="table__line">
       <p>{index + 1}</p>

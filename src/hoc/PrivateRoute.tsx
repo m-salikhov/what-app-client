@@ -1,4 +1,4 @@
-import { FC, ReactNode } from "react";
+import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../Hooks/redux";
 
@@ -6,7 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
-const PrivateRoute: FC<Props> = ({ children }) => {
+const PrivateRoute = ({ children }: Props) => {
   const { currentUser } = useAppSelector((state) => state.userReducer);
 
   if (!currentUser) {

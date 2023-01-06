@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Link } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import { TournamentShortType } from "../../Types/tournament";
@@ -8,7 +7,7 @@ interface LineProp {
   index: number;
 }
 
-const LineAll: FC<LineProp> = ({ item, index }) => {
+const LineAll = ({ item, index }: LineProp) => {
   return (
     <div className="table__line">
       <p>{index + 1}</p>

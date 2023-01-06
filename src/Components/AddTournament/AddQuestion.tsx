@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import splitQuestion from "../../Helpers/splitQuestion";
 import { QuestionType } from "../../Types/question";
 
@@ -19,10 +19,10 @@ const getTourNumber = (n: number) => {
   }
 };
 
-const AddQuestion: FC<AddQuestionProp> = ({
+const AddQuestion = ({
   handleChangeQuestion,
   numberQuestion,
-}) => {
+}: AddQuestionProp) => {
   const [question, setQuestion] = useState<QuestionType>({
     type: "regular",
     qNumber: numberQuestion,

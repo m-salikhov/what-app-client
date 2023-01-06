@@ -1,17 +1,18 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Props {
   setIsTimeOver(isTimeOver: boolean): void;
   qNumber: number;
 }
 
-const Timer: FC<Props> = ({ setIsTimeOver, qNumber }) => {
+const Timer = ({ setIsTimeOver, qNumber }: Props) => {
   const [time, setTime] = useState(10);
+  //Флаг, что время на чтение вопроса окончено
   const [flag, setFlag] = useState(false);
-  const ref = useRef(qNumber);
+  const [prevQNumber, setPrevQNumber] = useState(qNumber);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const interval = setTimeout(() => {
       setTime((prev) => prev - 1);
     }, 1000);
     if (time === 0 && !flag) {
@@ -19,17 +20,17 @@ const Timer: FC<Props> = ({ setIsTimeOver, qNumber }) => {
       setFlag(true);
     }
     if (time === 0 && flag) {
-      clearInterval(interval);
+      clearTimeout(interval);
       setIsTimeOver(true);
     }
-    if (ref.current !== qNumber) {
+    if (prevQNumber !== qNumber) {
       setTime(10);
       setFlag(false);
       setIsTimeOver(false);
-      ref.current = qNumber;
+      setPrevQNumber(qNumber);
     }
-    return () => clearInterval(interval);
-  }, [time, qNumber, flag, setIsTimeOver]);
+    return () => clearTimeout(interval);
+  }, [time, qNumber, flag, setIsTimeOver, prevQNumber]);
 
   return (
     <div>
@@ -43,7 +44,6 @@ const Timer: FC<Props> = ({ setIsTimeOver, qNumber }) => {
         <p>Время прочитать вопрос</p>
       )}
       <h2>{time}</h2>
-      <h2>{qNumber}</h2>
     </div>
   );
 };

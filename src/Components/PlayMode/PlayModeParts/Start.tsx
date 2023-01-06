@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { getDate } from "../../../Helpers/getDate";
 import { TournamentType } from "../../../Types/tournament";
 import { Step } from "../PlayMode";
@@ -8,7 +7,7 @@ interface Props {
   setStep(step: Step): void;
 }
 
-const Start: FC<Props> = ({ t, setStep }) => {
+const Start = ({ t, setStep }: Props) => {
   return (
     <main className="pm-info">
       <h2>{t.title}</h2>

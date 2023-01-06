@@ -1,8 +1,6 @@
-import { FC } from "react";
-
 const checkLinkOrText = (str: string) => /^http/.test(str);
 
-const Add: FC<{ add: string }> = ({ add }) => {
+const Add = ({ add }: { add: string }) => {
   return (
     <div className="question__add">
       <p>Раздаточный материал:</p>

@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
 
 interface ChangePassProp {
@@ -6,7 +6,7 @@ interface ChangePassProp {
   id?: string;
 }
 
-const ChangePass: FC<ChangePassProp> = ({ cancelChangePass, id }) => {
+const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
   const [newPass, setNewPass] = useState("");
   const [newPassRepeat, setNewPassRepeat] = useState("");
   const [message, setMessage] = useState("");

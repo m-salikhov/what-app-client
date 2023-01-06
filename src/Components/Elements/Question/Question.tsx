@@ -1,12 +1,16 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { QuestionType } from "../../../Types/question";
 import Add from "./Add";
 import Answer from "./Answer";
-import ansArrow from "./arrow_down.svg";
-
+// import ansArrow from "./arrow_down.svg";
 import "./question.scss";
 
-const Question: FC<{ q: QuestionType; random?: boolean }> = ({ q, random }) => {
+interface Props {
+  q: QuestionType;
+  random?: boolean;
+}
+
+const Question = ({ q, random }: Props) => {
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (

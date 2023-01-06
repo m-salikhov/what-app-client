@@ -1,4 +1,3 @@
-import { FC } from "react";
 import { Step } from "../PlayMode";
 
 interface Props {
@@ -7,8 +6,7 @@ interface Props {
   setStep(step: Step): void;
 }
 
-const TourEnd: FC<Props> = ({ qCounter, setQCounter, setStep }) => {
-  console.log("qCounter", qCounter);
+const TourEnd = ({ qCounter, setQCounter, setStep }: Props) => {
   function onClick() {
     setQCounter(qCounter + 1);
     setStep(Step.Question);

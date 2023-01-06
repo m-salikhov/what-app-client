@@ -1,7 +1,6 @@
-import { FC } from "react";
 import "./skeletonQuestion.scss";
 
-const SkeletonQuestion: FC<{ count: number }> = ({ count }) => {
+const SkeletonQuestion = ({ count }: { count: number }) => {
   const skeletonQuestion = (i: number) => {
     return (
       <div className="sk-q" key={i}>

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { useState } from "react";
 import { QuestionType } from "../../../Types/question";
 import { Step } from "../PlayMode";
 import Timer from "./Timer";
@@ -10,22 +10,18 @@ interface Props {
   nextQTourNumber: number | undefined;
 }
 
-const PMQuestion: FC<Props> = ({
-  q,
-  setQCounter,
-  nextQTourNumber,
-  setStep,
-}) => {
-  function onClick() {
+const PMQuestion = ({ q, setQCounter, nextQTourNumber, setStep }: Props) => {
+  const [isTimeOver, setIsTimeOver] = useState(false);
+
+  const onClick = () => {
     if (typeof nextQTourNumber === "undefined") {
       setStep(Step.End);
     } else if (q.tourNumber !== nextQTourNumber) {
       setStep(Step.EndOfTour);
     } else setQCounter(q.qNumber++);
     setIsTimeOver(false);
-  }
-  const [isTimeOver, setIsTimeOver] = useState(false);
-  console.log("isTimeOver", isTimeOver);
+  };
+
   return (
     <main>
       <Timer setIsTimeOver={setIsTimeOver} qNumber={q.qNumber} />

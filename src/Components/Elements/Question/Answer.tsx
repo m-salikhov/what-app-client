@@ -1,7 +1,6 @@
-import { FC } from "react";
 import { QuestionType } from "../../../Types/question";
 
-const Answer: FC<{ q: QuestionType }> = ({ q }) => {
+const Answer = ({ q }: { q: QuestionType }) => {
   return (
     <div className="answer">
       <p>
