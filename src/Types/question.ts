@@ -13,7 +13,7 @@ export interface QuestionType {
   answer: string;
   alterAnswer?: string;
   comment?: string;
-  source?: string[];
+  source: string[];
   author: string;
   tournament?: TournamentType;
 }

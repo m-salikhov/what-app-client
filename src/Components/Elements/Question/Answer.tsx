@@ -18,7 +18,7 @@ const Answer = ({ q }: { q: QuestionType }) => {
       )}
       {q.source?.length === 1 && (
         <p className="answer__source_one">
-          <span>Источник:</span> {q.source}
+          <span>Источник: </span> {q.source}
         </p>
       )}
       {q.source && q.source.length > 1 && (

@@ -16,7 +16,6 @@ const Profile = () => {
       setTournaments(res.data);
     });
   }, [currentUser.id]);
-  console.log("currentUser", currentUser);
   return (
     <main className="pr">
       <div className="pr-wrapper">

@@ -55,6 +55,9 @@ main {
 }
 
 .pmq {
+  max-width: 700px;
+  margin: 0 auto;
+  // text-align: center;
   h3 {
     text-align: center;
     font-size: 1.5rem;
@@ -105,5 +108,8 @@ main {
         font-size: 1.25rem;
       }
     }
+  }
+  .messageToQ {
+    text-align: center;
   }
 }

@@ -98,15 +98,16 @@ const AddQuestion = ({
         <textarea
           rows={4}
           placeholder="Введите текст вопроса..."
-          onChange={(e) =>
+          onChange={async (e) => {
+            const q = await splitQuestion(e.target.value);
             setQuestion((prev) => {
               setIsSaved(false);
               return {
                 ...prev,
-                ...splitQuestion(e.target.value),
+                ...q,
               };
-            })
-          }
+            });
+          }}
           name="text"
         />
       </div>

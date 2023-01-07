@@ -3,7 +3,7 @@ import { QuestionType } from "../../../Types/question";
 import Button from "../../Elements/Button/Button";
 import Add from "../../Elements/Question/Add";
 import Answer from "../../Elements/Question/Answer";
-import { Step } from "../PlayMode";
+import { Result, Step } from "../PlayMode";
 import Timer from "./Timer";
 
 interface Props {
@@ -11,19 +11,30 @@ interface Props {
   setQCounter(qNumber: number): void;
   setStep(step: Step): void;
   nextQTourNumber: number | undefined;
+  handleAnswer(tourNumber: number, qNumber: number, answer: boolean): void;
 }
 
-const PMQuestion = ({ q, setQCounter, nextQTourNumber, setStep }: Props) => {
+const PMQuestion = ({
+  q,
+  setQCounter,
+  nextQTourNumber,
+  setStep,
+  handleAnswer,
+}: Props) => {
   const [isTimeOver, setIsTimeOver] = useState(false);
   const [answerToQ, setAnswerToQ] = useState("");
+  const [messageToQ, setMessageAnswerToQ] = useState("");
 
   const onClick = () => {
-    setAnswerToQ("");
-
-    if (!isTimeOver) {
+    if (!Boolean(answerToQ) && !isTimeOver) {
       setIsTimeOver(true);
       return;
     }
+    if (!Boolean(answerToQ)) {
+      setMessageAnswerToQ("Выберите ответ");
+      return;
+    }
+    setAnswerToQ("");
 
     if (typeof nextQTourNumber === "undefined") {
       setStep(Step.End);
@@ -47,14 +58,30 @@ const PMQuestion = ({ q, setQCounter, nextQTourNumber, setStep }: Props) => {
             {answerToQ ? `Ответ ${answerToQ} принят` : "Вам удалось ответить?"}
           </p>
           <div className="isanswer">
-            <Button onClick={() => setAnswerToQ("Да")} title={"Да"} />
-            <Button onClick={() => setAnswerToQ("Нет")} title={"Нет"} />
+            <Button
+              onClick={() => {
+                setAnswerToQ("Да");
+                setMessageAnswerToQ("");
+                handleAnswer(q.tourNumber, q.qNumber, true);
+              }}
+              title={"Да"}
+            />
+            <Button
+              onClick={() => {
+                setAnswerToQ("Нет");
+                setMessageAnswerToQ("");
+                handleAnswer(q.tourNumber, q.qNumber, false);
+              }}
+              title={"Нет"}
+            />
           </div>
         </>
       )}
+      {messageToQ && <p className="messageToQ">{messageToQ}</p>}
       <Button
         onClick={onClick}
         title={isTimeOver ? "Следующий вопрос" : "Готов ответ?"}
+        extraClass={Boolean(answerToQ) ? "answered" : "notanswered"}
       />
     </div>
   );

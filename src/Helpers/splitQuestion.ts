@@ -1,9 +1,23 @@
+import axios from "axios";
 import { QuestionType } from "../Types/question";
 
-function splitQuestion(str: string): Partial<QuestionType> {
+interface ShrtcodeRes {
+  ok: boolean;
+  result: {
+    code: string;
+    short_link: string;
+    full_short_link: string;
+    short_link2: string;
+    full_short_link2: string;
+    share_link: string;
+    full_share_link: string;
+    original_link: string;
+  };
+}
+
+async function splitQuestion(str: string): Promise<Partial<QuestionType>> {
   const normStr0 = str.replace(/Вопрос \d+:\s/, "");
   const normStr = normStr0.replace(/\n+/g, "");
-
   const iAnswer = normStr.indexOf("Ответ:");
   const iAlter = normStr.indexOf("Зачёт:");
   const iComment = normStr.indexOf("Комментарий:");
@@ -36,15 +50,32 @@ function splitQuestion(str: string): Partial<QuestionType> {
   const author = normStr.substring(iAuthor + 7);
 
   const sourceStr = normStr.substring(iSource + 13, iAuthor);
-  const oneOrManySources = /\s\d.\s/.test(sourceStr);
-  let source: string[] = [];
+  const oneOrManySources = /\s\s\s\d.\s/.test(sourceStr);
+  let sourceOriginal: string[] = [];
   if (!oneOrManySources) {
-    source.push(sourceStr);
+    sourceOriginal.push(sourceStr);
   } else {
-    const source0 = sourceStr.split(/\s\d.\s/);
-    source = source0.map((v) => v.trim());
-    source.shift();
+    const source0 = sourceStr.split(/\s\s\s\d.\s/);
+    sourceOriginal = source0.map((v) => v.trim());
+    sourceOriginal.shift();
   }
+
+  let source = await Promise.all(
+    sourceOriginal.map(async (v) => {
+      if (v.length > 39 && /^http/.test(v)) {
+        const shortLink = await axios
+          .get<ShrtcodeRes>(`https://api.shrtco.de/v2/shorten?url=${v}`)
+          .then((res) => {
+            return res.data.result.short_link;
+          })
+          .catch((e: any) => console.log(e.response.data.message));
+        if (typeof shortLink !== "string") {
+          return "Источник не указан";
+        }
+        return shortLink;
+      } else return v;
+    })
+  );
 
   let question: Partial<QuestionType> = {
     text,
