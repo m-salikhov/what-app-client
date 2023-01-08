@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import "./playmode.scss";
 import Start from "./PlayModeParts/Start";
-import PMQuestion from "./PlayModeParts/PMQuestion";
-import TourEnd from "./PlayModeParts/TourEnd";
-import End from "./PlayModeParts/End";
+import PMQuestion from "./PlayModeParts/PMQuestion/PMQuestion";
+import TourEnd from "./PlayModeParts/End/TourEnd";
+import End from "./PlayModeParts/End/End";
 import { useTournamentById } from "../../Hooks/useTournamentById";
 
 export enum Step {
@@ -15,7 +15,7 @@ export enum Step {
 }
 
 export type Result = {
-  [key: number]: boolean[];
+  [key: number]: { num: number; ans: boolean }[];
 };
 
 const PlayMode = () => {
@@ -32,6 +32,7 @@ const PlayMode = () => {
   ) => {
     setResult((prev) => {
       const res = { ...prev };
+      let qNumberInTour = qNumber;
 
       if (typeof res[tourNumber] === "undefined") {
         res[tourNumber] = [];
@@ -45,12 +46,15 @@ const PlayMode = () => {
           sumPlayedQ = sumPlayedQ + res[i].length;
           i--;
         }
-        qNumber = qNumber - sumPlayedQ;
+        qNumberInTour = qNumber - sumPlayedQ;
       }
 
-      res[tourNumber][qNumber - 1] = answer;
+      res[tourNumber][qNumberInTour - 1] = { ans: answer, num: qNumber };
       return res;
     });
+  };
+  const handleQCounter = () => {
+    setQCounter((prev) => prev + 1);
   };
 
   function PlayModeChange(stepName: string) {
@@ -60,19 +64,21 @@ const PlayMode = () => {
       case Step.Question:
         return (
           <PMQuestion
-            q={t.questions[qCounter]}
-            setQCounter={setQCounter}
-            setStep={setStep}
-            nextQTourNumber={t.questions[qCounter + 1]?.tourNumber}
+            handleQCounter={handleQCounter}
             handleAnswer={handleAnswer}
+            q={t.questions[qCounter]}
+            nextQTourNumber={t.questions[qCounter + 1]?.tourNumber}
+            setStep={setStep}
           />
         );
       case Step.EndOfTour:
         return (
           <TourEnd
-            setQCounter={setQCounter}
-            qCounter={qCounter}
+            handleQCounter={handleQCounter}
             setStep={setStep}
+            result={result}
+            endedTourNumber={t.questions[qCounter].tourNumber}
+            t={t}
           />
         );
       case Step.End:
@@ -81,8 +87,6 @@ const PlayMode = () => {
         return null;
     }
   }
-
-  console.log("result", result);
 
   return (
     <main>

@@ -1,14 +1,14 @@
 import { useState } from "react";
-import { QuestionType } from "../../../Types/question";
-import Button from "../../Elements/Button/Button";
-import Add from "../../Elements/Question/Add";
-import Answer from "../../Elements/Question/Answer";
-import { Result, Step } from "../PlayMode";
+import { QuestionType } from "../../../../Types/question";
+import Button from "../../../Elements/Button/Button";
+import Add from "../../../Elements/Question/Add";
+import Answer from "../../../Elements/Question/Answer";
+import { Step } from "../../PlayMode";
 import Timer from "./Timer";
 
 interface Props {
   q: QuestionType;
-  setQCounter(qNumber: number): void;
+  handleQCounter(): void;
   setStep(step: Step): void;
   nextQTourNumber: number | undefined;
   handleAnswer(tourNumber: number, qNumber: number, answer: boolean): void;
@@ -16,7 +16,7 @@ interface Props {
 
 const PMQuestion = ({
   q,
-  setQCounter,
+  handleQCounter,
   nextQTourNumber,
   setStep,
   handleAnswer,
@@ -40,7 +40,7 @@ const PMQuestion = ({
       setStep(Step.End);
     } else if (q.tourNumber !== nextQTourNumber) {
       setStep(Step.EndOfTour);
-    } else setQCounter(q.qNumber++);
+    } else handleQCounter();
     setIsTimeOver(false);
   };
 
