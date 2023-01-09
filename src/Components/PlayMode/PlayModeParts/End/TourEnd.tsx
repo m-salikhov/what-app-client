@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { TournamentType } from "../../../../Types/tournament";
 import Button from "../../../Elements/Button/Button";
 import { Result, Step } from "../../PlayMode";
@@ -30,22 +31,25 @@ const TourEnd = ({
     });
     return [count, res[tour].length];
   };
-
   const calcFullResult = (res: Result) => {
     let countTrue = 0;
     let countAll = 0;
-    for (const tour in res) {
-      res[tour].forEach((v) => {
-        countAll++;
-        if (v.ans) countTrue++;
-      });
+    for (let tour in res) {
+      for (let index = 0; index < res[tour].length; index++) {
+        countAll = countAll + 1;
+        if (res[tour][index].ans) {
+          countTrue = countTrue + 1;
+        }
+      }
     }
     return [countTrue, countAll];
   };
 
+  const [selectedQ, setSelectedQ] = useState(0);
+
   const [TourCount, TourLength] = calcTourResult(endedTourNumber, result);
   const [TourneyCount, TourneyLength] = calcFullResult(result);
-
+  console.log(t.questions[selectedQ - 1]);
   return (
     <div className="tourend">
       <div className="resblock">
@@ -60,7 +64,7 @@ const TourEnd = ({
           </p>
         )}
       </div>
-      <TourTable res={result[endedTourNumber]} />
+      <TourTable res={result[endedTourNumber]} setSelectedQ={setSelectedQ} />
       <Button title="Следующий тур" onClick={onClick} />
     </div>
   );
