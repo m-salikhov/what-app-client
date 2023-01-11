@@ -113,55 +113,54 @@ main {
     text-align: center;
   }
 }
-
+.resblock {
+  p {
+    text-align: center;
+    span {
+      padding-left: 1rem;
+      font-weight: 800;
+    }
+  }
+}
 .tourend {
-  .resblock {
-    p {
-      text-align: center;
-      span {
-        padding-left: 1rem;
-        font-weight: 800;
-      }
-    }
-  }
-  .tourend__tbl {
-    display: flex;
-    justify-content: center;
-    padding-top: 0.7rem;
-    .tourend__tbl_el:first-child {
-      border-left: 2px solid rgba(27, 27, 27, 0.4);
-    }
-    .tourend__tbl_el:last-child {
-      border-right: 2px solid rgba(27, 27, 27, 0.4);
-    }
-    .tourend__tbl_el {
-      border-right: 2px solid rgba(27, 27, 27, 0.4);
-      border-top: 2px solid rgba(27, 27, 27, 0.4);
-      border-bottom: 2px solid rgba(27, 27, 27, 0.4);
-      cursor: pointer;
-      &:hover {
-        font-weight: bold;
-        background-color: rgba(97, 161, 153, 0.2);
-      }
-      div:first-child {
-        border-bottom: 2px solid rgba(27, 27, 27, 0.4);
-        width: 2rem;
-        height: 2rem;
-        display: table-cell;
-        text-align: center;
-        vertical-align: middle;
-        font-weight: 700;
-      }
-      div:last-child {
-        width: 2rem;
-        height: 2rem;
-        img {
-          width: 2rem;
-        }
-      }
-    }
-  }
   .btn-elem {
     padding-top: 0.8rem;
+  }
+}
+.tourend__tbl {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.7rem;
+  .tourend__tbl_el:first-child {
+    border-left: 2px solid rgba(27, 27, 27, 0.4);
+  }
+  .tourend__tbl_el:last-child {
+    border-right: 2px solid rgba(27, 27, 27, 0.4);
+  }
+  .tourend__tbl_el {
+    border-right: 2px solid rgba(27, 27, 27, 0.4);
+    border-top: 2px solid rgba(27, 27, 27, 0.4);
+    border-bottom: 2px solid rgba(27, 27, 27, 0.4);
+    cursor: pointer;
+    &:hover {
+      font-weight: bold;
+      background-color: rgba(97, 161, 153, 0.2);
+    }
+    div:first-child {
+      border-bottom: 2px solid rgba(27, 27, 27, 0.4);
+      width: 2rem;
+      height: 2rem;
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+      font-weight: 700;
+    }
+    div:last-child {
+      width: 2rem;
+      height: 2rem;
+      img {
+        width: 2rem;
+      }
+    }
   }
 }

@@ -8,9 +8,9 @@ import Timer from "./Timer";
 
 interface Props {
   q: QuestionType;
+  nextQTourNumber: number | undefined;
   handleQCounter(): void;
   setStep(step: Step): void;
-  nextQTourNumber: number | undefined;
   handleAnswer(tourNumber: number, qNumber: number, answer: boolean): void;
 }
 

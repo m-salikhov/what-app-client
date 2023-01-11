@@ -82,7 +82,13 @@ const PlayMode = () => {
           />
         );
       case Step.End:
-        return <End />;
+        return (
+          <End
+            result={result}
+            endedTourNumber={t.questions[qCounter].tourNumber}
+            t={t}
+          />
+        );
       default:
         return null;
     }

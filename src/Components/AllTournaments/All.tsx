@@ -72,7 +72,7 @@ const All = () => {
           </div>
         </div>
         <div className="table__body">
-          {ts.map((v, i) => (
+          {ts.reverse().map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>

@@ -23,7 +23,7 @@ const List = () => {
           <div className="table__header_t">Туры </div>
         </div>
         <div className="table__body">
-          {ts.map((v, i) => (
+          {ts.reverse().map((v, i) => (
             <ListLine item={v} index={i} key={v.id} />
           ))}
         </div>
