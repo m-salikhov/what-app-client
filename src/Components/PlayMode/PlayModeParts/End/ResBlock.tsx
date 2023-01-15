@@ -1,12 +1,14 @@
-import { Result } from "../../PlayMode";
+import { ResultType } from "../../PlayMode";
 
 interface Props {
   tour: number;
-  res: Result;
+  res: ResultType;
+  tours: number;
+  userResult?: { res: number };
 }
 
-const ResBlock = ({ tour, res }: Props) => {
-  const calcTourResult = (tour: number, res: Result) => {
+const ResBlock = ({ tour, res, tours, userResult }: Props) => {
+  const calcTourResult = (tour: number, res: ResultType) => {
     const tourResArrBoolean = res[tour];
     let count = 0;
     tourResArrBoolean.forEach((v) => {
@@ -14,7 +16,7 @@ const ResBlock = ({ tour, res }: Props) => {
     });
     return [count, res[tour].length];
   };
-  const calcFullResult = (res: Result) => {
+  const calcFullResult = (res: ResultType) => {
     let countTrue = 0;
     let countAll = 0;
     for (let tour in res) {
@@ -29,13 +31,17 @@ const ResBlock = ({ tour, res }: Props) => {
   };
   const [TourCount, TourLength] = calcTourResult(tour, res);
   const [TourneyCount, TourneyLength] = calcFullResult(res);
+  if (typeof userResult !== "undefined") {
+    userResult.res = TourneyCount;
+  }
+
   return (
     <div className="resblock">
       <p>
         {`Результат ${tour}-го тура:`}
         <span>{`${TourCount} из ${TourLength}`}</span>{" "}
       </p>
-      {tour > 1 && (
+      {tour === tours && (
         <p>
           {`Результат общий:`}
           <span>{`${TourneyCount} из ${TourneyLength}`}</span>{" "}

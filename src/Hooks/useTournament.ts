@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { initTournament } from "../Helpers/initValues";
 import { _axios } from "../Helpers/_axios";
-import { TournamentType } from "../Types/tournament";
+import { TournamentShortType, TournamentType } from "../Types/tournament";
 
 export function useTournamentById(id: string | undefined) {
   const [t, setT] = useState<TournamentType>(initTournament);
@@ -17,4 +17,20 @@ export function useTournamentById(id: string | undefined) {
       .catch((e: any) => console.log(e.response.data.message));
   }, [id]);
   return { t, loading };
+}
+
+export function useTournamentAllShorts() {
+  const [ts, setTs] = useState<TournamentShortType[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    _axios
+      .get(`/tournaments/allshort`)
+      .then((res) => {
+        setTs(res.data);
+        setLoading(false);
+      })
+      .catch((e: any) => console.log(e.response.data.message));
+  }, []);
+  return { ts, loading };
 }

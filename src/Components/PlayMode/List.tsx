@@ -1,17 +1,10 @@
-import { useState, useEffect } from "react";
 import { _axios } from "../../Helpers/_axios";
-import { TournamentShortType } from "../../Types/tournament";
+import { useTournamentAllShorts } from "../../Hooks/useTournament";
 import "./list.scss";
 import ListLine from "./ListLine";
 
 const List = () => {
-  const [ts, setTs] = useState<TournamentShortType[]>([]);
-
-  useEffect(() => {
-    _axios.get(`/tournaments/allshort`).then((res) => {
-      setTs(res.data);
-    });
-  }, []);
+  const { ts, loading } = useTournamentAllShorts();
 
   return (
     <main className="list">

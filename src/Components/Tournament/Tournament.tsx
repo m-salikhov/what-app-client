@@ -4,7 +4,7 @@ import Question from "../Elements/Question/Question";
 import Back from "../Elements/Back/Back";
 import { useParams } from "react-router-dom";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
-import { useTournamentById } from "../../Hooks/useTournamentById";
+import { useTournamentById } from "../../Hooks/useTournament";
 
 const Tournament = () => {
   const { id } = useParams();

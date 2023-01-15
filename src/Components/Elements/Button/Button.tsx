@@ -10,7 +10,7 @@ const Button = ({ onClick, title, extraClass }: ButtonProps) => {
   return (
     <div className="btn-elem">
       <button
-        className={Boolean(extraClass) ? `btn ${extraClass}` : "btn"}
+        className={extraClass ? `btn ${extraClass}` : "btn"}
         type="button"
         onClick={onClick}
       >

@@ -5,7 +5,7 @@ import Start from "./PlayModeParts/Start";
 import PMQuestion from "./PlayModeParts/PMQuestion/PMQuestion";
 import TourEnd from "./PlayModeParts/End/TourEnd";
 import End from "./PlayModeParts/End/End";
-import { useTournamentById } from "../../Hooks/useTournamentById";
+import { useTournamentById } from "../../Hooks/useTournament";
 
 export enum Step {
   Start = "START",
@@ -14,7 +14,7 @@ export enum Step {
   End = "END",
 }
 
-export type Result = {
+export type ResultType = {
   [key: number]: { num: number; ans: boolean }[];
 };
 
@@ -23,7 +23,7 @@ const PlayMode = () => {
   const { t } = useTournamentById(id);
   const [step, setStep] = useState(Step.Start);
   const [qCounter, setQCounter] = useState(0);
-  const [result, setResult] = useState<Result>({});
+  const [result, setResult] = useState<ResultType>({});
 
   const handleAnswer = (
     tourNumber: number,
