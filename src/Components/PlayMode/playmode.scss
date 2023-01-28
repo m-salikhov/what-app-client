@@ -169,4 +169,8 @@ main {
   .btn-elem {
     padding-top: 0.8rem;
   }
+  & > p {
+    padding-top: 0.5rem;
+    text-align: center;
+  }
 }

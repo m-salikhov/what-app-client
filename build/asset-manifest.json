@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.aa1d351f.css",
-    "main.js": "/static/js/main.46174dfd.js",
+    "main.css": "/static/css/main.d8c0e2f5.css",
+    "main.js": "/static/js/main.c683c75f.js",
     "static/media/Rubik-Regular.ttf": "/static/media/Rubik-Regular.974ab100afa4538622da.ttf",
     "static/media/Rubik-SemiBold.ttf": "/static/media/Rubik-SemiBold.4e99ecca3660ff081d90.ttf",
     "static/media/entry_img.svg": "/static/media/entry_img.04c0b8d88af5667fb6c82f9fcaacfa50.svg",
@@ -10,13 +10,15 @@
     "static/media/next.svg": "/static/media/next.a9d4d89be454c0a35b55921d04737e40.svg",
     "static/media/back.svg": "/static/media/back.2adb00d636fccfcf590c07ef7270a8f7.svg",
     "static/media/refresh.svg": "/static/media/refresh.f112b63417689c23c0ec0b0eacd2d878.svg",
+    "static/media/redcross.svg": "/static/media/redcross.5acc182101ead378346d6c8eea0bc8f9.svg",
     "static/media/arrow_left.svg": "/static/media/arrow_left.b9a9c6e0a80c3a9c1612c36ebf709248.svg",
+    "static/media/greenmar.svg": "/static/media/greenmar.aa9112194ac7d9dfd44b4140ebfc8876.svg",
     "index.html": "/index.html",
-    "main.aa1d351f.css.map": "/static/css/main.aa1d351f.css.map",
-    "main.46174dfd.js.map": "/static/js/main.46174dfd.js.map"
+    "main.d8c0e2f5.css.map": "/static/css/main.d8c0e2f5.css.map",
+    "main.c683c75f.js.map": "/static/js/main.c683c75f.js.map"
   },
   "entrypoints": [
-    "static/css/main.aa1d351f.css",
-    "static/js/main.46174dfd.js"
+    "static/css/main.d8c0e2f5.css",
+    "static/js/main.c683c75f.js"
   ]
 }

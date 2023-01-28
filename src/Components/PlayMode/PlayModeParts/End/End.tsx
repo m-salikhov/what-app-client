@@ -1,5 +1,8 @@
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { _axios } from "../../../../Helpers/_axios";
+import { useAppSelector } from "../../../../Hooks/redux";
 import { TournamentType } from "../../../../Types/tournament";
 import Button from "../../../Elements/Button/Button";
 import QuestionPlane from "../../../Elements/Question/QuestionPlane";
@@ -15,8 +18,10 @@ interface Props {
 
 const End = ({ endedTourNumber, result, t }: Props) => {
   const [selectedQ, setSelectedQ] = useState(0);
+  const [isResultSaved, setIsResultSaved] = useState(false);
   const navigate = useNavigate();
   const userResult = { res: 0 };
+  const { currentUser } = useAppSelector((state) => state.userReducer);
 
   const renderResTables = () => {
     let resTables = [];
@@ -33,12 +38,33 @@ const End = ({ endedTourNumber, result, t }: Props) => {
   };
 
   useEffect(() => {
-    console.log("res 1", userResult);
+    if (currentUser.id) {
+      const data = {
+        userId: currentUser.id,
+        title: t.title,
+        tournamentId: t.id,
+        tournamentLength: t.questionsQuantity,
+        resultNumber: userResult.res,
+        result,
+      };
 
-    return () => {
-      console.log("res 2", userResult);
-    };
-  }, []);
+      _axios
+        .post("/users/userresult", data)
+        .then((res) => {
+          if (res.status === 201) {
+            setIsResultSaved(true);
+          }
+        })
+        .catch((e: AxiosError) => console.log("e", e));
+    }
+  }, [
+    userResult.res,
+    t.questionsQuantity,
+    t.id,
+    t.title,
+    currentUser.id,
+    result,
+  ]);
 
   return (
     <div className="endt">
@@ -49,12 +75,8 @@ const End = ({ endedTourNumber, result, t }: Props) => {
         userResult={userResult}
       />
       {renderResTables()}
+      {isResultSaved && <p>Ваш результат доступен в Профиле</p>}
       <Button title="К выбору турнира" onClick={() => navigate("/playmode")} />
-      <Button
-        title="Result"
-        onClick={() => console.log("userResult", userResult)}
-      />
-
       {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
     </div>
   );

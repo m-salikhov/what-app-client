@@ -64,6 +64,21 @@
     font-weight: 800;
   }
 }
+
+.pr-res {
+  padding-top: 1rem;
+  text-align: start;
+
+  & > p {
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  div {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
 @media (max-width: 500px) {
   .pr-wrapper > div {
     display: unset;

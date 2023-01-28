@@ -6,16 +6,38 @@ import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
 import "./profile.scss";
 
+interface Result {
+  id: string;
+  userId: string;
+  date: string;
+  tournamentId: number;
+  title: string;
+  tournamentLength: number;
+  resultNumber: number;
+}
+
 const Profile = () => {
   const { currentUser } = useAppSelector((state) => state.userReducer);
   const [changePass, setChangePass] = useState(false);
   const [tournaments, setTournaments] = useState([initTournamentShort]);
+  const [results, setResults] = useState<Result[]>([]);
 
   useEffect(() => {
     _axios.get(`/tournaments/allbyuploader/${currentUser.id}`).then((res) => {
       setTournaments(res.data);
     });
   }, [currentUser.id]);
+
+  useEffect(() => {
+    _axios
+      .post(`/users/userresultshort`, { id: currentUser.id })
+      .then((res) => {
+        setResults(res.data);
+      });
+  }, [currentUser.id]);
+
+  console.log("results", results);
+
   return (
     <main className="pr">
       <div className="pr-wrapper">
@@ -45,6 +67,21 @@ const Profile = () => {
             Изменить пароль
           </button>
         )}
+        <section className="pr-res">
+          <p>Ваши результаты :</p>
+          {results.length > 0 ? (
+            results.map((v) => {
+              return (
+                <div key={v.id}>
+                  <p>{`${v.title}:`}</p>
+                  <p>{`${v.resultNumber} из ${v.tournamentLength}`}</p>
+                </div>
+              );
+            })
+          ) : (
+            <p>Вы пока что ничего не добавили</p>
+          )}
+        </section>
         <section className="pr-ts">
           <p>Добавленные вами турниры:</p>
           {tournaments.length > 0 ? (
