@@ -15,7 +15,7 @@ const All = () => {
 
   useEffect(() => {
     _axios.get(`/tournaments/allshort`).then((res) => {
-      setTs(res.data);
+      setTs(res.data.reverse());
     });
   }, []);
 
@@ -72,7 +72,7 @@ const All = () => {
           </div>
         </div>
         <div className="table__body">
-          {ts.reverse().map((v, i) => (
+          {ts.map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>

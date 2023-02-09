@@ -36,8 +36,6 @@ const Profile = () => {
       });
   }, [currentUser.id]);
 
-  console.log("results", results);
-
   return (
     <main className="pr">
       <div className="pr-wrapper">
