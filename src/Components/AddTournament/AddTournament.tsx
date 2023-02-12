@@ -7,6 +7,7 @@ import { QuestionType } from "../../Types/question";
 import { useAppSelector } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
 import { initTournament } from "../../Helpers/initValues";
+import checkTournament from "../../Helpers/checkTournament";
 
 const AddTournament = () => {
   const [tournament, setTournament] = useState<TournamentType>(initTournament);
@@ -28,12 +29,19 @@ const AddTournament = () => {
     }
   };
   const addTournament = async () => {
-    await _axios.post("/tournaments", {
-      ...tournament,
-      dateUpload: Date.now(),
-      uploaderUuid: currentUser?.id,
-      uploader: currentUser?.username,
-    });
+    const e = checkTournament(tournament);
+
+    if (e) {
+      console.log("e", e);
+      return;
+    }
+    console.log("nya");
+    // await _axios.post("/tournaments", {
+    //   ...tournament,
+    //   dateUpload: Date.now(),
+    //   uploaderUuid: currentUser?.id,
+    //   uploader: currentUser?.username,
+    // });
   };
 
   return (
@@ -41,7 +49,7 @@ const AddTournament = () => {
       <div className="add">
         <AddTournamentInfo handleChange={handleChange} />
         <div className="add-t__button">
-          <button onClick={addTournament}>
+          <button type="button" onClick={addTournament}>
             <h3>Отправить турнир</h3>
           </button>
         </div>
@@ -58,7 +66,10 @@ const AddTournament = () => {
         </div>
         <div className="add-q__button">
           {" "}
-          <button onClick={() => setqCount((p) => [...p, p.length + 1])}>
+          <button
+            type="button"
+            onClick={() => setqCount((p) => [...p, p.length + 1])}
+          >
             <h3>Следующий вопрос</h3>
           </button>
         </div>

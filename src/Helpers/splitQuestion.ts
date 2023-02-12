@@ -18,6 +18,7 @@ interface ShrtcodeRes {
 async function splitQuestion(str: string): Promise<Partial<QuestionType>> {
   const normStr0 = str.replace(/Вопрос \d+:\s/, "");
   const normStr = normStr0.replace(/\n+/g, "");
+
   const iAnswer = normStr.indexOf("Ответ:");
   const iAlter = normStr.indexOf("Зачёт:");
   const iComment = normStr.indexOf("Комментарий:");
@@ -35,7 +36,7 @@ async function splitQuestion(str: string): Promise<Partial<QuestionType>> {
     answer = normStr.substring(iAnswer + 7, iSource);
   }
 
-  let alterAnswer = "";
+  let alterAnswer;
   if (iAlter === -1) {
     alterAnswer = "";
   } else if (iComment > -1) {
@@ -47,7 +48,7 @@ async function splitQuestion(str: string): Promise<Partial<QuestionType>> {
   const comment =
     iComment > -1 ? normStr.substring(iComment + 13, iSource) : "";
 
-  const author = normStr.substring(iAuthor + 7);
+  const author = iAuthor > -1 ? normStr.substring(iAuthor + 7) : "";
 
   const sourceStr = normStr.substring(iSource + 13, iAuthor);
   const oneOrManySources = /\s\s\s\d.\s/.test(sourceStr);

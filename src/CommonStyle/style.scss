@@ -36,29 +36,14 @@ h4 {
 
 #root {
   height: 100%;
-  .layout {
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  main {
+    margin: 3%;
+    flex: 1;
+  }
+  footer {
     display: flex;
-    flex-direction: column;
-    position: relative;
-    main {
-      margin: 1rem 3% 0rem;
-    }
-    footer {
-      height: 100%;
-      display: flex;
-      align-items: flex-end;
-      padding-top: 2rem;
-    }
+    align-items: flex-end;
   }
 }
-
-// @media (max-width: 800px) {
-//   #root {
-//     .layout {
-//       main {
-//         margin: unset;
-//       }
-//     }
-//   }
-// }

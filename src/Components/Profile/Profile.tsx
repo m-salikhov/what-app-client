@@ -77,7 +77,7 @@ const Profile = () => {
               );
             })
           ) : (
-            <p>Вы пока что ничего не добавили</p>
+            <p>Нет сыгранных турниров</p>
           )}
         </section>
         <section className="pr-ts">

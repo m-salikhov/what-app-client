@@ -1,4 +1,5 @@
 import { ChangeEvent, useState } from "react";
+import { initQuestion } from "../../Helpers/initValues";
 import splitQuestion from "../../Helpers/splitQuestion";
 import { QuestionType } from "../../Types/question";
 
@@ -23,15 +24,21 @@ const AddQuestion = ({
   handleChangeQuestion,
   numberQuestion,
 }: AddQuestionProp) => {
+  // const [question, setQuestion] = useState<QuestionType>({
+  //   type: "regular",
+  //   qNumber: numberQuestion,
+  //   tourNumber: getTourNumber(numberQuestion),
+  //   text: "",
+  //   answer: "",
+  //   source: [],
+  //   author: "",
+  // });
   const [question, setQuestion] = useState<QuestionType>({
-    type: "regular",
-    qNumber: numberQuestion,
+    ...initQuestion,
     tourNumber: getTourNumber(numberQuestion),
-    text: "",
-    answer: "",
-    source: [],
-    author: "",
+    qNumber: numberQuestion,
   });
+
   const [isSaved, setIsSaved] = useState(false);
 
   const onChange = (
@@ -42,7 +49,6 @@ const AddQuestion = ({
   };
 
   const onAddQ = () => {
-    console.log("question", question);
     handleChangeQuestion(question);
     setIsSaved(true);
   };
@@ -50,15 +56,12 @@ const AddQuestion = ({
   return (
     <div className="add-q">
       <div className="add-q__header">
-        <label className="add-q__number">
-          <p> Номер вопроса:</p>
-          <input
-            name="qNumber"
-            type="text"
-            onChange={onChange}
-            defaultValue={numberQuestion}
-          />
-        </label>{" "}
+        <div className="add-q__number">
+          <p>
+            {" "}
+            Номер вопроса: <span> {numberQuestion}</span>{" "}
+          </p>
+        </div>{" "}
         <label className="add-t__tour">
           <p> Номер тура:</p>
           <input
