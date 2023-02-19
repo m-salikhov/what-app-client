@@ -24,15 +24,6 @@ const AddQuestion = ({
   handleChangeQuestion,
   numberQuestion,
 }: AddQuestionProp) => {
-  // const [question, setQuestion] = useState<QuestionType>({
-  //   type: "regular",
-  //   qNumber: numberQuestion,
-  //   tourNumber: getTourNumber(numberQuestion),
-  //   text: "",
-  //   answer: "",
-  //   source: [],
-  //   author: "",
-  // });
   const [question, setQuestion] = useState<QuestionType>({
     ...initQuestion,
     tourNumber: getTourNumber(numberQuestion),

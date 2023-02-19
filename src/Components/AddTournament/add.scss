@@ -122,6 +122,9 @@
       color: aliceblue;
       height: 2rem;
       width: 30%;
+      &.loading-t {
+        background-color: grey;
+      }
     }
   }
 }
