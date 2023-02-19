@@ -1,12 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import userReducer from "./reducers/UserSlice";
-import tournametReducer from "./reducers/TournamentSlice";
+import tournamentReducer from "./reducers/TournamentSlice";
+import questionsReducer from "./reducers/QuestionsSlice";
 
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   userReducer,
-  tournametReducer,
+  tournamentReducer,
+  questionsReducer,
 });
 
 export const store = configureStore({

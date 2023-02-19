@@ -1,25 +1,43 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initTournamentShort } from "../../Helpers/initValues";
-import { TournamentShortType, TournamentType } from "../../Types/tournament";
+import { QuestionType } from "../../Types/question";
+import { TournamentType } from "../../Types/tournament";
 
-interface TournamentState {
-  tournamentShort: TournamentShortType;
-  tournaments: TournamentType[];
-  tournament?: TournamentType;
-}
-
-const initialState: TournamentState = {
-  tournamentShort: initTournamentShort,
-  tournament: undefined,
-  tournaments: [],
+const initialState = {
+  title: "",
+  date: 0,
+  tours: 0,
+  questionsQuantity: 0,
+  editors: [] as string[],
+  editorsString: "",
 };
 
 export const tournamentSlice = createSlice({
   name: "tournament",
   initialState,
   reducers: {
-    setTournamentId(state, action: PayloadAction<TournamentShortType>) {
-      state.tournamentShort = action.payload;
+    setTitle(state, action: PayloadAction<string>) {
+      state.title = action.payload;
+    },
+    setNumberField(
+      state,
+      action: PayloadAction<{
+        field: "date" | "tours" | "questionsQuantity";
+        value: number;
+      }>
+    ) {
+      state[action.payload.field] = action.payload.value;
+    },
+    // setQuestion(state, action: PayloadAction<QuestionType>) {
+    //   state.questions = [...state.questions, action.payload];
+    // },
+    setEditors(state, action: PayloadAction<string>) {
+      state.editorsString = action.payload;
+      let arr = action.payload.split(",");
+      let arrRes = arr.map((s) => s.trim());
+      state.editors = arrRes;
+    },
+    resetState(state) {
+      state = initialState;
     },
   },
 });

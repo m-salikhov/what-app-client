@@ -90,13 +90,7 @@ const AddTournament = () => {
         </div>
         <div className="add__questions">
           {qCount.map((v) => {
-            return (
-              <AddQuestion
-                key={v}
-                numberQuestion={v}
-                handleChangeQuestion={handleChangeQuestion}
-              />
-            );
+            return <AddQuestion key={v} numberQuestion={v} />;
           })}
         </div>
         <div className="add-q__button">
