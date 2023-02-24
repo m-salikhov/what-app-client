@@ -72,7 +72,7 @@ const AddTournament = () => {
   return (
     <main className="add__wrapper">
       <div className="add">
-        <AddTournamentInfo handleChange={handleChange} />
+        <AddTournamentInfo />
         <div className="add-t__button">
           <button
             type="button"

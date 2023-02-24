@@ -9,39 +9,10 @@ interface AddQuestionProp {
   numberQuestion: number;
 }
 
-const getTourNumber = (n: number) => {
-  if (n === 0) {
-    return 0;
-  } else if (n > 0 && n < 13) {
-    return 1;
-  } else if (n > 12 && n < 25) {
-    return 2;
-  } else {
-    return 3;
-  }
-};
-
 const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
   const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(
-      questionsSlice.actions.setInitQuestion({
-        ...initQuestion,
-        tourNumber: getTourNumber(numberQuestion),
-        qNumber: numberQuestion,
-      })
-    );
-    dispatch(
-      questionsSlice.actions.setIsSaved({ numberQuestion, value: false })
-    );
-  }, []);
-
-  const [question, setQuestion] = useState<QuestionType>({
-    ...initQuestion,
-    tourNumber: getTourNumber(numberQuestion),
-    qNumber: numberQuestion,
-  });
+  //Номер тура для данного вопроса при стандартном размере тура в 12
+  const tourNumber = Math.ceil(numberQuestion / 12);
 
   const isSaved = useAppSelector(
     (state) => state.questionsReducer.isSaved[numberQuestion - 1]
@@ -49,13 +20,25 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
   const rawText = useAppSelector(
     (state) => state.questionsReducer[numberQuestion]
   );
+  const add = useAppSelector(
+    (state) => state.questionsReducer.questions[numberQuestion - 1]?.add
+  );
+  const type = useAppSelector(
+    (state) => state.questionsReducer.questions[numberQuestion - 1]?.type
+  );
 
-  const onChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-  ) => {
-    setQuestion({ ...question, [e.target.name]: e.target.value });
-    // setIsSaved(false);
-  };
+  useEffect(() => {
+    dispatch(
+      questionsSlice.actions.setInitQuestion({
+        ...initQuestion,
+        tourNumber,
+        qNumber: numberQuestion,
+      })
+    );
+    dispatch(
+      questionsSlice.actions.setIsSaved({ numberQuestion, value: false })
+    );
+  }, []);
 
   const onChangeRTK = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -65,6 +48,14 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
         questionsSlice.actions.setRawText({
           numberQuestion,
           text: e.target.value,
+        })
+      );
+    } else {
+      dispatch(
+        questionsSlice.actions.setQuestionField({
+          numberQuestion,
+          field: e.target.name,
+          value: e.target.value,
         })
       );
     }
@@ -87,7 +78,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
         <div className="add-q__number">
           <p>
             {" "}
-            Номер вопроса: <span> {numberQuestion}</span>{" "}
+            Номер вопроса: <span>{numberQuestion}</span>{" "}
           </p>
         </div>{" "}
         <label className="add-t__tour">
@@ -95,15 +86,15 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
           <input
             name="tourNumber"
             type="text"
-            onChange={onChange}
-            defaultValue={getTourNumber(numberQuestion)}
+            // onChange={onChange}
+            defaultValue={tourNumber}
           />
         </label>{" "}
         <label>
           {" "}
           <p>Тип вопроса:</p>
-          <select name="type" onChange={onChange}>
-            <option defaultValue="regular" value="regular">
+          <select name="type" onChange={onChangeRTK}>
+            <option defaultValue="regular" value={type}>
               Обычный
             </option>
             <option value="double">Дуплет</option>
@@ -120,7 +111,8 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
             name="add"
             placeholder="Ссылка на изображение или текст раздатки"
             type="text"
-            onChange={onChange}
+            onChange={onChangeRTK}
+            value={add}
           />
         </label>
       </div>

@@ -14,7 +14,7 @@ const initialState: QuestionsInitialState = {
 };
 
 export const questionsSlice = createSlice({
-  name: "questios",
+  name: "questions",
   initialState,
   reducers: {
     setQuestion(
@@ -31,6 +31,26 @@ export const questionsSlice = createSlice({
     setInitQuestion(state, action: PayloadAction<QuestionType>) {
       const q = action.payload;
       state.questions[q.qNumber - 1] = q;
+    },
+    setQuestionField(
+      state,
+      action: PayloadAction<{
+        numberQuestion: number;
+        field: string;
+        value: string;
+      }>
+    ) {
+      const { numberQuestion, field, value } = action.payload;
+      if (field === "add") {
+        state.questions[numberQuestion - 1][field] = value;
+      }
+      if (field === "tourNumber") {
+        state.questions[numberQuestion - 1][field] = +value;
+      }
+      if (field === "type") {
+        state.questions[numberQuestion - 1][field] =
+          value as QuestionType["type"];
+      }
     },
     setRawText(
       state,

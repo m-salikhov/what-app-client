@@ -4,11 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
 import { TournamentType } from "../../Types/tournament";
 
-interface AddTournamentInfoProp {
-  handleChange: (field: Partial<TournamentType>) => void;
-}
-
-const AddTournamentInfo = ({ handleChange }: AddTournamentInfoProp) => {
+const AddTournamentInfo = () => {
   const dispatch = useAppDispatch();
   const s = useAppSelector((state) => state.tournamentReducer);
 
