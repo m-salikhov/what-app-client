@@ -1,19 +1,42 @@
 import { ChangeEvent, useState } from "react";
+import { getDate } from "../../Helpers/getDate";
+import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
 import { TournamentType } from "../../Types/tournament";
 
-interface AddTournamentInfoProp {
-  handleChange: (field: Partial<TournamentType>) => void;
-}
+const AddTournamentInfo = () => {
+  const dispatch = useAppDispatch();
+  const s = useAppSelector((state) => state.tournamentReducer);
 
-const AddTournamentInfo = ({ handleChange }: AddTournamentInfoProp) => {
-  const [editors, setEditors] = useState<string[]>([]);
-  const [editorsCount, setEditorsCount] = useState([1]);
-
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.type === "date") {
-      handleChange({ [e.target.name]: Date.parse(e.target.value) });
-    } else handleChange({ [e.target.name]: e.target.value });
+  const onChangeRTK = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.name === "title") {
+      dispatch(tournamentSlice.actions.setTitle(e.target.value));
+      return;
+    }
+    if (e.target.type === "number") {
+      const action = {
+        field: e.target.name as "date" | "tours" | "questionsQuantity",
+        value: +e.target.value,
+      };
+      dispatch(tournamentSlice.actions.setNumberField(action));
+      return;
+    }
+    if (e.target.name === "date") {
+      const action = {
+        field: e.target.name as "date",
+        value: Date.parse(e.target.value),
+      };
+      dispatch(tournamentSlice.actions.setNumberField(action));
+      return;
+    }
+    if (e.target.name === "editors") {
+      dispatch(tournamentSlice.actions.setEditors(e.target.value));
+      return;
+    }
   };
+
+  console.log("Info");
+
   return (
     <div className="add-t">
       <div className="add-t__top">
@@ -23,56 +46,53 @@ const AddTournamentInfo = ({ handleChange }: AddTournamentInfoProp) => {
             name="title"
             placeholder="Название турнира"
             type="text"
-            onChange={onChange}
+            onChange={onChangeRTK}
+            value={s.title}
           />
         </label>
         <label className="add-t__tours">
           <p> Кол-во туров</p>
-          <input name="tours" type="text" onChange={onChange} />
+          <input
+            name="tours"
+            type="number"
+            onChange={onChangeRTK}
+            value={s.tours}
+          />
         </label>
         <label className="add-t__questionsQuantity">
           <p> Кол-во вопросов</p>
-          <input name="questionsQuantity" type="text" onChange={onChange} />
+          <input
+            name="questionsQuantity"
+            type="number"
+            onChange={onChangeRTK}
+            value={s.questionsQuantity}
+          />
         </label>
       </div>
       <div className="add-t__bottom">
         <label className="add-t__editors">
-          <p> Редакторы </p>
-          {editorsCount.map((v, i) => (
-            <input
-              key={v}
-              name="editors"
-              placeholder="Редактор"
-              type="text"
-              onChange={(e) => {
-                editors[i] = e.target.value;
-                handleChange({ editors: editors });
-                setEditors(editors);
-              }}
-            />
-          ))}
+          <p> Редакторы(через запятую) </p>
+          <input
+            name="editors"
+            placeholder="Редактор"
+            type="text"
+            onChange={onChangeRTK}
+            value={s.editorsString}
+          />
         </label>
         <label className="add-t__date">
           <p> Дата отыгрыша </p>
           <input
             name="date"
             type="date"
-            onChange={onChange}
+            onChange={onChangeRTK}
             onMouseDown={(e) => {
               e.preventDefault();
             }}
           />
         </label>
       </div>
-      <p
-        onClick={() => {
-          setEditorsCount((p) => [...p, p.length + 1]);
-        }}
-      >
-        Добавить редактора +
-      </p>
     </div>
   );
 };
-
 export default AddTournamentInfo;

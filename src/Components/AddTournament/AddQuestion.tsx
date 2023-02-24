@@ -1,56 +1,83 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { initQuestion } from "../../Helpers/initValues";
 import splitQuestion from "../../Helpers/splitQuestion";
 import { QuestionType } from "../../Types/question";
+import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import { questionsSlice } from "../../Store/reducers/QuestionsSlice";
 
 interface AddQuestionProp {
-  handleChangeQuestion: (q: QuestionType) => void;
   numberQuestion: number;
 }
 
-const getTourNumber = (n: number) => {
-  if (n === 0) {
-    return 0;
-  } else if (n > 0 && n < 13) {
-    return 1;
-  } else if (n > 12 && n < 25) {
-    return 2;
-  } else {
-    return 3;
-  }
-};
+const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
+  const dispatch = useAppDispatch();
+  //Номер тура для данного вопроса при стандартном размере тура в 12
+  const tourNumber = Math.ceil(numberQuestion / 12);
 
-const AddQuestion = ({
-  handleChangeQuestion,
-  numberQuestion,
-}: AddQuestionProp) => {
-  const [question, setQuestion] = useState<QuestionType>({
-    ...initQuestion,
-    tourNumber: getTourNumber(numberQuestion),
-    qNumber: numberQuestion,
-  });
+  const isSaved = useAppSelector(
+    (state) => state.questionsReducer.isSaved[numberQuestion - 1]
+  );
+  const rawText = useAppSelector(
+    (state) => state.questionsReducer[numberQuestion]
+  );
+  const add = useAppSelector(
+    (state) => state.questionsReducer.questions[numberQuestion - 1]?.add
+  );
+  const type = useAppSelector(
+    (state) => state.questionsReducer.questions[numberQuestion - 1]?.type
+  );
 
-  const [isSaved, setIsSaved] = useState(false);
+  useEffect(() => {
+    dispatch(
+      questionsSlice.actions.setInitQuestion({
+        ...initQuestion,
+        tourNumber,
+        qNumber: numberQuestion,
+      })
+    );
+    dispatch(
+      questionsSlice.actions.setIsSaved({ numberQuestion, value: false })
+    );
+  }, []);
 
-  const onChange = (
+  const onChangeRTK = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
-    setQuestion({ ...question, [e.target.name]: e.target.value });
-    setIsSaved(false);
+    if (e.target.name === "text") {
+      dispatch(
+        questionsSlice.actions.setRawText({
+          numberQuestion,
+          text: e.target.value,
+        })
+      );
+    } else {
+      dispatch(
+        questionsSlice.actions.setQuestionField({
+          numberQuestion,
+          field: e.target.name,
+          value: e.target.value,
+        })
+      );
+    }
   };
 
   const onAddQ = () => {
-    handleChangeQuestion(question);
-    setIsSaved(true);
+    const qSplited = splitQuestion(rawText);
+    dispatch(
+      questionsSlice.actions.setQuestion({
+        numberQuestion,
+        q: qSplited as QuestionType,
+      })
+    );
   };
-
+  console.log("Q", numberQuestion);
   return (
     <div className="add-q">
       <div className="add-q__header">
         <div className="add-q__number">
           <p>
             {" "}
-            Номер вопроса: <span> {numberQuestion}</span>{" "}
+            Номер вопроса: <span>{numberQuestion}</span>{" "}
           </p>
         </div>{" "}
         <label className="add-t__tour">
@@ -58,15 +85,15 @@ const AddQuestion = ({
           <input
             name="tourNumber"
             type="text"
-            onChange={onChange}
-            defaultValue={getTourNumber(numberQuestion)}
+            // onChange={onChange}
+            defaultValue={tourNumber}
           />
         </label>{" "}
         <label>
           {" "}
           <p>Тип вопроса:</p>
-          <select name="type" onChange={onChange}>
-            <option defaultValue="regular" value="regular">
+          <select name="type" onChange={onChangeRTK}>
+            <option defaultValue="regular" value={type}>
               Обычный
             </option>
             <option value="double">Дуплет</option>
@@ -83,7 +110,8 @@ const AddQuestion = ({
             name="add"
             placeholder="Ссылка на изображение или текст раздатки"
             type="text"
-            onChange={onChange}
+            onChange={onChangeRTK}
+            value={add}
           />
         </label>
       </div>
@@ -92,16 +120,8 @@ const AddQuestion = ({
         <textarea
           rows={4}
           placeholder="Введите текст вопроса..."
-          onChange={async (e) => {
-            const q = await splitQuestion(e.target.value);
-            setQuestion((prev) => {
-              setIsSaved(false);
-              return {
-                ...prev,
-                ...q,
-              };
-            });
-          }}
+          onChange={onChangeRTK}
+          value={rawText}
           name="text"
         />
       </div>

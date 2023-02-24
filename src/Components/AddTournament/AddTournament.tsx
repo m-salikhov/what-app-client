@@ -1,37 +1,31 @@
 import AddTournamentInfo from "./AddTournamentInfo";
 import "./add.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddQuestion from "./AddQuestion";
 import { TournamentType } from "../../Types/tournament";
 import { QuestionType } from "../../Types/question";
-import { useAppSelector } from "../../Hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
 import { initTournament } from "../../Helpers/initValues";
 import checkTournament from "../../Helpers/checkTournament";
+import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
+import { questionsSlice } from "../../Store/reducers/QuestionsSlice";
 
 const AddTournament = () => {
+  const dispatch = useAppDispatch();
+  const { currentUser } = useAppSelector((state) => state.userReducer);
+
   const [tournament, setTournament] = useState<TournamentType>(initTournament);
   const [qCount, setqCount] = useState([1]);
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [messageSuccess, setMessageSuccess] = useState("");
-  const { currentUser } = useAppSelector((state) => state.userReducer);
 
-  const handleChange = (field: Partial<TournamentType>) => {
-    setTournament((prev) => ({ ...prev, ...field }));
-  };
-  const handleChangeQuestion = (q: QuestionType) => {
-    const i = tournament.questions.findIndex((v) => v.qNumber === q.qNumber);
-    if (i === -1) {
-      const questions = [...tournament.questions, q];
-      setTournament((prev) => ({ ...prev, questions }));
-    } else {
-      const questions = tournament.questions;
-      questions[i] = q;
-      setTournament((prev) => ({ ...prev, questions }));
-    }
-  };
-  const addTournament = async () => {
+  //состояние для сохранения. Из компонентов AddTournamentInfo и AddQuestion
+  const tournamentInfo = useAppSelector((state) => state.tournamentReducer);
+  const questions = useAppSelector((state) => state.questionsReducer.questions);
+
+  const addTournament = () => {
     if (Boolean(messageSuccess)) {
       setMessageSuccess("");
       setTournament(initTournament);
@@ -48,7 +42,7 @@ const AddTournament = () => {
       return;
     }
 
-    await _axios
+    _axios
       .post("/tournaments", {
         ...tournament,
         dateUpload: Date.now(),
@@ -69,10 +63,17 @@ const AddTournament = () => {
       });
   };
 
+  useEffect(() => {
+    return () => {
+      dispatch(tournamentSlice.actions.resetState());
+      dispatch(questionsSlice.actions.resetState());
+    };
+  }, []);
+
   return (
     <main className="add__wrapper">
       <div className="add">
-        <AddTournamentInfo handleChange={handleChange} />
+        <AddTournamentInfo />
         <div className="add-t__button">
           <button
             type="button"
@@ -90,13 +91,7 @@ const AddTournament = () => {
         </div>
         <div className="add__questions">
           {qCount.map((v) => {
-            return (
-              <AddQuestion
-                key={v}
-                numberQuestion={v}
-                handleChangeQuestion={handleChangeQuestion}
-              />
-            );
+            return <AddQuestion key={v} numberQuestion={v} />;
           })}
         </div>
         <div className="add-q__button">
