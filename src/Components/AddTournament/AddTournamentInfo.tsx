@@ -35,6 +35,8 @@ const AddTournamentInfo = () => {
     }
   };
 
+  console.log("Info");
+
   return (
     <div className="add-t">
       <div className="add-t__top">

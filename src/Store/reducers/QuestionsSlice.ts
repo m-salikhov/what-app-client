@@ -67,6 +67,7 @@ export const questionsSlice = createSlice({
       const { numberQuestion, value } = action.payload;
       state.isSaved[numberQuestion - 1] = value;
     },
+    resetState: () => initialState,
   },
 });
 

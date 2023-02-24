@@ -7,9 +7,11 @@ const initialState = {
   date: 0,
   tours: 0,
   questionsQuantity: 0,
-  editors: [] as string[],
+  editors: [""],
   editorsString: "",
 };
+
+type State = keyof typeof initialState;
 
 export const tournamentSlice = createSlice({
   name: "tournament",
@@ -36,9 +38,7 @@ export const tournamentSlice = createSlice({
       let arrRes = arr.map((s) => s.trim());
       state.editors = arrRes;
     },
-    resetState(state) {
-      state = initialState;
-    },
+    resetState: () => initialState,
   },
 });
 

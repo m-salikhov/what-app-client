@@ -61,8 +61,8 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
     }
   };
 
-  const onAddQ = async () => {
-    const qSplited = await splitQuestion(rawText);
+  const onAddQ = () => {
+    const qSplited = splitQuestion(rawText);
     dispatch(
       questionsSlice.actions.setQuestion({
         numberQuestion,
@@ -70,8 +70,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
       })
     );
   };
-  const stateQ = useAppSelector((state) => state.questionsReducer);
-  console.log("stateQ", stateQ);
+  console.log("Q", numberQuestion);
   return (
     <div className="add-q">
       <div className="add-q__header">
