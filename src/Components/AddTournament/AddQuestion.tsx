@@ -1,9 +1,9 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { initQuestion } from "../../Helpers/initValues";
-import splitQuestion from "../../Helpers/splitQuestion";
-import { QuestionType } from "../../Types/question";
+import { ChangeEvent, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import splitQuestion from "../../Helpers/splitQuestion";
 import { questionsSlice } from "../../Store/reducers/QuestionsSlice";
+import { initQuestion } from "../../Helpers/initValues";
+import { QuestionType } from "../../Types/question";
 
 interface AddQuestionProp {
   numberQuestion: number;
@@ -14,6 +14,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
   //Номер тура для данного вопроса при стандартном размере тура в 12
   const tourNumber = Math.ceil(numberQuestion / 12);
 
+  //текущее состояние вопроса
   const isSaved = useAppSelector(
     (state) => state.questionsReducer.isSaved[numberQuestion - 1]
   );
@@ -70,7 +71,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
       })
     );
   };
-  console.log("Q", numberQuestion);
+
   return (
     <div className="add-q">
       <div className="add-q__header">
@@ -82,12 +83,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
         </div>{" "}
         <label className="add-t__tour">
           <p> Номер тура:</p>
-          <input
-            name="tourNumber"
-            type="text"
-            // onChange={onChange}
-            defaultValue={tourNumber}
-          />
+          <input name="tourNumber" type="text" defaultValue={tourNumber} />
         </label>{" "}
         <label>
           {" "}

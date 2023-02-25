@@ -17,7 +17,7 @@ export default function checkTournament(t: TournamentType) {
   if (!Boolean(t.tours)) {
     errors.push("Не выбрано кол-во туров");
   }
-  if (t.editors.length < 1) {
+  if (!Boolean(t.editors[0])) {
     errors.push("Не указан редактор(ы)");
   }
   if (t.tours != t.questions.at(-1)?.tourNumber) {

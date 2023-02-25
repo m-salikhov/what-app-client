@@ -10,7 +10,6 @@ interface QuestionsInitialState {
 const initialState: QuestionsInitialState = {
   questions: [],
   isSaved: [],
-  // rawText: {},
 };
 
 export const questionsSlice = createSlice({

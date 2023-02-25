@@ -1,21 +1,18 @@
-import AddTournamentInfo from "./AddTournamentInfo";
-import "./add.scss";
 import { useEffect, useState } from "react";
-import AddQuestion from "./AddQuestion";
-import { TournamentType } from "../../Types/tournament";
-import { QuestionType } from "../../Types/question";
 import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
-import { initTournament } from "../../Helpers/initValues";
-import checkTournament from "../../Helpers/checkTournament";
-import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
 import { questionsSlice } from "../../Store/reducers/QuestionsSlice";
+import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
+import checkTournament from "../../Helpers/checkTournament";
+import { TournamentType } from "../../Types/tournament";
+import AddQuestion from "./AddQuestion";
+import AddTournamentInfo from "./AddTournamentInfo";
+import "./add.scss";
 
 const AddTournament = () => {
   const dispatch = useAppDispatch();
   const { currentUser } = useAppSelector((state) => state.userReducer);
 
-  const [tournament, setTournament] = useState<TournamentType>(initTournament);
   const [qCount, setqCount] = useState([1]);
   const [errors, setErrors] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
@@ -25,17 +22,35 @@ const AddTournament = () => {
   const tournamentInfo = useAppSelector((state) => state.tournamentReducer);
   const questions = useAppSelector((state) => state.questionsReducer.questions);
 
+  const nextQuestionForm = () => {
+    if (qCount[qCount.length - 1] < tournamentInfo.questionsQuantity) {
+      setqCount((p) => [...p, p.length + 1]);
+      setErrors([]);
+    } else setErrors((prev) => [...prev, "Максимальное количество вопросов"]);
+  };
+
   const addTournament = () => {
+    //турнир на отправку
+    const t: TournamentType = {
+      ...tournamentInfo,
+      questions,
+      uploader: currentUser?.username,
+      uploaderUuid: currentUser?.id as string,
+      dateUpload: Date.now(),
+    };
+
     if (Boolean(messageSuccess)) {
       setMessageSuccess("");
-      setTournament(initTournament);
+      dispatch(tournamentSlice.actions.resetState());
+      dispatch(questionsSlice.actions.resetState());
+      setqCount([1]);
       return;
     }
 
     setLoading(true);
     setErrors([]);
-    const e = checkTournament(tournament);
-
+    const e = checkTournament(t);
+    console.log("e", e);
     if (e) {
       setErrors(e);
       setLoading(false);
@@ -43,12 +58,7 @@ const AddTournament = () => {
     }
 
     _axios
-      .post("/tournaments", {
-        ...tournament,
-        dateUpload: Date.now(),
-        uploaderUuid: currentUser?.id,
-        uploader: currentUser?.username,
-      })
+      .post("/tournaments", t)
       .then((res) => {
         console.log("res", res);
         if (res.status === 201) {
@@ -96,10 +106,7 @@ const AddTournament = () => {
         </div>
         <div className="add-q__button">
           {" "}
-          <button
-            type="button"
-            onClick={() => setqCount((p) => [...p, p.length + 1])}
-          >
+          <button type="button" onClick={nextQuestionForm}>
             <h3>Следующий вопрос</h3>
           </button>
         </div>
