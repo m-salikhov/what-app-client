@@ -32,9 +32,12 @@ nav {
       font-size: 1.125rem;
       font-weight: 600;
       padding: 0rem 0.5rem;
-      color: rgba(134, 123, 123, 0.8);
+      // color: rgba(134, 123, 123, 1);
+      color: rgba(34, 60, 80, 0.7);
+
       &:hover {
-        color: rgb(127, 97, 97);
+        // color: rgb(127, 97, 97);
+        color: rgba(34, 60, 80, 1);
       }
       a {
         padding-top: 1rem;
