@@ -1,12 +1,12 @@
-import { ChangeEvent, useState } from "react";
-import { getDate } from "../../Helpers/getDate";
+import { ChangeEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
-import { TournamentType } from "../../Types/tournament";
 
 const AddTournamentInfo = () => {
   const dispatch = useAppDispatch();
-  const s = useAppSelector((state) => state.tournamentReducer);
+  const tournamentInfoState = useAppSelector(
+    (state) => state.tournamentReducer
+  );
 
   const onChangeRTK = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === "title") {
@@ -35,8 +35,6 @@ const AddTournamentInfo = () => {
     }
   };
 
-  console.log("Info");
-
   return (
     <div className="add-t">
       <div className="add-t__top">
@@ -47,7 +45,7 @@ const AddTournamentInfo = () => {
             placeholder="Название турнира"
             type="text"
             onChange={onChangeRTK}
-            value={s.title}
+            value={tournamentInfoState.title}
           />
         </label>
         <label className="add-t__tours">
@@ -56,7 +54,7 @@ const AddTournamentInfo = () => {
             name="tours"
             type="number"
             onChange={onChangeRTK}
-            value={s.tours}
+            value={tournamentInfoState.tours}
           />
         </label>
         <label className="add-t__questionsQuantity">
@@ -65,7 +63,7 @@ const AddTournamentInfo = () => {
             name="questionsQuantity"
             type="number"
             onChange={onChangeRTK}
-            value={s.questionsQuantity}
+            value={tournamentInfoState.questionsQuantity}
           />
         </label>
       </div>
@@ -77,7 +75,7 @@ const AddTournamentInfo = () => {
             placeholder="Редактор"
             type="text"
             onChange={onChangeRTK}
-            value={s.editorsString}
+            value={tournamentInfoState.editorsString}
           />
         </label>
         <label className="add-t__date">

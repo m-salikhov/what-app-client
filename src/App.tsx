@@ -15,6 +15,7 @@ import { UserType } from "./Types/user";
 import { userSlice } from "./Store/reducers/UserSlice";
 import List from "./Components/PlayMode/List";
 import PlayMode from "./Components/PlayMode/PlayMode";
+import { About } from "./Components/About/About";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -31,9 +32,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
-          <Route path="entry" element={<Entry />} />
-          <Route path="all" element={<All />} />
-          <Route path="playmode" element={<List />} />
+          <Route path="about" element={<About />} />
           <Route
             path="add"
             element={
@@ -42,7 +41,9 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route path="tournament/:id" element={<Tournament />} />
+          <Route path="all" element={<All />} />
+          <Route path="entry" element={<Entry />} />
+          <Route path="playmode" element={<List />} />
           <Route path="playmode/:id" element={<PlayMode />} />
           <Route
             path="profile"
@@ -52,6 +53,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="tournament/:id" element={<Tournament />} />
         </Route>
       </Routes>
     </BrowserRouter>

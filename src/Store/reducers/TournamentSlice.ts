@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { QuestionType } from "../../Types/question";
-import { TournamentType } from "../../Types/tournament";
 
 const initialState = {
   title: "",
@@ -10,8 +8,6 @@ const initialState = {
   editors: [""],
   editorsString: "",
 };
-
-type State = keyof typeof initialState;
 
 export const tournamentSlice = createSlice({
   name: "tournament",
