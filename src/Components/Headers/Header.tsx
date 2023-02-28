@@ -1,10 +1,10 @@
-import "./header.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
 import { userSlice } from "../../Store/reducers/UserSlice";
 import owlBW from "./owlBW.svg";
 import { useState } from "react";
+import "./header.scss";
 
 const Header = () => {
   const [openMobMenu, setOpenMobMenu] = useState(false);

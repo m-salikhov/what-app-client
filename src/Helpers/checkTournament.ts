@@ -20,13 +20,13 @@ export default function checkTournament(t: TournamentType) {
   if (!Boolean(t.editors[0])) {
     errors.push("Не указан редактор(ы)");
   }
-  if (t.tours != t.questions.at(-1)?.tourNumber) {
+  if (t.tours !== t.questions.at(-1)?.tourNumber) {
     errors.push("Кол-во туров не соответсвует выбранному");
   }
   // if (t.questionsQuantity != t.questions.at(-1)?.qNumber) {
   //   errors.push("Неверная нумерация вопросов");
   // }
-  if (t.questionsQuantity != t.questions.length) {
+  if (t.questionsQuantity !== t.questions.length) {
     errors.push("Кол-во вопросов не соответсвует выбранному");
   }
 

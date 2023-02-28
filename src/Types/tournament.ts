@@ -1,7 +1,7 @@
 import { QuestionType } from "./question";
 
 export interface TournamentType {
-  id?: number;
+  id: number;
   title: string;
   date: number;
   tours: number;

@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {
+  id: 0,
   title: "",
   date: 0,
   tours: 0,

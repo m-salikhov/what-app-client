@@ -39,7 +39,7 @@ const AddQuestion = ({ numberQuestion }: AddQuestionProp) => {
     dispatch(
       questionsSlice.actions.setIsSaved({ numberQuestion, value: false })
     );
-  }, []);
+  }, [dispatch, tourNumber, numberQuestion]);
 
   const onChangeRTK = (
     e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>

@@ -78,7 +78,7 @@ const AddTournament = () => {
       dispatch(tournamentSlice.actions.resetState());
       dispatch(questionsSlice.actions.resetState());
     };
-  }, []);
+  }, [dispatch]);
 
   return (
     <main className="add__wrapper">

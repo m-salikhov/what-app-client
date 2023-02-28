@@ -1,7 +1,7 @@
-import { TournamentType } from "./tournament";
+import { TournamentShortType } from "./tournament";
 
 export interface QuestionType {
-  id?: number;
+  id: number;
   type: "regular" | "double" | "triple" | "other" | "outside";
   // номер в турнире
   qNumber: number;
@@ -15,5 +15,5 @@ export interface QuestionType {
   comment?: string;
   source: string[];
   author: string;
-  tournament?: TournamentType;
+  tournament?: TournamentShortType;
 }

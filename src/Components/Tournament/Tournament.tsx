@@ -5,10 +5,14 @@ import Back from "../Elements/Back/Back";
 import { useParams } from "react-router-dom";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import { useTournamentById } from "../../Hooks/useTournament";
+import { useEffect } from "react";
 
 const Tournament = () => {
   const { id } = useParams();
   const { t, loading } = useTournamentById(id);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main className="tournament__container">

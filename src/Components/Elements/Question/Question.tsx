@@ -2,7 +2,6 @@ import { useState } from "react";
 import { QuestionType } from "../../../Types/question";
 import Add from "./Add";
 import Answer from "./Answer";
-// import ansArrow from "./arrow_down.svg";
 import "./question.scss";
 
 interface Props {
@@ -12,7 +11,6 @@ interface Props {
 
 const Question = ({ q, random }: Props) => {
   const [showAnswer, setShowAnswer] = useState(false);
-
   return (
     <div className="question">
       <div className="question__header">

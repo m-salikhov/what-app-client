@@ -20,6 +20,7 @@ export const initTournament: TournamentType = {
 };
 
 export const initUser: UserType = {
+  id: "",
   email: "",
   username: "",
   role: "user",
@@ -28,6 +29,7 @@ export const initUser: UserType = {
 };
 
 export const initQuestion: QuestionType = {
+  id: 0,
   type: "regular",
   qNumber: 0,
   tourNumber: 0,

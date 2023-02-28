@@ -1,19 +1,19 @@
-import axios from "axios";
+// import axios from "axios";
 import { QuestionType } from "../Types/question";
 
-interface ShrtcodeRes {
-  ok: boolean;
-  result: {
-    code: string;
-    short_link: string;
-    full_short_link: string;
-    short_link2: string;
-    full_short_link2: string;
-    share_link: string;
-    full_share_link: string;
-    original_link: string;
-  };
-}
+// interface ShrtcodeRes {
+//   ok: boolean;
+//   result: {
+//     code: string;
+//     short_link: string;
+//     full_short_link: string;
+//     short_link2: string;
+//     full_short_link2: string;
+//     share_link: string;
+//     full_share_link: string;
+//     original_link: string;
+//   };
+// }
 
 function splitQuestion(str: string): Partial<QuestionType> {
   const normStr0 = str.replace(/Вопрос \d+:\s/, "");
