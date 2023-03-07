@@ -1,6 +1,8 @@
-import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "./CommonStyle/style.scss";
+import { useEffect } from "react";
+import { _axios } from "./Helpers/_axios";
+import { useAppDispatch } from "./Hooks/redux";
+import { userSlice } from "./Store/reducers/UserSlice";
 import AddTournament from "./Components/AddTournament/AddTournament";
 import All from "./Components/AllTournaments/All";
 import Entry from "./Components/Entry/Entry";
@@ -9,13 +11,11 @@ import Main from "./Components/Main/Main";
 import Profile from "./Components/Profile/Profile";
 import Tournament from "./Components/Tournament/Tournament";
 import PrivateRoute from "./hoc/PrivateRoute";
-import { _axios } from "./Helpers/_axios";
-import { useAppDispatch } from "./Hooks/redux";
-import { UserType } from "./Types/user";
-import { userSlice } from "./Store/reducers/UserSlice";
 import List from "./Components/PlayMode/List";
 import PlayMode from "./Components/PlayMode/PlayMode";
 import { About } from "./Components/About/About";
+import { UserType } from "./Types/user";
+import "./CommonStyle/style.scss";
 
 function App() {
   const dispatch = useAppDispatch();

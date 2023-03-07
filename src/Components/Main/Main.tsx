@@ -4,8 +4,8 @@ import { QuestionType } from "../../Types/question";
 import Question from "../Elements/Question/Question";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import LastTournaments from "./LastTournaments";
-import "./main.scss";
 import refreshIcon from "./refresh.svg";
+import "./main.scss";
 
 const Main = () => {
   const [message, setMessage] = useState("");

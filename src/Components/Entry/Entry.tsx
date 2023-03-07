@@ -1,43 +1,49 @@
-import entryImg from "./entry_img.svg";
-import "./entry.scss";
-import { ChangeEvent, FormEvent, useState } from "react";
-import { UserType } from "../../Types/user";
-import { _axios } from "../../Helpers/_axios";
-import { loginUser } from "../../Store/reducers/AsyncActionCreaters";
-import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { Navigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import { ChangeEvent, FormEvent, useState } from "react";
+import { _axios } from "../../Helpers/_axios";
+import { UserType } from "../../Types/user";
+import { loginUser } from "../../Store/reducers/AsyncActionCreaters";
 import { userSlice } from "../../Store/reducers/UserSlice";
 import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
+import entryImg from "./entry_img.svg";
+import "./entry.scss";
 
 const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 
 const Entry = () => {
-  const [reg, setReg] = useState(false);
-  const [passRepeat, setPassRepeat] = useState("");
+  const dispatch = useAppDispatch();
+
   const [form, setForm] = useState<UserType>(initUser);
+  const [passRepeat, setPassRepeat] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
-  const dispatch = useAppDispatch();
+  const [reg, setReg] = useState(false);
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
-    setErrorMessage("");
     dispatch(userSlice.actions.resetError());
 
     if (!testEmail.test(form.email)) {
-      return setErrorMessage("Неверный email");
+      setErrorMessage("Неверный email");
+      return;
     }
     if (!form.password) {
-      return setErrorMessage("Введите пароль");
+      setErrorMessage("Введите пароль");
+      return;
     }
     if (reg && form.password !== passRepeat) {
-      return setErrorMessage("Повторите пароль");
+      setErrorMessage("Повторите пароль");
+      return;
     }
     if (reg && !form.username) {
-      return setErrorMessage("Выберите псевдоним");
+      setErrorMessage("Выберите псевдоним");
+      return;
     }
+
+    setErrorMessage("");
 
     if (reg) {
       await _axios
@@ -67,6 +73,7 @@ const Entry = () => {
     <>
       {/* окно при успешной регистрации */}
       {isModalOpen ? <ModalReg /> : null}
+
       <main className="entry__wrapper">
         <div className="entry">
           <div className="entry__container">

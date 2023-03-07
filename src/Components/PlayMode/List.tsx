@@ -1,7 +1,7 @@
 import { _axios } from "../../Helpers/_axios";
 import { useTournamentAllShorts } from "../../Hooks/useTournament";
-import "./list.scss";
 import ListLine from "./ListLine";
+import "./list.scss";
 
 const List = () => {
   const { ts, loading } = useTournamentAllShorts();

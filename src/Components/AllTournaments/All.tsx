@@ -1,11 +1,11 @@
-import { MouseEvent, useEffect, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
+import { MouseEvent, useEffect, useState } from "react";
 import { TournamentShortType } from "../../Types/tournament";
-import "./all.scss";
-import chart from "./bar_chart.svg";
-
 import LineAll from "./LineAll";
 import { sortFunction } from "./sortFunction";
+import chart from "./bar_chart.svg";
+import "./all.scss";
+
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
 const All = () => {

@@ -1,13 +1,13 @@
 import { MouseEvent, useEffect, useState } from "react";
-import { getDate } from "../../Helpers/getDate";
 import { Link } from "react-router-dom";
+import { _axios } from "../../Helpers/_axios";
+import { getDate } from "../../Helpers/getDate";
+import { TournamentShortType } from "../../Types/tournament";
 import back from "./back.svg";
 import next from "./next.svg";
-import { TournamentShortType } from "../../Types/tournament";
-import { _axios } from "../../Helpers/_axios";
 
 const LastTournaments = () => {
-  const [lastTenTournamebts, setLastTenTournamebts] = useState<
+  const [lastTenTournaments, setLastTenTournaments] = useState<
     TournamentShortType[]
   >([]);
   const [pageNumber, setPageNumber] = useState(0);
@@ -15,7 +15,7 @@ const LastTournaments = () => {
 
   useEffect(() => {
     _axios.get(`/tournaments/last/${pageNumber * 10}`).then((res) => {
-      setLastTenTournamebts(res.data);
+      setLastTenTournaments(res.data);
     });
   }, [pageNumber]);
   useEffect(() => {
@@ -41,7 +41,7 @@ const LastTournaments = () => {
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
-      {lastTenTournamebts.map((v, i) => {
+      {lastTenTournaments.map((v, i) => {
         return (
           <div className="tournaments__item" key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>

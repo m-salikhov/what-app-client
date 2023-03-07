@@ -1,11 +1,11 @@
-import "./tournament.scss";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import Question from "../Elements/Question/Question";
 import Back from "../Elements/Back/Back";
-import { useParams } from "react-router-dom";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import { useTournamentById } from "../../Hooks/useTournament";
-import { useEffect } from "react";
+import "./tournament.scss";
 
 const Tournament = () => {
   const { id } = useParams();

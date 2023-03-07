@@ -1,7 +1,6 @@
 import { QuestionType } from "../../../Types/question";
 import Add from "./Add";
 import Answer from "./Answer";
-// import ansArrow from "./arrow_down.svg";
 import "./question.scss";
 
 interface Props {

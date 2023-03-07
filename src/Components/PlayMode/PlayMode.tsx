@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import "./playmode.scss";
 import Start from "./PlayModeParts/Start";
 import PMQuestion from "./PlayModeParts/PMQuestion/PMQuestion";
 import TourEnd from "./PlayModeParts/End/TourEnd";
 import End from "./PlayModeParts/End/End";
 import { useTournamentById } from "../../Hooks/useTournament";
+import "./playmode.scss";
 
 export enum Step {
   Start = "START",

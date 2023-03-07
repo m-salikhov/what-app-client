@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { _axios } from "../../Helpers/_axios";
+import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { questionsSlice } from "../../Store/reducers/QuestionsSlice";
 import { tournamentSlice } from "../../Store/reducers/TournamentSlice";
 import checkTournament from "../../Helpers/checkTournament";
-import { TournamentType } from "../../Types/tournament";
 import AddQuestion from "./AddQuestion";
 import AddTournamentInfo from "./AddTournamentInfo";
+import { TournamentType } from "../../Types/tournament";
 import "./add.scss";
 
 const AddTournament = () => {

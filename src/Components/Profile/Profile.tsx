@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
+import { _axios } from "../../Helpers/_axios";
 import { getDate } from "../../Helpers/getDate";
 import { initTournamentShort } from "../../Helpers/initValues";
-import { _axios } from "../../Helpers/_axios";
 import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
 import "./profile.scss";
