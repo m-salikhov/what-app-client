@@ -3,7 +3,7 @@ import { UserAuth, UserType } from "../../Types/user";
 import { AppDispatch } from "../store";
 import { userSlice } from "./UserSlice";
 
-export const loginUser =
+export const loginUserOld =
   (loginUser: UserAuth) => async (dispatch: AppDispatch) => {
     try {
       dispatch(userSlice.actions.userFetching());

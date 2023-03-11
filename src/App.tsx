@@ -1,8 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { _axios } from "./Helpers/_axios";
-import { useAppDispatch } from "./Hooks/redux";
-import { userSlice } from "./Store/reducers/UserSlice";
+import { useAppDispatch, useAppSelector } from "./Hooks/redux";
+import { getUserPreload } from "./Store/reducers/UserSlice";
 import AddTournament from "./Components/AddTournament/AddTournament";
 import All from "./Components/AllTournaments/All";
 import Entry from "./Components/Entry/Entry";
@@ -14,18 +13,21 @@ import PrivateRoute from "./hoc/PrivateRoute";
 import List from "./Components/PlayMode/List";
 import PlayMode from "./Components/PlayMode/PlayMode";
 import { About } from "./Components/About/About";
-import { UserType } from "./Types/user";
 import "./CommonStyle/style.scss";
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    _axios
-      .get<UserType>("/auth/logfirst")
-      .then((res) => dispatch(userSlice.actions.setCurrentUser(res.data)))
-      .catch(() => console.log("Не авторизован"));
+    dispatch(getUserPreload());
   }, [dispatch]);
+
+  const { currentUser, isLoading } = useAppSelector(
+    (state) => state.userReducer
+  );
+
+  console.log("isLoading", isLoading);
+  console.log("currentUser", currentUser);
 
   return (
     <BrowserRouter>

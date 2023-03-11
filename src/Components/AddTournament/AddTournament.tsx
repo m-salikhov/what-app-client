@@ -8,6 +8,7 @@ import AddQuestion from "./AddQuestion";
 import AddTournamentInfo from "./AddTournamentInfo";
 import { TournamentType } from "../../Types/tournament";
 import "./add.scss";
+import { AxiosError } from "axios";
 
 const AddTournament = () => {
   const dispatch = useAppDispatch();
@@ -67,8 +68,8 @@ const AddTournament = () => {
           setLoading(false);
         }
       })
-      .catch((e: any) => {
-        console.log(e.response.data.message);
+      .catch((e: AxiosError) => {
+        console.log(e.message);
         setLoading(false);
       });
   };

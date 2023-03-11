@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
 import { UserType } from "../../Types/user";
-import { loginUser } from "../../Store/reducers/AsyncActionCreaters";
-import { userSlice } from "../../Store/reducers/UserSlice";
+import { loginUserOld } from "../../Store/reducers/AsyncActionCreaters";
+import { loginUser, userSlice } from "../../Store/reducers/UserSlice";
 import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
@@ -49,7 +49,10 @@ const Entry = () => {
       await _axios
         .post<UserType>("/users", form)
         .catch(() => setErrorMessage("Email уже зарегистрирован"));
-      await dispatch(loginUser({ email: form.email, password: form.password }));
+      //todo перенести в then сохранение пошльзователя
+      await dispatch(
+        loginUserOld({ email: form.email, password: form.password })
+      );
       setIsModalOpen(true);
       return;
     }

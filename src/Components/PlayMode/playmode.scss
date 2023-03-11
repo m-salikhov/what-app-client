@@ -69,6 +69,7 @@ main {
   .answer {
     p {
       padding: 0.2rem 0;
+      word-wrap: break-word;
       span {
         font-weight: 800;
       }
@@ -106,7 +107,7 @@ main {
       justify-content: center;
       padding: 1rem 0rem;
       img {
-        max-width: 30%;
+        max-width: 60%;
       }
       p {
         font-size: 1.25rem;
