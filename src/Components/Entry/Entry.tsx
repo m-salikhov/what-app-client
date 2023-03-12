@@ -1,10 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
 import { UserType } from "../../Types/user";
-import { loginUserOld } from "../../Store/reducers/AsyncActionCreaters";
-import { loginUser, userSlice } from "../../Store/reducers/UserSlice";
+import {
+  loginUser,
+  resetError,
+  setCurrentUser,
+  userSlice,
+} from "../../Store/reducers/UserSlice";
 import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
@@ -24,7 +28,9 @@ const Entry = () => {
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
-    dispatch(userSlice.actions.resetError());
+
+    dispatch(resetError());
+    setErrorMessage("");
 
     if (!testEmail.test(form.email)) {
       setErrorMessage("Неверный email");
@@ -43,17 +49,15 @@ const Entry = () => {
       return;
     }
 
-    setErrorMessage("");
-
     if (reg) {
       await _axios
         .post<UserType>("/users", form)
+        .then((res) => {
+          console.log("res", res);
+          dispatch(setCurrentUser(res.data));
+          setIsModalOpen(true);
+        })
         .catch(() => setErrorMessage("Email уже зарегистрирован"));
-      //todo перенести в then сохранение пошльзователя
-      await dispatch(
-        loginUserOld({ email: form.email, password: form.password })
-      );
-      setIsModalOpen(true);
       return;
     }
     dispatch(loginUser({ email: form.email, password: form.password }));
@@ -64,9 +68,14 @@ const Entry = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const { currentUser, isLoading, error } = useAppSelector(
-    (state) => state.userReducer
-  );
+  const { currentUser, error } = useAppSelector((state) => state.userReducer);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetError());
+      setErrorMessage("");
+    };
+  }, [dispatch]);
 
   if (isAuth && currentUser?.id) {
     return <Navigate to="/" replace />;
@@ -124,16 +133,10 @@ const Entry = () => {
                   onChange={(e) => setPassRepeat(e.target.value)}
                 />{" "}
               </label>
-              {error && (
+              {(errorMessage || error) && (
                 <div className="entry__error">
                   <div className="entry__error--block"></div>
-                  <p>{error}</p>
-                </div>
-              )}
-              {errorMessage && (
-                <div className="entry__error">
-                  <div className="entry__error--block"></div>
-                  <p>{errorMessage}</p>
+                  <p>{errorMessage || error}</p>
                 </div>
               )}
 

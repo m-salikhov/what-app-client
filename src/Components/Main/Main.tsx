@@ -1,14 +1,18 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { AxiosError } from "axios";
 import { _axios } from "../../Helpers/_axios";
 import { QuestionType } from "../../Types/question";
 import Question from "../Elements/Question/Question";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import LastTournaments from "./LastTournaments";
+import Button from "../Elements/Button/Button";
 import refreshIcon from "./refresh.svg";
 import "./main.scss";
 
 const Main = () => {
-  const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
   const [newRandom, setNewRandom] = useState(0);
   const [randQuestions, setRandQuestions] = useState<QuestionType[]>([]);
   const [loading, setLoading] = useState(true);
@@ -20,7 +24,7 @@ const Main = () => {
         setRandQuestions(res.data);
         setLoading(false);
       })
-      .catch((e: any) => setMessage(e.response.data.message));
+      .catch((e: AxiosError) => console.log(e.message));
   }, [newRandom]);
 
   return (
@@ -55,8 +59,16 @@ const Main = () => {
               <Question q={v} random={true} key={v.id} />
             ))}
         </div>
-        <div className="main-content__tournaments">
-          <LastTournaments />
+        <div className="main-content__right">
+          {" "}
+          <div className="main-content__tournaments">
+            <LastTournaments />
+          </div>
+          <div className="main-content__banner">
+            <h2>Игровой режим</h2>
+            <p>Сыграйте любой из турниров с таймером и ведением счёта </p>
+            <Button title="ПОПРОБОВАТЬ" onClick={() => navigate("/playmode")} />
+          </div>
         </div>
       </div>
     </main>

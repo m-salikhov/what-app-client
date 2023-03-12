@@ -63,19 +63,29 @@
 @media (max-width: 800px) {
   .main-content {
     flex-direction: column;
+
     .main-content__random {
       width: 100%;
     }
-    .main-content__tournaments {
-      padding-left: unset;
-      width: unset;
+    .main-content__right {
+      width: 100%;
+      .main-content__tournaments {
+        margin-left: unset;
+      }
+      .main-content__banner {
+        margin-left: unset;
+      }
     }
   }
 }
 
-.main-content__tournaments {
-  padding-left: 2rem;
+.main-content__right {
   width: 50%;
+}
+
+.main-content__tournaments {
+  margin-left: 2rem;
+
   .tournaments__header {
     display: flex;
     justify-content: space-between;
@@ -117,5 +127,21 @@
       margin: auto 1rem;
       font-size: 1.25rem;
     }
+  }
+}
+
+.main-content__banner {
+  margin-left: 2rem;
+  margin-top: 1rem;
+  border: 3px solid rgb(27, 27, 27);
+  border-radius: 20px;
+  padding: 1.2rem;
+  background-color: rgba(250, 250, 210, 0.5);
+  h2 {
+    text-align: center;
+  }
+  p {
+    text-align: center;
+    padding: 1rem 0;
   }
 }

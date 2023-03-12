@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "./Hooks/redux";
+import { useAppDispatch } from "./Hooks/redux";
 import { getUserPreload } from "./Store/reducers/UserSlice";
 import AddTournament from "./Components/AddTournament/AddTournament";
 import All from "./Components/AllTournaments/All";
@@ -21,13 +21,6 @@ function App() {
   useEffect(() => {
     dispatch(getUserPreload());
   }, [dispatch]);
-
-  const { currentUser, isLoading } = useAppSelector(
-    (state) => state.userReducer
-  );
-
-  console.log("isLoading", isLoading);
-  console.log("currentUser", currentUser);
 
   return (
     <BrowserRouter>

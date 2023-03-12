@@ -30,3 +30,17 @@
     }
   }
 }
+.list {
+  h3 {
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: bold;
+  }
+  p {
+    text-align: center;
+    padding-top: 0.5rem;
+  }
+  .table {
+    margin-top: unset;
+  }
+}

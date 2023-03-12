@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 import { initUser } from "../../Helpers/initValues";
 import { _axios } from "../../Helpers/_axios";
 import { UserAuth, UserType } from "../../Types/user";
@@ -36,7 +36,13 @@ export const loginUser = createAsyncThunk<
   const user = await _axios
     .post<UserType>("/auth/login", loginUser)
     .then((res) => res.data)
-    .catch((e: AxiosError) => rejectWithValue(e.message));
+    .catch((e: AxiosError) => {
+      if (axios.isAxiosError(e)) {
+        return rejectWithValue(e.response?.data.message);
+      } else {
+        return rejectWithValue("Ошибка входа");
+      }
+    });
 
   return user;
 });
@@ -56,20 +62,6 @@ export const userSlice = createSlice({
     resetError(state) {
       state.error = "";
     },
-
-    userFetching(state) {
-      state.isLoading = true;
-    },
-    userFetchingSuccess(state, action: PayloadAction<UserType>) {
-      state.isLoading = false;
-      state.error = "";
-      state.currentUser = action.payload;
-    },
-    userFetchingError(state, action: PayloadAction<string>) {
-      state.isLoading = false;
-      state.currentUser = initUser;
-      state.error = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -81,15 +73,16 @@ export const userSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(loginUser.pending, (state) => {
-        console.log("pennding");
         state.isLoading = true;
         state.error = "";
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.error = action.payload || "Ошибка входа";
+        state.isLoading = false;
       });
   },
 });
 
-export const { setCurrentUser, resetCurrentUser } = userSlice.actions;
+export const { setCurrentUser, resetCurrentUser, resetError } =
+  userSlice.actions;
 export default userSlice.reducer;

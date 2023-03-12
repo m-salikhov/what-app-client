@@ -8,6 +8,8 @@ const List = () => {
 
   return (
     <main className="list">
+      <h3>Игровой режим</h3>
+      <p>Выберите турнир</p>
       <div className="table">
         <div className="table__header">
           <div className="table__header_t">№</div>

@@ -6,7 +6,7 @@ interface Props {
 }
 
 const Timer = ({ setIsTimeOver, qNumber }: Props) => {
-  const [time, setTime] = useState(10);
+  const [time, setTime] = useState(15);
   //Флаг, что время на чтение вопроса окончено
   const [flag, setFlag] = useState(false);
   const [prevQNumber, setPrevQNumber] = useState(qNumber);
@@ -16,7 +16,7 @@ const Timer = ({ setIsTimeOver, qNumber }: Props) => {
       setTime((prev) => prev - 1);
     }, 1000);
     if (time === 0 && !flag) {
-      setTime(15);
+      setTime(30);
       setFlag(true);
     }
     if (time === 0 && flag) {
