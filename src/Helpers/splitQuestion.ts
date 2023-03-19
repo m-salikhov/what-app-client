@@ -1,20 +1,6 @@
 // import axios from "axios";
 import { QuestionType } from "../Types/question";
 
-// interface ShrtcodeRes {
-//   ok: boolean;
-//   result: {
-//     code: string;
-//     short_link: string;
-//     full_short_link: string;
-//     short_link2: string;
-//     full_short_link2: string;
-//     share_link: string;
-//     full_share_link: string;
-//     original_link: string;
-//   };
-// }
-
 function splitQuestion(str: string): Partial<QuestionType> {
   const normStr0 = str.replace(/Вопрос \d+:\s/, "");
   const normStr = normStr0.replace(/\n+/g, "");
@@ -60,23 +46,6 @@ function splitQuestion(str: string): Partial<QuestionType> {
     source = source0.map((v) => v.trim());
     source.shift();
   }
-
-  // let source = await Promise.all(
-  //   sourceOriginal.map(async (v) => {
-  //     if (v.length > 39 && /^http/.test(v)) {
-  //       const shortLink = await axios
-  //         .get<ShrtcodeRes>(`https://api.shrtco.de/v2/shorten?url=${v}`)
-  //         .then((res) => {
-  //           return res.data.result.short_link;
-  //         })
-  //         .catch((e: any) => console.log(e.response.data.message));
-  //       if (typeof shortLink !== "string") {
-  //         return "Источник не указан";
-  //       }
-  //       return shortLink;
-  //     } else return v;
-  //   })
-  // );
 
   let question: Partial<QuestionType> = {
     text,

@@ -9,6 +9,7 @@ import LastTournaments from "./LastTournaments";
 import Button from "../Elements/Button/Button";
 import refreshIcon from "./refresh.svg";
 import "./main.scss";
+import { useDocTile } from "../../Hooks/useDocTitle";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ const Main = () => {
       })
       .catch((e: AxiosError) => console.log(e.message));
   }, [newRandom]);
+  useDocTile();
 
   return (
     <main>

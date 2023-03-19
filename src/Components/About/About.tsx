@@ -1,6 +1,8 @@
+import { useDocTile } from "../../Hooks/useDocTitle";
 import "./about.scss";
 
 export const About = () => {
+  useDocTile("О сайте");
   return (
     <main className="about">
       <h2>О сайте</h2>
@@ -30,8 +32,8 @@ export const About = () => {
       <h2>Использованные технологии</h2>
       <p>
         Фронтенд: React, Redux (Toolkit), React Router, SCSS <br />
-        Бэкенд: Node.js, NestJS, TypeORM, MySQL, для аутентификации/авторизации
-        Passport (JWTstrategy). <br />
+        Бэкенд: Node.js, NestJS, TypeORM, MySQL, для авторизации Passport
+        (JWTstrategy). <br />
         Для всего проекта использовал Typescript <br />
         Хотелось развернуть проект самостоятельно, поэтому арендовал VPS (на
         Ubuntu). Там развернул бэкенд. Настроил nginx (SSL + обратное прокси).{" "}

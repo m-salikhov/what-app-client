@@ -69,7 +69,6 @@ const AddTournament = () => {
         }
       })
       .catch((e: AxiosError) => {
-        console.log(e.message);
         setLoading(false);
       });
   };

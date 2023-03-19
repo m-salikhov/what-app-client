@@ -5,6 +5,7 @@ import { initTournamentShort } from "../../Helpers/initValues";
 import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
 import "./profile.scss";
+import { useDocTile } from "../../Hooks/useDocTitle";
 
 interface Result {
   id: string;
@@ -21,6 +22,8 @@ const Profile = () => {
   const [changePass, setChangePass] = useState(false);
   const [tournaments, setTournaments] = useState([initTournamentShort]);
   const [results, setResults] = useState<Result[]>([]);
+
+  useDocTile("Профиль");
 
   useEffect(() => {
     _axios.get(`/tournaments/allbyuploader/${currentUser.id}`).then((res) => {

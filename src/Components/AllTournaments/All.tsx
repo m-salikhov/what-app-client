@@ -5,6 +5,7 @@ import LineAll from "./LineAll";
 import { sortFunction } from "./sortFunction";
 import chart from "./bar_chart.svg";
 import "./all.scss";
+import { useDocTile } from "../../Hooks/useDocTitle";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
@@ -12,6 +13,8 @@ const All = () => {
   //ts = tournaments Все турниры
   const [ts, setTs] = useState<TournamentShortType[]>([]);
   const [field, setField] = useState("");
+
+  useDocTile("Все турниры");
 
   useEffect(() => {
     _axios.get(`/tournaments/allshort`).then((res) => {

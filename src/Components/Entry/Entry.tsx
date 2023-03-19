@@ -13,11 +13,13 @@ import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
 import "./entry.scss";
+import { useDocTile } from "../../Hooks/useDocTitle";
 
 const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 
 const Entry = () => {
   const dispatch = useAppDispatch();
+  useDocTile("Вход");
 
   const [form, setForm] = useState<UserType>(initUser);
   const [passRepeat, setPassRepeat] = useState("");

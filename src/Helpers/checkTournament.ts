@@ -2,7 +2,6 @@ import { TournamentType } from "../Types/tournament";
 
 export default function checkTournament(t: TournamentType) {
   const errors = [];
-  console.log("t", t);
 
   //блок проверки инфо о турнире
   if (!Boolean(t.date)) {
