@@ -2,11 +2,11 @@ import { _axios } from "../../Helpers/_axios";
 import { useTournamentAllShorts } from "../../Hooks/useTournament";
 import ListLine from "./ListLine";
 import "./list.scss";
-import { useDocTile } from "../../Hooks/useDocTitle";
+import { useDocTitle } from "../../Hooks/useDocTitle";
 
 const List = () => {
   const { ts, loading } = useTournamentAllShorts();
-  useDocTile("Игровой режим");
+  useDocTitle("Игровой режим");
 
   return (
     <main className="list">

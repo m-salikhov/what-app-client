@@ -32,7 +32,7 @@ const Header = () => {
     <header>
       <div onClick={() => navigate("/")}>
         <img src={owlBW} alt="заглавное изображение" />
-        <h2>База вопросов</h2>
+        <h2>База вопросов "Что? Где? Когда?"</h2>
       </div>
 
       <nav className={openMobMenu ? "mob-menu" : undefined} onClick={onClick}>

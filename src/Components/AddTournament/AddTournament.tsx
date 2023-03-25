@@ -9,8 +9,10 @@ import AddTournamentInfo from "./AddTournamentInfo";
 import { TournamentType } from "../../Types/tournament";
 import "./add.scss";
 import { AxiosError } from "axios";
+import { useDocTitle } from "../../Hooks/useDocTitle";
 
 const AddTournament = () => {
+  useDocTitle("Добавить турнир");
   const dispatch = useAppDispatch();
   const { currentUser } = useAppSelector((state) => state.userReducer);
 

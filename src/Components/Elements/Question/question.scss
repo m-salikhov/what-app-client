@@ -71,7 +71,7 @@
   display: flex;
   align-items: flex-end;
   border-top: 1px solid #000;
-  padding-top: 0.3rem;
+  padding: 0.3rem 0rem 0.1rem;
   cursor: pointer;
 
   & div {
@@ -88,7 +88,7 @@
 }
 
 .ans {
-  max-height: 500px;
+  max-height: 1800px;
   overflow: hidden;
   transition: max-height 0.5s;
   // transition-timing-function: linear;

@@ -6,7 +6,7 @@ import Back from "../Elements/Back/Back";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import { useTournamentById } from "../../Hooks/useTournament";
 import "./tournament.scss";
-import { useDocTile } from "../../Hooks/useDocTitle";
+import { useDocTitle } from "../../Hooks/useDocTitle";
 
 const Tournament = () => {
   const { id } = useParams();
@@ -15,7 +15,7 @@ const Tournament = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  useDocTile(t.title);
+  useDocTitle(t.title);
 
   return (
     <main className="tournament__container">

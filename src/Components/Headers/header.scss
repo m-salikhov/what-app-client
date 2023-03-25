@@ -13,7 +13,7 @@ header {
     }
     h2 {
       padding-left: 0.5rem;
-      font-size: 2.25rem;
+      font-size: 1.9rem;
       font-family: "Rubik-Semibold";
       margin: auto 0rem;
     }
@@ -75,17 +75,26 @@ nav {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1130px) {
   header {
     div {
       h2 {
-        font-size: 1.75rem;
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+@media (max-width: 460px) {
+  header {
+    div {
+      h2 {
+        font-size: 1rem;
       }
     }
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   nav {
     position: absolute;
     top: 3rem;
@@ -115,7 +124,7 @@ nav {
   }
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1050px) {
   .mob-btn {
     display: none;
   }
