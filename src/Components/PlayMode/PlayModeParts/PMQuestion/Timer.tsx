@@ -12,7 +12,7 @@ const Timer = ({ setIsTimeOver, qNumber }: Props) => {
   const [prevQNumber, setPrevQNumber] = useState(qNumber);
 
   useEffect(() => {
-    const interval = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setTime((prev) => prev - 1);
     }, 1000);
     if (time === 0 && !flag) {
@@ -20,16 +20,16 @@ const Timer = ({ setIsTimeOver, qNumber }: Props) => {
       setFlag(true);
     }
     if (time === 0 && flag) {
-      clearTimeout(interval);
+      clearTimeout(timeout);
       setIsTimeOver(true);
     }
     if (prevQNumber !== qNumber) {
-      setTime(10);
+      setTime(15);
       setFlag(false);
       setIsTimeOver(false);
       setPrevQNumber(qNumber);
     }
-    return () => clearTimeout(interval);
+    return () => clearTimeout(timeout);
   }, [time, qNumber, flag, setIsTimeOver, prevQNumber]);
 
   return (
