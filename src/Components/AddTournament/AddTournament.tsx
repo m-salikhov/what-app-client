@@ -63,7 +63,6 @@ const AddTournament = () => {
     _axios
       .post("/tournaments", t)
       .then((res) => {
-        console.log("res", res);
         if (res.status === 201) {
           console.log("res.status", res.status);
           setMessageSuccess("Турнир сохранён");

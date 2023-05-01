@@ -14,6 +14,7 @@ import List from "./Components/PlayMode/List";
 import PlayMode from "./Components/PlayMode/PlayMode";
 import { About } from "./Components/About/About";
 import "./CommonStyle/style.scss";
+import AddTournamentLink from "./Components/AddTournamentLink/AddTournamentLink";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,10 +30,10 @@ function App() {
           <Route index element={<Main />} />
           <Route path="about" element={<About />} />
           <Route
-            path="add"
+            path="addbylink"
             element={
               <PrivateRoute>
-                <AddTournament />
+                <AddTournamentLink />
               </PrivateRoute>
             }
           />

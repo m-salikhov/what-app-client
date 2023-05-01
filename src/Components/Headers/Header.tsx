@@ -50,7 +50,7 @@ const Header = () => {
           )}
           {currentUser?.id && (
             <li>
-              <Link to="/add"> Добавить турнир</Link>
+              <Link to="/addbylink"> Добавить турнир</Link>
             </li>
           )}
           {/* TODO перенести в Турниры на главную */}

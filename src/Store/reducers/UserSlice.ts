@@ -38,7 +38,7 @@ export const loginUser = createAsyncThunk<
     .then((res) => res.data)
     .catch((e: AxiosError) => {
       if (axios.isAxiosError(e)) {
-        return rejectWithValue(e.response?.data.message);
+        return rejectWithValue(e.message);
       } else {
         return rejectWithValue("Ошибка входа");
       }

@@ -1,0 +1,40 @@
+.addlink_container {
+  .addlink {
+    display: flex;
+    justify-content: center;
+
+    input {
+      width: 60%;
+      // margin: 6px 0px;
+      font-size: 1.3rem;
+      padding: 0px 18px;
+      border: 1px solid #1b1b1b80;
+      border-radius: 6px;
+    }
+    .btn-elem {
+      margin: 0rem 0rem 0rem 2rem;
+    }
+  }
+
+  .spinner {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .tournament__header {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 1rem auto;
+    .tournament__header-t {
+      padding: unset;
+    }
+  }
+
+  .addlink__buttons {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 10%;
+  }
+}
