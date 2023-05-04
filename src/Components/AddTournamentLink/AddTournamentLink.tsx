@@ -2,14 +2,13 @@ import { useState } from "react";
 import Button from "../Elements/Button/Button";
 import "./addTournamentLink.scss";
 import { _axios } from "../../Helpers/_axios";
-import { AxiosError } from "axios";
 import { TournamentType } from "../../Types/tournament";
 import { initTournament } from "../../Helpers/initValues";
 import { getDate } from "../../Helpers/getDate";
-import Question from "../Elements/Question/Question";
 import { RotatingLines } from "react-loader-spinner";
 import { useAppSelector } from "../../Hooks/redux";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import QuestionPlane from "../Elements/Question/QuestionPlane";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -18,22 +17,28 @@ const AddTournamentLink = () => {
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
+  const [message, setMessage] = useState("");
+  const [edit, setEdit] = useState(false);
   const [t, setT] = useState<TournamentType>(initTournament);
 
   const parseLink = async () => {
     setLoading(true);
     setIsLoad(false);
+    setMessage("");
     await _axios
       .post("/tournaments/createbylink", { link })
       .then((res) => {
         setT(res.data);
         setIsLoad(true);
       })
-      .catch((e: AxiosError) => console.log(e.message));
+      .catch(() => setMessage("Неверная ссылка"));
     setLoading(false);
   };
 
   const addTournament = () => {
+    setLoading(true);
+    setIsLoad(false);
+    setMessage("");
     const tournament: TournamentType = {
       ...t,
       uploaderUuid: currentUser.id,
@@ -43,10 +48,14 @@ const AddTournamentLink = () => {
     _axios
       .post("/tournaments", tournament)
       .then((res) => {
-        console.log(res);
+        if (res.status === 201) {
+          setMessage("Турнир успешно сохранён в базе");
+          setLoading(false);
+        }
       })
-      .catch((e: AxiosError) => {
-        console.log(e.message);
+      .catch(() => {
+        setMessage("Ошибка при сохранении");
+        setLoading(false);
       });
   };
 
@@ -61,6 +70,8 @@ const AddTournamentLink = () => {
         />
         <Button title="Загрузить" onClick={parseLink} />
       </div>
+
+      {message && <p className="addlink__message">{message}</p>}
       {loading && (
         <div className="spinner">
           {" "}
@@ -103,12 +114,17 @@ const AddTournamentLink = () => {
             </h3>
           </div>
           <div className="addlink__buttons">
-            <Button title="Редактировать турнир" onClick={() => {}}></Button>
+            <Button
+              title={edit ? "Закончить редактирование" : "Редактировать турнир"}
+              onClick={() => {
+                setEdit(!edit);
+              }}
+            ></Button>
             <Button title="Добавить в базу" onClick={addTournament}></Button>
           </div>
           <div className="tournament__content">
             {t.questions.map((v) => (
-              <Question q={v} key={v.answer} />
+              <QuestionPlane q={v} key={v.answer} />
             ))}
           </div>
         </>
