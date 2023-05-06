@@ -1,5 +1,5 @@
-const editForm = () => {
+const EditForm = () => {
   return <div>editForm</div>;
 };
 
-export default editForm;
+export default EditForm;

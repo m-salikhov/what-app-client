@@ -1,14 +1,16 @@
-import { useState } from "react";
-import Button from "../Elements/Button/Button";
-import "./addTournamentLink.scss";
+import { useReducer, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
-import { TournamentType } from "../../Types/tournament";
-import { initTournament } from "../../Helpers/initValues";
-import { getDate } from "../../Helpers/getDate";
 import { RotatingLines } from "react-loader-spinner";
+import Button from "../Elements/Button/Button";
+import QuestionPlane from "../Elements/Question/QuestionPlane";
 import { useAppSelector } from "../../Hooks/redux";
 import { useDocTitle } from "../../Hooks/useDocTitle";
-import QuestionPlane from "../Elements/Question/QuestionPlane";
+import { getDate } from "../../Helpers/getDate";
+import { initTournament } from "../../Helpers/initValues";
+import { TournamentType } from "../../Types/tournament";
+import "./addTournamentLink.scss";
+import { QuestionType } from "../../Types/question";
+import reducer from "./helpers/reducer";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -19,16 +21,20 @@ const AddTournamentLink = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
-  const [t, setT] = useState<TournamentType>(initTournament);
+  // const [t, setT] = useState<TournamentType>(initTournament);
+
+  //
+  const [t, dispatch] = useReducer(reducer, initTournament);
 
   const parseLink = async () => {
     setLoading(true);
     setIsLoad(false);
     setMessage("");
     await _axios
-      .post("/tournaments/createbylink", { link })
+      .post<TournamentType>("/tournaments/createbylink", { link })
       .then((res) => {
-        setT(res.data);
+        // setT(res.data);
+        dispatch({ type: "loaded", payload: res.data });
         setIsLoad(true);
       })
       .catch(() => setMessage("Неверная ссылка"));
