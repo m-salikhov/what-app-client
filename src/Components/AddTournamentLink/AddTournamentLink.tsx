@@ -9,8 +9,8 @@ import { getDate } from "../../Helpers/getDate";
 import { initTournament } from "../../Helpers/initValues";
 import { TournamentType } from "../../Types/tournament";
 import "./addTournamentLink.scss";
-import { QuestionType } from "../../Types/question";
 import reducer from "./helpers/reducer";
+import EditForm from "./EditForm";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -21,9 +21,7 @@ const AddTournamentLink = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
-  // const [t, setT] = useState<TournamentType>(initTournament);
 
-  //
   const [t, dispatch] = useReducer(reducer, initTournament);
 
   const parseLink = async () => {
@@ -33,7 +31,6 @@ const AddTournamentLink = () => {
     await _axios
       .post<TournamentType>("/tournaments/createbylink", { link })
       .then((res) => {
-        // setT(res.data);
         dispatch({ type: "loaded", payload: res.data });
         setIsLoad(true);
       })
@@ -64,6 +61,10 @@ const AddTournamentLink = () => {
         setLoading(false);
       });
   };
+
+  if (edit) {
+    return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
+  }
 
   return (
     <main className="addlink_container">
