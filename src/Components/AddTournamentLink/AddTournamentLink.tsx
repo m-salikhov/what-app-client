@@ -24,18 +24,18 @@ const AddTournamentLink = () => {
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
-  const parseLink = async () => {
+  const parseLink = () => {
     setLoading(true);
     setIsLoad(false);
     setMessage("");
-    await _axios
+    _axios
       .post<TournamentType>("/tournaments/createbylink", { link })
       .then((res) => {
         dispatch({ type: "loaded", payload: res.data });
         setIsLoad(true);
+        setLoading(false);
       })
       .catch(() => setMessage("Неверная ссылка"));
-    setLoading(false);
   };
 
   const addTournament = () => {
@@ -73,6 +73,11 @@ const AddTournamentLink = () => {
           type="text"
           onChange={(e) => {
             setLink(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              parseLink();
+            }
           }}
         />
         <Button title="Загрузить" onClick={parseLink} />

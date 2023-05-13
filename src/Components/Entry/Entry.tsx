@@ -12,8 +12,8 @@ import {
 import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
-import "./entry.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import "./entry.scss";
 
 const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 

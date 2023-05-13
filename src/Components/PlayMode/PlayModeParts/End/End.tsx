@@ -3,25 +3,22 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { _axios } from "../../../../Helpers/_axios";
 import { useAppSelector } from "../../../../Hooks/redux";
-import { TournamentType } from "../../../../Types/tournament";
 import Button from "../../../Elements/Button/Button";
 import QuestionPlane from "../../../Elements/Question/QuestionPlane";
-import { ResultType } from "../../PlayMode";
 import ResBlock from "./ResBlock";
 import TourTable from "./TourTable";
 
-interface Props {
-  result: ResultType;
-  endedTourNumber: number;
-  t: TournamentType;
-}
-
-const End = ({ endedTourNumber, result, t }: Props) => {
+const End = () => {
   const [selectedQ, setSelectedQ] = useState(0);
   const [isResultSaved, setIsResultSaved] = useState(false);
   const navigate = useNavigate();
-  const userResult = { res: 0 };
+
+  const { t, qCounter, result, answeredCount } = useAppSelector(
+    (state) => state.playModeReducer
+  );
   const { currentUser } = useAppSelector((state) => state.userReducer);
+
+  const endedTourNumber = t.questions[qCounter].tourNumber;
 
   const renderResTables = () => {
     let resTables = [];
@@ -44,7 +41,7 @@ const End = ({ endedTourNumber, result, t }: Props) => {
         title: t.title,
         tournamentId: t.id,
         tournamentLength: t.questionsQuantity,
-        resultNumber: userResult.res,
+        resultNumber: answeredCount,
         result,
       };
 
@@ -57,23 +54,11 @@ const End = ({ endedTourNumber, result, t }: Props) => {
         })
         .catch((e: AxiosError) => console.log("e", e));
     }
-  }, [
-    userResult.res,
-    t.questionsQuantity,
-    t.id,
-    t.title,
-    currentUser.id,
-    result,
-  ]);
+  }, [t.questionsQuantity, t.id, t.title, currentUser.id, result]);
 
   return (
     <div className="endt">
-      <ResBlock
-        tour={endedTourNumber}
-        res={result}
-        tours={t.tours}
-        userResult={userResult}
-      />
+      <ResBlock />
       {renderResTables()}
       {isResultSaved && <p>Ваш результат доступен в Профиле</p>}
       <Button title="К выбору турнира" onClick={() => navigate("/playmode")} />

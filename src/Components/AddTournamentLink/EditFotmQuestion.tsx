@@ -16,7 +16,8 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           <input
             name="qNumber"
             type="number"
-            value={q.qNumber ? q.qNumber : ""}
+            min={0}
+            value={q.qNumber}
             onChange={(e) =>
               dispatch({ type: "qNumber", index, payload: +e.target.value })
             }
@@ -27,7 +28,8 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           <input
             name="tourNumber"
             type="number"
-            value={q.tourNumber ? q.tourNumber : ""}
+            min={0}
+            value={q.tourNumber}
             onChange={(e) =>
               dispatch({ type: "tourNumber", index, payload: +e.target.value })
             }

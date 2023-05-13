@@ -3,10 +3,19 @@ import { useTournamentAllShorts } from "../../Hooks/useTournament";
 import ListLine from "./ListLine";
 import "./list.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import { useAppDispatch } from "../../Hooks/redux";
+import { useEffect } from "react";
+import { playModeSlice } from "../../Store/reducers/PlayModeSlice";
 
 const List = () => {
   const { ts, loading } = useTournamentAllShorts();
   useDocTitle("Игровой режим");
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(playModeSlice.actions.resetState());
+  }, []);
 
   return (
     <main className="list">

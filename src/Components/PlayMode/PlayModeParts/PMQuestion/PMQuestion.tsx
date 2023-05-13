@@ -3,44 +3,48 @@ import { QuestionType } from "../../../../Types/question";
 import Button from "../../../Elements/Button/Button";
 import Add from "../../../Elements/Question/Add";
 import Answer from "../../../Elements/Question/Answer";
-import { Step } from "../../PlayMode";
 import Timer from "./Timer";
+import { playModeSlice } from "../../../../Store/reducers/PlayModeSlice";
+import { useAppDispatch, useAppSelector } from "../../../../Hooks/redux";
 
 interface Props {
-  q: QuestionType;
-  nextQTourNumber: number | undefined;
-  handleQCounter(): void;
-  setStep(step: Step): void;
+  // q: QuestionType;
+  // nextQTourNumber: number | undefined;
   handleAnswer(tourNumber: number, qNumber: number, answer: boolean): void;
 }
 
-const PMQuestion = ({
-  q,
-  handleQCounter,
-  nextQTourNumber,
-  setStep,
-  handleAnswer,
-}: Props) => {
+const PMQuestion = () => {
+  const dispatch = useAppDispatch();
+  const { t, qCounter } = useAppSelector((state) => state.playModeReducer);
+
   const [isTimeOver, setIsTimeOver] = useState(false);
   const [answerToQ, setAnswerToQ] = useState("");
   const [messageToQ, setMessageAnswerToQ] = useState("");
 
+  const q = t.questions[qCounter];
+  const nextQTourNumber = t.questions[qCounter + 1]?.tourNumber;
+
   const onClick = () => {
+    //если нажать "готов ответ" во время отсчёта таймера
     if (!Boolean(answerToQ) && !isTimeOver) {
       setIsTimeOver(true);
       return;
     }
+
+    //Если нажать "Следующий вопрос" не выбрав вариант ответа
     if (!Boolean(answerToQ)) {
       setMessageAnswerToQ("Выберите ответ");
       return;
     }
+
     setAnswerToQ("");
 
     if (typeof nextQTourNumber === "undefined") {
-      setStep(Step.End);
+      dispatch(playModeSlice.actions.setStep("END"));
     } else if (q.tourNumber !== nextQTourNumber) {
-      setStep(Step.EndOfTour);
-    } else handleQCounter();
+      dispatch(playModeSlice.actions.setStep("END_OF_TOUR"));
+    } else dispatch(playModeSlice.actions.qCounterIncrement());
+
     setIsTimeOver(false);
   };
 
@@ -62,7 +66,7 @@ const PMQuestion = ({
               onClick={() => {
                 setAnswerToQ("Да");
                 setMessageAnswerToQ("");
-                handleAnswer(q.tourNumber, q.qNumber, true);
+                dispatch(playModeSlice.actions.setResult(true));
               }}
               title={"Да"}
             />
@@ -70,7 +74,7 @@ const PMQuestion = ({
               onClick={() => {
                 setAnswerToQ("Нет");
                 setMessageAnswerToQ("");
-                handleAnswer(q.tourNumber, q.qNumber, false);
+                dispatch(playModeSlice.actions.setResult(false));
               }}
               title={"Нет"}
             />

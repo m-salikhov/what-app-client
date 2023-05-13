@@ -11,7 +11,7 @@ const ListLine = ({ item, index }: LineProp) => {
     <div className="table__line">
       <p>{index + 1}</p>
       <div className="link">
-        <Link to={`../playmode/${item.id}`}>{item.title}</Link>
+        <Link to={`../playmode/${item.id}/${item.title}`}>{item.title}</Link>
       </div>
       <p>{item.questionsQuantity}</p>
       <p>{item.tours}</p>

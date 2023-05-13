@@ -18,7 +18,7 @@ const TourTable = ({ res, setSelectedQ }: Props) => {
           >
             <div>{v.num}</div>
             <div>
-              <img src={v.ans ? green_ans : red_ans} alt="обновить случайные" />
+              <img src={v.ans ? green_ans : red_ans} alt="answer icon" />
             </div>
           </div>
         );
