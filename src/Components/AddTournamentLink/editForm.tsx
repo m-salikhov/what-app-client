@@ -1,4 +1,4 @@
-import { getDate, getDateYYYY_MM_DD } from "../../Helpers/getDate";
+import { getDateYYYY_MM_DD } from "../../Helpers/getDate";
 import { TournamentType } from "../../Types/tournament";
 import Button from "../Elements/Button/Button";
 import EditFotmQuestion from "./EditFotmQuestion";

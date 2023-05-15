@@ -1,21 +1,21 @@
-import { _axios } from "../../Helpers/_axios";
 import { useTournamentAllShorts } from "../../Hooks/useTournament";
 import ListLine from "./ListLine";
-import "./list.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { useAppDispatch } from "../../Hooks/redux";
 import { useEffect } from "react";
 import { playModeSlice } from "../../Store/reducers/PlayModeSlice";
+import "./list.scss";
 
 const List = () => {
-  const { ts, loading } = useTournamentAllShorts();
   useDocTitle("Игровой режим");
 
   const dispatch = useAppDispatch();
 
+  const { ts } = useTournamentAllShorts();
+
   useEffect(() => {
     dispatch(playModeSlice.actions.resetState());
-  }, []);
+  }, [dispatch]);
 
   return (
     <main className="list">

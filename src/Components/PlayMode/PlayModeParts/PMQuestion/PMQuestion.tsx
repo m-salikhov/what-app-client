@@ -1,17 +1,10 @@
 import { useState } from "react";
-import { QuestionType } from "../../../../Types/question";
 import Button from "../../../Elements/Button/Button";
 import Add from "../../../Elements/Question/Add";
 import Answer from "../../../Elements/Question/Answer";
 import Timer from "./Timer";
 import { playModeSlice } from "../../../../Store/reducers/PlayModeSlice";
 import { useAppDispatch, useAppSelector } from "../../../../Hooks/redux";
-
-interface Props {
-  // q: QuestionType;
-  // nextQTourNumber: number | undefined;
-  handleAnswer(tourNumber: number, qNumber: number, answer: boolean): void;
-}
 
 const PMQuestion = () => {
   const dispatch = useAppDispatch();

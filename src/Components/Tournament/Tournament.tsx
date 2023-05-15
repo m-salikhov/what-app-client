@@ -39,13 +39,7 @@ const Tournament = () => {
           </h3>
         </div>
         <h3>
-          Редакция:{" "}
-          {t.editors.map((v, i) => (
-            <span key={i}>
-              {v}
-              {i < t.editors.length - 1 ? "," : null}{" "}
-            </span>
-          ))}
+          Редакция: <span>{t.editors.join(", ")}</span>
         </h3>
       </div>
       <div className="tournament__content">

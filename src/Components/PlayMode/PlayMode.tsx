@@ -1,23 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Start from "./PlayModeParts/Start";
 import PMQuestion from "./PlayModeParts/PMQuestion/PMQuestion";
 import TourEnd from "./PlayModeParts/End/TourEnd";
 import End from "./PlayModeParts/End/End";
-import { useTournamentById } from "../../Hooks/useTournament";
-import "./playmode.scss";
 import { Step, getTournamentById } from "../../Store/reducers/PlayModeSlice";
 import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import "./playmode.scss";
 
 const PlayMode = () => {
   const dispatch = useAppDispatch();
+
   const { id, title } = useParams();
 
   const { step } = useAppSelector((state) => state.playModeReducer);
 
   useEffect(() => {
     dispatch(getTournamentById(id as string));
-  }, [id]);
+  }, [id, dispatch]);
 
   function PlayModeChange(stepName: Step) {
     switch (stepName) {

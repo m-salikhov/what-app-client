@@ -8,14 +8,15 @@ import { useDocTitle } from "../../Hooks/useDocTitle";
 import { getDate } from "../../Helpers/getDate";
 import { initTournament } from "../../Helpers/initValues";
 import { TournamentType } from "../../Types/tournament";
-import "./addTournamentLink.scss";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
+import "./addTournamentLink.scss";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
 
   const { currentUser } = useAppSelector((state) => state.userReducer);
+
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
   const [isLoad, setIsLoad] = useState(false);
@@ -35,7 +36,10 @@ const AddTournamentLink = () => {
         setIsLoad(true);
         setLoading(false);
       })
-      .catch(() => setMessage("Неверная ссылка"));
+      .catch(() => {
+        setMessage("Неверная ссылка");
+        setLoading(false);
+      });
   };
 
   const addTournament = () => {

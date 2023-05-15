@@ -1,6 +1,5 @@
 import { getDate } from "../../../Helpers/getDate";
-import { Step, playModeSlice } from "../../../Store/reducers/PlayModeSlice";
-import { TournamentType } from "../../../Types/tournament";
+import { playModeSlice } from "../../../Store/reducers/PlayModeSlice";
 import { useAppDispatch, useAppSelector } from "../../../Hooks/redux";
 
 const Start = () => {
@@ -17,9 +16,7 @@ const Start = () => {
       </div>
       <div>
         <p>Редактор(ы):</p>
-        {t.editors.map((v, i) => {
-          return <p key={i}>{v}</p>;
-        })}
+        <p>{t.editors.join(", ")}</p>
       </div>
       <div>
         <button

@@ -54,7 +54,14 @@ const End = () => {
         })
         .catch((e: AxiosError) => console.log("e", e));
     }
-  }, [t.questionsQuantity, t.id, t.title, currentUser.id, result]);
+  }, [
+    t.questionsQuantity,
+    t.id,
+    t.title,
+    currentUser.id,
+    result,
+    answeredCount,
+  ]);
 
   return (
     <div className="endt">

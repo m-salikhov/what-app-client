@@ -3,13 +3,6 @@ import { initTournament } from "../../Helpers/initValues";
 import { TournamentType } from "../../Types/tournament";
 import { _axios } from "../../Helpers/_axios";
 
-// export enum Step {
-//   Start = "START",
-//   Question = "QUESTION",
-//   EndOfTour = "ENDOFTOUR",
-//   End = "END",
-// }
-
 export type Step = "START" | "QUESTION" | "END_OF_TOUR" | "END";
 
 export type ResultType = {
