@@ -4,8 +4,8 @@ import { TournamentShortType } from "../../Types/tournament";
 import LineAll from "./LineAll";
 import { sortFunction } from "./sortFunction";
 import chart from "./bar_chart.svg";
-import "./all.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import "./all.scss";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
@@ -17,7 +17,7 @@ const All = () => {
   useDocTitle("Все турниры");
 
   useEffect(() => {
-    _axios.get(`/tournaments/allshort`).then((res) => {
+    _axios.get<TournamentShortType[]>(`/tournaments/allshort`).then((res) => {
       setTs(res.data.reverse());
     });
   }, []);

@@ -11,6 +11,7 @@ import { TournamentType } from "../../Types/tournament";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import "./addTournamentLink.scss";
+import checkTournament from "../../Helpers/checkTournament";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -22,6 +23,7 @@ const AddTournamentLink = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
+  const [errorsFilling, setErrorsFilling] = useState<string[]>([]);
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
@@ -44,8 +46,18 @@ const AddTournamentLink = () => {
 
   const addTournament = () => {
     setLoading(true);
-    setIsLoad(false);
     setMessage("");
+
+    setErrorsFilling([]);
+    const e = checkTournament(t);
+    if (e) {
+      setErrorsFilling(e);
+      setLoading(false);
+      return;
+    }
+
+    setIsLoad(false);
+
     const tournament: TournamentType = {
       ...t,
       uploaderUuid: currentUser.id,
@@ -86,7 +98,12 @@ const AddTournamentLink = () => {
         />
         <Button title="Загрузить" onClick={parseLink} />
       </div>
-
+      {errorsFilling.length > 0 &&
+        errorsFilling.map((e, i) => (
+          <p className="addlink__errorsFilling" key={i}>
+            {e}
+          </p>
+        ))}
       {message && <p className="addlink__message">{message}</p>}
       {loading && (
         <div className="spinner">
@@ -110,7 +127,7 @@ const AddTournamentLink = () => {
             </div>
             <div className="tournament__header-m">
               <h3>
-                Дата отыгрыша: <span>{t.date && getDate(t.date)}</span>
+                Дата отыгрыша: <span>{t.date ? getDate(t.date) : null}</span>
               </h3>
               <h3>
                 Туры: <span>{t.tours}</span>

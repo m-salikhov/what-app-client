@@ -53,7 +53,6 @@ const AddTournament = () => {
     setLoading(true);
     setErrors([]);
     const e = checkTournament(t);
-    console.log("e", e);
     if (e) {
       setErrors(e);
       setLoading(false);

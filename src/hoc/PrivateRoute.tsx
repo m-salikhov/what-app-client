@@ -9,7 +9,7 @@ interface Props {
 const PrivateRoute = ({ children }: Props) => {
   const { currentUser } = useAppSelector((state) => state.userReducer);
 
-  if (!currentUser) {
+  if (!currentUser.id) {
     return <Navigate to="/entry" />;
   }
   return <>{children}</>;
