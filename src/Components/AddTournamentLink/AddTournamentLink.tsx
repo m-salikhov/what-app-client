@@ -28,6 +28,7 @@ const AddTournamentLink = () => {
   const [t, dispatch] = useReducer(reducer, initTournament);
 
   const parseLink = () => {
+    console.log("click");
     setLoading(true);
     setIsLoad(false);
     setMessage("");
@@ -96,7 +97,7 @@ const AddTournamentLink = () => {
             }
           }}
         />
-        <Button title="Загрузить" onClick={parseLink} />
+        <Button title="Загрузить" onClick={parseLink} disabled={loading} />
       </div>
       {errorsFilling.length > 0 &&
         errorsFilling.map((e, i) => (
@@ -157,7 +158,7 @@ const AddTournamentLink = () => {
           </div>
           <div className="tournament__content">
             {t.questions.map((v) => (
-              <QuestionPlane q={v} key={v.answer} />
+              <QuestionPlane q={v} key={`${v.answer}${v.author}`} />
             ))}
           </div>
         </>

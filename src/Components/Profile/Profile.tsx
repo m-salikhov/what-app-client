@@ -4,8 +4,8 @@ import { getDate } from "../../Helpers/getDate";
 import { initTournamentShort } from "../../Helpers/initValues";
 import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
-import "./profile.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import "./profile.scss";
 
 interface Result {
   id: string;
@@ -18,12 +18,12 @@ interface Result {
 }
 
 const Profile = () => {
+  useDocTitle("Профиль");
   const { currentUser } = useAppSelector((state) => state.userReducer);
+
   const [changePass, setChangePass] = useState(false);
   const [tournaments, setTournaments] = useState([initTournamentShort]);
   const [results, setResults] = useState<Result[]>([]);
-
-  useDocTitle("Профиль");
 
   useEffect(() => {
     _axios.get(`/tournaments/allbyuploader/${currentUser.id}`).then((res) => {

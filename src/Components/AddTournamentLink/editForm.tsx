@@ -12,7 +12,13 @@ interface Props {
 
 const EditForm = ({ t, dispatch, setEdit }: Props) => {
   return (
-    <main>
+    <main
+      onKeyDown={(e) => {
+        if (e.key === "Enter" && e.ctrlKey) {
+          setEdit(false);
+        }
+      }}
+    >
       <Button
         title="Закончить редактирование"
         onClick={() => setEdit(false)}

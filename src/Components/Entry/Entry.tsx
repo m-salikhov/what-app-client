@@ -42,16 +42,17 @@ const Entry = () => {
       setErrorMessage("Введите пароль");
       return;
     }
-    if (reg && form.password !== passRepeat) {
-      setErrorMessage("Повторите пароль");
-      return;
-    }
-    if (reg && !form.username) {
-      setErrorMessage("Выберите псевдоним");
-      return;
-    }
 
+    //блок обработки регистрации
     if (reg) {
+      if (form.password !== passRepeat) {
+        setErrorMessage("Повторите пароль");
+        return;
+      }
+      if (!form.username) {
+        setErrorMessage("Выберите псевдоним");
+        return;
+      }
       await _axios
         .post<UserType>("/users", form)
         .then((res) => {
@@ -62,6 +63,7 @@ const Entry = () => {
         .catch(() => setErrorMessage("Email уже зарегистрирован"));
       return;
     }
+
     dispatch(loginUser({ email: form.email, password: form.password }));
     setIsAuth(true);
   };
