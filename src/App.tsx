@@ -15,6 +15,7 @@ import PlayMode from "./Components/PlayMode/PlayMode";
 import { About } from "./Components/About/About";
 import "./CommonStyle/style.scss";
 import AddTournamentLink from "./Components/AddTournamentLink/AddTournamentLink";
+import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -50,6 +51,7 @@ function App() {
             }
           />
           <Route path="tournament/:id" element={<Tournament />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
