@@ -1,7 +1,7 @@
 import { TournamentType } from "../Types/tournament";
 
 export default function checkTournament(t: TournamentType) {
-  const errors = [];
+  const errors: string[] = [];
 
   //блок проверки инфо о турнире
   if (!Boolean(t.date)) {
@@ -25,7 +25,7 @@ export default function checkTournament(t: TournamentType) {
   // if (t.questionsQuantity != t.questions.at(-1)?.qNumber) {
   //   errors.push("Неверная нумерация вопросов");
   // }
-  if (t.questionsQuantity !== t.questions.length) {
+  if (t.questionsQuantity !== t.questions.at(-1)?.qNumber) {
     errors.push("Кол-во вопросов не соответсвует выбранному");
   }
 

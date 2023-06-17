@@ -10,8 +10,8 @@ import { initTournament } from "../../Helpers/initValues";
 import { TournamentType } from "../../Types/tournament";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
-import "./addTournamentLink.scss";
 import checkTournament from "../../Helpers/checkTournament";
+import "./addTournamentLink.scss";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -28,10 +28,10 @@ const AddTournamentLink = () => {
   const [t, dispatch] = useReducer(reducer, initTournament);
 
   const parseLink = () => {
-    console.log("click");
     setLoading(true);
     setIsLoad(false);
     setMessage("");
+    setErrorsFilling([]);
     _axios
       .post<TournamentType>("/tournaments/createbylink", { link })
       .then((res) => {
