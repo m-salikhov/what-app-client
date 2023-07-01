@@ -1,4 +1,5 @@
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import myPhoto from "./photo_profile_copy.jpg";
 import "./about.scss";
 
 export const About = () => {
@@ -36,16 +37,36 @@ export const About = () => {
       <p>
         Фронтенд: React, Redux (Toolkit), React Router, SCSS <br />
         Бэкенд: Node.js, NestJS, TypeORM, MySQL, для авторизации Passport
-        (JWTstrategy). <br />
+        (JWTstrategy), для парсинга Cheerio. <br />
         Для всего проекта использовал Typescript <br />
         Хотелось развернуть проект самостоятельно, поэтому арендовал VPS (на
         Ubuntu). Там развернул бэкенд. Настроил nginx (SSL + обратное прокси).{" "}
         <br />
-        Фронт же просто на Netify. <br /> Что-то из этого избыточно для такого
+        Там же хостится сайт. <br /> Что-то из этого избыточно для такого
         небольшого проекта, но это тренировка и просто интересно изучать эти
         технологии.
       </p>
       <h2>Об авторе</h2>
+      <div className="about__author">
+        <img src={myPhoto} alt="фото автора сайта" />
+        <div className="about__info">
+          <p>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis
+            porro eos maxime delectus totam facilis adipisci doloribus, placeat
+            optio sapiente numquam similique cum odit eum? Laudantium aspernatur
+            voluptate fugit velit.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nisi
+            velit, excepturi adipisci vel laudantium, voluptatum est porro
+            recusandae ad sequi deserunt nesciunt asperiores, consequatur
+            distinctio inventore? Magnam, consequatur aliquid. In unde, odit
+            quae, at sed soluta possimus excepturi ipsam quod animi maxime
+            veniam vitae quas, necessitatibus modi nostrum officia nihil omnis
+            ad debitis accusamus iusto. Rem veniam ea sit!
+          </p>
+        </div>
+      </div>
     </main>
   );
 };
