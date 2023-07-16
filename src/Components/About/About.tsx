@@ -51,19 +51,18 @@ export const About = () => {
         <img src={myPhoto} alt="фото автора сайта" />
         <div className="about__info">
           <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nobis
-            porro eos maxime delectus totam facilis adipisci doloribus, placeat
-            optio sapiente numquam similique cum odit eum? Laudantium aspernatur
-            voluptate fugit velit.
-          </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nisi
-            velit, excepturi adipisci vel laudantium, voluptatum est porro
-            recusandae ad sequi deserunt nesciunt asperiores, consequatur
-            distinctio inventore? Magnam, consequatur aliquid. In unde, odit
-            quae, at sed soluta possimus excepturi ipsam quod animi maxime
-            veniam vitae quas, necessitatibus modi nostrum officia nihil omnis
-            ad debitis accusamus iusto. Rem veniam ea sit!
+            Меня зовут Максим, мне 35 лет. Я начинающий разработчик.
+            <br /> <br /> Я родился и вырос в Подмосковье в городе Мытищи, но
+            сейчас живу в Москве. Получил высшее образование в
+            МГСУ(строительный). Окончил университет в 2010г. <br /> После этого
+            работал некоторое время по специальности, но в итоге оказался в
+            Тинькофф Банке, где и работаю четвёртый год. На данный момент я
+            тимлид небольшой группы контроля качества на одной из операционных
+            линий. В моей команде 11 человек. <br /> Несколько лет назад увлёкся
+            разработкой. То что было в начале увлечением переросло в полноценное
+            желание связать свою жизнь с этим новым направлением. <br /> <br />{" "}
+            Я занимаюсь почти каждый день и мне очень нравится изучать
+            технологии и как-то применять их на практике.
           </p>
         </div>
       </div>

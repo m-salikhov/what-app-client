@@ -12,6 +12,8 @@ import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import checkTournament from "../../Helpers/checkTournament";
 import "./addTournamentLink.scss";
+import Instruction from "./Instruction";
+import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -39,8 +41,8 @@ const AddTournamentLink = () => {
         setIsLoad(true);
         setLoading(false);
       })
-      .catch(() => {
-        setMessage("Неверная ссылка");
+      .catch((e: AxiosErrorNest) => {
+        setMessage(e.response?.data.message || "Неверная ссылка");
         setLoading(false);
       });
   };
@@ -59,14 +61,25 @@ const AddTournamentLink = () => {
 
     setIsLoad(false);
 
-    const tournament: TournamentType = {
-      ...t,
-      uploaderUuid: currentUser.id,
-      uploader: currentUser.username,
-    };
+    const tournament: TournamentType = currentUser.id
+      ? {
+          ...t,
+          uploaderUuid: currentUser.id,
+          uploader: currentUser.username,
+        }
+      : {
+          ...t,
+          uploaderUuid: "954bd063-43d9-428b-aa3f-a716ad7aca7e",
+          uploader: "quest",
+        };
+
+    const link =
+      tournament.uploaderUuid === "954bd063-43d9-428b-aa3f-a716ad7aca7e"
+        ? "/tournaments/quest"
+        : "/tournaments";
 
     _axios
-      .post("/tournaments", tournament)
+      .post(link, tournament)
       .then((res) => {
         if (res.status === 201) {
           setMessage("Турнир успешно сохранён в базе");
@@ -82,7 +95,6 @@ const AddTournamentLink = () => {
   if (edit) {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
-
   return (
     <main className="addlink_container">
       <div className="addlink">
@@ -97,15 +109,18 @@ const AddTournamentLink = () => {
             }
           }}
         />
-        <Button title="Загрузить" onClick={parseLink} disabled={loading} />
+        <Button title="Открыть" onClick={parseLink} disabled={loading} />
       </div>
+
       {errorsFilling.length > 0 &&
         errorsFilling.map((e, i) => (
           <p className="addlink__errorsFilling" key={i}>
             {e}
           </p>
         ))}
+
       {message && <p className="addlink__message">{message}</p>}
+
       {loading && (
         <div className="spinner">
           {" "}
@@ -118,6 +133,9 @@ const AddTournamentLink = () => {
           />
         </div>
       )}
+
+      {!isLoad && !loading && <Instruction />}
+
       {isLoad && (
         <>
           <div className="tournament__header">
@@ -158,7 +176,7 @@ const AddTournamentLink = () => {
           </div>
           <div className="tournament__content">
             {t.questions.map((v) => (
-              <QuestionPlane q={v} key={`${v.answer}${v.author}`} />
+              <QuestionPlane q={v} key={`${v.answer}${v.comment}`} />
             ))}
           </div>
         </>

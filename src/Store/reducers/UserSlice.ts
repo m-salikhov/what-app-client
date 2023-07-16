@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initUser } from "../../Helpers/initValues";
 import { _axios } from "../../Helpers/_axios";
 import { UserAuth, UserType } from "../../Types/user";
+import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 
 interface UserState {
   currentUser: UserType;
@@ -35,8 +36,8 @@ export const loginUser = createAsyncThunk<
   const user = await _axios
     .post<UserType>("/auth/login", loginUser)
     .then((res) => res.data)
-    .catch((e) => {
-      return rejectWithValue(e.response?.data?.message || "Ошибка входа");
+    .catch((e: AxiosErrorNest) => {
+      return rejectWithValue(e.response?.data.message || "Ошибка входа");
     });
 
   return user;

@@ -81,11 +81,16 @@
 
 .main-content__right {
   width: 50%;
+  .main__stats {
+    p {
+      text-align: center;
+    }
+  }
 }
 
 .main-content__tournaments {
   margin-left: 2rem;
-
+  padding-top: 0.9rem;
   .tournaments__header {
     display: flex;
     justify-content: space-between;

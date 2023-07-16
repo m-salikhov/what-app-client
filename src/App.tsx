@@ -30,14 +30,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<Main />} />
           <Route path="about" element={<About />} />
-          <Route
-            path="addbylink"
-            element={
-              <PrivateRoute>
-                <AddTournamentLink />
-              </PrivateRoute>
-            }
-          />
+          <Route path="addbylink" element={<AddTournamentLink />} />
           <Route path="all" element={<All />} />
           <Route path="entry" element={<Entry />} />
           <Route path="playmode" element={<List />} />

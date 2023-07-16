@@ -6,20 +6,20 @@ import { UserType } from "../../Types/user";
 import {
   loginUser,
   resetError,
-  setCurrentUser,
   userSlice,
 } from "../../Store/reducers/UserSlice";
 import ModalReg from "./ModalReg";
 import { initUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./entry.scss";
 
 const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 
 const Entry = () => {
-  const dispatch = useAppDispatch();
   useDocTitle("Вход");
+  const dispatch = useAppDispatch();
 
   const [form, setForm] = useState<UserType>(initUser);
   const [passRepeat, setPassRepeat] = useState("");
@@ -43,7 +43,7 @@ const Entry = () => {
       return;
     }
 
-    //блок обработки регистрации
+    //блок обработки регистрации нового пользователя
     if (reg) {
       if (form.password !== passRepeat) {
         setErrorMessage("Повторите пароль");
@@ -53,18 +53,32 @@ const Entry = () => {
         setErrorMessage("Выберите псевдоним");
         return;
       }
-      await _axios
+      const res = await _axios
         .post<UserType>("/users", form)
-        .then((res) => {
-          console.log("res", res);
-          dispatch(setCurrentUser(res.data));
-          setIsModalOpen(true);
-        })
-        .catch(() => setErrorMessage("Email уже зарегистрирован"));
-      return;
+        .then((res) => res.data)
+        .catch((e: AxiosErrorNest) => {
+          setErrorMessage(e.response?.data.message || "Ошибка входа");
+        });
+
+      if (res) {
+        await dispatch(
+          loginUser({ email: form.email, password: form.password })
+        ).catch((e: AxiosErrorNest) => {
+          setErrorMessage(e.response?.data.message || "Ошибка входа");
+        });
+        setIsModalOpen(true);
+        return;
+      } else {
+        return;
+      }
     }
 
-    dispatch(loginUser({ email: form.email, password: form.password }));
+    //вход для существующего пользователя
+    await dispatch(
+      loginUser({ email: form.email, password: form.password })
+    ).catch((e: AxiosErrorNest) => {
+      setErrorMessage(e.response?.data.message || "Ошибка входа");
+    });
     setIsAuth(true);
   };
 

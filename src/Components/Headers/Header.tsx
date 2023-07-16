@@ -48,11 +48,11 @@ const Header = () => {
               <Link to="/edit"> Редактировать</Link>
             </li>
           )}
-          {currentUser?.id && (
-            <li>
-              <Link to="/addbylink"> Добавить турнир</Link>
-            </li>
-          )}
+
+          <li>
+            <Link to="/addbylink"> Добавить турнир</Link>
+          </li>
+
           {/* TODO перенести в Турниры на главную */}
           {/* <li>
             <Link to="/">Режим</Link>

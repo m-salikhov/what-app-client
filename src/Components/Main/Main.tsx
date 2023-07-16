@@ -10,6 +10,7 @@ import Button from "../Elements/Button/Button";
 import refreshIcon from "./refresh.svg";
 import "./main.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import Stats from "./Stats";
 
 const Main = () => {
   const navigate = useNavigate();
@@ -55,7 +56,9 @@ const Main = () => {
               </div>
             </div>
           </div>
+
           {loading && <SkeletonQuestion count={4} />}
+
           {!loading &&
             randQuestions.map((v) => (
               <Question q={v} random={true} key={v.id} />
@@ -63,6 +66,7 @@ const Main = () => {
         </div>
         <div className="main-content__right">
           {" "}
+          <Stats />
           <div className="main-content__tournaments">
             <LastTournaments />
           </div>
