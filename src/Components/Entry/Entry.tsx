@@ -14,6 +14,7 @@ import entryImg from "./entry_img.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./entry.scss";
+import { Tooltip } from "react-tooltip";
 
 const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 
@@ -110,7 +111,11 @@ const Entry = () => {
               <img src={entryImg} alt="заглавное изображение" />
             </div>
             <form className="entry__form" onSubmit={onSubmit}>
-              <label className="entry__input">
+              <label
+                className="entry__input"
+                id="tooltip-mail"
+                data-tooltip-html="Можно зарегистрировать или зайти под тестовым аккаунтом<br /> почта: test@gmail.com, пароль: test"
+              >
                 <h2>Почта</h2>
                 <input
                   type="email"
@@ -120,6 +125,8 @@ const Entry = () => {
                   placeholder="email"
                 />
               </label>
+              {!reg && <Tooltip anchorSelect="#tooltip-mail" place="bottom" />}
+
               <label className={reg ? "entry__input" : "entry__input reg"}>
                 <h2>Псевдоним</h2>
                 <input
@@ -130,6 +137,7 @@ const Entry = () => {
                   placeholder="username"
                 />
               </label>
+
               <label className="entry__input">
                 <h2>Пароль</h2>
                 <input

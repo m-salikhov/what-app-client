@@ -2,7 +2,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch } from "./Hooks/redux";
 import { getUserPreload } from "./Store/reducers/UserSlice";
-import AddTournament from "./Components/AddTournament/AddTournament";
 import All from "./Components/AllTournaments/All";
 import Entry from "./Components/Entry/Entry";
 import Layout from "./Components/Lyout/Layout";
@@ -22,7 +21,7 @@ function App() {
 
   useEffect(() => {
     dispatch(getUserPreload());
-  }, [dispatch]);
+  }, []);
 
   return (
     <BrowserRouter>
