@@ -72,7 +72,6 @@ const Entry = () => {
         return;
       }
     }
-
     //вход для существующего пользователя
     await dispatch(
       loginUser({ email: form.email, password: form.password })

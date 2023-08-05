@@ -1,6 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {
+interface TournamentState {
+  id: number;
+  title: string;
+  date: number;
+  tours: number;
+  questionsQuantity: number;
+  editors: string[];
+  editorsString: string;
+}
+
+const initialState: TournamentState = {
   id: 0,
   title: "",
   date: 0,

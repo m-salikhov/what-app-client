@@ -9,7 +9,7 @@ export type ResultType = {
   [tourNumber: number]: { num: number; ans: boolean }[];
 };
 
-interface InitState {
+interface PlayModeState {
   step: Step;
   t: TournamentType;
   qCounter: number;
@@ -17,7 +17,7 @@ interface InitState {
   answeredCount: number;
 }
 
-const initialState: InitState = {
+const initialState: PlayModeState = {
   step: "START",
   t: initTournament,
   qCounter: 0,
