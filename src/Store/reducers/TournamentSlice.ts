@@ -8,6 +8,7 @@ interface TournamentState {
   questionsQuantity: number;
   editors: string[];
   editorsString: string;
+  link: string;
 }
 
 const initialState: TournamentState = {
@@ -18,6 +19,7 @@ const initialState: TournamentState = {
   questionsQuantity: 0,
   editors: [""],
   editorsString: "",
+  link: "",
 };
 
 export const tournamentSlice = createSlice({

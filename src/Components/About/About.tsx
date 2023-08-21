@@ -4,6 +4,7 @@ import "./about.scss";
 
 export const About = () => {
   useDocTitle("О сайте");
+
   return (
     <main className="about">
       <h2>О сайте</h2>

@@ -12,6 +12,7 @@ export const initTournamentShort: TournamentShortType = {
   editors: [],
   dateUpload: 0,
   uploaderUuid: "",
+  link: "",
 };
 
 export const initTournament: TournamentType = {

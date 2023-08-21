@@ -1,5 +1,5 @@
 import { _axios } from "../../Helpers/_axios";
-import { MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { TournamentShortType } from "../../Types/tournament";
 import LineAll from "./LineAll";
 import { sortFunction } from "./sortFunction";
@@ -9,10 +9,18 @@ import "./all.scss";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
+function filter(tournaments: TournamentShortType[], searchString: string) {
+  if (searchString.length > 1) {
+    return tournaments.filter((v) =>
+      v.title.toLowerCase().includes(searchString.toLowerCase())
+    );
+  } else return tournaments;
+}
+
 const All = () => {
-  //ts = tournaments Все турниры
-  const [ts, setTs] = useState<TournamentShortType[]>([]);
+  const [shortTournaments, setTs] = useState<TournamentShortType[]>([]);
   const [field, setField] = useState("");
+  const [search, setSearch] = useState("");
 
   useDocTitle("Все турниры");
 
@@ -32,8 +40,16 @@ const All = () => {
     }
   }
 
+  function handleSearch(e: ChangeEvent<HTMLInputElement>) {
+    setSearch(e.target.value);
+  }
+
   return (
     <main>
+      <label className="all_search">
+        <p>поиск</p>
+        <input type="text" autoFocus onChange={handleSearch} />
+      </label>
       <div className="table">
         <div className="table__header">
           <div className="table__header_t">№</div>
@@ -75,7 +91,7 @@ const All = () => {
           </div>
         </div>
         <div className="table__body">
-          {ts.map((v, i) => (
+          {filter(shortTournaments, search).map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>
