@@ -53,10 +53,6 @@ const Header = () => {
             <Link to="/addbylink"> Добавить турнир</Link>
           </li>
 
-          {/* TODO перенести в Турниры на главную */}
-          {/* <li>
-            <Link to="/">Режим</Link>
-          </li> */}
           <li>
             <Link to="/all">Все турниры</Link>
           </li>

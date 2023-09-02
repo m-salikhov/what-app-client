@@ -13,22 +13,27 @@ import { useDocTitle } from "../../Hooks/useDocTitle";
 import Stats from "./Stats";
 
 const Main = () => {
-  const navigate = useNavigate();
-
   const [newRandom, setNewRandom] = useState(0);
   const [randQuestions, setRandQuestions] = useState<QuestionType[]>([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    _axios
-      .get("/tournaments/random/4")
-      .then((res) => {
-        setRandQuestions(res.data);
-        setLoading(false);
-      })
-      .catch((e: AxiosError) => console.log(e.message));
-  }, [newRandom]);
+  const navigate = useNavigate();
+
   useDocTitle();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      _axios
+        .get("/tournaments/random/4")
+        .then((res) => {
+          setRandQuestions(res.data);
+          setLoading(false);
+        })
+        .catch((e: AxiosError) => console.log(e.message));
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, [newRandom]);
 
   return (
     <main>

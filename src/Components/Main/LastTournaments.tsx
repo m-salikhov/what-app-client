@@ -14,10 +14,13 @@ const LastTournaments = () => {
   const [pageCount, setPageCount] = useState(0);
 
   useEffect(() => {
-    _axios.get(`/tournaments/last/${pageNumber * 10}`).then((res) => {
-      setLastTenTournaments(res.data);
-    });
+    _axios
+      .get<TournamentShortType[]>(`/tournaments/last/${pageNumber * 10}`)
+      .then((res) => {
+        setLastTenTournaments(res.data);
+      });
   }, [pageNumber]);
+
   useEffect(() => {
     _axios.get(`/tournaments/last/-1`).then((res) => {
       setPageCount(res.data);
@@ -41,7 +44,7 @@ const LastTournaments = () => {
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
-      {lastTenTournaments.map((v, i) => {
+      {lastTenTournaments.map((v) => {
         return (
           <div className="tournaments__item" key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
