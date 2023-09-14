@@ -14,73 +14,101 @@ type QuestionTypePayload =
   | "other"
   | "outside";
 
+export const actionTypes = {
+  loaded: "loaded",
+  questionType: "type",
+  add: "add",
+  text: "text",
+  answer: "answer",
+  alterAnswer: "alterAnswer",
+  comment: "comment",
+  source: "source",
+  author: "author",
+  qNumber: "qNumber",
+  tourNumber: "tourNumber",
+  title: "title",
+  editors: "editors",
+  date: "date",
+} as const;
+
 const reducer = (state: TournamentType, action: Action) => {
-  const { type, index, ...rest } = action;
-  if (type === "loaded") {
-    const t = rest.payload as TournamentType;
+  const { type, index, payload } = action;
+
+  if (type === actionTypes.loaded) {
+    const t = payload as TournamentType;
     return { ...state, ...t };
-  } else if (typeof rest.payload === "string" && typeof index === "number") {
+  }
+
+  if (typeof payload === "string" && typeof index === "number") {
     const qs = [...state.questions];
     switch (type) {
-      case "type":
-        qs[index].type = rest.payload as QuestionTypePayload;
+      case actionTypes.questionType:
+        qs[index].type = payload as QuestionTypePayload;
         return { ...state, questions: qs };
-      case "add":
-        qs[index].add = rest.payload;
+      case actionTypes.add:
+        qs[index].add = payload;
         return { ...state, questions: qs };
-      case "text":
-        console.log(action);
-        qs[index].text = rest.payload;
+      case actionTypes.text:
+        console.log(payload);
+        qs[index].text = payload;
         return { ...state, questions: qs };
-      case "answer":
-        qs[index].answer = rest.payload;
+      case actionTypes.answer:
+        qs[index].answer = payload;
         return { ...state, questions: qs };
-      case "alterAnswer":
-        qs[index].alterAnswer = rest.payload;
+      case actionTypes.alterAnswer:
+        qs[index].alterAnswer = payload;
         return { ...state, questions: qs };
-      case "comment":
-        qs[index].comment = rest.payload;
+      case actionTypes.comment:
+        qs[index].comment = payload;
         return { ...state, questions: qs };
-      case "source":
-        const sourceArr = rest.payload.split(";");
+      case actionTypes.source:
+        const sourceArr = payload.split(";");
         qs[index].source = sourceArr;
         return { ...state, questions: qs };
-      case "author":
-        qs[index].author = rest.payload;
+      case actionTypes.author:
+        qs[index].author = payload;
         return { ...state, questions: qs };
       default:
         return state;
     }
-  } else if (typeof rest.payload === "number" && typeof index === "number") {
-    const qs = state.questions;
+  }
+
+  if (typeof payload === "number" && typeof index === "number") {
+    const qs = [...state.questions];
     switch (type) {
-      case "qNumber":
-        qs[index].qNumber = rest.payload;
+      case actionTypes.qNumber:
+        qs[index].qNumber = payload;
         return { ...state, questions: qs };
-      case "tourNumber":
-        qs[index].tourNumber = rest.payload;
+      case actionTypes.tourNumber:
+        qs[index].tourNumber = payload;
         return { ...state, questions: qs };
       default:
         return state;
     }
-  } else if (typeof rest.payload === "string" && !index) {
+  }
+
+  if (typeof payload === "string") {
     switch (type) {
-      case "title":
-        return { ...state, title: rest.payload };
-      case "editors":
-        const editorsArr = rest.payload.split(";");
+      case actionTypes.title:
+        return { ...state, title: payload };
+      case actionTypes.editors:
+        const editorsArr = payload.split(";");
         return { ...state, editors: editorsArr };
       default:
         return state;
     }
-  } else if (typeof rest.payload === "number" && !index) {
+  }
+
+  if (typeof payload === "number") {
     switch (type) {
-      case "date":
-        return { ...state, date: rest.payload };
+      case actionTypes.date:
+        return { ...state, date: payload };
       default:
         return state;
     }
-  } else return state;
+  }
+
+  return state;
 };
 
 export default reducer;

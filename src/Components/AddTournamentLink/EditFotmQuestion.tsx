@@ -1,5 +1,5 @@
 import { QuestionType } from "../../Types/question";
-import { Action } from "./helpers/reducer";
+import { Action, actionTypes } from "./helpers/reducer";
 
 interface Props {
   q: QuestionType;
@@ -14,24 +14,30 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <label className="edit-q__tour">
           <p> Номер вопроса:</p>
           <input
-            name="qNumber"
             type="number"
             min={0}
             value={q.qNumber}
             onChange={(e) =>
-              dispatch({ type: "qNumber", index, payload: +e.target.value })
+              dispatch({
+                type: actionTypes.qNumber,
+                index,
+                payload: +e.target.value,
+              })
             }
           />
         </label>{" "}
         <label className="edit-q__tour">
           <p> Номер тура:</p>
           <input
-            name="tourNumber"
             type="number"
             min={0}
             value={q.tourNumber}
             onChange={(e) =>
-              dispatch({ type: "tourNumber", index, payload: +e.target.value })
+              dispatch({
+                type: actionTypes.tourNumber,
+                index,
+                payload: +e.target.value,
+              })
             }
           />
         </label>{" "}
@@ -40,7 +46,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Раздаточный материал(текст или ссылка на изображение)</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: "add", index, payload: e.target.value })
+            dispatch({ type: actionTypes.add, index, payload: e.target.value })
           }
           value={q.add}
           rows={q.add ? 3 : 1}
@@ -49,9 +55,13 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
       <label>
         <p>Текст вопроса</p>
         <textarea
-          onChange={(e) => {
-            dispatch({ type: "text", index, payload: e.target.value });
-          }}
+          onChange={(e) =>
+            dispatch({
+              type: actionTypes.text,
+              index,
+              payload: e.target.value,
+            })
+          }
           value={q.text}
           rows={5}
         />
@@ -59,9 +69,14 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
       <label>
         <p>Ответ</p>
         <textarea
-          onChange={(e) =>
-            dispatch({ type: "answer", index, payload: e.target.value })
-          }
+          onChange={(e) => {
+            console.log(e.target.value);
+            dispatch({
+              type: actionTypes.answer,
+              index,
+              payload: e.target.value,
+            });
+          }}
           value={q.answer}
           rows={1}
         />
@@ -70,7 +85,11 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Зачёт</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: "alterAnswer", index, payload: e.target.value })
+            dispatch({
+              type: actionTypes.alterAnswer,
+              index,
+              payload: e.target.value,
+            })
           }
           value={q.alterAnswer}
           rows={1}
@@ -80,7 +99,11 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Комментарий</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: "comment", index, payload: e.target.value })
+            dispatch({
+              type: actionTypes.comment,
+              index,
+              payload: e.target.value,
+            })
           }
           value={q.comment}
           rows={q.comment ? 5 : 1}
@@ -90,7 +113,11 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Источник(и) (через точку с запятой!)</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: "source", index, payload: e.target.value })
+            dispatch({
+              type: actionTypes.source,
+              index,
+              payload: e.target.value,
+            })
           }
           value={q.source.join(";")}
           rows={3}
@@ -100,7 +127,11 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Автор(ы)</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: "author", index, payload: e.target.value })
+            dispatch({
+              type: actionTypes.author,
+              index,
+              payload: e.target.value,
+            })
           }
           value={q.author}
           rows={1}

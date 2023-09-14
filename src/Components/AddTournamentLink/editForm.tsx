@@ -2,7 +2,7 @@ import { getDateYYYY_MM_DD } from "../../Helpers/getDate";
 import { TournamentType } from "../../Types/tournament";
 import Button from "../Elements/Button/Button";
 import EditFotmQuestion from "./EditFotmQuestion";
-import { Action } from "./helpers/reducer";
+import { Action, actionTypes } from "./helpers/reducer";
 
 interface Props {
   t: TournamentType;
@@ -27,12 +27,12 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
         <div className="edit-t__top">
           {" "}
           <label className="edit-t__title">
-            <p> Название турнира</p>
+            <p onClick={() => console.log(t)}> Название турнира</p>
             <input
               placeholder="Название турнира"
               type="text"
               onChange={(e) =>
-                dispatch({ type: "title", payload: e.target.value })
+                dispatch({ type: actionTypes.title, payload: e.target.value })
               }
               value={t.title}
             />
@@ -46,7 +46,10 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
                 e.preventDefault();
               }}
               onChange={(e) =>
-                dispatch({ type: "date", payload: Date.parse(e.target.value) })
+                dispatch({
+                  type: actionTypes.date,
+                  payload: Date.parse(e.target.value),
+                })
               }
             />
             <label className="edit-t__title">
@@ -54,7 +57,10 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
               <textarea
                 placeholder="Редакторская группа"
                 onChange={(e) =>
-                  dispatch({ type: "editors", payload: e.target.value })
+                  dispatch({
+                    type: actionTypes.editors,
+                    payload: e.target.value,
+                  })
                 }
                 value={t.editors.join(";")}
                 rows={3}

@@ -11,9 +11,9 @@ import { TournamentType } from "../../Types/tournament";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import checkTournament from "../../Helpers/checkTournament";
-import "./addTournamentLink.scss";
 import Instruction from "./Instruction";
 import { AxiosErrorNest } from "../../Types/axiosErrorNest";
+import "./addTournamentLink.scss";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -95,6 +95,7 @@ const AddTournamentLink = () => {
   if (edit) {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
+
   return (
     <main className="addlink_container">
       <div className="addlink">

@@ -5,12 +5,13 @@ import Question from "../Elements/Question/Question";
 import Back from "../Elements/Back/Back";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import { useTournamentById } from "../../Hooks/useTournament";
-import "./tournament.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
+import "./tournament.scss";
 
 const Tournament = () => {
   const { id } = useParams();
   const { t, loading } = useTournamentById(id);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
