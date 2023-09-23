@@ -14,6 +14,7 @@ import checkTournament from "../../Helpers/checkTournament";
 import Instruction from "./Instruction";
 import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./addTournamentLink.scss";
+import { QuestionType } from "../../Types/question";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -61,17 +62,17 @@ const AddTournamentLink = () => {
 
     setIsLoad(false);
 
-    const tournament: TournamentType = currentUser.id
-      ? {
-          ...t,
-          uploaderUuid: currentUser.id,
-          uploader: currentUser.username,
-        }
-      : {
-          ...t,
-          uploaderUuid: "954bd063-43d9-428b-aa3f-a716ad7aca7e",
-          uploader: "quest",
-        };
+    const tournament: TournamentType = {
+      ...t,
+      uploaderUuid: currentUser.id
+        ? currentUser.id
+        : "954bd063-43d9-428b-aa3f-a716ad7aca7e",
+      uploader: currentUser.username ? currentUser.username : "quest",
+    };
+    tournament.questions = tournament.questions.map((q) => {
+      const { id, ...rest } = q;
+      return rest as QuestionType;
+    });
 
     const link =
       tournament.uploaderUuid === "954bd063-43d9-428b-aa3f-a716ad7aca7e"
@@ -177,7 +178,7 @@ const AddTournamentLink = () => {
           </div>
           <div className="tournament__content">
             {t.questions.map((v) => (
-              <QuestionPlane q={v} key={`${v.answer}${v.comment}`} />
+              <QuestionPlane q={v} key={v.id} />
             ))}
           </div>
         </>

@@ -1,7 +1,7 @@
 import { getDateYYYY_MM_DD } from "../../Helpers/getDate";
 import { TournamentType } from "../../Types/tournament";
 import Button from "../Elements/Button/Button";
-import EditFotmQuestion from "./EditFotmQuestion";
+import EditFotmQuestion from "./EditFormQuestion";
 import { Action, actionTypes } from "./helpers/reducer";
 
 interface Props {
@@ -27,7 +27,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
         <div className="edit-t__top">
           {" "}
           <label className="edit-t__title">
-            <p onClick={() => console.log(t)}> Название турнира</p>
+            <p> Название турнира</p>
             <input
               placeholder="Название турнира"
               type="text"
@@ -69,9 +69,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
           </label>
         </div>
         {t.questions.map((v, i) => {
-          return (
-            <EditFotmQuestion q={v} index={i} dispatch={dispatch} key={i} />
-          );
+          return <EditFotmQuestion q={v} dispatch={dispatch} key={v.id} />;
         })}
       </div>
     </main>

@@ -91,10 +91,24 @@
           font-size: 1rem;
           min-height: 2rem;
           width: 5rem;
+          text-align: center;
         }
       }
-      & :last-child {
+      & :nth-child(2) {
         margin-left: 1rem;
+      }
+      & :nth-child(3) {
+        margin-left: auto;
+      }
+      .btn-elem {
+        .btn.def {
+          background-color: red;
+          color: blue;
+        }
+        .btn.back {
+          background-color: blue;
+          color: red;
+        }
       }
     }
     & > label {

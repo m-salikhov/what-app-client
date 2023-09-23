@@ -1,13 +1,30 @@
+import { useState } from "react";
 import { QuestionType } from "../../Types/question";
 import { Action, actionTypes } from "./helpers/reducer";
+import Button from "../Elements/Button/Button";
 
 interface Props {
   q: QuestionType;
-  index: number;
   dispatch: (action: Action) => void;
 }
 
-const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
+const EditFormQuestion = ({ q, dispatch }: Props) => {
+  const btnTextOption = {
+    def: "Удалить",
+    back: "Вернуть",
+  } as const;
+
+  const [btnText, setBtnText] = useState<string>(btnTextOption.def);
+
+  const removeQuestion = () => {
+    setBtnText((prev) => {
+      console.log(q.id);
+      return prev === btnTextOption.def
+        ? btnTextOption.back
+        : btnTextOption.def;
+    });
+  };
+
   return (
     <div className="edit-q__container">
       <div className="edit-q__numbers">
@@ -20,7 +37,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
             onChange={(e) =>
               dispatch({
                 type: actionTypes.qNumber,
-                index,
+                questionID: q.id,
                 payload: +e.target.value,
               })
             }
@@ -35,18 +52,27 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
             onChange={(e) =>
               dispatch({
                 type: actionTypes.tourNumber,
-                index,
+                questionID: q.id,
                 payload: +e.target.value,
               })
             }
           />
         </label>{" "}
+        <Button
+          onClick={removeQuestion}
+          title={btnText}
+          extraClass={btnText === btnTextOption.def ? "def" : "back"}
+        ></Button>
       </div>
       <label>
         <p>Раздаточный материал(текст или ссылка на изображение)</p>
         <textarea
           onChange={(e) =>
-            dispatch({ type: actionTypes.add, index, payload: e.target.value })
+            dispatch({
+              type: actionTypes.add,
+              questionID: q.id,
+              payload: e.target.value,
+            })
           }
           value={q.add}
           rows={q.add ? 3 : 1}
@@ -58,7 +84,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           onChange={(e) =>
             dispatch({
               type: actionTypes.text,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             })
           }
@@ -70,10 +96,9 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
         <p>Ответ</p>
         <textarea
           onChange={(e) => {
-            console.log(e.target.value);
             dispatch({
               type: actionTypes.answer,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             });
           }}
@@ -87,7 +112,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           onChange={(e) =>
             dispatch({
               type: actionTypes.alterAnswer,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             })
           }
@@ -101,7 +126,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           onChange={(e) =>
             dispatch({
               type: actionTypes.comment,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             })
           }
@@ -115,7 +140,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           onChange={(e) =>
             dispatch({
               type: actionTypes.source,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             })
           }
@@ -129,7 +154,7 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
           onChange={(e) =>
             dispatch({
               type: actionTypes.author,
-              index,
+              questionID: q.id,
               payload: e.target.value,
             })
           }
@@ -141,4 +166,4 @@ const EditFotmQuestion = ({ q, index, dispatch }: Props) => {
   );
 };
 
-export default EditFotmQuestion;
+export default EditFormQuestion;
