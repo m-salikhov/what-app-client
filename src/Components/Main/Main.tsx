@@ -30,7 +30,7 @@ const Main = () => {
           setLoading(false);
         })
         .catch((e: AxiosError) => console.log(e.message));
-    }, 900);
+    }, 600);
 
     return () => clearTimeout(timer);
   }, [newRandom]);

@@ -1,8 +1,7 @@
-import { QuestionType } from "../../../Types/question";
 import { TournamentType } from "../../../Types/tournament";
 
 export interface Action {
-  type: keyof TournamentType | keyof QuestionType | "loaded";
+  type: keyof typeof actionTypes;
   questionID?: number;
   payload: string | number | TournamentType;
 }
@@ -16,7 +15,7 @@ type QuestionTypePayload =
 
 export const actionTypes = {
   loaded: "loaded",
-  questionType: "type",
+  questionType: "questionType",
   add: "add",
   text: "text",
   answer: "answer",
@@ -29,6 +28,7 @@ export const actionTypes = {
   title: "title",
   editors: "editors",
   date: "date",
+  remove: "remove",
 } as const;
 
 const reducer = (state: TournamentType, action: Action) => {
@@ -48,52 +48,103 @@ const reducer = (state: TournamentType, action: Action) => {
     return t;
   }
 
+  if (type === actionTypes.remove && typeof questionID === "number") {
+    const questions = [...state.questions];
+    let { questionsQuantity } = state;
+
+    const indexQuestion = questions.findIndex((q) => q.id === questionID);
+    const q = questions[indexQuestion];
+
+    if (q.type === "outside") {
+      q.qNumber === 0 ? (q.qNumber = -1) : (q.qNumber = 0);
+    }
+
+    if (q.qNumber > 0) {
+      q.qNumber = -1;
+      for (let i = indexQuestion + 1; i < questions.length; i++) {
+        if (questions[i].qNumber > 0) questions[i].qNumber -= 1;
+      }
+      questionsQuantity -= 1;
+    } else if (q.qNumber < 0 && q.type !== "outside") {
+      let nextQuestionIndex = 0;
+      let prevQuestionIndex = 0;
+
+      for (let i = indexQuestion; i < questions.length; i++) {
+        if (questions[i].qNumber > 0) {
+          nextQuestionIndex = questions[i].qNumber;
+          break;
+        }
+      }
+      for (let i = indexQuestion; i >= 0; i--) {
+        if (questions[i].qNumber > 0) {
+          prevQuestionIndex = questions[i].qNumber;
+          break;
+        }
+      }
+
+      if (nextQuestionIndex) {
+        q.qNumber = nextQuestionIndex;
+        for (let i = indexQuestion + 1; i < questions.length; i++) {
+          if (questions[i].qNumber > 0) questions[i].qNumber += 1;
+        }
+      } else if (prevQuestionIndex) {
+        q.qNumber = prevQuestionIndex + 1;
+      } else {
+        q.qNumber = 1;
+      }
+
+      questionsQuantity += 1;
+    }
+
+    return { ...state, questions, questionsQuantity };
+  }
+
   if (typeof payload === "string" && typeof questionID === "number") {
-    const qs = [...state.questions];
-    const indexQuestion = qs.findIndex((q) => q.id === questionID);
+    const questions = [...state.questions];
+    const indexQuestion = questions.findIndex((q) => q.id === questionID);
 
     switch (type) {
       case actionTypes.questionType:
-        qs[indexQuestion].type = payload as QuestionTypePayload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].type = payload as QuestionTypePayload;
+        return { ...state, questions };
       case actionTypes.add:
-        qs[indexQuestion].add = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].add = payload;
+        return { ...state, questions };
       case actionTypes.text:
-        qs[indexQuestion].text = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].text = payload;
+        return { ...state, questions };
       case actionTypes.answer:
-        qs[indexQuestion].answer = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].answer = payload;
+        return { ...state, questions };
       case actionTypes.alterAnswer:
-        qs[indexQuestion].alterAnswer = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].alterAnswer = payload;
+        return { ...state, questions };
       case actionTypes.comment:
-        qs[indexQuestion].comment = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].comment = payload;
+        return { ...state, questions };
       case actionTypes.source:
         const sourceArr = payload.split(";");
-        qs[indexQuestion].source = sourceArr;
-        return { ...state, questions: qs };
+        questions[indexQuestion].source = sourceArr;
+        return { ...state, questions };
       case actionTypes.author:
-        qs[indexQuestion].author = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].author = payload;
+        return { ...state, questions };
       default:
         return state;
     }
   }
 
   if (typeof payload === "number" && typeof questionID === "number") {
-    const qs = [...state.questions];
-    const indexQuestion = qs.findIndex((q) => q.id === questionID);
+    const questions = [...state.questions];
+    const indexQuestion = questions.findIndex((q) => q.id === questionID);
 
     switch (type) {
       case actionTypes.qNumber:
-        qs[indexQuestion].qNumber = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].qNumber = payload;
+        return { ...state, questions };
       case actionTypes.tourNumber:
-        qs[indexQuestion].tourNumber = payload;
-        return { ...state, questions: qs };
+        questions[indexQuestion].tourNumber = payload;
+        return { ...state, questions };
       default:
         return state;
     }
@@ -112,12 +163,7 @@ const reducer = (state: TournamentType, action: Action) => {
   }
 
   if (typeof payload === "number") {
-    switch (type) {
-      case actionTypes.date:
-        return { ...state, date: payload };
-      default:
-        return state;
-    }
+    return { ...state, date: payload };
   }
 
   return state;

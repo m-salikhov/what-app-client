@@ -69,10 +69,15 @@ const AddTournamentLink = () => {
         : "954bd063-43d9-428b-aa3f-a716ad7aca7e",
       uploader: currentUser.username ? currentUser.username : "quest",
     };
-    tournament.questions = tournament.questions.map((q) => {
-      const { id, ...rest } = q;
-      return rest as QuestionType;
-    });
+    tournament.questions = tournament.questions
+      .map((q) => {
+        const { id, ...rest } = q;
+        return rest as QuestionType;
+      })
+      .filter((q) => q.qNumber !== -1);
+
+    //Отделить вопросы с qNumber -1
+    // const qs = state.questions.filter((q) => q.id !== questionID);
 
     const link =
       tournament.uploaderUuid === "954bd063-43d9-428b-aa3f-a716ad7aca7e"
@@ -177,9 +182,11 @@ const AddTournamentLink = () => {
             <Button title="Добавить в базу" onClick={addTournament}></Button>
           </div>
           <div className="tournament__content">
-            {t.questions.map((v) => (
-              <QuestionPlane q={v} key={v.id} />
-            ))}
+            {t.questions
+              .filter((q) => q.qNumber !== -1)
+              .map((v) => (
+                <QuestionPlane q={v} key={v.id} />
+              ))}
           </div>
         </>
       )}

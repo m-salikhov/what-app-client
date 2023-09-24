@@ -101,13 +101,9 @@
         margin-left: auto;
       }
       .btn-elem {
-        .btn.def {
-          background-color: red;
-          color: blue;
-        }
         .btn.back {
-          background-color: blue;
-          color: red;
+          // background-color: blue;
+          color: black;
         }
       }
     }
@@ -125,5 +121,15 @@
   max-width: 900px;
   a {
     color: blue;
+  }
+}
+
+.edit-q__container:has(.back) {
+  background-color: rgb(193, 189, 190);
+  input {
+    background-color: rgb(193, 189, 190);
+  }
+  textarea {
+    background-color: rgb(193, 189, 190);
   }
 }

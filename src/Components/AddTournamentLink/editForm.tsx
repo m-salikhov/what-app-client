@@ -68,9 +68,9 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
             </label>
           </label>
         </div>
-        {t.questions.map((v, i) => {
-          return <EditFotmQuestion q={v} dispatch={dispatch} key={v.id} />;
-        })}
+        {t.questions.map((v) => (
+          <EditFotmQuestion q={v} dispatch={dispatch} key={v.id} />
+        ))}
       </div>
     </main>
   );

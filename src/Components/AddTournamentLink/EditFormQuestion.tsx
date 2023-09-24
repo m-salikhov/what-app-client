@@ -14,14 +14,20 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
     back: "Вернуть",
   } as const;
 
-  const [btnText, setBtnText] = useState<string>(btnTextOption.def);
+  const [btnText, setBtnText] = useState<string>(
+    q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back
+  );
 
   const removeQuestion = () => {
     setBtnText((prev) => {
-      console.log(q.id);
       return prev === btnTextOption.def
         ? btnTextOption.back
         : btnTextOption.def;
+    });
+    dispatch({
+      type: actionTypes.remove,
+      questionID: q.id,
+      payload: "",
     });
   };
 
