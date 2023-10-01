@@ -3,6 +3,7 @@ import { initUser } from "../../Helpers/initValues";
 import { _axios } from "../../Helpers/_axios";
 import { UserAuth, UserType } from "../../Types/user";
 import { AxiosErrorNest } from "../../Types/axiosErrorNest";
+import { routes } from "../../constants";
 
 interface UserState {
   currentUser: UserType;
@@ -22,7 +23,7 @@ export const getUserPreload = createAsyncThunk<UserType>(
   "users/preload",
   async () => {
     const user = await _axios
-      .get<UserType>("/auth/logfirst")
+      .get<UserType>(routes.authLogFirst)
       .then((res) => res.data);
     return user;
   }
@@ -34,7 +35,7 @@ export const loginUser = createAsyncThunk<
   { rejectValue: string }
 >("users/login", async (loginUser, { rejectWithValue }) => {
   const user = await _axios
-    .post<UserType>("/auth/login", loginUser)
+    .post<UserType>(routes.authLogin, loginUser)
     .then((res) => res.data)
     .catch((e: AxiosErrorNest) => {
       return rejectWithValue(e.response?.data.message || "Ошибка входа");

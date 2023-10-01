@@ -23,7 +23,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
         title="Закончить редактирование"
         onClick={() => setEdit(false)}
       ></Button>
-      <div className="edit-t">
+      <div className="edit-t" onClick={(e) => console.log(e.target)}>
         <div className="edit-t__top">
           {" "}
           <label className="edit-t__title">

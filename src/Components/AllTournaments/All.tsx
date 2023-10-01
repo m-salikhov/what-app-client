@@ -6,6 +6,7 @@ import { sortFunction } from "./sortFunction";
 import chart from "./bar_chart.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./all.scss";
+import { routes } from "../../constants";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
@@ -25,9 +26,11 @@ const All = () => {
   useDocTitle("Все турниры");
 
   useEffect(() => {
-    _axios.get<TournamentShortType[]>(`/tournaments/allshort`).then((res) => {
-      setTs(res.data.reverse());
-    });
+    _axios
+      .get<TournamentShortType[]>(routes.tournamentsAllShort)
+      .then((res) => {
+        setTs(res.data.reverse());
+      });
   }, []);
 
   function sort(e: MouseEvent<HTMLDivElement>) {

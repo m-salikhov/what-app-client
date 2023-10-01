@@ -15,6 +15,7 @@ import Instruction from "./Instruction";
 import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./addTournamentLink.scss";
 import { QuestionType } from "../../Types/question";
+import { guest, routes } from "../../constants";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -36,7 +37,7 @@ const AddTournamentLink = () => {
     setMessage("");
     setErrorsFilling([]);
     _axios
-      .post<TournamentType>("/tournaments/createbylink", { link })
+      .post<TournamentType>(routes.tournamentsCreateByLink, { link })
       .then((res) => {
         dispatch({ type: "loaded", payload: res.data });
         setIsLoad(true);
@@ -64,10 +65,8 @@ const AddTournamentLink = () => {
 
     const tournament: TournamentType = {
       ...t,
-      uploaderUuid: currentUser.id
-        ? currentUser.id
-        : "954bd063-43d9-428b-aa3f-a716ad7aca7e",
-      uploader: currentUser.username ? currentUser.username : "quest",
+      uploaderUuid: currentUser.id ? currentUser.id : guest.id,
+      uploader: currentUser.username ? currentUser.username : guest.userName,
     };
     tournament.questions = tournament.questions
       .map((q) => {
@@ -76,13 +75,10 @@ const AddTournamentLink = () => {
       })
       .filter((q) => q.qNumber !== -1);
 
-    //Отделить вопросы с qNumber -1
-    // const qs = state.questions.filter((q) => q.id !== questionID);
-
     const link =
-      tournament.uploaderUuid === "954bd063-43d9-428b-aa3f-a716ad7aca7e"
-        ? "/tournaments/quest"
-        : "/tournaments";
+      tournament.uploaderUuid === guest.id
+        ? routes.tournamentsGuest
+        : routes.tournaments;
 
     _axios
       .post(link, tournament)

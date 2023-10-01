@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { initTournament } from "../../Helpers/initValues";
 import { TournamentType } from "../../Types/tournament";
 import { _axios } from "../../Helpers/_axios";
+import { routes } from "../../constants";
 
 export type Step = "START" | "QUESTION" | "END_OF_TOUR" | "END";
 
@@ -29,7 +30,7 @@ export const getTournamentById = createAsyncThunk(
   "t/fetchById",
   async (id: string) => {
     const t = await _axios
-      .get<TournamentType>(`/tournaments/${id}`)
+      .get<TournamentType>(`${routes.tournaments}${id}`)
       .then((res) => res.data);
     return t;
   }

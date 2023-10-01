@@ -11,6 +11,7 @@ import refreshIcon from "./refresh.svg";
 import "./main.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import Stats from "./Stats";
+import { amountRandomQuestions, routes } from "../../constants";
 
 const Main = () => {
   const [newRandom, setNewRandom] = useState(0);
@@ -24,7 +25,7 @@ const Main = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       _axios
-        .get("/tournaments/random/4")
+        .get(`${routes.tournamentsRandom}${amountRandomQuestions}`)
         .then((res) => {
           setRandQuestions(res.data);
           setLoading(false);
@@ -62,7 +63,7 @@ const Main = () => {
             </div>
           </div>
 
-          {loading && <SkeletonQuestion count={4} />}
+          {loading && <SkeletonQuestion count={amountRandomQuestions} />}
 
           {!loading &&
             randQuestions.map((v) => (

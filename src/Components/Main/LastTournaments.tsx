@@ -5,6 +5,7 @@ import { getDate } from "../../Helpers/getDate";
 import { TournamentShortType } from "../../Types/tournament";
 import back from "./back.svg";
 import next from "./next.svg";
+import { routes } from "../../constants";
 
 const LastTournaments = () => {
   const [lastTenTournaments, setLastTenTournaments] = useState<
@@ -15,14 +16,14 @@ const LastTournaments = () => {
 
   useEffect(() => {
     _axios
-      .get<TournamentShortType[]>(`/tournaments/last/${pageNumber * 10}`)
+      .get<TournamentShortType[]>(`${routes.tournamentsLast}${pageNumber * 10}`)
       .then((res) => {
         setLastTenTournaments(res.data);
       });
   }, [pageNumber]);
 
   useEffect(() => {
-    _axios.get(`/tournaments/last/-1`).then((res) => {
+    _axios.get(`${routes.tournamentsLast}-1`).then((res) => {
       setPageCount(res.data);
     });
   }, []);

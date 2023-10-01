@@ -12,7 +12,7 @@ const LineAll = ({ item, index }: LineProp) => {
     <div className="table__line">
       <p>{index + 1}</p>
       <div className="link">
-        <Link to={`../tournament/${item.id}`}>{item.title}</Link>
+        <Link to={`/tournament/${item.id}`}>{item.title}</Link>
       </div>
       <p>{getDate(item.date)}</p>
       <p>{item.questionsQuantity}</p>

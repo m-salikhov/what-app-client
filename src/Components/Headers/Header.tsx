@@ -5,6 +5,7 @@ import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
 import { userSlice } from "../../Store/reducers/UserSlice";
 import owlBW from "./owlBW.svg";
 import "./header.scss";
+import { routes } from "../../constants";
 
 const Header = () => {
   const [openMobMenu, setOpenMobMenu] = useState(false);
@@ -14,7 +15,7 @@ const Header = () => {
 
   const logout = async () => {
     await _axios
-      .get("/auth/logout")
+      .get(routes.authLogout)
       .then((res) => console.log("res.data", res.data))
       .catch(() => console.log("ошибка"));
 

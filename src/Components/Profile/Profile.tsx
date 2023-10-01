@@ -6,6 +6,7 @@ import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./profile.scss";
+import { routes } from "../../constants";
 
 interface Result {
   id: string;
@@ -26,17 +27,17 @@ const Profile = () => {
   const [results, setResults] = useState<Result[]>([]);
 
   useEffect(() => {
-    _axios.get(`/tournaments/allbyuploader/${currentUser.id}`).then((res) => {
-      setTournaments(res.data);
-    });
+    _axios
+      .get(`${routes.tournamentsAllByUploader}${currentUser.id}`)
+      .then((res) => {
+        setTournaments(res.data);
+      });
   }, [currentUser.id]);
 
   useEffect(() => {
-    _axios
-      .post(`/users/userresultshort`, { id: currentUser.id })
-      .then((res) => {
-        setResults(res.data);
-      });
+    _axios.post(routes.userResultShort, { id: currentUser.id }).then((res) => {
+      setResults(res.data);
+    });
   }, [currentUser.id]);
 
   return (
