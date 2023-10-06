@@ -20,4 +20,4 @@ export const routes = {
 
 export const amountRandomQuestions = 4;
 
-export const baseURL = "https://andvarif.store/";
+export const baseServerURL = "https://andvarif.store/";

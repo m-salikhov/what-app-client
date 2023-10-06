@@ -32,8 +32,10 @@ function App() {
           <Route path="addbylink" element={<AddTournamentLink />} />
           <Route path="all" element={<All />} />
           <Route path="entry" element={<Entry />} />
-          <Route path="playmode" element={<List />} />
-          <Route path="playmode/:id/:title" element={<PlayMode />} />
+          <Route path="playmode">
+            <Route index element={<List />} />
+            <Route path=":id/:title" element={<PlayMode />} />
+          </Route>
           <Route
             path="profile"
             element={

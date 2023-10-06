@@ -25,6 +25,21 @@
 }
 
 .tournament__content {
+  .tournament__content_header {
+    // display: flex;
+    .tournament__content_tours {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      margin-left: -20px;
+      p {
+        padding: 0rem 0.5rem;
+        &:hover {
+          font-weight: bold;
+        }
+      }
+    }
+  }
   .question {
     max-width: 800px;
     margin-left: auto;
@@ -32,10 +47,13 @@
   }
 }
 
-// @media (max-width: 800px) {
-//   .tournament_content {
-//     .question {
-//       width: unset;
-//     }
-//   }
-// }
+@media (max-width: 400px) {
+  .tournament__content {
+    .tournament__content_header {
+      display: unset;
+      .tournament__content_tours {
+        margin-left: unset;
+      }
+    }
+  }
+}
