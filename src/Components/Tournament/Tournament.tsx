@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import Question from "../Elements/Question/Question";
@@ -6,8 +6,8 @@ import Back from "../Elements/Back/Back";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import { useTournamentById } from "../../Hooks/useTournament";
 import { useDocTitle } from "../../Hooks/useDocTitle";
-import "./tournament.scss";
 import { getTourAnchors, getToursParagraphs, scroll } from "./scrollLogic";
+import "./tournament.scss";
 
 const Tournament = () => {
   const { id } = useParams();
@@ -17,9 +17,7 @@ const Tournament = () => {
 
   useDocTitle(t.title);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
+  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
 
   return (
     <main className="tournament__container">

@@ -18,22 +18,22 @@ export const getTourAnchors = (t: TournamentType) => {
 };
 
 export const getToursParagraphs = (tours: number) => {
-  const a = [];
+  const arr = [];
 
   for (let i = tours; i > 0; i--) {
-    a.unshift(<p key={i} id={i.toString()}>{`Тур ${i}`}</p>);
+    arr.unshift(<p key={i} id={i.toString()}>{`Тур ${i}`}</p>);
   }
 
-  return a;
+  return arr;
 };
 
 export const scroll = (
-  e: MouseEvent<HTMLElement>,
+  e: MouseEvent<HTMLDivElement>,
   node: HTMLDivElement | null,
   arrAnchors: number[]
 ) => {
   let id: number;
-  if (e.target instanceof Element && e.target.id) {
+  if (e.target instanceof HTMLElement && e.target.id) {
     id = +e.target.id;
   } else {
     return;

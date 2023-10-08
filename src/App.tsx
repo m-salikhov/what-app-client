@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
 import { useAppDispatch } from "./Hooks/redux";
 import { getUserPreload } from "./Store/reducers/UserSlice";
 import All from "./Components/AllTournaments/All";
@@ -19,9 +18,7 @@ import NotFound from "./Components/NotFound/NotFound";
 function App() {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getUserPreload());
-  }, [dispatch]);
+  dispatch(getUserPreload());
 
   return (
     <BrowserRouter>
