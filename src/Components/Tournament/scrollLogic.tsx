@@ -20,8 +20,8 @@ export const getTourAnchors = (t: TournamentType) => {
 export const getToursParagraphs = (tours: number) => {
   const arr = [];
 
-  for (let i = tours; i > 0; i--) {
-    arr.unshift(<p key={i} id={i.toString()}>{`Тур ${i}`}</p>);
+  for (let i = 1; i <= tours; i++) {
+    arr.push(<p key={i} id={String(i)}>{`Тур ${i}`}</p>);
   }
 
   return arr;
@@ -29,18 +29,18 @@ export const getToursParagraphs = (tours: number) => {
 
 export const scroll = (
   e: MouseEvent<HTMLDivElement>,
-  node: HTMLDivElement | null,
+  nodeList: HTMLDivElement | null,
   arrAnchors: number[]
 ) => {
   let id: number;
   if (e.target instanceof HTMLElement && e.target.id) {
-    id = +e.target.id;
+    id = Number(e.target.id);
   } else {
     return;
   }
 
   const anchor = arrAnchors[id - 1];
-  if (node instanceof HTMLDivElement) {
-    node.children[anchor].scrollIntoView({ behavior: "smooth" });
+  if (nodeList instanceof HTMLDivElement) {
+    nodeList.children[anchor].scrollIntoView({ behavior: "smooth" });
   }
 };

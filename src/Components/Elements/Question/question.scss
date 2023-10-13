@@ -1,7 +1,6 @@
 .question {
   border: 2px solid rgba(27, 27, 27, 1);
   margin: 1rem 0rem;
-  padding-bottom: 0.5rem;
   border-radius: 10px;
   p {
     font-size: 1.25rem;
@@ -69,10 +68,21 @@
 }
 .ans__arrow {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: space-between;
   border-top: 1px solid #000;
-  padding: 0.3rem 0rem 0.1rem;
+  padding-right: 1rem;
   cursor: pointer;
+  .test__o {
+    color: rgb(109, 85, 98);
+    transform: rotate(180deg);
+    transition: all 0.5s;
+  }
+  .test__c {
+    color: rgb(109, 85, 98);
+    transform: rotate(0deg);
+    transition: all 0.5s;
+  }
 
   & div {
     width: 1rem;

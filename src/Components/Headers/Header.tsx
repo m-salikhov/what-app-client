@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { _axios } from "../../Helpers/_axios";
 import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
 import { userSlice } from "../../Store/reducers/UserSlice";
-import owlBW from "./owlBW.svg";
+import owlGreen from "./owlGreen.svg";
 import "./header.scss";
 import { routes } from "../../constants";
 
@@ -36,7 +36,7 @@ const Header = () => {
   return (
     <header>
       <div onClick={() => navigate("/")}>
-        <img src={owlBW} alt="заглавное изображение" />
+        <img src={owlGreen} alt="заглавное изображение" />
         <h2>База вопросов "Что? Где? Когда?"</h2>
       </div>
 
