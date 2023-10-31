@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AxiosError } from "axios";
-import { _axios } from "../../Helpers/_axios";
-import { QuestionType } from "../../Types/question";
 import Question from "../Elements/Question/Question";
 import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
 import LastTournaments from "./LastTournaments";
@@ -11,30 +8,20 @@ import refreshIcon from "./refresh.svg";
 import "./main.scss";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import Stats from "./Stats";
-import { amountRandomQuestions, routes } from "../../constants";
+import { amountRandomQuestions } from "../../constants";
+import { useGetRandomQuery } from "../../Store/tournamentAPI";
 
 const Main = () => {
-  const [newRandom, setNewRandom] = useState(0);
-  const [randQuestions, setRandQuestions] = useState<QuestionType[]>([]);
-  const [loading, setLoading] = useState(true);
-
   const navigate = useNavigate();
-
   useDocTitle();
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      _axios
-        .get(`${routes.tournamentsRandom}${amountRandomQuestions}`)
-        .then((res) => {
-          setRandQuestions(res.data);
-          setLoading(false);
-        })
-        .catch((e: AxiosError) => console.log(e.message));
-    }, 600);
+  const [newRandom, setNewRandom] = useState(0);
 
-    return () => clearTimeout(timer);
-  }, [newRandom]);
+  const {
+    data: randomQuestions = [],
+    refetch,
+    isLoading,
+  } = useGetRandomQuery(amountRandomQuestions);
 
   return (
     <main>
@@ -45,8 +32,8 @@ const Main = () => {
             <div
               className="refresh"
               onClick={() => {
-                setLoading(true);
-                setNewRandom((p) => ++p);
+                refetch();
+                setNewRandom((prev) => prev + 1);
               }}
             >
               {" "}
@@ -63,10 +50,9 @@ const Main = () => {
             </div>
           </div>
 
-          {loading && <SkeletonQuestion count={amountRandomQuestions} />}
-
-          {!loading &&
-            randQuestions.map((v) => (
+          {isLoading && <SkeletonQuestion count={amountRandomQuestions} />}
+          {!isLoading &&
+            randomQuestions.map((v) => (
               <Question q={v} random={true} key={v.id} />
             ))}
         </div>
