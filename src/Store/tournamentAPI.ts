@@ -1,13 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TournamentShortType, TournamentType } from "../Types/tournament";
 import { QuestionType } from "../Types/question";
-import { routes } from "../constants";
+import { guest, routes } from "../constants";
 
 const baseUrl = "https://andvarif.store";
 
 export const tournamentAPI = createApi({
   reducerPath: "tournamentAPI",
-  tagTypes: ["tournaments", "shorts"],
+  tagTypes: ["tournaments", "shorts", "stats"],
   baseQuery: fetchBaseQuery({ baseUrl }),
 
   endpoints: (build) => ({
@@ -21,10 +21,20 @@ export const tournamentAPI = createApi({
       keepUnusedDataFor: 1,
     }),
 
+    getStats: build.query<{ tc: number; qc: number }, undefined>({
+      query: () => routes.tournamentsStats,
+      keepUnusedDataFor: 600,
+      providesTags: ["stats"],
+      // providesTags: (result) => {
+      //   return result
+      //     ? [{ ...result, type: "stats" as const }, "stats"]
+      //     : ["stats"];
+      // },
+    }),
+
     getTornamentsShort: build.query<TournamentShortType[], undefined>({
       query: () => routes.tournamentsAllShort,
       providesTags: (result) => {
-        console.log({ result });
         return result
           ? [
               ...result.map(({ id }) => ({ type: "shorts" as const, id })),
@@ -41,11 +51,15 @@ export const tournamentAPI = createApi({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["stats"],
     }),
 
     addTournament: build.mutation<number, TournamentType>({
       query: (body) => ({
-        url: "/tournaments",
+        url:
+          body.uploader === guest.userName
+            ? routes.tournamentsGuest
+            : routes.tournaments,
         method: "POST",
         credentials: "include",
         body,
@@ -61,4 +75,5 @@ export const {
   useAddTournamentMutation,
   useParseLinkMutation,
   useGetTornamentsShortQuery,
+  useGetStatsQuery,
 } = tournamentAPI;

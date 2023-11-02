@@ -98,7 +98,7 @@ const All = () => {
           </div>
         </div>
         <div className="table__body">
-          {filter(tsShorts, search).map((v, i) => (
+          {filter(tournamentsShorts, search).map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>
