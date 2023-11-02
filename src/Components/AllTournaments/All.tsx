@@ -1,12 +1,11 @@
-import { _axios } from "../../Helpers/_axios";
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
+import { ChangeEvent, MouseEvent, useState } from "react";
 import { TournamentShortType } from "../../Types/tournament";
 import LineAll from "./LineAll";
 import { sortFunction } from "./sortFunction";
 import chart from "./bar_chart.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./all.scss";
-import { routes } from "../../constants";
+import { useGetTornamentsShortQuery } from "../../Store/tournamentAPI";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
@@ -19,32 +18,37 @@ function filter(tournaments: TournamentShortType[], searchString: string) {
 }
 
 const All = () => {
-  const [shortTournaments, setTs] = useState<TournamentShortType[]>([]);
-  const [field, setField] = useState("");
-  const [search, setSearch] = useState("");
-
   useDocTitle("Все турниры");
 
-  useEffect(() => {
-    _axios
-      .get<TournamentShortType[]>(routes.tournamentsAllShort)
-      .then((res) => {
-        setTs(res.data.reverse());
-      });
-  }, []);
+  const {
+    data: tsShorts = [],
+    isLoading,
+    isSuccess,
+  } = useGetTornamentsShortQuery(undefined);
+
+  const [tournamentsShorts, setTournamentsShorts] = useState<
+    TournamentShortType[]
+  >([]);
+
+  const [field, setField] = useState("");
+  const [search, setSearch] = useState("");
 
   function sort(e: MouseEvent<HTMLDivElement>) {
     const className = e.currentTarget.className as FieldName;
     if (field === className) {
-      setTs((prev) => [...prev.reverse()]);
+      setTournamentsShorts((prev) => [...prev.reverse()]);
     } else {
-      setTs((prev) => sortFunction(prev, className));
+      setTournamentsShorts((prev) => sortFunction(prev, className));
       setField(className);
     }
   }
 
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
+  }
+
+  if (isSuccess && tsShorts.length !== tournamentsShorts.length) {
+    setTournamentsShorts([...tsShorts].reverse());
   }
 
   return (
@@ -94,7 +98,7 @@ const All = () => {
           </div>
         </div>
         <div className="table__body">
-          {filter(shortTournaments, search).map((v, i) => (
+          {filter(tournamentsShorts, search).map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>

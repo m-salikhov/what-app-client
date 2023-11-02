@@ -35,7 +35,7 @@ const reducer = (state: TournamentType, action: Action) => {
   const { type, questionID, payload } = action;
 
   if (type === actionTypes.loaded) {
-    const t = payload as TournamentType;
+    const t = structuredClone(payload as TournamentType);
 
     const randomKeys: number[] = [];
     while (randomKeys.length < t.questions.length) {

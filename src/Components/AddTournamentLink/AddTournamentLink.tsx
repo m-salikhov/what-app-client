@@ -1,5 +1,4 @@
 import { useReducer, useState } from "react";
-import { _axios } from "../../Helpers/_axios";
 import { RotatingLines } from "react-loader-spinner";
 import Button from "../Elements/Button/Button";
 import QuestionPlane from "../Elements/Question/QuestionPlane";
@@ -7,15 +6,18 @@ import { useAppSelector } from "../../Hooks/redux";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { getDate } from "../../Helpers/getDate";
 import { initTournament } from "../../Helpers/initValues";
-import { TournamentType } from "../../Types/tournament";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import checkTournament from "../../Helpers/checkTournament";
 import Instruction from "./Instruction";
-import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./addTournamentLink.scss";
-import { QuestionType } from "../../Types/question";
-import { guest, routes } from "../../constants";
+import {
+  useAddTournamentMutation,
+  useParseLinkMutation,
+} from "../../Store/tournamentAPI";
+import { ErrorServer } from "../../Types/errorServer";
+import removeQuestionsID from "./helpers/removeQuestionsID";
+import { guest } from "../../constants";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
@@ -24,73 +26,51 @@ const AddTournamentLink = () => {
 
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isLoad, setIsLoad] = useState(false);
+  const [showT, setShowT] = useState(false);
   const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
   const [errorsFilling, setErrorsFilling] = useState<string[]>([]);
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
-  const parseLink = () => {
-    setLoading(true);
-    setIsLoad(false);
+  const [addT, { isLoading: isLoadingAdd, isSuccess: isSuccessLoadAdd }] =
+    useAddTournamentMutation();
+  const [parseT, { isLoading, isSuccess, error }] = useParseLinkMutation();
+
+  const handleAddTournament = async () => {
     setMessage("");
     setErrorsFilling([]);
-    _axios
-      .post<TournamentType>(routes.tournamentsCreateByLink, { link })
-      .then((res) => {
-        dispatch({ type: "loaded", payload: res.data });
-        setIsLoad(true);
-        setLoading(false);
-      })
-      .catch((e: AxiosErrorNest) => {
-        setMessage(e.response?.data.message || "Неверная ссылка");
-        setLoading(false);
-      });
-  };
 
-  const addTournament = () => {
-    setLoading(true);
-    setMessage("");
-
-    setErrorsFilling([]);
-    const e = checkTournament(t);
-    if (e) {
-      setErrorsFilling(e);
-      setLoading(false);
+    const errors = checkTournament(t);
+    if (errors) {
+      setErrorsFilling(errors);
       return;
     }
-
-    setIsLoad(false);
-
-    const tournament: TournamentType = {
-      ...t,
+    await addT({
+      ...removeQuestionsID(t),
       uploaderUuid: currentUser.id ? currentUser.id : guest.id,
       uploader: currentUser.username ? currentUser.username : guest.userName,
-    };
-    tournament.questions = tournament.questions
-      .map((q) => {
-        const { id, ...rest } = q;
-        return rest as QuestionType;
+    })
+      .unwrap()
+      .then(() => {
+        setMessage("Турнир успешно сохранён в базе");
+        setShowT(false);
       })
-      .filter((q) => q.qNumber !== -1);
+      .catch(() => setMessage("Ошибка при сохранении"));
+  };
 
-    const link =
-      tournament.uploaderUuid === guest.id
-        ? routes.tournamentsGuest
-        : routes.tournaments;
+  const handleParseLink = async () => {
+    setMessage("");
+    setErrorsFilling([]);
 
-    _axios
-      .post(link, tournament)
-      .then((res) => {
-        if (res.status === 201) {
-          setMessage("Турнир успешно сохранён в базе");
-          setLoading(false);
-        }
+    await parseT({ link })
+      .unwrap()
+      .then((data) => {
+        dispatch({ type: "loaded", payload: data });
+        setShowT(true);
       })
-      .catch(() => {
-        setMessage("Ошибка при сохранении");
-        setLoading(false);
+      .catch((e: ErrorServer) => {
+        setMessage(e.data.message || "Ошибка");
       });
   };
 
@@ -108,11 +88,11 @@ const AddTournamentLink = () => {
           }}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              parseLink();
+              handleParseLink();
             }
           }}
         />
-        <Button title="Открыть" onClick={parseLink} disabled={loading} />
+        <Button title="Открыть" onClick={handleParseLink} disabled={loading} />
       </div>
 
       {errorsFilling.length > 0 &&
@@ -124,7 +104,7 @@ const AddTournamentLink = () => {
 
       {message && <p className="addlink__message">{message}</p>}
 
-      {loading && (
+      {(isLoading || isLoadingAdd) && (
         <div className="spinner">
           {" "}
           <RotatingLines
@@ -137,9 +117,9 @@ const AddTournamentLink = () => {
         </div>
       )}
 
-      {!isLoad && !loading && <Instruction />}
+      {!showT && <Instruction />}
 
-      {isLoad && (
+      {showT && (
         <>
           <div className="tournament__header">
             <div className="tournament__header-t">
@@ -175,7 +155,10 @@ const AddTournamentLink = () => {
                 setEdit(!edit);
               }}
             ></Button>
-            <Button title="Добавить в базу" onClick={addTournament}></Button>
+            <Button
+              title="Добавить в базу"
+              onClick={handleAddTournament}
+            ></Button>
           </div>
           <div className="tournament__content">
             {t.questions
