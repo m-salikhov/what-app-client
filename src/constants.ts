@@ -8,7 +8,7 @@ export const routes = {
   tournamentsGuest: "/tournaments/quest/",
   tournamentsCreateByLink: "/tournaments/createbylink/",
   tournamentsAllShort: `/tournaments/allshort/`,
-  tournamentsLast: "/tournaments/last/",
+  tournamentsLastShort: "/tournaments/last/",
   authLogin: "/auth/login/",
   authLogFirst: "/auth/logfirst/",
   authLogout: "/auth/logout",

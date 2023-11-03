@@ -6,24 +6,30 @@ import { TournamentShortType } from "../../Types/tournament";
 import back from "./back.svg";
 import next from "./next.svg";
 import { routes } from "../../constants";
+import { useGetTournamentsLastShortQuery } from "../../Store/tournamentAPI";
 
 const LastTournaments = () => {
-  const [lastTenTournaments, setLastTenTournaments] = useState<
-    TournamentShortType[]
-  >([]);
+  // const [lastTenTournaments, setLastTenTournaments] = useState<
+  //   TournamentShortType[]
+  // >([]);
   const [pageNumber, setPageNumber] = useState(0);
   const [pageCount, setPageCount] = useState(0);
 
-  useEffect(() => {
-    _axios
-      .get<TournamentShortType[]>(`${routes.tournamentsLast}${pageNumber * 10}`)
-      .then((res) => {
-        setLastTenTournaments(res.data);
-      });
-  }, [pageNumber]);
+  // useEffect(() => {
+  //   _axios
+  //     .get<TournamentShortType[]>(
+  //       `${routes.tournamentsLastShort}${pageNumber * 10}`
+  //     )
+  //     .then((res) => {
+  //       setLastTenTournaments(res.data);
+  //     });
+  // }, [pageNumber]);
+
+  const { data: lastTenTournaments = [] } =
+    useGetTournamentsLastShortQuery(pageNumber);
 
   useEffect(() => {
-    _axios.get(`${routes.tournamentsLast}-1`).then((res) => {
+    _axios.get(`${routes.tournamentsLastShort}-1`).then((res) => {
       setPageCount(res.data);
     });
   }, []);

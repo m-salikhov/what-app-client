@@ -7,13 +7,19 @@ const baseUrl = "https://andvarif.store";
 
 export const tournamentAPI = createApi({
   reducerPath: "tournamentAPI",
-  tagTypes: ["tournaments", "shorts", "stats"],
+  tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
   baseQuery: fetchBaseQuery({ baseUrl }),
 
   endpoints: (build) => ({
     getTornaments: build.query<TournamentType, string>({
       query: (id: string) => `/tournaments/${id}`,
       keepUnusedDataFor: 600,
+    }),
+
+    getTournamentsLastShort: build.query<TournamentShortType[], number>({
+      query: (count: number) => routes.tournamentsLastShort + count,
+      keepUnusedDataFor: 600,
+      providesTags: ["lastTournamentsShort"],
     }),
 
     getRandom: build.query<QuestionType[], number>({
@@ -25,11 +31,6 @@ export const tournamentAPI = createApi({
       query: () => routes.tournamentsStats,
       keepUnusedDataFor: 600,
       providesTags: ["stats"],
-      // providesTags: (result) => {
-      //   return result
-      //     ? [{ ...result, type: "stats" as const }, "stats"]
-      //     : ["stats"];
-      // },
     }),
 
     getTornamentsShort: build.query<TournamentShortType[], undefined>({
@@ -51,7 +52,6 @@ export const tournamentAPI = createApi({
         method: "POST",
         body,
       }),
-      invalidatesTags: ["stats"],
     }),
 
     addTournament: build.mutation<number, TournamentType>({
@@ -64,7 +64,7 @@ export const tournamentAPI = createApi({
         credentials: "include",
         body,
       }),
-      invalidatesTags: ["shorts"],
+      invalidatesTags: ["shorts", "stats", "lastTournamentsShort"],
     }),
   }),
 });
@@ -76,4 +76,5 @@ export const {
   useParseLinkMutation,
   useGetTornamentsShortQuery,
   useGetStatsQuery,
+  useGetTournamentsLastShortQuery,
 } = tournamentAPI;

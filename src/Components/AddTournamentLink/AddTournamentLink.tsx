@@ -10,7 +10,6 @@ import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import checkTournament from "../../Helpers/checkTournament";
 import Instruction from "./Instruction";
-import "./addTournamentLink.scss";
 import {
   useAddTournamentMutation,
   useParseLinkMutation,
@@ -18,6 +17,7 @@ import {
 import { ErrorServer } from "../../Types/errorServer";
 import removeQuestionsID from "./helpers/removeQuestionsID";
 import { guest } from "../../constants";
+import "./addTournamentLink.scss";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
