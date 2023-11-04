@@ -14,6 +14,7 @@ export const routes = {
   authLogout: "/auth/logout",
   tournamentsRandom: "/tournaments/random/",
   tournamentsStats: "/tournaments/statistics",
+  tournamentsAmountPages: "/tournaments/amountpages",
   tournamentsAllByUploader: "/tournaments/allbyuploader/",
   userResultShort: "/users/userresultshort",
 } as const;
