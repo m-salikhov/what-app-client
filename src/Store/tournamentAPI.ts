@@ -33,6 +33,12 @@ export const tournamentAPI = createApi({
       providesTags: ["stats"],
     }),
 
+    getTournamentsAmountPages: build.query<number, undefined>({
+      query: () => routes.tournamentsAmountPages,
+      keepUnusedDataFor: 6000,
+      providesTags: ["stats"],
+    }),
+
     getTornamentsShort: build.query<TournamentShortType[], undefined>({
       query: () => routes.tournamentsAllShort,
       providesTags: (result) => {
@@ -77,4 +83,5 @@ export const {
   useGetTornamentsShortQuery,
   useGetStatsQuery,
   useGetTournamentsLastShortQuery,
+  useGetTournamentsAmountPagesQuery,
 } = tournamentAPI;

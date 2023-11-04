@@ -1,46 +1,31 @@
-import { MouseEvent, useEffect, useState } from "react";
+import { MouseEvent, useState } from "react";
 import { Link } from "react-router-dom";
-import { _axios } from "../../Helpers/_axios";
 import { getDate } from "../../Helpers/getDate";
-import { TournamentShortType } from "../../Types/tournament";
 import back from "./back.svg";
 import next from "./next.svg";
-import { routes } from "../../constants";
-import { useGetTournamentsLastShortQuery } from "../../Store/tournamentAPI";
+import {
+  useGetTournamentsAmountPagesQuery,
+  useGetTournamentsLastShortQuery,
+} from "../../Store/tournamentAPI";
 
 const LastTournaments = () => {
-  // const [lastTenTournaments, setLastTenTournaments] = useState<
-  //   TournamentShortType[]
-  // >([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
 
-  // useEffect(() => {
-  //   _axios
-  //     .get<TournamentShortType[]>(
-  //       `${routes.tournamentsLastShort}${pageNumber * 10}`
-  //     )
-  //     .then((res) => {
-  //       setLastTenTournaments(res.data);
-  //     });
-  // }, [pageNumber]);
+  const { data: lastTenTournaments = [] } = useGetTournamentsLastShortQuery(
+    pageNumber * 10
+  );
 
-  const { data: lastTenTournaments = [] } =
-    useGetTournamentsLastShortQuery(pageNumber);
-
-  useEffect(() => {
-    _axios.get(`${routes.tournamentsLastShort}-1`).then((res) => {
-      setPageCount(res.data);
-    });
-  }, []);
+  const { data: amountPages = 0 } =
+    useGetTournamentsAmountPagesQuery(undefined);
 
   const changePageNumber = (e: MouseEvent<HTMLDivElement>) => {
-    const name = e.currentTarget.className;
-    if (name === "next" && pageNumber < pageCount - 1) {
-      setPageNumber((p) => ++p);
+    const { className } = e.currentTarget;
+
+    if (className === "next" && pageNumber < amountPages - 1) {
+      setPageNumber((p) => p + 1);
     }
-    if (name === "back" && pageNumber > 0) {
-      setPageNumber((p) => --p);
+    if (className === "back" && pageNumber > 0) {
+      setPageNumber((p) => p - 1);
     }
   };
 
