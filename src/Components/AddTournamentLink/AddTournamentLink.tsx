@@ -25,7 +25,6 @@ const AddTournamentLink = () => {
   const { currentUser } = useAppSelector((state) => state.userReducer);
 
   const [link, setLink] = useState("");
-  const [loading, setLoading] = useState(false);
   const [showT, setShowT] = useState(false);
   const [message, setMessage] = useState("");
   const [edit, setEdit] = useState(false);
@@ -33,9 +32,9 @@ const AddTournamentLink = () => {
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
-  const [addT, { isLoading: isLoadingAdd, isSuccess: isSuccessLoadAdd }] =
+  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] =
     useAddTournamentMutation();
-  const [parseT, { isLoading, isSuccess, error }] = useParseLinkMutation();
+  const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
   const handleAddTournament = async () => {
     setMessage("");
@@ -51,32 +50,38 @@ const AddTournamentLink = () => {
       uploaderUuid: currentUser.id ? currentUser.id : guest.id,
       uploader: currentUser.username ? currentUser.username : guest.userName,
     })
-      .unwrap()
+      // .unwrap()
       .then(() => {
         setMessage("Турнир успешно сохранён в базе");
         setShowT(false);
-      })
-      .catch(() => setMessage("Ошибка при сохранении"));
+      });
+    // .catch(() => setMessage("Ошибка при сохранении"));
   };
 
   const handleParseLink = async () => {
     setMessage("");
     setErrorsFilling([]);
+    setShowT(false);
 
     await parseT({ link })
       .unwrap()
       .then((data) => {
         dispatch({ type: "loaded", payload: data });
         setShowT(true);
-      })
-      .catch((e: ErrorServer) => {
-        setMessage(e.data.message || "Ошибка");
       });
+    // .catch((e: ErrorServer) => {
+    //   setMessage(e.data.message || "Ошибка");
+    // });
   };
 
   if (edit) {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
+
+  const handleError = (err: typeof errorParse) => {
+    const e = err as ErrorServer;
+    return e.data.message;
+  };
 
   return (
     <main className="addlink_container">
@@ -92,7 +97,11 @@ const AddTournamentLink = () => {
             }
           }}
         />
-        <Button title="Открыть" onClick={handleParseLink} disabled={loading} />
+        <Button
+          title="Открыть"
+          onClick={handleParseLink}
+          disabled={isLoadingAdd || isLoading}
+        />
       </div>
 
       {errorsFilling.length > 0 &&
@@ -103,6 +112,11 @@ const AddTournamentLink = () => {
         ))}
 
       {message && <p className="addlink__message">{message}</p>}
+      {(errorParse || errorAdd) && (
+        <p className="addlink__message">
+          {handleError(errorParse || errorAdd)}
+        </p>
+      )}
 
       {(isLoading || isLoadingAdd) && (
         <div className="spinner">

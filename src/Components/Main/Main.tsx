@@ -15,7 +15,7 @@ const Main = () => {
   const navigate = useNavigate();
   useDocTitle();
 
-  const [newRandom, setNewRandom] = useState(0);
+  const [isRandomRefetch, setIsRandomRefetch] = useState(false);
 
   const {
     data: randomQuestions = [],
@@ -33,7 +33,7 @@ const Main = () => {
               className="refresh"
               onClick={() => {
                 refetch();
-                setNewRandom((prev) => prev + 1);
+                setIsRandomRefetch(!isRandomRefetch);
               }}
             >
               {" "}
@@ -41,7 +41,7 @@ const Main = () => {
               <div>
                 <img
                   className={
-                    newRandom % 2 ? "refresh__arrow" : "refresh__arrow r"
+                    isRandomRefetch ? "refresh__arrow" : "refresh__arrow r"
                   }
                   src={refreshIcon}
                   alt="обновить случайные"
