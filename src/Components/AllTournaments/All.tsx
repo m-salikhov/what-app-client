@@ -20,11 +20,8 @@ function filter(tournaments: TournamentShortType[], searchString: string) {
 const All = () => {
   useDocTitle("Все турниры");
 
-  const {
-    data: tsShorts = [],
-    isLoading,
-    isSuccess,
-  } = useGetTornamentsShortQuery(undefined);
+  const { data: tsShorts = [], isSuccess } =
+    useGetTornamentsShortQuery(undefined);
 
   const [tournamentsShorts, setTournamentsShorts] = useState<
     TournamentShortType[]

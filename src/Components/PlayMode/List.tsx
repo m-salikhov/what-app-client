@@ -1,17 +1,17 @@
-import { useTournamentAllShorts } from "../../Hooks/useTournament";
 import ListLine from "./ListLine";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { useAppDispatch } from "../../Hooks/redux";
 import { useEffect } from "react";
 import { playModeSlice } from "../../Store/reducers/PlayModeSlice";
 import "./list.scss";
+import { useGetTornamentsShortQuery } from "../../Store/tournamentAPI";
 
 const List = () => {
   useDocTitle("Игровой режим");
 
   const dispatch = useAppDispatch();
 
-  const { ts } = useTournamentAllShorts();
+  const { data: tsShorts = [] } = useGetTornamentsShortQuery(undefined);
 
   useEffect(() => {
     dispatch(playModeSlice.actions.resetState());
@@ -29,7 +29,7 @@ const List = () => {
           <div className="table__header_t">Туры </div>
         </div>
         <div className="table__body">
-          {ts.reverse().map((v, i) => (
+          {[...tsShorts].reverse().map((v, i) => (
             <ListLine item={v} index={i} key={v.id} />
           ))}
         </div>
