@@ -16,13 +16,14 @@ import {
 } from "../../Store/tournamentAPI";
 import { ErrorServer } from "../../Types/errorServer";
 import removeQuestionsID from "./helpers/removeQuestionsID";
-import { guest } from "../../constants";
+// import { guest } from "../../constants";
 import "./addTournamentLink.scss";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
 
   const { currentUser } = useAppSelector((state) => state.userReducer);
+  console.log({ currentUser });
 
   const [link, setLink] = useState("");
   const [showT, setShowT] = useState(false);
@@ -47,8 +48,8 @@ const AddTournamentLink = () => {
     }
     await addT({
       ...removeQuestionsID(t),
-      uploaderUuid: currentUser.id ? currentUser.id : guest.id,
-      uploader: currentUser.username ? currentUser.username : guest.userName,
+      uploaderUuid: currentUser.id,
+      uploader: currentUser.username,
     }).then(() => {
       setMessage("Турнир успешно сохранён в базе");
       setShowT(false);
@@ -74,7 +75,7 @@ const AddTournamentLink = () => {
 
   const handleError = (err: typeof errorParse) => {
     const e = err as ErrorServer;
-    return e.data.message;
+    return e.data.message || "Ошибка";
   };
 
   return (

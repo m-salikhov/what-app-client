@@ -1,14 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TournamentShortType, TournamentType } from "../Types/tournament";
 import { QuestionType } from "../Types/question";
-import { guest, routes } from "../constants";
-
-const baseUrl = "https://andvarif.store";
+import { baseServerURL, guest, routes } from "../constants";
 
 export const tournamentAPI = createApi({
   reducerPath: "tournamentAPI",
   tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
-  baseQuery: fetchBaseQuery({ baseUrl }),
+  baseQuery: fetchBaseQuery({ baseUrl: baseServerURL }),
 
   endpoints: (build) => ({
     getTornaments: build.query<TournamentType, string>({
@@ -63,7 +61,7 @@ export const tournamentAPI = createApi({
     addTournament: build.mutation<number, TournamentType>({
       query: (body) => ({
         url:
-          body.uploader === guest.userName
+          body.uploader === guest.username
             ? routes.tournamentsGuest
             : routes.tournaments,
         method: "POST",

@@ -5,7 +5,7 @@ import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
 import { userSlice } from "../../Store/reducers/UserSlice";
 import owlGreen from "./owlGreen.svg";
 import "./header.scss";
-import { routes } from "../../constants";
+import { guest, routes } from "../../constants";
 
 const Header = () => {
   const [openMobMenu, setOpenMobMenu] = useState(false);
@@ -64,12 +64,12 @@ const Header = () => {
           <li>
             <Link to="/all">Все турниры</Link>
           </li>
-          {currentUser?.id && (
+          {currentUser.id !== guest.id && (
             <li>
               <Link to="/profile">Профиль</Link>
             </li>
           )}
-          {currentUser?.id ? (
+          {currentUser.id !== guest.id ? (
             <li>
               <Link to="/" onClick={logout}>
                 Выйти
