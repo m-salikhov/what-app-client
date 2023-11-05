@@ -49,13 +49,10 @@ const AddTournamentLink = () => {
       ...removeQuestionsID(t),
       uploaderUuid: currentUser.id ? currentUser.id : guest.id,
       uploader: currentUser.username ? currentUser.username : guest.userName,
-    })
-      // .unwrap()
-      .then(() => {
-        setMessage("Турнир успешно сохранён в базе");
-        setShowT(false);
-      });
-    // .catch(() => setMessage("Ошибка при сохранении"));
+    }).then(() => {
+      setMessage("Турнир успешно сохранён в базе");
+      setShowT(false);
+    });
   };
 
   const handleParseLink = async () => {
@@ -69,9 +66,6 @@ const AddTournamentLink = () => {
         dispatch({ type: "loaded", payload: data });
         setShowT(true);
       });
-    // .catch((e: ErrorServer) => {
-    //   setMessage(e.data.message || "Ошибка");
-    // });
   };
 
   if (edit) {
