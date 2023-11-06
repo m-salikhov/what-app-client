@@ -14,16 +14,14 @@ import {
   useAddTournamentMutation,
   useParseLinkMutation,
 } from "../../Store/tournamentAPI";
-import { ErrorServer } from "../../Types/errorServer";
 import removeQuestionsID from "./helpers/removeQuestionsID";
-// import { guest } from "../../constants";
 import "./addTournamentLink.scss";
+import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
 
   const { currentUser } = useAppSelector((state) => state.userReducer);
-  console.log({ currentUser });
 
   const [link, setLink] = useState("");
   const [showT, setShowT] = useState(false);
@@ -73,11 +71,6 @@ const AddTournamentLink = () => {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
 
-  const handleError = (err: typeof errorParse) => {
-    const e = err as ErrorServer;
-    return e.data.message || "Ошибка";
-  };
-
   return (
     <main className="addlink_container">
       <div className="addlink">
@@ -109,7 +102,7 @@ const AddTournamentLink = () => {
       {message && <p className="addlink__message">{message}</p>}
       {(errorParse || errorAdd) && (
         <p className="addlink__message">
-          {handleError(errorParse || errorAdd)}
+          {extractServerErrorMessage(errorParse || errorAdd)}
         </p>
       )}
 

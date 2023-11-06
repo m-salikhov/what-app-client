@@ -41,6 +41,7 @@ export const scroll = (
 
   const anchor = arrAnchors[id - 1];
   if (nodeList instanceof HTMLDivElement) {
-    nodeList.children[anchor].scrollIntoView({ behavior: "smooth" });
+    const node = nodeList.querySelector(".tournament__content_qs");
+    if (node) node.children[anchor].scrollIntoView({ behavior: "smooth" });
   }
 };

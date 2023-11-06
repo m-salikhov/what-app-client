@@ -1,29 +1,46 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import Question from "../Elements/Question/Question";
 import Back from "../Elements/Back/Back";
-import SkeletonQuestion from "../Elements/Question/SkeletonQuestion";
-import { useTournamentById } from "../../Hooks/useTournament";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { getTourAnchors, getToursParagraphs, scroll } from "./scrollLogic";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import "./tournament.scss";
+import { useGetTornamentsQuery } from "../../Store/tournamentAPI";
+import { initTournament } from "../../Helpers/initValues";
+import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 
 const Tournament = () => {
-  const { id } = useParams();
-  const { t, loading } = useTournamentById(id);
-  const ref = useRef<HTMLDivElement>(null);
+  const { id = "" } = useParams();
+  const {
+    data: t = initTournament,
+    isFetching,
+    error,
+  } = useGetTornamentsQuery(id);
+  const ref = useRef(null);
   const tourAnchors = getTourAnchors(t);
 
   useDocTitle(t.title);
 
-  window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  if (error) {
+    return (
+      <main>
+        {" "}
+        <h2>{extractServerErrorMessage(error)}</h2>{" "}
+      </main>
+    );
+  }
 
   return (
     <main className="tournament__container">
       <div className="tournament__header">
         <div className="tournament__header-t">
-          <h2>{t?.title}</h2>
+          <h2>{t.title}</h2>
           <p>
             <span>добавил </span>
             {t.uploader}
@@ -44,7 +61,7 @@ const Tournament = () => {
           Редакция: <span>{t.editors.join(", ")}</span>
         </h3>
       </div>
-      <div className="tournament__content">
+      <div className="tournament__content" ref={ref}>
         <div className="tournament__content_header">
           {" "}
           <div className="back">
@@ -57,10 +74,16 @@ const Tournament = () => {
             {getToursParagraphs(t.tours)}
           </div>
         </div>
-        <div className="tournament__content_qs" ref={ref}>
-          {loading && <SkeletonQuestion count={6} />}
-          {!loading && t.questions.map((v) => <Question q={v} key={v.id} />)}
-        </div>
+        <TransitionGroup className="tournament__content_qs">
+          {!isFetching &&
+            t.questions.map((v) => {
+              return (
+                <CSSTransition key={v.id} classNames="question" timeout={400}>
+                  <Question q={v} />
+                </CSSTransition>
+              );
+            })}
+        </TransitionGroup>
       </div>
     </main>
   );
