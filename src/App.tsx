@@ -1,6 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useAppDispatch } from "./Hooks/redux";
-import { getUserPreload } from "./Store/reducers/UserSlice";
 import All from "./Components/AllTournaments/All";
 import Entry from "./Components/Entry/Entry";
 import Layout from "./Components/Lyout/Layout";
@@ -16,10 +14,6 @@ import AddTournamentLink from "./Components/AddTournamentLink/AddTournamentLink"
 import NotFound from "./Components/NotFound/NotFound";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  dispatch(getUserPreload());
-
   return (
     <BrowserRouter>
       <Routes>

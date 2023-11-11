@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import { _axios } from "../../Helpers/_axios";
 import { getDate } from "../../Helpers/getDate";
 import { initTournamentShort } from "../../Helpers/initValues";
-import { useAppSelector } from "../../Hooks/redux";
 import ChangePass from "./ChangePass";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./profile.scss";
 import { routes } from "../../constants";
+import { useGetUserLogfirstQuery } from "../../Store/userAPI";
 
 interface Result {
   id: string;
@@ -20,49 +20,48 @@ interface Result {
 
 const Profile = () => {
   useDocTitle("Профиль");
-  const { currentUser } = useAppSelector((state) => state.userReducer);
-
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
   const [changePass, setChangePass] = useState(false);
   const [tournaments, setTournaments] = useState([initTournamentShort]);
   const [results, setResults] = useState<Result[]>([]);
 
   useEffect(() => {
     _axios
-      .get(`${routes.tournamentsAllByUploader}${currentUser.id}`)
+      .get(`${routes.tournamentsAllByUploader}${currentUser?.id}`)
       .then((res) => {
         setTournaments(res.data);
       });
-  }, [currentUser.id]);
+  }, [currentUser?.id]);
 
   useEffect(() => {
-    _axios.post(routes.userResultShort, { id: currentUser.id }).then((res) => {
+    _axios.post(routes.userResultShort, { id: currentUser?.id }).then((res) => {
       setResults(res.data);
     });
-  }, [currentUser.id]);
+  }, [currentUser?.id]);
 
   return (
     <main className="pr">
       <div className="pr-wrapper">
         <div>
           <p>Имя</p>
-          <p>{currentUser.username}</p>
+          <p>{currentUser?.username}</p>
         </div>
         <div>
           <p>Почта</p>
-          <p>{currentUser.email}</p>
+          <p>{currentUser?.email}</p>
         </div>
         <div>
           <p>Зарегистрирован</p>
-          <p>{getDate(currentUser.date)}</p>
+          <p>{currentUser ? getDate(currentUser?.date) : null}</p>
         </div>
         <div>
           <p>Статус</p>
-          <p>{currentUser.role}</p>
+          <p>{currentUser?.role}</p>
         </div>
         {changePass ? (
           <ChangePass
             cancelChangePass={() => setChangePass(false)}
-            id={currentUser.id}
+            id={currentUser?.id}
           />
         ) : (
           <button type="button" onClick={() => setChangePass(true)}>

@@ -28,3 +28,11 @@ export type getUserType =
       email?: never;
       username: string;
     };
+
+export interface FormUser {
+  email: string;
+  username: string;
+  role: string;
+  password: string;
+  passRepeat: string;
+}

@@ -30,6 +30,14 @@ export const initUser: UserType = {
   date: 0,
 };
 
+export const initFormUser = {
+  email: "",
+  username: "",
+  role: "user",
+  password: "",
+  passRepeat: "",
+};
+
 export const initQuestion: QuestionType = {
   id: 0,
   type: "regular",

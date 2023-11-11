@@ -23,7 +23,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
         title="Закончить редактирование"
         onClick={() => setEdit(false)}
       ></Button>
-      <div className="edit-t" onClick={(e) => console.log(e.target)}>
+      <div className="edit-t">
         <div className="edit-t__top">
           {" "}
           <label className="edit-t__title">
@@ -41,7 +41,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
             <p> Дата отыгрыша </p>
             <input
               type="date"
-              value={getDateYYYY_MM_DD(t.date)}
+              value={getDateYYYY_MM_DD(t.date || Date.now())}
               onMouseDown={(e) => {
                 e.preventDefault();
               }}

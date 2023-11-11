@@ -21,6 +21,8 @@ p {
   font-size: 1.1rem;
   line-height: 1.5;
   word-spacing: 0.1rem;
+  color: #222427;
+
   &::selection {
     background-color: $greycolor;
   }

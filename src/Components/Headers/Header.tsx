@@ -1,26 +1,27 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { _axios } from "../../Helpers/_axios";
-import { useAppSelector, useAppDispatch } from "../../Hooks/redux";
-import { userSlice } from "../../Store/reducers/UserSlice";
+import { useAppDispatch } from "../../Hooks/redux";
 import owlGreen from "./owlGreen.svg";
 import "./header.scss";
-import { guest, routes } from "../../constants";
+import {
+  useGetUserLogfirstQuery,
+  useLazyGetUserLogoutQuery,
+  userAPI,
+} from "../../Store/userAPI";
 
 const Header = () => {
   const [openMobMenu, setOpenMobMenu] = useState(false);
-  const { currentUser } = useAppSelector((state) => state.userReducer);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const logout = async () => {
-    await _axios
-      .get(routes.authLogout)
-      .then((res) => console.log("res.data", res.data))
-      .catch(() => console.log("ошибка"));
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const [trigger] = useLazyGetUserLogoutQuery();
 
-    dispatch(userSlice.actions.resetCurrentUser());
+  const logout = () => {
+    trigger(undefined);
+    dispatch(userAPI.util.resetApiState());
   };
+
   const handleMobMenu = () => {
     const { innerWidth } = window;
 
@@ -64,12 +65,12 @@ const Header = () => {
           <li>
             <Link to="/all">Все турниры</Link>
           </li>
-          {currentUser.id !== guest.id && (
+          {currentUser?.id && (
             <li>
               <Link to="/profile">Профиль</Link>
             </li>
           )}
-          {currentUser.id !== guest.id ? (
+          {currentUser?.id ? (
             <li>
               <Link to="/" onClick={logout}>
                 Выйти

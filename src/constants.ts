@@ -17,6 +17,7 @@ export const routes = {
   tournamentsAmountPages: "/tournaments/amountpages",
   tournamentsAllByUploader: "/tournaments/allbyuploader/",
   userResultShort: "/users/userresultshort",
+  userRegistration: "/users",
 } as const;
 
 export const amountRandomQuestions = 4;

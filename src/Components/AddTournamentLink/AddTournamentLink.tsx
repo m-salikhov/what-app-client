@@ -2,7 +2,6 @@ import { useReducer, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import Button from "../Elements/Button/Button";
 import QuestionPlane from "../Elements/Question/QuestionPlane";
-import { useAppSelector } from "../../Hooks/redux";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import { getDate } from "../../Helpers/getDate";
 import { initTournament } from "../../Helpers/initValues";
@@ -17,11 +16,13 @@ import {
 import removeQuestionsID from "./helpers/removeQuestionsID";
 import "./addTournamentLink.scss";
 import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
+import { useGetUserLogfirstQuery } from "../../Store/userAPI";
+import { guest } from "../../constants";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
 
-  const { currentUser } = useAppSelector((state) => state.userReducer);
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
 
   const [link, setLink] = useState("");
   const [showT, setShowT] = useState(false);
@@ -46,8 +47,8 @@ const AddTournamentLink = () => {
     }
     await addT({
       ...removeQuestionsID(t),
-      uploaderUuid: currentUser.id,
-      uploader: currentUser.username,
+      uploaderUuid: currentUser ? currentUser.id : guest.id,
+      uploader: currentUser ? currentUser.username : guest.username,
     }).then(() => {
       setMessage("Турнир успешно сохранён в базе");
       setShowT(false);
@@ -155,6 +156,7 @@ const AddTournamentLink = () => {
               title={edit ? "Закончить редактирование" : "Редактировать турнир"}
               onClick={() => {
                 setEdit(!edit);
+                setErrorsFilling([]);
               }}
             ></Button>
             <Button

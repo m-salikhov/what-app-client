@@ -1,102 +1,82 @@
 import { Navigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
+import { useAppDispatch } from "../../Hooks/redux";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { _axios } from "../../Helpers/_axios";
-import { UserType } from "../../Types/user";
-import {
-  loginUser,
-  resetError,
-  userSlice,
-} from "../../Store/reducers/UserSlice";
+import { FormUser } from "../../Types/user";
 import ModalReg from "./ModalReg";
-import { initUser } from "../../Helpers/initValues";
+import { initFormUser } from "../../Helpers/initValues";
 import entryImg from "./entry_img.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
-import { AxiosErrorNest } from "../../Types/axiosErrorNest";
 import "./entry.scss";
 import { Tooltip } from "react-tooltip";
-
-const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
+import checkFormFields from "./helpers/checkFormFields";
+import {
+  useLoginMutation,
+  useRegistrationMutation,
+  userAPI,
+} from "../../Store/userAPI";
+import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 
 const Entry = () => {
   useDocTitle("Вход");
   const dispatch = useAppDispatch();
 
-  const [form, setForm] = useState<UserType>(initUser);
-  const [passRepeat, setPassRepeat] = useState("");
+  const [formUser, setFormUser] = useState<FormUser>(initFormUser);
   const [errorMessage, setErrorMessage] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isAuth, setIsAuth] = useState(false);
   const [reg, setReg] = useState(false);
+
+  const [login, { isSuccess: loginSuccess, error: errorLogin }] =
+    useLoginMutation({
+      fixedCacheKey: "login",
+    });
+  const [registration, { error: errorReg }] = useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
 
-    dispatch(resetError());
     setErrorMessage("");
 
-    if (!testEmail.test(form.email)) {
-      setErrorMessage("Неверный email");
-      return;
-    }
-    if (!form.password) {
-      setErrorMessage("Введите пароль");
+    const FormFieldsErrors = checkFormFields(formUser, reg);
+    if (FormFieldsErrors) {
+      setErrorMessage(FormFieldsErrors);
       return;
     }
 
-    //блок обработки регистрации нового пользователя
     if (reg) {
-      if (form.password !== passRepeat) {
-        setErrorMessage("Повторите пароль");
-        return;
-      }
-      if (!form.username) {
-        setErrorMessage("Выберите псевдоним");
-        return;
-      }
-      const res = await _axios
-        .post<UserType>("/users", form)
-        .then((res) => res.data)
-        .catch((e: AxiosErrorNest) => {
-          setErrorMessage(e.response?.data.message || "Ошибка входа");
-        });
-
-      if (res) {
-        await dispatch(
-          loginUser({ email: form.email, password: form.password })
-        ).catch((e: AxiosErrorNest) => {
-          setErrorMessage(e.response?.data.message || "Ошибка входа");
-        });
-        setIsModalOpen(true);
-        return;
-      } else {
-        return;
-      }
+      await registration(formUser)
+        .unwrap()
+        .then((data) =>
+          dispatch(
+            userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)
+          )
+        );
+      setIsModalOpen(true);
+      return;
     }
 
-    //вход для существующего пользователя
-    await dispatch(
-      loginUser({ email: form.email, password: form.password })
-    ).catch((e: AxiosErrorNest) => {
-      setErrorMessage(e.response?.data.message || "Ошибка входа");
-    });
-    setIsAuth(true);
+    await login({ email: formUser.email, password: formUser.password })
+      .unwrap()
+      .then((data) =>
+        dispatch(
+          userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)
+        )
+      );
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormUser({
+      ...formUser,
+      [e.target.name]: e.target.value,
+    });
   };
-
-  const { currentUser, error } = useAppSelector((state) => state.userReducer);
 
   useEffect(() => {
     return () => {
-      dispatch(resetError());
       setErrorMessage("");
     };
-  }, [dispatch]);
+  }, []);
 
-  if (isAuth && currentUser?.id) {
+  if (loginSuccess) {
     return <Navigate to="/" replace />;
   }
 
@@ -154,15 +134,18 @@ const Entry = () => {
                 <input
                   autoComplete="on"
                   type="password"
-                  name="repeatPassword"
+                  name="passRepeat"
                   placeholder="repeat password"
-                  onChange={(e) => setPassRepeat(e.target.value)}
+                  onChange={onChange}
                 />{" "}
               </label>
-              {(errorMessage || error) && (
+              {(errorMessage || errorLogin || errorReg) && (
                 <div className="entry__error">
                   <div className="entry__error--block"></div>
-                  <p>{errorMessage || error}</p>
+                  <p>
+                    {errorMessage ||
+                      extractServerErrorMessage(errorLogin || errorReg)}
+                  </p>
                 </div>
               )}
 
@@ -172,9 +155,7 @@ const Entry = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     setErrorMessage("");
-                    dispatch(userSlice.actions.resetError());
                     setReg(!reg);
-                    setIsAuth(false);
                   }}
                 >
                   {reg ? "Авторизироваться" : "Зарегистрироваться"}
