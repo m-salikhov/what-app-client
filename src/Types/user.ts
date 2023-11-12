@@ -36,3 +36,13 @@ export interface FormUser {
   password: string;
   passRepeat: string;
 }
+
+export interface Result {
+  id: string;
+  userId: string;
+  date: string;
+  tournamentId: number;
+  title: string;
+  tournamentLength: number;
+  resultNumber: number;
+}

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { routes } from "../constants";
-import { FormUser, UserAuth, UserType } from "../Types/user";
+import { FormUser, Result, UserAuth, UserType } from "../Types/user";
+import { TournamentShortType } from "../Types/tournament";
 
 const baseUrl = "https://andvarif.store";
 
@@ -30,6 +31,12 @@ export const userAPI = createApi({
         body,
       }),
     }),
+    tournamentsAllByUploader: build.query<TournamentShortType[], string>({
+      query: (userID) => routes.tournamentsAllByUploader + userID,
+    }),
+    getUserResultShort: build.query<Result[], string>({
+      query: (userID) => routes.userResultShort + userID,
+    }),
   }),
 });
 
@@ -39,4 +46,6 @@ export const {
   useLazyGetUserLogoutQuery,
   useLoginMutation,
   useRegistrationMutation,
+  useTournamentsAllByUploaderQuery,
+  useGetUserResultShortQuery,
 } = userAPI;

@@ -16,7 +16,7 @@ export const routes = {
   tournamentsStats: "/tournaments/statistics",
   tournamentsAmountPages: "/tournaments/amountpages",
   tournamentsAllByUploader: "/tournaments/allbyuploader/",
-  userResultShort: "/users/userresultshort",
+  userResultShort: "/users/userresultshort/",
   userRegistration: "/users",
 } as const;
 

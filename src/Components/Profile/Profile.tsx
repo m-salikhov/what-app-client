@@ -6,38 +6,25 @@ import ChangePass from "./ChangePass";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./profile.scss";
 import { routes } from "../../constants";
-import { useGetUserLogfirstQuery } from "../../Store/userAPI";
-
-interface Result {
-  id: string;
-  userId: string;
-  date: string;
-  tournamentId: number;
-  title: string;
-  tournamentLength: number;
-  resultNumber: number;
-}
+import {
+  useGetUserLogfirstQuery,
+  useTournamentsAllByUploaderQuery,
+  useGetUserResultShortQuery,
+} from "../../Store/userAPI";
 
 const Profile = () => {
   useDocTitle("Профиль");
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+
   const [changePass, setChangePass] = useState(false);
-  const [tournaments, setTournaments] = useState([initTournamentShort]);
-  const [results, setResults] = useState<Result[]>([]);
-
-  useEffect(() => {
-    _axios
-      .get(`${routes.tournamentsAllByUploader}${currentUser?.id}`)
-      .then((res) => {
-        setTournaments(res.data);
-      });
-  }, [currentUser?.id]);
-
-  useEffect(() => {
-    _axios.post(routes.userResultShort, { id: currentUser?.id }).then((res) => {
-      setResults(res.data);
-    });
-  }, [currentUser?.id]);
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  if (currentUser) {
+  }
+  const { data: tournaments = [] } = useTournamentsAllByUploaderQuery(
+    currentUser?.id || ""
+  );
+  const { data: results = [] } = useGetUserResultShortQuery(
+    currentUser?.id || ""
+  );
 
   return (
     <main className="pr">
