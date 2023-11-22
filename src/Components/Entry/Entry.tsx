@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAppDispatch } from "../../Hooks/redux";
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { FormUser } from "../../Types/user";
 import ModalReg from "./ModalReg";
 import { initFormUser } from "../../Helpers/initValues";
@@ -25,10 +25,12 @@ const Entry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reg, setReg] = useState(false);
 
-  const [login, { isSuccess: loginSuccess, error: errorLogin }] =
-    useLoginMutation({
-      fixedCacheKey: "login",
-    });
+  const [
+    login,
+    { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState },
+  ] = useLoginMutation({
+    fixedCacheKey: "login",
+  });
   const [registration, { error: errorReg }] = useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
@@ -69,12 +71,6 @@ const Entry = () => {
       [e.target.name]: e.target.value,
     });
   };
-
-  useEffect(() => {
-    return () => {
-      setErrorMessage("");
-    };
-  }, []);
 
   if (loginSuccess) {
     return <Navigate to="/" replace />;
@@ -154,6 +150,7 @@ const Entry = () => {
                 <button
                   onClick={(e) => {
                     e.preventDefault();
+                    resetLoginState();
                     setErrorMessage("");
                     setReg(!reg);
                   }}

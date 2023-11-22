@@ -9,17 +9,18 @@ export const routes = {
   tournamentsCreateByLink: "/tournaments/createbylink/",
   tournamentsAllShort: `/tournaments/allshort/`,
   tournamentsLastShort: "/tournaments/last/",
-  authLogin: "/auth/login/",
-  authLogFirst: "/auth/logfirst/",
-  authLogout: "/auth/logout",
   tournamentsRandom: "/tournaments/random/",
   tournamentsStats: "/tournaments/statistics",
   tournamentsAmountPages: "/tournaments/amountpages",
   tournamentsAllByUploader: "/tournaments/allbyuploader/",
+  authLogin: "/auth/login/",
+  authLogFirst: "/auth/logfirst/",
+  authLogout: "/auth/logout",
   userResultShort: "/users/userresultshort/",
   userRegistration: "/users",
+  userResultPost: "/users/userresult",
 } as const;
 
 export const amountRandomQuestions = 4;
 
-export const baseServerURL = "https://andvarif.store/";
+export const baseUrl = "https://andvarif.store/";

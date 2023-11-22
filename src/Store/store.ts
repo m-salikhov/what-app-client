@@ -1,12 +1,10 @@
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./reducers/UserSlice";
 import { tournamentAPI } from "./tournamentAPI";
 import playModeReducer from "./reducers/PlayModeSlice";
 import { userAPI } from "./userAPI";
 
 const rootReducer = combineReducers({
-  userReducer,
   playModeReducer,
   [tournamentAPI.reducerPath]: tournamentAPI.reducer,
   [userAPI.reducerPath]: userAPI.reducer,

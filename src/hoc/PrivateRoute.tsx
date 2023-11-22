@@ -1,15 +1,15 @@
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { useAppSelector } from "../Hooks/redux";
+import { useGetUserLogfirstQuery } from "../Store/userAPI";
 
 interface Props {
   children: ReactNode;
 }
 
 const PrivateRoute = ({ children }: Props) => {
-  const { currentUser } = useAppSelector((state) => state.userReducer);
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
 
-  if (!currentUser.id) {
+  if (!currentUser) {
     return <Navigate to="/entry" />;
   }
   return <>{children}</>;

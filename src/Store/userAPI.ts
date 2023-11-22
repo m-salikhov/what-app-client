@@ -1,22 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { routes } from "../constants";
+import { baseUrl, routes } from "../constants";
 import { FormUser, Result, UserAuth, UserType } from "../Types/user";
 import { TournamentShortType } from "../Types/tournament";
-
-const baseUrl = "https://andvarif.store";
 
 export const userAPI = createApi({
   reducerPath: "userAPI",
   baseQuery: fetchBaseQuery({ baseUrl, credentials: "include" }),
-
+  tagTypes: ["result"],
+  keepUnusedDataFor: 86400,
   endpoints: (build) => ({
     getUserLogfirst: build.query<UserType, undefined>({
       query: () => routes.authLogFirst,
-      keepUnusedDataFor: 86400,
     }),
+
     getUserLogout: build.query<{ message: string }, undefined>({
       query: () => routes.authLogout,
     }),
+
     login: build.mutation<UserType, UserAuth>({
       query: (body) => ({
         url: routes.authLogin,
@@ -24,6 +24,7 @@ export const userAPI = createApi({
         body,
       }),
     }),
+
     registration: build.mutation<UserType, FormUser>({
       query: (body) => ({
         url: routes.userRegistration,
@@ -31,11 +32,23 @@ export const userAPI = createApi({
         body,
       }),
     }),
+
     tournamentsAllByUploader: build.query<TournamentShortType[], string>({
       query: (userID) => routes.tournamentsAllByUploader + userID,
     }),
+
     getUserResultShort: build.query<Result[], string>({
       query: (userID) => routes.userResultShort + userID,
+      providesTags: ["result"],
+    }),
+
+    postUserResult: build.mutation<Result, Omit<Result, "id" | "date">>({
+      query: (body) => ({
+        url: routes.userResultPost,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["result"],
     }),
   }),
 });
@@ -48,4 +61,5 @@ export const {
   useRegistrationMutation,
   useTournamentsAllByUploaderQuery,
   useGetUserResultShortQuery,
+  usePostUserResultMutation,
 } = userAPI;

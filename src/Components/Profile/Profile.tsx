@@ -1,11 +1,8 @@
-import { useEffect, useState } from "react";
-import { _axios } from "../../Helpers/_axios";
+import { useState } from "react";
 import { getDate } from "../../Helpers/getDate";
-import { initTournamentShort } from "../../Helpers/initValues";
 import ChangePass from "./ChangePass";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./profile.scss";
-import { routes } from "../../constants";
 import {
   useGetUserLogfirstQuery,
   useTournamentsAllByUploaderQuery,
@@ -17,8 +14,6 @@ const Profile = () => {
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  if (currentUser) {
-  }
   const { data: tournaments = [] } = useTournamentsAllByUploaderQuery(
     currentUser?.id || ""
   );

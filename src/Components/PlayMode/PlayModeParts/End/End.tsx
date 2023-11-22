@@ -1,26 +1,28 @@
-import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { _axios } from "../../../../Helpers/_axios";
 import { useAppSelector } from "../../../../Hooks/redux";
 import Button from "../../../Elements/Button/Button";
 import QuestionPlane from "../../../Elements/Question/QuestionPlane";
 import ResBlock from "./ResBlock";
 import TourTable from "./TourTable";
+import {
+  useGetUserLogfirstQuery,
+  usePostUserResultMutation,
+} from "../../../../Store/userAPI";
+import extractServerErrorMessage from "../../../../Helpers/extractServerErrorMessage";
 
 const End = () => {
-  const [selectedQ, setSelectedQ] = useState(0);
-  const [isResultSaved, setIsResultSaved] = useState(false);
   const navigate = useNavigate();
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
+  const [selectedQ, setSelectedQ] = useState(0);
   const { t, qCounter, result, answeredCount } = useAppSelector(
     (state) => state.playModeReducer
   );
-  const { currentUser } = useAppSelector((state) => state.userReducer);
-
   const endedTourNumber = t.questions[qCounter].tourNumber;
 
-  const renderResTables = () => {
+  const renderResTables = (endedTourNumber: number) => {
     let resTables = [];
     for (let i = 1; i <= endedTourNumber; i++) {
       resTables.push(
@@ -35,8 +37,8 @@ const End = () => {
   };
 
   useEffect(() => {
-    if (currentUser.id) {
-      const data = {
+    if (currentUser) {
+      const userResult = {
         userId: currentUser.id,
         title: t.title,
         tournamentId: t.id,
@@ -44,30 +46,31 @@ const End = () => {
         resultNumber: answeredCount,
         result,
       };
-
-      _axios
-        .post("/users/userresult", data)
-        .then((res) => {
-          if (res.status === 201) {
-            setIsResultSaved(true);
-          }
-        })
-        .catch((e: AxiosError) => console.log("e", e));
+      saveUserResult(userResult)
+        .unwrap()
+        .then((data) => console.log(data));
     }
   }, [
     t.questionsQuantity,
     t.id,
     t.title,
-    currentUser.id,
+    currentUser,
     result,
     answeredCount,
+    saveUserResult,
   ]);
 
   return (
     <div className="endt">
       <ResBlock />
-      {renderResTables()}
-      {isResultSaved && <p>Ваш результат доступен в Профиле</p>}
+      {renderResTables(endedTourNumber)}
+      {isSuccess && <p>Ваш результат доступен в Профиле</p>}
+      {error && (
+        <p>
+          {extractServerErrorMessage(error) ||
+            "Ошибка при сохранении результата"}
+        </p>
+      )}
       <Button title="К выбору турнира" onClick={() => navigate("/playmode")} />
       {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
     </div>

@@ -1,22 +1,21 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { TournamentShortType, TournamentType } from "../Types/tournament";
 import { QuestionType } from "../Types/question";
-import { baseServerURL, guest, routes } from "../constants";
+import { baseUrl, guest, routes } from "../constants";
 
 export const tournamentAPI = createApi({
   reducerPath: "tournamentAPI",
   tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
-  baseQuery: fetchBaseQuery({ baseUrl: baseServerURL }),
+  baseQuery: fetchBaseQuery({ baseUrl }),
+  keepUnusedDataFor: 86400,
 
   endpoints: (build) => ({
     getTornaments: build.query<TournamentType, string>({
       query: (id: string) => `/tournaments/${id}`,
-      keepUnusedDataFor: 600,
     }),
 
     getTournamentsLastShort: build.query<TournamentShortType[], number>({
       query: (count: number) => routes.tournamentsLastShort + count,
-      keepUnusedDataFor: 600,
       providesTags: ["lastTournamentsShort"],
     }),
 
@@ -27,13 +26,11 @@ export const tournamentAPI = createApi({
 
     getStats: build.query<{ tc: number; qc: number }, undefined>({
       query: () => routes.tournamentsStats,
-      keepUnusedDataFor: 600,
       providesTags: ["stats"],
     }),
 
     getTournamentsAmountPages: build.query<number, undefined>({
       query: () => routes.tournamentsAmountPages,
-      keepUnusedDataFor: 6000,
       providesTags: ["stats"],
     }),
 
@@ -47,7 +44,6 @@ export const tournamentAPI = createApi({
             ]
           : ["shorts"];
       },
-      keepUnusedDataFor: 600,
     }),
 
     parseLink: build.mutation<TournamentType, { link: string }>({
