@@ -11,21 +11,16 @@ type FieldName = keyof Omit<TournamentShortType, "id">;
 
 function filter(tournaments: TournamentShortType[], searchString: string) {
   if (searchString.length > 1) {
-    return tournaments.filter((v) =>
-      v.title.toLowerCase().includes(searchString.toLowerCase())
-    );
+    return tournaments.filter((t) => t.title.toLowerCase().includes(searchString.toLowerCase()));
   } else return tournaments;
 }
 
 const All = () => {
   useDocTitle("Все турниры");
 
-  const { data: tsShorts = [], isSuccess } =
-    useGetTornamentsShortQuery(undefined);
+  const { data: tsShorts = [], isSuccess } = useGetTornamentsShortQuery(undefined);
 
-  const [tournamentsShorts, setTournamentsShorts] = useState<
-    TournamentShortType[]
-  >([]);
+  const [tournamentsShorts, setTournamentsShorts] = useState<TournamentShortType[]>([]);
 
   const [field, setField] = useState("");
   const [search, setSearch] = useState("");

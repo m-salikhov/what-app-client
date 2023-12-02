@@ -26,15 +26,10 @@ const initialState: PlayModeState = {
   answeredCount: 0,
 };
 
-export const getTournamentById = createAsyncThunk(
-  "t/fetchById",
-  async (id: string) => {
-    const t = await _axios
-      .get<TournamentType>(`${routes.tournaments}${id}`)
-      .then((res) => res.data);
-    return t;
-  }
-);
+export const getTournamentById = createAsyncThunk("t/fetchById", async (id: string) => {
+  const t = await _axios.get<TournamentType>(`${routes.tournaments}${id}`).then((res) => res.data);
+  return t;
+});
 
 export const playModeSlice = createSlice({
   name: "playModeSlice",

@@ -10,11 +10,7 @@ const Footer = () => {
         <a href="https://t.me/DeFrag3" target="_blank" rel="noreferrer">
           <img src={tg} alt="телеграмм" />
         </a>
-        <a
-          href="https://github.com/m-salikhov"
-          target="_blank"
-          rel="noreferrer"
-        >
+        <a href="https://github.com/m-salikhov" target="_blank" rel="noreferrer">
           <img src={gh} alt="гитхаб" />
         </a>
         <div>

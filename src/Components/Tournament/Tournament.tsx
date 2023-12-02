@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useParams } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import Question from "../Elements/Question/Question";
@@ -13,19 +13,11 @@ import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 
 const Tournament = () => {
   const { id = "" } = useParams();
-  const {
-    data: t = initTournament,
-    isFetching,
-    error,
-  } = useGetTornamentsQuery(id);
+  const { data: t = initTournament, isFetching, error } = useGetTornamentsQuery(id);
   const ref = useRef(null);
   const tourAnchors = getTourAnchors(t);
 
   useDocTitle(t.title);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
 
   if (error) {
     return (
@@ -35,6 +27,8 @@ const Tournament = () => {
       </main>
     );
   }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <main className="tournament__container">
@@ -67,10 +61,7 @@ const Tournament = () => {
           <div className="back">
             <Back />
           </div>
-          <div
-            className="tournament__content_tours"
-            onClick={(e) => scroll(e, ref.current, tourAnchors)}
-          >
+          <div className="tournament__content_tours" onClick={(e) => scroll(e, ref.current, tourAnchors)}>
             {getToursParagraphs(t.tours)}
           </div>
         </div>

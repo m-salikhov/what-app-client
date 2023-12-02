@@ -9,11 +9,7 @@ import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./entry.scss";
 import { Tooltip } from "react-tooltip";
 import checkFormFields from "./helpers/checkFormFields";
-import {
-  useLoginMutation,
-  useRegistrationMutation,
-  userAPI,
-} from "../../Store/userAPI";
+import { useLoginMutation, useRegistrationMutation, userAPI } from "../../Store/userAPI";
 import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 
 const Entry = () => {
@@ -25,10 +21,7 @@ const Entry = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reg, setReg] = useState(false);
 
-  const [
-    login,
-    { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState },
-  ] = useLoginMutation({
+  const [login, { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState }] = useLoginMutation({
     fixedCacheKey: "login",
   });
   const [registration, { error: errorReg }] = useRegistrationMutation();
@@ -47,22 +40,14 @@ const Entry = () => {
     if (reg) {
       await registration(formUser)
         .unwrap()
-        .then((data) =>
-          dispatch(
-            userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)
-          )
-        );
+        .then((data) => dispatch(userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)));
       setIsModalOpen(true);
       return;
     }
 
     await login({ email: formUser.email, password: formUser.password })
       .unwrap()
-      .then((data) =>
-        dispatch(
-          userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)
-        )
-      );
+      .then((data) => dispatch(userAPI.util.upsertQueryData("getUserLogfirst", undefined, data)));
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -94,25 +79,13 @@ const Entry = () => {
                 data-tooltip-html="Можно зарегистрировать или зайти под тестовым аккаунтом<br /> почта: test@gmail.com, пароль: test"
               >
                 <h2>Почта</h2>
-                <input
-                  type="email"
-                  onChange={onChange}
-                  name="email"
-                  autoComplete="on"
-                  placeholder="email"
-                />
+                <input type="email" onChange={onChange} name="email" autoComplete="on" placeholder="email" />
               </label>
               {!reg && <Tooltip anchorSelect="#tooltip-mail" place="bottom" />}
 
               <label className={reg ? "entry__input" : "entry__input reg"}>
                 <h2>Псевдоним</h2>
-                <input
-                  type="text"
-                  onChange={onChange}
-                  name="username"
-                  autoComplete="off"
-                  placeholder="username"
-                />
+                <input type="text" onChange={onChange} name="username" autoComplete="off" placeholder="username" />
               </label>
 
               <label className="entry__input">
@@ -138,10 +111,7 @@ const Entry = () => {
               {(errorMessage || errorLogin || errorReg) && (
                 <div className="entry__error">
                   <div className="entry__error--block"></div>
-                  <p>
-                    {errorMessage ||
-                      extractServerErrorMessage(errorLogin || errorReg)}
-                  </p>
+                  <p>{errorMessage || extractServerErrorMessage(errorLogin || errorReg)}</p>
                 </div>
               )}
 

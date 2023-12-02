@@ -12,8 +12,7 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getMidlleware) =>
-    getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware),
+  middleware: (getMidlleware) => getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

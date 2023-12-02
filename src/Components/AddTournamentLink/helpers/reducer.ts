@@ -6,12 +6,7 @@ export interface Action {
   payload: string | number | TournamentType;
 }
 
-type QuestionTypePayload =
-  | "regular"
-  | "double"
-  | "triple"
-  | "other"
-  | "outside";
+type QuestionTypePayload = "regular" | "double" | "triple" | "other" | "outside";
 
 export const actionTypes = {
   loaded: "loaded",

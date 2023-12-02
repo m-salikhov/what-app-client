@@ -1,44 +1,38 @@
 import { useReducer, useState } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import Button from "../Elements/Button/Button";
-import QuestionPlane from "../Elements/Question/QuestionPlane";
 import { useDocTitle } from "../../Hooks/useDocTitle";
-import { getDate } from "../../Helpers/getDate";
 import { initTournament } from "../../Helpers/initValues";
 import reducer from "./helpers/reducer";
 import EditForm from "./EditForm";
 import checkTournament from "../../Helpers/checkTournament";
 import Instruction from "./Instruction";
-import {
-  useAddTournamentMutation,
-  useParseLinkMutation,
-} from "../../Store/tournamentAPI";
+import { useAddTournamentMutation, useParseLinkMutation } from "../../Store/tournamentAPI";
 import removeQuestionsID from "./helpers/removeQuestionsID";
 import "./addTournamentLink.scss";
 import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
 import { useGetUserLogfirstQuery } from "../../Store/userAPI";
 import { guest } from "../../constants";
+import ParsedTournament from "./ParsedTournament";
 
 const AddTournamentLink = () => {
   useDocTitle("Добавить турнир");
 
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-
   const [link, setLink] = useState("");
-  const [showT, setShowT] = useState(false);
   const [message, setMessage] = useState("");
+  const [showT, setShowT] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [errorsFilling, setErrorsFilling] = useState<string[]>([]);
+  const [errorsFilling, setErrorsFilling] = useState<string[] | null>(null);
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
-  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] =
-    useAddTournamentMutation();
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
   const handleAddTournament = async () => {
     setMessage("");
-    setErrorsFilling([]);
+    setErrorsFilling(null);
 
     const errors = checkTournament(t);
     if (errors) {
@@ -57,7 +51,7 @@ const AddTournamentLink = () => {
 
   const handleParseLink = async () => {
     setMessage("");
-    setErrorsFilling([]);
+    setErrorsFilling(null);
     setShowT(false);
 
     await parseT({ link })
@@ -71,6 +65,8 @@ const AddTournamentLink = () => {
   if (edit) {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
+
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <main className="addlink_container">
@@ -86,92 +82,38 @@ const AddTournamentLink = () => {
             }
           }}
         />
-        <Button
-          title="Открыть"
-          onClick={handleParseLink}
-          disabled={isLoadingAdd || isLoading}
-        />
+        <Button title="Открыть" onClick={handleParseLink} disabled={isLoadingAdd || isLoading} />
       </div>
 
-      {errorsFilling.length > 0 &&
-        errorsFilling.map((e, i) => (
+      {errorsFilling &&
+        errorsFilling.map((error, i) => (
           <p className="addlink__errorsFilling" key={i}>
-            {e}
+            {error}
           </p>
         ))}
 
       {message && <p className="addlink__message">{message}</p>}
+
       {(errorParse || errorAdd) && (
-        <p className="addlink__message">
-          {extractServerErrorMessage(errorParse || errorAdd)}
-        </p>
+        <p className="addlink__message">{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
       {(isLoading || isLoadingAdd) && (
         <div className="spinner">
           {" "}
-          <RotatingLines
-            strokeColor="#61a199e6"
-            strokeWidth="3"
-            animationDuration="0.75"
-            width="80"
-            visible={true}
-          />
+          <RotatingLines strokeColor="#61a199e6" strokeWidth="3" animationDuration="0.75" width="80" visible={true} />
         </div>
       )}
 
-      {!showT && <Instruction />}
-
-      {showT && (
-        <>
-          <div className="tournament__header">
-            <div className="tournament__header-t">
-              <h3>
-                Название: <span>{t.title}</span>
-              </h3>
-            </div>
-            <div className="tournament__header-m">
-              <h3>
-                Дата отыгрыша: <span>{t.date ? getDate(t.date) : null}</span>
-              </h3>
-              <h3>
-                Туры: <span>{t.tours}</span>
-              </h3>
-              <h3>
-                Вопросы: <span>{t.questionsQuantity}</span>
-              </h3>
-            </div>
-            <h3>
-              Редакция:{" "}
-              {t.editors.map((v, i) => (
-                <span key={i}>
-                  {v}
-                  {i < t.editors.length - 1 ? "," : null}{" "}
-                </span>
-              ))}
-            </h3>
-          </div>
-          <div className="addlink__buttons">
-            <Button
-              title={edit ? "Закончить редактирование" : "Редактировать турнир"}
-              onClick={() => {
-                setEdit(!edit);
-                setErrorsFilling([]);
-              }}
-            ></Button>
-            <Button
-              title="Добавить в базу"
-              onClick={handleAddTournament}
-            ></Button>
-          </div>
-          <div className="tournament__content">
-            {t.questions
-              .filter((q) => q.qNumber !== -1)
-              .map((v) => (
-                <QuestionPlane q={v} key={v.id} />
-              ))}
-          </div>
-        </>
+      {showT ? (
+        <ParsedTournament
+          t={t}
+          handleAddTournament={handleAddTournament}
+          setEdit={setEdit}
+          setErrorsFilling={setErrorsFilling}
+        />
+      ) : (
+        <Instruction />
       )}
     </main>
   );

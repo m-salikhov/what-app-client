@@ -14,12 +14,8 @@ const Profile = () => {
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  const { data: tournaments = [] } = useTournamentsAllByUploaderQuery(
-    currentUser?.id || ""
-  );
-  const { data: results = [] } = useGetUserResultShortQuery(
-    currentUser?.id || ""
-  );
+  const { data: tournaments = [] } = useTournamentsAllByUploaderQuery(currentUser?.id || "");
+  const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id || "");
 
   return (
     <main className="pr">
@@ -41,10 +37,7 @@ const Profile = () => {
           <p>{currentUser?.role}</p>
         </div>
         {changePass ? (
-          <ChangePass
-            cancelChangePass={() => setChangePass(false)}
-            id={currentUser?.id}
-          />
+          <ChangePass cancelChangePass={() => setChangePass(false)} id={currentUser?.id} />
         ) : (
           <button type="button" onClick={() => setChangePass(true)}>
             Изменить пароль

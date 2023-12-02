@@ -6,8 +6,7 @@ const Stats = () => {
   return (
     <div className="main__stats">
       <p>
-        Всего турниров <strong>{stats?.tc}</strong>, вопросов{" "}
-        <strong>{stats?.qc}</strong>
+        Всего турниров <strong>{stats?.tc}</strong>, вопросов <strong>{stats?.qc}</strong>
       </p>
     </div>
   );

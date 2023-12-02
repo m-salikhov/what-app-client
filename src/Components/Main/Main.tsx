@@ -17,11 +17,7 @@ const Main = () => {
 
   const [isRandomRefetch, setIsRandomRefetch] = useState(false);
 
-  const {
-    data: randomQuestions = [],
-    refetch,
-    isLoading,
-  } = useGetRandomQuery(amountRandomQuestions);
+  const { data: randomQuestions = [], refetch, isLoading } = useGetRandomQuery(amountRandomQuestions);
 
   return (
     <main>
@@ -40,9 +36,7 @@ const Main = () => {
               <h2>Случайные вопросы</h2>
               <div>
                 <img
-                  className={
-                    isRandomRefetch ? "refresh__arrow" : "refresh__arrow r"
-                  }
+                  className={isRandomRefetch ? "refresh__arrow" : "refresh__arrow r"}
                   src={refreshIcon}
                   alt="обновить случайные"
                 />
@@ -51,10 +45,7 @@ const Main = () => {
           </div>
 
           {isLoading && <SkeletonQuestion count={amountRandomQuestions} />}
-          {!isLoading &&
-            randomQuestions.map((v) => (
-              <Question q={v} random={true} key={v.id} />
-            ))}
+          {!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
         </div>
         <div className="main-content__right">
           {" "}

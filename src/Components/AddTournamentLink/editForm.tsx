@@ -19,10 +19,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
         }
       }}
     >
-      <Button
-        title="Закончить редактирование"
-        onClick={() => setEdit(false)}
-      ></Button>
+      <Button title="Закончить редактирование" onClick={() => setEdit(false)}></Button>
       <div className="edit-t">
         <div className="edit-t__top">
           {" "}
@@ -31,9 +28,7 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
             <input
               placeholder="Название турнира"
               type="text"
-              onChange={(e) =>
-                dispatch({ type: actionTypes.title, payload: e.target.value })
-              }
+              onChange={(e) => dispatch({ type: actionTypes.title, payload: e.target.value })}
               value={t.title}
             />
           </label>

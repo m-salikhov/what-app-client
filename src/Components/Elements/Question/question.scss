@@ -25,10 +25,11 @@
   }
   .question__add {
     padding-top: 0.5rem;
-    p {
+    & > p {
       padding-left: 0.5rem;
+      color: rgb(87, 85, 85);
     }
-    .content {
+    & div {
       display: flex;
       justify-content: center;
       padding: 1rem 0rem;
@@ -44,6 +45,7 @@
     padding: 0.5rem;
     p {
       padding: 0.25rem 0;
+      white-space: pre-line;
     }
   }
 

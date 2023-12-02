@@ -3,11 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Hooks/redux";
 import owlGreen from "./owlGreen.svg";
 import "./header.scss";
-import {
-  useGetUserLogfirstQuery,
-  useLazyGetUserLogoutQuery,
-  userAPI,
-} from "../../Store/userAPI";
+import { useGetUserLogfirstQuery, useLazyGetUserLogoutQuery, userAPI } from "../../Store/userAPI";
 
 const Header = () => {
   const [openMobMenu, setOpenMobMenu] = useState(false);
@@ -26,10 +22,8 @@ const Header = () => {
     const { innerWidth } = window;
 
     if (innerWidth > 1050) return;
-    if (innerWidth < 1050 && !openMobMenu)
-      document.body.style.overflow = "hidden";
-    if (innerWidth < 1050 && openMobMenu)
-      document.body.style.overflow = "visible";
+    if (innerWidth < 1050 && !openMobMenu) document.body.style.overflow = "hidden";
+    if (innerWidth < 1050 && openMobMenu) document.body.style.overflow = "visible";
 
     setOpenMobMenu(!openMobMenu);
   };
@@ -41,10 +35,7 @@ const Header = () => {
         <h2>База вопросов "Что? Где? Когда?"</h2>
       </div>
 
-      <nav
-        className={openMobMenu ? "mob-menu" : undefined}
-        onClick={handleMobMenu}
-      >
+      <nav className={openMobMenu ? "mob-menu" : undefined} onClick={handleMobMenu}>
         <ul>
           <li>
             <Link to="/about">О сайте</Link>
@@ -83,10 +74,7 @@ const Header = () => {
           )}
         </ul>
       </nav>
-      <div
-        className={openMobMenu ? "mob-btn open" : "mob-btn"}
-        onClick={handleMobMenu}
-      >
+      <div className={openMobMenu ? "mob-btn open" : "mob-btn"} onClick={handleMobMenu}>
         <span></span>
         <span></span>
         <span></span>

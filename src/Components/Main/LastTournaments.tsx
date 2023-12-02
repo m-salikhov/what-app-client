@@ -3,20 +3,14 @@ import { Link } from "react-router-dom";
 import { getDate } from "../../Helpers/getDate";
 import back from "./back.svg";
 import next from "./next.svg";
-import {
-  useGetTournamentsAmountPagesQuery,
-  useGetTournamentsLastShortQuery,
-} from "../../Store/tournamentAPI";
+import { useGetTournamentsAmountPagesQuery, useGetTournamentsLastShortQuery } from "../../Store/tournamentAPI";
 
 const LastTournaments = () => {
   const [pageNumber, setPageNumber] = useState(0);
 
-  const { data: lastTenTournaments = [] } = useGetTournamentsLastShortQuery(
-    pageNumber * 10
-  );
+  const { data: lastTenTournaments = [] } = useGetTournamentsLastShortQuery(pageNumber * 10);
 
-  const { data: amountPages = 0 } =
-    useGetTournamentsAmountPagesQuery(undefined);
+  const { data: amountPages = 0 } = useGetTournamentsAmountPagesQuery(undefined);
 
   const changePageNumber = (e: MouseEvent<HTMLDivElement>) => {
     const { className } = e.currentTarget;

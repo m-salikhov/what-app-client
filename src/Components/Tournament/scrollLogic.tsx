@@ -27,11 +27,7 @@ export const getToursParagraphs = (tours: number) => {
   return arr;
 };
 
-export const scroll = (
-  e: MouseEvent<HTMLDivElement>,
-  nodeList: HTMLDivElement | null,
-  arrAnchors: number[]
-) => {
+export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement | null, arrAnchors: number[]) => {
   let id: number;
   if (e.target instanceof HTMLElement && e.target.id) {
     id = Number(e.target.id);

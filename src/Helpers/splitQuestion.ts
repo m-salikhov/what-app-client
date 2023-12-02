@@ -31,8 +31,7 @@ function splitQuestion(str: string): Partial<QuestionType> {
     alterAnswer = normStr.substring(iAlter + 7, iSource);
   }
 
-  const comment =
-    iComment > -1 ? normStr.substring(iComment + 13, iSource) : "";
+  const comment = iComment > -1 ? normStr.substring(iComment + 13, iSource) : "";
 
   const author = iAuthor > -1 ? normStr.substring(iAuthor + 7) : "";
 

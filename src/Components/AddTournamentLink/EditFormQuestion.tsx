@@ -14,15 +14,11 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
     back: "Вернуть",
   } as const;
 
-  const [btnText, setBtnText] = useState<string>(
-    q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back
-  );
+  const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
 
   const removeQuestion = () => {
     setBtnText((prev) => {
-      return prev === btnTextOption.def
-        ? btnTextOption.back
-        : btnTextOption.def;
+      return prev === btnTextOption.def ? btnTextOption.back : btnTextOption.def;
     });
     dispatch({
       type: actionTypes.remove,

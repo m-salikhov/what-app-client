@@ -41,12 +41,7 @@ const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
     <form className="pr-pass">
       <label>
         <p>Новый пароль</p>
-        <input
-          type="password"
-          onChange={(e) => setNewPass(e.target.value)}
-          value={newPass}
-          autoComplete="off"
-        />
+        <input type="password" onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete="off" />
       </label>
       <label>
         <p>Повторите пароль</p>
