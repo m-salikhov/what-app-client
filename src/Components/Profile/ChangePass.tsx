@@ -1,15 +1,17 @@
 import { FormEvent, useState } from "react";
-import { _axios } from "../../Helpers/_axios";
+import { useChangePasswordMutation } from "../../Store/userAPI";
 
 interface ChangePassProp {
-  cancelChangePass: () => void;
-  id?: string;
+  setChangePass: (flag: boolean) => void;
+  id: string;
 }
 
-const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
+const ChangePass = ({ setChangePass, id }: ChangePassProp) => {
   const [newPass, setNewPass] = useState("");
   const [newPassRepeat, setNewPassRepeat] = useState("");
   const [message, setMessage] = useState("");
+
+  const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -20,10 +22,9 @@ const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
       setMessage("Пароль не совпадает");
       return;
     }
-    await _axios
-      .put<string>("/users", { newPass, id })
-      .then((res) => {
-        setMessage(res.data);
+
+    await changePassword({ newPass, id })
+      .then(() => {
         setNewPass("");
         setNewPassRepeat("");
       })
@@ -34,7 +35,7 @@ const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
     if (message) {
       setMessage("");
     }
-    cancelChangePass();
+    setChangePass(false);
   };
 
   return (
@@ -52,7 +53,8 @@ const ChangePass = ({ cancelChangePass, id }: ChangePassProp) => {
           autoComplete="off"
         />
       </label>
-      {message && <p className="pr-error">{message}</p>}
+      {(message || isError) && <p className="pr-error">{message}</p>}
+      {isSuccess && <p>{"Пароль успешно сохранён"}</p>}
       <div className="pr-pass__control">
         <button type="button" onClick={onCancel}>
           Закрыть

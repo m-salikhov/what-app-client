@@ -27,8 +27,16 @@ export const userAPI = createApi({
 
     registration: build.mutation<UserType, FormUser>({
       query: (body) => ({
-        url: routes.userRegistration,
+        url: routes.users,
         method: "POST",
+        body,
+      }),
+    }),
+
+    changePassword: build.mutation<string, { newPass: string; id: string }>({
+      query: (body) => ({
+        url: routes.users,
+        method: "PUT",
         body,
       }),
     }),
@@ -62,4 +70,5 @@ export const {
   useTournamentsAllByUploaderQuery,
   useGetUserResultShortQuery,
   usePostUserResultMutation,
+  useChangePasswordMutation,
 } = userAPI;

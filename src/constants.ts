@@ -17,7 +17,7 @@ export const routes = {
   authLogFirst: "/auth/logfirst/",
   authLogout: "/auth/logout",
   userResultShort: "/users/userresultshort/",
-  userRegistration: "/users",
+  users: "/users",
   userResultPost: "/users/userresult",
 } as const;
 

@@ -14,8 +14,8 @@ const Profile = () => {
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  const { data: tournaments = [] } = useTournamentsAllByUploaderQuery(currentUser?.id || "");
-  const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id || "");
+  const { data: tournaments } = useTournamentsAllByUploaderQuery(currentUser?.id || "");
+  const { data: results } = useGetUserResultShortQuery(currentUser?.id || "");
 
   return (
     <main className="pr">
@@ -36,8 +36,8 @@ const Profile = () => {
           <p>Статус</p>
           <p>{currentUser?.role}</p>
         </div>
-        {changePass ? (
-          <ChangePass cancelChangePass={() => setChangePass(false)} id={currentUser?.id} />
+        {changePass && currentUser ? (
+          <ChangePass setChangePass={setChangePass} id={currentUser.id} />
         ) : (
           <button type="button" onClick={() => setChangePass(true)}>
             Изменить пароль
@@ -45,7 +45,7 @@ const Profile = () => {
         )}
         <section className="pr-res">
           <p>Ваши результаты :</p>
-          {results.length > 0 ? (
+          {results ? (
             results.map((v) => {
               return (
                 <div key={v.id}>
@@ -60,7 +60,7 @@ const Profile = () => {
         </section>
         <section className="pr-ts">
           <p>Добавленные вами турниры:</p>
-          {tournaments.length > 0 ? (
+          {tournaments ? (
             tournaments.map((v) => {
               return <p key={v.id}>{v.title}</p>;
             })

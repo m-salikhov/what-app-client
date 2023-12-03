@@ -11,7 +11,6 @@
   }
 }
 .pr-wrapper {
-  display: inline-block;
   border: 3px solid #1b1b1b80;
   border-radius: 20px;
   padding: 1rem;
@@ -19,7 +18,7 @@
 
 .pr {
   text-align: center;
-  padding-top: 1rem;
+  padding: 1rem 20% 0rem;
   button {
     margin-top: 0.5rem;
     width: 12rem;
@@ -82,5 +81,11 @@
 @media (max-width: 500px) {
   .pr-wrapper > div {
     display: unset;
+  }
+}
+
+@media (max-width: 880px) {
+  .pr {
+    padding: 1rem 0% 0rem;
   }
 }
