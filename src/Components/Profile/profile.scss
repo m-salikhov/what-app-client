@@ -34,17 +34,36 @@
 }
 
 .pr-pass {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 0.5rem;
-  background-color: rgba(167, 173, 173, 0.2);
+  width: 50%;
+  padding: 20px;
+  background-color: white;
+  border: 2px solid black;
+  z-index: 10;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  p {
+    text-align: center;
+  }
+
   label {
-    margin: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+      border: 2px solid black;
+      padding: 2px 5px;
+    }
   }
   .pr-pass__control {
     display: flex;
     flex-direction: column;
     align-items: center;
+    & > :nth-child(1) {
+      margin: 10px 0px;
+    }
   }
   .pr-error {
     color: red;
@@ -88,4 +107,14 @@
   .pr {
     padding: 1rem 0% 0rem;
   }
+}
+
+.portal {
+  position: absolute;
+  height: 50px;
+  width: 200px;
+  background-color: aqua;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import { useChangePasswordMutation } from "../../Store/userAPI";
+import Button from "../Elements/Button/Button";
 
 interface ChangePassProp {
   setChangePass: (flag: boolean) => void;
@@ -14,6 +15,7 @@ const ChangePass = ({ setChangePass, id }: ChangePassProp) => {
   const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
+    console.log("sub");
     e.preventDefault();
     if (message) {
       setMessage("");
@@ -40,28 +42,26 @@ const ChangePass = ({ setChangePass, id }: ChangePassProp) => {
 
   return (
     <form className="pr-pass">
-      <label>
-        <p>Новый пароль</p>
-        <input type="password" onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete="off" />
-      </label>
-      <label>
-        <p>Повторите пароль</p>
-        <input
-          type="password"
-          onChange={(e) => setNewPassRepeat(e.target.value)}
-          value={newPassRepeat}
-          autoComplete="off"
-        />
-      </label>
-      {(message || isError) && <p className="pr-error">{message}</p>}
-      {isSuccess && <p>{"Пароль успешно сохранён"}</p>}
-      <div className="pr-pass__control">
-        <button type="button" onClick={onCancel}>
-          Закрыть
-        </button>
-        <button type="submit" onClick={onSubmit}>
-          Отправить
-        </button>
+      <div className="pr-pass-container">
+        <label>
+          <p>Новый пароль</p>
+          <input type="password" onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete="off" />
+        </label>
+        <label>
+          <p>Повторите пароль</p>
+          <input
+            type="password"
+            onChange={(e) => setNewPassRepeat(e.target.value)}
+            value={newPassRepeat}
+            autoComplete="off"
+          />
+        </label>
+        {(message || isError) && <p className="pr-error">{message}</p>}
+        {isSuccess && <p>{"Пароль успешно сохранён"}</p>}
+        <div className="pr-pass__control">
+          <Button title="Закрыть" onClick={onCancel} />
+          <Button title="Отправить" onSubmit={onSubmit} />
+        </div>
       </div>
     </form>
   );

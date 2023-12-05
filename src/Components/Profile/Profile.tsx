@@ -8,6 +8,8 @@ import {
   useTournamentsAllByUploaderQuery,
   useGetUserResultShortQuery,
 } from "../../Store/userAPI";
+import { createPortal } from "react-dom";
+import Button from "../Elements/Button/Button";
 
 const Profile = () => {
   useDocTitle("Профиль");
@@ -36,13 +38,17 @@ const Profile = () => {
           <p>Статус</p>
           <p>{currentUser?.role}</p>
         </div>
-        {changePass && currentUser ? (
-          <ChangePass setChangePass={setChangePass} id={currentUser.id} />
-        ) : (
-          <button type="button" onClick={() => setChangePass(true)}>
-            Изменить пароль
-          </button>
-        )}
+
+        {changePass &&
+          currentUser &&
+          createPortal(<ChangePass setChangePass={setChangePass} id={currentUser.id} />, document.body)}
+
+        <button type="button" onClick={() => setChangePass(true)}>
+          Изменить пароль
+        </button>
+
+        {/* <Button title="Изменить пароль" onClick={() => setChangePass(true)} /> */}
+
         <section className="pr-res">
           <p>Ваши результаты :</p>
           {results ? (
