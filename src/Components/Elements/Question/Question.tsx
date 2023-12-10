@@ -27,7 +27,7 @@ const Question = ({ q, random }: Props) => {
       </div>
 
       <div className="ans__arrow" onClick={() => setShowAnswer(!showAnswer)}>
-        <h4>{showAnswer ? "Свернуть" : "Ответ"}</h4>
+        <h4>Ответ</h4>
         <AiOutlineDown className={showAnswer ? "test__o" : "test__c"} size={"30px"} />
       </div>
       <div className={showAnswer ? "ans open" : "ans close"}>

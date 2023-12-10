@@ -41,12 +41,12 @@ const LastTournaments = () => {
       <div className="tournaments__footer">
         <div className="back" onClick={changePageNumber}>
           {" "}
-          <img src={back} alt="обновить случайные" />
+          <img src={back} alt="предыдущая страница списка турниров" />
         </div>
         <p>{pageNumber + 1}</p>
         <div className="next" onClick={changePageNumber}>
           {" "}
-          <img src={next} alt="обновить случайные" />
+          <img src={next} alt="предыдущая страница списка турниров" />
         </div>
       </div>
     </>
