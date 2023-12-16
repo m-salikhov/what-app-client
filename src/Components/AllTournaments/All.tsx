@@ -1,46 +1,33 @@
-import { ChangeEvent, MouseEvent, useState } from "react";
+import { ChangeEvent, MouseEvent, useRef, useState } from "react";
 import { TournamentShortType } from "../../Types/tournament";
 import LineAll from "./LineAll";
-import { sortFunction } from "./sortFunction";
+import { sortFunction } from "./helpers/sortFunction";
 import chart from "./bar_chart.svg";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./all.scss";
-import { useGetTornamentsShortQuery } from "../../Store/tournamentAPI";
+import useTournamentsShort from "./hooks/useTournamentsShorts";
+import filterTournamentsShort from "./helpers/filterTournamentsShort";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
-
-function filter(tournaments: TournamentShortType[], searchString: string) {
-  if (searchString.length > 1) {
-    return tournaments.filter((t) => t.title.toLowerCase().includes(searchString.toLowerCase()));
-  } else return tournaments;
-}
 
 const All = () => {
   useDocTitle("Все турниры");
 
-  const { data: tsShorts = [], isSuccess } = useGetTornamentsShortQuery(undefined);
-
-  const [tournamentsShorts, setTournamentsShorts] = useState<TournamentShortType[]>([]);
-
-  const [field, setField] = useState("");
+  const { setTournamentsShorts, tournamentsShorts } = useTournamentsShort();
+  const field = useRef("");
   const [search, setSearch] = useState("");
 
-  function sort(e: MouseEvent<HTMLDivElement>) {
+  function handleSort(e: MouseEvent<HTMLDivElement>) {
     const className = e.currentTarget.className as FieldName;
-    if (field === className) {
+    if (field.current === className) {
       setTournamentsShorts((prev) => [...prev.reverse()]);
     } else {
       setTournamentsShorts((prev) => sortFunction(prev, className));
-      setField(className);
+      field.current = className;
     }
   }
-
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
-  }
-
-  if (isSuccess && tsShorts.length !== tournamentsShorts.length) {
-    setTournamentsShorts([...tsShorts].reverse());
   }
 
   return (
@@ -54,43 +41,43 @@ const All = () => {
           <div className="table__header_t">№</div>
           <div className="table__header_t">
             Название{" "}
-            <div className="title" onClick={sort}>
+            <div className="title" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Дата{" "}
-            <div className="date" onClick={sort}>
+            <div className="date" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Вопросы{" "}
-            <div className="questionsQuantity" onClick={sort}>
+            <div className="questionsQuantity" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Туры{" "}
-            <div className="tours" onClick={sort}>
+            <div className="tours" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Добавлен{" "}
-            <div className="dateUpload" onClick={sort}>
+            <div className="dateUpload" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
           <div className="table__header_t">
             Добавил{" "}
-            <div className="uploader" onClick={sort}>
+            <div className="uploader" onClick={handleSort}>
               <img src={chart} alt="сортировать" />
             </div>{" "}
           </div>
         </div>
         <div className="table__body">
-          {filter(tournamentsShorts, search).map((v, i) => (
+          {filterTournamentsShort(tournamentsShorts, search).map((v, i) => (
             <LineAll item={v} index={i} key={v.id} />
           ))}
         </div>

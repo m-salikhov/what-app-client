@@ -16,6 +16,7 @@ $font-stack: "Rubik-Regular", system-ui, Arial, Helvetica;
 body {
   font-family: $font-stack;
   background-color: $mainBGcolor;
+  -webkit-tap-highlight-color: transparent;
 }
 p {
   font-size: 1.1rem;

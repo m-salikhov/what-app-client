@@ -1,4 +1,4 @@
-import { TournamentShortType } from "../../Types/tournament";
+import { TournamentShortType } from "../../../Types/tournament";
 
 type FieldName = keyof Omit<TournamentShortType, "id">;
 
