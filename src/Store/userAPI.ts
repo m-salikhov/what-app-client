@@ -41,10 +41,6 @@ export const userAPI = createApi({
       }),
     }),
 
-    tournamentsAllByUploader: build.query<TournamentShortType[], string>({
-      query: (userID) => routes.tournamentsAllByUploader + userID,
-    }),
-
     getUserResultShort: build.query<Result[], string>({
       query: (userID) => routes.userResultShort + userID,
       providesTags: ["result"],
@@ -67,7 +63,6 @@ export const {
   useLazyGetUserLogoutQuery,
   useLoginMutation,
   useRegistrationMutation,
-  useTournamentsAllByUploaderQuery,
   useGetUserResultShortQuery,
   usePostUserResultMutation,
   useChangePasswordMutation,

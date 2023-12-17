@@ -58,6 +58,11 @@ export const tournamentAPI = createApi({
       }),
       invalidatesTags: ["shorts", "stats", "lastTournamentsShort"],
     }),
+
+    getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
+      query: (userID) => routes.tournamentsAllByUploader + userID,
+      providesTags: ["shorts"],
+    }),
   }),
 });
 
@@ -70,4 +75,5 @@ export const {
   useGetStatsQuery,
   useGetTournamentsLastShortQuery,
   useGetTournamentsAmountPagesQuery,
+  useGetTournamentsAllByUploaderQuery,
 } = tournamentAPI;

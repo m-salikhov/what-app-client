@@ -3,20 +3,17 @@ import { getDate } from "../../Helpers/getDate";
 import ChangePass from "./ChangePass";
 import { useDocTitle } from "../../Hooks/useDocTitle";
 import "./profile.scss";
-import {
-  useGetUserLogfirstQuery,
-  useTournamentsAllByUploaderQuery,
-  useGetUserResultShortQuery,
-} from "../../Store/userAPI";
+import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from "../../Store/userAPI";
 import { createPortal } from "react-dom";
 import Button from "../Elements/Button/Button";
+import { useGetTournamentsAllByUploaderQuery } from "../../Store/tournamentAPI";
 
 const Profile = () => {
   useDocTitle("Профиль");
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  const { data: tournaments } = useTournamentsAllByUploaderQuery(currentUser?.id || "");
+  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || "");
   const { data: results } = useGetUserResultShortQuery(currentUser?.id || "");
 
   return (

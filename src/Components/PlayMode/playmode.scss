@@ -58,9 +58,9 @@ main {
 .pmq {
   max-width: 700px;
   margin: 0 auto;
-  // text-align: center;
   p {
     font-size: 1.25rem;
+    white-space: pre-line;
   }
   h3 {
     text-align: center;
@@ -99,10 +99,11 @@ main {
   }
   .question__add {
     padding-top: 0.5rem;
-    p {
+    & > p {
       padding-left: 0.5rem;
+      color: rgb(87, 85, 85);
     }
-    .content {
+    & div {
       display: flex;
       justify-content: center;
       padding: 1rem 0rem;
