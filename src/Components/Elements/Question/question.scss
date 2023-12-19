@@ -90,7 +90,7 @@
   .test__o {
     color: rgb(109, 85, 98);
     transform: rotate(180deg);
-    transition: all 0.5s;
+    transition: all 0.25s;
   }
   .test__c {
     color: rgb(109, 85, 98);
@@ -119,6 +119,7 @@
   &.close {
     max-height: 0;
     overflow: hidden;
+    transition: max-height 0.25s;
   }
 }
 
