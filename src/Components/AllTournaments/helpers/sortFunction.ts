@@ -1,6 +1,6 @@
-import { TournamentShortType } from "../../../Types/tournament";
+import { TournamentShortType } from '../../../Types/tournament';
 
-type FieldName = keyof Omit<TournamentShortType, "id">;
+type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
 export const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
   return [

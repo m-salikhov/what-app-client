@@ -1,8 +1,8 @@
-import { TournamentShortType } from "./tournament";
+import { TournamentShortType } from './tournament';
 
 export interface QuestionType {
   id: number;
-  type: "regular" | "double" | "triple" | "other" | "outside";
+  type: 'regular' | 'double' | 'triple' | 'other' | 'outside';
   qNumber: number;
   tourNumber: number;
   add?: string;

@@ -1,10 +1,10 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initTournament } from "../../Helpers/initValues";
-import { TournamentType } from "../../Types/tournament";
-import { _axios } from "../../Helpers/_axios";
-import { routes } from "../../constants";
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { initTournament } from '../../Helpers/initValues';
+import { TournamentType } from '../../Types/tournament';
+import { _axios } from '../../Helpers/_axios';
+import { routes } from '../../constants';
 
-export type Step = "START" | "QUESTION" | "END_OF_TOUR" | "END";
+export type Step = 'START' | 'QUESTION' | 'END_OF_TOUR' | 'END';
 
 export type ResultType = {
   [tourNumber: number]: { num: number; ans: boolean }[];
@@ -19,20 +19,20 @@ interface PlayModeState {
 }
 
 const initialState: PlayModeState = {
-  step: "START",
+  step: 'START',
   t: initTournament,
   qCounter: 0,
   result: [],
   answeredCount: 0,
 };
 
-export const getTournamentById = createAsyncThunk("t/fetchById", async (id: string) => {
+export const getTournamentById = createAsyncThunk('t/fetchById', async (id: string) => {
   const t = await _axios.get<TournamentType>(`${routes.tournaments}${id}`).then((res) => res.data);
   return t;
 });
 
 export const playModeSlice = createSlice({
-  name: "playModeSlice",
+  name: 'playModeSlice',
   initialState,
   reducers: {
     setStep(state, action: PayloadAction<Step>) {
@@ -48,7 +48,7 @@ export const playModeSlice = createSlice({
       const { tourNumber, qNumber } = state.t.questions[state.qCounter];
       let qNumberInTour = qNumber;
 
-      if (typeof state.result[tourNumber] === "undefined") {
+      if (typeof state.result[tourNumber] === 'undefined') {
         state.result[tourNumber] = [];
       }
 

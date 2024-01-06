@@ -1,19 +1,19 @@
-import { QuestionType } from "../Types/question";
-import { TournamentShortType, TournamentType } from "../Types/tournament";
-import { UserType } from "../Types/user";
-import { guest } from "../constants";
+import { QuestionType } from '../Types/question';
+import { TournamentShortType, TournamentType } from '../Types/tournament';
+import { UserType } from '../Types/user';
+import { guest } from '../constants';
 
 export const initTournamentShort: TournamentShortType = {
   id: 0,
-  title: "",
+  title: '',
   date: 0,
   tours: 0,
   questionsQuantity: 0,
-  uploader: "",
+  uploader: '',
   editors: [],
   dateUpload: 0,
-  uploaderUuid: "",
-  link: "",
+  uploaderUuid: '',
+  link: '',
 };
 
 export const initTournament: TournamentType = {
@@ -23,28 +23,28 @@ export const initTournament: TournamentType = {
 
 export const initUser: UserType = {
   id: guest.id,
-  email: "",
+  email: '',
   username: guest.username,
-  role: "user",
-  password: "",
+  role: 'user',
+  password: '',
   date: 0,
 };
 
 export const initFormUser = {
-  email: "",
-  username: "",
-  role: "user",
-  password: "",
-  passRepeat: "",
+  email: '',
+  username: '',
+  role: 'user',
+  password: '',
+  passRepeat: '',
 };
 
 export const initQuestion: QuestionType = {
   id: 0,
-  type: "regular",
+  type: 'regular',
   qNumber: 0,
   tourNumber: 0,
-  text: "",
-  answer: "",
+  text: '',
+  answer: '',
   source: [],
-  author: "",
+  author: '',
 };

@@ -1,6 +1,6 @@
-import { useState } from "react";
-import { TournamentShortType } from "../../../Types/tournament";
-import { useGetTornamentsShortQuery } from "../../../Store/tournamentAPI";
+import { useState } from 'react';
+import { TournamentShortType } from '../../../Types/tournament';
+import { useGetTornamentsShortQuery } from '../../../Store/tournamentAPI';
 
 export default function useTournamentsShort() {
   const { data: tsShorts = [], isSuccess } = useGetTornamentsShortQuery(undefined);

@@ -1,24 +1,24 @@
-import { useState } from "react";
-import { getDate } from "../../Helpers/getDate";
-import ChangePass from "./ChangePass";
-import { useDocTitle } from "../../Hooks/useDocTitle";
-import "./profile.scss";
-import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from "../../Store/userAPI";
-import { createPortal } from "react-dom";
-import Button from "../Elements/Button/Button";
-import { useGetTournamentsAllByUploaderQuery } from "../../Store/tournamentAPI";
+import { useState } from 'react';
+import { getDate } from '../../Helpers/getDate';
+import ChangePass from './ChangePass';
+import { useDocTitle } from '../../Hooks/useDocTitle';
+import './profile.scss';
+import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
+import { createPortal } from 'react-dom';
+import Button from '../Elements/Button/Button';
+import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
 
 const Profile = () => {
-  useDocTitle("Профиль");
+  useDocTitle('Профиль');
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || "");
-  const { data: results } = useGetUserResultShortQuery(currentUser?.id || "");
+  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || '');
+  const { data: results } = useGetUserResultShortQuery(currentUser?.id || '');
 
   return (
-    <main className="pr">
-      <div className="pr-wrapper">
+    <main className='pr'>
+      <div className='pr-wrapper'>
         <div>
           <p>Имя</p>
           <p>{currentUser?.username}</p>
@@ -40,13 +40,13 @@ const Profile = () => {
           currentUser &&
           createPortal(<ChangePass setChangePass={setChangePass} id={currentUser.id} />, document.body)}
 
-        <button type="button" onClick={() => setChangePass(true)}>
+        <button type='button' onClick={() => setChangePass(true)}>
           Изменить пароль
         </button>
 
         {/* <Button title="Изменить пароль" onClick={() => setChangePass(true)} /> */}
 
-        <section className="pr-res">
+        <section className='pr-res'>
           <p>Ваши результаты :</p>
           {results ? (
             results.map((v) => {
@@ -61,7 +61,7 @@ const Profile = () => {
             <p>Нет сыгранных турниров</p>
           )}
         </section>
-        <section className="pr-ts">
+        <section className='pr-ts'>
           <p>Добавленные вами турниры:</p>
           {tournaments ? (
             tournaments.map((v) => {

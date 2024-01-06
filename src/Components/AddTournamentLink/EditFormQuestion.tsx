@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { QuestionType } from "../../Types/question";
-import { Action, actionTypes } from "./helpers/reducer";
-import Button from "../Elements/Button/Button";
+import { useState } from 'react';
+import { QuestionType } from '../../Types/question';
+import { Action, actionTypes } from './helpers/reducer';
+import Button from '../Elements/Button/Button';
 
 interface Props {
   q: QuestionType;
@@ -10,8 +10,8 @@ interface Props {
 
 const EditFormQuestion = ({ q, dispatch }: Props) => {
   const btnTextOption = {
-    def: "Удалить",
-    back: "Вернуть",
+    def: 'Удалить',
+    back: 'Вернуть',
   } as const;
 
   const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
@@ -23,17 +23,17 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
     dispatch({
       type: actionTypes.remove,
       questionID: q.id,
-      payload: "",
+      payload: '',
     });
   };
 
   return (
-    <div className="edit-q__container">
-      <div className="edit-q__numbers">
-        <label className="edit-q__tour">
+    <div className='edit-q__container'>
+      <div className='edit-q__numbers'>
+        <label className='edit-q__tour'>
           <p> Номер вопроса:</p>
           <input
-            type="number"
+            type='number'
             min={0}
             value={q.qNumber}
             onChange={(e) =>
@@ -44,11 +44,11 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
               })
             }
           />
-        </label>{" "}
-        <label className="edit-q__tour">
+        </label>{' '}
+        <label className='edit-q__tour'>
           <p> Номер тура:</p>
           <input
-            type="number"
+            type='number'
             min={0}
             value={q.tourNumber}
             onChange={(e) =>
@@ -59,11 +59,11 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
               })
             }
           />
-        </label>{" "}
+        </label>{' '}
         <Button
           onClick={removeQuestion}
           title={btnText}
-          extraClass={btnText === btnTextOption.def ? "def" : "back"}
+          extraClass={btnText === btnTextOption.def ? 'def' : 'back'}
         ></Button>
       </div>
       <label>
@@ -146,7 +146,7 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
               payload: e.target.value,
             })
           }
-          value={q.source.join(";")}
+          value={q.source.join(';')}
           rows={3}
         />
       </label>

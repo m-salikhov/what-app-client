@@ -1,4 +1,4 @@
-import { TournamentType } from "../../../Types/tournament";
+import { TournamentType } from '../../../Types/tournament';
 
 export interface Action {
   type: keyof typeof actionTypes;
@@ -6,24 +6,24 @@ export interface Action {
   payload: string | number | TournamentType;
 }
 
-type QuestionTypePayload = "regular" | "double" | "triple" | "other" | "outside";
+type QuestionTypePayload = 'regular' | 'double' | 'triple' | 'other' | 'outside';
 
 export const actionTypes = {
-  loaded: "loaded",
-  questionType: "questionType",
-  add: "add",
-  text: "text",
-  answer: "answer",
-  alterAnswer: "alterAnswer",
-  comment: "comment",
-  source: "source",
-  author: "author",
-  qNumber: "qNumber",
-  tourNumber: "tourNumber",
-  title: "title",
-  editors: "editors",
-  date: "date",
-  remove: "remove",
+  loaded: 'loaded',
+  questionType: 'questionType',
+  add: 'add',
+  text: 'text',
+  answer: 'answer',
+  alterAnswer: 'alterAnswer',
+  comment: 'comment',
+  source: 'source',
+  author: 'author',
+  qNumber: 'qNumber',
+  tourNumber: 'tourNumber',
+  title: 'title',
+  editors: 'editors',
+  date: 'date',
+  remove: 'remove',
 } as const;
 
 const reducer = (state: TournamentType, action: Action) => {
@@ -43,14 +43,14 @@ const reducer = (state: TournamentType, action: Action) => {
     return t;
   }
 
-  if (type === actionTypes.remove && typeof questionID === "number") {
+  if (type === actionTypes.remove && typeof questionID === 'number') {
     const questions = [...state.questions];
     let { questionsQuantity } = state;
 
     const indexQuestion = questions.findIndex((q) => q.id === questionID);
     const q = questions[indexQuestion];
 
-    if (q.type === "outside") {
+    if (q.type === 'outside') {
       q.qNumber === 0 ? (q.qNumber = -1) : (q.qNumber = 0);
     }
 
@@ -60,7 +60,7 @@ const reducer = (state: TournamentType, action: Action) => {
         if (questions[i].qNumber > 0) questions[i].qNumber -= 1;
       }
       questionsQuantity -= 1;
-    } else if (q.qNumber < 0 && q.type !== "outside") {
+    } else if (q.qNumber < 0 && q.type !== 'outside') {
       let nextQuestionIndex = 0;
       let prevQuestionIndex = 0;
 
@@ -94,7 +94,7 @@ const reducer = (state: TournamentType, action: Action) => {
     return { ...state, questions, questionsQuantity };
   }
 
-  if (typeof payload === "string" && typeof questionID === "number") {
+  if (typeof payload === 'string' && typeof questionID === 'number') {
     const questions = [...state.questions];
     const indexQuestion = questions.findIndex((q) => q.id === questionID);
 
@@ -118,7 +118,7 @@ const reducer = (state: TournamentType, action: Action) => {
         questions[indexQuestion].comment = payload;
         return { ...state, questions };
       case actionTypes.source:
-        const sourceArr = payload.split(";");
+        const sourceArr = payload.split(';');
         questions[indexQuestion].source = sourceArr;
         return { ...state, questions };
       case actionTypes.author:
@@ -129,7 +129,7 @@ const reducer = (state: TournamentType, action: Action) => {
     }
   }
 
-  if (typeof payload === "number" && typeof questionID === "number") {
+  if (typeof payload === 'number' && typeof questionID === 'number') {
     const questions = [...state.questions];
     const indexQuestion = questions.findIndex((q) => q.id === questionID);
 
@@ -145,19 +145,19 @@ const reducer = (state: TournamentType, action: Action) => {
     }
   }
 
-  if (typeof payload === "string") {
+  if (typeof payload === 'string') {
     switch (type) {
       case actionTypes.title:
         return { ...state, title: payload };
       case actionTypes.editors:
-        const editorsArr = payload.split(";");
+        const editorsArr = payload.split(';');
         return { ...state, editors: editorsArr };
       default:
         return state;
     }
   }
 
-  if (typeof payload === "number") {
+  if (typeof payload === 'number') {
     return { ...state, date: payload };
   }
 

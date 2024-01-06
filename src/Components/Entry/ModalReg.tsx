@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { Navigate } from 'react-router-dom';
 
 const ModalReg = () => {
   const [counter, setCounter] = useState(5);
@@ -10,17 +10,17 @@ const ModalReg = () => {
   }, [counter]);
 
   if (counter === 0) {
-    return <Navigate to="/" />;
+    return <Navigate to='/' />;
   }
   return (
     <>
-      {" "}
-      <div className="modalBG">
-        {" "}
-        <div className="modal-wrapper">
+      {' '}
+      <div className='modalBG'>
+        {' '}
+        <div className='modal-wrapper'>
           <h2>Вы успешно зарегистрировались</h2>
           <p>Через несколько секунд откроется главная {counter} </p>
-        </div>{" "}
+        </div>{' '}
       </div>
     </>
   );

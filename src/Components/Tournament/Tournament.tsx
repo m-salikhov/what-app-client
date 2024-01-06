@@ -1,18 +1,18 @@
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
-import { getDate } from "../../Helpers/getDate";
-import Question from "../Elements/Question/Question";
-import Back from "../Elements/Back/Back";
-import { useDocTitle } from "../../Hooks/useDocTitle";
-import { getTourAnchors, getToursParagraphs, scroll } from "./scrollLogic";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
-import "./tournament.scss";
-import { useGetTornamentsQuery } from "../../Store/tournamentAPI";
-import { initTournament } from "../../Helpers/initValues";
-import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
+import { useRef } from 'react';
+import { useParams } from 'react-router-dom';
+import { getDate } from '../../Helpers/getDate';
+import Question from '../Elements/Question/Question';
+import Back from '../Elements/Back/Back';
+import { useDocTitle } from '../../Hooks/useDocTitle';
+import { getTourAnchors, getToursParagraphs, scroll } from './scrollLogic';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import './tournament.scss';
+import { useGetTornamentsQuery } from '../../Store/tournamentAPI';
+import { initTournament } from '../../Helpers/initValues';
+import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 
 const Tournament = () => {
-  const { id = "" } = useParams();
+  const { id = '' } = useParams();
   const { data: t = initTournament, isFetching, error } = useGetTornamentsQuery(id);
   const ref = useRef(null);
   const tourAnchors = getTourAnchors(t);
@@ -22,25 +22,25 @@ const Tournament = () => {
   if (error) {
     return (
       <main>
-        {" "}
-        <h2>{extractServerErrorMessage(error)}</h2>{" "}
+        {' '}
+        <h2>{extractServerErrorMessage(error)}</h2>{' '}
       </main>
     );
   }
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className="tournament__container">
-      <div className="tournament__header">
-        <div className="tournament__header-t">
+    <main className='tournament__container'>
+      <div className='tournament__header'>
+        <div className='tournament__header-t'>
           <h2>{t.title}</h2>
           <p>
             <span>добавил </span>
             {t.uploader}
           </p>
         </div>
-        <div className="tournament__header-m">
+        <div className='tournament__header-m'>
           <h3>
             Дата отыгрыша: <span>{getDate(t.date)}</span>
           </h3>
@@ -52,24 +52,24 @@ const Tournament = () => {
           </h3>
         </div>
         <h3>
-          Редакция: <span>{t.editors.join(", ")}</span>
+          Редакция: <span>{t.editors.join(', ')}</span>
         </h3>
       </div>
-      <div className="tournament__content" ref={ref}>
-        <div className="tournament__content_header">
-          {" "}
-          <div className="back">
+      <div className='tournament__content' ref={ref}>
+        <div className='tournament__content_header'>
+          {' '}
+          <div className='back'>
             <Back />
           </div>
-          <div className="tournament__content_tours" onClick={(e) => scroll(e, ref.current, tourAnchors)}>
+          <div className='tournament__content_tours' onClick={(e) => scroll(e, ref.current, tourAnchors)}>
             {getToursParagraphs(t.tours)}
           </div>
         </div>
-        <TransitionGroup className="tournament__content_qs">
+        <TransitionGroup className='tournament__content_qs'>
           {!isFetching &&
             t.questions.map((v) => {
               return (
-                <CSSTransition key={v.id} classNames="question" timeout={400}>
+                <CSSTransition key={v.id} classNames='question' timeout={400}>
                   <Question q={v} />
                 </CSSTransition>
               );

@@ -1,10 +1,8 @@
-import { useAppSelector } from "../../../../Hooks/redux";
-import { ResultType } from "../../../../Store/reducers/PlayModeSlice";
+import { useAppSelector } from '../../../../Hooks/redux';
+import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
 
 const ResBlock = () => {
-  const { t, qCounter, result, answeredCount } = useAppSelector(
-    (state) => state.playModeReducer
-  );
+  const { t, qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
   const tour = t.questions[qCounter].tourNumber;
 
   const calcTourResult = (tour: number, res: ResultType) => {
@@ -19,15 +17,15 @@ const ResBlock = () => {
   const [TourCount, TourLength] = calcTourResult(tour, result);
 
   return (
-    <div className="resblock">
+    <div className='resblock'>
       <p>
         {`Результат ${tour}-го тура:`}
-        <span>{`${TourCount} из ${TourLength}`}</span>{" "}
+        <span>{`${TourCount} из ${TourLength}`}</span>{' '}
       </p>
       {tour === t.tours && (
         <p>
           {`Результат общий:`}
-          <span>{`${answeredCount} из ${t.questionsQuantity}`}</span>{" "}
+          <span>{`${answeredCount} из ${t.questionsQuantity}`}</span>{' '}
         </p>
       )}
     </div>

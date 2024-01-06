@@ -1,4 +1,4 @@
-import { TournamentShortType } from "../../../Types/tournament";
+import { TournamentShortType } from '../../../Types/tournament';
 
 function filterTournamentsShort(tournaments: TournamentShortType[], searchString: string) {
   if (searchString.length > 1) {

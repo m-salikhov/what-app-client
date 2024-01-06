@@ -1,19 +1,19 @@
-import { FormUser } from "../../../Types/user";
+import { FormUser } from '../../../Types/user';
 
 function checkFormFields(formUser: FormUser, reg: boolean) {
   const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;
 
   if (!testEmail.test(formUser.email)) {
-    return "Неверный email";
+    return 'Неверный email';
   }
   if (!formUser.password) {
-    return "Введите пароль";
+    return 'Введите пароль';
   }
   if (reg && formUser.password !== formUser.passRepeat) {
-    return "Повторите пароль";
+    return 'Повторите пароль';
   }
   if (reg && !formUser.username) {
-    return "Выберите псевдоним";
+    return 'Выберите псевдоним';
   }
 
   return null;

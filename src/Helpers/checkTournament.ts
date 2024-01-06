@@ -1,32 +1,32 @@
-import { TournamentType } from "../Types/tournament";
+import { TournamentType } from '../Types/tournament';
 
 export default function checkTournament(t: TournamentType) {
   const errors: string[] = [];
 
   //блок проверки инфо о турнире
   if (!Boolean(t.date)) {
-    errors.push("Не выбрана дата");
+    errors.push('Не выбрана дата');
   }
   if (!Boolean(t.title)) {
-    errors.push("Не добавлено название");
+    errors.push('Не добавлено название');
   }
   if (!Boolean(t.questionsQuantity)) {
-    errors.push("Не выбрано кол-во вопросов");
+    errors.push('Не выбрано кол-во вопросов');
   }
   if (!Boolean(t.tours)) {
-    errors.push("Не выбрано кол-во туров");
+    errors.push('Не выбрано кол-во туров');
   }
   if (!Boolean(t.editors[0])) {
-    errors.push("Не указан редактор(ы)");
+    errors.push('Не указан редактор(ы)');
   }
   if (t.tours !== t.questions.at(-1)?.tourNumber) {
-    errors.push("Кол-во туров не соответсвует выбранному");
+    errors.push('Кол-во туров не соответсвует выбранному');
   }
   // if (t.questionsQuantity != t.questions.at(-1)?.qNumber) {
   //   errors.push("Неверная нумерация вопросов");
   // }
   if (t.questionsQuantity !== t.questions.at(-1)?.qNumber) {
-    errors.push("Кол-во вопросов не соответсвует выбранному");
+    errors.push('Кол-во вопросов не соответсвует выбранному');
   }
 
   //блок проверки вопросов

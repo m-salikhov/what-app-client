@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
-import { getDate } from "../../Helpers/getDate";
-import { TournamentShortType } from "../../Types/tournament";
+import { Link } from 'react-router-dom';
+import { getDate } from '../../Helpers/getDate';
+import { TournamentShortType } from '../../Types/tournament';
 
 interface LineProp {
   item: TournamentShortType;
@@ -9,9 +9,9 @@ interface LineProp {
 
 const LineAll = ({ item, index }: LineProp) => {
   return (
-    <div className="table__line">
+    <div className='table__line'>
       <p>{index + 1}</p>
-      <div className="link">
+      <div className='link'>
         <Link to={`/tournament/${item.id}`}>{item.title}</Link>
       </div>
       <p>{getDate(item.date)}</p>

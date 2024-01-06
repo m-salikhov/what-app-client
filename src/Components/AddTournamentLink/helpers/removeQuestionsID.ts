@@ -1,5 +1,5 @@
-import { QuestionType } from "../../../Types/question";
-import { TournamentType } from "../../../Types/tournament";
+import { QuestionType } from '../../../Types/question';
+import { TournamentType } from '../../../Types/tournament';
 
 const removeQuestionsID = (tournamet: TournamentType) => {
   const t = { ...tournamet };

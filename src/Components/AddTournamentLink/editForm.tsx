@@ -1,8 +1,8 @@
-import { getDateYYYY_MM_DD } from "../../Helpers/getDate";
-import { TournamentType } from "../../Types/tournament";
-import Button from "../Elements/Button/Button";
-import EditFotmQuestion from "./EditFormQuestion";
-import { Action, actionTypes } from "./helpers/reducer";
+import { getDateYYYY_MM_DD } from '../../Helpers/getDate';
+import { TournamentType } from '../../Types/tournament';
+import Button from '../Elements/Button/Button';
+import EditFotmQuestion from './EditFormQuestion';
+import { Action, actionTypes } from './helpers/reducer';
 
 interface Props {
   t: TournamentType;
@@ -14,28 +14,28 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
   return (
     <main
       onKeyDown={(e) => {
-        if (e.key === "Enter" && e.ctrlKey) {
+        if (e.key === 'Enter' && e.ctrlKey) {
           setEdit(false);
         }
       }}
     >
-      <Button title="Закончить редактирование" onClick={() => setEdit(false)}></Button>
-      <div className="edit-t">
-        <div className="edit-t__top">
-          {" "}
-          <label className="edit-t__title">
+      <Button title='Закончить редактирование' onClick={() => setEdit(false)}></Button>
+      <div className='edit-t'>
+        <div className='edit-t__top'>
+          {' '}
+          <label className='edit-t__title'>
             <p> Название турнира</p>
             <input
-              placeholder="Название турнира"
-              type="text"
+              placeholder='Название турнира'
+              type='text'
               onChange={(e) => dispatch({ type: actionTypes.title, payload: e.target.value })}
               value={t.title}
             />
           </label>
-          <label className="edit-t__date">
+          <label className='edit-t__date'>
             <p> Дата отыгрыша </p>
             <input
-              type="date"
+              type='date'
               value={getDateYYYY_MM_DD(t.date || Date.now())}
               onMouseDown={(e) => {
                 e.preventDefault();
@@ -47,17 +47,17 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
                 })
               }
             />
-            <label className="edit-t__title">
+            <label className='edit-t__title'>
               <p>Редакторы (через точку с запятой без пробела!)</p>
               <textarea
-                placeholder="Редакторская группа"
+                placeholder='Редакторская группа'
                 onChange={(e) =>
                   dispatch({
                     type: actionTypes.editors,
                     payload: e.target.value,
                   })
                 }
-                value={t.editors.join(";")}
+                value={t.editors.join(';')}
                 rows={3}
               />
             </label>

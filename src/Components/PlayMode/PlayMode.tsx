@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-import Start from "./PlayModeParts/Start";
-import PMQuestion from "./PlayModeParts/PMQuestion/PMQuestion";
-import TourEnd from "./PlayModeParts/End/TourEnd";
-import End from "./PlayModeParts/End/End";
-import { Step, getTournamentById } from "../../Store/reducers/PlayModeSlice";
-import { useAppDispatch, useAppSelector } from "../../Hooks/redux";
-import "./playmode.scss";
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import Start from './PlayModeParts/Start';
+import PMQuestion from './PlayModeParts/PMQuestion/PMQuestion';
+import TourEnd from './PlayModeParts/End/TourEnd';
+import End from './PlayModeParts/End/End';
+import { Step, getTournamentById } from '../../Store/reducers/PlayModeSlice';
+import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
+import './playmode.scss';
 
 const PlayMode = () => {
   const dispatch = useAppDispatch();
@@ -21,13 +21,13 @@ const PlayMode = () => {
 
   function PlayModeChange(stepName: Step) {
     switch (stepName) {
-      case "START":
+      case 'START':
         return <Start />;
-      case "QUESTION":
+      case 'QUESTION':
         return <PMQuestion />;
-      case "END_OF_TOUR":
+      case 'END_OF_TOUR':
         return <TourEnd />;
-      case "END":
+      case 'END':
         return <End />;
       default:
         return null;

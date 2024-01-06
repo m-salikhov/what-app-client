@@ -1,19 +1,19 @@
 // import axios from "axios";
-import { QuestionType } from "../Types/question";
+import { QuestionType } from '../Types/question';
 
 function splitQuestion(str: string): Partial<QuestionType> {
-  const normStr0 = str.replace(/Вопрос \d+:\s/, "");
-  const normStr = normStr0.replace(/\n+/g, "");
+  const normStr0 = str.replace(/Вопрос \d+:\s/, '');
+  const normStr = normStr0.replace(/\n+/g, '');
 
-  const iAnswer = normStr.indexOf("Ответ:");
-  const iAlter = normStr.indexOf("Зачёт:");
-  const iComment = normStr.indexOf("Комментарий:");
-  const iSource = normStr.indexOf("Источник(и):");
-  const iAuthor = normStr.indexOf("Автор:");
+  const iAnswer = normStr.indexOf('Ответ:');
+  const iAlter = normStr.indexOf('Зачёт:');
+  const iComment = normStr.indexOf('Комментарий:');
+  const iSource = normStr.indexOf('Источник(и):');
+  const iAuthor = normStr.indexOf('Автор:');
 
   const text = normStr.substring(0, iAnswer);
 
-  let answer = "";
+  let answer = '';
   if (iAlter > -1) {
     answer = normStr.substring(iAnswer + 7, iAlter);
   } else if (iComment > -1) {
@@ -24,16 +24,16 @@ function splitQuestion(str: string): Partial<QuestionType> {
 
   let alterAnswer;
   if (iAlter === -1) {
-    alterAnswer = "";
+    alterAnswer = '';
   } else if (iComment > -1) {
     alterAnswer = normStr.substring(iAlter + 7, iComment);
   } else {
     alterAnswer = normStr.substring(iAlter + 7, iSource);
   }
 
-  const comment = iComment > -1 ? normStr.substring(iComment + 13, iSource) : "";
+  const comment = iComment > -1 ? normStr.substring(iComment + 13, iSource) : '';
 
-  const author = iAuthor > -1 ? normStr.substring(iAuthor + 7) : "";
+  const author = iAuthor > -1 ? normStr.substring(iAuthor + 7) : '';
 
   const sourceStr = normStr.substring(iSource + 13, iAuthor);
   const oneOrManySources = /\s\s\s\d.\s/.test(sourceStr);

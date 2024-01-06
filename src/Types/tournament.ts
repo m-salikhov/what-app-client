@@ -1,4 +1,4 @@
-import { QuestionType } from "./question";
+import { QuestionType } from './question';
 
 export interface TournamentType {
   id: number;
@@ -14,4 +14,4 @@ export interface TournamentType {
   link: string;
 }
 
-export type TournamentShortType = Omit<TournamentType, "questions">;
+export type TournamentShortType = Omit<TournamentType, 'questions'>;

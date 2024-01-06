@@ -1,5 +1,5 @@
-import { FormEvent } from "react";
-import "./btn.scss";
+import { FormEvent } from 'react';
+import './btn.scss';
 
 interface ButtonProps {
   onClick?: () => void;
@@ -11,10 +11,10 @@ interface ButtonProps {
 
 const Button = ({ onClick, title, extraClass, disabled, onSubmit }: ButtonProps) => {
   return (
-    <div className="btn-elem">
+    <div className='btn-elem'>
       <button
-        className={extraClass ? `btn ${extraClass}` : "btn"}
-        type="button"
+        className={extraClass ? `btn ${extraClass}` : 'btn'}
+        type='button'
         onClick={onClick || onSubmit}
         disabled={disabled ? true : false}
       >

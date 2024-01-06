@@ -1,25 +1,25 @@
-import { useReducer, useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import Button from "../Elements/Button/Button";
-import { useDocTitle } from "../../Hooks/useDocTitle";
-import { initTournament } from "../../Helpers/initValues";
-import reducer from "./helpers/reducer";
-import EditForm from "./EditForm";
-import checkTournament from "../../Helpers/checkTournament";
-import Instruction from "./Instruction";
-import { useAddTournamentMutation, useParseLinkMutation } from "../../Store/tournamentAPI";
-import removeQuestionsID from "./helpers/removeQuestionsID";
-import "./addTournamentLink.scss";
-import extractServerErrorMessage from "../../Helpers/extractServerErrorMessage";
-import { useGetUserLogfirstQuery } from "../../Store/userAPI";
-import { guest } from "../../constants";
-import ParsedTournament from "./ParsedTournament";
+import { useReducer, useState } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
+import Button from '../Elements/Button/Button';
+import { useDocTitle } from '../../Hooks/useDocTitle';
+import { initTournament } from '../../Helpers/initValues';
+import reducer from './helpers/reducer';
+import EditForm from './EditForm';
+import checkTournament from '../../Helpers/checkTournament';
+import Instruction from './Instruction';
+import { useAddTournamentMutation, useParseLinkMutation } from '../../Store/tournamentAPI';
+import removeQuestionsID from './helpers/removeQuestionsID';
+import './addTournamentLink.scss';
+import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import { useGetUserLogfirstQuery } from '../../Store/userAPI';
+import { guest } from '../../constants';
+import ParsedTournament from './ParsedTournament';
 
 const AddTournamentLink = () => {
-  useDocTitle("Добавить турнир");
+  useDocTitle('Добавить турнир');
 
-  const [link, setLink] = useState("");
-  const [message, setMessage] = useState("");
+  const [link, setLink] = useState('');
+  const [message, setMessage] = useState('');
   const [showT, setShowT] = useState(false);
   const [edit, setEdit] = useState(false);
   const [errorsFilling, setErrorsFilling] = useState<string[] | null>(null);
@@ -31,7 +31,7 @@ const AddTournamentLink = () => {
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
   const handleAddTournament = async () => {
-    setMessage("");
+    setMessage('');
     setErrorsFilling(null);
 
     const errors = checkTournament(t);
@@ -44,20 +44,20 @@ const AddTournamentLink = () => {
       uploaderUuid: currentUser ? currentUser.id : guest.id,
       uploader: currentUser ? currentUser.username : guest.username,
     }).then(() => {
-      setMessage("Турнир успешно сохранён в базе");
+      setMessage('Турнир успешно сохранён в базе');
       setShowT(false);
     });
   };
 
   const handleParseLink = async () => {
-    setMessage("");
+    setMessage('');
     setErrorsFilling(null);
     setShowT(false);
 
     await parseT({ link })
       .unwrap()
       .then((data) => {
-        dispatch({ type: "loaded", payload: data });
+        dispatch({ type: 'loaded', payload: data });
         setShowT(true);
       });
   };
@@ -66,42 +66,42 @@ const AddTournamentLink = () => {
     return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className="addlink_container">
-      <div className="addlink">
+    <main className='addlink_container'>
+      <div className='addlink'>
         <input
-          type="text"
+          type='text'
           onChange={(e) => {
             setLink(e.target.value);
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter") {
+            if (e.key === 'Enter') {
               handleParseLink();
             }
           }}
         />
-        <Button title="Открыть" onClick={handleParseLink} disabled={isLoadingAdd || isLoading} />
+        <Button title='Открыть' onClick={handleParseLink} disabled={isLoadingAdd || isLoading} />
       </div>
 
       {errorsFilling &&
         errorsFilling.map((error, i) => (
-          <p className="addlink__errorsFilling" key={i}>
+          <p className='addlink__errorsFilling' key={i}>
             {error}
           </p>
         ))}
 
-      {message && <p className="addlink__message">{message}</p>}
+      {message && <p className='addlink__message'>{message}</p>}
 
       {(errorParse || errorAdd) && (
-        <p className="addlink__message">{extractServerErrorMessage(errorParse || errorAdd)}</p>
+        <p className='addlink__message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
       {(isLoading || isLoadingAdd) && (
-        <div className="spinner">
-          {" "}
-          <RotatingLines strokeColor="#61a199e6" strokeWidth="3" animationDuration="0.75" width="80" visible={true} />
+        <div className='spinner'>
+          {' '}
+          <RotatingLines strokeColor='#61a199e6' strokeWidth='3' animationDuration='0.75' width='80' visible={true} />
         </div>
       )}
 

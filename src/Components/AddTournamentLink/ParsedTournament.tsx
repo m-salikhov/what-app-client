@@ -1,7 +1,7 @@
-import { getDate } from "../../Helpers/getDate";
-import { TournamentType } from "../../Types/tournament";
-import Button from "../Elements/Button/Button";
-import QuestionPlane from "../Elements/Question/QuestionPlane";
+import { getDate } from '../../Helpers/getDate';
+import { TournamentType } from '../../Types/tournament';
+import Button from '../Elements/Button/Button';
+import QuestionPlane from '../Elements/Question/QuestionPlane';
 
 interface Props {
   t: TournamentType;
@@ -13,13 +13,13 @@ interface Props {
 const ParsedTournament = ({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) => {
   return (
     <>
-      <div className="tournament__header">
-        <div className="tournament__header-t">
+      <div className='tournament__header'>
+        <div className='tournament__header-t'>
           <h3>
             Название: <span>{t.title}</span>
           </h3>
         </div>
-        <div className="tournament__header-m">
+        <div className='tournament__header-m'>
           <h3>
             Дата отыгрыша: <span>{t.date ? getDate(t.date) : null}</span>
           </h3>
@@ -31,26 +31,26 @@ const ParsedTournament = ({ t, setEdit, setErrorsFilling, handleAddTournament }:
           </h3>
         </div>
         <h3>
-          Редакция:{" "}
+          Редакция:{' '}
           {t.editors.map((v, i) => (
             <span key={i}>
               {v}
-              {i < t.editors.length - 1 ? "," : null}{" "}
+              {i < t.editors.length - 1 ? ',' : null}{' '}
             </span>
           ))}
         </h3>
       </div>
-      <div className="addlink__buttons">
+      <div className='addlink__buttons'>
         <Button
-          title={"Редактировать турнир"}
+          title={'Редактировать турнир'}
           onClick={() => {
             setEdit((prev) => !prev);
             setErrorsFilling(null);
           }}
         ></Button>
-        <Button title="Добавить в базу" onClick={handleAddTournament}></Button>
+        <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
       </div>
-      <div className="tournament__content">
+      <div className='tournament__content'>
         {t.questions
           .filter((q) => q.qNumber !== -1)
           .map((v) => (

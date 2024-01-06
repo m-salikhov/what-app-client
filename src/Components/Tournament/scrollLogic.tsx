@@ -1,5 +1,5 @@
-import { TournamentType } from "../../Types/tournament";
-import { MouseEvent } from "react";
+import { TournamentType } from '../../Types/tournament';
+import { MouseEvent } from 'react';
 
 export const getTourAnchors = (t: TournamentType) => {
   const tours: number[] = [];
@@ -37,7 +37,7 @@ export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement |
 
   const anchor = arrAnchors[id - 1];
   if (nodeList instanceof HTMLDivElement) {
-    const node = nodeList.querySelector(".tournament__content_qs");
-    if (node) node.children[anchor].scrollIntoView({ behavior: "smooth" });
+    const node = nodeList.querySelector('.tournament__content_qs');
+    if (node) node.children[anchor].scrollIntoView({ behavior: 'smooth' });
   }
 };

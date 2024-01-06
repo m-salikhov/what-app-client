@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { initTournament } from "../Helpers/initValues";
-import { _axios } from "../Helpers/_axios";
-import { TournamentShortType, TournamentType } from "../Types/tournament";
-import { UserType } from "../Types/user";
-import { routes } from "../constants";
+import { useState, useEffect } from 'react';
+import { initTournament } from '../Helpers/initValues';
+import { _axios } from '../Helpers/_axios';
+import { TournamentShortType, TournamentType } from '../Types/tournament';
+import { UserType } from '../Types/user';
+import { routes } from '../constants';
 
 export function useTournamentById(id: string | undefined) {
   const [t, setT] = useState<TournamentType>(initTournament);
