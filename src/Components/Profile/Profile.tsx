@@ -5,7 +5,6 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import './profile.scss';
 import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
 import { createPortal } from 'react-dom';
-import Button from '../Elements/Button/Button';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
 
 const Profile = () => {

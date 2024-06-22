@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl, routes } from '../constants';
 import { FormUser, Result, UserAuth, UserType } from '../Types/user';
-import { TournamentShortType } from '../Types/tournament';
 
 export const userAPI = createApi({
   reducerPath: 'userAPI',

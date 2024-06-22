@@ -1,5 +1,3 @@
-import { useAppDispatch } from '../../../Hooks/redux';
-
 const checkLinkOrText = (str: string) => /^http/.test(str);
 
 const Add = ({ add }: { add: string }) => {
