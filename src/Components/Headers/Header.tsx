@@ -5,7 +5,7 @@ import owlGreen from './owlGreen.svg';
 import './header.scss';
 import { useGetUserLogfirstQuery, useLazyGetUserLogoutQuery, userAPI } from '../../Store/userAPI';
 
-const Header = () => {
+function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -81,6 +81,6 @@ const Header = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Header;

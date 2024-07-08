@@ -2,7 +2,7 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import notFoundOwl from './404.jpg';
 import './notFound.scss';
 
-const NotFound = () => {
+function NotFound() {
   useDocTitle('404');
 
   return (
@@ -13,6 +13,6 @@ const NotFound = () => {
       </div>
     </main>
   );
-};
+}
 
 export default NotFound;

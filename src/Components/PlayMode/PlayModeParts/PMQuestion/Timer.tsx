@@ -5,7 +5,7 @@ interface Props {
   qNumber: number;
 }
 
-const Timer = ({ setIsTimeOver, qNumber }: Props) => {
+function Timer({ setIsTimeOver, qNumber }: Props) {
   const [time, setTime] = useState(15);
   //Флаг, что время на чтение вопроса окончено
   const [flag, setFlag] = useState(false);
@@ -40,6 +40,6 @@ const Timer = ({ setIsTimeOver, qNumber }: Props) => {
       </div>
     </div>
   );
-};
+}
 
 export default Timer;

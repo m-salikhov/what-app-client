@@ -1,7 +1,7 @@
 import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
 import { TournamentShortType } from '../../Types/tournament';
 import LineAll from './LineAll';
-import { sortFunction } from './helpers/sortFunction';
+import sortFunction from './helpers/sortFunction';
 import chart from './bar_chart.svg';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import './all.scss';
@@ -10,7 +10,7 @@ import filterTournamentsShort from './helpers/filterTournamentsShort';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
-const All = () => {
+function All() {
   useDocTitle('Все турниры');
 
   const { setTournamentsShorts, tournamentsShorts } = useTournamentsShort();
@@ -84,6 +84,6 @@ const All = () => {
       </div>
     </main>
   );
-};
+}
 
 export default All;

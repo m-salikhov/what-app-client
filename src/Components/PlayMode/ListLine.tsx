@@ -6,7 +6,7 @@ interface LineProp {
   index: number;
 }
 
-const ListLine = ({ item, index }: LineProp) => {
+function ListLine({ item, index }: LineProp) {
   return (
     <div className='table__line'>
       <p>{index + 1}</p>
@@ -17,6 +17,6 @@ const ListLine = ({ item, index }: LineProp) => {
       <p>{item.tours}</p>
     </div>
   );
-};
+}
 
 export default ListLine;

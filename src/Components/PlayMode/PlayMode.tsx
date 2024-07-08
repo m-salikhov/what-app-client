@@ -8,7 +8,7 @@ import { Step, getTournamentById } from '../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import './playmode.scss';
 
-const PlayMode = () => {
+function PlayMode() {
   const dispatch = useAppDispatch();
 
   const { id, title } = useParams();
@@ -40,6 +40,6 @@ const PlayMode = () => {
       {PlayModeChange(step)}
     </main>
   );
-};
+}
 
 export default PlayMode;

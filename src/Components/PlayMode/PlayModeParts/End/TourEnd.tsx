@@ -6,7 +6,7 @@ import TourTable from './TourTable';
 import { playModeSlice } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
 
-const TourEnd = () => {
+function TourEnd() {
   const dispatch = useAppDispatch();
 
   const { t, qCounter, result } = useAppSelector((state) => state.playModeReducer);
@@ -27,6 +27,6 @@ const TourEnd = () => {
       {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
     </div>
   );
-};
+}
 
 export default TourEnd;

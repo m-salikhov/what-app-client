@@ -3,7 +3,7 @@ import tg from './icons/3787425_telegram_logo_messanger_social_social media_icon
 import mail from './icons/1814108_email_envenlope_letter_mail_icon.svg';
 import gh from './icons/8546736_github_icon.svg';
 
-const Footer = () => {
+function Footer() {
   return (
     <footer>
       <div className='footer__icons'>
@@ -20,6 +20,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

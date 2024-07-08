@@ -8,7 +8,7 @@ interface Props {
   dispatch: (action: Action) => void;
 }
 
-const EditFormQuestion = ({ q, dispatch }: Props) => {
+function EditFormQuestion({ q, dispatch }: Props) {
   const btnTextOption = {
     def: 'Удалить',
     back: 'Вернуть',
@@ -166,6 +166,6 @@ const EditFormQuestion = ({ q, dispatch }: Props) => {
       </label>
     </div>
   );
-};
+}
 
 export default EditFormQuestion;

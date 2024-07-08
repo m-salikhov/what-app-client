@@ -6,13 +6,13 @@ interface Props {
   children: ReactNode;
 }
 
-const PrivateRoute = ({ children }: Props) => {
+function PrivateRoute({ children }: Props) {
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
 
   if (!currentUser) {
     return <Navigate to='/entry' />;
   }
   return <>{children}</>;
-};
+}
 
 export default PrivateRoute;

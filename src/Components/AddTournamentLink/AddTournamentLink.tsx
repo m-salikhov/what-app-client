@@ -15,7 +15,7 @@ import { useGetUserLogfirstQuery } from '../../Store/userAPI';
 import { guest } from '../../constants';
 import ParsedTournament from './ParsedTournament';
 
-const AddTournamentLink = () => {
+function AddTournamentLink() {
   useDocTitle('Добавить турнир');
 
   const [link, setLink] = useState('');
@@ -117,6 +117,6 @@ const AddTournamentLink = () => {
       )}
     </main>
   );
-};
+}
 
 export default AddTournamentLink;

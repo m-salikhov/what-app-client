@@ -12,7 +12,7 @@ import checkFormFields from './helpers/checkFormFields';
 import { useLoginMutation, useRegistrationMutation, userAPI } from '../../Store/userAPI';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 
-const Entry = () => {
+function Entry() {
   useDocTitle('Вход');
   const dispatch = useAppDispatch();
 
@@ -134,6 +134,6 @@ const Entry = () => {
       </main>
     </>
   );
-};
+}
 
 export default Entry;

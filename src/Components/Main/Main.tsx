@@ -11,7 +11,7 @@ import Stats from './Stats';
 import { amountRandomQuestions } from '../../constants';
 import { useGetRandomQuery } from '../../Store/tournamentAPI';
 
-const Main = () => {
+function Main() {
   const navigate = useNavigate();
   useDocTitle();
 
@@ -62,6 +62,6 @@ const Main = () => {
       </div>
     </main>
   );
-};
+}
 
 export default Main;

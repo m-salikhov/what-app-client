@@ -1,6 +1,6 @@
 import './skeletonQuestion.scss';
 
-const SkeletonQuestion = ({ count }: { count: number }) => {
+function SkeletonQuestion({ count }: { count: number }) {
   const skeletonQuestion = (i: number) => {
     return (
       <div className='sk-q' key={i}>
@@ -18,6 +18,6 @@ const SkeletonQuestion = ({ count }: { count: number }) => {
   });
 
   return <>{arrElements}</>;
-};
+}
 
 export default SkeletonQuestion;

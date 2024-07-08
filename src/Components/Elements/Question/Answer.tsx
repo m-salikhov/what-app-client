@@ -1,6 +1,6 @@
 import { QuestionType } from '../../../Types/question';
 
-const Answer = ({ q }: { q: QuestionType }) => {
+function Answer({ q }: { q: QuestionType }) {
   return (
     <div className='answer'>
       <p>
@@ -38,6 +38,6 @@ const Answer = ({ q }: { q: QuestionType }) => {
       </p>
     </div>
   );
-};
+}
 
 export default Answer;

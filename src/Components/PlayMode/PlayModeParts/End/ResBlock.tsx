@@ -1,7 +1,7 @@
 import { useAppSelector } from '../../../../Hooks/redux';
 import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
 
-const ResBlock = () => {
+function ResBlock() {
   const { t, qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
   const tour = t.questions[qCounter].tourNumber;
 
@@ -30,6 +30,6 @@ const ResBlock = () => {
       )}
     </div>
   );
-};
+}
 
 export default ResBlock;

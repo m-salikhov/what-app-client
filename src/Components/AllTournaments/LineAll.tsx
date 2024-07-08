@@ -7,7 +7,7 @@ interface LineProp {
   index: number;
 }
 
-const LineAll = ({ item, index }: LineProp) => {
+function LineAll({ item, index }: LineProp) {
   return (
     <div className='table__line'>
       <p>{index + 1}</p>
@@ -21,6 +21,6 @@ const LineAll = ({ item, index }: LineProp) => {
       <p>{item.uploader}</p>
     </div>
   );
-};
+}
 
 export default LineAll;

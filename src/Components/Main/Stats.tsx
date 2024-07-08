@@ -1,6 +1,6 @@
 import { useGetStatsQuery } from '../../Store/tournamentAPI';
 
-const Stats = () => {
+function Stats() {
   const { data: stats } = useGetStatsQuery(undefined);
 
   return (
@@ -10,6 +10,6 @@ const Stats = () => {
       </p>
     </div>
   );
-};
+}
 
 export default Stats;

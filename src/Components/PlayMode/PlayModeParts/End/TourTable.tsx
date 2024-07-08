@@ -6,7 +6,7 @@ interface Props {
   setSelectedQ(qNum: number): void;
 }
 
-const TourTable = ({ res, setSelectedQ }: Props) => {
+function TourTable({ res, setSelectedQ }: Props) {
   return (
     <div className='tourend__tbl'>
       {res.map((v) => {
@@ -21,6 +21,6 @@ const TourTable = ({ res, setSelectedQ }: Props) => {
       })}
     </div>
   );
-};
+}
 
 export default TourTable;

@@ -10,7 +10,7 @@ interface Props {
   setEdit: (edit: boolean) => void;
 }
 
-const EditForm = ({ t, dispatch, setEdit }: Props) => {
+function EditForm({ t, dispatch, setEdit }: Props) {
   return (
     <main
       onKeyDown={(e) => {
@@ -69,6 +69,6 @@ const EditForm = ({ t, dispatch, setEdit }: Props) => {
       </div>
     </main>
   );
-};
+}
 
 export default EditForm;

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import arrow_left from './arrow_left.svg';
 import './back.scss';
 
-const Back = () => {
+function Back() {
   const navigate = useNavigate();
   return (
     <>
@@ -13,6 +13,6 @@ const Back = () => {
       </div>
     </>
   );
-};
+}
 
 export default Back;

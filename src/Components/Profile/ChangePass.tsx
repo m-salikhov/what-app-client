@@ -7,7 +7,7 @@ interface ChangePassProp {
   id: string;
 }
 
-const ChangePass = ({ setChangePass, id }: ChangePassProp) => {
+function ChangePass({ setChangePass, id }: ChangePassProp) {
   const [newPass, setNewPass] = useState('');
   const [newPassRepeat, setNewPassRepeat] = useState('');
   const [message, setMessage] = useState('');
@@ -64,6 +64,6 @@ const ChangePass = ({ setChangePass, id }: ChangePassProp) => {
       </div>
     </form>
   );
-};
+}
 
 export default ChangePass;

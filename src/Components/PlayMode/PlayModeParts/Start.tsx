@@ -2,7 +2,7 @@ import { getDate } from '../../../Helpers/getDate';
 import { playModeSlice } from '../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../Hooks/redux';
 
-const Start = () => {
+function Start() {
   const dispatch = useAppDispatch();
 
   const { t } = useAppSelector((state) => state.playModeReducer);
@@ -23,6 +23,6 @@ const Start = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Start;

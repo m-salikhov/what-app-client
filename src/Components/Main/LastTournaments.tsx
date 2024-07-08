@@ -5,7 +5,7 @@ import back from './back.svg';
 import next from './next.svg';
 import { useGetTournamentsAmountPagesQuery, useGetTournamentsLastShortQuery } from '../../Store/tournamentAPI';
 
-const LastTournaments = () => {
+function LastTournaments() {
   const [pageNumber, setPageNumber] = useState(0);
 
   const { data: lastTenTournaments = [] } = useGetTournamentsLastShortQuery(pageNumber * 10);
@@ -51,6 +51,6 @@ const LastTournaments = () => {
       </div>
     </>
   );
-};
+}
 
 export default LastTournaments;

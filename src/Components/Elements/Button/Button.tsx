@@ -9,7 +9,7 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button = ({ onClick, title, extraClass, disabled, onSubmit }: ButtonProps) => {
+function Button({ onClick, title, extraClass, disabled, onSubmit }: ButtonProps) {
   return (
     <div className='btn-elem'>
       <button
@@ -22,6 +22,6 @@ const Button = ({ onClick, title, extraClass, disabled, onSubmit }: ButtonProps)
       </button>
     </div>
   );
-};
+}
 
 export default Button;

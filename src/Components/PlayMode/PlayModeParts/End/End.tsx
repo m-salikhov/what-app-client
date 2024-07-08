@@ -8,7 +8,7 @@ import TourTable from './TourTable';
 import { useGetUserLogfirstQuery, usePostUserResultMutation } from '../../../../Store/userAPI';
 import extractServerErrorMessage from '../../../../Helpers/extractServerErrorMessage';
 
-const End = () => {
+function End() {
   const navigate = useNavigate();
   const { data: currentUser } = useGetUserLogfirstQuery(undefined);
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
@@ -51,6 +51,6 @@ const End = () => {
       {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
     </div>
   );
-};
+}
 
 export default End;

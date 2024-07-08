@@ -11,7 +11,7 @@ import { useGetTornamentsQuery } from '../../Store/tournamentAPI';
 import { initTournament } from '../../Helpers/initValues';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 
-const Tournament = () => {
+function Tournament() {
   const { id = '' } = useParams();
   const { data: t = initTournament, isFetching, error } = useGetTornamentsQuery(id);
   const ref = useRef(null);
@@ -78,6 +78,6 @@ const Tournament = () => {
       </div>
     </main>
   );
-};
+}
 
 export default Tournament;

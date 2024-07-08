@@ -6,7 +6,7 @@ import { playModeSlice } from '../../Store/reducers/PlayModeSlice';
 import './list.scss';
 import { useGetTornamentsShortQuery } from '../../Store/tournamentAPI';
 
-const List = () => {
+function List() {
   useDocTitle('Игровой режим');
 
   const dispatch = useAppDispatch();
@@ -36,6 +36,6 @@ const List = () => {
       </div>
     </main>
   );
-};
+}
 
 export default List;

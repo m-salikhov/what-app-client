@@ -11,7 +11,7 @@ interface Props {
   random?: boolean;
 }
 
-const Question = ({ q, random }: Props) => {
+function Question({ q, random }: Props) {
   const [showAnswer, setShowAnswer] = useState(false);
 
   return (
@@ -35,6 +35,6 @@ const Question = ({ q, random }: Props) => {
       </div>
     </div>
   );
-};
+}
 
 export default Question;

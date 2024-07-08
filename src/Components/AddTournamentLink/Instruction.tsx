@@ -1,4 +1,4 @@
-const Instruction = () => {
+function Instruction() {
   return (
     <div className='addlink__instruction'>
       <p>
@@ -23,6 +23,6 @@ const Instruction = () => {
       </p>
     </div>
   );
-};
+}
 
 export default Instruction;

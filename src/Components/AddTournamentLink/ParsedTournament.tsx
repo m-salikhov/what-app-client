@@ -10,7 +10,7 @@ interface Props {
   handleAddTournament: () => void;
 }
 
-const ParsedTournament = ({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) => {
+function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
   return (
     <>
       <div className='tournament__header'>
@@ -59,6 +59,6 @@ const ParsedTournament = ({ t, setEdit, setErrorsFilling, handleAddTournament }:
       </div>
     </>
   );
-};
+}
 
 export default ParsedTournament;

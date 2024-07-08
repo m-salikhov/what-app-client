@@ -7,7 +7,7 @@ interface Props {
   q: QuestionType;
 }
 
-const QuestionPlane = ({ q }: Props) => {
+function QuestionPlane({ q }: Props) {
   return (
     <div className='question'>
       <div className='question__header'>
@@ -22,6 +22,6 @@ const QuestionPlane = ({ q }: Props) => {
       <Answer q={q} />
     </div>
   );
-};
+}
 
 export default QuestionPlane;

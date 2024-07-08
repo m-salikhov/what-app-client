@@ -7,7 +7,7 @@ import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from '../../Store
 import { createPortal } from 'react-dom';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
 
-const Profile = () => {
+function Profile() {
   useDocTitle('Профиль');
 
   const [changePass, setChangePass] = useState(false);
@@ -73,6 +73,6 @@ const Profile = () => {
       </div>
     </main>
   );
-};
+}
 
 export default Profile;

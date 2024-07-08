@@ -6,7 +6,7 @@ import Timer from './Timer';
 import { playModeSlice } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
 
-const PMQuestion = () => {
+function PMQuestion() {
   const dispatch = useAppDispatch();
   const { t, qCounter } = useAppSelector((state) => state.playModeReducer);
 
@@ -80,6 +80,6 @@ const PMQuestion = () => {
       />
     </div>
   );
-};
+}
 
 export default PMQuestion;

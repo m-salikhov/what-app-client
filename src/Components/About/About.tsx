@@ -2,7 +2,7 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import myPhoto from './photo_profile_copy.jpg';
 import './about.scss';
 
-export const About = () => {
+function About() {
   useDocTitle('О сайте');
 
   return (
@@ -59,4 +59,6 @@ export const About = () => {
       </div>
     </main>
   );
-};
+}
+
+export default About;
