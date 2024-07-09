@@ -8,12 +8,12 @@ interface Props {
   dispatch: (action: Action) => void;
 }
 
-function EditFormQuestion({ q, dispatch }: Props) {
-  const btnTextOption = {
-    def: 'Удалить',
-    back: 'Вернуть',
-  } as const;
+const btnTextOption = {
+  def: 'Удалить',
+  back: 'Вернуть',
+};
 
+function EditFormQuestion({ q, dispatch }: Props) {
   const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
 
   const removeQuestion = () => {
