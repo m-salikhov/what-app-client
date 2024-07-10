@@ -3,7 +3,7 @@ import Button from '../../../Elements/Button/Button';
 import Add from '../../../Elements/Question/Add';
 import Answer from '../../../Elements/Question/Answer';
 import Timer from './Timer';
-import { playModeSlice } from '../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
 
 function PMQuestion() {
@@ -33,10 +33,10 @@ function PMQuestion() {
     setAnswerToQ('');
 
     if (typeof nextQTourNumber === 'undefined') {
-      dispatch(playModeSlice.actions.setStep('END'));
+      dispatch(playModeActions.setStep('END'));
     } else if (q.tourNumber !== nextQTourNumber) {
-      dispatch(playModeSlice.actions.setStep('END_OF_TOUR'));
-    } else dispatch(playModeSlice.actions.qCounterIncrement());
+      dispatch(playModeActions.setStep('END_OF_TOUR'));
+    } else dispatch(playModeActions.qCounterIncrement());
 
     setIsTimeOver(false);
   };
@@ -57,7 +57,7 @@ function PMQuestion() {
               onClick={() => {
                 setAnswerToQ('Да');
                 setMessageAnswerToQ('');
-                dispatch(playModeSlice.actions.setResult(true));
+                dispatch(playModeActions.setResult(true));
               }}
               title={'Да'}
             />
@@ -65,7 +65,7 @@ function PMQuestion() {
               onClick={() => {
                 setAnswerToQ('Нет');
                 setMessageAnswerToQ('');
-                dispatch(playModeSlice.actions.setResult(false));
+                dispatch(playModeActions.setResult(false));
               }}
               title={'Нет'}
             />

@@ -2,9 +2,9 @@ import ListLine from './ListLine';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useAppDispatch } from '../../Hooks/redux';
 import { useEffect } from 'react';
-import { playModeSlice } from '../../Store/reducers/PlayModeSlice';
-import './list.scss';
+import { playModeActions } from '../../Store/reducers/PlayModeSlice';
 import { useGetTornamentsShortQuery } from '../../Store/tournamentAPI';
+import './list.scss';
 
 function List() {
   useDocTitle('Игровой режим');
@@ -14,7 +14,7 @@ function List() {
   const { data: tsShorts = [] } = useGetTornamentsShortQuery(undefined);
 
   useEffect(() => {
-    dispatch(playModeSlice.actions.resetState());
+    dispatch(playModeActions.resetState());
   }, [dispatch]);
 
   return (

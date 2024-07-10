@@ -31,7 +31,7 @@ export const getTournamentById = createAsyncThunk('t/fetchById', async (id: stri
   return t;
 });
 
-export const playModeSlice = createSlice({
+const playModeSlice = createSlice({
   name: 'playModeSlice',
   initialState,
   reducers: {
@@ -57,7 +57,7 @@ export const playModeSlice = createSlice({
         let i = tourNumber - 1;
         let sumPlayedQ = 0;
         while (i > 0) {
-          sumPlayedQ = sumPlayedQ + state.result[i].length;
+          sumPlayedQ += state.result[i].length;
           i--;
         }
         qNumberInTour = qNumber - sumPlayedQ;
@@ -82,4 +82,4 @@ export const playModeSlice = createSlice({
   },
 });
 
-export default playModeSlice.reducer;
+export const { reducer: playModeReducer, actions: playModeActions } = playModeSlice;

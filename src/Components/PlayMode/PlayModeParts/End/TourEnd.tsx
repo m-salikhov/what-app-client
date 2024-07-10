@@ -3,7 +3,7 @@ import Button from '../../../Elements/Button/Button';
 import QuestionPlane from '../../../Elements/Question/QuestionPlane';
 import ResBlock from './ResBlock';
 import TourTable from './TourTable';
-import { playModeSlice } from '../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
 
 function TourEnd() {
@@ -13,8 +13,8 @@ function TourEnd() {
   const endedTourNumber = t.questions[qCounter].tourNumber;
 
   const onClick = () => {
-    dispatch(playModeSlice.actions.qCounterIncrement());
-    dispatch(playModeSlice.actions.setStep('QUESTION'));
+    dispatch(playModeActions.qCounterIncrement());
+    dispatch(playModeActions.setStep('QUESTION'));
   };
 
   const [selectedQ, setSelectedQ] = useState(0);

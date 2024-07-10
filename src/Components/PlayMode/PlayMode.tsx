@@ -8,6 +8,21 @@ import { Step, getTournamentById } from '../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import './playmode.scss';
 
+function PlayModeChange(stepName: Step) {
+  switch (stepName) {
+    case 'START':
+      return <Start />;
+    case 'QUESTION':
+      return <PMQuestion />;
+    case 'END_OF_TOUR':
+      return <TourEnd />;
+    case 'END':
+      return <End />;
+    default:
+      return null;
+  }
+}
+
 function PlayMode() {
   const dispatch = useAppDispatch();
 
@@ -18,21 +33,6 @@ function PlayMode() {
   useEffect(() => {
     dispatch(getTournamentById(id as string));
   }, [id, dispatch]);
-
-  function PlayModeChange(stepName: Step) {
-    switch (stepName) {
-      case 'START':
-        return <Start />;
-      case 'QUESTION':
-        return <PMQuestion />;
-      case 'END_OF_TOUR':
-        return <TourEnd />;
-      case 'END':
-        return <End />;
-      default:
-        return null;
-    }
-  }
 
   return (
     <main>

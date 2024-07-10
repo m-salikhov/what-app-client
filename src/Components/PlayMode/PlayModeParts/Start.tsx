@@ -1,5 +1,5 @@
 import { getDate } from '../../../Helpers/getDate';
-import { playModeSlice } from '../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../Hooks/redux';
 
 function Start() {
@@ -19,7 +19,7 @@ function Start() {
         <p>{t.editors.join(', ')}</p>
       </div>
       <div>
-        <button onClick={() => dispatch(playModeSlice.actions.setStep('QUESTION'))}>Начать игру</button>
+        <button onClick={() => dispatch(playModeActions.setStep('QUESTION'))}>Начать игру</button>
       </div>
     </div>
   );
