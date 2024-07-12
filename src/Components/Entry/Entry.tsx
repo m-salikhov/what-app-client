@@ -1,6 +1,6 @@
+import { ChangeEvent, FormEvent, useState, MouseEvent, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../Hooks/redux';
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { FormUser } from '../../Types/user';
 import ModalReg from './ModalReg';
 import { initFormUser } from '../../Helpers/initValues';
@@ -11,6 +11,7 @@ import { Tooltip } from 'react-tooltip';
 import checkFormFields from './helpers/checkFormFields';
 import { useLoginMutation, useRegistrationMutation, userAPI } from '../../Store/userAPI';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import Button from '../Elements/Button/Button';
 
 function Entry() {
   useDocTitle('Вход');
@@ -21,10 +22,12 @@ function Entry() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reg, setReg] = useState(false);
 
-  const [login, { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState }] = useLoginMutation({
-    fixedCacheKey: 'login',
-  });
-  const [registration, { error: errorReg }] = useRegistrationMutation();
+  const [login, { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState, isLoading: isLoadingLogin }] =
+    useLoginMutation({
+      fixedCacheKey: 'login',
+    });
+  const [registration, { error: errorReg, isLoading: isLoadingReg, reset: resetReginState }] =
+    useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -40,14 +43,18 @@ function Entry() {
     if (reg) {
       await registration(formUser)
         .unwrap()
-        .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)));
+        .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+        .catch(() => {});
       setIsModalOpen(true);
       return;
     }
 
     await login({ email: formUser.email, password: formUser.password })
       .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)));
+      .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+      .catch(() => {});
+
+    localStorage.setItem('test', 'yes');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +63,20 @@ function Entry() {
       [e.target.name]: e.target.value,
     });
   };
+
+  const onClickAuthRegChangeBtn = (e: MouseEvent) => {
+    e.preventDefault();
+    resetLoginState();
+    setErrorMessage('');
+    setReg(!reg);
+  };
+
+  useEffect(() => {
+    return () => {
+      resetReginState();
+      resetLoginState();
+    };
+  }, [resetReginState, resetLoginState]);
 
   if (loginSuccess) {
     return <Navigate to='/' replace />;
@@ -92,10 +113,10 @@ function Entry() {
                 <h2>Пароль</h2>
                 <input
                   type='password'
-                  onChange={onChange}
                   name='password'
                   autoComplete='on'
                   placeholder='password'
+                  onChange={onChange}
                 />{' '}
               </label>
               <label className={reg ? 'entry__input' : 'entry__input reg'}>
@@ -116,17 +137,12 @@ function Entry() {
               )}
 
               <div className='entry__buttons'>
-                <button type='submit'>Отправить</button>
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    resetLoginState();
-                    setErrorMessage('');
-                    setReg(!reg);
-                  }}
-                >
-                  {reg ? 'Авторизироваться' : 'Зарегистрироваться'}
-                </button>
+                <Button title='Отправить' type='submit' disabled={isLoadingLogin || isLoadingReg} />
+                <Button
+                  title={reg ? 'Авторизироваться' : 'Зарегистрироваться'}
+                  onClick={onClickAuthRegChangeBtn}
+                  disabled={isLoadingLogin || isLoadingReg}
+                />
               </div>
             </form>
           </div>

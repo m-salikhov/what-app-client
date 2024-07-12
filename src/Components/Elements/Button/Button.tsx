@@ -1,22 +1,24 @@
-import { FormEvent } from 'react';
+import { FormEvent, MouseEvent } from 'react';
 import './btn.scss';
 
 interface ButtonProps {
-  onClick?: () => void;
-  onSubmit?: (e: FormEvent<EventTarget>) => void;
   title: string;
-  extraClass?: string;
   disabled?: boolean;
+  extraClass?: string;
+  type?: 'button' | 'submit' | 'reset' | undefined;
+  onClick?: (e: MouseEvent) => void;
+  onSubmit?: (e: FormEvent<EventTarget>) => void;
 }
 
-function Button({ onClick, title, extraClass, disabled, onSubmit }: ButtonProps) {
+function Button({ onClick, title, extraClass, disabled, onSubmit, type }: ButtonProps) {
   return (
     <div className='btn-elem'>
       <button
         className={extraClass ? `btn ${extraClass}` : 'btn'}
-        type='button'
-        onClick={onClick || onSubmit}
-        disabled={disabled ? true : false}
+        type={type || 'button'}
+        onClick={onClick}
+        onSubmit={onSubmit}
+        disabled={disabled}
       >
         {title}
       </button>

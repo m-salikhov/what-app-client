@@ -58,6 +58,7 @@ export const userAPI = createApi({
 
 export const {
   useGetUserLogfirstQuery,
+  useLazyGetUserLogfirstQuery,
   useGetUserLogoutQuery,
   useLazyGetUserLogoutQuery,
   useLoginMutation,

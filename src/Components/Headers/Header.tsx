@@ -10,13 +10,18 @@ function Header() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
-  const [trigger] = useLazyGetUserLogoutQuery();
+  let test = localStorage.getItem('test');
+
+  const { data: currentUser } = useGetUserLogfirstQuery(undefined, { skip: Boolean(!test) });
+  const [triggerUserLogoutQuery] = useLazyGetUserLogoutQuery();
 
   const logout = () => {
-    trigger(undefined);
+    localStorage.removeItem('test');
     dispatch(userAPI.util.resetApiState());
+    triggerUserLogoutQuery(undefined);
   };
+
+  console.log(localStorage.getItem('test'));
 
   const handleMobMenu = () => {
     const { innerWidth } = window;
