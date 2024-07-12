@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, MouseEvent, useEffect } from 'react';
+import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppDispatch } from '../../Hooks/redux';
 import { FormUser } from '../../Types/user';
@@ -26,8 +26,7 @@ function Entry() {
     useLoginMutation({
       fixedCacheKey: 'login',
     });
-  const [registration, { error: errorReg, isLoading: isLoadingReg, reset: resetReginState }] =
-    useRegistrationMutation();
+  const [registration, { error: errorReg, isLoading: isLoadingReg }] = useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -54,7 +53,7 @@ function Entry() {
       .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
       .catch(() => {});
 
-    localStorage.setItem('test', 'yes');
+    localStorage.setItem('rememberMe', 'yes');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -70,13 +69,6 @@ function Entry() {
     setErrorMessage('');
     setReg(!reg);
   };
-
-  useEffect(() => {
-    return () => {
-      resetReginState();
-      resetLoginState();
-    };
-  }, [resetReginState, resetLoginState]);
 
   if (loginSuccess) {
     return <Navigate to='/' replace />;

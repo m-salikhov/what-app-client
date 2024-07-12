@@ -3,25 +3,22 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../Hooks/redux';
 import owlGreen from './owlGreen.svg';
 import './header.scss';
-import { useGetUserLogfirstQuery, useLazyGetUserLogoutQuery, userAPI } from '../../Store/userAPI';
+import { useLazyGetUserLogoutQuery, userAPI } from '../../Store/userAPI';
+import { useInitLogin } from '../../Hooks/useInitLogin';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  let test = localStorage.getItem('test');
-
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined, { skip: Boolean(!test) });
+  const currentUser = useInitLogin();
   const [triggerUserLogoutQuery] = useLazyGetUserLogoutQuery();
 
   const logout = () => {
-    localStorage.removeItem('test');
+    localStorage.removeItem('rememberMe');
     dispatch(userAPI.util.resetApiState());
     triggerUserLogoutQuery(undefined);
   };
-
-  console.log(localStorage.getItem('test'));
 
   const handleMobMenu = () => {
     const { innerWidth } = window;
