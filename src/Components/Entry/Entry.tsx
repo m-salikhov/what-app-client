@@ -6,12 +6,12 @@ import ModalReg from './ModalReg';
 import { initFormUser } from '../../Helpers/initValues';
 import entryImg from './entry_img.svg';
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import './entry.scss';
 import { Tooltip } from 'react-tooltip';
 import checkFormFields from './helpers/checkFormFields';
 import { useLoginMutation, useRegistrationMutation, userAPI } from '../../Store/userAPI';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import Button from '../Elements/Button/Button';
+import './entry.scss';
 
 function Entry() {
   useDocTitle('Вход');
@@ -19,32 +19,29 @@ function Entry() {
 
   const [formUser, setFormUser] = useState<FormUser>(initFormUser);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [reg, setReg] = useState(false);
+  const [isReg, setReg] = useState(false);
 
-  const [login, { isSuccess: loginSuccess, error: errorLogin, reset: resetLoginState, isLoading: isLoadingLogin }] =
-    useLoginMutation({
-      fixedCacheKey: 'login',
-    });
-  const [registration, { error: errorReg, isLoading: isLoadingReg }] = useRegistrationMutation();
+  const [login, { isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin, reset }] = useLoginMutation({
+    fixedCacheKey: 'login',
+  });
+  const [registration, { error: errorReg, isLoading: isLoadingReg, isSuccess: regSuccess }] = useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
 
-    setErrorMessage('');
-
-    const FormFieldsErrors = checkFormFields(formUser, reg);
+    const FormFieldsErrors = checkFormFields(formUser, isReg);
     if (FormFieldsErrors) {
       setErrorMessage(FormFieldsErrors);
       return;
     }
 
-    if (reg) {
+    if (isReg) {
       await registration(formUser)
         .unwrap()
         .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
         .catch(() => {});
-      setIsModalOpen(true);
+      localStorage.setItem('rememberMe', 'yes');
+
       return;
     }
 
@@ -52,11 +49,13 @@ function Entry() {
       .unwrap()
       .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
       .catch(() => {});
-
+    reset();
     localStorage.setItem('rememberMe', 'yes');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setErrorMessage('');
+
     setFormUser({
       ...formUser,
       [e.target.name]: e.target.value,
@@ -65,19 +64,25 @@ function Entry() {
 
   const onClickAuthRegChangeBtn = (e: MouseEvent) => {
     e.preventDefault();
-    resetLoginState();
     setErrorMessage('');
-    setReg(!reg);
+    setReg(!isReg);
   };
 
   if (loginSuccess) {
     return <Navigate to='/' replace />;
   }
 
+  if (errorLogin || errorReg) {
+    const errMessage = extractServerErrorMessage(errorLogin || errorReg);
+    if (errMessage !== errorMessage) {
+      setErrorMessage(errMessage);
+    }
+  }
+
   return (
     <>
       {/* окно при успешной регистрации */}
-      {isModalOpen ? <ModalReg /> : null}
+      {regSuccess ? <ModalReg /> : null}
 
       <main className='entry__wrapper'>
         <div className='entry'>
@@ -94,9 +99,9 @@ function Entry() {
                 <h2>Почта</h2>
                 <input type='email' onChange={onChange} name='email' autoComplete='on' placeholder='email' />
               </label>
-              {!reg && <Tooltip anchorSelect='#tooltip-mail' place='bottom' />}
+              {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='bottom' />}
 
-              <label className={reg ? 'entry__input' : 'entry__input reg'}>
+              <label className={isReg ? 'entry__input' : 'entry__input reg'}>
                 <h2>Псевдоним</h2>
                 <input type='text' onChange={onChange} name='username' autoComplete='off' placeholder='username' />
               </label>
@@ -111,7 +116,7 @@ function Entry() {
                   onChange={onChange}
                 />{' '}
               </label>
-              <label className={reg ? 'entry__input' : 'entry__input reg'}>
+              <label className={isReg ? 'entry__input' : 'entry__input reg'}>
                 <h2>Повторите пароль</h2>
                 <input
                   autoComplete='on'
@@ -121,17 +126,17 @@ function Entry() {
                   onChange={onChange}
                 />{' '}
               </label>
-              {(errorMessage || errorLogin || errorReg) && (
+              {errorMessage && (
                 <div className='entry__error'>
                   <div className='entry__error--block'></div>
-                  <p>{errorMessage || extractServerErrorMessage(errorLogin || errorReg)}</p>
+                  <p>{errorMessage}</p>
                 </div>
               )}
 
               <div className='entry__buttons'>
                 <Button title='Отправить' type='submit' disabled={isLoadingLogin || isLoadingReg} />
                 <Button
-                  title={reg ? 'Авторизироваться' : 'Зарегистрироваться'}
+                  title={isReg ? 'Авторизироваться' : 'Зарегистрироваться'}
                   onClick={onClickAuthRegChangeBtn}
                   disabled={isLoadingLogin || isLoadingReg}
                 />
