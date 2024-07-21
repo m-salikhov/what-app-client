@@ -1,21 +1,23 @@
 import { useAppDispatch } from '../../../Hooks/redux';
 import { useLoginMutation, userAPI } from '../../../Store/userAPI';
 
-export function useLogin(email: string, password: string) {
+export function useLogin() {
   const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation({
     fixedCacheKey: 'login',
   });
 
   const dispatch = useAppDispatch();
 
-  async function login() {
+  async function login(email: string, password: string) {
     await loginFunc({ email, password })
       .unwrap()
       .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+      .then(() => {
+        localStorage.setItem('rememberMe', 'yes');
+      })
       .catch(() => {});
 
     reset();
-    localStorage.setItem('rememberMe', 'yes');
   }
 
   return { isSuccess, error, isLoading, login };

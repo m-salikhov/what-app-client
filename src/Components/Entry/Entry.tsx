@@ -12,6 +12,7 @@ import { useLoginMutation, useRegistrationMutation, userAPI } from '../../Store/
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import Button from '../Elements/Button/Button';
 import './entry.scss';
+import { useLogin } from './hooks/useLogin';
 
 function Entry() {
   useDocTitle('Вход');
@@ -21,9 +22,12 @@ function Entry() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isReg, setReg] = useState(false);
 
-  const [login, { isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin, reset }] = useLoginMutation({
-    fixedCacheKey: 'login',
-  });
+  // const [login, { isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin, reset }] = useLoginMutation({
+  //   fixedCacheKey: 'login',
+  // });
+
+  const { login, isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin } = useLogin();
+
   const [registration, { error: errorReg, isLoading: isLoadingReg, isSuccess: regSuccess }] = useRegistrationMutation();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
@@ -35,22 +39,24 @@ function Entry() {
       return;
     }
 
-    if (isReg) {
-      await registration(formUser)
-        .unwrap()
-        .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
-        .catch(() => {});
-      localStorage.setItem('rememberMe', 'yes');
+    login(formUser.email, formUser.password);
 
-      return;
-    }
+    // if (isReg) {
+    //   await registration(formUser)
+    //     .unwrap()
+    //     .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+    //     .catch(() => {});
+    //   localStorage.setItem('rememberMe', 'yes');
 
-    await login({ email: formUser.email, password: formUser.password })
-      .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
-      .catch(() => {});
-    reset();
-    localStorage.setItem('rememberMe', 'yes');
+    //   return;
+    // }
+
+    // await login({ email: formUser.email, password: formUser.password })
+    //   .unwrap()
+    //   .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+    //   .catch(() => {});
+    // reset();
+    // localStorage.setItem('rememberMe', 'yes');
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -78,6 +84,8 @@ function Entry() {
   if (loginSuccess) {
     return <Navigate to='/' replace />;
   }
+
+  console.log(localStorage.getItem('rememberMe'));
 
   return (
     <>
