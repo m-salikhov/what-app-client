@@ -68,15 +68,15 @@ function Entry() {
     setReg(!isReg);
   };
 
-  if (loginSuccess) {
-    return <Navigate to='/' replace />;
-  }
-
   if (errorLogin || errorReg) {
     const errMessage = extractServerErrorMessage(errorLogin || errorReg);
     if (errMessage !== errorMessage) {
       setErrorMessage(errMessage);
     }
+  }
+
+  if (loginSuccess) {
+    return <Navigate to='/' replace />;
   }
 
   return (
