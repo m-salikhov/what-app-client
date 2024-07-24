@@ -11,7 +11,7 @@ export function useLogin() {
   async function login(email: string, password: string) {
     await loginFunc({ email, password })
       .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+      .then((data) => dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data)))
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })

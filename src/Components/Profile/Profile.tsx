@@ -3,7 +3,7 @@ import { getDate } from '../../Helpers/getDate';
 import ChangePass from './ChangePass';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import './profile.scss';
-import { useGetUserLogfirstQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
+import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
 import { createPortal } from 'react-dom';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
 
@@ -11,7 +11,7 @@ function Profile() {
   useDocTitle('Профиль');
 
   const [changePass, setChangePass] = useState(false);
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const { data: currentUser } = useInitialLoginQuery(undefined);
   const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || '');
   const { data: results } = useGetUserResultShortQuery(currentUser?.id || '');
 

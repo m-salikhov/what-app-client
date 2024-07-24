@@ -1,31 +1,22 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../Hooks/redux';
+import { useLogout } from '../../Hooks/useLogout';
+import { useInitialLogin } from '../../Hooks/useInitialLogin';
+import { useWindowSize } from '../../Hooks/useWindowSize';
 import owlGreen from './owlGreen.svg';
 import './header.scss';
-import { useLazyGetUserLogoutQuery, userAPI } from '../../Store/userAPI';
-import { useInitLogin } from '../../Hooks/useInitLogin';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const currentUser = useInitLogin();
-  const [triggerUserLogoutQuery] = useLazyGetUserLogoutQuery();
-
-  const logout = () => {
-    localStorage.removeItem('rememberMe');
-    dispatch(userAPI.util.resetApiState());
-    triggerUserLogoutQuery(undefined);
-  };
+  const currentUser = useInitialLogin();
+  const { width } = useWindowSize();
+  const logout = useLogout();
 
   const handleMobMenu = () => {
-    const { innerWidth } = window;
-
-    if (innerWidth > 1050) return;
-    if (innerWidth < 1050 && !openMobMenu) document.body.style.overflow = 'hidden';
-    if (innerWidth < 1050 && openMobMenu) document.body.style.overflow = 'visible';
+    if (width > 1050) return;
+    if (width < 1050 && !openMobMenu) document.body.style.overflow = 'hidden';
+    if (width < 1050 && openMobMenu) document.body.style.overflow = 'visible';
 
     setOpenMobMenu(!openMobMenu);
   };

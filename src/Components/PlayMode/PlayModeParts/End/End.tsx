@@ -5,12 +5,12 @@ import Button from '../../../Elements/Button/Button';
 import QuestionPlane from '../../../Elements/Question/QuestionPlane';
 import ResBlock from './ResBlock';
 import TourTable from './TourTable';
-import { useGetUserLogfirstQuery, usePostUserResultMutation } from '../../../../Store/userAPI';
+import { useInitialLoginQuery, usePostUserResultMutation } from '../../../../Store/userAPI';
 import extractServerErrorMessage from '../../../../Helpers/extractServerErrorMessage';
 
 function End() {
   const navigate = useNavigate();
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const { data: currentUser } = useInitialLoginQuery(undefined);
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
   const [selectedQ, setSelectedQ] = useState(0);

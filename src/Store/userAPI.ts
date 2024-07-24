@@ -8,11 +8,11 @@ export const userAPI = createApi({
   tagTypes: ['result'],
   keepUnusedDataFor: 86400,
   endpoints: (build) => ({
-    getUserLogfirst: build.query<UserType, undefined>({
+    initialLogin: build.query<UserType, undefined>({
       query: () => routes.authLogFirst,
     }),
 
-    getUserLogout: build.query<{ message: string }, undefined>({
+    logout: build.query<{ message: string }, undefined>({
       query: () => routes.authLogout,
     }),
 
@@ -57,10 +57,10 @@ export const userAPI = createApi({
 });
 
 export const {
-  useGetUserLogfirstQuery,
-  useLazyGetUserLogfirstQuery,
-  useGetUserLogoutQuery,
-  useLazyGetUserLogoutQuery,
+  useInitialLoginQuery,
+  useLazyInitialLoginQuery,
+  useLogoutQuery,
+  useLazyLogoutQuery,
   useLoginMutation,
   useRegistrationMutation,
   useGetUserResultShortQuery,

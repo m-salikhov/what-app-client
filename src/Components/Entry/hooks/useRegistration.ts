@@ -10,7 +10,7 @@ export function useRegistration() {
   async function registration(formUser: FormUser) {
     await registrationFunc(formUser)
       .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
+      .then((data) => dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data)))
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })

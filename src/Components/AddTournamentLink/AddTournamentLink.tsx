@@ -11,7 +11,7 @@ import { useAddTournamentMutation, useParseLinkMutation } from '../../Store/tour
 import removeQuestionsID from './helpers/removeQuestionsID';
 import './addTournamentLink.scss';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
-import { useGetUserLogfirstQuery } from '../../Store/userAPI';
+import { useInitialLoginQuery } from '../../Store/userAPI';
 import { guest } from '../../constants';
 import ParsedTournament from './ParsedTournament';
 
@@ -26,7 +26,7 @@ function AddTournamentLink() {
 
   const [t, dispatch] = useReducer(reducer, initTournament);
 
-  const { data: currentUser } = useGetUserLogfirstQuery(undefined);
+  const { data: currentUser } = useInitialLoginQuery(undefined);
   const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
