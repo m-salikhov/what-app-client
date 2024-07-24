@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAppDispatch } from '../../Hooks/redux';
 import { FormUser } from '../../Types/user';
 import ModalReg from './ModalReg';
 import { initFormUser } from '../../Helpers/initValues';
@@ -8,27 +7,22 @@ import entryImg from './entry_img.svg';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { Tooltip } from 'react-tooltip';
 import checkFormFields from './helpers/checkFormFields';
-import { useLoginMutation, useRegistrationMutation, userAPI } from '../../Store/userAPI';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import Button from '../Elements/Button/Button';
-import './entry.scss';
 import { useLogin } from './hooks/useLogin';
+import { useRegistration } from './hooks/useRegistration';
+import './entry.scss';
 
 function Entry() {
   useDocTitle('Вход');
-  const dispatch = useAppDispatch();
 
   const [formUser, setFormUser] = useState<FormUser>(initFormUser);
   const [errorMessage, setErrorMessage] = useState('');
   const [isReg, setReg] = useState(false);
 
-  // const [login, { isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin, reset }] = useLoginMutation({
-  //   fixedCacheKey: 'login',
-  // });
-
   const { login, isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin } = useLogin();
 
-  const [registration, { error: errorReg, isLoading: isLoadingReg, isSuccess: regSuccess }] = useRegistrationMutation();
+  const { registration, isSuccess: regSuccess, error: errorReg, isLoading: isLoadingReg } = useRegistration();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
@@ -39,24 +33,7 @@ function Entry() {
       return;
     }
 
-    login(formUser.email, formUser.password);
-
-    // if (isReg) {
-    //   await registration(formUser)
-    //     .unwrap()
-    //     .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
-    //     .catch(() => {});
-    //   localStorage.setItem('rememberMe', 'yes');
-
-    //   return;
-    // }
-
-    // await login({ email: formUser.email, password: formUser.password })
-    //   .unwrap()
-    //   .then((data) => dispatch(userAPI.util.upsertQueryData('getUserLogfirst', undefined, data)))
-    //   .catch(() => {});
-    // reset();
-    // localStorage.setItem('rememberMe', 'yes');
+    isReg ? registration(formUser) : login(formUser.email, formUser.password);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -84,8 +61,6 @@ function Entry() {
   if (loginSuccess) {
     return <Navigate to='/' replace />;
   }
-
-  console.log(localStorage.getItem('rememberMe'));
 
   return (
     <>
