@@ -1,15 +1,15 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../Hooks/useLogout';
-import { useInitialLogin } from '../../Hooks/useInitialLogin';
 import { useWindowSize } from '../../Hooks/useWindowSize';
 import owlGreen from './owlGreen.svg';
+import { useInitialLoginQuery } from '../../Store/userAPI';
 import './header.scss';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
   const navigate = useNavigate();
-  const currentUser = useInitialLogin();
+  const { data: currentUser } = useInitialLoginQuery(undefined);
   const { width } = useWindowSize();
   const logout = useLogout();
 

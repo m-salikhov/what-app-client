@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './CommonStyle/style.scss';
 import All from './Components/AllTournaments/All';
 import Entry from './Components/Entry/Entry';
 import Layout from './Components/Lyout/Layout';
@@ -12,6 +11,7 @@ import PlayMode from './Components/PlayMode/PlayMode';
 import About from './Components/About/About';
 import AddTournamentLink from './Components/AddTournamentLink/AddTournamentLink';
 import NotFound from './Components/NotFound/NotFound';
+import './CommonStyle/style.scss';
 
 function App() {
   return (

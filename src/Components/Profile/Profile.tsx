@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { getDate } from '../../Helpers/getDate';
 import ChangePass from './ChangePass';
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import './profile.scss';
 import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
 import { createPortal } from 'react-dom';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
+import './profile.scss';
 
 function Profile() {
   useDocTitle('Профиль');
