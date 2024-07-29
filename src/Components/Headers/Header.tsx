@@ -10,6 +10,7 @@ function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
   const navigate = useNavigate();
   const { data: currentUser } = useInitialLoginQuery(undefined);
+
   const { width } = useWindowSize();
   const logout = useLogout();
 

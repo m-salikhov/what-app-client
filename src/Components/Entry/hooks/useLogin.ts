@@ -1,5 +1,6 @@
 import { useAppDispatch } from '../../../Hooks/redux';
 import { useLoginMutation, userAPI } from '../../../Store/userAPI';
+import { FormUser } from '../../../Types/user';
 
 export function useLogin() {
   const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation({
@@ -8,7 +9,9 @@ export function useLogin() {
 
   const dispatch = useAppDispatch();
 
-  async function login(email: string, password: string) {
+  async function login(formUser: FormUser) {
+    const { email, password } = formUser;
+
     await loginFunc({ email, password })
       .unwrap()
       .then((data) => dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data)))

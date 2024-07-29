@@ -1,3 +1,4 @@
+import { initUser } from '../Helpers/initValues';
 import { useLazyLogoutQuery, userAPI } from '../Store/userAPI';
 import { useAppDispatch } from './redux';
 
@@ -7,7 +8,7 @@ export function useLogout() {
 
   const logout = () => {
     localStorage.removeItem('rememberMe');
-    dispatch(userAPI.util.resetApiState());
+    dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, initUser));
     triggerLogoutQuery(undefined);
   };
 

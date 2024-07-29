@@ -33,7 +33,7 @@ function Entry() {
       return;
     }
 
-    isReg ? registration(formUser) : login(formUser.email, formUser.password);
+    isReg ? registration(formUser) : login(formUser);
   };
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {

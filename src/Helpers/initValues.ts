@@ -1,7 +1,6 @@
 import { QuestionType } from '../Types/question';
 import { TournamentShortType, TournamentType } from '../Types/tournament';
 import { UserType } from '../Types/user';
-import { guest } from '../constants';
 
 export const initTournamentShort: TournamentShortType = {
   id: 0,
@@ -22,9 +21,9 @@ export const initTournament: TournamentType = {
 };
 
 export const initUser: UserType = {
-  id: guest.id,
+  id: '',
   email: '',
-  username: guest.username,
+  username: '',
   role: 'user',
   password: '',
   date: 0,
