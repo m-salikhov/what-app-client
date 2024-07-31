@@ -34,9 +34,11 @@ function Header() {
           <li>
             <Link to='/about'>О сайте</Link>
           </li>
+
           <li>
             <Link to='/playmode'>Игровой режим </Link>
           </li>
+
           {currentUser?.role === 'superuser' && (
             <li>
               <Link to='/edit'> Редактировать</Link>
@@ -50,11 +52,13 @@ function Header() {
           <li>
             <Link to='/all'>Все турниры</Link>
           </li>
+
           {currentUser?.id && (
             <li>
               <Link to='/profile'>Профиль</Link>
             </li>
           )}
+
           {currentUser?.id ? (
             <li>
               <Link to='/' onClick={logout}>

@@ -24,8 +24,7 @@ export const initUser: UserType = {
   id: '',
   email: '',
   username: '',
-  role: 'user',
-  password: '',
+  role: '',
   date: 0,
 };
 

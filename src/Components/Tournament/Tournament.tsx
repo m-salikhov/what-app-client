@@ -4,18 +4,17 @@ import { getDate } from '../../Helpers/getDate';
 import Question from '../Elements/Question/Question';
 import Back from '../Elements/Back/Back';
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import { getTourAnchors, getToursParagraphs, scroll } from './scrollLogic';
+import { getToursParagraphs, scroll } from './scrollLogic';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import './tournament.scss';
 import { useGetTornamentsQuery } from '../../Store/tournamentAPI';
 import { initTournament } from '../../Helpers/initValues';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import './tournament.scss';
 
 function Tournament() {
   const { id = '' } = useParams();
-  const { data: t = initTournament, isFetching, error } = useGetTornamentsQuery(id);
+  const { data: t = initTournament, isSuccess, error } = useGetTornamentsQuery(id);
   const ref = useRef(null);
-  const tourAnchors = getTourAnchors(t);
 
   useDocTitle(t.title);
 
@@ -61,12 +60,12 @@ function Tournament() {
           <div className='back'>
             <Back />
           </div>
-          <div className='tournament__content_tours' onClick={(e) => scroll(e, ref.current, tourAnchors)}>
+          <div className='tournament__content_tours' onClick={(e) => scroll(e, ref.current, t)}>
             {getToursParagraphs(t.tours)}
           </div>
         </div>
         <TransitionGroup className='tournament__content_qs'>
-          {!isFetching &&
+          {isSuccess &&
             t.questions.map((v) => {
               return (
                 <CSSTransition key={v.id} classNames='question' timeout={400}>

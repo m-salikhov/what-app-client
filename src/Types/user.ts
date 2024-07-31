@@ -2,7 +2,7 @@ export interface UserType {
   id: string;
   email: string;
   username: string;
-  role: 'user' | 'superuser' | 'admin';
+  role: 'user' | 'superuser' | 'admin' | '';
   password?: string;
   date: number;
 }

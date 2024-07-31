@@ -1,20 +1,20 @@
 import { TournamentType } from '../../Types/tournament';
 import { MouseEvent } from 'react';
 
-export const getTourAnchors = (t: TournamentType) => {
+const getToursAnchors = (tournament: TournamentType) => {
   const tours: number[] = [];
-  const questionIndex: number[] = [];
+  const toursAnchors: number[] = [];
 
-  t.questions.forEach((v, i) => {
+  tournament.questions.forEach((v, i) => {
     if (v.qNumber < 1) return;
 
     if (!tours.includes(v.tourNumber)) {
       tours.push(v.tourNumber);
-      questionIndex.push(i);
+      toursAnchors.push(i);
     }
   });
 
-  return questionIndex;
+  return toursAnchors;
 };
 
 export const getToursParagraphs = (tours: number) => {
@@ -27,7 +27,9 @@ export const getToursParagraphs = (tours: number) => {
   return arr;
 };
 
-export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement | null, arrAnchors: number[]) => {
+export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement | null, tournament: TournamentType) => {
+  const arrAnchors = getToursAnchors(tournament);
+
   let id: number;
   if (e.target instanceof HTMLElement && e.target.id) {
     id = Number(e.target.id);
