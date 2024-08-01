@@ -4,7 +4,6 @@ import Header from '../Headers/Header';
 import { useInitialLogin } from '../../Hooks/useInitialLogin';
 
 function Layout() {
-  console.log('LAYOUT');
   useInitialLogin();
 
   return (

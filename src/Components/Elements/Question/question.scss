@@ -126,10 +126,10 @@
 @media (max-width: 600px) {
   .question {
     .question__header {
+      padding: 0.5rem;
       h3 {
         font-size: 1rem;
       }
-      padding: 0.5rem;
       a {
         display: flex;
         align-items: center;
