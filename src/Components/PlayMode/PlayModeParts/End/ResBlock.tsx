@@ -1,9 +1,10 @@
 import { useAppSelector } from '../../../../Hooks/redux';
 import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
+import { StepProps } from '../Types/playmodeTypes';
 
-function ResBlock() {
-  const { t, qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
-  const tour = t.questions[qCounter].tourNumber;
+function ResBlock({ tournament }: StepProps) {
+  const { qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
+  const tour = tournament.questions[qCounter].tourNumber;
 
   const calcTourResult = (tour: number, res: ResultType) => {
     const tourResArrBoolean = res[tour];
@@ -22,10 +23,10 @@ function ResBlock() {
         {`Результат ${tour}-го тура:`}
         <span>{`${TourCount} из ${TourLength}`}</span>{' '}
       </p>
-      {tour === t.tours && (
+      {tour === tournament.tours && (
         <p>
           {`Результат общий:`}
-          <span>{`${answeredCount} из ${t.questionsQuantity}`}</span>{' '}
+          <span>{`${answeredCount} из ${tournament.questionsQuantity}`}</span>{' '}
         </p>
       )}
     </div>

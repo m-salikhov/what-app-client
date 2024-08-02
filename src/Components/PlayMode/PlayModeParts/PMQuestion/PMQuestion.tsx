@@ -1,21 +1,22 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import Button from '../../../Elements/Button/Button';
 import Add from '../../../Elements/Question/Add';
 import Answer from '../../../Elements/Question/Answer';
 import Timer from './Timer';
 import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
+import { StepProps } from '../Types/playmodeTypes';
 
-function PMQuestion() {
+function PMQuestion({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
-  const { t, qCounter } = useAppSelector((state) => state.playModeReducer);
+  const { qCounter } = useAppSelector((state) => state.playModeReducer);
 
   const [isTimeOver, setIsTimeOver] = useState(false);
   const [answerToQ, setAnswerToQ] = useState('');
   const [messageToQ, setMessageAnswerToQ] = useState('');
 
-  const q = t.questions[qCounter];
-  const nextQTourNumber = t.questions[qCounter + 1]?.tourNumber;
+  const q = tournament.questions[qCounter];
+  const nextQTourNumber = tournament.questions[qCounter + 1]?.tourNumber;
 
   const onClick = () => {
     //если нажать "готов ответ" во время отсчёта таймера
@@ -41,6 +42,19 @@ function PMQuestion() {
     setIsTimeOver(false);
   };
 
+  const onClickChoiseAnsBtn = (e: MouseEvent) => {
+    const { id } = e.currentTarget;
+    setAnswerToQ(id ? 'Да' : 'Нет');
+    setMessageAnswerToQ('');
+    dispatch(
+      playModeActions.setResult({
+        qNumber: q.qNumber,
+        tourNumber: q.tourNumber,
+        isAnswered: Boolean(id),
+      })
+    );
+  };
+
   return (
     <div className='pmq'>
       <h3>Вопрос {q.qNumber}</h3>
@@ -53,22 +67,8 @@ function PMQuestion() {
         <>
           <p className='isanswer__header'>{answerToQ ? `Ответ ${answerToQ} принят` : 'Вам удалось ответить?'}</p>
           <div className='isanswer'>
-            <Button
-              onClick={() => {
-                setAnswerToQ('Да');
-                setMessageAnswerToQ('');
-                dispatch(playModeActions.setResult(true));
-              }}
-              title={'Да'}
-            />
-            <Button
-              onClick={() => {
-                setAnswerToQ('Нет');
-                setMessageAnswerToQ('');
-                dispatch(playModeActions.setResult(false));
-              }}
-              title={'Нет'}
-            />
+            <Button onClick={onClickChoiseAnsBtn} title={'Да'} id='1' />
+            <Button onClick={onClickChoiseAnsBtn} title={'Нет'} />
           </div>
         </>
       )}

@@ -14,6 +14,7 @@ import { useInitialLoginQuery } from '../../Store/userAPI';
 import { guest } from '../../constants';
 import ParsedTournament from './ParsedTournament';
 import './addTournamentLink.scss';
+import { Spinner } from '../Elements/Spinner/Spinner';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -99,12 +100,7 @@ function AddTournamentLink() {
         <p className='addlink__message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
-      {(isLoading || isLoadingAdd) && (
-        <div className='spinner'>
-          {' '}
-          <RotatingLines strokeColor='#61a199e6' strokeWidth='3' animationDuration='0.75' width='80' visible={true} />
-        </div>
-      )}
+      {(isLoading || isLoadingAdd) && <Spinner />}
 
       {showT ? (
         <ParsedTournament

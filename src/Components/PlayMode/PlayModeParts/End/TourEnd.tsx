@@ -5,12 +5,13 @@ import ResBlock from './ResBlock';
 import TourTable from './TourTable';
 import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
+import { StepProps } from '../Types/playmodeTypes';
 
-function TourEnd() {
+function TourEnd({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
 
-  const { t, qCounter, result } = useAppSelector((state) => state.playModeReducer);
-  const endedTourNumber = t.questions[qCounter].tourNumber;
+  const { qCounter, result } = useAppSelector((state) => state.playModeReducer);
+  const endedTourNumber = tournament.questions[qCounter].tourNumber;
 
   const onClick = () => {
     dispatch(playModeActions.qCounterIncrement());
@@ -21,10 +22,10 @@ function TourEnd() {
 
   return (
     <div className='tourend'>
-      <ResBlock />
+      <ResBlock tournament={tournament} />
       <TourTable res={result[endedTourNumber]} setSelectedQ={setSelectedQ} />
       <Button title='Следующий тур' onClick={onClick} />
-      {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
+      {Boolean(selectedQ) && <QuestionPlane q={tournament.questions[selectedQ - 1]} />}
     </div>
   );
 }

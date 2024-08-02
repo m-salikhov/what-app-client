@@ -29,10 +29,16 @@
     }
   }
 }
+
 main {
   & > h2 {
     text-align: center;
     padding-bottom: 0.4rem;
+  }
+  .pm_error {
+    text-align: center;
+    color: red;
+    margin-top: 1rem;
   }
 }
 

@@ -7,18 +7,19 @@ import ResBlock from './ResBlock';
 import TourTable from './TourTable';
 import { useInitialLoginQuery, usePostUserResultMutation } from '../../../../Store/userAPI';
 import extractServerErrorMessage from '../../../../Helpers/extractServerErrorMessage';
+import { StepProps } from '../Types/playmodeTypes';
 
-function End() {
+function End({ tournament }: StepProps) {
   const navigate = useNavigate();
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
   const [selectedQ, setSelectedQ] = useState(0);
-  const { t, qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
-  const endedTourNumber = t.questions[qCounter].tourNumber;
+  const { qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
+  const endedTourNumber = tournament.questions[qCounter].tourNumber;
 
   const renderResTables = (endedTourNumber: number) => {
-    let resTables = [];
+    const resTables = [];
     for (let i = 1; i <= endedTourNumber; i++) {
       resTables.push(<TourTable res={result[i]} setSelectedQ={setSelectedQ} key={result[i][0].num} />);
     }
@@ -29,9 +30,9 @@ function End() {
     if (currentUser) {
       const userResult = {
         userId: currentUser.id,
-        title: t.title,
-        tournamentId: t.id,
-        tournamentLength: t.questionsQuantity,
+        title: tournament.title,
+        tournamentId: tournament.id,
+        tournamentLength: tournament.questionsQuantity,
         resultNumber: answeredCount,
         result,
       };
@@ -39,16 +40,24 @@ function End() {
         .unwrap()
         .then((data) => console.log(data));
     }
-  }, [t.questionsQuantity, t.id, t.title, currentUser, result, answeredCount, saveUserResult]);
+  }, [
+    tournament.questionsQuantity,
+    tournament.id,
+    tournament.title,
+    currentUser,
+    result,
+    answeredCount,
+    saveUserResult,
+  ]);
 
   return (
     <div className='endt'>
-      <ResBlock />
+      <ResBlock tournament={tournament} />
       {renderResTables(endedTourNumber)}
       {isSuccess && <p>Ваш результат доступен в Профиле</p>}
       {error && <p>{extractServerErrorMessage(error) || 'Ошибка при сохранении результата'}</p>}
       <Button title='К выбору турнира' onClick={() => navigate('/playmode')} />
-      {Boolean(selectedQ) && <QuestionPlane q={t.questions[selectedQ - 1]} />}
+      {Boolean(selectedQ) && <QuestionPlane q={tournament.questions[selectedQ - 1]} />}
     </div>
   );
 }

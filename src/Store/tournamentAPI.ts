@@ -10,8 +10,8 @@ export const tournamentAPI = createApi({
   keepUnusedDataFor: 86400,
 
   endpoints: (build) => ({
-    getTornaments: build.query<TournamentType, string>({
-      query: (id: string) => `/tournaments/${id}`,
+    getTournament: build.query<TournamentType, string | number>({
+      query: (id: string | number) => `/tournaments/${id}`,
     }),
 
     getTournamentsLastShort: build.query<TournamentShortType[], number>({
@@ -67,7 +67,8 @@ export const tournamentAPI = createApi({
 });
 
 export const {
-  useGetTornamentsQuery,
+  usePrefetch,
+  useGetTournamentQuery,
   useGetRandomQuery,
   useAddTournamentMutation,
   useParseLinkMutation,

@@ -1,8 +1,7 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initTournament } from '../../Helpers/initValues';
 import { TournamentType } from '../../Types/tournament';
 import { _axios } from '../../Helpers/_axios';
-import { routes } from '../../constants';
 
 export type Step = 'START' | 'QUESTION' | 'END_OF_TOUR' | 'END';
 
@@ -18,6 +17,12 @@ interface PlayModeState {
   answeredCount: number;
 }
 
+interface setResultAction {
+  isAnswered: boolean;
+  qNumber: number;
+  tourNumber: number;
+}
+
 const initialState: PlayModeState = {
   step: 'START',
   t: initTournament,
@@ -25,11 +30,6 @@ const initialState: PlayModeState = {
   result: [],
   answeredCount: 0,
 };
-
-export const getTournamentById = createAsyncThunk('t/fetchById', async (id: string) => {
-  const t = await _axios.get<TournamentType>(`${routes.tournaments}${id}`).then((res) => res.data);
-  return t;
-});
 
 const playModeSlice = createSlice({
   name: 'playModeSlice',
@@ -44,8 +44,9 @@ const playModeSlice = createSlice({
     qCounterIncrement(state) {
       state.qCounter++;
     },
-    setResult(state, action: PayloadAction<boolean>) {
-      const { tourNumber, qNumber } = state.t.questions[state.qCounter];
+    setResult(state, action: PayloadAction<setResultAction>) {
+      const { isAnswered, qNumber, tourNumber } = action.payload;
+
       let qNumberInTour = qNumber;
 
       if (typeof state.result[tourNumber] === 'undefined') {
@@ -64,21 +65,16 @@ const playModeSlice = createSlice({
       }
 
       state.result[tourNumber][qNumberInTour - 1] = {
-        ans: action.payload,
+        ans: isAnswered,
         num: qNumber,
       };
 
-      if (action.payload) {
+      if (isAnswered) {
         state.answeredCount++;
       }
     },
 
     resetState: () => initialState,
-  },
-  extraReducers: (builder) => {
-    builder.addCase(getTournamentById.fulfilled, (state, action) => {
-      state.t = action.payload;
-    });
   },
 });
 

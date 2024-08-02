@@ -1,22 +1,21 @@
 import { getDate } from '../../../Helpers/getDate';
 import { playModeActions } from '../../../Store/reducers/PlayModeSlice';
-import { useAppDispatch, useAppSelector } from '../../../Hooks/redux';
+import { useAppDispatch } from '../../../Hooks/redux';
+import { StepProps } from './Types/playmodeTypes';
 
-function Start() {
+function Start({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
-
-  const { t } = useAppSelector((state) => state.playModeReducer);
 
   return (
     <div className='pm-info'>
       <div>
-        <p>Вопросов: {t.questionsQuantity}</p>
-        <p>Туров: {t.tours}</p>
-        <p>Дата: {getDate(t.date)}</p>
+        <p>Вопросов: {tournament.questionsQuantity}</p>
+        <p>Туров: {tournament.tours}</p>
+        <p>Дата: {getDate(tournament.date)}</p>
       </div>
       <div>
         <p>Редактор(ы):</p>
-        <p>{t.editors.join(', ')}</p>
+        <p>{tournament.editors.join(', ')}</p>
       </div>
       <div>
         <button onClick={() => dispatch(playModeActions.setStep('QUESTION'))}>Начать игру</button>

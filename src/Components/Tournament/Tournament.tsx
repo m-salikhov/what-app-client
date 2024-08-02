@@ -6,14 +6,14 @@ import Back from '../Elements/Back/Back';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { getToursParagraphs, scroll } from './scrollLogic';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { useGetTornamentsQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentQuery } from '../../Store/tournamentAPI';
 import { initTournament } from '../../Helpers/initValues';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import './tournament.scss';
 
 function Tournament() {
   const { id = '' } = useParams();
-  const { data: t = initTournament, isSuccess, error } = useGetTornamentsQuery(id);
+  const { data: t = initTournament, isSuccess, error } = useGetTournamentQuery(id);
   const ref = useRef(null);
 
   useDocTitle(t.title);
