@@ -1,5 +1,4 @@
 import { useReducer, useState } from 'react';
-import { RotatingLines } from 'react-loader-spinner';
 import Button from '../Elements/Button/Button';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { initTournament } from '../../Helpers/initValues';
@@ -13,8 +12,8 @@ import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import { useInitialLoginQuery } from '../../Store/userAPI';
 import { guest } from '../../constants';
 import ParsedTournament from './ParsedTournament';
-import './addTournamentLink.scss';
 import { Spinner } from '../Elements/Spinner/Spinner';
+import './addTournamentLink.scss';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');

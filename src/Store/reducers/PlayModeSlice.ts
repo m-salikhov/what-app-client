@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { initTournament } from '../../Helpers/initValues';
 import { TournamentType } from '../../Types/tournament';
-import { _axios } from '../../Helpers/_axios';
 
 export type Step = 'START' | 'QUESTION' | 'END_OF_TOUR' | 'END';
 
