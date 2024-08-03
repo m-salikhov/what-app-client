@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, useMemo } from 'react';
 import Button from '../../../Elements/Button/Button';
 import Add from '../../../Elements/Question/Add';
 import Answer from '../../../Elements/Question/Answer';
@@ -6,17 +6,22 @@ import Timer from './Timer';
 import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
 import { StepProps } from '../Types/playmodeTypes';
+import { QuestionType } from '../../../../Types/question';
 
-function PMQuestion({ tournament }: StepProps) {
+function PMQuestion({ tournament: { questions } }: StepProps) {
+  const questionsBasic = useMemo((): QuestionType[] => {
+    return questions.filter((v) => v.qNumber > 0 && v.tourNumber > 0);
+  }, [questions]);
+
   const dispatch = useAppDispatch();
-  const { qCounter } = useAppSelector((state) => state.playModeReducer);
+  const { currentQuestionIndex } = useAppSelector((state) => state.playModeReducer);
 
   const [isTimeOver, setIsTimeOver] = useState(false);
   const [answerToQ, setAnswerToQ] = useState('');
   const [messageToQ, setMessageAnswerToQ] = useState('');
 
-  const q = tournament.questions[qCounter];
-  const nextQTourNumber = tournament.questions[qCounter + 1]?.tourNumber;
+  const currentQuestion = questionsBasic[currentQuestionIndex];
+  const nextQTourNumber = questionsBasic[currentQuestionIndex + 1]?.tourNumber;
 
   const onClick = () => {
     //если нажать "готов ответ" во время отсчёта таймера
@@ -33,11 +38,11 @@ function PMQuestion({ tournament }: StepProps) {
 
     setAnswerToQ('');
 
-    if (typeof nextQTourNumber === 'undefined') {
+    if (!nextQTourNumber) {
       dispatch(playModeActions.setStep('END'));
-    } else if (q.tourNumber !== nextQTourNumber) {
+    } else if (currentQuestion.tourNumber !== nextQTourNumber) {
       dispatch(playModeActions.setStep('END_OF_TOUR'));
-    } else dispatch(playModeActions.qCounterIncrement());
+    } else dispatch(playModeActions.currentQuestionIndexIncrement());
 
     setIsTimeOver(false);
   };
@@ -46,10 +51,11 @@ function PMQuestion({ tournament }: StepProps) {
     const { id } = e.currentTarget;
     setAnswerToQ(id ? 'Да' : 'Нет');
     setMessageAnswerToQ('');
+
     dispatch(
       playModeActions.setResult({
-        qNumber: q.qNumber,
-        tourNumber: q.tourNumber,
+        qNumber: currentQuestion.qNumber,
+        tourNumber: currentQuestion.tourNumber,
         isAnswered: Boolean(id),
       })
     );
@@ -57,12 +63,12 @@ function PMQuestion({ tournament }: StepProps) {
 
   return (
     <div className='pmq'>
-      <h3>Вопрос {q.qNumber}</h3>
-      <Timer setIsTimeOver={setIsTimeOver} qNumber={q.qNumber} />
-      {q.add && <Add add={q.add} />}
-      <p>{q.text}</p>
+      <h3>Вопрос {currentQuestion.qNumber}</h3>
+      <Timer setIsTimeOver={setIsTimeOver} qNumber={currentQuestion.qNumber || 0} />
+      {currentQuestion.add && <Add add={currentQuestion.add} />}
+      <p>{currentQuestion.text}</p>
 
-      {isTimeOver && <Answer q={q} />}
+      {isTimeOver && <Answer q={currentQuestion} />}
       {isTimeOver && (
         <>
           <p className='isanswer__header'>{answerToQ ? `Ответ ${answerToQ} принят` : 'Вам удалось ответить?'}</p>

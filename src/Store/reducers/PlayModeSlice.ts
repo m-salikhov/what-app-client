@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { initTournament } from '../../Helpers/initValues';
-import { TournamentType } from '../../Types/tournament';
 
 export type Step = 'START' | 'QUESTION' | 'END_OF_TOUR' | 'END';
 
@@ -10,8 +8,7 @@ export type ResultType = {
 
 interface PlayModeState {
   step: Step;
-  t: TournamentType;
-  qCounter: number;
+  currentQuestionIndex: number;
   result: ResultType;
   answeredCount: number;
 }
@@ -24,9 +21,8 @@ interface setResultAction {
 
 const initialState: PlayModeState = {
   step: 'START',
-  t: initTournament,
-  qCounter: 0,
-  result: [],
+  currentQuestionIndex: 0,
+  result: {},
   answeredCount: 0,
 };
 
@@ -37,36 +33,38 @@ const playModeSlice = createSlice({
     setStep(state, action: PayloadAction<Step>) {
       state.step = action.payload;
     },
-    setT(state, action: PayloadAction<TournamentType>) {
-      state.t = action.payload;
+
+    currentQuestionIndexIncrement(state) {
+      state.currentQuestionIndex++;
     },
-    qCounterIncrement(state) {
-      state.qCounter++;
-    },
+
     setResult(state, action: PayloadAction<setResultAction>) {
       const { isAnswered, qNumber, tourNumber } = action.payload;
+      const { result } = state;
+
+      console.log(action.payload);
 
       let qNumberInTour = qNumber;
 
-      if (typeof state.result[tourNumber] === 'undefined') {
-        state.result[tourNumber] = [];
+      if (!(tourNumber in result) && tourNumber) {
+        result[tourNumber] = [];
       }
 
       //Высчитывает положение вопроса в отдельном туре(кроме первого тура)
-      if (tourNumber > 1) {
-        let i = tourNumber - 1;
-        let sumPlayedQ = 0;
-        while (i > 0) {
-          sumPlayedQ += state.result[i].length;
-          i--;
-        }
-        qNumberInTour = qNumber - sumPlayedQ;
-      }
+      // if (tourNumber > 1) {
+      //   let i = tourNumber - 1;
+      //   let sumPlayedQ = 0;
+      //   while (i > 0) {
+      //     sumPlayedQ += result[i].length;
+      //     i--;
+      //   }
+      //   qNumberInTour = qNumber - sumPlayedQ;
+      // }
 
-      state.result[tourNumber][qNumberInTour - 1] = {
+      result[tourNumber].push({
         ans: isAnswered,
         num: qNumber,
-      };
+      });
 
       if (isAnswered) {
         state.answeredCount++;

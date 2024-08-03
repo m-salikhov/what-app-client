@@ -3,8 +3,8 @@ import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
 import { StepProps } from '../Types/playmodeTypes';
 
 function ResBlock({ tournament }: StepProps) {
-  const { qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
-  const tour = tournament.questions[qCounter].tourNumber;
+  const { currentQuestionIndex, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
+  const tour = tournament.questions[currentQuestionIndex].tourNumber;
 
   const calcTourResult = (tour: number, res: ResultType) => {
     const tourResArrBoolean = res[tour];

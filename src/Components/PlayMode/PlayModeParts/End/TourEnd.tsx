@@ -10,11 +10,13 @@ import { StepProps } from '../Types/playmodeTypes';
 function TourEnd({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
 
-  const { qCounter, result } = useAppSelector((state) => state.playModeReducer);
-  const endedTourNumber = tournament.questions[qCounter].tourNumber;
+  const { currentQuestionIndex, result } = useAppSelector((state) => state.playModeReducer);
+  const endedTourNumber = tournament.questions[currentQuestionIndex].tourNumber;
+
+  console.log({ result });
 
   const onClick = () => {
-    dispatch(playModeActions.qCounterIncrement());
+    dispatch(playModeActions.currentQuestionIndexIncrement());
     dispatch(playModeActions.setStep('QUESTION'));
   };
 

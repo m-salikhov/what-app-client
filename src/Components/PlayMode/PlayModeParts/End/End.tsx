@@ -15,8 +15,8 @@ function End({ tournament }: StepProps) {
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
   const [selectedQ, setSelectedQ] = useState(0);
-  const { qCounter, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
-  const endedTourNumber = tournament.questions[qCounter].tourNumber;
+  const { currentQuestionIndex, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
+  const endedTourNumber = tournament.questions[currentQuestionIndex].tourNumber;
 
   const renderResTables = (endedTourNumber: number) => {
     const resTables = [];
@@ -27,7 +27,7 @@ function End({ tournament }: StepProps) {
   };
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser?.id) {
       const userResult = {
         userId: currentUser.id,
         title: tournament.title,
