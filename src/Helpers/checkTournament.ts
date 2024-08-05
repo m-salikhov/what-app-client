@@ -4,19 +4,19 @@ export default function checkTournament(t: TournamentType) {
   const errors: string[] = [];
 
   //блок проверки инфо о турнире
-  if (!Boolean(t.date)) {
+  if (!t.date) {
     errors.push('Не выбрана дата');
   }
-  if (!Boolean(t.title)) {
+  if (!t.title) {
     errors.push('Не добавлено название');
   }
-  if (!Boolean(t.questionsQuantity)) {
+  if (!t.questionsQuantity) {
     errors.push('Не выбрано кол-во вопросов');
   }
-  if (!Boolean(t.tours)) {
+  if (!t.tours) {
     errors.push('Не выбрано кол-во туров');
   }
-  if (!Boolean(t.editors[0])) {
+  if (!t.editors[0]) {
     errors.push('Не указан редактор(ы)');
   }
   if (t.tours !== t.questions.at(-1)?.tourNumber) {
@@ -31,13 +31,13 @@ export default function checkTournament(t: TournamentType) {
 
   //блок проверки вопросов
   t.questions.forEach((q) => {
-    if (!Boolean(q.text)) {
+    if (!q.text) {
       errors.push(`Не указан текст вопроса ${q.qNumber}`);
     }
-    if (!Boolean(q.author)) {
+    if (!q.author) {
       errors.push(`Не указан автор вопроса ${q.qNumber}`);
     }
-    if (!Boolean(q.answer)) {
+    if (!q.answer) {
       errors.push(`Не указан ответ на вопрос ${q.qNumber}`);
     }
   });

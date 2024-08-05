@@ -12,9 +12,11 @@ function SkeletonQuestion({ count }: { count: number }) {
       </div>
     );
   };
-  const arr = Array(count).fill(1);
-  const arrElements = arr.map((v, i) => {
-    return skeletonQuestion(i);
+
+  const arr = [...Array(count).keys()];
+
+  const arrElements = arr.map((v) => {
+    return skeletonQuestion(v);
   });
 
   return <>{arrElements}</>;

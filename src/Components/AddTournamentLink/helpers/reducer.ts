@@ -118,8 +118,7 @@ const reducer = (state: TournamentType, action: Action) => {
         questions[indexQuestion].comment = payload;
         return { ...state, questions };
       case actionTypes.source:
-        const sourceArr = payload.split(';');
-        questions[indexQuestion].source = sourceArr;
+        questions[indexQuestion].source = payload.split(';');
         return { ...state, questions };
       case actionTypes.author:
         questions[indexQuestion].author = payload;
@@ -150,8 +149,7 @@ const reducer = (state: TournamentType, action: Action) => {
       case actionTypes.title:
         return { ...state, title: payload };
       case actionTypes.editors:
-        const editorsArr = payload.split(';');
-        return { ...state, editors: editorsArr };
+        return { ...state, editors: payload.split(';') };
       default:
         return state;
     }

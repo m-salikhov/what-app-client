@@ -26,13 +26,13 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
 
   const onClick = () => {
     //если нажать "готов ответ" во время отсчёта таймера
-    if (!Boolean(answerToQ) && !isTimeOver) {
+    if (!answerToQ && !isTimeOver) {
       setIsTimeOver(true);
       return;
     }
 
     //Если нажать "Следующий вопрос" не выбрав вариант ответа
-    if (!Boolean(answerToQ)) {
+    if (!answerToQ) {
       setMessageAnswerToQ('Выберите ответ');
       return;
     }
@@ -83,7 +83,7 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
       <Button
         onClick={onClick}
         title={isTimeOver ? 'Следующий вопрос' : 'Готов ответ?'}
-        extraClass={Boolean(answerToQ) ? 'answered' : 'notanswered'}
+        extraClass={answerToQ ? 'answered' : 'notanswered'}
       />
     </div>
   );

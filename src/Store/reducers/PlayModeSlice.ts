@@ -6,7 +6,7 @@ export type ResultType = {
   [tourNumber: number]: { num: number; ans: boolean }[];
 };
 
-interface PlayModeState {
+export interface PlayModeState {
   step: Step;
   currentQuestionIndex: number;
   result: ResultType;
@@ -42,24 +42,9 @@ const playModeSlice = createSlice({
       const { isAnswered, qNumber, tourNumber } = action.payload;
       const { result } = state;
 
-      console.log(action.payload);
-
-      let qNumberInTour = qNumber;
-
       if (!(tourNumber in result) && tourNumber) {
         result[tourNumber] = [];
       }
-
-      //Высчитывает положение вопроса в отдельном туре(кроме первого тура)
-      // if (tourNumber > 1) {
-      //   let i = tourNumber - 1;
-      //   let sumPlayedQ = 0;
-      //   while (i > 0) {
-      //     sumPlayedQ += result[i].length;
-      //     i--;
-      //   }
-      //   qNumberInTour = qNumber - sumPlayedQ;
-      // }
 
       result[tourNumber].push({
         ans: isAnswered,

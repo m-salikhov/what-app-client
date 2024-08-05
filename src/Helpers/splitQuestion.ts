@@ -1,4 +1,3 @@
-// import axios from "axios";
 import { QuestionType } from '../Types/question';
 
 function splitQuestion(str: string): Partial<QuestionType> {
@@ -46,7 +45,7 @@ function splitQuestion(str: string): Partial<QuestionType> {
     source.shift();
   }
 
-  let question: Partial<QuestionType> = {
+  const question: Partial<QuestionType> = {
     text,
     answer,
     alterAnswer,
