@@ -1,7 +1,8 @@
-.entry__wrapper {
+.entry-wrapper {
   display: flex;
   justify-content: center;
   margin: 0 auto;
+
   .entry {
     display: flex;
     justify-content: center;
@@ -9,24 +10,26 @@
     border-radius: 30px;
     width: 22rem;
     margin-top: 1rem;
-    .entry__container {
+
+    .entry-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 90%;
-      margin: 1rem 0rem;
-      .entry__img {
+      margin: 1rem 0;
+
+      .entry-img {
         width: 50%;
       }
-      .entry__form {
+
+      .entry-form {
         margin-top: 0.5rem;
         width: 75%;
 
-        .entry__input {
+        .entry-input {
           flex-direction: column;
           display: flex;
-
-          padding: 0.25rem 0rem;
+          padding: 0.25rem 0;
           max-height: 50px;
           transition: all 1s;
           overflow: hidden;
@@ -35,54 +38,46 @@
             padding: 0;
             max-height: 0;
           }
+
           h2 {
             font-size: 0.9rem;
           }
+
           input {
-            // width: 80%;
             font-size: 1.1rem;
-            padding: 0.2rem 0rem 0.2rem 0.3rem;
+            padding: 0.2rem 0 0.2rem 0.3rem;
             border: 1px solid #1b1b1b80;
             box-shadow: none;
             transition: all 0.8s;
           }
         }
-        // .entry__buttons {
-        //   display: flex;
-        //   flex-direction: column;
-        //   button {
-        //     height: 2rem;
-        //     margin: 0.25rem 0rem;
-        //     border: 1px solid #1b1b1b80;
-        //     background: rgba(97, 161, 153, 0.2);
-        //   }
-        // }
       }
     }
   }
 }
 
-.entry__error {
+.entry-error {
   display: flex;
   align-items: center;
-  // border: 1px solid crimson;
-  background-color: rgba(180, 136, 136, 0.3);
-  .entry__error--block {
+  background-color: rgb(180 136 136 / 30%);
+
+  .entry-error-block {
     width: 1rem;
     min-height: 3.5rem;
     background-color: crimson;
   }
+
   p {
     padding-left: 0.4rem;
   }
 }
 
-.modalBG {
+.modal-background {
   backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(6, 3, 3, 0.5);
+  background-color: rgb(6 3 3 / 50%);
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -101,15 +96,16 @@
     width: 50%;
     height: 20%;
     z-index: 10;
+
     h2,
     p {
-      padding: 0.25rem 0rem;
+      padding: 0.25rem 0;
       text-align: center;
     }
   }
 }
 
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .modal-wrapper {
     h2 {
       font-size: 1.2rem;

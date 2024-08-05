@@ -81,16 +81,16 @@ function Entry() {
       {/* окно при успешной регистрации */}
       {regSuccess ? <ModalReg /> : null}
 
-      <main className='entry__wrapper'>
+      <main className='entry-wrapper'>
         <div className='entry'>
-          <div className='entry__container'>
-            <div className='entry__img'>
+          <div className='entry-container'>
+            <div className='entry-img'>
               <img src={entryImg} alt='заглавное изображение' />
             </div>
 
-            <form className='entry__form' onSubmit={onSubmit}>
+            <form className='entry-form' onSubmit={onSubmit}>
               <label
-                className='entry__input'
+                className='entry-input'
                 id='tooltip-mail'
                 data-tooltip-html='Можно зарегистрировать или зайти под тестовым аккаунтом<br /> почта: test@gmail.com, пароль: test'
               >
@@ -99,12 +99,12 @@ function Entry() {
               </label>
               {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='top' />}
 
-              <label className={isReg ? 'entry__input' : 'entry__input reg'}>
+              <label className={isReg ? 'entry-input' : 'entry-input reg'}>
                 <h2>Псевдоним</h2>
                 <input type='text' onChange={onChange} name='username' autoComplete='off' placeholder='username' />
               </label>
 
-              <label className='entry__input'>
+              <label className='entry-input'>
                 <h2>Пароль</h2>
                 <input
                   type='password'
@@ -115,7 +115,7 @@ function Entry() {
                 />{' '}
               </label>
 
-              <label className={isReg ? 'entry__input' : 'entry__input reg'}>
+              <label className={isReg ? 'entry-input' : 'entry-input reg'}>
                 <h2>Повторите пароль</h2>
                 <input
                   autoComplete='on'
@@ -127,13 +127,13 @@ function Entry() {
               </label>
 
               {errorMessage && (
-                <div className='entry__error'>
-                  <div className='entry__error--block'></div>
+                <div className='entry-error'>
+                  <div className='entry-error-block'></div>
                   <p>{errorMessage}</p>
                 </div>
               )}
 
-              <div className='entry__buttons'>
+              <div className='entry-buttons'>
                 <Button title='Отправить' type='submit' disabled={isLoadingLogin || isLoadingReg} />
                 <Button
                   title={isReg ? 'Авторизироваться' : 'Зарегистрироваться'}

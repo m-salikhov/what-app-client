@@ -15,7 +15,7 @@ function ModalReg() {
   return (
     <>
       {' '}
-      <div className='modalBG'>
+      <div className='modal-background'>
         {' '}
         <div className='modal-wrapper'>
           <h2>Вы успешно зарегистрировались</h2>

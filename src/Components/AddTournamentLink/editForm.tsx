@@ -21,9 +21,9 @@ function EditForm({ t, dispatch, setEdit }: Props) {
     >
       <Button title='Закончить редактирование' onClick={() => setEdit(false)}></Button>
       <div className='edit-t'>
-        <div className='edit-t__top'>
+        <div className='edit-t-top'>
           {' '}
-          <label className='edit-t__title'>
+          <label className='edit-t-title'>
             <p> Название турнира</p>
             <input
               placeholder='Название турнира'
@@ -32,7 +32,7 @@ function EditForm({ t, dispatch, setEdit }: Props) {
               value={t.title}
             />
           </label>
-          <label className='edit-t__date'>
+          <label className='edit-t-date'>
             <p> Дата отыгрыша </p>
             <input
               type='date'
@@ -47,7 +47,7 @@ function EditForm({ t, dispatch, setEdit }: Props) {
                 })
               }
             />
-            <label className='edit-t__title'>
+            <label className='edit-t-title'>
               <p>Редакторы (через точку с запятой без пробела!)</p>
               <textarea
                 placeholder='Редакторская группа'

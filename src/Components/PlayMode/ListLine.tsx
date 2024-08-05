@@ -8,7 +8,7 @@ interface LineProp {
 
 function ListLine({ item, index }: LineProp) {
   return (
-    <div className='table__line'>
+    <div className='table-line'>
       <p>{index + 1}</p>
       <div className='link'>
         <Link to={`../playmode/${item.id}/${item.title}`}>{item.title}</Link>

@@ -6,7 +6,7 @@ import gh from './icons/8546736_github_icon.svg';
 function Footer() {
   return (
     <footer>
-      <div className='footer__icons'>
+      <div className='footer-icons'>
         <a href='https://t.me/DeFrag3' target='_blank' rel='noreferrer'>
           <img src={tg} alt='телеграмм' />
         </a>

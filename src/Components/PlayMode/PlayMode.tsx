@@ -8,8 +8,8 @@ import { useAppSelector } from '../../Hooks/redux';
 import { useGetTournamentQuery } from '../../Store/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import { TournamentType } from '../../Types/tournament';
-import './playmode.scss';
 import { StepPM } from './PlayModeParts/Types/playmodeTypes';
+import './playmode.scss';
 
 function PlayModeChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
@@ -37,7 +37,7 @@ function PlayMode() {
     <main>
       <h2>{title}</h2>
       {isLoading && <Spinner />}
-      {isError && <p className='pm_error'> Ошибка: Не удалось загрузить турнир</p>}
+      {isError && <p className='pm-error'> Ошибка: Не удалось загрузить турнир</p>}
       {isSuccess && PlayModeChange(step, tournament)}
     </main>
   );

@@ -70,7 +70,7 @@ function AddTournamentLink() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className='addlink_container'>
+    <main className='addlink-container'>
       <div className='addlink'>
         <input
           type='text'
@@ -88,15 +88,15 @@ function AddTournamentLink() {
 
       {errorsFilling &&
         errorsFilling.map((error, i) => (
-          <p className='addlink__errorsFilling' key={i}>
+          <p className='addlink-errors-filling' key={i}>
             {error}
           </p>
         ))}
 
-      {message && <p className='addlink__message'>{message}</p>}
+      {message && <p className='addlink-message'>{message}</p>}
 
       {(errorParse || errorAdd) && (
-        <p className='addlink__message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
+        <p className='addlink-message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
       {(isLoading || isLoadingAdd) && <Spinner />}

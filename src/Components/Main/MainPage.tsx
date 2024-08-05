@@ -5,13 +5,13 @@ import SkeletonQuestion from '../Elements/Question/SkeletonQuestion';
 import LastTournaments from './LastTournaments';
 import Button from '../Elements/Button/Button';
 import refreshIcon from './refresh.svg';
-import './main.scss';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import Stats from './Stats';
 import { amountRandomQuestions } from '../../constants';
 import { useGetRandomQuery } from '../../Store/tournamentAPI';
+import './mainPage.scss';
 
-function Main() {
+function MainPage() {
   const navigate = useNavigate();
   useDocTitle();
 
@@ -22,8 +22,8 @@ function Main() {
   return (
     <main>
       <div className='main-content'>
-        <div className='main-content__random'>
-          <div className='main-content__refresh'>
+        <div className='main-content-random'>
+          <div className='main-content-refresh'>
             {' '}
             <div
               className='refresh'
@@ -36,7 +36,7 @@ function Main() {
               <h2>Случайные вопросы</h2>
               <div>
                 <img
-                  className={isRandomRefetch ? 'refresh__arrow' : 'refresh__arrow r'}
+                  className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow r'}
                   src={refreshIcon}
                   alt='обновить случайные'
                 />
@@ -47,13 +47,13 @@ function Main() {
           {isLoading && <SkeletonQuestion count={amountRandomQuestions} />}
           {!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
         </div>
-        <div className='main-content__right'>
+        <div className='main-content-right'>
           {' '}
           <Stats />
-          <div className='main-content__tournaments'>
+          <div className='main-content-tournaments'>
             <LastTournaments />
           </div>
-          <div className='main-content__banner'>
+          <div className='main-content-banner'>
             <h2>Игровой режим</h2>
             <p>Сыграйте любой из турниров с таймером и ведением счёта </p>
             <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/playmode')} />
@@ -64,4 +64,4 @@ function Main() {
   );
 }
 
-export default Main;
+export default MainPage;

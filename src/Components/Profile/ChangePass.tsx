@@ -57,7 +57,7 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
         </label>
         {(message || isError) && <p className='pr-error'>{message}</p>}
         {isSuccess && <p>{'Пароль успешно сохранён'}</p>}
-        <div className='pr-pass__control'>
+        <div className='pr-pass-control'>
           <Button title='Закрыть' onClick={onCancel} />
           <Button title='Отправить' onSubmit={onSubmit} />
         </div>

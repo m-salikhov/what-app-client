@@ -1,41 +1,49 @@
 .about {
-  padding: 0px 6%;
+  padding: 0 6%;
+
   a {
-    color: rgb(0, 0, 255);
+    color: rgb(0 0 255);
+
     &:visited {
-      color: rgb(0, 0, 255);
+      color: rgb(0 0 255);
     }
   }
+
   h2 {
     text-align: left;
     padding: 0.25rem 0 0;
   }
+
   p {
     padding: 0.5rem 0;
     font-size: 1.25rem;
     line-height: 1.9rem;
   }
 
-  .about__author {
+  .about-author {
     padding-top: 0.5rem;
     display: flex;
+
     img {
       width: 250px;
       height: 310px;
     }
+
     p {
       padding-left: 1rem;
     }
   }
 }
 
-@media (max-width: 800px) {
-  .about__author {
+@media (width <= 800px) {
+  .about-author {
     flex-direction: column;
+
     img {
       margin: 0 auto;
     }
-    .about__info {
+
+    .about-info {
       p {
         padding: unset;
         padding-top: 0.5rem;

@@ -30,16 +30,16 @@ function Tournament() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className='tournament__container'>
-      <div className='tournament__header'>
-        <div className='tournament__header-t'>
+    <main className='tournament-container'>
+      <div className='tournament-header'>
+        <div className='tournament-header-t'>
           <h2>{t.title}</h2>
           <p>
             <span>добавил </span>
             {t.uploader}
           </p>
         </div>
-        <div className='tournament__header-m'>
+        <div className='tournament-header-m'>
           <h3>
             Дата отыгрыша: <span>{getDate(t.date)}</span>
           </h3>
@@ -54,17 +54,17 @@ function Tournament() {
           Редакция: <span>{t.editors.join(', ')}</span>
         </h3>
       </div>
-      <div className='tournament__content' ref={ref}>
-        <div className='tournament__content_header'>
+      <div className='tournament-content' ref={ref}>
+        <div className='tournament-content-header'>
           {' '}
           <div className='back'>
             <Back />
           </div>
-          <div className='tournament__content_tours' onClick={(e) => scroll(e, ref.current, t)}>
+          <div className='tournament-content-tours' onClick={(e) => scroll(e, ref.current, t)}>
             {getToursParagraphs(t.tours)}
           </div>
         </div>
-        <TransitionGroup className='tournament__content_qs'>
+        <TransitionGroup className='tournament-content-qs'>
           {isSuccess &&
             t.questions.map((v) => {
               return (

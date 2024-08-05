@@ -1,40 +1,45 @@
 header {
   display: flex;
   justify-content: space-between;
-  box-shadow: 0px 0px 10px 5px rgba(34, 60, 80, 0.3);
+  box-shadow: 0 0 10px 5px rgb(34 60 80 / 30%);
+
   div {
     display: flex;
     height: 3rem;
     cursor: pointer;
+
     img {
       padding: 0.4rem 0 0.4rem 0.4rem;
     }
+
     h2 {
       padding-left: 0.5rem;
       font-size: 1.9rem;
-      font-family: "Rubik-Semibold";
-      margin: auto 0rem;
+      margin: auto 0;
     }
   }
 }
 
 nav {
   display: flex;
+
   ul {
     display: flex;
     align-items: center;
     height: 100%;
+
     li {
       display: flex;
       height: 100%;
       font-size: 1.125rem;
       font-weight: 600;
-      padding: 0rem 0.5rem;
-      color: rgba(34, 60, 80, 0.7);
+      padding: 0 0.5rem;
+      color: rgb(34 60 80 / 70%);
 
       &:hover {
-        color: rgb(10, 13, 16);
+        color: rgb(10 13 16);
       }
+
       a {
         padding-top: 1rem;
         height: 100%;
@@ -48,10 +53,11 @@ nav {
   flex-direction: column;
   justify-content: center;
   margin-right: 0.7rem;
+
   span {
     width: 25px;
     height: 3px;
-    margin: 2px 0px;
+    margin: 2px 0;
     background-color: black;
     transition: 0.3s;
   }
@@ -62,16 +68,18 @@ nav {
     transform: rotate(45deg) translateY(5px);
     transition: 0.3s;
   }
+
   span:nth-child(2) {
     display: none;
   }
+
   span:last-child {
     transform: rotate(-45deg) translateY(-5px);
     transition: 0.3s;
   }
 }
 
-@media (max-width: 1130px) {
+@media (width <= 1130px) {
   header {
     div {
       h2 {
@@ -80,7 +88,8 @@ nav {
     }
   }
 }
-@media (max-width: 460px) {
+
+@media (width <= 460px) {
   header {
     div {
       h2 {
@@ -90,7 +99,7 @@ nav {
   }
 }
 
-@media (max-width: 1050px) {
+@media (width <= 1050px) {
   nav {
     position: absolute;
     top: 3rem;
@@ -103,24 +112,27 @@ nav {
       width: 70%;
       z-index: 10;
       background-color: white;
+
       li {
         height: 3rem;
         font-size: 1.4rem;
       }
     }
   }
+
   .mob-menu {
     transform: translateX(0);
     z-index: 1;
     backdrop-filter: blur(2px);
     transition: transform 0.2s;
+
     ul {
       z-index: 10;
     }
   }
 }
 
-@media (min-width: 1050px) {
+@media (width >= 1050px) {
   .mob-btn {
     display: none;
   }

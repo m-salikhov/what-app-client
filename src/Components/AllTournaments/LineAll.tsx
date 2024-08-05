@@ -9,7 +9,7 @@ interface LineProp {
 
 function LineAll({ item, index }: LineProp) {
   return (
-    <div className='table__line'>
+    <div className='table-line'>
       <p>{index + 1}</p>
       <div className='link'>
         <Link to={`/tournament/${item.id}`}>{item.title}</Link>

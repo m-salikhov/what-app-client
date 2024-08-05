@@ -1,45 +1,53 @@
-@media (max-width: 800px) {
+@media (width <= 800px) {
   .list {
-    .table__header_t:nth-child(4) {
+    .table-header-t:nth-child(4) {
       display: block;
       text-align: center;
       width: 4rem;
     }
-    .table__line {
+
+    .table-line {
       p:nth-child(4) {
         display: block;
         text-align: center;
         width: 4rem;
       }
+
       p:nth-child(3) {
         font-size: 1rem;
       }
     }
   }
 }
-@media (max-width: 420px) {
+
+@media (width <= 420px) {
   .list {
-    .table__header_t:nth-child(2) {
+    .table-header-t:nth-child(2) {
       width: 10rem;
     }
+
     .link {
       width: 10rem;
+
       // a {
       //   font-size: 0.8rem;
       // }
     }
   }
 }
+
 .list {
   h3 {
     font-size: 1.8rem;
     text-align: center;
     font-weight: bold;
   }
+
   p {
     text-align: center;
     padding-top: 0.5rem;
   }
+
   .table {
     margin-top: unset;
   }

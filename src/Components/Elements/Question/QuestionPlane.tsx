@@ -10,12 +10,12 @@ interface Props {
 function QuestionPlane({ q }: Props) {
   return (
     <div className='question'>
-      <div className='question__header'>
+      <div className='question-header'>
         <h3>Вопрос {q.qNumber}</h3>
         <h3>Тур {q.tourNumber}</h3>
       </div>
       {q.add && <Add add={q.add} />}
-      <div className='question__text'>
+      <div className='question-text'>
         <p>{q.text}</p>
       </div>
 

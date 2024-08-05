@@ -42,9 +42,9 @@ function About() {
         интересно изучать эти технологии.
       </p>
       <h2>Об авторе</h2>
-      <div className='about__author'>
+      <div className='about-author'>
         <img src={myPhoto} alt='фото автора сайта' />
-        <div className='about__info'>
+        <div className='about-info'>
           <p>
             Меня зовут Максим, мне 35 лет. Я начинающий разработчик.
             <br /> <br /> Я родился и вырос в Подмосковье в городе Мытищи, но сейчас живу в Москве. Получил высшее

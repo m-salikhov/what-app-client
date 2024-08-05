@@ -8,7 +8,7 @@ function NotFound() {
   return (
     <main className='not-found'>
       <h2>СТРАНИЦА НЕ НАЙДЕНА</h2>
-      <div className='not-found_img'>
+      <div className='not-found-img'>
         <img src={notFoundOwl} alt='страница не найдена' />
       </div>
     </main>

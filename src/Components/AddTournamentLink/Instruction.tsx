@@ -1,6 +1,6 @@
 function Instruction() {
   return (
-    <div className='addlink__instruction'>
+    <div className='addlink-instruction'>
       <p>
         {' '}
         Чтобы добавить турнир надо сначала загрузить его из{' '}

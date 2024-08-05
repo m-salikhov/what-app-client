@@ -28,9 +28,9 @@ function EditFormQuestion({ q, dispatch }: Props) {
   };
 
   return (
-    <div className='edit-q__container'>
-      <div className='edit-q__numbers'>
-        <label className='edit-q__tour'>
+    <div className='edit-q-container'>
+      <div className='edit-q-numbers'>
+        <label className='edit-q-tour'>
           <p> Номер вопроса:</p>
           <input
             type='number'
@@ -45,7 +45,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
             }
           />
         </label>{' '}
-        <label className='edit-q__tour'>
+        <label className='edit-q-tour'>
           <p> Номер тура:</p>
           <input
             type='number'

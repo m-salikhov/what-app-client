@@ -17,13 +17,13 @@ function Answer({ q }: { q: QuestionType }) {
         </p>
       )}
       {q.source?.length === 1 && (
-        <p className='answer__source_one'>
+        <p className='answer-source-one'>
           <span>Источник: </span> {q.source}
         </p>
       )}
       {q.source && q.source.length > 1 && (
         <div>
-          <p className='answer__source_many'>Источники:</p>
+          <p className='answer-source-many'>Источники:</p>
           {q.source.map((v, i) => {
             return (
               <p key={i}>

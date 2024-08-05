@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Main from './Components/Main/Main';
+import MainPage from './Components/Main/MainPage';
 import Layout from './Components/Lyout/Layout';
 import Tournament from './Components/Tournament/Tournament';
 import About from './Components/About/About';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Main />,
+        element: <MainPage />,
       },
       {
         path: 'about',

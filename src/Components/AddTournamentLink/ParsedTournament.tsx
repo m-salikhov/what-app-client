@@ -13,13 +13,13 @@ interface Props {
 function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
   return (
     <>
-      <div className='tournament__header'>
-        <div className='tournament__header-t'>
+      <div className='tournament-header'>
+        <div className='tournament-header-t'>
           <h3>
             Название: <span>{t.title}</span>
           </h3>
         </div>
-        <div className='tournament__header-m'>
+        <div className='tournament-header-m'>
           <h3>
             Дата отыгрыша: <span>{t.date ? getDate(t.date) : null}</span>
           </h3>
@@ -40,7 +40,7 @@ function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }:
           ))}
         </h3>
       </div>
-      <div className='addlink__buttons'>
+      <div className='addlink-buttons'>
         <Button
           title={'Редактировать турнир'}
           onClick={() => {
@@ -50,7 +50,7 @@ function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }:
         ></Button>
         <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
       </div>
-      <div className='tournament__content'>
+      <div className='tournament-content'>
         {t.questions
           .filter((q) => q.qNumber !== -1)
           .map((v) => (

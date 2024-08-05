@@ -1,45 +1,53 @@
-.tournament__header {
+.tournament-header {
   h3 {
     padding: 1rem 0;
     font-weight: bold;
+
     span {
       font-weight: normal;
     }
   }
-  .tournament__header-t {
+
+  .tournament-header-t {
     display: flex;
     padding-bottom: 1rem;
+
     p {
       padding-left: 2rem;
       font-size: 1.25rem;
       margin-top: auto;
     }
   }
-  .tournament__header-m {
+
+  .tournament-header-m {
     display: flex;
+
     h3:nth-child(n + 2) {
       padding-left: 3rem;
     }
   }
 }
 
-.tournament__content {
-  .tournament__content_header {
+.tournament-content {
+  .tournament-content-header {
     // display: flex;
-    .tournament__content_tours {
+    .tournament-content-tours {
       display: flex;
       flex-grow: 1;
       justify-content: center;
       margin-left: -20px;
+
       p {
-        padding: 0rem 0.5rem;
+        padding: 0 0.5rem;
         cursor: pointer;
+
         &:hover {
           font-weight: bold;
         }
       }
     }
   }
+
   .question {
     max-width: 800px;
     margin-left: auto;
@@ -47,11 +55,12 @@
   }
 }
 
-@media (max-width: 400px) {
-  .tournament__content {
-    .tournament__content_header {
+@media (width <= 400px) {
+  .tournament-content {
+    .tournament-content-header {
       display: unset;
-      .tournament__content_tours {
+
+      .tournament-content-tours {
         margin-left: unset;
       }
     }
@@ -62,6 +71,7 @@
   opacity: 0;
   transform: scale(0.9) translateY(5rem);
 }
+
 .question-enter-active {
   opacity: 1;
   transform: scale(1) translateY(0);

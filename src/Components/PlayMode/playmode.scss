@@ -2,30 +2,35 @@
   h2 {
     text-align: center;
   }
+
   div {
     display: flex;
     justify-content: center;
     padding-top: 1rem;
   }
+
   div:nth-child(1) {
     p {
-      padding: 0rem 1rem;
+      padding: 0 1rem;
     }
   }
+
   div:nth-child(2) {
     p {
-      padding: 0rem 0.5rem;
+      padding: 0 0.5rem;
     }
   }
+
   button {
     width: 300px;
     height: 30px;
     font-size: larger;
     border: 1px solid #1b1b1b80;
     border-radius: 5px;
+
     &:hover {
       font-weight: 800;
-      background-color: rgba(97, 161, 153, 0.2);
+      background-color: rgb(97 161 153 / 20%);
     }
   }
 }
@@ -35,7 +40,8 @@ main {
     text-align: center;
     padding-bottom: 0.4rem;
   }
-  .pm_error {
+
+  .pm-error {
     text-align: center;
     color: red;
     margin-top: 1rem;
@@ -43,17 +49,19 @@ main {
 }
 
 .timer {
-  padding: 1rem 0rem;
+  padding: 1rem 0;
+
   div {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    padding: 0rem 0.5rem;
+    padding: 0 0.5rem;
     max-width: 17rem;
     height: 3rem;
-    border: 3px solid rgba(97, 161, 153, 0.5);
+    border: 3px solid rgb(97 161 153 / 50%);
     border-radius: 5px;
+
     p {
       font-weight: 800;
       font-size: 1rem;
@@ -64,64 +72,80 @@ main {
 .pmq {
   max-width: 700px;
   margin: 0 auto;
+
   p {
     font-size: 1.25rem;
     white-space: pre-line;
   }
+
   h3 {
     text-align: center;
     font-size: 1.5rem;
   }
+
   .answer {
     p {
       padding: 0.2rem 0;
       word-wrap: break-word;
+
       span {
         font-weight: 800;
       }
     }
-    .answer__source_many {
+
+    .answer-source-many {
       font-weight: 800;
     }
   }
+
   .isanswer {
     display: flex;
     justify-content: center;
+
     button:first-child {
       margin-right: 1rem;
     }
+
     button:last-child {
       margin-left: 1rem;
     }
   }
-  .isanswer__header {
+
+  .isanswer-header {
     text-align: center;
     font-size: 1.4rem;
     font-weight: 800;
     padding-top: 1rem;
   }
+
   & > .btn-elem {
     margin-top: 1.2rem;
   }
-  .question__add {
+
+  .question-add {
     padding-top: 0.5rem;
+
     & > p {
       padding-left: 0.5rem;
-      color: rgb(87, 85, 85);
+      color: rgb(87 85 85);
     }
+
     & div {
       display: flex;
       justify-content: center;
-      padding: 1rem 0rem;
+      padding: 1rem 0;
+
       img {
         max-width: 60%;
       }
+
       p {
         font-size: 1.25rem;
       }
     }
   }
-  .messageToQ {
+
+  .message-to-q {
     text-align: center;
   }
 }
@@ -129,6 +153,7 @@ main {
 .resblock {
   p {
     text-align: center;
+
     span {
       padding-left: 1rem;
       font-weight: 800;
@@ -141,27 +166,33 @@ main {
     padding-top: 0.8rem;
   }
 }
-.tourend__tbl {
+
+.tourend-tbl {
   display: flex;
   justify-content: center;
   padding-top: 0.7rem;
-  .tourend__tbl_el:first-child {
-    border-left: 2px solid rgba(27, 27, 27, 0.4);
+
+  .tourend-tbl-el:first-child {
+    border-left: 2px solid rgb(27 27 27 / 40%);
   }
-  .tourend__tbl_el:last-child {
-    border-right: 2px solid rgba(27, 27, 27, 0.4);
+
+  .tourend-tbl-el:last-child {
+    border-right: 2px solid rgb(27 27 27 / 40%);
   }
-  .tourend__tbl_el {
-    border-right: 2px solid rgba(27, 27, 27, 0.4);
-    border-top: 2px solid rgba(27, 27, 27, 0.4);
-    border-bottom: 2px solid rgba(27, 27, 27, 0.4);
+
+  .tourend-tbl-el {
+    border-right: 2px solid rgb(27 27 27 / 40%);
+    border-top: 2px solid rgb(27 27 27 / 40%);
+    border-bottom: 2px solid rgb(27 27 27 / 40%);
     cursor: pointer;
+
     &:hover {
       font-weight: bold;
-      background-color: rgba(97, 161, 153, 0.2);
+      background-color: rgb(97 161 153 / 20%);
     }
+
     div:first-child {
-      border-bottom: 2px solid rgba(27, 27, 27, 0.4);
+      border-bottom: 2px solid rgb(27 27 27 / 40%);
       width: 2rem;
       height: 2rem;
       display: table-cell;
@@ -169,9 +200,11 @@ main {
       vertical-align: middle;
       font-weight: 700;
     }
+
     div:last-child {
       width: 2rem;
       height: 2rem;
+
       img {
         width: 2rem;
       }
@@ -183,6 +216,7 @@ main {
   .btn-elem {
     padding-top: 0.8rem;
   }
+
   & > p {
     padding-top: 0.5rem;
     text-align: center;

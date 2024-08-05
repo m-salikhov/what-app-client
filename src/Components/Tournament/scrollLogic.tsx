@@ -39,7 +39,7 @@ export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement |
 
   const anchor = arrAnchors[id - 1];
   if (nodeList instanceof HTMLDivElement) {
-    const node = nodeList.querySelector('.tournament__content_qs');
+    const node = nodeList.querySelector('.tournament-content-qs');
     if (node) node.children[anchor].scrollIntoView({ behavior: 'smooth' });
   }
 };

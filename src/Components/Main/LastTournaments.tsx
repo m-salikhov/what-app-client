@@ -26,19 +26,19 @@ function LastTournaments() {
   return (
     <>
       <h2>Последние добавленные турниры</h2>
-      <div className='tournaments__header'>
+      <div className='tournaments-header'>
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
       {lastTenTournaments.map((v) => {
         return (
-          <div className='tournaments__item' key={v.id}>
+          <div className='tournaments-item' key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
             <h5>{getDate(v.dateUpload)}</h5>
           </div>
         );
       })}
-      <div className='tournaments__footer'>
+      <div className='tournaments-footer'>
         <div className='back' onClick={changePageNumber}>
           {' '}
           <img src={back} alt='предыдущая страница списка турниров' />
