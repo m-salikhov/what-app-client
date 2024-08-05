@@ -5,7 +5,7 @@ import ResBlock from './ResBlock';
 import TourTable from './TourTable';
 import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
-import { StepProps } from '../Types/playmodeTypes';
+import { StepPM, StepProps } from '../Types/playmodeTypes';
 
 function TourEnd({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
@@ -17,7 +17,7 @@ function TourEnd({ tournament }: StepProps) {
 
   const onClick = () => {
     dispatch(playModeActions.currentQuestionIndexIncrement());
-    dispatch(playModeActions.setStep('QUESTION'));
+    dispatch(playModeActions.setStep(StepPM.QUESTION));
   };
 
   const [selectedQ, setSelectedQ] = useState(0);

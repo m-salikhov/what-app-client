@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { configureStore } from '@reduxjs/toolkit';
+// import { combineReducers } from 'redux';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { tournamentAPI } from './tournamentAPI';
 import { playModeReducer } from './reducers/PlayModeSlice';
 import { userAPI } from './userAPI';

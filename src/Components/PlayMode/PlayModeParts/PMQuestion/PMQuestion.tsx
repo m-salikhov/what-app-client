@@ -5,10 +5,11 @@ import Answer from '../../../Elements/Question/Answer';
 import Timer from './Timer';
 import { playModeActions } from '../../../../Store/reducers/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../Hooks/redux';
-import { StepProps } from '../Types/playmodeTypes';
+import { StepPM, StepProps } from '../Types/playmodeTypes';
 import { QuestionType } from '../../../../Types/question';
 
 function PMQuestion({ tournament: { questions } }: StepProps) {
+  //чистит тутрнир от нулевых вопросов, оставляя только игровые
   const questionsBasic = useMemo((): QuestionType[] => {
     return questions.filter((v) => v.qNumber > 0 && v.tourNumber > 0);
   }, [questions]);
@@ -39,9 +40,9 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
     setAnswerToQ('');
 
     if (!nextQTourNumber) {
-      dispatch(playModeActions.setStep('END'));
+      dispatch(playModeActions.setStep(StepPM.END));
     } else if (currentQuestion.tourNumber !== nextQTourNumber) {
-      dispatch(playModeActions.setStep('END_OF_TOUR'));
+      dispatch(playModeActions.setStep(StepPM.END_OF_TOUR));
     } else dispatch(playModeActions.currentQuestionIndexIncrement());
 
     setIsTimeOver(false);

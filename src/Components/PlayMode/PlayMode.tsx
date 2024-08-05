@@ -9,16 +9,17 @@ import { useGetTournamentQuery } from '../../Store/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import { TournamentType } from '../../Types/tournament';
 import './playmode.scss';
+import { StepPM } from './PlayModeParts/Types/playmodeTypes';
 
 function PlayModeChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
-    case 'START':
+    case StepPM.START:
       return <Start tournament={tournament} />;
-    case 'QUESTION':
+    case StepPM.QUESTION:
       return <PMQuestion tournament={tournament} />;
-    case 'END_OF_TOUR':
+    case StepPM.END_OF_TOUR:
       return <TourEnd tournament={tournament} />;
-    case 'END':
+    case StepPM.END:
       return <End tournament={tournament} />;
     default:
       return null;
