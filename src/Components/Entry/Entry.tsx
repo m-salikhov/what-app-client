@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { FormUser } from '../../Types/user';
 import ModalReg from './ModalReg';
@@ -20,12 +20,25 @@ function Entry() {
   const [errorMessage, setErrorMessage] = useState('');
   const [isReg, setReg] = useState(false);
 
-  const { login, isSuccess: loginSuccess, error: errorLogin, isLoading: isLoadingLogin } = useLogin();
+  const {
+    login,
+    isSuccess: loginSuccess,
+    error: errorLogin,
+    isLoading: isLoadingLogin,
+    reset: resetLogin,
+  } = useLogin();
 
-  const { registration, isSuccess: regSuccess, error: errorReg, isLoading: isLoadingReg } = useRegistration();
+  const {
+    registration,
+    isSuccess: regSuccess,
+    error: errorReg,
+    isLoading: isLoadingReg,
+    reset: resetReg,
+  } = useRegistration();
 
   const onSubmit = async (e: FormEvent<EventTarget>) => {
     e.preventDefault();
+    isReg ? resetReg() : resetLogin();
 
     const FormFieldsErrors = checkFormFields(formUser, isReg);
     if (FormFieldsErrors) {
@@ -39,21 +52,22 @@ function Entry() {
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setErrorMessage('');
 
-    setFormUser({
-      ...formUser,
+    setFormUser((prev) => ({
+      ...prev,
       [e.target.name]: e.target.value,
-    });
+    }));
   };
 
-  const onClickAuthRegChangeBtn = (e: MouseEvent) => {
-    e.preventDefault();
+  const onClickAuthRegChangeBtn = () => {
     setErrorMessage('');
+    isReg ? resetReg() : resetLogin();
     setReg(!isReg);
   };
 
   if (errorLogin || errorReg) {
     const errMessage = extractServerErrorMessage(errorLogin || errorReg);
     if (errMessage !== errorMessage) {
+      console.log('id err');
       setErrorMessage(errMessage);
     }
   }
@@ -73,6 +87,7 @@ function Entry() {
             <div className='entry__img'>
               <img src={entryImg} alt='заглавное изображение' />
             </div>
+
             <form className='entry__form' onSubmit={onSubmit}>
               <label
                 className='entry__input'
@@ -82,7 +97,7 @@ function Entry() {
                 <h2>Почта</h2>
                 <input type='email' onChange={onChange} name='email' autoComplete='on' placeholder='email' />
               </label>
-              {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='bottom' />}
+              {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='top' />}
 
               <label className={isReg ? 'entry__input' : 'entry__input reg'}>
                 <h2>Псевдоним</h2>
@@ -99,6 +114,7 @@ function Entry() {
                   onChange={onChange}
                 />{' '}
               </label>
+
               <label className={isReg ? 'entry__input' : 'entry__input reg'}>
                 <h2>Повторите пароль</h2>
                 <input
@@ -109,6 +125,7 @@ function Entry() {
                   onChange={onChange}
                 />{' '}
               </label>
+
               {errorMessage && (
                 <div className='entry__error'>
                   <div className='entry__error--block'></div>

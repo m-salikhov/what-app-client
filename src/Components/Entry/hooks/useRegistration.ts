@@ -3,7 +3,7 @@ import { userAPI, useRegistrationMutation } from '../../../Store/userAPI';
 import { FormUser } from '../../../Types/user';
 
 export function useRegistration() {
-  const [registrationFunc, { error, isLoading, isSuccess }] = useRegistrationMutation();
+  const [registrationFunc, { error, isLoading, isSuccess, reset }] = useRegistrationMutation();
 
   const dispatch = useAppDispatch();
 
@@ -17,5 +17,5 @@ export function useRegistration() {
       .catch(() => {});
   }
 
-  return { isSuccess, error, isLoading, registration };
+  return { isSuccess, error, isLoading, registration, reset };
 }

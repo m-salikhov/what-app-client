@@ -3,9 +3,7 @@ import { useLoginMutation, userAPI } from '../../../Store/userAPI';
 import { FormUser } from '../../../Types/user';
 
 export function useLogin() {
-  const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation({
-    fixedCacheKey: 'login',
-  });
+  const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -23,5 +21,5 @@ export function useLogin() {
     reset();
   }
 
-  return { isSuccess, error, isLoading, login };
+  return { isSuccess, error, isLoading, login, reset };
 }
