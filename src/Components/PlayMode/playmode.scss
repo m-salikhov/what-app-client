@@ -1,3 +1,16 @@
+main {
+  & > h2 {
+    padding-bottom: 0.4rem;
+    text-align: center;
+  }
+
+  .pm-error {
+    margin-top: 1rem;
+    color: red;
+    text-align: center;
+  }
+}
+
 .pm-info {
   h2 {
     text-align: center;
@@ -35,36 +48,23 @@
   }
 }
 
-main {
-  & > h2 {
-    text-align: center;
-    padding-bottom: 0.4rem;
-  }
-
-  .pm-error {
-    text-align: center;
-    color: red;
-    margin-top: 1rem;
-  }
-}
-
 .timer {
   padding: 1rem 0;
 
   div {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin: 0 auto;
-    padding: 0 0.5rem;
+    justify-content: space-between;
     max-width: 17rem;
     height: 3rem;
+    padding: 0 0.5rem;
+    margin: 0 auto;
     border: 3px solid rgb(97 161 153 / 50%);
     border-radius: 5px;
 
     p {
-      font-weight: 800;
       font-size: 1rem;
+      font-weight: 800;
     }
   }
 }
@@ -79,8 +79,8 @@ main {
   }
 
   h3 {
-    text-align: center;
     font-size: 1.5rem;
+    text-align: center;
   }
 
   .answer {
@@ -112,10 +112,10 @@ main {
   }
 
   .isanswer-header {
-    text-align: center;
+    padding-top: 1rem;
     font-size: 1.4rem;
     font-weight: 800;
-    padding-top: 1rem;
+    text-align: center;
   }
 
   & > .btn-elem {
@@ -181,10 +181,10 @@ main {
   }
 
   .tourend-tbl-el {
-    border-right: 2px solid rgb(27 27 27 / 40%);
-    border-top: 2px solid rgb(27 27 27 / 40%);
-    border-bottom: 2px solid rgb(27 27 27 / 40%);
     cursor: pointer;
+    border-top: 2px solid rgb(27 27 27 / 40%);
+    border-right: 2px solid rgb(27 27 27 / 40%);
+    border-bottom: 2px solid rgb(27 27 27 / 40%);
 
     &:hover {
       font-weight: bold;
@@ -192,13 +192,13 @@ main {
     }
 
     div:first-child {
-      border-bottom: 2px solid rgb(27 27 27 / 40%);
+      display: table-cell;
       width: 2rem;
       height: 2rem;
-      display: table-cell;
+      font-weight: 700;
       text-align: center;
       vertical-align: middle;
-      font-weight: 700;
+      border-bottom: 2px solid rgb(27 27 27 / 40%);
     }
 
     div:last-child {

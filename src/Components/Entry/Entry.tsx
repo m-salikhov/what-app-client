@@ -1,16 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { FormUser } from '../../Types/user';
-import ModalReg from './ModalReg';
-import { initFormUser } from '../../Helpers/initValues';
-import entryImg from './entry_img.svg';
-import { useDocTitle } from '../../Hooks/useDocTitle';
 import { Tooltip } from 'react-tooltip';
-import checkFormFields from './helpers/checkFormFields';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import { initFormUser } from '../../Helpers/initValues';
+import { useDocTitle } from '../../Hooks/useDocTitle';
+import { FormUser } from '../../Types/user';
 import Button from '../Elements/Button/Button';
+import entryImg from './entry_img.svg';
+import checkFormFields from './helpers/checkFormFields';
 import { useLogin } from './hooks/useLogin';
 import { useRegistration } from './hooks/useRegistration';
+import ModalReg from './ModalReg';
 import './entry.scss';
 
 function Entry() {
@@ -136,7 +136,7 @@ function Entry() {
               <div className='entry-buttons'>
                 <Button title='Отправить' type='submit' disabled={isLoadingLogin || isLoadingReg} />
                 <Button
-                  title={isReg ? 'Авторизироваться' : 'Зарегистрироваться'}
+                  title={isReg ? 'Авторизоваться' : 'Зарегистрироваться'}
                   onClick={onClickAuthRegChangeBtn}
                   disabled={isLoadingLogin || isLoadingReg}
                 />

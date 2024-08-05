@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { amountRandomQuestions } from '../../constants';
+import { useDocTitle } from '../../Hooks/useDocTitle';
+import { useGetRandomQuery } from '../../Store/tournamentAPI';
+import Button from '../Elements/Button/Button';
 import Question from '../Elements/Question/Question';
 import SkeletonQuestion from '../Elements/Question/SkeletonQuestion';
 import LastTournaments from './LastTournaments';
-import Button from '../Elements/Button/Button';
 import refreshIcon from './refresh.svg';
-import { useDocTitle } from '../../Hooks/useDocTitle';
 import Stats from './Stats';
-import { amountRandomQuestions } from '../../constants';
-import { useGetRandomQuery } from '../../Store/tournamentAPI';
 import './mainPage.scss';
 
 function MainPage() {

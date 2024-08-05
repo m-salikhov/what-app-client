@@ -2,15 +2,15 @@
   .list {
     .table-header-t:nth-child(4) {
       display: block;
-      text-align: center;
       width: 4rem;
+      text-align: center;
     }
 
     .table-line {
       p:nth-child(4) {
         display: block;
-        text-align: center;
         width: 4rem;
+        text-align: center;
       }
 
       p:nth-child(3) {
@@ -39,13 +39,13 @@
 .list {
   h3 {
     font-size: 1.8rem;
-    text-align: center;
     font-weight: bold;
+    text-align: center;
   }
 
   p {
-    text-align: center;
     padding-top: 0.5rem;
+    text-align: center;
   }
 
   .table {

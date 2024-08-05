@@ -1,6 +1,6 @@
 .question {
-  border: 2px solid rgb(27 27 27 / 100%);
   margin: 1rem 0;
+  border: 2px solid rgb(27 27 27 / 100%);
   border-radius: 10px;
 
   p {
@@ -10,9 +10,9 @@
   .question-header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(27 27 27 / 40%);
     padding: 0.5rem;
     background-color: rgb(173 216 230 / 40%);
+    border-bottom: 1px solid rgb(27 27 27 / 40%);
 
     h3 {
       font-weight: 800;
@@ -77,8 +77,8 @@
     }
 
     & > p:first-child {
-      color: #45877e;
       font-weight: bold;
+      color: #45877e;
 
       span {
         color: black;
@@ -101,20 +101,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid #000;
   padding-right: 1rem;
   cursor: pointer;
+  border-top: 1px solid #000;
 
   .test-o {
     color: rgb(109 85 98);
-    transform: rotate(180deg);
     transition: all 0.25s;
+    transform: rotate(180deg);
   }
 
   .test-c {
     color: rgb(109 85 98);
-    transform: rotate(0deg);
     transition: all 0.5s;
+    transform: rotate(0deg);
   }
 
   & div {

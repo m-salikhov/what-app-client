@@ -1,11 +1,8 @@
 footer {
-  // min-height: 4rem;
-  width: 100%;
-
-  // background-color: rgb(167, 190, 233);
-  border-top: 2px solid rgb(0 0 0 / 50%);
   display: flex;
   justify-content: center;
+  width: 100%;
+  border-top: 2px solid rgb(0 0 0 / 50%);
 
   .footer-icons {
     display: flex;
@@ -17,8 +14,8 @@ footer {
       margin: 1rem;
 
       p {
-        margin: auto 0;
         padding-left: 0.3rem;
+        margin: auto 0;
       }
     }
   }

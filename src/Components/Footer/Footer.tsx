@@ -1,6 +1,6 @@
 import './footer.scss';
-import tg from './icons/3787425_telegram_logo_messanger_social_social media_icon.svg';
-import mail from './icons/1814108_email_envenlope_letter_mail_icon.svg';
+import tg from './icons/3787425_telegram_logo_icon.svg';
+import mail from './icons/1814108_email_icon.svg';
 import gh from './icons/8546736_github_icon.svg';
 
 function Footer() {

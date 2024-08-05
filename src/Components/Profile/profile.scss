@@ -6,30 +6,30 @@
   }
 
   & > p:nth-child(2n + 1) {
+    width: 20rem;
     // font-family: Rubik-Semibold;
     font-weight: bold;
-    width: 20rem;
     text-align: left;
   }
 }
 
 .pr-wrapper {
+  padding: 1rem;
   border: 3px solid #1b1b1b80;
   border-radius: 20px;
-  padding: 1rem;
 }
 
 .pr {
-  text-align: center;
   padding: 1rem 20% 0;
+  text-align: center;
 
   button {
-    margin-top: 0.5rem;
     width: 12rem;
+    margin-top: 0.5rem;
     font-size: 1.25rem;
+    background-color: rgb(97 161 153 / 10%);
     border: 1px solid #1b1b1b80;
     border-radius: 5px;
-    background-color: rgb(97 161 153 / 10%);
 
     &:hover {
       font-weight: 800;
@@ -39,13 +39,13 @@
 }
 
 .pr-pass {
-  padding: 20px 40px;
-  background-color: white;
-  border: 2px solid black;
-  z-index: 10;
   position: absolute;
   top: 40%;
   left: 50%;
+  z-index: 10;
+  padding: 20px 40px;
+  background-color: white;
+  border: 2px solid black;
   transform: translate(-50%, -50%);
 
   p {
@@ -58,8 +58,8 @@
     align-items: center;
 
     input {
-      border: 2px solid black;
       padding: 2px 5px;
+      border: 2px solid black;
     }
   }
 
@@ -122,10 +122,10 @@
 
 .portal {
   position: absolute;
-  height: 50px;
-  width: 200px;
-  background-color: aqua;
   top: 40%;
   left: 50%;
+  width: 200px;
+  height: 50px;
+  background-color: aqua;
   transform: translate(-50%, -50%);
 }
