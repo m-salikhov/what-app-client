@@ -8,10 +8,14 @@ interface Props {
 
 function TourTable({ res, setSelectedQ }: Props) {
   return (
-    <div className='tourend-tbl'>
+    <div className='tour-end-tbl'>
       {res.map((v) => {
         return (
-          <div className='tourend-tbl-el' key={v.num} onClick={() => setSelectedQ(v.num)}>
+          <div
+            className='tour-end-tbl-el'
+            key={v.num}
+            onClick={() => setSelectedQ(v.num)}
+          >
             <div>{v.num}</div>
             <div>
               <img src={v.ans ? green_ans : red_ans} alt='answer icon' />

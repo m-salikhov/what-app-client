@@ -10,10 +10,10 @@ import { StepPM, StepProps } from '../Types/playmodeTypes';
 function TourEnd({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
 
-  const { currentQuestionIndex, result } = useAppSelector((state) => state.playModeReducer);
+  const { currentQuestionIndex, result } = useAppSelector(
+    (state) => state.playModeReducer
+  );
   const endedTourNumber = tournament.questions[currentQuestionIndex].tourNumber;
-
-  console.log({ result });
 
   const onClick = () => {
     dispatch(playModeActions.currentQuestionIndexIncrement());
@@ -27,7 +27,9 @@ function TourEnd({ tournament }: StepProps) {
       <ResBlock tournament={tournament} />
       <TourTable res={result[endedTourNumber]} setSelectedQ={setSelectedQ} />
       <Button title='Следующий тур' onClick={onClick} />
-      {Boolean(selectedQ) && <QuestionPlane q={tournament.questions[selectedQ - 1]} />}
+      {Boolean(selectedQ) && (
+        <QuestionPlane q={tournament.questions[selectedQ - 1]} />
+      )}
     </div>
   );
 }

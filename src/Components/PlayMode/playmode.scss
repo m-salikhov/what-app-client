@@ -161,26 +161,26 @@ main {
   }
 }
 
-.tourend {
+.tour-end {
   .btn-elem {
     padding-top: 0.8rem;
   }
 }
 
-.tourend-tbl {
+.tour-end-tbl {
   display: flex;
   justify-content: center;
   padding-top: 0.7rem;
 
-  .tourend-tbl-el:first-child {
+  .tour-end-tbl-el:first-child {
     border-left: 2px solid rgb(27 27 27 / 40%);
   }
 
-  .tourend-tbl-el:last-child {
+  .tour-end-tbl-el:last-child {
     border-right: 2px solid rgb(27 27 27 / 40%);
   }
 
-  .tourend-tbl-el {
+  .tour-end-tbl-el {
     cursor: pointer;
     border-top: 2px solid rgb(27 27 27 / 40%);
     border-right: 2px solid rgb(27 27 27 / 40%);
