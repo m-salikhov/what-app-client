@@ -1,19 +1,28 @@
 import { useAppSelector } from '../../../../Hooks/redux';
 import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
-import { StepProps } from '../Types/playmodeTypes';
+import { StepPM, StepProps } from '../Types/playmodeTypes';
+
+const calcTourResult = (tour: number, res: ResultType) => {
+  const tourResArrBoolean = res[tour];
+
+  let count = 0;
+  tourResArrBoolean.forEach((v) => {
+    if (v.ans) count++;
+  });
+
+  return [count, res[tour].length];
+};
 
 function ResBlock({ tournament }: StepProps) {
-  const { currentQuestionIndex, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
-  const tour = tournament.questions[currentQuestionIndex].tourNumber;
+  const {
+    currentQuestionIndex,
+    result,
+    step,
+    totalAnsweredCount,
+    totalQuestionsCount,
+  } = useAppSelector((state) => state.playModeReducer);
 
-  const calcTourResult = (tour: number, res: ResultType) => {
-    const tourResArrBoolean = res[tour];
-    let count = 0;
-    tourResArrBoolean.forEach((v) => {
-      if (v.ans) count++;
-    });
-    return [count, res[tour].length];
-  };
+  const tour = tournament.questions[currentQuestionIndex].tourNumber;
 
   const [TourCount, TourLength] = calcTourResult(tour, result);
 
@@ -23,10 +32,10 @@ function ResBlock({ tournament }: StepProps) {
         {`Результат ${tour}-го тура:`}
         <span>{`${TourCount} из ${TourLength}`}</span>{' '}
       </p>
-      {tour === tournament.tours && (
+      {step === StepPM.END && (
         <p>
           {`Результат общий:`}
-          <span>{`${answeredCount} из ${tournament.questionsQuantity}`}</span>{' '}
+          <span>{`${totalAnsweredCount} из ${totalQuestionsCount}`}</span>{' '}
         </p>
       )}
     </div>

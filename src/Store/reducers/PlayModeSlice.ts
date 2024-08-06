@@ -10,7 +10,8 @@ export interface PlayModeState {
   step: Step;
   currentQuestionIndex: number;
   result: ResultType;
-  answeredCount: number;
+  totalAnsweredCount: number;
+  totalQuestionsCount: number;
 }
 
 interface setResultAction {
@@ -23,7 +24,8 @@ const initialState: PlayModeState = {
   step: 'START',
   currentQuestionIndex: 0,
   result: {},
-  answeredCount: 0,
+  totalAnsweredCount: 0,
+  totalQuestionsCount: 0,
 };
 
 const playModeSlice = createSlice({
@@ -51,8 +53,10 @@ const playModeSlice = createSlice({
         num: qNumber,
       });
 
+      state.totalQuestionsCount++;
+
       if (isAnswered) {
-        state.answeredCount++;
+        state.totalAnsweredCount++;
       }
     },
 
@@ -60,4 +64,5 @@ const playModeSlice = createSlice({
   },
 });
 
-export const { reducer: playModeReducer, actions: playModeActions } = playModeSlice;
+export const { reducer: playModeReducer, actions: playModeActions } =
+  playModeSlice;

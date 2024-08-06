@@ -5,7 +5,10 @@ import Button from '../../../Elements/Button/Button';
 import QuestionPlane from '../../../Elements/Question/QuestionPlane';
 import ResBlock from './ResBlock';
 import TourTable from './TourTable';
-import { useInitialLoginQuery, usePostUserResultMutation } from '../../../../Store/userAPI';
+import {
+  useInitialLoginQuery,
+  usePostUserResultMutation,
+} from '../../../../Store/userAPI';
 import extractServerErrorMessage from '../../../../Helpers/extractServerErrorMessage';
 import { StepProps } from '../Types/playmodeTypes';
 
@@ -15,13 +18,21 @@ function End({ tournament }: StepProps) {
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
   const [selectedQ, setSelectedQ] = useState(0);
-  const { currentQuestionIndex, result, answeredCount } = useAppSelector((state) => state.playModeReducer);
+  const { currentQuestionIndex, result, totalAnsweredCount } = useAppSelector(
+    (state) => state.playModeReducer
+  );
   const endedTourNumber = tournament.questions[currentQuestionIndex].tourNumber;
 
   const renderResTables = (endedTourNumber: number) => {
     const resTables = [];
     for (let i = 1; i <= endedTourNumber; i++) {
-      resTables.push(<TourTable res={result[i]} setSelectedQ={setSelectedQ} key={result[i][0].num} />);
+      resTables.push(
+        <TourTable
+          res={result[i]}
+          setSelectedQ={setSelectedQ}
+          key={result[i][0].num}
+        />
+      );
     }
     return resTables;
   };
@@ -33,7 +44,7 @@ function End({ tournament }: StepProps) {
         title: tournament.title,
         tournamentId: tournament.id,
         tournamentLength: tournament.questionsQuantity,
-        resultNumber: answeredCount,
+        resultNumber: totalAnsweredCount,
         result,
       };
       saveUserResult(userResult)
@@ -46,18 +57,28 @@ function End({ tournament }: StepProps) {
     tournament.title,
     currentUser,
     result,
-    answeredCount,
+    totalAnsweredCount,
     saveUserResult,
   ]);
 
   return (
     <div className='endt'>
       <ResBlock tournament={tournament} />
+
       {renderResTables(endedTourNumber)}
+
       {isSuccess && <p>Ваш результат доступен в Профиле</p>}
-      {error && <p>{extractServerErrorMessage(error) || 'Ошибка при сохранении результата'}</p>}
+
+      {error && (
+        <p>
+          {extractServerErrorMessage(error) ||
+            'Ошибка при сохранении результата'}
+        </p>
+      )}
+
       <Button title='К выбору турнира' onClick={() => navigate('/playmode')} />
-      {Boolean(selectedQ) && <QuestionPlane q={tournament.questions[selectedQ - 1]} />}
+
+      {selectedQ && <QuestionPlane q={tournament.questions[selectedQ - 1]} />}
     </div>
   );
 }
