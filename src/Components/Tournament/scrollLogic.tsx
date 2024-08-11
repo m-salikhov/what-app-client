@@ -27,7 +27,11 @@ export const getToursParagraphs = (tours: number) => {
   return arr;
 };
 
-export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement | null, tournament: TournamentType) => {
+export const scroll = (
+  e: MouseEvent<HTMLDivElement>,
+  nodeList: HTMLDivElement | null,
+  tournament: TournamentType
+) => {
   const arrAnchors = getToursAnchors(tournament);
 
   let id: number;
@@ -38,6 +42,7 @@ export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement |
   }
 
   const anchor = arrAnchors[id - 1];
+  console.log('anchor:', anchor);
   if (nodeList instanceof HTMLDivElement) {
     const node = nodeList.querySelector('.tournament-content-qs');
     if (node) node.children[anchor].scrollIntoView({ behavior: 'smooth' });

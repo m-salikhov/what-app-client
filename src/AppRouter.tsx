@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MainPage from './Components/Main/MainPage';
-import Layout from './Components/Lyout/Layout';
+import Layout from './Components/Layout/Layout';
 import Tournament from './Components/Tournament/Tournament';
 import About from './Components/About/About';
 import AddTournamentLink from './Components/AddTournamentLink/AddTournamentLink';

@@ -5,16 +5,21 @@ import Question from '../Elements/Question/Question';
 import Back from '../Elements/Back/Back';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { getToursParagraphs, scroll } from './scrollLogic';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useGetTournamentQuery } from '../../Store/tournamentAPI';
 import { initTournament } from '../../Helpers/initValues';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import './tournament.scss';
+import { animated, useTransition } from '@react-spring/web';
 
 function Tournament() {
   const { id = '' } = useParams();
-  const { data: t = initTournament, isSuccess, error } = useGetTournamentQuery(id);
+  const {
+    data: t = initTournament,
+    isSuccess,
+    error,
+  } = useGetTournamentQuery(id);
   const ref = useRef(null);
+  console.log('Tournament ~ ref:', ref);
 
   useDocTitle(t.title);
 
@@ -28,6 +33,13 @@ function Tournament() {
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const transitions = useTransition(t.questions, {
+    keys: (q) => q.id,
+    from: { opacity: 0, transform: 'scale(0.8) translateY(5rem)' },
+    enter: { opacity: 1, transform: 'scale(1) translateY(0)' },
+    config: { duration: 400 },
+  });
 
   return (
     <main className='tournament-container'>
@@ -54,26 +66,32 @@ function Tournament() {
           Редакция: <span>{t.editors.join(', ')}</span>
         </h3>
       </div>
+
       <div className='tournament-content' ref={ref}>
         <div className='tournament-content-header'>
           {' '}
           <div className='back'>
             <Back />
           </div>
-          <div className='tournament-content-tours' onClick={(e) => scroll(e, ref.current, t)}>
+          <div
+            className='tournament-content-tours'
+            onClick={(e) => scroll(e, ref.current, t)}
+          >
             {getToursParagraphs(t.tours)}
           </div>
         </div>
-        <TransitionGroup className='tournament-content-qs'>
-          {isSuccess &&
-            t.questions.map((v) => {
+
+        {isSuccess && (
+          <div className='tournament-content-qs'>
+            {transitions((style, v) => {
               return (
-                <CSSTransition key={v.id} classNames='question' timeout={400}>
+                <animated.div style={style}>
                   <Question q={v} />
-                </CSSTransition>
+                </animated.div>
               );
             })}
-        </TransitionGroup>
+          </div>
+        )}
       </div>
     </main>
   );

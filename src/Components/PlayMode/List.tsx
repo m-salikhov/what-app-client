@@ -3,7 +3,7 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useAppDispatch } from '../../Hooks/redux';
 import { useEffect } from 'react';
 import { playModeActions } from '../../Store/reducers/PlayModeSlice';
-import { useGetTornamentsShortQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentsShortQuery } from '../../Store/tournamentAPI';
 import './list.scss';
 
 function List() {
@@ -11,7 +11,7 @@ function List() {
 
   const dispatch = useAppDispatch();
 
-  const { data: tsShorts = [] } = useGetTornamentsShortQuery(undefined);
+  const { data: tsShorts = [] } = useGetTournamentsShortQuery(undefined);
 
   useEffect(() => {
     dispatch(playModeActions.resetState());
