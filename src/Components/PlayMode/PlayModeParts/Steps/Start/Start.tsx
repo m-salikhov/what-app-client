@@ -1,7 +1,7 @@
-import { getDate } from '../../../Helpers/getDate';
-import { playModeActions } from '../../../Store/reducers/PlayModeSlice';
-import { useAppDispatch } from '../../../Hooks/redux';
-import { StepPM, StepProps } from './Types/playmodeTypes';
+import { getDate } from '../../../../../Helpers/getDate';
+import { useAppDispatch } from '../../../../../Hooks/redux';
+import { playModeActions } from '../../../../../Store/reducers/PlayModeSlice';
+import { StepProps, StepPM } from '../../Types/playmodeTypes';
 
 function Start({ tournament }: StepProps) {
   const dispatch = useAppDispatch();
@@ -18,7 +18,11 @@ function Start({ tournament }: StepProps) {
         <p>{tournament.editors.join(', ')}</p>
       </div>
       <div>
-        <button onClick={() => dispatch(playModeActions.setStep(StepPM.QUESTION))}>Начать игру</button>
+        <button
+          onClick={() => dispatch(playModeActions.setStep(StepPM.QUESTION))}
+        >
+          Начать игру
+        </button>
       </div>
     </div>
   );

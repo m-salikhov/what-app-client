@@ -1,49 +1,27 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../Hooks/redux';
-import Button from '../../../Elements/Button/Button';
-import QuestionPlane from '../../../Elements/Question/QuestionPlane';
-import ResBlock from './ResBlock';
-import TourTable from './TourTable';
+import { useAppSelector } from '../../../../../Hooks/redux';
+import Button from '../../../../Elements/Button/Button';
+import QuestionPlane from '../../../../Elements/Question/QuestionPlane';
+import ResBlock from '../Components/ResBlock';
 import {
   useInitialLoginQuery,
   usePostUserResultMutation,
-} from '../../../../Store/userAPI';
-import extractServerErrorMessage from '../../../../Helpers/extractServerErrorMessage';
-import { StepProps } from '../Types/playmodeTypes';
-import { ResultType } from '../../../../Store/reducers/PlayModeSlice';
-
-const renderResTables = (
-  endedTourNumber: number,
-  result: ResultType,
-  setSelectedQ: Dispatch<SetStateAction<number>>
-) => {
-  const resTables = [];
-  for (let i = 1; i <= endedTourNumber; i++) {
-    resTables.push(
-      <TourTable
-        res={result[i]}
-        setSelectedQ={setSelectedQ}
-        key={result[i][0].num}
-      />
-    );
-  }
-  return resTables;
-};
+} from '../../../../../Store/userAPI';
+import extractServerErrorMessage from '../../../../../Helpers/extractServerErrorMessage';
+import { StepProps } from '../../Types/playmodeTypes';
 
 function End({ tournament }: StepProps) {
   const navigate = useNavigate();
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 
-  const [selectedQ, setSelectedQ] = useState(0);
   const {
-    currentQuestionIndex,
     result,
     totalAnsweredCount,
     totalQuestionsCount,
+    selectedResultQuestion,
   } = useAppSelector((state) => state.playModeReducer);
-  const endedTourNumber = tournament.questions[currentQuestionIndex].tourNumber;
 
   useEffect(() => {
     if (currentUser?.id) {
@@ -70,10 +48,8 @@ function End({ tournament }: StepProps) {
   ]);
 
   return (
-    <div className='endt'>
-      <ResBlock tournament={tournament} />
-
-      {renderResTables(endedTourNumber, result, setSelectedQ)}
+    <div className='end-tournament'>
+      <ResBlock />
 
       {isSuccess && <p>Ваш результат доступен в Профиле</p>}
 
@@ -86,8 +62,8 @@ function End({ tournament }: StepProps) {
 
       <Button title='К выбору турнира' onClick={() => navigate('/playmode')} />
 
-      {Boolean(selectedQ) && (
-        <QuestionPlane q={tournament.questions[selectedQ - 1]} />
+      {Boolean(selectedResultQuestion) && (
+        <QuestionPlane q={tournament.questions[selectedResultQuestion - 1]} />
       )}
     </div>
   );

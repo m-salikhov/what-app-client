@@ -12,12 +12,7 @@ export interface PlayModeState {
   result: ResultType;
   totalAnsweredCount: number;
   totalQuestionsCount: number;
-}
-
-interface setResultAction {
-  isAnswered: boolean;
-  qNumber: number;
-  tourNumber: number;
+  selectedResultQuestion: number;
 }
 
 const initialState: PlayModeState = {
@@ -26,7 +21,14 @@ const initialState: PlayModeState = {
   result: {},
   totalAnsweredCount: 0,
   totalQuestionsCount: 0,
+  selectedResultQuestion: 0,
 };
+
+interface setResultAction {
+  isAnswered: boolean;
+  qNumber: number;
+  tourNumber: number;
+}
 
 const playModeSlice = createSlice({
   name: 'playModeSlice',
@@ -58,6 +60,10 @@ const playModeSlice = createSlice({
       if (isAnswered) {
         state.totalAnsweredCount++;
       }
+    },
+
+    setSelectedResultQuestion(state, action: PayloadAction<number>) {
+      state.selectedResultQuestion = action.payload;
     },
 
     resetState: () => initialState,
