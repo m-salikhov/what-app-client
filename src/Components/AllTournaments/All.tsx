@@ -7,13 +7,15 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import useTournamentsShort from './hooks/useTournamentsShorts';
 import filterTournamentsShort from './helpers/filterTournamentsShort';
 import './allTournaments.scss';
+import { Spinner } from '../Elements/Spinner/Spinner';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
 function All() {
   useDocTitle('Все турниры');
 
-  const { setTournamentsShorts, tournamentsShorts } = useTournamentsShort();
+  const { setTournamentsShorts, tournamentsShorts, isSuccess, isLoading } =
+    useTournamentsShort();
   const field = useRef('');
   const [search, setSearch] = useState('');
 
@@ -76,11 +78,16 @@ function All() {
             </div>{' '}
           </div>
         </div>
-        <div className='table-body'>
-          {filterTournamentsShort(tournamentsShorts, search).map((v, i) => (
-            <LineAll item={v} index={i} key={v.id} />
-          ))}
-        </div>
+
+        {isLoading && <Spinner />}
+
+        {isSuccess && (
+          <div className='table-body'>
+            {filterTournamentsShort(tournamentsShorts, search).map((v, i) => (
+              <LineAll item={v} index={i} key={v.id} />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   );

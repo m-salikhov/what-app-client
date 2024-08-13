@@ -13,6 +13,7 @@ import { StepProps } from '../../Types/playmodeTypes';
 
 function End({ tournament }: StepProps) {
   const navigate = useNavigate();
+
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
 

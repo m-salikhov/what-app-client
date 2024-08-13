@@ -92,7 +92,6 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
       <Button
         onClick={onClick}
         title={isTimeOver ? 'Следующий вопрос' : 'Готов ответ?'}
-        extraClass={answerToQ ? 'answered' : 'not-answered'}
       />
     </div>
   );

@@ -3,8 +3,11 @@ import { TournamentShortType } from '../../../Types/tournament';
 import { useGetTournamentsShortQuery } from '../../../Store/tournamentAPI';
 
 export default function useTournamentsShort() {
-  const { data: tsShorts = [], isSuccess } =
-    useGetTournamentsShortQuery(undefined);
+  const {
+    data: tsShorts = [],
+    isSuccess,
+    isLoading,
+  } = useGetTournamentsShortQuery(undefined);
 
   const [tournamentsShorts, setTournamentsShorts] = useState<
     TournamentShortType[]
@@ -15,5 +18,5 @@ export default function useTournamentsShort() {
     setTournamentsShorts([...ts].reverse());
   }
 
-  return { tournamentsShorts, setTournamentsShorts };
+  return { tournamentsShorts, setTournamentsShorts, isLoading, isSuccess };
 }
