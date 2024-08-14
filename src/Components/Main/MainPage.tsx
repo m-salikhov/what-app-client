@@ -17,7 +17,11 @@ function MainPage() {
 
   const [isRandomRefetch, setIsRandomRefetch] = useState(false);
 
-  const { data: randomQuestions = [], refetch, isLoading } = useGetRandomQuery(amountRandomQuestions);
+  const {
+    data: randomQuestions = [],
+    refetch,
+    isLoading,
+  } = useGetRandomQuery(amountRandomQuestions);
 
   return (
     <main>
@@ -36,7 +40,9 @@ function MainPage() {
               <h2>Случайные вопросы</h2>
               <div>
                 <img
-                  className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow r'}
+                  className={
+                    isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow r'
+                  }
                   src={refreshIcon}
                   alt='обновить случайные'
                 />
@@ -45,14 +51,19 @@ function MainPage() {
           </div>
 
           {isLoading && <SkeletonQuestion count={amountRandomQuestions} />}
-          {!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
+
+          {!isLoading &&
+            randomQuestions.map((v) => (
+              <Question q={v} random={true} key={v.id} />
+            ))}
         </div>
         <div className='main-content-right'>
-          {' '}
           <Stats />
+
           <div className='main-content-tournaments'>
             <LastTournaments />
           </div>
+
           <div className='main-content-banner'>
             <h2>Игровой режим</h2>
             <p>Сыграйте любой из турниров с таймером и ведением счёта </p>

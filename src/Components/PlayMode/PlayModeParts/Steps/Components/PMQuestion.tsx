@@ -77,12 +77,12 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
       {isTimeOver && <Answer q={currentQuestion} />}
       {isTimeOver && (
         <>
-          <p className='isanswer-header'>
+          <p className='pmq-is-answered'>
             {answerToQ !== undefined
               ? `Ответ ${answerToQ ? 'Да' : 'Нет'} принят`
               : 'Вам удалось ответить?'}
           </p>
-          <div className='isanswer'>
+          <div className='pmq-choice-btn'>
             <Button onClick={onClickChoiceAnsBtn} title={'Да'} id='1' />
             <Button onClick={onClickChoiceAnsBtn} title={'Нет'} />
           </div>

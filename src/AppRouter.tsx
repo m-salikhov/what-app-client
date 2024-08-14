@@ -4,7 +4,7 @@ import Layout from './Components/Layout/Layout';
 import Tournament from './Components/Tournament/Tournament';
 import About from './Components/About/About';
 import AddTournamentLink from './Components/AddTournamentLink/AddTournamentLink';
-import All from './Components/AllTournaments/All';
+import AllTournaments from './Components/AllTournaments/AllTournaments';
 import Entry from './Components/Entry/Entry';
 import PrivateRoute from './hoc/PrivateRoute';
 import Profile from './Components/Profile/Profile';
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: 'all',
-        element: <All />,
+        element: <AllTournaments />,
       },
       {
         path: 'entry',

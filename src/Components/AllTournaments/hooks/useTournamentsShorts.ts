@@ -7,6 +7,7 @@ export default function useTournamentsShort() {
     data: tsShorts = [],
     isSuccess,
     isLoading,
+    error,
   } = useGetTournamentsShortQuery(undefined);
 
   const [tournamentsShorts, setTournamentsShorts] = useState<
@@ -18,5 +19,11 @@ export default function useTournamentsShort() {
     setTournamentsShorts([...ts].reverse());
   }
 
-  return { tournamentsShorts, setTournamentsShorts, isLoading, isSuccess };
+  return {
+    tournamentsShorts,
+    setTournamentsShorts,
+    isLoading,
+    isSuccess,
+    error,
+  };
 }

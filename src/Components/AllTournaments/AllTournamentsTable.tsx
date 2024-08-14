@@ -1,21 +1,28 @@
-import { ChangeEvent, MouseEvent, useRef, useState } from 'react';
-import { TournamentShortType } from '../../Types/tournament';
-import LineAll from './LineAll';
-import sortFunction from './helpers/sortFunction';
-import chart from './bar_chart.svg';
-import { useDocTitle } from '../../Hooks/useDocTitle';
-import useTournamentsShort from './hooks/useTournamentsShorts';
+import {
+  ChangeEvent,
+  Dispatch,
+  MouseEvent,
+  SetStateAction,
+  useRef,
+  useState,
+} from 'react';
 import filterTournamentsShort from './helpers/filterTournamentsShort';
-import './allTournaments.scss';
-import { Spinner } from '../Elements/Spinner/Spinner';
+import sortFunction from './helpers/sortFunction';
+import LineAll from './LineAll';
+import { TournamentShortType } from '../../Types/tournament';
+import chart from './bar_chart.svg';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
-function All() {
-  useDocTitle('Все турниры');
+interface Props {
+  setTournamentsShorts: Dispatch<SetStateAction<TournamentShortType[]>>;
+  tournamentsShorts: TournamentShortType[];
+}
 
-  const { setTournamentsShorts, tournamentsShorts, isSuccess, isLoading } =
-    useTournamentsShort();
+export default function AllTournamentsTable({
+  setTournamentsShorts,
+  tournamentsShorts,
+}: Props) {
   const field = useRef('');
   const [search, setSearch] = useState('');
 
@@ -28,16 +35,18 @@ function All() {
       field.current = className;
     }
   }
+
   function handleSearch(e: ChangeEvent<HTMLInputElement>) {
     setSearch(e.target.value);
   }
 
   return (
-    <main>
+    <>
       <label className='all-search'>
         <p>поиск</p>
         <input type='text' autoFocus onChange={handleSearch} />
       </label>
+
       <div className='table'>
         <div className='table-header'>
           <div className='table-header-t'>№</div>
@@ -79,18 +88,12 @@ function All() {
           </div>
         </div>
 
-        {isLoading && <Spinner />}
-
-        {isSuccess && (
-          <div className='table-body'>
-            {filterTournamentsShort(tournamentsShorts, search).map((v, i) => (
-              <LineAll item={v} index={i} key={v.id} />
-            ))}
-          </div>
-        )}
+        <div className='table-body'>
+          {filterTournamentsShort(tournamentsShorts, search).map((v, i) => (
+            <LineAll item={v} index={i} key={v.id} />
+          ))}
+        </div>
       </div>
-    </main>
+    </>
   );
 }
-
-export default All;

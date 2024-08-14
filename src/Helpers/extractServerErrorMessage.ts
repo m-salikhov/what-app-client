@@ -1,8 +1,10 @@
 import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
 import { ErrorServer } from '../Types/errorServer';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-const extractServerErrorMessage = (err: SerializedError | FetchBaseQueryError | undefined) => {
+const extractServerErrorMessage = (
+  err: SerializedError | FetchBaseQueryError | undefined
+) => {
   if (typeof err === 'undefined') {
     return '';
   }

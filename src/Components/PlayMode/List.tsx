@@ -4,8 +4,9 @@ import { useAppDispatch } from '../../Hooks/redux';
 import { useEffect } from 'react';
 import { playModeActions } from '../../Store/reducers/PlayModeSlice';
 import { useGetTournamentsShortQuery } from '../../Store/tournamentAPI';
-import './list.scss';
 import { Spinner } from '../Elements/Spinner/Spinner';
+import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import './list.scss';
 
 function List() {
   useDocTitle('Игровой режим');
@@ -16,6 +17,7 @@ function List() {
     data: tsShorts = [],
     isLoading,
     isSuccess,
+    error,
   } = useGetTournamentsShortQuery(undefined);
 
   useEffect(() => {
@@ -24,27 +26,30 @@ function List() {
 
   return (
     <main className='list'>
-      <h3>Игровой режим</h3>
-      <p>Выберите турнир</p>
+      {isLoading && <Spinner />}
 
-      <div className='table'>
-        <div className='table-header'>
-          <div className='table-header-t'>№</div>
-          <div className='table-header-t'>Название </div>
-          <div className='table-header-t'>Вопросы </div>
-          <div className='table-header-t'>Туры </div>
-        </div>
+      {error && <h2>{extractServerErrorMessage(error)}</h2>}
 
-        {isLoading && <Spinner />}
+      {isSuccess && (
+        <>
+          <h3>Игровой режим</h3>
+          <p>Выберите турнир</p>
+          <div className='table'>
+            <div className='table-header'>
+              <div className='table-header-t'>№</div>
+              <div className='table-header-t'>Название </div>
+              <div className='table-header-t'>Вопросы </div>
+              <div className='table-header-t'>Туры </div>
+            </div>
 
-        {isSuccess && (
-          <div className='table-body'>
-            {[...tsShorts].reverse().map((v, i) => (
-              <ListLine item={v} index={i} key={v.id} />
-            ))}
-          </div>
-        )}
-      </div>
+            <div className='table-body'>
+              {[...tsShorts].reverse().map((v, i) => (
+                <ListLine item={v} index={i} key={v.id} />
+              ))}
+            </div>
+          </div>{' '}
+        </>
+      )}
     </main>
   );
 }
