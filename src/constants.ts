@@ -3,7 +3,7 @@ export const guest = {
   username: 'guest',
 } as const;
 
-export const routes = {
+export const serverRoutes = {
   tournaments: '/tournaments/',
   tournamentsGuest: '/tournaments/quest/',
   tournamentsCreateByLink: '/tournaments/createbylink/',

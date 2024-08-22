@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, routes } from '../constants';
+import { baseUrl, serverRoutes } from '../constants';
 import { FormUser, Result, UserAuth, UserType } from '../Types/user';
 
 export const userAPI = createApi({
@@ -9,16 +9,16 @@ export const userAPI = createApi({
   keepUnusedDataFor: 86400,
   endpoints: (build) => ({
     initialLogin: build.query<UserType, undefined>({
-      query: () => routes.authLogFirst,
+      query: () => serverRoutes.authLogFirst,
     }),
 
     logout: build.query<{ message: string }, undefined>({
-      query: () => routes.authLogout,
+      query: () => serverRoutes.authLogout,
     }),
 
     login: build.mutation<UserType, UserAuth>({
       query: (body) => ({
-        url: routes.authLogin,
+        url: serverRoutes.authLogin,
         method: 'POST',
         body,
       }),
@@ -26,7 +26,7 @@ export const userAPI = createApi({
 
     registration: build.mutation<UserType, FormUser>({
       query: (body) => ({
-        url: routes.users,
+        url: serverRoutes.users,
         method: 'POST',
         body,
       }),
@@ -34,20 +34,20 @@ export const userAPI = createApi({
 
     changePassword: build.mutation<string, { newPass: string; id: string }>({
       query: (body) => ({
-        url: routes.users,
+        url: serverRoutes.users,
         method: 'PUT',
         body,
       }),
     }),
 
     getUserResultShort: build.query<Result[], string>({
-      query: (userID) => routes.userResultShort + userID,
+      query: (userID) => serverRoutes.userResultShort + userID,
       providesTags: ['result'],
     }),
 
     postUserResult: build.mutation<Result, Omit<Result, 'id' | 'date'>>({
       query: (body) => ({
-        url: routes.userResultPost,
+        url: serverRoutes.userResultPost,
         method: 'POST',
         body,
       }),

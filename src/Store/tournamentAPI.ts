@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TournamentShortType, TournamentType } from '../Types/tournament';
 import { QuestionType } from '../Types/question';
-import { baseUrl, guest, routes } from '../constants';
+import { baseUrl, guest, serverRoutes } from '../constants';
 
 export const tournamentAPI = createApi({
   reducerPath: 'tournamentAPI',
@@ -15,7 +15,7 @@ export const tournamentAPI = createApi({
     }),
 
     getTournamentsLastShort: build.query<TournamentShortType[], number>({
-      query: (count: number) => routes.tournamentsLastShort + count,
+      query: (count: number) => serverRoutes.tournamentsLastShort + count,
       providesTags: ['lastTournamentsShort'],
     }),
 
@@ -25,17 +25,17 @@ export const tournamentAPI = createApi({
     }),
 
     getStats: build.query<{ tc: number; qc: number }, undefined>({
-      query: () => routes.tournamentsStats,
+      query: () => serverRoutes.tournamentsStats,
       providesTags: ['stats'],
     }),
 
     getTournamentsAmountPages: build.query<number, undefined>({
-      query: () => routes.tournamentsAmountPages,
+      query: () => serverRoutes.tournamentsAmountPages,
       providesTags: ['stats'],
     }),
 
     getTournamentsShort: build.query<TournamentShortType[], undefined>({
-      query: () => routes.tournamentsAllShort,
+      query: () => serverRoutes.tournamentsAllShort,
       providesTags: (result) => {
         return result
           ? [...result.map(({ id }) => ({ type: 'shorts' as const, id }))]
@@ -45,7 +45,7 @@ export const tournamentAPI = createApi({
 
     parseLink: build.mutation<TournamentType, { link: string }>({
       query: (body) => ({
-        url: routes.tournamentsCreateByLink,
+        url: serverRoutes.tournamentsCreateByLink,
         method: 'POST',
         body,
       }),
@@ -55,8 +55,8 @@ export const tournamentAPI = createApi({
       query: (body) => ({
         url:
           body.uploader === guest.username
-            ? routes.tournamentsGuest
-            : routes.tournaments,
+            ? serverRoutes.tournamentsGuest
+            : serverRoutes.tournaments,
         method: 'POST',
         credentials: 'include',
         body,
@@ -65,7 +65,7 @@ export const tournamentAPI = createApi({
     }),
 
     getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
-      query: (userID) => routes.tournamentsAllByUploader + userID,
+      query: (userID) => serverRoutes.tournamentsAllByUploader + userID,
       providesTags: ['shorts'],
     }),
   }),
