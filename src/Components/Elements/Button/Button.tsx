@@ -1,5 +1,5 @@
 import { FormEvent, MouseEvent } from 'react';
-import './btn.scss';
+import './btn.css';
 
 interface ButtonProps {
   title: string;
@@ -11,7 +11,15 @@ interface ButtonProps {
   onSubmit?: (e: FormEvent<EventTarget>) => void;
 }
 
-function Button({ onClick, title, extraClass, disabled, onSubmit, type, id }: ButtonProps) {
+function Button({
+  onClick,
+  title,
+  extraClass,
+  disabled,
+  onSubmit,
+  type,
+  id,
+}: ButtonProps) {
   return (
     <div className='btn-elem'>
       <button

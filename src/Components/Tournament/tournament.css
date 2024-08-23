@@ -30,7 +30,7 @@
 
 .tournament-content {
   .tournament-content-header {
-    // display: flex;
+    /* display: flex; */
     .tournament-content-tours {
       display: flex;
       flex-grow: 1;

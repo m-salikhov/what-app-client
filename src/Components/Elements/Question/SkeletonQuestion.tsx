@@ -1,4 +1,4 @@
-import './skeletonQuestion.scss';
+import './skeletonQuestion.css';
 
 function SkeletonQuestion({ count }: { count: number }) {
   const skeletonQuestion = (i: number) => {

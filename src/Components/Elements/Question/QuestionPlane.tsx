@@ -1,7 +1,7 @@
 import { QuestionType } from '../../../Types/question';
 import Add from './Add';
 import Answer from './Answer';
-import './question.scss';
+import './question.css';
 
 interface Props {
   q: QuestionType;

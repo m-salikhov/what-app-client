@@ -4,7 +4,7 @@ import { useLogout } from '../../Hooks/useLogout';
 import { useWindowSize } from '../../Hooks/useWindowSize';
 import owlGreen from './owlGreen.svg';
 import { useInitialLoginQuery } from '../../Store/userAPI';
-import './header.scss';
+import './header.css';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
@@ -29,7 +29,10 @@ function Header() {
         <h2>База вопросов "Что? Где? Когда?"</h2>
       </div>
 
-      <nav className={openMobMenu ? 'mob-menu' : undefined} onClick={handleMobMenu}>
+      <nav
+        className={openMobMenu ? 'mob-menu' : undefined}
+        onClick={handleMobMenu}
+      >
         <ul>
           <li>
             <Link to='/about'>О сайте</Link>
@@ -72,7 +75,10 @@ function Header() {
           )}
         </ul>
       </nav>
-      <div className={openMobMenu ? 'mob-btn open' : 'mob-btn'} onClick={handleMobMenu}>
+      <div
+        className={openMobMenu ? 'mob-btn open' : 'mob-btn'}
+        onClick={handleMobMenu}
+      >
         <span></span>
         <span></span>
         <span></span>

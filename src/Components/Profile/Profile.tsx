@@ -2,17 +2,22 @@ import { useState } from 'react';
 import { getDate } from '../../Helpers/getDate';
 import ChangePass from './ChangePass';
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/userAPI';
+import {
+  useInitialLoginQuery,
+  useGetUserResultShortQuery,
+} from '../../Store/userAPI';
 import { createPortal } from 'react-dom';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
-import './profile.scss';
+import './profile.css';
 
 function Profile() {
   useDocTitle('Профиль');
 
   const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useInitialLoginQuery(undefined);
-  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || '');
+  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(
+    currentUser?.id || ''
+  );
   const { data: results } = useGetUserResultShortQuery(currentUser?.id || '');
 
   return (
@@ -37,7 +42,10 @@ function Profile() {
 
         {changePass &&
           currentUser &&
-          createPortal(<ChangePass setChangePass={setChangePass} id={currentUser.id} />, document.body)}
+          createPortal(
+            <ChangePass setChangePass={setChangePass} id={currentUser.id} />,
+            document.body
+          )}
 
         <button type='button' onClick={() => setChangePass(true)}>
           Изменить пароль

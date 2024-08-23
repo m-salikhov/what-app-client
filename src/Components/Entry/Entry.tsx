@@ -11,7 +11,7 @@ import checkFormFields from './helpers/checkFormFields';
 import { useLogin } from './hooks/useLogin';
 import { useRegistration } from './hooks/useRegistration';
 import ModalReg from './ModalReg';
-import './entry.scss';
+import './entry.css';
 
 function Entry() {
   useDocTitle('Вход');
@@ -95,13 +95,25 @@ function Entry() {
                 data-tooltip-html='Можно зарегистрировать или зайти под тестовым аккаунтом<br /> почта: test@gmail.com, пароль: test'
               >
                 <h2>Почта</h2>
-                <input type='email' onChange={onChange} name='email' autoComplete='on' placeholder='email' />
+                <input
+                  type='email'
+                  onChange={onChange}
+                  name='email'
+                  autoComplete='on'
+                  placeholder='email'
+                />
               </label>
               {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='top' />}
 
               <label className={isReg ? 'entry-input' : 'entry-input reg'}>
                 <h2>Псевдоним</h2>
-                <input type='text' onChange={onChange} name='username' autoComplete='off' placeholder='username' />
+                <input
+                  type='text'
+                  onChange={onChange}
+                  name='username'
+                  autoComplete='off'
+                  placeholder='username'
+                />
               </label>
 
               <label className='entry-input'>
@@ -134,7 +146,11 @@ function Entry() {
               )}
 
               <div className='entry-buttons'>
-                <Button title='Отправить' type='submit' disabled={isLoadingLogin || isLoadingReg} />
+                <Button
+                  title='Отправить'
+                  type='submit'
+                  disabled={isLoadingLogin || isLoadingReg}
+                />
                 <Button
                   title={isReg ? 'Авторизоваться' : 'Зарегистрироваться'}
                   onClick={onClickAuthRegChangeBtn}

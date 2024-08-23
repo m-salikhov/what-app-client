@@ -1,7 +1,7 @@
 import { getDateYYYY_MM_DD } from '../../Helpers/getDate';
 import { TournamentType } from '../../Types/tournament';
 import Button from '../Elements/Button/Button';
-import EditFotmQuestion from './EditFormQuestion';
+import EditFormQuestion from './EditFormQuestion';
 import { Action, actionTypes } from './helpers/reducer';
 
 interface Props {
@@ -19,7 +19,10 @@ function EditForm({ t, dispatch, setEdit }: Props) {
         }
       }}
     >
-      <Button title='Закончить редактирование' onClick={() => setEdit(false)}></Button>
+      <Button
+        title='Закончить редактирование'
+        onClick={() => setEdit(false)}
+      ></Button>
       <div className='edit-t'>
         <div className='edit-t-top'>
           {' '}
@@ -28,7 +31,9 @@ function EditForm({ t, dispatch, setEdit }: Props) {
             <input
               placeholder='Название турнира'
               type='text'
-              onChange={(e) => dispatch({ type: actionTypes.title, payload: e.target.value })}
+              onChange={(e) =>
+                dispatch({ type: actionTypes.title, payload: e.target.value })
+              }
               value={t.title}
             />
           </label>
@@ -64,7 +69,7 @@ function EditForm({ t, dispatch, setEdit }: Props) {
           </label>
         </div>
         {t.questions.map((v) => (
-          <EditFotmQuestion q={v} dispatch={dispatch} key={v.id} />
+          <EditFormQuestion q={v} dispatch={dispatch} key={v.id} />
         ))}
       </div>
     </main>

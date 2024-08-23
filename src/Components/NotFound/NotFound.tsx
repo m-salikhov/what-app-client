@@ -1,6 +1,6 @@
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import notFoundOwl from './404.jpg';
-import './notFound.scss';
+import './notFound.css';
 
 function NotFound() {
   useDocTitle('404');

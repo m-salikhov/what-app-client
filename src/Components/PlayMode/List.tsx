@@ -6,7 +6,7 @@ import { playModeActions } from '../../Store/reducers/PlayModeSlice';
 import { useGetTournamentsShortQuery } from '../../Store/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
-import './list.scss';
+import './list.css';
 
 function List() {
   useDocTitle('Игровой режим');

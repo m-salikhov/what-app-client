@@ -9,7 +9,7 @@ import SkeletonQuestion from '../Elements/Question/SkeletonQuestion';
 import LastTournaments from './LastTournaments';
 import refreshIcon from './refresh.svg';
 import Stats from './Stats';
-import './mainPage.scss';
+import './mainPage.css';
 
 function MainPage() {
   const navigate = useNavigate();

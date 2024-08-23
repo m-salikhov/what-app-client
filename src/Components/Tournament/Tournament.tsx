@@ -4,7 +4,7 @@ import { useGetTournamentQuery } from '../../Store/tournamentAPI';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import TournamentContent from './TournamentContent';
-import './tournament.scss';
+import './tournament.css';
 
 function Tournament() {
   const { id = '' } = useParams();

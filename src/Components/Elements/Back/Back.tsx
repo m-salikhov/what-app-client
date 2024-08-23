@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import arrow_left from './arrow_left.svg';
-import './back.scss';
+import './back.css';
 
 function Back() {
   const navigate = useNavigate();

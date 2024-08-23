@@ -9,7 +9,7 @@ import Start from './PlayModeParts/Steps/Start/Start';
 import PMQuestion from './PlayModeParts/Steps/Components/PMQuestion';
 import TourEnd from './PlayModeParts/Steps/TourEnd/TourEnd';
 import End from './PlayModeParts/Steps/TournamentEnd/End';
-import './playmode.scss';
+import './playmode.css';
 
 function PlayModeChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {

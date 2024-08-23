@@ -1,5 +1,4 @@
 @import 'nullstyle';
-@import 'variables';
 
 @font-face {
   font-family: Rubik-Semibold;
@@ -11,11 +10,18 @@
   src: url('Fonts/Rubik-Regular.ttf');
 }
 
-$font-stack: 'Rubik-Regular', system-ui, arial, helvetica;
+/* $font-stack: 'Rubik-Regular', system-ui, arial, helvetica; */
+
+:root {
+  --font-stack: 'Rubik-Regular', system-ui, arial, helvetica;
+  --main-background-color: rgb(223 223 223 / 40%);
+  --main-border: 1px solid rgb(27 27 27 / 40%);
+  --background-grey: rgb(27 27 27 / 40%);
+}
 
 body {
-  font-family: $font-stack;
-  background-color: $main-background-color;
+  font-family: var(--font-stack);
+  background-color: var(--main-background-color);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -26,7 +32,7 @@ p {
   word-spacing: 0.1rem;
 
   &::selection {
-    background-color: $greycolor;
+    background-color: var(--background-grey);
   }
 }
 

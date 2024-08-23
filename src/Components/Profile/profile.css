@@ -7,7 +7,7 @@
 
   & > p:nth-child(2n + 1) {
     width: 20rem;
-    // font-family: Rubik-Semibold;
+    /* font-family: Rubik-Semibold; */
     font-weight: bold;
     text-align: left;
   }

@@ -1,9 +1,9 @@
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import useTournamentsShort from './hooks/useTournamentsShorts';
-import './allTournaments.scss';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import AllTournamentsTable from './AllTournamentsTable';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
+import './allTournaments.css';
 
 function AllTournaments() {
   useDocTitle('Все турниры');
