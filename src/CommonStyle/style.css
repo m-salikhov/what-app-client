@@ -1,39 +1,31 @@
 @import 'nullstyle';
-
-@font-face {
-  font-family: Rubik-Semibold;
-  src: url('Fonts/Rubik-SemiBold.ttf');
-}
-
-@font-face {
-  font-family: Rubik-Regular;
-  src: url('Fonts/Rubik-Regular.ttf');
-}
-
-/* $font-stack: 'Rubik-Regular', system-ui, arial, helvetica; */
-
-:root {
-  --font-stack: 'Rubik-Regular', system-ui, arial, helvetica;
-  --main-background-color: rgb(223 223 223 / 40%);
-  --main-border: 1px solid rgb(27 27 27 / 40%);
-  --background-grey: rgb(27 27 27 / 40%);
-}
+@import 'variables';
 
 body {
   font-family: var(--font-stack);
-  background-color: var(--main-background-color);
+  background-color: var(--main-bg-color);
   -webkit-tap-highlight-color: transparent;
+  transition: background-color 400ms linear;
 }
 
 p {
   font-size: 1.1rem;
   line-height: 1.5;
-  color: #222427;
+  color: var(--p-color);
   word-spacing: 0.1rem;
 
   &::selection {
-    background-color: var(--background-grey);
+    background-color: var(--bg-grey);
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--h-color);
 }
 
 h1 {

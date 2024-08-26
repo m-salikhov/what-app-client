@@ -11,7 +11,7 @@
     width: 250px;
     padding: 2px 18px;
     font-size: 1.3rem;
-    border: 1px solid #1b1b1b80;
+    border: var(--main-border);
     border-radius: 6px;
   }
 }
@@ -37,7 +37,7 @@
     padding-left: 0.4rem;
     font-family: Rubik-Semibold, sans-serif;
     background-color: rgb(15 110 78 / 50%);
-    border: 1px solid rgb(27 27 27 / 40%);
+    border: var(--main-border);
 
     div {
       position: absolute;
@@ -115,11 +115,12 @@
     display: flex;
     align-items: center;
     width: 25rem;
-    border: 1px solid rgb(27 27 27 / 40%);
+    border: var(--main-border);
 
     a {
       padding-left: 0.4rem;
       font-size: 1.1rem;
+      color: var(--p-color);
 
       &:hover {
         font-weight: bold;
@@ -132,7 +133,7 @@
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
     text-align: center;
-    border: 1px solid rgb(27 27 27 / 40%);
+    border: var(--main-border);
   }
 
   p:nth-child(1) {

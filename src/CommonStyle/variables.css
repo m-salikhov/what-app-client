@@ -1,0 +1,32 @@
+@font-face {
+  font-family: Rubik-Semibold;
+  src: url('Fonts/Rubik-SemiBold.ttf');
+}
+
+@font-face {
+  font-family: Rubik-Regular;
+  src: url('Fonts/Rubik-Regular.ttf');
+}
+
+html {
+  --font-stack: 'Rubik-Regular', system-ui, arial, helvetica;
+  --main-border-color: #0d1117;
+  --main-bg-color: rgb(223 223 223);
+  --main-border: 1px solid var(--main-border-color);
+  --bg-grey: rgb(27 27 27 / 40%);
+  --external-link: #0645ad;
+  --p-color: #222427;
+  --h-color: #000000;
+  --nav-text-color: #466176;
+  --nav-text-color-hover: #162734;
+}
+
+html[data-theme='dark'] {
+  --main-bg-color: #0d1117;
+  --main-border-color: #939ca4b3;
+  --main-border: 1px solid var(--main-border-color);
+  --p-color: #a9b0ba;
+  --h-color: #a9b0ba;
+  --nav-text-color: #3a6a8e;
+  --nav-text-color-hover: #4c8fc2;
+}

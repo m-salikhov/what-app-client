@@ -34,10 +34,10 @@ nav {
       padding: 0 0.5rem;
       font-size: 1.125rem;
       font-weight: 600;
-      color: rgb(34 60 80 / 70%);
+      color: var(--nav-text-color);
 
       &:hover {
-        color: rgb(10 13 16);
+        color: var(--nav-text-color-hover);
       }
 
       a {
@@ -58,7 +58,7 @@ nav {
     width: 25px;
     height: 3px;
     margin: 2px 0;
-    background-color: black;
+    background-color: var(--nav-text-color);
     transition: 0.3s;
   }
 }
@@ -111,7 +111,7 @@ nav {
       z-index: 10;
       flex-direction: column;
       width: 70%;
-      background-color: white;
+      background-color: var(--main-bg-color);
 
       li {
         height: 3rem;

@@ -5,6 +5,7 @@ import { useWindowSize } from '../../Hooks/useWindowSize';
 import owlGreen from './owlGreen.svg';
 import { useInitialLoginQuery } from '../../Store/userAPI';
 import './header.css';
+import DarkMode from '../Elements/DarkMode/DarkMode';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
@@ -24,9 +25,12 @@ function Header() {
 
   return (
     <header>
-      <div onClick={() => navigate('/')}>
-        <img src={owlGreen} alt='заглавное изображение' />
-        <h2>База вопросов "Что? Где? Когда?"</h2>
+      <div>
+        <div onClick={() => navigate('/')}>
+          <img src={owlGreen} alt='заглавное изображение' />
+          <h2>База вопросов "Что? Где? Когда?"</h2>
+        </div>
+        <DarkMode />
       </div>
 
       <nav

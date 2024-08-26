@@ -1,7 +1,8 @@
 .question {
   margin: 1rem 0;
-  border: 2px solid rgb(27 27 27 / 100%);
+  border: 2px solid var(--main-border-color);
   border-radius: 10px;
+  overflow: hidden;
 
   p {
     font-size: 1.25rem;
@@ -12,7 +13,8 @@
     justify-content: space-between;
     padding: 0.5rem;
     background-color: rgb(173 216 230 / 40%);
-    border-bottom: 1px solid rgb(27 27 27 / 40%);
+    /* border-radius: 10px 10px 0px 0px; */
+    border-bottom: var(--main-border);
 
     h3 {
       font-weight: 800;
@@ -82,7 +84,7 @@
       color: #45877e;
 
       span {
-        color: black;
+        color: var(--p-color);
       }
     }
 
@@ -104,7 +106,7 @@
   justify-content: space-between;
   padding-right: 1rem;
   cursor: pointer;
-  border-top: 1px solid #000;
+  border-top: var(--main-border);
 
   .test-o {
     color: rgb(109 85 98);
