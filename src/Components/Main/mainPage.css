@@ -88,7 +88,7 @@
     a {
       padding: 0.5rem 0;
       font-size: 1.3rem;
-      color: rgb(16 74 55);
+      color: var(--a-main-list-color);
       cursor: pointer;
     }
   }
@@ -117,8 +117,8 @@
   padding: 1.2rem;
   margin-top: 1rem;
   margin-left: 2rem;
-  background-color: rgb(250 250 210 / 50%);
-  border: 3px solid rgb(27 27 27);
+  background-color: var(--banner-color);
+  border: 3px solid var(--main-border-color);
   border-radius: 20px;
 
   h2 {

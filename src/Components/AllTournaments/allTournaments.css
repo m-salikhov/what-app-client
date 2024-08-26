@@ -38,6 +38,7 @@
     font-family: Rubik-Semibold, sans-serif;
     background-color: rgb(15 110 78 / 50%);
     border: var(--main-border);
+    color: var(--h-color);
 
     div {
       position: absolute;
@@ -115,7 +116,7 @@
     display: flex;
     align-items: center;
     width: 25rem;
-    border: var(--main-border);
+    border: var(--border-quiet);
 
     a {
       padding-left: 0.4rem;
@@ -133,7 +134,7 @@
     padding-top: 0.8rem;
     padding-bottom: 0.8rem;
     text-align: center;
-    border: var(--main-border);
+    border: var(--border-quiet);
   }
 
   p:nth-child(1) {

@@ -11,12 +11,16 @@
 html {
   --font-stack: 'Rubik-Regular', system-ui, arial, helvetica;
   --main-border-color: #0d1117;
-  --main-bg-color: rgb(223 223 223);
+  --border-color-quiet: #a5aab0;
+  --main-bg-color: #dfdfdf;
   --main-border: 1px solid var(--main-border-color);
+  --border-quiet: 1px solid var(--border-color-quiet);
   --bg-grey: rgb(27 27 27 / 40%);
+  --banner-color: #e3e3cf;
   --external-link: #0645ad;
   --p-color: #222427;
   --h-color: #000000;
+  --a-main-list-color: #104a37;
   --nav-text-color: #466176;
   --nav-text-color-hover: #162734;
 }
@@ -24,9 +28,12 @@ html {
 html[data-theme='dark'] {
   --main-bg-color: #0d1117;
   --main-border-color: #939ca4b3;
+  --border-color-quiet: #333734;
   --main-border: 1px solid var(--main-border-color);
+  --banner-color: #2e3851;
   --p-color: #a9b0ba;
-  --h-color: #a9b0ba;
+  --h-color: #bfc7d3;
+  --a-main-list-color: #527d6e;
   --nav-text-color: #3a6a8e;
   --nav-text-color-hover: #4c8fc2;
 }
