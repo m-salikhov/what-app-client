@@ -44,7 +44,7 @@ export default function AllTournamentsTable({
     <>
       <label className='all-search'>
         <p>поиск</p>
-        <input type='text' autoFocus onChange={handleSearch} />
+        <input type='text' onChange={handleSearch} />
       </label>
 
       <div className='table'>

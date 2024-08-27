@@ -44,7 +44,7 @@ h4 {
 }
 
 input {
-  background-color: #dfdfdf;
+  background-color: var(--main-bg-color);
 }
 
 #root {
