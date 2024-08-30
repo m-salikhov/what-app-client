@@ -24,6 +24,7 @@ html {
   --bg-hover-pm-table: #cde2df;
   --nav-text-color: #466176;
   --nav-text-color-hover: #162734;
+  --input-bg-color: #f8f8f8;
 }
 
 html[data-theme='dark'] {
@@ -38,4 +39,5 @@ html[data-theme='dark'] {
   --a-main-list-color: #527d6e;
   --nav-text-color: #3a6a8e;
   --nav-text-color-hover: #4c8fc2;
+  --input-bg-color: #a8a9ae;
 }

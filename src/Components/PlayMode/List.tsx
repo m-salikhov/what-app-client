@@ -1,24 +1,60 @@
 import ListLine from './ListLine';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useAppDispatch } from '../../Hooks/redux';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { playModeActions } from '../../Store/reducers/PlayModeSlice';
-import { useGetTournamentsShortQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentsLastShortQuery } from '../../Store/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import './list.css';
+import { TournamentsLastShort } from '../../Store/Types/tournamentAPI.types';
+
+const initial: TournamentsLastShort = {
+  tournaments: [],
+  pageCount: 0,
+  hasMorePage: false,
+  count: 0,
+};
 
 function List() {
   useDocTitle('Игровой режим');
-
   const dispatch = useAppDispatch();
 
+  const [page, setPage] = useState(1);
+  const amount = 20;
+
   const {
-    data: tsShorts = [],
+    data: { tournaments, hasMorePage } = initial,
     isLoading,
     isSuccess,
     error,
-  } = useGetTournamentsShortQuery(undefined);
+  } = useGetTournamentsLastShortQuery({
+    amount,
+    page,
+    withSkip: false,
+  });
+
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry: IntersectionObserverEntry) => {
+      const intersecting = entry.isIntersecting;
+      if (intersecting) {
+        setPage((prev) => prev + 1);
+      }
+    });
+  };
+
+  const observer = useRef(
+    new IntersectionObserver(observerCallback, { rootMargin: '-60px' })
+  );
+  const observerTarget = useRef<null | HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (observerTarget.current) {
+      hasMorePage
+        ? observer.current.observe(observerTarget.current)
+        : observer.current.unobserve(observerTarget.current);
+    }
+  }, [hasMorePage]);
 
   useEffect(() => {
     dispatch(playModeActions.resetState());
@@ -43,13 +79,14 @@ function List() {
             </div>
 
             <div className='table-body'>
-              {[...tsShorts].reverse().map((v, i) => (
+              {tournaments.map((v, i) => (
                 <ListLine item={v} index={i} key={v.id} />
               ))}
             </div>
           </div>{' '}
         </>
       )}
+      <div ref={observerTarget}></div>
     </main>
   );
 }

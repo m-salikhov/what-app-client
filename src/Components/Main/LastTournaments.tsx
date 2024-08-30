@@ -3,23 +3,35 @@ import { Link } from 'react-router-dom';
 import { getDate } from '../../Helpers/getDate';
 import back from './back.svg';
 import next from './next.svg';
-import { useGetTournamentsAmountPagesQuery, useGetTournamentsLastShortQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentsLastShortQuery } from '../../Store/tournamentAPI';
+import { TournamentsLastShort } from '../../Store/Types/tournamentAPI.types';
+
+const initial: TournamentsLastShort = {
+  tournaments: [],
+  pageCount: 0,
+  hasMorePage: false,
+  count: 0,
+};
 
 function LastTournaments() {
-  const [pageNumber, setPageNumber] = useState(0);
+  const [page, setPage] = useState(1);
+  const amount = 10;
 
-  const { data: lastTenTournaments = [] } = useGetTournamentsLastShortQuery(pageNumber * 10);
-
-  const { data: amountPages = 0 } = useGetTournamentsAmountPagesQuery(undefined);
+  const { data: { tournaments, pageCount } = initial } =
+    useGetTournamentsLastShortQuery({
+      amount,
+      page,
+      withSkip: true,
+    });
 
   const changePageNumber = (e: MouseEvent<HTMLDivElement>) => {
     const { className } = e.currentTarget;
 
-    if (className === 'next' && pageNumber < amountPages - 1) {
-      setPageNumber((p) => p + 1);
+    if (className === 'next' && page < pageCount) {
+      setPage((p) => p + 1);
     }
-    if (className === 'back' && pageNumber > 0) {
-      setPageNumber((p) => p - 1);
+    if (className === 'back' && page > 1) {
+      setPage((p) => p - 1);
     }
   };
 
@@ -30,7 +42,7 @@ function LastTournaments() {
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
-      {lastTenTournaments.map((v) => {
+      {tournaments.map((v) => {
         return (
           <div className='tournaments-item' key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
@@ -43,7 +55,7 @@ function LastTournaments() {
           {' '}
           <img src={back} alt='предыдущая страница списка турниров' />
         </div>
-        <p>{pageNumber + 1}</p>
+        <p>{page}</p>
         <div className='next' onClick={changePageNumber}>
           {' '}
           <img src={next} alt='предыдущая страница списка турниров' />

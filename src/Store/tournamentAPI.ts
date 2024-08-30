@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { TournamentShortType, TournamentType } from '../Types/tournament';
 import { QuestionType } from '../Types/question';
 import { baseUrl, guest, serverRoutes } from '../constants';
+import { TournamentsLastShort } from './Types/tournamentAPI.types';
 
 export const tournamentAPI = createApi({
   reducerPath: 'tournamentAPI',
@@ -14,9 +15,24 @@ export const tournamentAPI = createApi({
       query: (id: string | number) => `/tournaments/${id}`,
     }),
 
-    getTournamentsLastShort: build.query<TournamentShortType[], number>({
-      query: (count: number) => serverRoutes.tournamentsLastShort + count,
-      providesTags: ['lastTournamentsShort'],
+    getTournamentsLastShort: build.query<
+      TournamentsLastShort,
+      { amount: number; page: number; withSkip: boolean }
+    >({
+      query: ({ amount, page, withSkip }) =>
+        serverRoutes.tournamentsLastShort +
+        `last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
+      providesTags: (result) => {
+        return result
+          ? [
+              ...result.tournaments.map(({ id }) => ({
+                type: 'shorts' as const,
+                id,
+              })),
+              'shorts',
+            ]
+          : ['shorts'];
+      },
     }),
 
     getRandom: build.query<QuestionType[], number>({

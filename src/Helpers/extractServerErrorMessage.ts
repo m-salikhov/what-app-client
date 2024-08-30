@@ -10,7 +10,7 @@ const extractServerErrorMessage = (
   }
 
   const e = err as ErrorServer;
-  return e.data.message || 'Ошибка';
+  return e.data?.message || 'Ошибка';
 };
 
 export default extractServerErrorMessage;
