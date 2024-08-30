@@ -8,6 +8,7 @@ import { Spinner } from '../Elements/Spinner/Spinner';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import './list.css';
 import { TournamentsLastShort } from '../../Store/Types/tournamentAPI.types';
+import { animated, useTransition } from '@react-spring/web';
 
 const initial: TournamentsLastShort = {
   tournaments: [],
@@ -32,6 +33,13 @@ function List() {
     amount,
     page,
     withSkip: false,
+  });
+
+  const transitions = useTransition(tournaments, {
+    keys: (q) => q.id,
+    from: { opacity: 0 },
+    enter: { opacity: 1 },
+    config: { duration: 400 },
   });
 
   const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -79,9 +87,13 @@ function List() {
             </div>
 
             <div className='table-body'>
-              {tournaments.map((v, i) => (
-                <ListLine item={v} index={i} key={v.id} />
-              ))}
+              {transitions((style, v) => {
+                return (
+                  <animated.div style={style}>
+                    <ListLine item={v} index={tournaments.indexOf(v)} />
+                  </animated.div>
+                );
+              })}
             </div>
           </div>{' '}
         </>

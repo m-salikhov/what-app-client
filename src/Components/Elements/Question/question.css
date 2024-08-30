@@ -92,9 +92,14 @@
       overflow-x: auto;
     }
 
-    .answer-source-many {
-      & ~ p {
-        padding-left: 0.5rem;
+    div {
+      & p:first-child {
+        font-weight: bold;
+      }
+      .answer-source-many {
+        & ~ p {
+          padding-left: 0.5rem;
+        }
       }
     }
   }

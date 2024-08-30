@@ -21,6 +21,7 @@ html {
   --p-color: #222427;
   --h-color: #000000;
   --a-main-list-color: #104a37;
+  --a-main-list-bg-color: #cadcda;
   --bg-hover-pm-table: #cde2df;
   --nav-text-color: #466176;
   --nav-text-color-hover: #162734;
@@ -33,6 +34,7 @@ html[data-theme='dark'] {
   --border-color-quiet: #333734;
   --main-border: 1px solid var(--main-border-color);
   --bg-hover-pm-table: #375753;
+  --a-main-list-bg-color: #2b2b2b;
   --banner-color: #2e3851;
   --p-color: #a9b0ba;
   --h-color: #bfc7d3;

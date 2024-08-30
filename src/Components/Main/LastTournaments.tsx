@@ -36,7 +36,7 @@ function LastTournaments() {
   };
 
   return (
-    <>
+    <div className='main-content-tournaments'>
       <h2>Последние добавленные турниры</h2>
       <div className='tournaments-header'>
         <h3>Название</h3>
@@ -61,7 +61,7 @@ function LastTournaments() {
           <img src={next} alt='предыдущая страница списка турниров' />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

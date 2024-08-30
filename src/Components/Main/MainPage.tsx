@@ -60,9 +60,7 @@ function MainPage() {
         <div className='main-content-right'>
           <Stats />
 
-          <div className='main-content-tournaments'>
-            <LastTournaments />
-          </div>
+          <LastTournaments />
 
           <div className='main-content-banner'>
             <h2>Игровой режим</h2>

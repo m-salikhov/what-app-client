@@ -82,7 +82,7 @@
     border-top: var(--main-border);
 
     &:hover {
-      background-color: rgb(97 161 153 / 10%);
+      background-color: var(--a-main-list-bg-color);
     }
 
     a {
