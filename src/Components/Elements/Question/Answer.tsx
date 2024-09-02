@@ -1,4 +1,5 @@
 import { QuestionType } from '../../../Types/question';
+import ExternalLinkText from '../Text/ExternalLinkText/ExternalLinkText';
 
 function Answer({ q }: { q: QuestionType }) {
   return (
@@ -18,7 +19,12 @@ function Answer({ q }: { q: QuestionType }) {
       )}
       {q.source?.length === 1 && (
         <p className='answer-source-one'>
-          <span>Источник: </span> {q.source}
+          <span>Источник: </span>{' '}
+          {q.source[0].startsWith('http') ? (
+            <ExternalLinkText text={q.source[0]} href={q.source[0]} />
+          ) : (
+            q.source[0]
+          )}
         </p>
       )}
       {q.source && q.source.length > 1 && (
@@ -27,7 +33,12 @@ function Answer({ q }: { q: QuestionType }) {
           {q.source.map((v, i) => {
             return (
               <p key={i}>
-                {++i}. {v}
+                {++i}.{' '}
+                {v.startsWith('http') ? (
+                  <ExternalLinkText text={v} href={v} />
+                ) : (
+                  v
+                )}
               </p>
             );
           })}

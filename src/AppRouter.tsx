@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom';
+import { createHashRouter } from 'react-router-dom';
 import MainPage from './Components/Main/MainPage';
 import Layout from './Components/Layout/Layout';
 import Tournament from './Components/Tournament/Tournament';
@@ -12,7 +12,7 @@ import List from './Components/PlayMode/List';
 import PlayMode from './Components/PlayMode/PlayMode';
 import NotFound from './Components/NotFound/NotFound';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,

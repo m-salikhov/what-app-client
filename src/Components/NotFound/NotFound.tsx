@@ -1,5 +1,5 @@
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import notFoundOwl from './404.jpg';
+import NotFoundOwl from './NotFoundOwl.svg?react';
 import './notFound.css';
 
 function NotFound() {
@@ -8,9 +8,7 @@ function NotFound() {
   return (
     <main className='not-found'>
       <h2>СТРАНИЦА НЕ НАЙДЕНА</h2>
-      <div className='not-found-img'>
-        <img src={notFoundOwl} alt='страница не найдена' />
-      </div>
+      <NotFoundOwl />
     </main>
   );
 }

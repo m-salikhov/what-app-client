@@ -1,0 +1,11 @@
+.text-external-link {
+  color: var(--external-link);
+
+  &:visited {
+    color: var(--external-link);
+  }
+
+  &:hover {
+    color: var(--external-link-hover);
+  }
+}
