@@ -19,6 +19,12 @@ p {
   }
 }
 
+span {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--p-color);
+}
+
 h1,
 h2,
 h3,

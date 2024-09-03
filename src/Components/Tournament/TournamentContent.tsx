@@ -25,6 +25,7 @@ function TournamentContent({ tournament }: { tournament: TournamentType }) {
             {tournament.uploader}
           </p>
         </div>
+
         <div className='tournament-header-m'>
           <h3>
             Дата отыгрыша: <span>{getDate(tournament.date)}</span>

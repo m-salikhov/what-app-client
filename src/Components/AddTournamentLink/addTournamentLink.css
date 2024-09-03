@@ -7,7 +7,7 @@
       width: 60%;
       padding: 0 18px;
       font-size: 1.3rem;
-      border: 1px solid #1b1b1b80;
+      border: var(--main-border);
       border-radius: 6px;
     }
 
@@ -50,7 +50,8 @@
     width: 100%;
     padding: 0.3rem 0 0.3rem 0.3rem;
     font-size: 1.2rem;
-    border: 1px solid #000;
+    border: var(--main-border);
+    background-color: var(--input-bg-color);
   }
 
   .edit-t-top {
@@ -62,7 +63,7 @@
         padding-left: 0.3rem;
         font-size: 1rem;
         font-weight: 900;
-        border: 1px solid #000;
+        border: var(--main-border);
       }
 
       input[type='text'] {
@@ -72,21 +73,22 @@
   }
 
   .edit-q-container:has(.back) {
-    background-color: rgb(193 189 190);
+    background-color: var(--edit-question-bg-color-del);
 
     input {
-      background-color: rgb(193 189 190);
+      background-color: var(--main-bg-color);
     }
 
     textarea {
-      background-color: rgb(193 189 190);
+      background-color: var(--main-bg-color);
     }
   }
 
   .edit-q-container {
     padding: 1rem;
     margin-top: 2rem;
-    border: 4px solid rgb(97 161 153 / 90%);
+    border: 2px solid var(--main-border-color);
+    background-color: var(--edit-question-bg-color);
 
     & > label {
       p {
@@ -110,7 +112,7 @@
           padding-left: 0.5rem;
           font-size: 1.5rem;
           text-align: center;
-          border: 1px solid #000;
+          border: var(--main-border);
         }
       }
 
@@ -137,5 +139,46 @@
 
   a {
     color: blue;
+  }
+}
+
+.react-aria-DateField {
+  color: var(--text-color);
+}
+
+.react-aria-DateInput {
+  display: flex;
+  padding: 4px 6px;
+  border: var(--main-border);
+  background: var(--field-background);
+  width: fit-content;
+  white-space: nowrap;
+  forced-color-adjust: none;
+
+  &[data-focus-within] {
+    /* outline: 2px solid var(--main-border-color); */
+    outline-offset: -1px;
+  }
+}
+
+.react-aria-DateSegment {
+  padding: 0 2px;
+  text-align: end;
+  color: var(--p-color);
+  font-weight: bold;
+
+  &[data-type='literal'] {
+    padding: 0;
+  }
+
+  &[data-placeholder] {
+    font-style: italic;
+  }
+
+  &:focus {
+    color: blueviolet;
+    outline: none;
+    border-radius: 4px;
+    caret-color: transparent;
   }
 }

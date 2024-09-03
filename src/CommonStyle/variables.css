@@ -27,6 +27,8 @@ html {
   --nav-text-color: #466176;
   --nav-text-color-hover: #162734;
   --input-bg-color: #f8f8f8;
+  --edit-question-bg-color: #f8f8f8;
+  --edit-question-bg-color-del: #a5a5a6;
 }
 
 html[data-theme='dark'] {
@@ -43,4 +45,6 @@ html[data-theme='dark'] {
   --nav-text-color: #3a6a8e;
   --nav-text-color-hover: #4c8fc2;
   --input-bg-color: #a8a9ae;
+  --edit-question-bg-color: #353131;
+  --edit-question-bg-color-del: #614b4b;
 }

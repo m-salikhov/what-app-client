@@ -14,11 +14,15 @@ const btnTextOption = {
 };
 
 function EditFormQuestion({ q, dispatch }: Props) {
-  const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
+  const [btnText, setBtnText] = useState<string>(
+    q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back
+  );
 
   const removeQuestion = () => {
     setBtnText((prev) => {
-      return prev === btnTextOption.def ? btnTextOption.back : btnTextOption.def;
+      return prev === btnTextOption.def
+        ? btnTextOption.back
+        : btnTextOption.def;
     });
     dispatch({
       type: actionTypes.remove,
@@ -43,6 +47,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
                 payload: +e.target.value,
               })
             }
+            disabled={q.qNumber === -1 ? true : false}
           />
         </label>{' '}
         <label className='edit-q-tour'>
@@ -58,6 +63,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
                 payload: +e.target.value,
               })
             }
+            disabled={q.qNumber === -1 ? true : false}
           />
         </label>{' '}
         <Button
@@ -78,6 +84,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.add}
           rows={q.add ? 3 : 1}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -92,6 +99,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.text}
           rows={5}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -106,6 +114,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }}
           value={q.answer}
           rows={1}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -120,6 +129,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.alterAnswer}
           rows={1}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -134,6 +144,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.comment}
           rows={q.comment ? 5 : 1}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -148,6 +159,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.source.join(';')}
           rows={3}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
       <label>
@@ -162,6 +174,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           }
           value={q.author}
           rows={1}
+          disabled={q.qNumber === -1 ? true : false}
         />
       </label>
     </div>

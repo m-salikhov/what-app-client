@@ -7,6 +7,10 @@ footer {
   .footer-icons {
     display: flex;
 
+    svg {
+      fill: var(--p-color);
+    }
+
     div,
     a {
       display: flex;

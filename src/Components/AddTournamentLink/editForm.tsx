@@ -1,8 +1,15 @@
+import { parseDate } from '@internationalized/date';
 import { getDateYYYY_MM_DD } from '../../Helpers/getDate';
 import { TournamentType } from '../../Types/tournament';
 import Button from '../Elements/Button/Button';
 import EditFormQuestion from './EditFormQuestion';
 import { Action, actionTypes } from './helpers/reducer';
+import {
+  DateField,
+  Label,
+  DateInput,
+  DateSegment,
+} from 'react-aria-components';
 
 interface Props {
   t: TournamentType;
@@ -19,13 +26,10 @@ function EditForm({ t, dispatch, setEdit }: Props) {
         }
       }}
     >
-      <Button
-        title='Закончить редактирование'
-        onClick={() => setEdit(false)}
-      ></Button>
+      <Button title='Закончить редактирование' onClick={() => setEdit(false)} />
+
       <div className='edit-t'>
         <div className='edit-t-top'>
-          {' '}
           <label className='edit-t-title'>
             <p> Название турнира</p>
             <input
@@ -37,37 +41,38 @@ function EditForm({ t, dispatch, setEdit }: Props) {
               value={t.title}
             />
           </label>
-          <label className='edit-t-date'>
-            <p> Дата отыгрыша </p>
-            <input
-              type='date'
-              value={getDateYYYY_MM_DD(t.date || Date.now())}
-              onMouseDown={(e) => {
-                e.preventDefault();
-              }}
+
+          <DateField
+            onChange={(e) => {
+              dispatch({
+                type: actionTypes.date,
+                payload: e && e.year > 1900 ? Date.parse(e.toString()) : 0,
+              });
+            }}
+            defaultValue={t.date ? parseDate(getDateYYYY_MM_DD(t.date)) : null}
+          >
+            <Label>Дата отыгрыша</Label>
+            <DateInput>
+              {(segment) => <DateSegment segment={segment} />}
+            </DateInput>
+          </DateField>
+
+          <label className='edit-t-title'>
+            <p>Редакторы (через точку с запятой без пробела!)</p>
+            <textarea
+              placeholder='Редакторская группа'
               onChange={(e) =>
                 dispatch({
-                  type: actionTypes.date,
-                  payload: Date.parse(e.target.value),
+                  type: actionTypes.editors,
+                  payload: e.target.value,
                 })
               }
+              value={t.editors.join(';')}
+              rows={3}
             />
-            <label className='edit-t-title'>
-              <p>Редакторы (через точку с запятой без пробела!)</p>
-              <textarea
-                placeholder='Редакторская группа'
-                onChange={(e) =>
-                  dispatch({
-                    type: actionTypes.editors,
-                    payload: e.target.value,
-                  })
-                }
-                value={t.editors.join(';')}
-                rows={3}
-              />
-            </label>
           </label>
         </div>
+
         {t.questions.map((v) => (
           <EditFormQuestion q={v} dispatch={dispatch} key={v.id} />
         ))}
