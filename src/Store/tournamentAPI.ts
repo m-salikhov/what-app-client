@@ -54,7 +54,10 @@ export const tournamentAPI = createApi({
       query: () => serverRoutes.tournamentsAllShort,
       providesTags: (result) => {
         return result
-          ? [...result.map(({ id }) => ({ type: 'shorts' as const, id }))]
+          ? [
+              ...result.map(({ id }) => ({ type: 'shorts' as const, id })),
+              'shorts',
+            ]
           : ['shorts'];
       },
     }),

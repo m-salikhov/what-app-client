@@ -9,6 +9,7 @@ export type ResultType = {
 export interface PlayModeState {
   step: Step;
   currentQuestionIndex: number;
+  currentTourNumber: number;
   result: ResultType;
   totalAnsweredCount: number;
   totalQuestionsCount: number;
@@ -18,6 +19,7 @@ export interface PlayModeState {
 const initialState: PlayModeState = {
   step: 'START',
   currentQuestionIndex: 0,
+  currentTourNumber: 0,
   result: {},
   totalAnsweredCount: 0,
   totalQuestionsCount: 0,
@@ -36,6 +38,12 @@ const playModeSlice = createSlice({
   reducers: {
     setStep(state, action: PayloadAction<Step>) {
       state.step = action.payload;
+    },
+
+    setCurrentTourNumber(state, action: PayloadAction<number>) {
+      if (state.currentTourNumber !== action.payload) {
+        state.currentTourNumber = action.payload;
+      }
     },
 
     currentQuestionIndexIncrement(state) {

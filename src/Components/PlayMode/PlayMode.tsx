@@ -6,10 +6,11 @@ import { Spinner } from '../Elements/Spinner/Spinner';
 import { TournamentType } from '../../Types/tournament';
 import { StepPM } from './PlayModeParts/Types/playmodeTypes';
 import Start from './PlayModeParts/Steps/Start/Start';
-import PMQuestion from './PlayModeParts/Steps/Components/PMQuestion';
+import PMQuestion from './PlayModeParts/Steps/Components/PMQuestion/PMQuestion';
 import TourEnd from './PlayModeParts/Steps/TourEnd/TourEnd';
 import End from './PlayModeParts/Steps/TournamentEnd/End';
 import './playmode.css';
+import ProgressBar from './PlayModeParts/Steps/Components/ProgressBar/ProgressBar';
 
 function PlayModeChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
@@ -38,9 +39,12 @@ function PlayMode() {
     isError,
   } = useGetTournamentQuery(id as string);
 
+  const showProgressBar = isSuccess && step !== 'START' && step !== 'END';
+
   return (
     <main>
       <h2>{title}</h2>
+      {showProgressBar && <ProgressBar tournament={tournament} />}
       {isLoading && <Spinner />}
       {isError && (
         <p className='pm-error'> Ошибка: Не удалось загрузить турнир</p>

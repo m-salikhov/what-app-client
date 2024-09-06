@@ -9,6 +9,45 @@ main {
     color: red;
     text-align: center;
   }
+
+  .progress-bar {
+    height: 1.5rem;
+    display: flex;
+    align-items: stretch;
+
+    .progress-bar-item {
+      border: var(--main-border);
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        to right,
+        rgb(97 161 153 / 90%) 50%,
+        var(--main-bg-color) 50%
+      );
+      background-size: 200% 100%;
+      background-position: right bottom;
+
+      &:first-child {
+        border-radius: 5px 0px 0px 5px;
+      }
+      &:last-child {
+        border-radius: 0px 5px 5px 0px;
+      }
+
+      &.fill {
+        background-position: left bottom;
+        transition: all 0.5s ease-out;
+      }
+    }
+    .progress-bar-item-number {
+      line-height: unset;
+      color: white;
+      padding-top: 1px;
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .pm-info {
@@ -152,6 +191,7 @@ main {
 
 .resblock {
   p {
+    padding-top: 0.7rem;
     text-align: center;
 
     span {

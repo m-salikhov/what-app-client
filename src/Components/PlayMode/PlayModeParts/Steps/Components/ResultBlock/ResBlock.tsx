@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../../../../Hooks/redux';
-import { ResultType } from '../../../../../Store/reducers/PlayModeSlice';
-import { makeResultTable } from '../Helpers/makeResultTable';
+import { useAppSelector } from '../../../../../../Hooks/redux';
+import { ResultType } from '../../../../../../Store/reducers/PlayModeSlice';
+import { makeResultTable } from '../../Helpers/makeResultTable';
 
 const calcTourResult = (tour: number, res: ResultType) => {
   const tourResArrBoolean = res[tour];

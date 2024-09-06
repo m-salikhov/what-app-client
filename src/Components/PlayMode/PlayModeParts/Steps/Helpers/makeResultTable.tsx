@@ -1,4 +1,4 @@
-import TourTable from '../Components/TourTable';
+import TourTable from '../Components/ResultBlock/TourTable';
 import { ResultType } from '../../../../../Store/reducers/PlayModeSlice';
 
 export const makeResultTable = (result: ResultType) => {

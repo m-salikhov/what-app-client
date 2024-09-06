@@ -1,12 +1,12 @@
-import { useState, MouseEvent, useMemo } from 'react';
-import Button from '../../../../Elements/Button/Button';
-import Add from '../../../../Elements/Question/Add';
-import Answer from '../../../../Elements/Question/Answer';
+import { useState, MouseEvent, useMemo, useEffect } from 'react';
+import Button from '../../../../../Elements/Button/Button';
+import Add from '../../../../../Elements/Question/Add';
+import Answer from '../../../../../Elements/Question/Answer';
 import Timer from './Timer';
-import { playModeActions } from '../../../../../Store/reducers/PlayModeSlice';
-import { useAppDispatch, useAppSelector } from '../../../../../Hooks/redux';
-import { StepPM, StepProps } from '../../Types/playmodeTypes';
-import { QuestionType } from '../../../../../Types/question';
+import { playModeActions } from '../../../../../../Store/reducers/PlayModeSlice';
+import { useAppDispatch, useAppSelector } from '../../../../../../Hooks/redux';
+import { StepPM, StepProps } from '../../../Types/playmodeTypes';
+import { QuestionType } from '../../../../../../Types/question';
 
 function PMQuestion({ tournament: { questions } }: StepProps) {
   //чистит турнир от нулевых вопросов, оставляя только игровые
@@ -64,9 +64,13 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
     setMessageAnswerToQ('');
   };
 
+  useEffect(() => {
+    dispatch(playModeActions.setCurrentTourNumber(currentQuestion.tourNumber));
+  });
+
   return (
     <div className='pmq'>
-      <h3>Вопрос {currentQuestion.qNumber}</h3>
+      {/* <h3>Вопрос {currentQuestion.qNumber}</h3> */}
       <Timer
         setIsTimeOver={setIsTimeOver}
         qNumber={currentQuestion.qNumber || 0}

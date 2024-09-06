@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppSelector } from '../../../../../Hooks/redux';
 import Button from '../../../../Elements/Button/Button';
 import QuestionPlane from '../../../../Elements/Question/QuestionPlane';
-import ResBlock from '../Components/ResBlock';
+import ResBlock from '../Components/ResultBlock/ResBlock';
 import {
   useInitialLoginQuery,
   usePostUserResultMutation,
@@ -34,9 +34,7 @@ function End({ tournament }: StepProps) {
         resultNumber: totalAnsweredCount,
         result,
       };
-      saveUserResult(userResult)
-        .unwrap()
-        .then((data) => console.log(data));
+      saveUserResult(userResult);
     }
   }, [
     tournament.questionsQuantity,
