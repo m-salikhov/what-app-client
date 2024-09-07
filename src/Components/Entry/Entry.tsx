@@ -1,3 +1,4 @@
+import './entry.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
@@ -11,7 +12,6 @@ import checkFormFields from './helpers/checkFormFields';
 import { useLogin } from './hooks/useLogin';
 import { useRegistration } from './hooks/useRegistration';
 import ModalReg from './ModalReg';
-import './entry.css';
 
 function Entry() {
   useDocTitle('Вход');
@@ -67,7 +67,6 @@ function Entry() {
   if (errorLogin || errorReg) {
     const errMessage = extractServerErrorMessage(errorLogin || errorReg);
     if (errMessage !== errorMessage) {
-      console.log('id err');
       setErrorMessage(errMessage);
     }
   }

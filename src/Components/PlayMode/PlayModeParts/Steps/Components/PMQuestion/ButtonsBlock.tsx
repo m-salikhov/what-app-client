@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import Button from '../../../../../Elements/Button/Button';
 import { useAppDispatch } from '../../../../../../Hooks/redux';
-import { playModeActions } from '../../../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../../../Store/Slices/PlayModeSlice';
 import { StepPM } from '../../../Types/playmodeTypes';
 import { QuestionType } from '../../../../../../Types/question';
 

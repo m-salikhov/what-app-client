@@ -9,10 +9,10 @@ import Instruction from './Instruction';
 import {
   useAddTournamentMutation,
   useParseLinkMutation,
-} from '../../Store/tournamentAPI';
+} from '../../Store/ToolkitAPIs/tournamentAPI';
 import removeQuestionsID from './helpers/removeQuestionsID';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
-import { useInitialLoginQuery } from '../../Store/userAPI';
+import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import { guest } from '../../constants';
 import ParsedTournament from './ParsedTournament';
 import { Spinner } from '../Elements/Spinner/Spinner';

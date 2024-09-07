@@ -7,7 +7,7 @@ import ResBlock from '../Components/ResultBlock/ResBlock';
 import {
   useInitialLoginQuery,
   usePostUserResultMutation,
-} from '../../../../../Store/userAPI';
+} from '../../../../../Store/ToolkitAPIs/userAPI';
 import extractServerErrorMessage from '../../../../../Helpers/extractServerErrorMessage';
 import { StepProps } from '../../Types/playmodeTypes';
 import { Spinner } from '../../../../Elements/Spinner/Spinner';

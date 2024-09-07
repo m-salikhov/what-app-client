@@ -1,8 +1,8 @@
+import './DarkMode.css';
 import Sun from './Sun.svg?react';
 import Moon from './Moon.svg?react';
 import useTheme from '../../../Hooks/useTheme';
 import { useState } from 'react';
-import './DarkMode.css';
 
 function DarkMode() {
   const { theme, changeTheme } = useTheme();

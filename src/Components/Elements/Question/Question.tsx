@@ -1,10 +1,10 @@
+import './question.css';
 import { useState } from 'react';
 import { QuestionType } from '../../../Types/question';
 import Add from './Add';
 import Answer from './Answer';
 import { AiOutlineDown } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import './question.css';
 
 interface Props {
   q: QuestionType;

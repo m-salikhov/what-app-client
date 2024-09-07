@@ -1,5 +1,5 @@
 import { useAppSelector } from '../../../../../../Hooks/redux';
-import { ResultType } from '../../../../../../Store/reducers/PlayModeSlice';
+import { ResultType } from '../../../../../../Store/Slices/PlayModeSlice';
 import { makeResultTable } from '../../Helpers/makeResultTable';
 
 const calcTourResult = (tour: number, res: ResultType) => {

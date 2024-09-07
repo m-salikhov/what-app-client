@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useInitialLoginQuery } from '../Store/userAPI';
+import { useInitialLoginQuery } from '../Store/ToolkitAPIs/userAPI';
 
 interface Props {
   children: ReactNode;

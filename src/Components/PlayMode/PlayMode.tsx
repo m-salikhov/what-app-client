@@ -1,8 +1,8 @@
 import './playmode.css';
 import { useParams } from 'react-router-dom';
-import { Step } from '../../Store/reducers/PlayModeSlice';
+import { Step } from '../../Store/Slices/PlayModeSlice';
 import { useAppSelector } from '../../Hooks/redux';
-import { useGetTournamentQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import { TournamentType } from '../../Types/tournament';
 import { StepPM } from './PlayModeParts/Types/playmodeTypes';
@@ -12,7 +12,7 @@ import TourEnd from './PlayModeParts/Steps/TourEnd/TourEnd';
 import End from './PlayModeParts/Steps/TournamentEnd/End';
 import ProgressBar from './PlayModeParts/Steps/Components/ProgressBar/ProgressBar';
 
-function PlayModeChange(stepName: Step, tournament: TournamentType) {
+function playModeStepChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
     case StepPM.START:
       return <Start tournament={tournament} />;
@@ -53,7 +53,7 @@ function PlayMode() {
         <p className='pm-error'> Ошибка: Не удалось загрузить турнир</p>
       )}
 
-      {isSuccess && PlayModeChange(step, tournament)}
+      {isSuccess && playModeStepChange(step, tournament)}
     </main>
   );
 }

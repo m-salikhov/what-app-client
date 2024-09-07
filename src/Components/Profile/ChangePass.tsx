@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { useChangePasswordMutation } from '../../Store/userAPI';
+import { useChangePasswordMutation } from '../../Store/ToolkitAPIs/userAPI';
 import Button from '../Elements/Button/Button';
 
 interface ChangePassProp {
@@ -44,7 +44,12 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
       <div className='pr-pass-container'>
         <label>
           <p>Новый пароль</p>
-          <input type='password' onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete='off' />
+          <input
+            type='password'
+            onChange={(e) => setNewPass(e.target.value)}
+            value={newPass}
+            autoComplete='off'
+          />
         </label>
         <label>
           <p>Повторите пароль</p>

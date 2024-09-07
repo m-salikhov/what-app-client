@@ -1,6 +1,6 @@
 import { getDate } from '../../../../../Helpers/getDate';
 import { useAppDispatch } from '../../../../../Hooks/redux';
-import { playModeActions } from '../../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../../Store/Slices/PlayModeSlice';
 import { StepProps, StepPM } from '../../Types/playmodeTypes';
 
 function Start({ tournament }: StepProps) {

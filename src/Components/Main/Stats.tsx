@@ -1,4 +1,4 @@
-import { useGetStatsQuery } from '../../Store/tournamentAPI';
+import { useGetStatsQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 
 function Stats() {
   const { data: stats } = useGetStatsQuery(undefined);
@@ -6,7 +6,8 @@ function Stats() {
   return (
     <div className='main-stats'>
       <p>
-        Всего турниров <strong>{stats?.tc}</strong>, вопросов <strong>{stats?.qc}</strong>
+        Всего турниров <strong>{stats?.tc}</strong>, вопросов{' '}
+        <strong>{stats?.qc}</strong>
       </p>
     </div>
   );

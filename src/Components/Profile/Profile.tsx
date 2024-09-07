@@ -1,3 +1,4 @@
+import './profile.css';
 import { useState } from 'react';
 import { getDate } from '../../Helpers/getDate';
 import ChangePass from './ChangePass';
@@ -5,10 +6,9 @@ import { useDocTitle } from '../../Hooks/useDocTitle';
 import {
   useInitialLoginQuery,
   useGetUserResultShortQuery,
-} from '../../Store/userAPI';
+} from '../../Store/ToolkitAPIs/userAPI';
 import { createPortal } from 'react-dom';
-import { useGetTournamentsAllByUploaderQuery } from '../../Store/tournamentAPI';
-import './profile.css';
+import { useGetTournamentsAllByUploaderQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 
 function Profile() {
   useDocTitle('Профиль');

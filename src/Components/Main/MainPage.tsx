@@ -1,15 +1,15 @@
+import './mainPage.css';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { amountRandomQuestions } from '../../constants';
 import { useDocTitle } from '../../Hooks/useDocTitle';
-import { useGetRandomQuery } from '../../Store/tournamentAPI';
+import { useGetRandomQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 import Button from '../Elements/Button/Button';
 import Question from '../Elements/Question/Question';
 import SkeletonQuestion from '../Elements/Question/SkeletonQuestion';
 import LastTournaments from './LastTournaments';
 import refreshIcon from './refresh.svg';
 import Stats from './Stats';
-import './mainPage.css';
 
 function MainPage() {
   const navigate = useNavigate();

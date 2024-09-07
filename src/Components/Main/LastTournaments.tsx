@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { getDate } from '../../Helpers/getDate';
 import back from './back.svg';
 import next from './next.svg';
-import { useGetTournamentsLastShortQuery } from '../../Store/tournamentAPI';
+import { useGetTournamentsLastShortQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 import { TournamentsLastShort } from '../../Store/Types/tournamentAPI.types';
 
 const initial: TournamentsLastShort = {

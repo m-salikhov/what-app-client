@@ -1,6 +1,6 @@
+import './notFound.css';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import NotFoundOwl from './NotFoundOwl.svg?react';
-import './notFound.css';
 
 function NotFound() {
   useDocTitle('404');

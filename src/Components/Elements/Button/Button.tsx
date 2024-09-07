@@ -1,5 +1,5 @@
-import { FormEvent, MouseEvent } from 'react';
 import './btn.css';
+import { FormEvent, MouseEvent } from 'react';
 
 interface ButtonProps {
   title: string;

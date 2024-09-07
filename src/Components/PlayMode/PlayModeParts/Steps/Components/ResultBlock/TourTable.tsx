@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../../../../../../Hooks/redux';
-import { playModeActions } from '../../../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../../../Store/Slices/PlayModeSlice';
 import green_ans from '../../../PMIcons/green_mark.svg';
 import red_ans from '../../../PMIcons/red_cross.svg';
 

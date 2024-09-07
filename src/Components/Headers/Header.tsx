@@ -1,10 +1,10 @@
+import './header.css';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../Hooks/useLogout';
 import { useWindowSize } from '../../Hooks/useWindowSize';
 import owlGreen from './owlGreen.svg';
-import { useInitialLoginQuery } from '../../Store/userAPI';
-import './header.css';
+import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import DarkMode from '../Elements/DarkMode/DarkMode';
 
 function Header() {

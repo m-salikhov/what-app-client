@@ -3,7 +3,7 @@ import Button from '../../../../../Elements/Button/Button';
 import Add from '../../../../../Elements/Question/Add';
 import Answer from '../../../../../Elements/Question/Answer';
 import Timer from './Timer';
-import { playModeActions } from '../../../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../../../Store/Slices/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../../Hooks/redux';
 import { StepProps } from '../../../Types/playmodeTypes';
 import { QuestionType } from '../../../../../../Types/question';

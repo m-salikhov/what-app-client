@@ -1,9 +1,10 @@
 import { useAppDispatch } from '../../../Hooks/redux';
-import { useLoginMutation, userAPI } from '../../../Store/userAPI';
+import { useLoginMutation, userAPI } from '../../../Store/ToolkitAPIs/userAPI';
 import { FormUser } from '../../../Types/user';
 
 export function useLogin() {
-  const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation();
+  const [loginFunc, { isSuccess, error, isLoading, reset }] =
+    useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -12,7 +13,9 @@ export function useLogin() {
 
     await loginFunc({ email, password })
       .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data)))
+      .then((data) =>
+        dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data))
+      )
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })

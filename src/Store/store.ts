@@ -1,8 +1,7 @@
-// import { combineReducers } from 'redux';
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import { tournamentAPI } from './tournamentAPI';
-import { playModeReducer } from './reducers/PlayModeSlice';
-import { userAPI } from './userAPI';
+import { tournamentAPI } from './ToolkitAPIs/tournamentAPI';
+import { playModeReducer } from './Slices/PlayModeSlice';
+import { userAPI } from './ToolkitAPIs/userAPI';
 
 const rootReducer = combineReducers({
   playModeReducer,
@@ -12,7 +11,8 @@ const rootReducer = combineReducers({
 
 export const store = configureStore({
   reducer: rootReducer,
-  middleware: (getMidlleware) => getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware),
+  middleware: (getMidlleware) =>
+    getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

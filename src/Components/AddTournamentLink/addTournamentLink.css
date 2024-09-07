@@ -136,13 +136,6 @@
 .addlink-instruction {
   max-width: 900px;
   margin: 1rem auto;
-
-  a {
-    color: var(--external-link);
-    &:visited {
-      color: var(--external-link);
-    }
-  }
 }
 
 .react-aria-DateField {

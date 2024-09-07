@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TournamentShortType } from '../../../Types/tournament';
-import { useGetTournamentsShortQuery } from '../../../Store/tournamentAPI';
+import { useGetTournamentsShortQuery } from '../../../Store/ToolkitAPIs/tournamentAPI';
 
 export default function useTournamentsShort() {
   const {

@@ -1,5 +1,5 @@
 import { initUser } from '../Helpers/initValues';
-import { useLazyLogoutQuery, userAPI } from '../Store/userAPI';
+import { useLazyLogoutQuery, userAPI } from '../Store/ToolkitAPIs/userAPI';
 import { useAppDispatch } from './redux';
 
 export function useLogout() {

@@ -1,5 +1,5 @@
-import { RotatingLines } from 'react-loader-spinner';
 import './spinner.css';
+import { RotatingLines } from 'react-loader-spinner';
 
 type Props = Parameters<typeof RotatingLines>[0];
 

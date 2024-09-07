@@ -1,5 +1,5 @@
 import TourTable from '../Components/ResultBlock/TourTable';
-import { ResultType } from '../../../../../Store/reducers/PlayModeSlice';
+import { ResultType } from '../../../../../Store/Slices/PlayModeSlice';
 
 export const makeResultTable = (result: ResultType) => {
   const resultTable = [];

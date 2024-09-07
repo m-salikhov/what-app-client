@@ -1,7 +1,7 @@
 import Button from '../../../../Elements/Button/Button';
 import QuestionPlane from '../../../../Elements/Question/QuestionPlane';
 import ResBlock from '../Components/ResultBlock/ResBlock';
-import { playModeActions } from '../../../../../Store/reducers/PlayModeSlice';
+import { playModeActions } from '../../../../../Store/Slices/PlayModeSlice';
 import { useAppDispatch, useAppSelector } from '../../../../../Hooks/redux';
 import { StepPM, StepProps } from '../../Types/playmodeTypes';
 
