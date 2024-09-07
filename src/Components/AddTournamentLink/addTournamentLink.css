@@ -138,7 +138,10 @@
   margin: 1rem auto;
 
   a {
-    color: blue;
+    color: var(--external-link);
+    &:visited {
+      color: var(--external-link);
+    }
   }
 }
 

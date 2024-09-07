@@ -5,8 +5,8 @@ interface Props {
   qNumber: number;
 }
 
-const readingTime = 5;
-const questionTime = 6;
+const readingTime = 15;
+const questionTime = 30;
 
 function Timer({ setIsTimeOver, qNumber }: Props) {
   const [time, setTime] = useState(readingTime);
