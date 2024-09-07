@@ -25,6 +25,11 @@
       .entry-form {
         width: 75%;
         margin-top: 0.5rem;
+        .react-tooltip {
+          span {
+            color: antiquewhite;
+          }
+        }
 
         .entry-input {
           display: flex;

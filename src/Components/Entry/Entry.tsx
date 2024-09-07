@@ -103,7 +103,9 @@ function Entry() {
                   placeholder='email'
                 />
               </label>
-              {!isReg && <Tooltip anchorSelect='#tooltip-mail' place='top' />}
+              {!isReg && (
+                <Tooltip anchorSelect='#tooltip-mail' place='top' opacity={1} />
+              )}
 
               <label className={isReg ? 'entry-input' : 'entry-input reg'}>
                 <h2>Псевдоним</h2>
