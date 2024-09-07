@@ -10,12 +10,14 @@ import {
 } from '../../../../../Store/userAPI';
 import extractServerErrorMessage from '../../../../../Helpers/extractServerErrorMessage';
 import { StepProps } from '../../Types/playmodeTypes';
+import { Spinner } from '../../../../Elements/Spinner/Spinner';
 
 function End({ tournament }: StepProps) {
   const navigate = useNavigate();
 
   const { data: currentUser } = useInitialLoginQuery(undefined);
-  const [saveUserResult, { isSuccess, error }] = usePostUserResultMutation();
+  const [saveUserResult, { isSuccess, error, isLoading }] =
+    usePostUserResultMutation();
 
   const {
     result,
@@ -49,6 +51,8 @@ function End({ tournament }: StepProps) {
   return (
     <div className='end-tournament'>
       <ResBlock />
+
+      {isLoading && <Spinner width='30' />}
 
       {isSuccess && <p>Ваш результат доступен в Профиле</p>}
 

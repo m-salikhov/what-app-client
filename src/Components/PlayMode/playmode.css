@@ -115,6 +115,21 @@ main {
   max-width: 700px;
   margin: 0 auto;
 
+  .buttons-block {
+    padding: 1rem 0;
+
+    .buttons-block-answer {
+      display: flex;
+      justify-content: center;
+      p {
+        margin: auto 0;
+      }
+      .btn-elem {
+        margin-left: 1rem;
+      }
+    }
+  }
+
   p {
     font-size: 1.25rem;
     white-space: pre-line;

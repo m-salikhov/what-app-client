@@ -15,6 +15,7 @@ function TourEnd({ tournament }: StepProps) {
   const onClick = () => {
     dispatch(playModeActions.currentQuestionIndexIncrement());
     dispatch(playModeActions.setStep(StepPM.QUESTION));
+    dispatch(playModeActions.setSelectedResultQuestion(0));
   };
 
   return (

@@ -2,10 +2,13 @@ import './footer.css';
 import Telegram from './icons/telegram.svg?react';
 import Mail from './icons/email.svg?react';
 import Github from './icons/github.svg?react';
+import { useMatch } from 'react-router-dom';
 
 function Footer() {
+  const match = useMatch({ path: 'playmode', end: false });
+
   return (
-    <footer>
+    <footer className={match ? 'footer-hide' : undefined}>
       <div className='footer-icons'>
         <a href='https://t.me/DeFrag3' target='_blank' rel='noreferrer'>
           <Telegram />

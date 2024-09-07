@@ -41,9 +41,7 @@ const playModeSlice = createSlice({
     },
 
     setCurrentTourNumber(state, action: PayloadAction<number>) {
-      if (state.currentTourNumber !== action.payload) {
-        state.currentTourNumber = action.payload;
-      }
+      state.currentTourNumber = action.payload;
     },
 
     currentQuestionIndexIncrement(state) {
@@ -71,7 +69,9 @@ const playModeSlice = createSlice({
     },
 
     setSelectedResultQuestion(state, action: PayloadAction<number>) {
-      state.selectedResultQuestion = action.payload;
+      if (state.selectedResultQuestion !== action.payload) {
+        state.selectedResultQuestion = action.payload;
+      }
     },
 
     resetState: () => initialState,
