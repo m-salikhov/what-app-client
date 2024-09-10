@@ -1,3 +1,4 @@
+import './list.css';
 import ListLine from './ListLine';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useAppDispatch } from '../../Hooks/redux';
@@ -6,7 +7,6 @@ import { playModeActions } from '../../Store/Slices/PlayModeSlice';
 import { useGetTournamentsLastShortQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
 import { Spinner } from '../Elements/Spinner/Spinner';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
-import './list.css';
 import { TournamentsLastShort } from '../../Store/Types/tournamentAPI.types';
 import { animated, useTransition } from '@react-spring/web';
 

@@ -1,3 +1,168 @@
+.table {
+  width: fit-content;
+  margin: 2rem auto;
+}
+
+.table-body {
+  .table-line:nth-child(2n) {
+    background-color: rgb(97 161 153 / 20%);
+  }
+}
+
+.table-header {
+  display: flex;
+
+  .table-header-t {
+    position: relative;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    padding-left: 0.4rem;
+    font-family: Rubik-Semibold, sans-serif;
+    background-color: rgb(15 110 78 / 50%);
+    border: var(--main-border);
+    color: var(--h-color);
+
+    div {
+      position: absolute;
+      bottom: 0.65rem;
+      width: 1.2rem;
+
+      img {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .table-header-t:nth-child(1) {
+    width: 3rem;
+    padding-left: unset;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .table-header-t:nth-child(2) {
+    width: 25rem;
+    text-align: start;
+
+    div {
+      left: 6.2rem;
+    }
+  }
+
+  .table-header-t:nth-child(3) {
+    width: 7.5rem;
+
+    div {
+      left: 3.4rem;
+    }
+  }
+
+  .table-header-t:nth-child(4) {
+    width: 7.3rem;
+
+    div {
+      left: 5.5rem;
+    }
+  }
+
+  .table-header-t:nth-child(5) {
+    width: 5.4rem;
+
+    div {
+      left: 3.6rem;
+    }
+  }
+
+  .table-header-t:nth-child(6) {
+    width: 9rem;
+
+    div {
+      left: 6.2rem;
+    }
+  }
+
+  .table-header-t:nth-child(7) {
+    width: 11rem;
+    overflow: hidden;
+
+    div {
+      left: 5.5rem;
+    }
+  }
+}
+
+.table-line {
+  display: flex;
+
+  .link {
+    display: flex;
+    align-items: center;
+    width: 25rem;
+    border: var(--border-quiet);
+
+    a {
+      padding-left: 0.4rem;
+      font-size: 1.1rem;
+      color: var(--p-color);
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  p {
+    position: relative;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    text-align: center;
+    border: var(--border-quiet);
+  }
+
+  p:nth-child(1) {
+    width: 3rem;
+    overflow: hidden;
+  }
+
+  p:nth-child(2) {
+    padding-left: 0.5rem;
+    text-align: start;
+
+    div {
+      bottom: 0.7rem;
+      left: 6.2rem;
+    }
+  }
+
+  p:nth-child(3) {
+    width: 7.5rem;
+
+    div {
+      bottom: 0.7rem;
+      left: 5.3rem;
+    }
+  }
+
+  p:nth-child(4) {
+    width: 7.3rem;
+  }
+
+  p:nth-child(5) {
+    width: 5.4rem;
+  }
+
+  p:nth-child(6) {
+    width: 9rem;
+  }
+
+  p:nth-child(7) {
+    width: 11rem;
+    padding-left: 0.5rem;
+    overflow: hidden;
+    text-align: start;
+  }
+}
+
 @media (width <= 800px) {
   .list {
     .table-header-t:nth-child(4) {
