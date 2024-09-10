@@ -52,7 +52,7 @@ function List() {
   };
 
   const observer = useRef(
-    new IntersectionObserver(observerCallback, { rootMargin: '-60px' })
+    new IntersectionObserver(observerCallback, { rootMargin: '1px' })
   );
   const observerTarget = useRef<null | HTMLDivElement>(null);
 

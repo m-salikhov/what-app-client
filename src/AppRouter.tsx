@@ -1,16 +1,23 @@
 import { createHashRouter } from 'react-router-dom';
 import MainPage from './Components/Main/MainPage';
 import Layout from './Components/Layout/Layout';
-import Tournament from './Components/Tournament/Tournament';
-import About from './Components/About/About';
-import AddTournamentLink from './Components/AddTournamentLink/AddTournamentLink';
-import AllTournaments from './Components/AllTournaments/AllTournaments';
-import Entry from './Components/Entry/Entry';
 import PrivateRoute from './hoc/PrivateRoute';
-import Profile from './Components/Profile/Profile';
-import List from './Components/PlayMode/List';
-import PlayMode from './Components/PlayMode/PlayMode';
-import NotFound from './Components/NotFound/NotFound';
+import { lazy, Suspense } from 'react';
+import { Spinner } from './Components/Elements/Spinner/Spinner';
+
+const Entry = lazy(() => import('./Components/Entry/Entry'));
+const AddTournamentLink = lazy(
+  () => import('./Components/AddTournamentLink/AddTournamentLink')
+);
+const List = lazy(() => import('./Components/PlayMode/List'));
+const PlayMode = lazy(() => import('./Components/PlayMode/PlayMode'));
+const Profile = lazy(() => import('./Components/Profile/Profile'));
+const NotFound = lazy(() => import('./Components/NotFound/NotFound'));
+const AllTournaments = lazy(
+  () => import('./Components/AllTournaments/AllTournaments')
+);
+const About = lazy(() => import('./Components/About/About'));
+const Tournament = lazy(() => import('./Components/Tournament/Tournament'));
 
 const router = createHashRouter([
   {
@@ -23,29 +30,54 @@ const router = createHashRouter([
       },
       {
         path: 'about',
-        element: <About />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            {' '}
+            <About />{' '}
+          </Suspense>
+        ),
       },
       {
         path: 'tournament/:id',
-        element: <Tournament />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            {' '}
+            <Tournament />{' '}
+          </Suspense>
+        ),
       },
       {
         path: 'addbylink',
-        element: <AddTournamentLink />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <AddTournamentLink />
+          </Suspense>
+        ),
       },
       {
         path: 'all',
-        element: <AllTournaments />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            {' '}
+            <AllTournaments />
+          </Suspense>
+        ),
       },
       {
         path: 'entry',
-        element: <Entry />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Entry />
+          </Suspense>
+        ),
       },
       {
         path: 'profile',
         element: (
           <PrivateRoute>
-            <Profile />
+            <Suspense fallback={<Spinner />}>
+              <Profile />
+            </Suspense>
           </PrivateRoute>
         ),
       },
@@ -54,17 +86,29 @@ const router = createHashRouter([
         children: [
           {
             index: true,
-            element: <List />,
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <List />{' '}
+              </Suspense>
+            ),
           },
           {
             path: ':id/:title',
-            element: <PlayMode />,
+            element: (
+              <Suspense fallback={<Spinner />}>
+                <PlayMode />
+              </Suspense>
+            ),
           },
         ],
       },
       {
         path: '*',
-        element: <NotFound />,
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <NotFound />
+          </Suspense>
+        ),
       },
     ],
   },
