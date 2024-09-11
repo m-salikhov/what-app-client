@@ -1,10 +1,10 @@
-import { getDate } from '../../Helpers/getDate';
 import { TournamentType } from '../../Types/tournament';
 import { animated, useTransition } from '@react-spring/web';
 import { useRef } from 'react';
 import Question from '../Elements/Question/Question';
 import { getToursParagraphs, scroll } from './scrollLogic';
 import Back from '../Elements/Back/Back';
+import TournamentHeader from '../Elements/TournamentHeader/TournamentHeader';
 
 function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);
@@ -17,30 +17,7 @@ function TournamentContent({ tournament }: { tournament: TournamentType }) {
 
   return (
     <>
-      <div className='tournament-header'>
-        <div className='tournament-header-t'>
-          <h2>{tournament.title}</h2>
-          <p>
-            <span>добавил </span>
-            {tournament.uploader}
-          </p>
-        </div>
-
-        <div className='tournament-header-m'>
-          <h3>
-            Дата отыгрыша: <span>{getDate(tournament.date)}</span>
-          </h3>
-          <h3>
-            Туры: <span>{tournament.tours}</span>
-          </h3>
-          <h3>
-            Вопросы: <span>{tournament.questionsQuantity}</span>
-          </h3>
-        </div>
-        <h3>
-          Редакция: <span>{tournament.editors.join(', ')}</span>
-        </h3>
-      </div>
+      <TournamentHeader tournament={tournament} />
 
       <div className='tournament-content' ref={ref}>
         <div className='tournament-content-header'>

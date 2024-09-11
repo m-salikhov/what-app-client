@@ -2,6 +2,7 @@
   .addlink {
     display: flex;
     justify-content: center;
+    padding-bottom: 2rem;
 
     input {
       width: 60%;
@@ -25,17 +26,6 @@
     padding-top: 1rem;
     font-size: 1.5rem;
     text-align: center;
-  }
-
-  .tournament-header {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin: 1rem auto;
-
-    .tournament-header-t {
-      padding: unset;
-    }
   }
 
   .addlink-buttons {

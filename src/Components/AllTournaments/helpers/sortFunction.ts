@@ -7,11 +7,9 @@ const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
     ...arr.sort(function (a, b) {
       if (a[fieldName] > b[fieldName]) {
         return 1;
-      }
-      if (a[fieldName] < b[fieldName]) {
+      } else if (a[fieldName] < b[fieldName]) {
         return -1;
-      }
-      return 0;
+      } else return 0;
     }),
   ];
 };

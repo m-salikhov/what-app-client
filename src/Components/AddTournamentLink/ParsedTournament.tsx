@@ -1,7 +1,7 @@
-import { getDate } from '../../Helpers/getDate';
 import { TournamentType } from '../../Types/tournament';
 import Button from '../Elements/Button/Button';
 import QuestionPlane from '../Elements/Question/QuestionPlane';
+import TournamentHeader from '../Elements/TournamentHeader/TournamentHeader';
 
 interface Props {
   t: TournamentType;
@@ -10,36 +10,16 @@ interface Props {
   handleAddTournament: () => void;
 }
 
-function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
+function ParsedTournament({
+  t,
+  setEdit,
+  setErrorsFilling,
+  handleAddTournament,
+}: Props) {
   return (
     <>
-      <div className='tournament-header'>
-        <div className='tournament-header-t'>
-          <h3>
-            Название: <span>{t.title}</span>
-          </h3>
-        </div>
-        <div className='tournament-header-m'>
-          <h3>
-            Дата отыгрыша: <span>{t.date ? getDate(t.date) : null}</span>
-          </h3>
-          <h3>
-            Туры: <span>{t.tours}</span>
-          </h3>
-          <h3>
-            Вопросы: <span>{t.questionsQuantity}</span>
-          </h3>
-        </div>
-        <h3>
-          Редакция:{' '}
-          {t.editors.map((v, i) => (
-            <span key={i}>
-              {v}
-              {i < t.editors.length - 1 ? ',' : null}{' '}
-            </span>
-          ))}
-        </h3>
-      </div>
+      <TournamentHeader tournament={t} />
+
       <div className='addlink-buttons'>
         <Button
           title={'Редактировать турнир'}

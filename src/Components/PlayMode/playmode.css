@@ -149,6 +149,14 @@ main {
         font-weight: 800;
       }
     }
+    & > p:first-child {
+      font-weight: bold;
+      color: #45877e;
+
+      span {
+        color: var(--p-color);
+      }
+    }
 
     .answer-source-many {
       font-weight: 800;
