@@ -29,8 +29,6 @@ nav {
     height: 100%;
 
     li {
-      display: flex;
-      height: 100%;
       padding: 0 0.5rem;
       font-size: 1.125rem;
       font-weight: 600;
@@ -38,11 +36,6 @@ nav {
 
       &:hover {
         color: var(--nav-text-color-hover);
-      }
-
-      a {
-        height: 100%;
-        padding-top: 1rem;
       }
     }
   }
@@ -112,10 +105,24 @@ nav {
       flex-direction: column;
       width: 70%;
       background-color: var(--main-bg-color);
+      padding-top: 1rem;
 
       li {
+        display: flex;
         height: 3rem;
         font-size: 1.4rem;
+        width: 100%;
+        justify-content: center;
+        &:first-child {
+          order: 1;
+        }
+
+        a {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }

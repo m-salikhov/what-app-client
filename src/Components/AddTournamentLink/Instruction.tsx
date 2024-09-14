@@ -6,10 +6,7 @@ function Instruction() {
       <p>
         {' '}
         Чтобы добавить турнир надо сначала загрузить его из
-        <ExternalLinkText
-          href='https://db.chgk.info/tour/olivye21_u'
-          text=' База вопросов.'
-        />
+        <ExternalLinkText href='https://db.chgk.info/' text=' База вопросов.' />
         <br />
         <br />
         Для этого откройте страницу любого из турниров, вставьте ссылку на неё в

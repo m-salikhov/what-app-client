@@ -1,15 +1,18 @@
 import './header.css';
+import owlGreen from './owlGreen.svg';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../Hooks/useLogout';
 import { useWindowSize } from '../../Hooks/useWindowSize';
-import owlGreen from './owlGreen.svg';
 import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import DarkMode from '../Elements/DarkMode/DarkMode';
 
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
+
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { data: currentUser } = useInitialLoginQuery(undefined);
 
   const { width } = useWindowSize();
@@ -17,10 +20,10 @@ function Header() {
 
   const handleMobMenu = () => {
     if (width > 1050) return;
-    if (width < 1050 && !openMobMenu) document.body.style.overflow = 'hidden';
-    if (width < 1050 && openMobMenu) document.body.style.overflow = 'visible';
 
-    setOpenMobMenu(!openMobMenu);
+    document.body.style.overflow = openMobMenu ? 'visible' : 'hidden';
+
+    setOpenMobMenu((prev) => !prev);
   };
 
   return (
@@ -30,14 +33,24 @@ function Header() {
           <img src={owlGreen} alt='заглавное изображение' />
           <h2>База вопросов "Что? Где? Когда?"</h2>
         </div>
-        <DarkMode />
       </div>
 
       <nav
         className={openMobMenu ? 'mob-menu' : undefined}
-        onClick={handleMobMenu}
+        onClick={(e) => {
+          if (
+            e.target instanceof HTMLElement &&
+            e.target.localName.match(/^(nav|a)$/)
+          ) {
+            handleMobMenu();
+          }
+        }}
       >
         <ul>
+          <li>
+            {' '}
+            <DarkMode />{' '}
+          </li>
           <li>
             <Link to='/about'>О сайте</Link>
           </li>
