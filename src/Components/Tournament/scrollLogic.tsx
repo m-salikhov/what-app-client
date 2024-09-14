@@ -42,7 +42,7 @@ export const scroll = (
   }
 
   const anchor = arrAnchors[id - 1];
-  console.log('anchor:', anchor);
+
   if (nodeList instanceof HTMLDivElement) {
     const node = nodeList.querySelector('.tournament-content-qs');
     if (node) node.children[anchor].scrollIntoView({ behavior: 'smooth' });

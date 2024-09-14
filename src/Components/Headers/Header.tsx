@@ -1,25 +1,51 @@
 import './header.css';
 import owlGreen from './owlGreen.svg';
-import { useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  Link,
+  NavigateFunction,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import { useLogout } from '../../Hooks/useLogout';
 import { useWindowSize } from '../../Hooks/useWindowSize';
 import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import DarkMode from '../Elements/DarkMode/DarkMode';
 
+const logoNavigate = (
+  isManePage: boolean,
+  isFullSize: boolean,
+  openMobMenu: boolean,
+  navigate: NavigateFunction,
+  setOpenMobMenu: Dispatch<SetStateAction<boolean>>
+) => {
+  if (isFullSize && isManePage) {
+    return;
+  } else if (isFullSize) {
+    navigate('/');
+  } else if (openMobMenu && isManePage) {
+    setOpenMobMenu(false);
+  } else if (openMobMenu) {
+    navigate('/');
+    setOpenMobMenu(false);
+  } else if (!isManePage) {
+    navigate('/');
+  }
+};
+
 function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   const { data: currentUser } = useInitialLoginQuery(undefined);
 
-  const { width } = useWindowSize();
+  const { isFullSize } = useWindowSize();
   const logout = useLogout();
 
   const handleMobMenu = () => {
-    if (width > 1050) return;
+    if (isFullSize) return;
 
     document.body.style.overflow = openMobMenu ? 'visible' : 'hidden';
 
@@ -29,7 +55,17 @@ function Header() {
   return (
     <header>
       <div>
-        <div onClick={() => navigate('/')}>
+        <div
+          onClick={() =>
+            logoNavigate(
+              pathname === '/',
+              isFullSize,
+              openMobMenu,
+              navigate,
+              setOpenMobMenu
+            )
+          }
+        >
           <img src={owlGreen} alt='заглавное изображение' />
           <h2>База вопросов "Что? Где? Когда?"</h2>
         </div>
