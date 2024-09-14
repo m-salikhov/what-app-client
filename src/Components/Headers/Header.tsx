@@ -24,10 +24,12 @@ const logoNavigate = (
   } else if (isFullSize) {
     navigate('/');
   } else if (openMobMenu && isManePage) {
+    document.body.style.overflow = 'visible';
     setOpenMobMenu(false);
   } else if (openMobMenu) {
-    navigate('/');
+    document.body.style.overflow = 'visible';
     setOpenMobMenu(false);
+    navigate('/');
   } else if (!isManePage) {
     navigate('/');
   }
