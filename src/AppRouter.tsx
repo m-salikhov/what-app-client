@@ -4,6 +4,7 @@ import Layout from './Components/Layout/Layout';
 import PrivateRoute from './hoc/PrivateRoute';
 import { lazy, Suspense } from 'react';
 import { Spinner } from './Components/Elements/Spinner/Spinner';
+import Wordle from './Components/Wordle/Wordle';
 
 const Entry = lazy(() => import('./Components/Entry/Entry'));
 const AddTournamentLink = lazy(
@@ -79,6 +80,14 @@ const router = createHashRouter([
               <Profile />
             </Suspense>
           </PrivateRoute>
+        ),
+      },
+      {
+        path: 'wordle',
+        element: (
+          <Suspense fallback={<Spinner />}>
+            <Wordle />
+          </Suspense>
         ),
       },
       {

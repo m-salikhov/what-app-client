@@ -7,6 +7,7 @@ export const userAPI = createApi({
   baseQuery: fetchBaseQuery({ baseUrl, credentials: 'include' }),
   tagTypes: ['result'],
   keepUnusedDataFor: 86400,
+
   endpoints: (build) => ({
     initialLogin: build.query<UserType, undefined>({
       query: () => serverRoutes.authLogFirst,

@@ -19,6 +19,8 @@ export const serverRoutes = {
   userResultShort: '/users/userresultshort/',
   users: '/users',
   userResultPost: '/users/userresult',
+  wordleRandom: '/wordle/random-word',
+  wordleCheckExist: '/wordle/check-exist/',
 } as const;
 
 export const amountRandomQuestions = 4;

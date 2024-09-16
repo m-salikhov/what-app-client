@@ -1,0 +1,43 @@
+.wordle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .wordle-container {
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+    div {
+      height: 45px;
+      width: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      font-weight: bold;
+      background-color: aqua;
+    }
+  }
+
+  .board-container {
+    margin-top: 2rem;
+    .row {
+      display: flex;
+      justify-content: center;
+      div {
+        margin: 5px;
+        height: 40px;
+        width: 40px;
+        background-color: bisque;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        cursor: pointer;
+      }
+    }
+  }
+}

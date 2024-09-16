@@ -1,6 +1,6 @@
+import './about.css';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import myPhoto from './photo_profile_copy.jpg';
-import './about.css';
 import ExternalLinkText from '../Elements/Text/ExternalLinkText/ExternalLinkText';
 
 function About() {
@@ -17,10 +17,6 @@ function About() {
         Сайт посвящён любимому хобби автора - игре "Что? Где? Когда?", а точнее
         её спортивной версии. <br />
         Все вопросы взяты из открытой{' '}
-        {/* <a href='https://db.chgk.info/' target='_blank' rel='noreferrer'>
-          {' '}
-          Базы вопросов.
-        </a> */}
         <ExternalLinkText text='Базы вопросов.' href='https://db.chgk.info/' />
       </p>
       <h2>Навигация</h2>

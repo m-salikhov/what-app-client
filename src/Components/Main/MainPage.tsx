@@ -67,6 +67,12 @@ function MainPage() {
             <p>Сыграйте любой из турниров с таймером и ведением счёта </p>
             <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/playmode')} />
           </div>
+
+          <div className='main-content-banner'>
+            <h2>wordle</h2>
+            {/* <p>Сыграйте любой из турниров с таймером и ведением счёта </p> */}
+            <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/wordle')} />
+          </div>
         </div>
       </div>
     </main>
