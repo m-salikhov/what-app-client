@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export interface LetterState {
   letterNumber: number;
   class: 'in-place' | 'out-of-place' | 'miss';
+  value: string;
 }
 
 export interface WordleState {
@@ -72,20 +73,23 @@ const WordleSlice = createSlice({
       const states: LetterState[] = [];
 
       for (let i = 0; i < 5; i++) {
-        const elem = word[i];
+        const value = word[i];
+        const letterNumber = state.currentLetterNumber - 4 + i;
 
-        if (!answer.includes(elem)) {
+        if (!answer.includes(value)) {
           states.push({
-            letterNumber: state.currentLetterNumber - 4 + i,
+            letterNumber,
             class: 'miss',
+            value,
           });
-        } else if (elem === answer[i]) {
+        } else if (value === answer[i]) {
           states.push({
-            letterNumber: state.currentLetterNumber - 4 + i,
+            letterNumber,
             class: 'in-place',
+            value,
           });
         } else {
-          const regex = new RegExp(elem, 'g');
+          const regex = new RegExp(value, 'g');
 
           const l1 = [...answer.matchAll(regex)].length;
 
@@ -94,8 +98,9 @@ const WordleSlice = createSlice({
 
           if (l1 >= l2) {
             states.push({
-              letterNumber: state.currentLetterNumber - 4 + i,
+              letterNumber,
               class: 'out-of-place',
+              value,
             });
           } else {
             let iWordEntry = wordEntry.findIndex((v) => v.index == i);
@@ -104,27 +109,30 @@ const WordleSlice = createSlice({
               if (iWordEntry < wordEntry.length - 1) {
                 let flag: boolean = false;
                 for (let index = iWordEntry + 1; index < 5; index++) {
-                  word[index] === elem && answer[index] === elem
+                  word[index] === value && answer[index] === value
                     ? (flag = true)
                     : null;
                 }
 
                 if (flag) {
                   states.push({
-                    letterNumber: state.currentLetterNumber - 4 + i,
+                    letterNumber,
                     class: 'miss',
+                    value,
                   });
                 } else {
                   states.push({
-                    letterNumber: state.currentLetterNumber - 4 + i,
+                    letterNumber,
                     class: 'out-of-place',
+                    value,
                   });
                 }
               }
             } else {
               states.push({
-                letterNumber: state.currentLetterNumber - 4 + i,
+                letterNumber,
                 class: 'miss',
+                value,
               });
             }
           }

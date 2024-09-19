@@ -4,6 +4,7 @@
   align-items: center;
   -webkit-user-select: none;
   user-select: none;
+
   .wordle-container {
     width: fit-content;
     height: fit-content;
@@ -51,6 +52,7 @@
     .board-row {
       display: flex;
       justify-content: center;
+
       div {
         margin: 5px;
         height: 40px;
@@ -62,7 +64,21 @@
         font-weight: bold;
         font-size: 18px;
         cursor: pointer;
+        text-transform: uppercase;
         transition-duration: 0.8s;
+
+        &.miss {
+          background-color: grey;
+          color: aliceblue;
+        }
+        &.out-of-place {
+          background-color: rgb(201, 180, 88);
+          color: aliceblue;
+        }
+        &.in-place {
+          background-color: rgb(106, 170, 100);
+          color: aliceblue;
+        }
 
         &:hover {
           transform: scale(1.1);

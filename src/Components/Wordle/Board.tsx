@@ -1,19 +1,90 @@
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
-import { wordleActions } from '../../Store/Slices/WordleSlice';
+import { LetterState, wordleActions } from '../../Store/Slices/WordleSlice';
 import {
   useCheckMutation,
   useGetRandomWordQuery,
 } from '../../Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './helpers/getWordToCheck';
+import { MouseEventHandler } from 'react';
+
+const keyboard = {
+  1: ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
+  2: ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
+  3: ['del', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '⏎'],
+};
+
+type A = keyof typeof keyboard;
+
+function getKeyboard(
+  onEnterClick: MouseEventHandler<HTMLDivElement>,
+  letterState: LetterState[]
+) {
+  const arr = [];
+
+  for (let i = 1; i < 4; i++) {
+    arr.push(
+      <div key={i} className='board-row'>
+        {keyboard[i as A].map((letter) => {
+          const state = letterState.findLast((v) => v.value === letter);
+
+          return (
+            <div
+              onClick={letter === '⏎' ? onEnterClick : undefined}
+              className={state?.class}
+              key={letter}
+            >
+              {letter}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
+  return arr;
+}
 
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters, words } =
+  const { currentLetterNumber, allowNextLetter, letters, words, letterState } =
     useAppSelector((state) => state.wordleReducer);
 
   const [check] = useCheckMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
+
+  function onEnterClick() {
+    const word = getWordToCheck(letters, currentLetterNumber);
+
+    if (!word || words.at(-1) === word) {
+      return;
+    }
+
+    if (word === answer.word) {
+      dispatch(
+        wordleActions.setWords({
+          answer: answer.word,
+          word: word,
+        })
+      );
+      dispatch(wordleActions.setAllowNextLetter(false));
+
+      console.log('CONGRATULATIONS!!');
+      return;
+    }
+
+    check(word).then(({ data }) => {
+      if (data?.isExist) {
+        dispatch(wordleActions.setAllowNextLetter(true));
+        dispatch(
+          wordleActions.setWords({
+            answer: answer.word,
+            word: data.word,
+          })
+        );
+      }
+    });
+  }
 
   return (
     <div
@@ -24,89 +95,13 @@ export default function Board() {
             return;
           }
 
-          if (!e.target.className) {
+          if (e.target.className !== 'board-container') {
             dispatch(wordleActions.setLetters(e.target.innerText));
           }
         }
       }}
     >
-      <div className='board-row'>
-        <div>Ё</div>
-        <div>Й</div>
-        <div>Ц</div>
-        <div>У</div>
-        <div>К</div>
-        <div>Е</div>
-        <div>Н</div>
-        <div>Г</div>
-        <div>Ш</div>
-        <div>Щ</div>
-        <div>З</div>
-        <div>Х</div>
-        <div>Ъ</div>
-      </div>
-      <div className='board-row'>
-        <div>Ф</div>
-        <div>Ы</div>
-        <div>В</div>
-        <div>А</div>
-        <div>П</div>
-        <div>Р</div>
-        <div>О</div>
-        <div>Л</div>
-        <div>Д</div>
-        <div>Ж</div>
-        <div>Э</div>
-      </div>
-      <div className='board-row'>
-        <div>DEL</div>
-        <div>Я</div>
-        <div>Ч</div>
-        <div>С</div>
-        <div>М</div>
-        <div>И</div>
-        <div>Т</div>
-        <div>Ь</div>
-        <div>Б</div>
-        <div>Ю</div>
-        <div
-          className='wordle-enter'
-          onClick={() => {
-            const word = getWordToCheck(letters, currentLetterNumber);
-
-            if (!word || words.at(-1) === word) {
-              return;
-            }
-
-            if (word === answer.word) {
-              dispatch(
-                wordleActions.setWords({
-                  answer: answer.word,
-                  word: word,
-                })
-              );
-              dispatch(wordleActions.setAllowNextLetter(false));
-
-              console.log('CONGRATULATIONS!!');
-              return;
-            }
-
-            check(word).then(({ data }) => {
-              if (data?.isExist) {
-                dispatch(wordleActions.setAllowNextLetter(true));
-                dispatch(
-                  wordleActions.setWords({
-                    answer: answer.word,
-                    word: data.word,
-                  })
-                );
-              }
-            });
-          }}
-        >
-          ⏎
-        </div>
-      </div>
+      {getKeyboard(onEnterClick, letterState)}
     </div>
   );
 }

@@ -43,8 +43,6 @@ export default function Wordle() {
     };
   }, [dispatch]);
 
-  console.log(answer);
-
   return (
     <main
       className='wordle'
