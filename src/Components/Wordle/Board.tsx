@@ -1,25 +1,19 @@
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { wordleActions } from '../../Store/Slices/WordleSlice';
-import { useCheckWordExistQuery } from '../../Store/ToolkitAPIs/wordleAPI';
+import {
+  useCheckMutation,
+  useGetRandomWordQuery,
+} from '../../Store/ToolkitAPIs/wordleAPI';
+import { getWordToCheck } from './helpers/getWordToCheck';
 
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters } = useAppSelector(
-    (state) => state.wordleReducer
-  );
+  const { currentLetterNumber, allowNextLetter, letters, words } =
+    useAppSelector((state) => state.wordleReducer);
 
-  let wordToCheck = '';
-  if (!(letters.length % 5)) {
-    wordToCheck = letters
-      .slice(currentLetterNumber - 5, currentLetterNumber)
-      .join('')
-      .toLowerCase();
-  }
-
-  const { refetch } = useCheckWordExistQuery(wordToCheck, {
-    skip: true,
-  });
+  const [check] = useCheckMutation();
+  const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
 
   return (
     <div
@@ -36,7 +30,8 @@ export default function Board() {
         }
       }}
     >
-      <div className='row'>
+      <div className='board-row'>
+        <div>Ё</div>
         <div>Й</div>
         <div>Ц</div>
         <div>У</div>
@@ -50,7 +45,7 @@ export default function Board() {
         <div>Х</div>
         <div>Ъ</div>
       </div>
-      <div className='row'>
+      <div className='board-row'>
         <div>Ф</div>
         <div>Ы</div>
         <div>В</div>
@@ -63,7 +58,7 @@ export default function Board() {
         <div>Ж</div>
         <div>Э</div>
       </div>
-      <div className='row'>
+      <div className='board-row'>
         <div>DEL</div>
         <div>Я</div>
         <div>Ч</div>
@@ -75,14 +70,37 @@ export default function Board() {
         <div>Б</div>
         <div>Ю</div>
         <div
+          className='wordle-enter'
           onClick={() => {
-            refetch().then(({ data }) => {
-              if (data) {
-                if (data.isExist) {
-                  dispatch(wordleActions.setAllowNextLetter(true));
-                }
+            const word = getWordToCheck(letters, currentLetterNumber);
+
+            if (!word || words.at(-1) === word) {
+              return;
+            }
+
+            if (word === answer.word) {
+              dispatch(
+                wordleActions.setWords({
+                  answer: answer.word,
+                  word: word,
+                })
+              );
+              dispatch(wordleActions.setAllowNextLetter(false));
+
+              console.log('CONGRATULATIONS!!');
+              return;
+            }
+
+            check(word).then(({ data }) => {
+              if (data?.isExist) {
+                dispatch(wordleActions.setAllowNextLetter(true));
+                dispatch(
+                  wordleActions.setWords({
+                    answer: answer.word,
+                    word: data.word,
+                  })
+                );
               }
-              return data;
             });
           }}
         >

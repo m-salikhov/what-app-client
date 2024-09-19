@@ -4,17 +4,20 @@ import { baseUrl, serverRoutes } from '../../constants';
 export const wordleAPI = createApi({
   reducerPath: 'wordleAPI',
   baseQuery: fetchBaseQuery({ baseUrl }),
-  keepUnusedDataFor: 10,
+  keepUnusedDataFor: 3600,
 
   endpoints: (build) => ({
     getRandomWord: build.query<{ word: string }, undefined>({
       query: () => serverRoutes.wordleRandom,
     }),
 
-    checkWordExist: build.query<{ isExist: boolean; word: string }, string>({
-      query: (word) => serverRoutes.wordleCheckExist + `check?word=${word}`,
+    check: build.mutation<{ isExist: boolean; word: string }, string>({
+      query: (word) => ({
+        url: serverRoutes.wordleCheckExist + `check?word=${word}`,
+        method: 'GET',
+      }),
     }),
   }),
 });
 
-export const { useCheckWordExistQuery, useGetRandomWordQuery } = wordleAPI;
+export const { useGetRandomWordQuery, useCheckMutation } = wordleAPI;
