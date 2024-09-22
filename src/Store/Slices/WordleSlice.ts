@@ -1,8 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+type ClassName = 'in-place' | 'out-of-place' | 'miss';
+
 export interface LetterState {
-  letterNumber: number;
-  class: 'in-place' | 'out-of-place' | 'miss';
+  className: ClassName;
   value: string;
 }
 
@@ -24,6 +25,10 @@ const initialState: WordleState = {
   letterState: [],
 };
 
+function pushState(value: string, className: ClassName, states: LetterState[]) {
+  states.push({ value, className });
+}
+
 const WordleSlice = createSlice({
   name: 'wordleSlice',
   initialState,
@@ -35,10 +40,7 @@ const WordleSlice = createSlice({
       if (letter === 'DEL' || letter === 'BACKSPACE') {
         if (state.currentRowNumber === state.words.length) {
           return;
-        } else if (
-          state.letters.length &&
-          Math.ceil(state.currentLetterNumber / 5) == state.currentRowNumber
-        ) {
+        } else if (state.letters.length && Math.ceil(state.currentLetterNumber / 5) == state.currentRowNumber) {
           state.letters.pop();
           state.allowNextLetter = true;
           state.currentLetterNumber--;
@@ -67,73 +69,40 @@ const WordleSlice = createSlice({
       state.allowNextLetter = action.payload;
     },
 
-    setWords(state, action: PayloadAction<{ answer: string; word: string }>) {
-      const { answer, word } = action.payload;
+    setWords(state, action: PayloadAction<{ answer: string; version: string }>) {
+      const { answer, version } = action.payload;
 
       const states: LetterState[] = [];
 
       for (let i = 0; i < 5; i++) {
-        const value = word[i];
-        const letterNumber = state.currentLetterNumber - 4 + i;
+        const value = version[i];
 
         if (!answer.includes(value)) {
-          states.push({
-            letterNumber,
-            class: 'miss',
-            value,
-          });
+          pushState(value, 'miss', states);
         } else if (value === answer[i]) {
-          states.push({
-            letterNumber,
-            class: 'in-place',
-            value,
-          });
+          pushState(value, 'in-place', states);
         } else {
           const regex = new RegExp(value, 'g');
+          const answerEntries = [...answer.matchAll(regex)].map((v) => v.index);
+          const versionEntries = [...version.matchAll(regex)].map((v) => v.index);
 
-          const l1 = [...answer.matchAll(regex)].length;
-
-          const wordEntry = [...word.matchAll(regex)];
-          const l2 = wordEntry.length;
-
-          if (l1 >= l2) {
-            states.push({
-              letterNumber,
-              class: 'out-of-place',
-              value,
-            });
-          } else {
-            let iWordEntry = wordEntry.findIndex((v) => v.index == i);
-
-            if (iWordEntry < l1) {
-              if (iWordEntry < wordEntry.length - 1) {
-                let flag: boolean = false;
-                for (let index = iWordEntry + 1; index < 5; index++) {
-                  word[index] === value && answer[index] === value
-                    ? (flag = true)
-                    : null;
-                }
-
-                if (flag) {
-                  states.push({
-                    letterNumber,
-                    class: 'miss',
-                    value,
-                  });
-                } else {
-                  states.push({
-                    letterNumber,
-                    class: 'out-of-place',
-                    value,
-                  });
-                }
-              }
-            } else {
-              states.push({
-                letterNumber,
-                class: 'miss',
-                value,
-              });
+          if (answerEntries.length >= versionEntries.length) {
+            pushState(value, 'out-of-place', states);
+          } else if (versionEntries.indexOf(i) + 1 > answerEntries.length) {
+            pushState(value, 'miss', states);
+          } else if (answerEntries.length === 1) {
+            versionEntries.includes(answerEntries[0])
+              ? pushState(value, 'miss', states)
+              : pushState(value, 'out-of-place', states);
+          } else if (answerEntries.length === 2) {
+            if (versionEntries.indexOf(i) === 0) {
+              versionEntries.filter((v) => answerEntries.includes(v)).length === 2
+                ? pushState(value, 'miss', states)
+                : pushState(value, 'out-of-place', states);
+            } else if (versionEntries.indexOf(i) === 1) {
+              answerEntries.includes(versionEntries[2])
+                ? pushState(value, 'miss', states)
+                : pushState(value, 'out-of-place', states);
             }
           }
         }
@@ -141,7 +110,7 @@ const WordleSlice = createSlice({
 
       state.letterState.push(...states);
 
-      state.words.push(word);
+      state.words.push(version);
     },
 
     resetState: () => initialState,

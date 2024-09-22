@@ -1,9 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { LetterState, wordleActions } from '../../Store/Slices/WordleSlice';
-import {
-  useCheckMutation,
-  useGetRandomWordQuery,
-} from '../../Store/ToolkitAPIs/wordleAPI';
+import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './helpers/getWordToCheck';
 import { MouseEventHandler } from 'react';
 
@@ -15,24 +12,25 @@ const keyboard = {
 
 type A = keyof typeof keyboard;
 
-function getKeyboard(
-  onEnterClick: MouseEventHandler<HTMLDivElement>,
-  letterState: LetterState[]
-) {
+function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>, letterState: LetterState[]) {
   const arr = [];
 
   for (let i = 1; i < 4; i++) {
     arr.push(
       <div key={i} className='board-row'>
         {keyboard[i as A].map((letter) => {
-          const state = letterState.findLast((v) => v.value === letter);
+          const states = letterState.filter((v) => v.value === letter).map((v) => v.className);
+          let state: string | undefined = undefined;
+          if (states.length > 0) {
+            state = states.includes('in-place')
+              ? 'in-place'
+              : states.includes('out-of-place')
+              ? 'out-of-place'
+              : 'miss';
+          }
 
           return (
-            <div
-              onClick={letter === '⏎' ? onEnterClick : undefined}
-              className={state?.class}
-              key={letter}
-            >
+            <div onClick={letter === '⏎' ? onEnterClick : undefined} className={state} key={letter}>
               {letter}
             </div>
           );
@@ -47,8 +45,9 @@ function getKeyboard(
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters, words, letterState } =
-    useAppSelector((state) => state.wordleReducer);
+  const { currentLetterNumber, allowNextLetter, letters, words, letterState } = useAppSelector(
+    (state) => state.wordleReducer
+  );
 
   const [check] = useCheckMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
@@ -64,7 +63,7 @@ export default function Board() {
       dispatch(
         wordleActions.setWords({
           answer: answer.word,
-          word: word,
+          version: word,
         })
       );
       dispatch(wordleActions.setAllowNextLetter(false));
@@ -79,7 +78,7 @@ export default function Board() {
         dispatch(
           wordleActions.setWords({
             answer: answer.word,
-            word: data.word,
+            version: data.word,
           })
         );
       }
