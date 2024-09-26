@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 interface Props {
   q: QuestionType;
-  random: boolean;
+  random?: boolean;
 }
 
 function Question({ q, random = false }: Props) {

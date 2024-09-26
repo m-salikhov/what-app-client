@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { useState } from 'react';
 import { useChangePasswordMutation } from '../../Store/ToolkitAPIs/userAPI';
 import Button from '../Elements/Button/Button';
 
@@ -14,8 +14,7 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
 
   const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
-  const onSubmit = async (e: FormEvent<EventTarget>) => {
-    e.preventDefault();
+  const onSubmit = () => {
     if (message) {
       setMessage('');
     }
@@ -24,7 +23,7 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
       return;
     }
 
-    await changePassword({ newPass, id })
+    changePassword({ newPass, id })
       .then(() => {
         setNewPass('');
         setNewPassRepeat('');
@@ -40,16 +39,12 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
   };
 
   return (
-    <form className='pr-pass'>
-      <div className='pr-pass-container'>
+    <form className='profile-pass'>
+      {' '}
+      <div className='profile-pass-container'>
         <label>
           <p>Новый пароль</p>
-          <input
-            type='password'
-            onChange={(e) => setNewPass(e.target.value)}
-            value={newPass}
-            autoComplete='off'
-          />
+          <input type='password' onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete='off' />
         </label>
         <label>
           <p>Повторите пароль</p>
@@ -60,11 +55,14 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
             autoComplete='off'
           />
         </label>
-        {(message || isError) && <p className='pr-error'>{message}</p>}
-        {isSuccess && <p>{'Пароль успешно сохранён'}</p>}
-        <div className='pr-pass-control'>
+
+        {(message || isError) && <p className='profile-pass-error'>{message}</p>}
+
+        {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
+
+        <div className='profile-pass-control'>
           <Button title='Закрыть' onClick={onCancel} />
-          <Button title='Отправить' onSubmit={onSubmit} />
+          <Button title='Отправить' onClick={onSubmit} />
         </div>
       </div>
     </form>
