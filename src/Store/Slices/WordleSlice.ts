@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type ClassName = 'in-place' | 'out-of-place' | 'miss';
 
-export interface LetterState {
+interface LetterState {
   className: ClassName;
   value: string;
 }
@@ -14,6 +14,7 @@ export interface WordleState {
   allowNextLetter: boolean;
   words: string[];
   letterState: LetterState[];
+  wrongWordFlag: boolean;
 }
 
 const initialState: WordleState = {
@@ -23,6 +24,7 @@ const initialState: WordleState = {
   allowNextLetter: true,
   words: [],
   letterState: [],
+  wrongWordFlag: false,
 };
 
 function pushState(value: string, className: ClassName, states: LetterState[]) {
@@ -111,6 +113,10 @@ const WordleSlice = createSlice({
       state.letterState.push(...states);
 
       state.words.push(version);
+    },
+
+    setWrongWordFlag(state, action: PayloadAction<boolean>) {
+      state.wrongWordFlag = action.payload;
     },
 
     resetState: () => initialState,

@@ -113,13 +113,13 @@
   cursor: pointer;
   border-top: var(--main-border);
 
-  .test-o {
+  .ans-arrow-o {
     color: rgb(109 85 98);
     transition: all 0.25s;
     transform: rotate(180deg);
   }
 
-  .test-c {
+  .ans-arrow-c {
     color: rgb(109 85 98);
     transition: all 0.5s;
     transform: rotate(0deg);

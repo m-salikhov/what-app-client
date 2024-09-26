@@ -24,8 +24,13 @@
       border: var(--main-border);
       color: var(--p-color);
       border-radius: 5px;
+      transition-property: background-color, color;
       transition-duration: 0.5s;
       z-index: 10;
+
+      &.current-letter {
+        border-width: 3px;
+      }
 
       &.miss {
         background-color: grey;
@@ -40,9 +45,17 @@
         color: aliceblue;
       }
 
-      &.letter:nth-child(n + 1) {
+      &.letter {
         animation-name: letter-scale;
         animation-duration: 1s;
+      }
+
+      &.wrong-word {
+        animation-name: wrong-word;
+        animation-duration: 100ms;
+        animation-iteration-count: infinite;
+        border-width: 3px;
+        border-color: red;
       }
     }
   }
@@ -95,5 +108,37 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+
+@keyframes wrong-word {
+  50% {
+    transform: translateX(3px);
+  }
+  100% {
+    transform: translateX(-3px);
+  }
+}
+
+@media (width <= 650px) {
+  .wordle {
+    .board-container {
+      .board-row {
+        margin-top: 5px;
+        div {
+          margin: 2px;
+          height: 60px;
+          width: 24px;
+          font-size: 18px;
+        }
+
+        &:nth-child(3) {
+          div:first-child,
+          div:last-child {
+            width: 48px;
+          }
+        }
+      }
+    }
   }
 }

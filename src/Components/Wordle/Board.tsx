@@ -1,24 +1,26 @@
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
-import { LetterState, wordleActions } from '../../Store/Slices/WordleSlice';
+import { wordleActions } from '../../Store/Slices/WordleSlice';
 import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './helpers/getWordToCheck';
 import { MouseEventHandler } from 'react';
 
 const keyboard = {
-  1: ['ё', 'й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
+  1: ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
   2: ['ф', 'ы', 'в', 'а', 'п', 'р', 'о', 'л', 'д', 'ж', 'э'],
   3: ['del', 'я', 'ч', 'с', 'м', 'и', 'т', 'ь', 'б', 'ю', '⏎'],
 };
 
-type A = keyof typeof keyboard;
+type KeyboardRowIndex = keyof typeof keyboard;
 
-function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>, letterState: LetterState[]) {
+function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
   const arr = [];
+
+  const { letterState } = useAppSelector((state) => state.wordleReducer);
 
   for (let i = 1; i < 4; i++) {
     arr.push(
       <div key={i} className='board-row'>
-        {keyboard[i as A].map((letter) => {
+        {keyboard[i as KeyboardRowIndex].map((letter) => {
           const states = letterState.filter((v) => v.value === letter).map((v) => v.className);
           let state: string | undefined = undefined;
           if (states.length > 0) {
@@ -45,9 +47,7 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>, letterStat
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters, words, letterState } = useAppSelector(
-    (state) => state.wordleReducer
-  );
+  const { currentLetterNumber, allowNextLetter, letters, words } = useAppSelector((state) => state.wordleReducer);
 
   const [check] = useCheckMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
@@ -81,6 +81,11 @@ export default function Board() {
             version: data.word,
           })
         );
+      } else {
+        dispatch(wordleActions.setWrongWordFlag(true));
+        setTimeout(() => {
+          dispatch(wordleActions.setWrongWordFlag(false));
+        }, 500);
       }
     });
   }
@@ -100,7 +105,7 @@ export default function Board() {
         }
       }}
     >
-      {getKeyboard(onEnterClick, letterState)}
+      {getKeyboard(onEnterClick)}
     </div>
   );
 }

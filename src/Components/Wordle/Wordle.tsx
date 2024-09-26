@@ -1,17 +1,20 @@
 import './wordle.css';
 import Board from './Board';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
-import { LetterState, wordleActions } from '../../Store/Slices/WordleSlice';
+import { wordleActions } from '../../Store/Slices/WordleSlice';
 import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './helpers/getWordToCheck';
 import { useEffect } from 'react';
+import useLetterClassName from './helpers/useLetterClassName';
 
-const getWordleDIV = (letters: string[], letterState: LetterState[]) => {
+const getWordleDIV = () => {
   const arr = [];
+
+  const { letters } = useAppSelector((state) => state.wordleReducer);
 
   for (let i = 0; i < 30; i++) {
     arr.push(
-      <div key={i} className={letterState[i] ? letterState[i].className + ' letter' : undefined}>
+      <div key={i} className={useLetterClassName(i)}>
         {letters[i] ? letters[i] : null}
       </div>
     );
@@ -21,9 +24,7 @@ const getWordleDIV = (letters: string[], letterState: LetterState[]) => {
 };
 
 export default function Wordle() {
-  const { letters, allowNextLetter, currentLetterNumber, letterState, words } = useAppSelector(
-    (state) => state.wordleReducer
-  );
+  const { letters, allowNextLetter, currentLetterNumber, words } = useAppSelector((state) => state.wordleReducer);
 
   const dispatch = useAppDispatch();
 
@@ -69,6 +70,11 @@ export default function Wordle() {
                   version: data.word,
                 })
               );
+            } else {
+              dispatch(wordleActions.setWrongWordFlag(true));
+              setTimeout(() => {
+                dispatch(wordleActions.setWrongWordFlag(false));
+              }, 500);
             }
           });
         }
@@ -80,7 +86,7 @@ export default function Wordle() {
         dispatch(wordleActions.setLetters(e.key));
       }}
     >
-      <div className='wordle-container'>{getWordleDIV(letters, letterState)}</div>
+      <div className='wordle-container'>{getWordleDIV()}</div>
       <Board />
     </main>
   );
