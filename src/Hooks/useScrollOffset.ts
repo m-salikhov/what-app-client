@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function useScrollOffset(flag: boolean) {
+export default function useScrollOffset<T>(flag: T) {
   const body = document.querySelector('body') as HTMLBodyElement;
 
   useEffect(() => {

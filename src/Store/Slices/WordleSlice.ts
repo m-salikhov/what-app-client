@@ -15,6 +15,7 @@ export interface WordleState {
   words: string[];
   letterState: LetterState[];
   wrongWordFlag: boolean;
+  result: 'win' | 'lose' | null;
 }
 
 const initialState: WordleState = {
@@ -25,6 +26,7 @@ const initialState: WordleState = {
   words: [],
   letterState: [],
   wrongWordFlag: false,
+  result: null,
 };
 
 function pushState(value: string, className: ClassName, states: LetterState[]) {
@@ -117,6 +119,11 @@ const WordleSlice = createSlice({
 
     setWrongWordFlag(state, action: PayloadAction<boolean>) {
       state.wrongWordFlag = action.payload;
+    },
+
+    setResult(state, action: PayloadAction<'win' | 'lose' | null>) {
+      state.allowNextLetter = false;
+      state.result = action.payload;
     },
 
     resetState: () => initialState,

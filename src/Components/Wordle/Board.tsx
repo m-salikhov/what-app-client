@@ -47,12 +47,18 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters, words } = useAppSelector((state) => state.wordleReducer);
+  const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(
+    (state) => state.wordleReducer
+  );
 
   const [check] = useCheckMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
 
   function onEnterClick() {
+    if (result) {
+      return;
+    }
+
     const word = getWordToCheck(letters, currentLetterNumber);
 
     if (!word || words.at(-1) === word) {
@@ -66,14 +72,14 @@ export default function Board() {
           version: word,
         })
       );
-      dispatch(wordleActions.setAllowNextLetter(false));
-
-      console.log('CONGRATULATIONS!!');
+      dispatch(wordleActions.setResult('win'));
       return;
     }
 
     check(word).then(({ data }) => {
-      if (data?.isExist) {
+      if (data?.isExist && currentLetterNumber === 30) {
+        dispatch(wordleActions.setResult('lose'));
+      } else if (data?.isExist) {
         dispatch(wordleActions.setAllowNextLetter(true));
         dispatch(
           wordleActions.setWords({
@@ -94,6 +100,10 @@ export default function Board() {
     <div
       className='board-container'
       onClick={(e) => {
+        if (result) {
+          return;
+        }
+
         if (e.target instanceof HTMLElement) {
           if (!allowNextLetter && e.target.innerText !== 'DEL') {
             return;

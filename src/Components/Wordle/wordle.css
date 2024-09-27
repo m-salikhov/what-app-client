@@ -100,6 +100,76 @@
       }
     }
   }
+
+  .wordle-result {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 150;
+    -webkit-backdrop-filter: blur(1px);
+    backdrop-filter: blur(1px);
+    .wordle-result-wrapper {
+      position: absolute;
+      top: calc(50% - 200px);
+      left: calc(50% - 150px);
+      width: 320px;
+      height: 300px;
+      border: 2px solid var(--main-border-color);
+      border-radius: 10px;
+      background-color: var(--main-bg-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+
+      .wordle-result-close {
+        display: flex;
+        padding: 5px 5px 0 0;
+        width: 100%;
+        justify-content: flex-end;
+        svg {
+          cursor: pointer;
+        }
+      }
+
+      .wordle-result-icon {
+        display: flex;
+        justify-content: center;
+      }
+
+      .wordle-result-text {
+        text-align: center;
+        font-size: 18px;
+        padding-top: 12px;
+
+        span {
+          font-size: 18px;
+          font-weight: bold;
+        }
+      }
+
+      .wordle-result-new {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        align-items: flex-end;
+        p {
+          width: 100%;
+          height: 60px;
+          text-align: center;
+          line-height: 60px;
+          font-size: 22px;
+          border-top: 2px solid var(--main-border-color);
+          background-color: var(--banner-color);
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
 @keyframes letter-scale {

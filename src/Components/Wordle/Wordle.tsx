@@ -6,6 +6,7 @@ import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs
 import { getWordToCheck } from './helpers/getWordToCheck';
 import { useEffect } from 'react';
 import useLetterClassName from './helpers/useLetterClassName';
+import GameEndModal from './GameEndModal';
 
 const getWordleDIV = () => {
   const arr = [];
@@ -24,7 +25,9 @@ const getWordleDIV = () => {
 };
 
 export default function Wordle() {
-  const { letters, allowNextLetter, currentLetterNumber, words } = useAppSelector((state) => state.wordleReducer);
+  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(
+    (state) => state.wordleReducer
+  );
 
   const dispatch = useAppDispatch();
 
@@ -42,6 +45,10 @@ export default function Wordle() {
       className='wordle'
       tabIndex={0}
       onKeyDown={(e) => {
+        if (result) {
+          return;
+        }
+
         if (!allowNextLetter && e.key === 'Enter') {
           const word = getWordToCheck(letters, currentLetterNumber);
 
@@ -56,13 +63,14 @@ export default function Wordle() {
                 version: word,
               })
             );
-            console.log('CONGRATULATIONS!!');
-            dispatch(wordleActions.setAllowNextLetter(false));
+            dispatch(wordleActions.setResult('win'));
             return;
           }
 
           check(word).then(({ data }) => {
-            if (data?.isExist) {
+            if (data?.isExist && currentLetterNumber === 30) {
+              dispatch(wordleActions.setResult('lose'));
+            } else if (data?.isExist) {
               dispatch(wordleActions.setAllowNextLetter(true));
               dispatch(
                 wordleActions.setWords({
@@ -86,6 +94,7 @@ export default function Wordle() {
         dispatch(wordleActions.setLetters(e.key));
       }}
     >
+      <GameEndModal />
       <div className='wordle-container'>{getWordleDIV()}</div>
       <Board />
     </main>
