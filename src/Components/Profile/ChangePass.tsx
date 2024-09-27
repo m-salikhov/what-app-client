@@ -1,16 +1,19 @@
 import { useState } from 'react';
-import { useChangePasswordMutation } from '../../Store/ToolkitAPIs/userAPI';
+import { useChangePasswordMutation, useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import Button from '../Elements/Button/Button';
 
-interface ChangePassProp {
-  setChangePass: (flag: boolean) => void;
-  id: string;
-}
+import { useTransition, animated } from '@react-spring/web';
+import useScrollOffset from '../../Hooks/useScrollOffset';
 
-function ChangePass({ setChangePass, id }: ChangePassProp) {
+function ChangePass() {
+  const [changePass, setChangePass] = useState(false);
   const [newPass, setNewPass] = useState('');
   const [newPassRepeat, setNewPassRepeat] = useState('');
   const [message, setMessage] = useState('');
+
+  const { data: currentUser } = useInitialLoginQuery(undefined);
+
+  const id = currentUser?.id || '';
 
   const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
@@ -38,34 +41,71 @@ function ChangePass({ setChangePass, id }: ChangePassProp) {
     setChangePass(false);
   };
 
+  const transition = useTransition(changePass, {
+    from: {
+      scale: 0.5,
+      opacity: 0,
+    },
+    enter: {
+      scale: 1,
+      opacity: 1,
+    },
+    leave: {
+      scale: 0.5,
+      opacity: 0,
+    },
+
+    config: { duration: 300 },
+  });
+
+  useScrollOffset(changePass);
+
   return (
-    <form className='profile-pass'>
-      {' '}
-      <div className='profile-pass-container'>
-        <label>
-          <p>Новый пароль</p>
-          <input type='password' onChange={(e) => setNewPass(e.target.value)} value={newPass} autoComplete='off' />
-        </label>
-        <label>
-          <p>Повторите пароль</p>
-          <input
-            type='password'
-            onChange={(e) => setNewPassRepeat(e.target.value)}
-            value={newPassRepeat}
-            autoComplete='off'
-          />
-        </label>
-
-        {(message || isError) && <p className='profile-pass-error'>{message}</p>}
-
-        {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
-
-        <div className='profile-pass-control'>
-          <Button title='Закрыть' onClick={onCancel} />
-          <Button title='Отправить' onClick={onSubmit} />
-        </div>
+    <>
+      <div className='change-pass-text'>
+        <p onClick={() => setChangePass(true)}>изменить пароль</p>
       </div>
-    </form>
+      {transition((style, flag) => {
+        return flag ? (
+          <div className='change-pass-wrapper'>
+            <animated.div style={style} className='profile-pass'>
+              <form>
+                {' '}
+                <div className='profile-pass-container'>
+                  <label>
+                    <p>Новый пароль</p>
+                    <input
+                      type='password'
+                      onChange={(e) => setNewPass(e.target.value)}
+                      value={newPass}
+                      autoComplete='off'
+                    />
+                  </label>
+                  <label>
+                    <p>Повторите пароль</p>
+                    <input
+                      type='password'
+                      onChange={(e) => setNewPassRepeat(e.target.value)}
+                      value={newPassRepeat}
+                      autoComplete='off'
+                    />
+                  </label>
+
+                  {(message || isError) && <p className='profile-pass-error'>{message}</p>}
+
+                  {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
+
+                  <div className='profile-pass-control'>
+                    <Button title='Закрыть' onClick={onCancel} />
+                    <Button title='Отправить' onClick={onSubmit} />
+                  </div>
+                </div>
+              </form>
+            </animated.div>
+          </div>
+        ) : null;
+      })}
+    </>
   );
 }
 

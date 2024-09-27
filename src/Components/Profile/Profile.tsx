@@ -1,36 +1,16 @@
 import './profile.css';
-import { useState } from 'react';
 import { getDate } from '../../Helpers/getDate';
 import ChangePass from './ChangePass';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/ToolkitAPIs/userAPI';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
-import { useTransition, animated } from '@react-spring/web';
 
 function Profile() {
   useDocTitle('Профиль');
 
-  const [changePass, setChangePass] = useState(false);
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || '');
   const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id || '');
-
-  const transition = useTransition(changePass, {
-    from: {
-      scale: 0.5,
-      opacity: 0,
-    },
-    enter: {
-      scale: 1,
-      opacity: 1,
-    },
-    leave: {
-      scale: 0.5,
-      opacity: 0,
-    },
-
-    config: { duration: 300 },
-  });
 
   return (
     <main className='profile'>
@@ -53,19 +33,7 @@ function Profile() {
             <p>{currentUser?.role}</p>
           </div>
         </section>
-
-        <div className='change-pass-text'>
-          <p onClick={() => setChangePass(true)}>изменить пароль</p>
-        </div>
-
-        {transition((style, changePass) => {
-          return changePass ? (
-            <animated.div style={style} className='change-pass-wrapper'>
-              <ChangePass setChangePass={setChangePass} id={currentUser?.id || ''} />{' '}
-            </animated.div>
-          ) : null;
-        })}
-
+        <ChangePass />{' '}
         <section className='profile-results'>
           <h2>Ваши результаты :</h2>
           {results.length > 0 ? (
@@ -78,12 +46,9 @@ function Profile() {
               );
             })
           ) : (
-            <div>
-              <p>Нет сыгранных турниров</p>
-            </div>
+            <p>Нет сыгранных турниров</p>
           )}
         </section>
-
         <section className='profile-adds'>
           <h2>Добавленные вами турниры:</h2>
           {tournaments ? (
