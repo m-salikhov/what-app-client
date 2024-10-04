@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import { useChangePasswordMutation, useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import Button from '../Elements/Button/Button';
-
 import { useTransition, animated } from '@react-spring/web';
-import useScrollOffset from '../../Hooks/useScrollOffset';
+import { hideScroll, showScroll } from '../../Helpers/scrollDisplay';
 
 function ChangePass() {
   const [changePass, setChangePass] = useState(false);
@@ -39,6 +38,7 @@ function ChangePass() {
       setMessage('');
     }
     setChangePass(false);
+    showScroll(300);
   };
 
   const transition = useTransition(changePass, {
@@ -58,12 +58,17 @@ function ChangePass() {
     config: { duration: 300 },
   });
 
-  useScrollOffset(changePass);
-
   return (
     <>
       <div className='change-pass-text'>
-        <p onClick={() => setChangePass(true)}>изменить пароль</p>
+        <p
+          onClick={() => {
+            setChangePass(true);
+            hideScroll();
+          }}
+        >
+          изменить пароль
+        </p>
       </div>
       {transition((style, flag) => {
         return flag ? (
