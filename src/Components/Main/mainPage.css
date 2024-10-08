@@ -91,6 +91,11 @@
       color: var(--a-main-list-color);
       cursor: pointer;
     }
+
+    h5 {
+      width: 85px;
+      color: var(--a-main-list-color);
+    }
   }
 
   .tournaments-footer {

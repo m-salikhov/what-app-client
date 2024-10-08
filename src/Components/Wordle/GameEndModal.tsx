@@ -1,5 +1,4 @@
 import { useTransition, animated } from '@react-spring/web';
-import useScrollOffset from '../../Hooks/useScrollOffset';
 import { useAppDispatch, useAppSelector } from '../../Hooks/redux';
 import { IoClose } from 'react-icons/io5';
 import { GrAchievement } from 'react-icons/gr';
@@ -7,6 +6,7 @@ import { useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
 import { wordleActions } from '../../Store/Slices/WordleSlice';
 import { TfiLock } from 'react-icons/tfi';
 import { useState } from 'react';
+import { showScroll } from '../../Helpers/scrollDisplay';
 
 export default function GameEndModal() {
   const { result, currentLetterNumber } = useAppSelector((state) => state.wordleReducer);
@@ -31,14 +31,14 @@ export default function GameEndModal() {
     config: { duration: 300 },
   });
 
-  useScrollOffset(result);
-
   function onNewGame() {
+    showScroll(300);
     dispatch(wordleActions.resetState());
     refetch();
   }
 
   function onClose() {
+    showScroll(300);
     setModalOpen(false);
   }
 

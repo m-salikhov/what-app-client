@@ -17,12 +17,11 @@ function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
-  const { data: { tournaments, pageCount } = initial } =
-    useGetTournamentsLastShortQuery({
-      amount,
-      page,
-      withSkip: true,
-    });
+  const { data: { tournaments, pageCount } = initial } = useGetTournamentsLastShortQuery({
+    amount,
+    page,
+    withSkip: true,
+  });
 
   const changePageNumber = (e: MouseEvent<HTMLDivElement>) => {
     const { className } = e.currentTarget;
@@ -46,7 +45,9 @@ function LastTournaments() {
         return (
           <div className='tournaments-item' key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
-            <h5>{getDate(v.dateUpload)}</h5>
+            <div>
+              <h5>{getDate(v.dateUpload)}</h5>
+            </div>
           </div>
         );
       })}

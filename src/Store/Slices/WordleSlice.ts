@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { hideScroll } from '../../Helpers/scrollDisplay';
 
 type ClassName = 'in-place' | 'out-of-place' | 'miss';
 
@@ -121,7 +122,8 @@ const WordleSlice = createSlice({
       state.wrongWordFlag = action.payload;
     },
 
-    setResult(state, action: PayloadAction<'win' | 'lose' | null>) {
+    setResult(state, action: PayloadAction<'win' | 'lose'>) {
+      hideScroll();
       state.allowNextLetter = false;
       state.result = action.payload;
     },
