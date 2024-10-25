@@ -207,9 +207,10 @@ main {
 .pmq {
   max-width: 700px;
   margin: 0 auto;
+  padding-top: 1rem;
 
   .buttons-block {
-    padding: 1rem 0;
+    padding-bottom: 1rem;
 
     .buttons-block-answer {
       display: flex;

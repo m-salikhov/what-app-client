@@ -38,6 +38,7 @@ function Start({ tournament }: StepProps) {
           onChange={(e) => dispatch(playModeActions.setQuestionTimer(e))}
           minValue={1}
           maxValue={99}
+          isDisabled={!withTimer}
         >
           <Group>
             <Button slot='decrement'>-</Button>
@@ -52,6 +53,7 @@ function Start({ tournament }: StepProps) {
           onChange={(e) => dispatch(playModeActions.setAnswerTimer(e))}
           minValue={1}
           maxValue={99}
+          isDisabled={!withTimer}
         >
           <Group>
             <Button slot='decrement'>-</Button>
