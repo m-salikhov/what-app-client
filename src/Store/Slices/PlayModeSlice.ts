@@ -14,6 +14,9 @@ export interface PlayModeState {
   totalAnsweredCount: number;
   totalQuestionsCount: number;
   selectedResultQuestion: number;
+  withTimer: boolean;
+  questionTimer: number;
+  answerTimer: number;
 }
 
 const initialState: PlayModeState = {
@@ -24,6 +27,9 @@ const initialState: PlayModeState = {
   totalAnsweredCount: 0,
   totalQuestionsCount: 0,
   selectedResultQuestion: 0,
+  withTimer: true,
+  questionTimer: 15,
+  answerTimer: 30,
 };
 
 interface setResultAction {
@@ -74,9 +80,20 @@ const playModeSlice = createSlice({
       }
     },
 
+    setWithTimer(state) {
+      state.withTimer = !state.withTimer;
+    },
+
+    setQuestionTimer(state, action: PayloadAction<number>) {
+      state.questionTimer = action.payload;
+    },
+
+    setAnswerTimer(state, action: PayloadAction<number>) {
+      state.answerTimer = action.payload;
+    },
+
     resetState: () => initialState,
   },
 });
 
-export const { reducer: playModeReducer, actions: playModeActions } =
-  playModeSlice;
+export const { reducer: playModeReducer, actions: playModeActions } = playModeSlice;

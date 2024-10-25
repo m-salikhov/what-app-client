@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useAppSelector } from '../../../../../../Hooks/redux';
 
 interface Props {
-  setIsTimeOver(isTimeOver: boolean): void;
+  setShowAnswer: Dispatch<SetStateAction<boolean>>;
   qNumber: number;
 }
 
-const readingTime = 15;
-const questionTime = 30;
+function Timer({ setShowAnswer, qNumber }: Props) {
+  const { questionTimer, answerTimer } = useAppSelector((state) => state.playModeReducer);
+  const [time, setTime] = useState(questionTimer);
 
-function Timer({ setIsTimeOver, qNumber }: Props) {
-  const [time, setTime] = useState(readingTime);
   //Флаг, что время на чтение вопроса окончено
   const [flag, setFlag] = useState(false);
 
@@ -19,17 +19,17 @@ function Timer({ setIsTimeOver, qNumber }: Props) {
     }, 1000);
 
     if (time === 0 && !flag) {
-      setTime(questionTime);
+      setTime(answerTimer);
       setFlag(true);
     }
 
     if (time === 0 && flag) {
       clearTimeout(timeout);
-      setIsTimeOver(true);
+      setShowAnswer(true);
     }
 
     return () => clearTimeout(timeout);
-  }, [time, qNumber, flag, setIsTimeOver]);
+  }, [time, qNumber, flag, setShowAnswer]);
 
   return (
     <div className='timer'>

@@ -13,6 +13,7 @@ p {
   line-height: 1.5;
   color: var(--p-color);
   word-spacing: 0.1rem;
+  text-wrap: pretty;
 
   &::selection {
     background-color: var(--bg-grey);
@@ -32,6 +33,7 @@ h4,
 h5,
 h6 {
   color: var(--h-color);
+  text-wrap: balance;
 }
 
 h1 {

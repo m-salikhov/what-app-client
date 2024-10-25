@@ -8,14 +8,10 @@ import { QuestionType } from '../../../../../../Types/question';
 interface Props {
   currentQuestion: QuestionType;
   nextQTourNumber: number;
-  setIsTimeOver: Dispatch<SetStateAction<boolean>>;
+  setShowAnswer: Dispatch<SetStateAction<boolean>>;
 }
 
-function ButtonsBlock({
-  currentQuestion,
-  nextQTourNumber,
-  setIsTimeOver,
-}: Props) {
+function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props) {
   const dispatch = useAppDispatch();
 
   const [answer, setAnswer] = useState<boolean | undefined>(undefined);
@@ -37,7 +33,7 @@ function ButtonsBlock({
       dispatch(playModeActions.setStep(StepPM.END_OF_TOUR));
     } else dispatch(playModeActions.currentQuestionIndexIncrement());
 
-    setIsTimeOver(false);
+    setShowAnswer(false);
   };
 
   return (
@@ -50,9 +46,7 @@ function ButtonsBlock({
         </div>
       )}
 
-      {answer !== undefined && (
-        <Button title='Следующий вопрос' onClick={onClick} />
-      )}
+      {answer !== undefined && <Button title='Следующий вопрос' onClick={onClick} />}
     </div>
   );
 }

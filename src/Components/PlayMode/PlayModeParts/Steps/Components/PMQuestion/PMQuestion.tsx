@@ -17,11 +17,9 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
     return questions.filter((v) => v.qNumber > 0 && v.tourNumber > 0);
   }, [questions]);
 
-  const { currentQuestionIndex } = useAppSelector(
-    (state) => state.playModeReducer
-  );
+  const { currentQuestionIndex, withTimer } = useAppSelector((state) => state.playModeReducer);
 
-  const [isTimeOver, setIsTimeOver] = useState(false);
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const currentQuestion = questionsBasic[currentQuestionIndex];
   const nextQTourNumber = questionsBasic[currentQuestionIndex + 1]?.tourNumber;
@@ -32,17 +30,12 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
 
   return (
     <div className='pmq'>
-      {!isTimeOver && (
-        <Timer
-          setIsTimeOver={setIsTimeOver}
-          qNumber={currentQuestion.qNumber || 0}
-        />
-      )}
-      {isTimeOver && (
+      {!showAnswer && withTimer && <Timer setShowAnswer={setShowAnswer} qNumber={currentQuestion.qNumber || 0} />}
+      {showAnswer && (
         <ButtonsBlock
           currentQuestion={currentQuestion}
           nextQTourNumber={nextQTourNumber}
-          setIsTimeOver={setIsTimeOver}
+          setShowAnswer={setShowAnswer}
         />
       )}
 
@@ -50,11 +43,9 @@ function PMQuestion({ tournament: { questions } }: StepProps) {
 
       <p>{currentQuestion.text}</p>
 
-      {isTimeOver && <Answer q={currentQuestion} />}
+      {showAnswer && <Answer q={currentQuestion} />}
 
-      {!isTimeOver && (
-        <Button onClick={() => setIsTimeOver(true)} title='Готов ответ?' />
-      )}
+      {!showAnswer && <Button onClick={() => setShowAnswer(true)} title='Готов ответ?' />}
     </div>
   );
 }
