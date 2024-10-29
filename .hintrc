@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "text-wrap",
+          "text-wrap: balance",
+          "text-wrap: pretty",
+          "text-size-adjust"
+        ]
+      }
+    ],
+    "typescript-config/consistent-casing": "off"
+  }
+}

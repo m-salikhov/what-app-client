@@ -85,11 +85,15 @@ const playModeSlice = createSlice({
     },
 
     setQuestionTimer(state, action: PayloadAction<number>) {
-      state.questionTimer = action.payload;
+      if (isNaN(action.payload)) {
+        state.questionTimer = 15;
+      } else state.questionTimer = action.payload;
     },
 
     setAnswerTimer(state, action: PayloadAction<number>) {
-      state.answerTimer = action.payload;
+      if (isNaN(action.payload)) {
+        state.answerTimer = 30;
+      } else state.answerTimer = action.payload;
     },
 
     resetState: () => initialState,
