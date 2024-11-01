@@ -1,6 +1,6 @@
 import './profile.css';
 import { getDate } from '../../Helpers/getDate';
-import ChangePass from './ChangePass';
+import { ChangePass } from './ChangePass';
 import { useDocTitle } from '../../Hooks/useDocTitle';
 import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/ToolkitAPIs/userAPI';
 import { useGetTournamentsAllByUploaderQuery } from '../../Store/ToolkitAPIs/tournamentAPI';

@@ -10,7 +10,9 @@
           "text-wrap",
           "text-wrap: balance",
           "text-wrap: pretty",
-          "text-size-adjust"
+          "text-size-adjust",
+          "forced-color-adjust",
+          "forced-color-adjust: none"
         ]
       }
     ],

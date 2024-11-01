@@ -9,7 +9,7 @@
 - React
 - React Router
 - Redux Toolkit
-- SCSS
+- CSS
 
 ---
 

@@ -6,10 +6,7 @@ import reducer from './helpers/reducer';
 import EditForm from './EditForm';
 import checkTournament from '../../Helpers/checkTournament';
 import Instruction from './Instruction';
-import {
-  useAddTournamentMutation,
-  useParseLinkMutation,
-} from '../../Store/ToolkitAPIs/tournamentAPI';
+import { useAddTournamentMutation, useParseLinkMutation } from '../../Store/ToolkitAPIs/tournamentAPI';
 import removeQuestionsID from './helpers/removeQuestionsID';
 import extractServerErrorMessage from '../../Helpers/extractServerErrorMessage';
 import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
@@ -30,8 +27,7 @@ function AddTournamentLink() {
   const [t, dispatch] = useReducer(reducer, initTournament);
 
   const { data: currentUser } = useInitialLoginQuery(undefined);
-  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] =
-    useAddTournamentMutation();
+  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
   const handleAddTournament = async () => {
@@ -78,6 +74,7 @@ function AddTournamentLink() {
       <div className='addlink'>
         <input
           type='text'
+          placeholder='Ссылка на турнир'
           onChange={(e) => {
             setLink(e.target.value);
           }}
@@ -87,11 +84,7 @@ function AddTournamentLink() {
             }
           }}
         />
-        <Button
-          title='Открыть'
-          onClick={handleParseLink}
-          disabled={isLoadingAdd || isLoading}
-        />
+        <Button title='Открыть' onClick={handleParseLink} disabled={isLoadingAdd || isLoading} />
       </div>
 
       {errorsFilling &&
@@ -104,9 +97,7 @@ function AddTournamentLink() {
       {message && <p className='addlink-message'>{message}</p>}
 
       {(errorParse || errorAdd) && (
-        <p className='addlink-message'>
-          {extractServerErrorMessage(errorParse || errorAdd)}
-        </p>
+        <p className='addlink-message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
       {(isLoading || isLoadingAdd) && <Spinner />}

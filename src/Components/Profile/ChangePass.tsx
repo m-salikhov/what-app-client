@@ -4,7 +4,7 @@ import Button from '../Elements/Button/Button';
 import { useTransition, animated } from '@react-spring/web';
 import { hideScroll, showScroll } from '../../Helpers/scrollDisplay';
 
-function ChangePass() {
+export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
   const [newPass, setNewPass] = useState('');
   const [newPassRepeat, setNewPassRepeat] = useState('');
@@ -20,6 +20,7 @@ function ChangePass() {
     if (message) {
       setMessage('');
     }
+
     if (!newPass || newPass !== newPassRepeat) {
       setMessage('Пароль не совпадает');
       return;
@@ -113,5 +114,3 @@ function ChangePass() {
     </>
   );
 }
-
-export default ChangePass;
