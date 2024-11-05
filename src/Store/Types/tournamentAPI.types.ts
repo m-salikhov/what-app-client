@@ -1,4 +1,4 @@
-import { TournamentShortType } from '../../Types/tournament';
+import { TournamentShortType } from '../../Common/Types/tournament';
 
 export interface TournamentsLastShort {
   tournaments: TournamentShortType[];

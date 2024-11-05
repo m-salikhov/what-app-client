@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, serverRoutes } from '../../constants';
+import { baseUrl, serverRoutes } from '../../Common/Constants/constants';
 
 export const wordleAPI = createApi({
   reducerPath: 'wordleAPI',
