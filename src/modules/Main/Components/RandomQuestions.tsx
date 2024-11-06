@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useGetRandomQuery } from '../../../Store/ToolkitAPIs/tournamentAPI';
-import Question from '../../Elements/Question/Question';
-import SkeletonQuestion from '../../Elements/Question/SkeletonQuestion';
 import refreshIcon from '../assets/refresh.svg';
+import Question from 'Common/Components/Question/Question';
+import SkeletonQuestion from 'Common/Components/Question/SkeletonQuestion';
+import { useGetRandomQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
 export default function RandomQuestions() {
   const amountRandomQuestions = 4;

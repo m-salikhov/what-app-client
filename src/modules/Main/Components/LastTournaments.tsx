@@ -1,10 +1,10 @@
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getDate } from '../../../Common/Helpers/getDate';
 import back from '../assets/back.svg';
 import next from '../assets/next.svg';
-import { useGetTournamentsLastShortQuery } from '../../../Store/ToolkitAPIs/tournamentAPI';
-import { TournamentsLastShort } from '../../../Store/Types/tournamentAPI.types';
+import { getDate } from 'Common/Helpers/getDate';
+import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
 
 const initial: TournamentsLastShort = {
   tournaments: [],

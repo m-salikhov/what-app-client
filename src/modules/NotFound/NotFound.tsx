@@ -1,5 +1,5 @@
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import './notFound.css';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
 import NotFoundOwl from './NotFoundOwl.svg?react';
 
 function NotFound() {

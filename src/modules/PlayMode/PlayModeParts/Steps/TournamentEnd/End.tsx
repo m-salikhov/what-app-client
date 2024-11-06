@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '../../../../../Common/Hooks/redux';
-import Button from '../../../../Elements/Button/Button';
-import QuestionPlane from '../../../../Elements/Question/QuestionPlane';
 import ResBlock from '../Components/ResultBlock/ResBlock';
-import { useInitialLoginQuery, usePostUserResultMutation } from '../../../../../Store/ToolkitAPIs/userAPI';
-import extractServerErrorMessage from '../../../../../Common/Helpers/extractServerErrorMessage';
-import { StepProps } from '../../Types/playmodeTypes';
-import { Spinner } from '../../../../Elements/Spinner/Spinner';
+import QuestionPlane from 'Common/Components/Question/QuestionPlane';
+import { Spinner } from 'Common/Components/Spinner/Spinner';
+import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
+import { useAppSelector } from 'Common/Hooks/redux';
+import { TournamentType } from 'Common/Types/tournament';
+import { useInitialLoginQuery, usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
+import Button from 'Common/Components/Button/Button';
 
-function End({ tournament }: StepProps) {
+function End({ tournament }: { tournament: TournamentType }) {
   const navigate = useNavigate();
 
   const { data: currentUser } = useInitialLoginQuery(undefined);

@@ -1,19 +1,19 @@
 import { useReducer, useState } from 'react';
-import Button from '../Elements/Button/Button';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import { initTournament } from '../../Common/Helpers/initValues';
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import reducer from './helpers/reducer';
-import EditForm from './EditForm';
-import checkTournament from '../../Common/Helpers/checkTournament';
-import Instruction from './Instruction';
-import { useAddTournamentMutation, useParseLinkMutation } from '../../Store/ToolkitAPIs/tournamentAPI';
+import EditForm from './Components/EditForm';
+import Instruction from './Components/Instruction';
 import removeQuestionsID from './helpers/removeQuestionsID';
-import extractServerErrorMessage from '../../Common/Helpers/extractServerErrorMessage';
-import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
-import { guest } from '../../Common/Constants/constants';
-import ParsedTournament from './ParsedTournament';
-import { Spinner } from '../Elements/Spinner/Spinner';
+import ParsedTournament from './Components/ParsedTournament';
 import './addTournamentLink.css';
+import Button from 'Common/Components/Button/Button';
+import { Spinner } from 'Common/Components/Spinner/Spinner';
+import { guest } from 'Common/Constants/constants';
+import checkTournament from './helpers/checkTournament';
+import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
+import { initTournament } from 'Common/Helpers/initValues';
+import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
+import { useInitialLoginQuery } from 'Store/ToolkitAPIs/userAPI';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');

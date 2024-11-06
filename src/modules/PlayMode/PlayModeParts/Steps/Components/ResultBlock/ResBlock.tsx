@@ -1,12 +1,10 @@
-import { useAppSelector } from '../../../../../../Common/Hooks/redux';
-import { ResultType } from '../../../../../../Store/Slices/PlayModeSlice';
+import { ResultType } from 'Store/Slices/PlayModeSlice';
 import { makeResultTable } from '../../Helpers/makeResultTable';
+import { useAppSelector } from 'Common/Hooks/redux';
 
 const calcTourResult = (tour: number, res: ResultType) => {
-  const tourResArrBoolean = res[tour];
-
   let count = 0;
-  tourResArrBoolean.forEach((v) => {
+  res[tour].forEach((v) => {
     if (v.ans) count++;
   });
 

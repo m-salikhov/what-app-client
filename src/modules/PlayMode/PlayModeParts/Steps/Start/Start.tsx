@@ -1,10 +1,10 @@
-import { getDate } from '../../../../../Common/Helpers/getDate';
-import { useAppDispatch } from '../../../../../Common/Hooks/redux';
-import { playModeActions } from '../../../../../Store/Slices/PlayModeSlice';
-import { StepProps, StepPM } from '../../Types/playmodeTypes';
+import { getDate } from 'Common/Helpers/getDate';
+import { useAppDispatch } from 'Common/Hooks/redux';
+import { TournamentType } from 'Common/Types/tournament';
+import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import TimerOptions from './TimerOptions';
 
-function Start({ tournament }: StepProps) {
+function Start({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
   return (
@@ -23,7 +23,7 @@ function Start({ tournament }: StepProps) {
       <TimerOptions />
 
       <div>
-        <button type='button' onClick={() => dispatch(playModeActions.setStep(StepPM.QUESTION))}>
+        <button type='button' onClick={() => dispatch(playModeActions.setStep('QUESTION'))}>
           Начать игру
         </button>
       </div>

@@ -1,11 +1,11 @@
 import './tournamentsTable.css';
 import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { useGetTournamentsShortQuery } from '../../../Store/ToolkitAPIs/tournamentAPI';
-import { getDate } from '../../../Common/Helpers/getDate';
 import { useEffect, useState, MouseEvent } from 'react';
-import { TournamentShortType } from '../../../Common/Types/tournament';
-import extractServerErrorMessage from '../../../Common/Helpers/extractServerErrorMessage';
+import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
+import { getDate } from 'Common/Helpers/getDate';
+import { TournamentShortType } from 'Common/Types/tournament';
+import { useGetTournamentsShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 

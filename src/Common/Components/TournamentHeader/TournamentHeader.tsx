@@ -1,6 +1,6 @@
+import { getDate } from 'Common/Helpers/getDate';
+import { TournamentType } from 'Common/Types/tournament';
 import './tournamentHeader.css';
-import { getDate } from '../../../Common/Helpers/getDate';
-import { TournamentType } from '../../../Common/Types/tournament';
 
 interface Props {
   tournament: TournamentType;

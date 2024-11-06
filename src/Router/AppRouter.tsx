@@ -1,20 +1,20 @@
 import { createHashRouter } from 'react-router-dom';
-import MainPage from '../modules/Main/MainPage';
-import Layout from '../modules/Layout/Layout';
 import PrivateRoute from './hoc/PrivateRoute';
 import { lazy, Suspense } from 'react';
-import { Spinner } from '../modules/Elements/Spinner/Spinner';
+import Layout from 'src/modules/Layout/Layout';
+import MainPage from 'src/modules/Main/MainPage';
+import { Spinner } from 'Common/Components/Spinner/Spinner';
 
-const Entry = lazy(() => import('../modules/Entry/Entry'));
-const AddTournamentLink = lazy(() => import('../modules/AddTournamentLink/AddTournamentLink'));
-const List = lazy(() => import('../modules/PlayMode/List'));
-const PlayMode = lazy(() => import('../modules/PlayMode/PlayMode'));
-const Profile = lazy(() => import('../modules/Profile/Profile'));
-const NotFound = lazy(() => import('../modules/NotFound/NotFound'));
-const AllTournaments = lazy(() => import('../modules/AllTournaments/AllTournaments'));
-const About = lazy(() => import('../modules/About/About'));
-const Wordle = lazy(() => import('../modules/Wordle/Wordle'));
-const Tournament = lazy(() => import('../modules/Tournament/Tournament'));
+const Entry = lazy(() => import('src/modules/Entry/Entry'));
+const AddTournamentLink = lazy(() => import('src/modules/AddTournamentLink/AddTournamentLink'));
+const List = lazy(() => import('src/modules/PlayMode/List'));
+const PlayMode = lazy(() => import('src/modules/PlayMode/PlayMode'));
+const Profile = lazy(() => import('src/modules/Profile/Profile'));
+const NotFound = lazy(() => import('src/modules/NotFound/NotFound'));
+const AllTournaments = lazy(() => import('src/modules/AllTournaments/AllTournaments'));
+const About = lazy(() => import('src/modules/About/About'));
+const Wordle = lazy(() => import('src/modules/Wordle/Wordle'));
+const Tournament = lazy(() => import('src/modules/Tournament/Tournament'));
 
 const router = createHashRouter([
   {

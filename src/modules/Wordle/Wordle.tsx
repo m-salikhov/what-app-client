@@ -1,12 +1,12 @@
 import './wordle.css';
-import Board from './Board';
-import { useAppDispatch, useAppSelector } from '../../Common/Hooks/redux';
-import { wordleActions } from '../../Store/Slices/WordleSlice';
-import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
+import Board from './Components/Board';
 import { getWordToCheck } from './helpers/getWordToCheck';
 import { useEffect } from 'react';
 import useLetterClassName from './helpers/useLetterClassName';
-import GameEndModal from './GameEndModal';
+import GameEndModal from './Components/GameEndModal';
+import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
+import { wordleActions } from 'Store/Slices/WordleSlice';
+import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 
 const getWordleDIV = () => {
   const arr = [];

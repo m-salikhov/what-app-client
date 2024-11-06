@@ -1,4 +1,4 @@
-import { TournamentType } from '../Types/tournament';
+import { TournamentType } from 'Common/Types/tournament';
 
 export default function checkTournament(t: TournamentType) {
   const errors: string[] = [];

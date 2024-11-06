@@ -1,9 +1,9 @@
 import './profile.css';
-import { getDate } from '../../Common/Helpers/getDate';
-import { ChangePass } from './ChangePass';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import { useInitialLoginQuery, useGetUserResultShortQuery } from '../../Store/ToolkitAPIs/userAPI';
-import { useGetTournamentsAllByUploaderQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
+import { ChangePass } from './Components/ChangePass';
+import { getDate } from 'Common/Helpers/getDate';
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
+import { useGetTournamentsAllByUploaderQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { useInitialLoginQuery, useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
 
 function Profile() {
   useDocTitle('Профиль');

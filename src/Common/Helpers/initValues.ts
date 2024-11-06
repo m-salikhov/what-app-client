@@ -1,6 +1,6 @@
-import { QuestionType } from '../Types/question';
-import { TournamentShortType, TournamentType } from '../Types/tournament';
-import { UserType } from '../Types/user';
+import { QuestionType } from 'Common/Types/question';
+import { TournamentShortType, TournamentType } from 'Common/Types/tournament';
+import { UserType } from 'Common/Types/user';
 
 export const initTournamentShort: TournamentShortType = {
   id: 0,

@@ -1,10 +1,10 @@
 import { parseDate } from '@internationalized/date';
-import { getDateYYYY_MM_DD } from '../../Common/Helpers/getDate';
-import { TournamentType } from '../../Common/Types/tournament';
-import Button from '../Elements/Button/Button';
 import EditFormQuestion from './EditFormQuestion';
-import { Action, actionTypes } from './helpers/reducer';
+import { Action, actionTypes } from '../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
+import Button from 'Common/Components/Button/Button';
+import { getDateYYYY_MM_DD } from 'Common/Helpers/getDate';
+import { TournamentType } from 'Common/Types/tournament';
 
 interface Props {
   t: TournamentType;

@@ -1,18 +1,14 @@
-// import './list.css';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import { useAppDispatch } from '../../Common/Hooks/redux';
-import { useEffect } from 'react';
-import { playModeActions } from '../../Store/Slices/PlayModeSlice';
-import TournamentsTable from '../Elements/TournamentsTable/TournamentsTable';
+import { useDocTitle } from 'src/Common/Hooks/useDocTitle';
+import { useAppDispatch } from 'src/Common/Hooks/redux';
+import { playModeActions } from 'src/Store/Slices/PlayModeSlice';
+import TournamentsTable from 'Common/Components/TournamentsTable/TournamentsTable';
 
 function List() {
   useDocTitle('Игровой режим');
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(playModeActions.resetState());
-  }, [dispatch]);
+  dispatch(playModeActions.resetState());
 
   return (
     <main>

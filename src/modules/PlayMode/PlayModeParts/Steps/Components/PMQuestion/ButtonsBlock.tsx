@@ -1,14 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react';
-import Button from '../../../../../Elements/Button/Button';
-import { useAppDispatch } from '../../../../../../Common/Hooks/redux';
-import { playModeActions } from '../../../../../../Store/Slices/PlayModeSlice';
-import { StepPM } from '../../../Types/playmodeTypes';
-import { QuestionType } from '../../../../../../Common/Types/question';
+import { useState } from 'react';
+import { QuestionType } from 'Common/Types/question';
+import { useAppDispatch } from 'Common/Hooks/redux';
+import { playModeActions } from 'Store/Slices/PlayModeSlice';
+import Button from 'Common/Components/Button/Button';
 
 interface Props {
   currentQuestion: QuestionType;
   nextQTourNumber: number;
-  setShowAnswer: Dispatch<SetStateAction<boolean>>;
+  setShowAnswer: (showAnswer: boolean) => void;
 }
 
 function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props) {
@@ -28,9 +27,9 @@ function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props
     }
 
     if (!nextQTourNumber) {
-      dispatch(playModeActions.setStep(StepPM.END));
+      dispatch(playModeActions.setStep('END'));
     } else if (currentQuestion.tourNumber !== nextQTourNumber) {
-      dispatch(playModeActions.setStep(StepPM.END_OF_TOUR));
+      dispatch(playModeActions.setStep('END_OF_TOUR'));
     } else dispatch(playModeActions.currentQuestionIndexIncrement());
 
     setShowAnswer(false);

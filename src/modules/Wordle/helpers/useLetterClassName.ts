@@ -1,5 +1,4 @@
-import { useAppSelector } from '../../../Common/Hooks/redux';
-// import { LetterState } from '../../../Store/Slices/WordleSlice';
+import { useAppSelector } from 'Common/Hooks/redux';
 
 export default function useLetterClassName(index: number) {
   const { currentLetterNumber, letterState, wrongWordFlag } = useAppSelector((state) => state.wordleReducer);

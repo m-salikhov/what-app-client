@@ -1,10 +1,10 @@
 import './tournament.css';
 import { useParams } from 'react-router-dom';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import { useGetTournamentQuery } from '../../Store/ToolkitAPIs/tournamentAPI';
-import extractServerErrorMessage from '../../Common/Helpers/extractServerErrorMessage';
-import { Spinner } from '../Elements/Spinner/Spinner';
-import TournamentContent from './TournamentContent';
+import { Spinner } from 'Common/Components/Spinner/Spinner';
+import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
+import { useGetTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import TournamentContent from './Components/TournamentContent';
 
 function Tournament() {
   const { id = '' } = useParams();

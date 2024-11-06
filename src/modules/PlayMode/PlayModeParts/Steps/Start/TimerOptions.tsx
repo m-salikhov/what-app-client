@@ -1,7 +1,7 @@
 import { Checkbox, NumberField, Group, Button, Input } from 'react-aria-components';
-import { playModeActions } from '../../../../../Store/Slices/PlayModeSlice';
-import { useAppDispatch, useAppSelector } from '../../../../../Common/Hooks/redux';
 import green_mark from '../../PMIcons/green_mark.svg';
+import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
+import { playModeActions } from 'Store/Slices/PlayModeSlice';
 
 export default function TimerOptions() {
   const { withTimer, answerTimer, questionTimer } = useAppSelector((state) => state.playModeReducer);

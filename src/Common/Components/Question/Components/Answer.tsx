@@ -1,5 +1,5 @@
-import { QuestionType } from '../../../Common/Types/question';
-import ExternalLinkText from '../Text/ExternalLinkText/ExternalLinkText';
+import ExternalLinkText from 'Common/Components/Text/ExternalLinkText/ExternalLinkText';
+import { QuestionType } from 'Common/Types/question';
 
 function Answer({ q }: { q: QuestionType }) {
   return (

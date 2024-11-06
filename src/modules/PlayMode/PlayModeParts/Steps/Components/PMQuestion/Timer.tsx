@@ -1,5 +1,5 @@
+import { useAppSelector } from 'Common/Hooks/redux';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { useAppSelector } from '../../../../../../Common/Hooks/redux';
 
 interface Props {
   setShowAnswer: Dispatch<SetStateAction<boolean>>;

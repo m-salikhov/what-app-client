@@ -1,6 +1,6 @@
-import { QuestionType } from '../../../Common/Types/question';
-import Add from './Add';
-import Answer from './Answer';
+import { QuestionType } from 'Common/Types/question';
+import Add from './Components/Add';
+import Answer from './Components/Answer';
 import './question.css';
 
 interface Props {

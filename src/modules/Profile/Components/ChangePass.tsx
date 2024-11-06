@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useChangePasswordMutation, useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
-import Button from '../Elements/Button/Button';
 import { useTransition, animated } from '@react-spring/web';
-import { hideScroll, showScroll } from '../../Common/Helpers/scrollDisplay';
+import { showScroll, hideScroll } from 'Common/Helpers/scrollDisplay';
+import { useInitialLoginQuery, useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
+import Button from 'Common/Components/Button/Button';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);

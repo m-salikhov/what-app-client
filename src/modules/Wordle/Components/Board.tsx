@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from '../../Common/Hooks/redux';
-import { wordleActions } from '../../Store/Slices/WordleSlice';
-import { useCheckMutation, useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
-import { getWordToCheck } from './helpers/getWordToCheck';
+import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
+import { wordleActions } from 'Store/Slices/WordleSlice';
+import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
+import { getWordToCheck } from '../helpers/getWordToCheck';
 import { MouseEventHandler } from 'react';
 
 const keyboard = {

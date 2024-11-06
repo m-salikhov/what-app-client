@@ -1,15 +1,14 @@
 import { useState, useMemo, useEffect } from 'react';
-import Button from '../../../../../Elements/Button/Button';
-import Add from '../../../../../Elements/Question/Add';
-import Answer from '../../../../../Elements/Question/Answer';
 import Timer from './Timer';
-import { playModeActions } from '../../../../../../Store/Slices/PlayModeSlice';
-import { useAppDispatch, useAppSelector } from '../../../../../../Common/Hooks/redux';
-import { StepProps } from '../../../Types/playmodeTypes';
-import { QuestionType } from '../../../../../../Common/Types/question';
 import ButtonsBlock from './ButtonsBlock';
+import Add from 'Common/Components/Question/Components/Add';
+import Answer from 'Common/Components/Question/Components/Answer';
+import { useAppDispatch, useAppSelector } from 'Common/Hooks/redux';
+import { QuestionType } from 'Common/Types/question';
+import { playModeActions } from 'Store/Slices/PlayModeSlice';
+import Button from 'Common/Components/Button/Button';
 
-function PMQuestion({ tournament: { questions } }: StepProps) {
+function PMQuestion({ tournament: { questions } }: { tournament: { questions: QuestionType[] } }) {
   const dispatch = useAppDispatch();
 
   //чистит турнир от нулевых вопросов, оставляя только игровые

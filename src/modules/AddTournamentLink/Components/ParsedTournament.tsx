@@ -1,7 +1,7 @@
-import { TournamentType } from '../../Common/Types/tournament';
-import Button from '../Elements/Button/Button';
-import QuestionPlane from '../Elements/Question/QuestionPlane';
-import TournamentHeader from '../Elements/TournamentHeader/TournamentHeader';
+import Button from 'Common/Components/Button/Button';
+import QuestionPlane from 'Common/Components/Question/QuestionPlane';
+import TournamentHeader from 'Common/Components/TournamentHeader/TournamentHeader';
+import { TournamentType } from 'Common/Types/tournament';
 
 interface Props {
   t: TournamentType;

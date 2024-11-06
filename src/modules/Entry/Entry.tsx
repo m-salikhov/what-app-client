@@ -2,16 +2,16 @@ import './entry.css';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';
-import extractServerErrorMessage from '../../Common/Helpers/extractServerErrorMessage';
-import { initFormUser } from '../../Common/Helpers/initValues';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import { FormUser } from '../../Common/Types/user';
-import Button from '../Elements/Button/Button';
 import entryImg from './entry_img.svg';
 import checkFormFields from './helpers/checkFormFields';
 import { useLogin } from './hooks/useLogin';
 import { useRegistration } from './hooks/useRegistration';
-import ModalReg from './ModalReg';
+import ModalReg from './Components/ModalReg';
+import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
+import { initFormUser } from 'Common/Helpers/initValues';
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
+import { FormUser } from 'Common/Types/user';
+import Button from 'Common/Components/Button/Button';
 
 function Entry() {
   useDocTitle('Вход');

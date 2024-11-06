@@ -5,7 +5,7 @@ import { Link, NavigateFunction, useLocation, useNavigate } from 'react-router-d
 import { useLogout } from '../../Common/Hooks/useLogout';
 import { useWindowSize } from '../../Common/Hooks/useWindowSize';
 import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
-import DarkMode from '../Elements/DarkMode/DarkMode';
+import DarkMode from '../../Common/Components/DarkMode/DarkMode';
 
 const logoNavigate = (
   isManePage: boolean,

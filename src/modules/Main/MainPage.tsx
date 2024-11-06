@@ -1,10 +1,10 @@
 import './mainPage.css';
 import { useNavigate } from 'react-router-dom';
-import { useDocTitle } from '../../Common/Hooks/useDocTitle';
-import Button from '../Elements/Button/Button';
 import LastTournaments from './Components/LastTournaments';
 import Stats from './Components/Stats';
 import RandomQuestions from './Components/RandomQuestions';
+import { useDocTitle } from 'Common/Hooks/useDocTitle';
+import Button from 'Common/Components/Button/Button';
 
 function MainPage() {
   const navigate = useNavigate();

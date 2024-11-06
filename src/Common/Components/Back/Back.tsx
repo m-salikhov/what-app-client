@@ -6,7 +6,7 @@ function Back() {
   const navigate = useNavigate();
   return (
     <>
-      <div className='lastpage' onClick={() => navigate(-1)}>
+      <div className='last-page' onClick={() => navigate(-1)}>
         {' '}
         <img src={arrow_left} alt='обновить случайные' />
         <p>Назад</p>

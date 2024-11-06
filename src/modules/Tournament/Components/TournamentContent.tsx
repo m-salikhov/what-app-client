@@ -1,10 +1,10 @@
-import { TournamentType } from '../../Common/Types/tournament';
 import { animated, useTransition } from '@react-spring/web';
 import { useRef } from 'react';
-import Question from '../Elements/Question/Question';
 import { getToursParagraphs, scroll } from './scrollLogic';
-import Back from '../Elements/Back/Back';
-import TournamentHeader from '../Elements/TournamentHeader/TournamentHeader';
+import Back from 'Common/Components/Back/Back';
+import Question from 'Common/Components/Question/Question';
+import TournamentHeader from 'Common/Components/TournamentHeader/TournamentHeader';
+import { TournamentType } from 'Common/Types/tournament';
 
 function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);

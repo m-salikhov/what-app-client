@@ -1,4 +1,4 @@
-import { QuestionType } from '../Types/question';
+import { QuestionType } from 'Common/Types/question';
 
 function splitQuestion(str: string): Partial<QuestionType> {
   const normStr0 = str.replace(/Вопрос \d+:\s/, '');

@@ -1,4 +1,4 @@
-import { useGetStatsQuery } from '../../../Store/ToolkitAPIs/tournamentAPI';
+import { useGetStatsQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
 function Stats() {
   const { data: stats } = useGetStatsQuery(undefined);

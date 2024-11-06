@@ -1,4 +1,4 @@
-import { TournamentType } from '../../Common/Types/tournament';
+import { TournamentType } from 'Common/Types/tournament';
 import { MouseEvent } from 'react';
 
 const getToursAnchors = (tournament: TournamentType) => {

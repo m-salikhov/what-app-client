@@ -1,4 +1,4 @@
-import { useAppSelector } from '../../../../../../Common/Hooks/redux';
+import { useAppSelector } from 'Common/Hooks/redux';
 
 function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
   const { currentQuestionIndex, step } = useAppSelector((state) => state.playModeReducer);

@@ -1,12 +1,12 @@
 import { useTransition, animated } from '@react-spring/web';
-import { useAppDispatch, useAppSelector } from '../../Common/Hooks/redux';
 import { IoClose } from 'react-icons/io5';
 import { GrAchievement } from 'react-icons/gr';
-import { useGetRandomWordQuery } from '../../Store/ToolkitAPIs/wordleAPI';
-import { wordleActions } from '../../Store/Slices/WordleSlice';
 import { TfiLock } from 'react-icons/tfi';
 import { useState } from 'react';
-import { showScroll } from '../../Common/Helpers/scrollDisplay';
+import { showScroll } from 'Common/Helpers/scrollDisplay';
+import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
+import { wordleActions } from 'Store/Slices/WordleSlice';
+import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 
 export default function GameEndModal() {
   const { result, currentLetterNumber } = useAppSelector((state) => state.wordleReducer);

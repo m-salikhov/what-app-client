@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { QuestionType } from '../../Common/Types/question';
-import { Action, actionTypes } from './helpers/reducer';
-import Button from '../Elements/Button/Button';
+import { Action, actionTypes } from '../helpers/reducer';
+import { QuestionType } from 'Common/Types/question';
+import Button from 'Common/Components/Button/Button';
 
 interface Props {
   q: QuestionType;
