@@ -20,7 +20,7 @@ function AddTournamentLink() {
 
   const [link, setLink] = useState('');
   const [message, setMessage] = useState('');
-  const [showT, setShowT] = useState(false);
+  const [showParsedTournament, setShowParsedTournament] = useState(false);
   const [edit, setEdit] = useState(false);
   const [errorsFilling, setErrorsFilling] = useState<string[] | null>(null);
 
@@ -39,26 +39,27 @@ function AddTournamentLink() {
       setErrorsFilling(errors);
       return;
     }
+
     await addT({
       ...removeQuestionsID(t),
       uploaderUuid: currentUser ? currentUser.id : guest.id,
       uploader: currentUser ? currentUser.username : guest.username,
     }).then(() => {
       setMessage('Турнир успешно сохранён в базе');
-      setShowT(false);
+      setShowParsedTournament(false);
     });
   };
 
   const handleParseLink = async () => {
     setMessage('');
     setErrorsFilling(null);
-    setShowT(false);
+    setShowParsedTournament(false);
 
     await parseT({ link })
       .unwrap()
       .then((data) => {
         dispatch({ type: 'loaded', payload: data });
-        setShowT(true);
+        setShowParsedTournament(true);
       })
       .catch(() => {});
   };
@@ -102,7 +103,7 @@ function AddTournamentLink() {
 
       {(isLoading || isLoadingAdd) && <Spinner />}
 
-      {showT ? (
+      {showParsedTournament ? (
         <ParsedTournament
           t={t}
           handleAddTournament={handleAddTournament}

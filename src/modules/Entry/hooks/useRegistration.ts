@@ -1,6 +1,6 @@
-import { useAppDispatch } from '../../../Hooks/redux';
-import { userAPI, useRegistrationMutation } from '../../../Store/ToolkitAPIs/userAPI';
-import { FormUser } from '../../../Common/Types/user';
+import { useAppDispatch } from 'Common/Hooks/redux';
+import { FormUser } from 'Common/Types/user';
+import { useRegistrationMutation, userAPI } from 'Store/ToolkitAPIs/userAPI';
 
 export function useRegistration() {
   const [registrationFunc, { error, isLoading, isSuccess, reset }] = useRegistrationMutation();

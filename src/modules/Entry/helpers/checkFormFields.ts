@@ -1,4 +1,4 @@
-import { FormUser } from '../../../Common/Types/user';
+import { FormUser } from 'Common/Types/user';
 
 function checkFormFields(formUser: FormUser, reg: boolean) {
   const testEmail = /^[^\s@]+@([^\s@.,]+\.)+[^\s@.,]{2,}$/;

@@ -9,7 +9,7 @@ import { useGetTournamentsShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
-function filterTournamentsShort(tournaments: TournamentShortType[], searchString: string) {
+function filterTournamentsByTitle(tournaments: TournamentShortType[], searchString: string) {
   if (searchString.length > 1) {
     return tournaments.filter((t) => t.title.toLowerCase().includes(searchString.toLowerCase()));
   } else return tournaments;
@@ -121,7 +121,7 @@ export default function TournamentsTable() {
           </div>
         </div>
 
-        {filterTournamentsShort(tournamentsShorts, search).map((item, i) => (
+        {filterTournamentsByTitle(tournamentsShorts, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>

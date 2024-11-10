@@ -1,4 +1,4 @@
-import { TournamentType } from '../../../Common/Types/tournament';
+import { TournamentType } from 'Common/Types/tournament';
 
 export interface Action {
   type: keyof typeof actionTypes;

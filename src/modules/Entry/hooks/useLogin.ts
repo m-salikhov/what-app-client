@@ -1,6 +1,6 @@
-import { useAppDispatch } from '../../../Hooks/redux';
-import { useLoginMutation, userAPI } from '../../../Store/ToolkitAPIs/userAPI';
-import { FormUser } from '../../../Common/Types/user';
+import { useAppDispatch } from 'Common/Hooks/redux';
+import { FormUser } from 'Common/Types/user';
+import { useLoginMutation, userAPI } from 'Store/ToolkitAPIs/userAPI';
 
 export function useLogin() {
   const [loginFunc, { isSuccess, error, isLoading, reset }] = useLoginMutation();
