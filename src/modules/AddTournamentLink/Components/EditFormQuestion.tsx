@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Action, actionTypes } from '../helpers/reducer';
-import { QuestionType } from 'Common/Types/question';
 import Button from 'Common/Components/Button/Button';
+import { AddLinkQuestion } from '../Types/AddLinkTournament';
 
 interface Props {
-  q: QuestionType;
+  q: AddLinkQuestion;
   dispatch: (action: Action) => void;
 }
 

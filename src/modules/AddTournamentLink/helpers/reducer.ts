@@ -1,9 +1,9 @@
-import { TournamentType } from 'Common/Types/tournament';
+import { AddLinkTournament } from '../Types/AddLinkTournament';
 
 export interface Action {
   type: keyof typeof actionTypes;
   questionID?: number;
-  payload: string | number | TournamentType;
+  payload: string | number | AddLinkTournament;
 }
 
 type QuestionTypePayload = 'regular' | 'double' | 'triple' | 'other' | 'outside';
@@ -26,11 +26,11 @@ export const actionTypes = {
   remove: 'remove',
 } as const;
 
-const reducer = (state: TournamentType, action: Action) => {
+const reducer = (state: AddLinkTournament, action: Action) => {
   const { type, questionID, payload } = action;
 
   if (type === actionTypes.loaded) {
-    const t = structuredClone(payload as TournamentType);
+    const t = structuredClone(payload as AddLinkTournament);
 
     const randomKeys: number[] = [];
     while (randomKeys.length < t.questions.length) {

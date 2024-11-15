@@ -1,10 +1,10 @@
 import Button from 'Common/Components/Button/Button';
 import QuestionPlane from 'Common/Components/Question/QuestionPlane';
 import TournamentHeader from 'Common/Components/TournamentHeader/TournamentHeader';
-import { TournamentType } from 'Common/Types/tournament';
+import { AddLinkTournament } from '../Types/AddLinkTournament';
 
 interface Props {
-  t: TournamentType;
+  t: AddLinkTournament;
   setEdit: (callback: (prev: boolean) => boolean) => void;
   setErrorsFilling: (errors: null) => void;
   handleAddTournament: () => void;

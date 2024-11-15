@@ -4,10 +4,10 @@ import { Action, actionTypes } from '../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
 import Button from 'Common/Components/Button/Button';
 import { getDateYYYY_MM_DD } from 'Common/Helpers/getDate';
-import { TournamentType } from 'Common/Types/tournament';
+import { AddLinkTournament } from '../Types/AddLinkTournament';
 
 interface Props {
-  t: TournamentType;
+  t: AddLinkTournament;
   dispatch: (action: Action) => void;
   setEdit: (edit: boolean) => void;
 }

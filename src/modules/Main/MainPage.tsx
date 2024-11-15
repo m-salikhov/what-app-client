@@ -27,7 +27,7 @@ function MainPage() {
           </div>
 
           <div className='main-content-banner'>
-            <h2>wordle</h2>
+            <h2>WORDLE</h2>
             <p>Отгадайте слово из 5 букв </p>
             <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/wordle')} />
           </div>

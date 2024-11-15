@@ -1,19 +1,19 @@
+import './addTournamentLink.css';
 import { useReducer, useState } from 'react';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import reducer from './helpers/reducer';
 import EditForm from './Components/EditForm';
 import Instruction from './Components/Instruction';
-import removeQuestionsID from './helpers/removeQuestionsID';
+import { removeQuestionsID } from './helpers/removeQuestionsID';
 import ParsedTournament from './Components/ParsedTournament';
-import './addTournamentLink.css';
 import Button from 'Common/Components/Button/Button';
 import { Spinner } from 'Common/Components/Spinner/Spinner';
 import { guest } from 'Common/Constants/constants';
-import checkTournament from './helpers/checkTournament';
+import { checkTournament } from './helpers/checkTournament';
 import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
-import { initTournament } from 'Common/Helpers/initValues';
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { useInitialLoginQuery } from 'Store/ToolkitAPIs/userAPI';
+import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -24,7 +24,7 @@ function AddTournamentLink() {
   const [edit, setEdit] = useState(false);
   const [errorsFilling, setErrorsFilling] = useState<string[] | null>(null);
 
-  const [t, dispatch] = useReducer(reducer, initTournament);
+  const [t, dispatch] = useReducer(reducer, addLinkInitTournament);
 
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();

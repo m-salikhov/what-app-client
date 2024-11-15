@@ -1,6 +1,6 @@
 import { TournamentType } from 'Common/Types/tournament';
 
-export default function checkTournament(t: TournamentType) {
+export function checkTournament(t: TournamentType) {
   const errors: string[] = [];
 
   //блок проверки инфо о турнире
