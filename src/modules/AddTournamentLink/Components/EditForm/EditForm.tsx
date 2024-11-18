@@ -1,13 +1,14 @@
 import { parseDate } from '@internationalized/date';
 import EditFormQuestion from './EditFormQuestion';
-import { Action, actionTypes } from '../helpers/reducer';
+import { Action, actionTypes } from '../../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
 import Button from 'Common/Components/Button/Button';
 import { getDateYYYY_MM_DD } from 'Common/Helpers/getDate';
-import { AddLinkTournament } from '../Types/AddLinkTournament';
+import { TournamentType } from 'Common/Types/tournament';
+import EditFormEditors from './EditFormEditors';
 
 interface Props {
-  t: AddLinkTournament;
+  t: TournamentType;
   dispatch: (action: Action) => void;
   setEdit: (edit: boolean) => void;
 }
@@ -48,20 +49,7 @@ function EditForm({ t, dispatch, setEdit }: Props) {
             <DateInput>{(segment) => <DateSegment segment={segment} />}</DateInput>
           </DateField>
 
-          <label className='edit-t-title'>
-            <p>Редакторы (через точку с запятой без пробела!)</p>
-            <textarea
-              placeholder='Редакторская группа'
-              onChange={(e) =>
-                dispatch({
-                  type: actionTypes.editors,
-                  payload: e.target.value,
-                })
-              }
-              value={t.editors.join(';')}
-              rows={3}
-            />
-          </label>
+          <EditFormEditors editors={t.editors} dispatch={dispatch} />
         </div>
 
         {t.questions.map((v) => (

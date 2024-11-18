@@ -1,5 +1,10 @@
 import { TournamentShortType } from './tournament';
 
+interface SourceType {
+  id: number;
+  link: string;
+}
+
 export interface QuestionType {
   id: number;
   type: 'regular' | 'double' | 'triple' | 'other' | 'outside';
@@ -10,7 +15,7 @@ export interface QuestionType {
   answer: string;
   alterAnswer?: string;
   comment?: string;
-  source: string[];
+  source: SourceType[];
   author: string;
   tournament?: TournamentShortType;
 }

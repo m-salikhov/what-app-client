@@ -37,11 +37,43 @@
 
 .edit-t {
   textarea {
-    width: 100%;
     padding: 0.3rem 0 0.3rem 0.3rem;
     font-size: 1.2rem;
     border: var(--main-border);
     background-color: var(--input-bg-color);
+    margin-bottom: 5px;
+  }
+
+  .edit-t-editors {
+    /* div {
+      position: relative;
+      p {
+        position: absolute;
+        top: 5px;
+        left: 95%;
+        font-weight: bold;
+        cursor: pointer;
+      } */
+
+    div {
+      display: flex;
+      textarea {
+        width: 350px;
+      }
+      p {
+        margin: auto 0;
+        cursor: pointer;
+      }
+    }
+
+    button {
+      padding: 0.2rem;
+      border: var(--main-border);
+      border-radius: 5px;
+      &:hover {
+        font-weight: bold;
+      }
+    }
   }
 
   .edit-t-top {
@@ -62,23 +94,31 @@
     }
   }
 
-  .edit-q-container:has(.back) {
-    background-color: var(--edit-question-bg-color-del);
-
-    input {
-      background-color: var(--main-bg-color);
-    }
-
-    textarea {
-      background-color: var(--main-bg-color);
-    }
-  }
-
   .edit-q-container {
     padding: 1rem;
     margin-top: 2rem;
     border: 2px solid var(--main-border-color);
     background-color: var(--edit-question-bg-color);
+
+    textarea {
+      width: 100%;
+    }
+
+    .edit-q-container-source {
+      display: flex;
+      p {
+        cursor: pointer;
+        margin: auto 0;
+      }
+    }
+    .edit-q-container-add-source {
+      padding: 0.2rem;
+      border: var(--main-border);
+      border-radius: 5px;
+      &:hover {
+        font-weight: bold;
+      }
+    }
 
     & > label {
       p {
@@ -119,6 +159,24 @@
           color: black;
         }
       }
+    }
+  }
+
+  .edit-q-container:has(.back) {
+    background-color: var(--edit-question-bg-color-del);
+
+    input {
+      background-color: var(--main-bg-color);
+    }
+
+    .edit-q-container-source {
+      p {
+        z-index: -1;
+      }
+    }
+
+    textarea {
+      background-color: var(--main-bg-color);
     }
   }
 }

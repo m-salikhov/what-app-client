@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { Action, actionTypes } from '../helpers/reducer';
+import { Action, actionTypes } from '../../helpers/reducer';
 import Button from 'Common/Components/Button/Button';
-import { AddLinkQuestion } from '../Types/AddLinkTournament';
+import { QuestionType } from 'Common/Types/question';
 
 interface Props {
-  q: AddLinkQuestion;
+  q: QuestionType;
   dispatch: (action: Action) => void;
 }
 
@@ -21,9 +21,8 @@ function EditFormQuestion({ q, dispatch }: Props) {
       return prev === btnTextOption.def ? btnTextOption.back : btnTextOption.def;
     });
     dispatch({
-      type: actionTypes.remove,
+      type: actionTypes.removeQuestion,
       questionID: q.id,
-      payload: '',
     });
   };
 
@@ -68,6 +67,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           extraClass={btnText === btnTextOption.def ? 'def' : 'back'}
         ></Button>
       </div>
+
       <label>
         <p>Раздаточный материал(текст или ссылка на изображение)</p>
         <textarea
@@ -83,6 +83,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           disabled={q.qNumber === -1 ? true : false}
         />
       </label>
+
       <label>
         <p>Текст вопроса</p>
         <textarea
@@ -98,6 +99,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           disabled={q.qNumber === -1 ? true : false}
         />
       </label>
+
       <label>
         <p>Ответ</p>
         <textarea
@@ -113,6 +115,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           disabled={q.qNumber === -1 ? true : false}
         />
       </label>
+
       <label>
         <p>Зачёт</p>
         <textarea
@@ -128,6 +131,7 @@ function EditFormQuestion({ q, dispatch }: Props) {
           disabled={q.qNumber === -1 ? true : false}
         />
       </label>
+
       <label>
         <p>Комментарий</p>
         <textarea
@@ -143,21 +147,44 @@ function EditFormQuestion({ q, dispatch }: Props) {
           disabled={q.qNumber === -1 ? true : false}
         />
       </label>
-      <label>
-        <p>Источник(и) (через точку с запятой!)</p>
-        <textarea
-          onChange={(e) =>
-            dispatch({
-              type: actionTypes.source,
-              questionID: q.id,
-              payload: e.target.value,
-            })
-          }
-          value={q.source.join(';')}
-          rows={3}
-          disabled={q.qNumber === -1 ? true : false}
-        />
-      </label>
+
+      <p>Источник(и):</p>
+      {q.source.map((v, i) => {
+        return (
+          <div key={i} className='edit-q-container-source'>
+            <textarea
+              title='Источник'
+              onChange={(e) =>
+                dispatch({
+                  type: actionTypes.source,
+                  questionID: q.id,
+                  sourceID: v.id,
+                  payload: e.target.value,
+                })
+              }
+              value={v.link}
+              disabled={q.qNumber === -1 ? true : false}
+            />
+            <p
+              onClick={() => {
+                if (q.source.length === 1) return;
+                dispatch({ type: actionTypes.removeSource, questionID: q.id, sourceID: v.id });
+              }}
+            >
+              ❌
+            </p>
+          </div>
+        );
+      })}
+      <button
+        className='edit-q-container-add-source'
+        onClick={() => dispatch({ type: actionTypes.addSource, questionID: q.id })}
+        type='button'
+        disabled={q.qNumber === -1 ? true : false}
+      >
+        Добавить источник
+      </button>
+
       <label>
         <p>Автор(ы)</p>
         <textarea

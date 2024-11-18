@@ -1,5 +1,10 @@
 import { QuestionType } from './question';
 
+interface EditorType {
+  name: string;
+  id: number;
+}
+
 export interface TournamentType {
   id: number;
   title: string;
@@ -7,7 +12,7 @@ export interface TournamentType {
   tours: number;
   questionsQuantity: number;
   questions: QuestionType[];
-  editors: string[];
+  editors: EditorType[];
   uploader: string;
   dateUpload: number;
   uploaderUuid: string;

@@ -25,7 +25,7 @@ export default function TournamentHeader({ tournament }: Props) {
         </h3>
       </div>
       <h3>
-        Редакция: <span>{tournament.editors.join(', ')}</span>
+        Редакция: <span>{tournament.editors.map((v) => v.name).join(', ')}</span>
       </h3>
     </div>
   );

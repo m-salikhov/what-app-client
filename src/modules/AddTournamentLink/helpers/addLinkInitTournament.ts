@@ -1,15 +1,15 @@
-import { AddLinkTournament } from '../Types/AddLinkTournament';
+import { TournamentType } from 'Common/Types/tournament';
 
-export const addLinkInitTournament: AddLinkTournament = {
+export const addLinkInitTournament: TournamentType = {
   id: 0,
+  uploaderUuid: '',
+  uploader: '',
   title: '',
+  link: '',
   date: 0,
   tours: 0,
   questionsQuantity: 0,
-  uploader: '',
-  editors: [],
   dateUpload: 0,
-  uploaderUuid: '',
-  link: '',
+  editors: [],
   questions: [],
 };

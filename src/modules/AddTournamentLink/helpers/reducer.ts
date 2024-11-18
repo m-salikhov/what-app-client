@@ -1,36 +1,94 @@
-import { AddLinkTournament } from '../Types/AddLinkTournament';
+import { TournamentType } from 'Common/Types/tournament';
 
-export interface Action {
-  type: keyof typeof actionTypes;
-  questionID?: number;
-  payload: string | number | AddLinkTournament;
-}
+export type Action =
+  | {
+      type: 'qNumber' | 'tourNumber';
+      questionID: number;
+      payload: number;
+    }
+  | {
+      type: 'loaded';
+      payload: TournamentType;
+    }
+  | {
+      type: 'title';
+      payload: string;
+    }
+  | {
+      type: 'date';
+      payload: number;
+    }
+  | {
+      type: 'add' | 'text' | 'answer' | 'alterAnswer' | 'comment' | 'author';
+      questionID: number;
+      payload: string;
+    }
+  | {
+      type: 'removeQuestion';
+      questionID: number;
+    }
+  | {
+      type: 'editors';
+      editorID: number;
+      payload: string;
+    }
+  | {
+      type: 'source';
+      questionID: number;
+      sourceID: number;
+      payload: string;
+    }
+  | {
+      type: 'questionType';
+      questionID: number;
+      payload: QuestionTypePayload;
+    }
+  | {
+      type: 'addEditor';
+    }
+  | {
+      type: 'removeEditor';
+      editorID: number;
+    }
+  | {
+      type: 'removeSource';
+      questionID: number;
+      sourceID: number;
+    }
+  | {
+      type: 'addSource';
+      questionID: number;
+    };
 
 type QuestionTypePayload = 'regular' | 'double' | 'triple' | 'other' | 'outside';
 
 export const actionTypes = {
   loaded: 'loaded',
+  date: 'date',
   questionType: 'questionType',
+  editors: 'editors',
+  addEditor: 'addEditor',
+  removeEditor: 'removeEditor',
+  title: 'title',
   add: 'add',
   text: 'text',
   answer: 'answer',
   alterAnswer: 'alterAnswer',
   comment: 'comment',
   source: 'source',
+  removeSource: 'removeSource',
+  addSource: 'addSource',
   author: 'author',
   qNumber: 'qNumber',
   tourNumber: 'tourNumber',
-  title: 'title',
-  editors: 'editors',
-  date: 'date',
-  remove: 'remove',
+  removeQuestion: 'removeQuestion',
 } as const;
 
-const reducer = (state: AddLinkTournament, action: Action) => {
-  const { type, questionID, payload } = action;
+const reducer = (state: TournamentType, action: Action) => {
+  const { type } = action;
 
   if (type === actionTypes.loaded) {
-    const t = structuredClone(payload as AddLinkTournament);
+    const t = structuredClone(action.payload);
 
     const randomKeys: number[] = [];
     while (randomKeys.length < t.questions.length) {
@@ -43,123 +101,166 @@ const reducer = (state: AddLinkTournament, action: Action) => {
     return t;
   }
 
-  if (type === actionTypes.remove && typeof questionID === 'number') {
-    const questions = [...state.questions];
-    let { questionsQuantity } = state;
+  switch (type) {
+    case actionTypes.date:
+      return { ...state, date: action.payload };
 
-    const indexQuestion = questions.findIndex((q) => q.id === questionID);
-    const q = questions[indexQuestion];
+    case actionTypes.title:
+      return { ...state, title: action.payload };
 
-    if (q.type === 'outside') {
-      q.qNumber === 0 ? (q.qNumber = -1) : (q.qNumber = 0);
-    }
+    case actionTypes.editors:
+      const editors = [...state.editors].map((editor) => {
+        if (editor.id === action.editorID) return { ...editor, name: action.payload };
+        return editor;
+      });
+      return { ...state, editors };
 
-    if (q.qNumber > 0) {
-      q.qNumber = -1;
-      for (let i = indexQuestion + 1; i < questions.length; i++) {
-        if (questions[i].qNumber > 0) questions[i].qNumber -= 1;
+    case actionTypes.questionType:
+      const TypesQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, type: action.payload };
+        return q;
+      });
+      return { ...state, questions: TypesQuestions };
+
+    case actionTypes.add:
+      const addQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, add: action.payload };
+        return q;
+      });
+      return { ...state, questions: addQuestions };
+
+    case actionTypes.text:
+      const textQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, text: action.payload };
+        return q;
+      });
+      return { ...state, questions: textQuestions };
+
+    case actionTypes.answer:
+      const answerQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, answer: action.payload };
+        return q;
+      });
+      return { ...state, questions: answerQuestions };
+
+    case actionTypes.alterAnswer:
+      const alterAnswerQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, alterAnswer: action.payload };
+        return q;
+      });
+      return { ...state, questions: alterAnswerQuestions };
+
+    case actionTypes.comment:
+      const commentQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, comment: action.payload };
+        return q;
+      });
+      return { ...state, questions: commentQuestions };
+
+    case actionTypes.author:
+      const authorQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, author: action.payload };
+        return q;
+      });
+      return { ...state, questions: authorQuestions };
+
+    case actionTypes.source:
+      const sourceQuestions = [...state.questions];
+      const questionIndex = sourceQuestions.findIndex((q) => q.id === action.questionID);
+      sourceQuestions[questionIndex].source.forEach((s) => {
+        if (s.id === action.sourceID) s.link = action.payload;
+      });
+      return { ...state, questions: sourceQuestions };
+
+    case actionTypes.removeSource:
+      const removeSourceQuestions = [...state.questions];
+      const questionIndexRemove = removeSourceQuestions.findIndex((q) => q.id === action.questionID);
+      const sourcesRemove = removeSourceQuestions[questionIndexRemove].source.filter((s) => s.id !== action.sourceID);
+      removeSourceQuestions[questionIndexRemove].source = sourcesRemove;
+      return { ...state, questions: removeSourceQuestions };
+
+    case actionTypes.addSource:
+      const addSourceQuestions = [...state.questions];
+      const questionIndexAdd = addSourceQuestions.findIndex((q) => q.id === action.questionID);
+      addSourceQuestions[questionIndexAdd].source.push({ id: Date.now(), link: '' });
+      return { ...state, questions: addSourceQuestions };
+
+    case actionTypes.qNumber:
+      const qNumberQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, qNumber: action.payload };
+        return q;
+      });
+      return { ...state, questions: qNumberQuestions };
+
+    case actionTypes.tourNumber:
+      const tourNumberQuestions = [...state.questions].map((q) => {
+        if (q.id === action.questionID) return { ...q, tourNumber: action.payload };
+        return q;
+      });
+      return { ...state, questions: tourNumberQuestions };
+
+    case actionTypes.addEditor:
+      return { ...state, editors: [...state.editors, { id: Date.now(), name: '' }] };
+
+    case actionTypes.removeEditor:
+      return {
+        ...state,
+        editors: state.editors.filter((editor) => editor.id !== action.editorID),
+      };
+
+    case actionTypes.removeQuestion:
+      const questions = [...state.questions];
+      let { questionsQuantity } = state;
+
+      const indexQuestion = questions.findIndex((q) => q.id === action.questionID);
+      const q = questions[indexQuestion];
+
+      if (q.type === 'outside') {
+        q.qNumber === 0 ? (q.qNumber = -1) : (q.qNumber = 0);
       }
-      questionsQuantity -= 1;
-    } else if (q.qNumber < 0 && q.type !== 'outside') {
-      let nextQuestionIndex = 0;
-      let prevQuestionIndex = 0;
 
-      for (let i = indexQuestion; i < questions.length; i++) {
-        if (questions[i].qNumber > 0) {
-          nextQuestionIndex = questions[i].qNumber;
-          break;
-        }
-      }
-      for (let i = indexQuestion; i >= 0; i--) {
-        if (questions[i].qNumber > 0) {
-          prevQuestionIndex = questions[i].qNumber;
-          break;
-        }
-      }
-
-      if (nextQuestionIndex) {
-        q.qNumber = nextQuestionIndex;
+      if (q.qNumber > 0) {
+        q.qNumber = -1;
         for (let i = indexQuestion + 1; i < questions.length; i++) {
-          if (questions[i].qNumber > 0) questions[i].qNumber += 1;
+          if (questions[i].qNumber > 0) questions[i].qNumber -= 1;
         }
-      } else if (prevQuestionIndex) {
-        q.qNumber = prevQuestionIndex + 1;
-      } else {
-        q.qNumber = 1;
+        questionsQuantity -= 1;
+      } else if (q.qNumber < 0 && q.type !== 'outside') {
+        let nextQuestionIndex = 0;
+        let prevQuestionIndex = 0;
+
+        for (let i = indexQuestion; i < questions.length; i++) {
+          if (questions[i].qNumber > 0) {
+            nextQuestionIndex = questions[i].qNumber;
+            break;
+          }
+        }
+        for (let i = indexQuestion; i >= 0; i--) {
+          if (questions[i].qNumber > 0) {
+            prevQuestionIndex = questions[i].qNumber;
+            break;
+          }
+        }
+
+        if (nextQuestionIndex) {
+          q.qNumber = nextQuestionIndex;
+          for (let i = indexQuestion + 1; i < questions.length; i++) {
+            if (questions[i].qNumber > 0) questions[i].qNumber += 1;
+          }
+        } else if (prevQuestionIndex) {
+          q.qNumber = prevQuestionIndex + 1;
+        } else {
+          q.qNumber = 1;
+        }
+
+        questionsQuantity += 1;
       }
 
-      questionsQuantity += 1;
-    }
+      return { ...state, questions, questionsQuantity };
 
-    return { ...state, questions, questionsQuantity };
+    default:
+      return state;
   }
-
-  if (typeof payload === 'string' && typeof questionID === 'number') {
-    const questions = [...state.questions];
-    const indexQuestion = questions.findIndex((q) => q.id === questionID);
-
-    switch (type) {
-      case actionTypes.questionType:
-        questions[indexQuestion].type = payload as QuestionTypePayload;
-        return { ...state, questions };
-      case actionTypes.add:
-        questions[indexQuestion].add = payload;
-        return { ...state, questions };
-      case actionTypes.text:
-        questions[indexQuestion].text = payload;
-        return { ...state, questions };
-      case actionTypes.answer:
-        questions[indexQuestion].answer = payload;
-        return { ...state, questions };
-      case actionTypes.alterAnswer:
-        questions[indexQuestion].alterAnswer = payload;
-        return { ...state, questions };
-      case actionTypes.comment:
-        questions[indexQuestion].comment = payload;
-        return { ...state, questions };
-      case actionTypes.source:
-        questions[indexQuestion].source = payload.split(';');
-        return { ...state, questions };
-      case actionTypes.author:
-        questions[indexQuestion].author = payload;
-        return { ...state, questions };
-      default:
-        return state;
-    }
-  }
-
-  if (typeof payload === 'number' && typeof questionID === 'number') {
-    const questions = [...state.questions];
-    const indexQuestion = questions.findIndex((q) => q.id === questionID);
-
-    switch (type) {
-      case actionTypes.qNumber:
-        questions[indexQuestion].qNumber = payload;
-        return { ...state, questions };
-      case actionTypes.tourNumber:
-        questions[indexQuestion].tourNumber = payload;
-        return { ...state, questions };
-      default:
-        return state;
-    }
-  }
-
-  if (typeof payload === 'string') {
-    switch (type) {
-      case actionTypes.title:
-        return { ...state, title: payload };
-      case actionTypes.editors:
-        return { ...state, editors: payload.split(';') };
-      default:
-        return state;
-    }
-  }
-
-  if (typeof payload === 'number') {
-    return { ...state, date: payload };
-  }
-
-  return state;
 };
 
 export default reducer;

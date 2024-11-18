@@ -1,10 +1,8 @@
 import './addTournamentLink.css';
-import { useReducer, useState } from 'react';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import reducer from './helpers/reducer';
-import EditForm from './Components/EditForm';
+import EditForm from './Components/EditForm/EditForm';
 import Instruction from './Components/Instruction';
-import { removeQuestionsID } from './helpers/removeQuestionsID';
 import ParsedTournament from './Components/ParsedTournament';
 import Button from 'Common/Components/Button/Button';
 import { Spinner } from 'Common/Components/Spinner/Spinner';
@@ -14,6 +12,7 @@ import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage'
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { useInitialLoginQuery } from 'Store/ToolkitAPIs/userAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
+import { useReducer, useState } from 'react';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -41,7 +40,7 @@ function AddTournamentLink() {
     }
 
     await addT({
-      ...removeQuestionsID(t),
+      ...t,
       uploaderUuid: currentUser ? currentUser.id : guest.id,
       uploader: currentUser ? currentUser.username : guest.username,
     }).then(() => {
