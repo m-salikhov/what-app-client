@@ -1,31 +1,17 @@
 import './tournamentsTable.css';
 import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { useEffect, useState, MouseEvent } from 'react';
+import { useState } from 'react';
 import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
 import { getDate } from 'Common/Helpers/getDate';
 import { TournamentShortType } from 'Common/Types/tournament';
-import { useGetTournamentsShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { useTournamentsTableFilter } from './hooks/useTournamentsTableFilter';
 
-type FieldName = keyof Omit<TournamentShortType, 'id'>;
-
-function filterTournamentsByTitle(tournaments: TournamentShortType[], searchString: string) {
+function filterTournamentsByTitleSearchString(tournaments: TournamentShortType[], searchString: string) {
   if (searchString.length > 1) {
     return tournaments.filter((t) => t.title.toLowerCase().includes(searchString.toLowerCase()));
   } else return tournaments;
 }
-
-const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
-  return [
-    ...arr.sort(function (a, b) {
-      if (a[fieldName] > b[fieldName]) {
-        return 1;
-      } else if (a[fieldName] < b[fieldName]) {
-        return -1;
-      } else return 0;
-    }),
-  ];
-};
 
 const linkBuilder = (pathname: string, tournament: TournamentShortType) => {
   if (pathname.includes('all')) {
@@ -37,31 +23,11 @@ const linkBuilder = (pathname: string, tournament: TournamentShortType) => {
 };
 
 export default function TournamentsTable() {
-  const { data, isSuccess, error } = useGetTournamentsShortQuery(undefined);
+  const { tournamentsShorts, handleSort, error } = useTournamentsTableFilter();
 
   const { pathname } = useLocation();
 
   const [search, setSearch] = useState('');
-  const [field, setField] = useState<FieldName | null>(null);
-
-  const [tournamentsShorts, setTournamentsShorts] = useState<TournamentShortType[]>([]);
-
-  function handleSort(e: MouseEvent<HTMLDivElement>) {
-    const id = e.currentTarget.id as FieldName;
-    if (field === id) {
-      setTournamentsShorts((prev) => [...prev.reverse()]);
-    } else {
-      setTournamentsShorts((prev) => sortFunction(prev, id));
-      setField(id);
-    }
-  }
-
-  useEffect(() => {
-    if (isSuccess) {
-      const ts = structuredClone(data);
-      setTournamentsShorts([...ts].reverse());
-    }
-  }, [isSuccess]);
 
   if (error) {
     return <h2>{extractServerErrorMessage(error)}</h2>;
@@ -121,7 +87,7 @@ export default function TournamentsTable() {
           </div>
         </div>
 
-        {filterTournamentsByTitle(tournamentsShorts, search).map((item, i) => (
+        {filterTournamentsByTitleSearchString(tournamentsShorts, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>
