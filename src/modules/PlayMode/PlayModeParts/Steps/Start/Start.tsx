@@ -17,7 +17,7 @@ function Start({ tournament }: { tournament: TournamentType }) {
 
       <div>
         <p>Редактор(ы):</p>
-        <p>{tournament.editors.join(', ')}</p>
+        <p>{tournament.editors.map((v) => v.name).join(', ')}</p>
       </div>
 
       <TimerOptions />
