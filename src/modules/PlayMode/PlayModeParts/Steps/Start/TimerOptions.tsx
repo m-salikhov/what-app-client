@@ -25,6 +25,7 @@ export default function TimerOptions() {
         minValue={1}
         maxValue={99}
         isDisabled={!withTimer}
+        aria-label='Question timer'
       >
         <Group>
           <Button slot='decrement'>-</Button>
@@ -40,6 +41,7 @@ export default function TimerOptions() {
         minValue={1}
         maxValue={99}
         isDisabled={!withTimer}
+        aria-label='Answer timer'
       >
         <Group>
           <Button slot='decrement'>-</Button>

@@ -14,6 +14,7 @@ p {
   color: var(--p-color);
   word-spacing: 0.1rem;
   text-wrap: pretty;
+  white-space: pre-wrap;
 
   &::selection {
     background-color: var(--bg-grey);
