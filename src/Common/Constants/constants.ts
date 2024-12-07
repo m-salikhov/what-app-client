@@ -23,4 +23,4 @@ export const serverRoutes = {
   wordleCheckExist: '/wordle/check-exist/',
 } as const;
 
-export const baseUrl = 'https://andvarif.store/';
+export const baseUrl = 'https://andvarifserv.ru/';
