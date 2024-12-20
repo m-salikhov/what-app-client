@@ -1,5 +1,6 @@
 import { useAppSelector } from 'Common/Hooks/redux';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { timerOptions } from 'Store/Selectors/PlayModeSelectors';
 
 interface Props {
   setShowAnswer: Dispatch<SetStateAction<boolean>>;
@@ -7,7 +8,7 @@ interface Props {
 }
 
 function Timer({ setShowAnswer, qNumber }: Props) {
-  const { questionTimer, answerTimer } = useAppSelector((state) => state.playModeReducer);
+  const { questionTimer, answerTimer } = useAppSelector(timerOptions);
   const [time, setTime] = useState(questionTimer);
 
   //Флаг, что время на чтение вопроса окончено

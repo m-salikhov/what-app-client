@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import ProgressBarItem from './ProgressBarItem';
 import { TournamentType } from 'Common/Types/tournament';
 import { useAppSelector } from 'Common/Hooks/redux';
+import { currentTourNumberPM } from 'Store/Selectors/PlayModeSelectors';
 
 export const getProgressBarItems = (first: number, last: number) => {
   const arr = [];
@@ -14,7 +15,7 @@ export const getProgressBarItems = (first: number, last: number) => {
 };
 
 export default function ProgressBar({ tournament }: { tournament: TournamentType }) {
-  const { currentTourNumber } = useAppSelector((state) => state.playModeReducer);
+  const currentTourNumber = useAppSelector(currentTourNumberPM);
 
   const firstTourQuestionIndex = useMemo(
     () => tournament.questions.findIndex((v) => v.tourNumber === currentTourNumber),

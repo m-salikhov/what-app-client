@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from 'Common/Hooks/redux';
 import { QuestionType } from 'Common/Types/question';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import Button from 'Common/Components/Button/Button';
+import { currentQuestionIndexPM, withTimerPM } from 'Store/Selectors/PlayModeSelectors';
 
 function PMQuestion({ tournament: { questions } }: { tournament: { questions: QuestionType[] } }) {
   const dispatch = useAppDispatch();
@@ -16,7 +17,8 @@ function PMQuestion({ tournament: { questions } }: { tournament: { questions: Qu
     return questions.filter((v) => v.qNumber > 0 && v.tourNumber > 0);
   }, [questions]);
 
-  const { currentQuestionIndex, withTimer } = useAppSelector((state) => state.playModeReducer);
+  const currentQuestionIndex = useAppSelector(currentQuestionIndexPM);
+  const withTimer = useAppSelector(withTimerPM);
 
   const [showAnswer, setShowAnswer] = useState(false);
 

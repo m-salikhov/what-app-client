@@ -8,6 +8,7 @@ import { useAppSelector } from 'Common/Hooks/redux';
 import { TournamentType } from 'Common/Types/tournament';
 import { useInitialLoginQuery, usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
 import Button from 'Common/Components/Button/Button';
+import { finalResult } from 'Store/Selectors/PlayModeSelectors';
 
 function End({ tournament }: { tournament: TournamentType }) {
   const navigate = useNavigate();
@@ -15,9 +16,7 @@ function End({ tournament }: { tournament: TournamentType }) {
   const { data: currentUser } = useInitialLoginQuery(undefined);
   const [saveUserResult, { isSuccess, error, isLoading }] = usePostUserResultMutation();
 
-  const { result, totalAnsweredCount, totalQuestionsCount, selectedResultQuestion } = useAppSelector(
-    (state) => state.playModeReducer
-  );
+  const { result, totalAnsweredCount, totalQuestionsCount, selectedResultQuestion } = useAppSelector(finalResult);
 
   useEffect(() => {
     if (currentUser?.id) {

@@ -10,6 +10,7 @@ import { useAppSelector } from 'Common/Hooks/redux';
 import { TournamentType } from 'Common/Types/tournament';
 import { Step } from 'Store/Slices/PlayModeSlice';
 import { useGetTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { stepPM } from 'Store/Selectors/PlayModeSelectors';
 
 function playModeStepChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
@@ -29,7 +30,7 @@ function playModeStepChange(stepName: Step, tournament: TournamentType) {
 function PlayMode() {
   const { id, title } = useParams();
 
-  const { step } = useAppSelector((state) => state.playModeReducer);
+  const step = useAppSelector(stepPM);
 
   const { data: tournament, isLoading, isSuccess, isError } = useGetTournamentQuery(id as string);
 

@@ -4,11 +4,12 @@ import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import ResBlock from '../Components/ResultBlock/ResBlock';
 import { TournamentType } from 'Common/Types/tournament';
 import Button from 'Common/Components/Button/Button';
+import { selectedResultQuestionPM } from 'Store/Selectors/PlayModeSelectors';
 
 function TourEnd({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
-  const { selectedResultQuestion } = useAppSelector((state) => state.playModeReducer);
+  const selectedResultQuestion = useAppSelector(selectedResultQuestionPM);
 
   const onClick = () => {
     dispatch(playModeActions.currentQuestionIndexIncrement());
