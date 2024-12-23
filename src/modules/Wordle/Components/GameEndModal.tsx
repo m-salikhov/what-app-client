@@ -7,9 +7,10 @@ import { showScroll } from 'Common/Helpers/scrollDisplay';
 import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
+import { board } from 'Store/Selectors/WordleSelectors';
 
 export default function GameEndModal() {
-  const { result, currentLetterNumber } = useAppSelector((state) => state.wordleReducer);
+  const { result, currentLetterNumber } = useAppSelector(board);
   const { data: answer = { word: '' }, refetch } = useGetRandomWordQuery(undefined);
 
   const [modalOpen, setModalOpen] = useState(true);

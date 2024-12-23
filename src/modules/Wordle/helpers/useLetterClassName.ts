@@ -1,7 +1,10 @@
 import { useAppSelector } from 'Common/Hooks/redux';
+import { currentLetterNumberW, letterStateW, wrongWordFlagW } from 'Store/Selectors/WordleSelectors';
 
 export default function useLetterClassName(index: number) {
-  const { currentLetterNumber, letterState, wrongWordFlag } = useAppSelector((state) => state.wordleReducer);
+  const letterState = useAppSelector(letterStateW);
+  const currentLetterNumber = useAppSelector(currentLetterNumberW);
+  const wrongWordFlag = useAppSelector(wrongWordFlagW);
 
   let className = '';
 

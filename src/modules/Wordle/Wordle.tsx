@@ -7,11 +7,12 @@ import GameEndModal from './Components/GameEndModal';
 import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
+import { board, lettersW } from 'Store/Selectors/WordleSelectors';
 
 const getWordleDIV = () => {
   const arr = [];
 
-  const { letters } = useAppSelector((state) => state.wordleReducer);
+  const letters = useAppSelector(lettersW);
 
   for (let i = 0; i < 30; i++) {
     arr.push(
@@ -25,9 +26,7 @@ const getWordleDIV = () => {
 };
 
 export default function Wordle() {
-  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(
-    (state) => state.wordleReducer
-  );
+  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(board);
 
   const dispatch = useAppDispatch();
 
@@ -38,7 +37,7 @@ export default function Wordle() {
     return () => {
       dispatch(wordleActions.resetState());
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <main

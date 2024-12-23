@@ -3,6 +3,7 @@ import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from '../helpers/getWordToCheck';
 import { MouseEventHandler } from 'react';
+import { board, letterStateW } from 'Store/Selectors/WordleSelectors';
 
 const keyboard = {
   1: ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
@@ -15,7 +16,7 @@ type KeyboardRowIndex = keyof typeof keyboard;
 function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
   const arr = [];
 
-  const { letterState } = useAppSelector((state) => state.wordleReducer);
+  const letterState = useAppSelector(letterStateW);
 
   for (let i = 1; i < 4; i++) {
     arr.push(
@@ -47,9 +48,7 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
 export default function Board() {
   const dispatch = useAppDispatch();
 
-  const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(
-    (state) => state.wordleReducer
-  );
+  const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(board);
 
   const [check] = useCheckMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);

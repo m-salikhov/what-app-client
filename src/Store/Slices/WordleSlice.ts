@@ -3,7 +3,7 @@ import { hideScroll } from 'Common/Helpers/scrollDisplay';
 
 type ClassName = 'in-place' | 'out-of-place' | 'miss';
 
-interface LetterState {
+export interface LetterState {
   className: ClassName;
   value: string;
 }
