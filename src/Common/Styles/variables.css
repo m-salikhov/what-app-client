@@ -16,7 +16,6 @@ html {
   --main-border: 1px solid var(--main-border-color);
   --border-quiet: 1px solid var(--border-color-quiet);
   --bg-grey: rgb(27 27 27 / 40%);
-  --banner-color: #f1f1d4;
   --external-link: #0645ad;
   --external-link-hover: #931af1;
   --p-color: #222427;
@@ -29,6 +28,7 @@ html {
   --input-bg-color: #f8f8f8;
   --edit-question-bg-color: #f8f8f8;
   --edit-question-bg-color-del: #a5a5a6;
+  --banner-gradient: linear-gradient(90deg, rgba(222, 212, 241, 1) 0%, rgba(241, 241, 212, 1) 100%);
 }
 
 html[data-theme='dark'] {
@@ -38,7 +38,6 @@ html[data-theme='dark'] {
   --main-border: 1px solid var(--main-border-color);
   --bg-hover-pm-table: #375753;
   --a-main-list-bg-color: #2b2b2b;
-  --banner-color: #2e3851;
   --p-color: #a9b0ba;
   --h-color: #bfc7d3;
   --a-main-list-color: #527d6e;
@@ -47,4 +46,5 @@ html[data-theme='dark'] {
   --input-bg-color: #a8a9ae;
   --edit-question-bg-color: #353131;
   --edit-question-bg-color-del: #614b4b;
+  --banner-gradient: linear-gradient(90deg, rgba(78, 71, 130, 1) 0%, rgba(46, 56, 81, 1) 100%);
 }
