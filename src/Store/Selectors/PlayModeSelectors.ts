@@ -1,4 +1,5 @@
 import { RootState } from 'Store/store';
+import { createSelector } from 'reselect';
 
 export const stepPM = (state: RootState) => state.playModeReducer.step;
 export const answerTimerPM = (state: RootState) => state.playModeReducer.answerTimer;
@@ -11,15 +12,21 @@ export const totalAnsweredCountPM = (state: RootState) => state.playModeReducer.
 export const withTimerPM = (state: RootState) => state.playModeReducer.withTimer;
 export const totalQuestionsCountPM = (state: RootState) => state.playModeReducer.totalQuestionsCount;
 
-export const timerOptions = (state: RootState) => ({
-  withTimer: state.playModeReducer.withTimer,
-  answerTimer: state.playModeReducer.answerTimer,
-  questionTimer: state.playModeReducer.questionTimer,
-});
+export const timerOptions = createSelector(
+  [withTimerPM, answerTimerPM, questionTimerPM],
+  (withTimer, answerTimer, questionTimer) => ({
+    withTimer,
+    answerTimer,
+    questionTimer,
+  })
+);
 
-export const finalResult = (state: RootState) => ({
-  totalAnsweredCount: state.playModeReducer.totalAnsweredCount,
-  totalQuestionsCount: state.playModeReducer.totalQuestionsCount,
-  result: state.playModeReducer.result,
-  selectedResultQuestion: state.playModeReducer.selectedResultQuestion,
-});
+export const finalResult = createSelector(
+  [totalAnsweredCountPM, totalQuestionsCountPM, resultPM, selectedResultQuestionPM],
+  (totalAnsweredCount, totalQuestionsCount, result, selectedResultQuestion) => ({
+    totalAnsweredCount,
+    totalQuestionsCount,
+    result,
+    selectedResultQuestion,
+  })
+);
