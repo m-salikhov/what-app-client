@@ -1,9 +1,7 @@
 import { expect, test } from 'vitest';
 
-function sum(a, b) {
-  return a + b;
-}
-
-test('sum', () => {
-  expect(sum(1, 2)).toBe(3);
+test('server', async () => {
+  const response = await fetch('https://example.com/user');
+  const user = await response.json();
+  expect(user.id).toBe('c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d');
 });
