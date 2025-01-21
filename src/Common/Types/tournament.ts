@@ -19,4 +19,4 @@ export interface TournamentType {
   link: string;
 }
 
-export type TournamentShortType = Omit<TournamentType, 'questions'>;
+export type TournamentShortType = Omit<TournamentType, 'questions' | 'editors'>;

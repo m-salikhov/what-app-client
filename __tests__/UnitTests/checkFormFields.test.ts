@@ -1,4 +1,4 @@
-import checkFormFields from '../../src/modules/Entry/helpers/checkFormFields';
+import checkFormFields from 'src/modules/Entry/helpers/checkFormFields';
 import { expect, test, describe } from 'vitest';
 
 const formUser = {

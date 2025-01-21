@@ -1,4 +1,4 @@
-import { getDate, getDateYYYY_MM_DD } from '../../src/Common/Helpers/getDate';
+import { getDate, getDateYYYY_MM_DD } from 'Common/Helpers/getDate';
 import { expect, test, describe } from 'vitest';
 
 describe('getDateYYYY_MM_DD', () => {

@@ -7,7 +7,7 @@ export const serverRoutes = {
   tournaments: '/tournaments/',
   tournamentsGuest: '/tournaments/quest/',
   tournamentsCreateByLink: '/tournaments/createbylink/',
-  tournamentsAllShort: `/tournaments/allshort/`,
+  tournamentsAllShort: `/tournaments/allshort`,
   tournamentsLastShort: '/tournaments/last/',
   tournamentsRandom: '/tournaments/random/',
   tournamentsStats: '/tournaments/statistics',

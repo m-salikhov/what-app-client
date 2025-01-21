@@ -1,4 +1,6 @@
 import { http, HttpResponse } from 'msw';
+import { baseUrl, serverRoutes } from 'Common/Constants/constants';
+import { allshort } from '../__fixtures__/allshort';
 
 export const handlers = [
   http.get('https://example.com/user', () => {
@@ -7,5 +9,9 @@ export const handlers = [
       firstName: 'John',
       lastName: 'Maverick',
     });
+  }),
+
+  http.get(baseUrl + serverRoutes.tournamentsAllShort, () => {
+    return HttpResponse.json(allshort);
   }),
 ];
