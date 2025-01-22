@@ -1,6 +1,6 @@
+import './about.css';
 import ExternalLinkText from 'Common/Components/Text/ExternalLinkText/ExternalLinkText';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
-import './about.css';
 import myPhoto from './photo_profile_copy.jpg';
 
 function About() {
@@ -43,7 +43,7 @@ function About() {
         <img src={myPhoto} alt='фото автора сайта' />
         <div className='about-info'>
           <p>
-            Меня зовут Максим, мне 35 лет. Я начинающий разработчик.
+            Меня зовут Максим, мне 36 лет. Я начинающий разработчик.
             <br /> <br /> Я родился и вырос в Подмосковье в городе Мытищи, но сейчас живу в Москве. Получил высшее
             образование в МГСУ(строительный). Окончил университет в 2010г. <br /> После этого работал некоторое время по
             специальности, но в итоге оказался в Тинькофф Банке, где и работаю четвёртый год. На данный момент я

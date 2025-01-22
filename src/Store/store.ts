@@ -13,15 +13,15 @@ const rootReducer = combineReducers({
   [wordleAPI.reducerPath]: wordleAPI.reducer,
 });
 
-export const store = configureStore({
-  reducer: rootReducer,
-  middleware: (getMidlleware) =>
-    getMidlleware().concat(
-      tournamentAPI.middleware,
-      userAPI.middleware,
-      wordleAPI.middleware
-    ),
-});
+export const setupStore = (preloadedState?: Partial<RootState>) => {
+  return configureStore({
+    reducer: rootReducer,
+    middleware: (getMidlleware) =>
+      getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware, wordleAPI.middleware),
+    preloadedState,
+  });
+};
 
-export type AppDispatch = typeof store.dispatch;
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
+export type AppStore = ReturnType<typeof setupStore>;
+export type AppDispatch = AppStore['dispatch'];
