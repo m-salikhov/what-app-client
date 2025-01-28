@@ -1,16 +1,14 @@
 import { describe, expect, test } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import TournamentsTable from 'Common/Components/TournamentsTable/TournamentsTable';
-import About from 'src/modules/About/About';
+import { renderWithProviders } from '../utils/renderWithProviders';
 
 describe('TournamentsTable', () => {
   test('should render tournaments table', async () => {
-    // render(<TournamentsTable />);
+    renderWithProviders(<TournamentsTable />);
 
-    render(<About />);
+    const search = await screen.findByText('Простой Смоленск – 2');
 
-    const about = screen.getByText('О сайте');
-
-    expect(about).toBeInTheDocument();
+    expect(search).toBeInTheDocument();
   });
 });

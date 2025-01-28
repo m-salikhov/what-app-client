@@ -4,23 +4,23 @@ export const guest = {
 } as const;
 
 export const serverRoutes = {
-  tournaments: '/tournaments/',
-  tournamentsGuest: '/tournaments/quest/',
-  tournamentsCreateByLink: '/tournaments/createbylink/',
-  tournamentsAllShort: `/tournaments/allshort`,
-  tournamentsLastShort: '/tournaments/last/',
-  tournamentsRandom: '/tournaments/random/',
-  tournamentsStats: '/tournaments/statistics',
-  tournamentsAmountPages: '/tournaments/amountpages',
-  tournamentsAllByUploader: '/tournaments/allbyuploader/',
-  authLogin: '/auth/login/',
-  authLogFirst: '/auth/logfirst/',
-  authLogout: '/auth/logout',
-  userResultShort: '/users/userresultshort/',
-  users: '/users',
-  userResultPost: '/users/userresult',
-  wordleRandom: '/wordle/random-word',
-  wordleCheckExist: '/wordle/check-exist/',
+  tournaments: 'tournaments',
+  tournamentsGuest: 'tournaments/quest',
+  tournamentsCreateByLink: 'tournaments/createbylink',
+  tournamentsAllShort: `tournaments/allshort`,
+  tournamentsLastShort: 'tournaments/last/',
+  tournamentsRandom: 'tournaments/random',
+  tournamentsStats: 'tournaments/statistics',
+  tournamentsAmountPages: 'tournaments/amountpages',
+  tournamentsAllByUploader: 'tournaments/allbyuploader/',
+  authLogin: 'auth/login',
+  authLogFirst: 'auth/logfirst',
+  authLogout: 'auth/logout',
+  userResultShort: 'users/userresultshort/',
+  users: 'users',
+  userResultPost: 'users/userresult/',
+  wordleRandom: 'wordle/random-word',
+  wordleCheckExist: 'wordle/check-exist/',
 } as const;
 
-export const baseUrl = 'https://andvarifserv.ru/';
+export const baseUrl = 'https://andvarifserv.ru';

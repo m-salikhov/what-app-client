@@ -1,7 +1,9 @@
+import { baseUrl, serverRoutes } from 'Common/Constants/constants';
+import { TournamentShortType } from 'Common/Types/tournament';
 import { expect, test } from 'vitest';
 
 test('server', async () => {
-  const response = await fetch('https://example.com/user');
-  const user = await response.json();
-  expect(user.id).toBe('c7b3d8e0-5e0b-4b0f-8b3a-3b9f4b3d3b3d');
+  const response = await fetch(baseUrl + serverRoutes.tournamentsAllShort);
+  const ts: TournamentShortType[] = await response.json();
+  expect(ts[0].title).toBe('Простой Смоленск – 2');
 });
