@@ -13,7 +13,7 @@ interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
 }
 
 export function renderWithProviders(
-  ui: React.ReactElement,
+  component: React.ReactElement,
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
@@ -28,5 +28,6 @@ export function renderWithProviders(
       </MemoryRouter>
     );
   }
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
+
+  return { store, ...render(component, { wrapper: Wrapper, ...renderOptions }) };
 }

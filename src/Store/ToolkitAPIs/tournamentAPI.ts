@@ -17,7 +17,7 @@ export const tournamentAPI = createApi({
 
     getTournamentsLastShort: build.query<TournamentsLastShort, { amount: number; page: number; withSkip: boolean }>({
       query: ({ amount, page, withSkip }) =>
-        serverRoutes.tournamentsLastShort + `last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
+        serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
       providesTags: (result) => {
         return result
           ? [
@@ -67,7 +67,7 @@ export const tournamentAPI = createApi({
     }),
 
     getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
-      query: (userID) => serverRoutes.tournamentsAllByUploader + userID,
+      query: (userID) => serverRoutes.tournamentsAllByUploader + '/' + userID,
       providesTags: ['shorts'],
     }),
   }),

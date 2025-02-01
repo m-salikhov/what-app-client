@@ -42,7 +42,7 @@ export const userAPI = createApi({
     }),
 
     getUserResultShort: build.query<Result[], string>({
-      query: (userID) => serverRoutes.userResultShort + userID,
+      query: (userID) => serverRoutes.userResultShort + '/' + userID,
       providesTags: ['result'],
     }),
 
