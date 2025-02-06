@@ -55,14 +55,9 @@
   display: flex;
   justify-content: center;
 
-  p {
-    padding: 2px 10px 2px 0;
-    font-size: 1.2rem;
-  }
-
   input {
     width: 250px;
-    padding: 2px 18px;
+    padding: 2px 14px;
     font-size: 1.3rem;
     border: var(--main-border);
     border-radius: 6px;

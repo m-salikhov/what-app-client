@@ -37,8 +37,7 @@ export default function TournamentsTable() {
     <>
       {' '}
       <label className='tournaments-table-search'>
-        <p>поиск</p>
-        <input type='text' name='tournaments-search' onChange={(e) => setSearch(e.target.value)} />
+        <input type='text' name='tournaments-search' onChange={(e) => setSearch(e.target.value)} placeholder='поиск' />
       </label>
       <div className='tournaments-table-wrapper'>
         <div className='tournaments-table-line'>
