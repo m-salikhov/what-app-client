@@ -5,6 +5,7 @@ import '@testing-library/jest-dom';
 
 beforeAll(() => server.listen());
 afterEach(() => {
+  console.log('AFTER EACH');
   server.resetHandlers();
   cleanup();
 });
