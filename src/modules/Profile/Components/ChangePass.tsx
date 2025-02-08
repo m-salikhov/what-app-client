@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useTransition, animated } from '@react-spring/web';
 import { showScroll, hideScroll } from 'Common/Helpers/scrollDisplay';
 import { useInitialLoginQuery, useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
 import Button from 'Common/Components/Button/Button';
+import Modal from 'Common/Components/Modal/Modal';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
@@ -34,30 +34,11 @@ export function ChangePass() {
       .catch(() => setMessage('Ошибка сервера'));
   };
 
-  const onCancel = () => {
-    if (message) {
-      setMessage('');
-    }
-    setChangePass(false);
-    showScroll(300);
+  const clearTextStates = () => {
+    setMessage('');
+    setNewPass('');
+    setNewPassRepeat('');
   };
-
-  const transition = useTransition(changePass, {
-    from: {
-      scale: 0.5,
-      opacity: 0,
-    },
-    enter: {
-      scale: 1,
-      opacity: 1,
-    },
-    leave: {
-      scale: 0.5,
-      opacity: 0,
-    },
-
-    config: { duration: 300 },
-  });
 
   return (
     <>
@@ -71,46 +52,50 @@ export function ChangePass() {
           изменить пароль
         </p>
       </div>
-      {transition((style, flag) => {
-        return flag ? (
-          <div className='change-pass-wrapper'>
-            <animated.div style={style} className='profile-pass'>
-              <form>
-                {' '}
-                <div className='profile-pass-container'>
-                  <label>
-                    <p>Новый пароль</p>
-                    <input
-                      type='password'
-                      onChange={(e) => setNewPass(e.target.value)}
-                      value={newPass}
-                      autoComplete='off'
-                    />
-                  </label>
-                  <label>
-                    <p>Повторите пароль</p>
-                    <input
-                      type='password'
-                      onChange={(e) => setNewPassRepeat(e.target.value)}
-                      value={newPassRepeat}
-                      autoComplete='off'
-                    />
-                  </label>
 
-                  {(message || isError) && <p className='profile-pass-error'>{message}</p>}
+      <Modal
+        active={changePass}
+        onClose={() => setChangePass(false)}
+        onDestroyed={() => {
+          clearTextStates();
+          showScroll();
+        }}
+      >
+        <div className='profile-pass'>
+          <form>
+            {' '}
+            <div className='profile-pass-container'>
+              <label>
+                <p>Новый пароль</p>
+                <input
+                  type='password'
+                  onChange={(e) => setNewPass(e.target.value)}
+                  value={newPass}
+                  autoComplete='off'
+                />
+              </label>
+              <label>
+                <p>Повторите пароль</p>
+                <input
+                  type='password'
+                  onChange={(e) => setNewPassRepeat(e.target.value)}
+                  value={newPassRepeat}
+                  autoComplete='off'
+                />
+              </label>
 
-                  {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
+              {(message || isError) && <p className='profile-pass-error'>{message}</p>}
 
-                  <div className='profile-pass-control'>
-                    <Button title='Закрыть' onClick={onCancel} />
-                    <Button title='Отправить' onClick={onSubmit} />
-                  </div>
-                </div>
-              </form>
-            </animated.div>
-          </div>
-        ) : null;
-      })}
+              {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
+
+              <div className='profile-pass-control'>
+                <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
+                <Button type='submit' title='Отправить' onClick={onSubmit} />
+              </div>
+            </div>
+          </form>
+        </div>
+      </Modal>
     </>
   );
 }

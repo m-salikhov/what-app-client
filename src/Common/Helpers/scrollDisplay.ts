@@ -1,6 +1,6 @@
 const body = document.body;
 
-export function showScroll(delay: number) {
+export function showScroll(delay = 0) {
   if (body.style.overflow !== 'hidden') return;
 
   setTimeout(() => {

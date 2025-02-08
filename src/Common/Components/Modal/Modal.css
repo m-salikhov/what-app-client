@@ -13,8 +13,6 @@
   z-index: 1000;
 
   .modal-content {
-    min-width: 300px;
-    min-height: 150px;
     background-color: #fff;
     border: 2px solid #000;
     border-radius: 10px;

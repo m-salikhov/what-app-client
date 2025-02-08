@@ -24,7 +24,7 @@ export function useTournamentsTableFilter() {
   const [tournamentsShorts, setTournamentsShorts] = useState<TournamentShortType[]>([]);
   const [filterField, setFilterField] = useState<FieldName | null>(null);
 
-  const { data, isSuccess, error } = useGetTournamentsShortQuery(undefined);
+  const { data, isSuccess, error, isLoading } = useGetTournamentsShortQuery(undefined);
 
   function handleSort(e: MouseEvent<HTMLDivElement>) {
     const filter = e.currentTarget.id as FieldName;
@@ -42,5 +42,5 @@ export function useTournamentsTableFilter() {
     }
   }, [isSuccess]);
 
-  return { tournamentsShorts, handleSort, error };
+  return { tournamentsShorts, handleSort, error, isLoading };
 }
