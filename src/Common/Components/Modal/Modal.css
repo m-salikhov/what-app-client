@@ -10,6 +10,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
+  z-index: 1000;
 
   .modal-content {
     min-width: 300px;
@@ -20,18 +21,5 @@
     padding: 15px;
     display: flex;
     flex-direction: column;
-
-    animation-name: openModal;
-    animation-duration: 500ms;
-  }
-}
-
-/* анимация открытия модального окна с keyframe */
-@keyframes openModal {
-  from {
-    transform: scale(0.8);
-  }
-  to {
-    transform: scale(1);
   }
 }

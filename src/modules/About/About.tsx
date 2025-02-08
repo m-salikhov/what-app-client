@@ -2,20 +2,12 @@ import './about.css';
 import ExternalLinkText from 'Common/Components/Text/ExternalLinkText/ExternalLinkText';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import myPhoto from './photo_profile_copy.jpg';
-import { useState } from 'react';
-import Modal from 'Common/Components/Modal/Modal';
 
 function About() {
   useDocTitle('О сайте');
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <main className='about'>
-      <button type='button' onClick={() => setIsModalOpen(true)}>
-        {' '}
-        открыть модалку{' '}
-      </button>
-      <Modal active={isModalOpen} onClose={() => setIsModalOpen(false)}></Modal>
       <h2>О сайте</h2>
       <p>Сайт создан исключительно в целях тренировки практических навыков. Является полностью некоммерческим.</p>
       <p>
