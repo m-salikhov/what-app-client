@@ -1,84 +1,66 @@
-import { useTransition, animated } from '@react-spring/web';
-import { IoClose } from 'react-icons/io5';
 import { GrAchievement } from 'react-icons/gr';
 import { TfiLock } from 'react-icons/tfi';
-import { useState } from 'react';
-import { showScroll } from 'Common/Helpers/scrollDisplay';
 import { useAppSelector, useAppDispatch } from 'Common/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { board } from 'Store/Selectors/WordleSelectors';
+import Modal from 'Common/Components/Modal/Modal';
+import { useEffect, useState } from 'react';
 
 export default function GameEndModal() {
   const { result, currentLetterNumber } = useAppSelector(board);
   const { data: answer = { word: '' }, refetch } = useGetRandomWordQuery(undefined);
-
-  const [modalOpen, setModalOpen] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const attempts = currentLetterNumber / 5;
 
-  const transition = useTransition(result, {
-    from: {
-      scale: 0.5,
-      opacity: 0,
-    },
-    enter: {
-      scale: 1,
-      opacity: 1,
-    },
-
-    config: { duration: 300 },
-  });
-
-  function onNewGame() {
-    showScroll(300);
+  function onDestroyed() {
     dispatch(wordleActions.resetState());
     refetch();
   }
 
-  function onClose() {
-    showScroll(300);
-    setModalOpen(false);
-  }
+  useEffect(() => {
+    if (result) {
+      setModalOpen(true);
+    }
+  }, [result]);
 
   return (
-    <>
-      {transition((style, result) => {
-        return result && modalOpen ? (
-          <div className='wordle-result' tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && onNewGame()}>
-            <animated.div style={style} className='wordle-result-wrapper'>
-              <div className='wordle-result-close'>
-                <IoClose size={'30px'} color='var(--p-color)' onClick={onClose} />
-              </div>
+    <Modal
+      active={modalOpen}
+      onClose={() => {
+        console.log(modalOpen);
+        setModalOpen(false);
+      }}
+      onDestroyed={onDestroyed}
+    >
+      {' '}
+      <div className='wordle-result-wrapper'>
+        <div className='wordle-result-icon'>
+          {result === 'win' ? (
+            <GrAchievement size={'100px'} color='#FFC300' />
+          ) : (
+            <TfiLock size={'100px'} color='#FFC300' />
+          )}
+        </div>
 
-              <div className='wordle-result-icon'>
-                {result === 'win' ? (
-                  <GrAchievement size={'100px'} color='#FFC300' />
-                ) : (
-                  <TfiLock size={'100px'} color='#FFC300' />
-                )}
-              </div>
+        {result === 'win' ? (
+          <p className='wordle-result-text'>
+            Вы отгадали слово <span>{answer.word}</span> <br /> {attempts === 2 ? 'со' : 'с'} {attempts}-
+            {attempts === 3 ? 'ей' : 'ой'} попытки!
+          </p>
+        ) : (
+          <p className='wordle-result-text'>
+            Увы! Вам не удалось отгадать <br /> слово <span>{answer.word}</span>
+          </p>
+        )}
 
-              {result === 'win' ? (
-                <p className='wordle-result-text'>
-                  Вы отгадали слово <span>{answer.word}</span> <br /> {attempts === 2 ? 'со' : 'с'} {attempts}-
-                  {attempts === 3 ? 'ей' : 'ой'} попытки!
-                </p>
-              ) : (
-                <p className='wordle-result-text'>
-                  Увы! Вам не удалось отгадать слово <span>{answer.word}</span>
-                </p>
-              )}
-
-              <div className='wordle-result-new' onClick={onNewGame}>
-                <p>новое слово</p>
-              </div>
-            </animated.div>
-          </div>
-        ) : null;
-      })}
-    </>
+        <div className='wordle-result-new' onClick={() => setModalOpen(false)}>
+          <p>новое слово</p>
+        </div>
+      </div>
+    </Modal>
   );
 }
