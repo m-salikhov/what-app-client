@@ -2,17 +2,6 @@ import { TournamentShortType } from 'Common/Types/tournament';
 
 export const allshort: TournamentShortType[] = [
   {
-    id: 197,
-    title: 'Балтийский Бриз. Masters III',
-    date: 1734786000000,
-    tours: 3,
-    questionsQuantity: 36,
-    dateUpload: 1738511490487,
-    uploaderUuid: '49e64aae-537b-4da9-8fe1-ea4c60453f51',
-    uploader: 'Myach',
-    link: 'https://gotquestions.online/pack/6179',
-  },
-  {
     id: 196,
     title: 'Киты на стене кофейни зимой',
     date: 1733662800000,
@@ -47,7 +36,7 @@ export const allshort: TournamentShortType[] = [
   },
   {
     id: 193,
-    title: '«Лига плюша-1: Баранка»',
+    title: 'Лига плюша-1: Баранка',
     date: 1726858800000,
     tours: 3,
     questionsQuantity: 36,
@@ -69,7 +58,7 @@ export const allshort: TournamentShortType[] = [
   },
   {
     id: 191,
-    title: 'II Открытый чемпионат Азии по игре Zakovat',
+    title: 'Открытый чемпионат Азии по игре Zakovat',
     date: 1715385600000,
     tours: 6,
     questionsQuantity: 72,

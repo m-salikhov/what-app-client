@@ -33,42 +33,42 @@ export default function TournamentsTable() {
           <div>
             Название
             <div className='tournaments-table-icon' id='title' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать по названию' />
             </div>{' '}
           </div>
 
           <div>
             Дата отыгрыша{' '}
             <div className='tournaments-table-icon' id='date' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать по дате отыгрыша' />
             </div>{' '}
           </div>
 
           <div>
             Вопросы{' '}
             <div className='tournaments-table-icon' id='questionsQuantity' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать по количеству вопросов' />
             </div>{' '}
           </div>
 
           <div>
             Туры{' '}
             <div className='tournaments-table-icon' id='tours' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать количество туров' />
             </div>{' '}
           </div>
 
           <div>
             Добавлен{' '}
             <div className='tournaments-table-icon' id='dateUpload' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать по дате добавления' />
             </div>{' '}
           </div>
 
           <div>
             Добавил{' '}
             <div className='tournaments-table-icon' id='uploader' onClick={handleSort}>
-              <img src={chart} alt='сортировать' />
+              <img src={chart} alt='сортировать по добавившему' />
             </div>{' '}
           </div>
         </div>
