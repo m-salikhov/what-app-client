@@ -11,7 +11,7 @@ export const handlers = [
     });
   }),
 
-  http.get(baseUrl + serverRoutes.tournamentsAllShort, () => {
+  http.get(baseUrl + '/' + serverRoutes.tournamentsAllShort, () => {
     return HttpResponse.json(allshort);
   }),
 ];

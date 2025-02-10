@@ -1,6 +1,5 @@
 import { TournamentShortType } from 'Common/Types/tournament';
-import { useEffect, useState, MouseEvent } from 'react';
-import { useGetTournamentsShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
 
 type FieldName = keyof Omit<TournamentShortType, 'id'>;
 
@@ -20,27 +19,18 @@ const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
   ];
 };
 
-export function useTournamentsTableFilter() {
-  const [tournamentsShorts, setTournamentsShorts] = useState<TournamentShortType[]>([]);
+export function useSortByColumns(setTournaments: Dispatch<SetStateAction<TournamentShortType[]>>) {
   const [filterField, setFilterField] = useState<FieldName | null>(null);
-
-  const { data, isSuccess, error, isLoading } = useGetTournamentsShortQuery(undefined);
 
   function handleSort(e: MouseEvent<HTMLDivElement>) {
     const filter = e.currentTarget.id as FieldName;
     if (filterField === filter) {
-      setTournamentsShorts((prev) => [...prev.reverse()]);
+      setTournaments((prev) => [...prev.reverse()]);
     } else {
-      setTournamentsShorts((prev) => sortFunction(prev, filter));
+      setTournaments((prev) => sortFunction(prev, filter));
       setFilterField(filter);
     }
   }
 
-  useEffect(() => {
-    if (isSuccess) {
-      setTournamentsShorts(structuredClone(data).reverse());
-    }
-  }, [isSuccess]);
-
-  return { tournamentsShorts, handleSort, error, isLoading };
+  return { handleSort };
 }

@@ -36,13 +36,13 @@ function PlayMode() {
 
   const showProgressBar = isSuccess && step !== 'START' && step !== 'END';
 
+  if (isLoading) return <Spinner />;
+
   return (
     <main>
       <h2>{title}</h2>
 
       {showProgressBar && <ProgressBar tournament={tournament} />}
-
-      {isLoading && <Spinner />}
 
       {isError && <p className='pm-error'> Ошибка: Не удалось загрузить турнир</p>}
 

@@ -4,30 +4,17 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
 import { getDate } from 'Common/Helpers/getDate';
-import { TournamentShortType } from 'Common/Types/tournament';
-import { useTournamentsTableFilter } from './hooks/useTournamentsTableFilter';
-
-function filterTournamentsByTitleSearchString(tournaments: TournamentShortType[], searchString: string) {
-  if (searchString.length > 1) {
-    return tournaments.filter((t) => t.title.toLowerCase().includes(searchString.toLowerCase()));
-  } else return tournaments;
-}
-
-const linkBuilder = (pathname: string, tournament: TournamentShortType) => {
-  if (pathname.includes('all')) {
-    return `/tournament/${tournament.id}`;
-  }
-  if (pathname.includes('playmode')) {
-    return `/playmode/${tournament.id}/${tournament.title}`;
-  } else return '';
-};
+import { useSortByColumns } from './hooks/useSortByColumns';
+import { useGetAllTournamentsShorts } from './hooks/useGetAllTournamentsShorts';
+import { Spinner } from '../Spinner/Spinner';
+import { linkBuilder } from './Helpers/linkBuilder';
+import { filterTournamentsByTitleSearchString } from './Helpers/filterTournamentsByTitleSearchString';
 
 export default function TournamentsTable() {
-  const { tournamentsShorts, handleSort, error } = useTournamentsTableFilter();
-
-  const { pathname } = useLocation();
-
+  const { error, tournaments, setTournaments, isLoading } = useGetAllTournamentsShorts();
+  const { handleSort } = useSortByColumns(setTournaments);
   const [search, setSearch] = useState('');
+  const { pathname } = useLocation();
 
   if (error) {
     return <h2>{extractServerErrorMessage(error)}</h2>;
@@ -86,11 +73,13 @@ export default function TournamentsTable() {
           </div>
         </div>
 
-        {filterTournamentsByTitleSearchString(tournamentsShorts, search).map((item, i) => (
+        {isLoading && <Spinner />}
+
+        {filterTournamentsByTitleSearchString(tournaments, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>
-              <Link to={linkBuilder(pathname, item)}>{item.title}</Link>
+              <Link to={linkBuilder(item, pathname)}>{item.title}</Link>
             </div>
             <div>{getDate(item.date)}</div>
             <div>{item.questionsQuantity}</div>

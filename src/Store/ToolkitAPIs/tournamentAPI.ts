@@ -41,7 +41,7 @@ export const tournamentAPI = createApi({
       providesTags: ['stats'],
     }),
 
-    getTournamentsShort: build.query<TournamentShortType[], undefined>({
+    getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
       query: () => serverRoutes.tournamentsAllShort,
       providesTags: (result) => {
         return result ? [...result.map(({ id }) => ({ type: 'shorts' as const, id })), 'shorts'] : ['shorts'];
@@ -79,7 +79,7 @@ export const {
   useGetRandomQuery,
   useAddTournamentMutation,
   useParseLinkMutation,
-  useGetTournamentsShortQuery,
+  useGetTournamentsAllShortQuery,
   useGetStatsQuery,
   useGetTournamentsLastShortQuery,
   useGetTournamentsAllByUploaderQuery,
