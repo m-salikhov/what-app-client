@@ -13,7 +13,7 @@ function Profile() {
   const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id || '');
 
   return (
-    <main className='profile'>
+    <div className='profile'>
       <section className='profile-wrapper'>
         <section className='user-info'>
           <div>
@@ -62,7 +62,7 @@ function Profile() {
           )}
         </section>
       </section>
-    </main>
+    </div>
   );
 }
 

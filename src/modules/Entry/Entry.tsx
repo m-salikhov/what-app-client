@@ -12,6 +12,7 @@ import { initFormUser } from 'Common/Helpers/initValues';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { FormUser } from 'Common/Types/user';
 import Button from 'Common/Components/Button/Button';
+import RegistrationForm from './Components/LoginForm';
 
 function Entry() {
   useDocTitle('Вход');
@@ -80,14 +81,13 @@ function Entry() {
       {/* окно при успешной регистрации */}
       {regSuccess ? <ModalReg /> : null}
 
-      <main className='entry-wrapper'>
+      <div className='entry-wrapper'>
         <div className='entry'>
           <div className='entry-container'>
             <div className='entry-img'>
               <img src={entryImg} alt='заглавное изображение' />
             </div>
-
-            <form className='entry-form' onSubmit={onSubmit}>
+            {/* <form className='entry-form' onSubmit={onSubmit}>
               <label
                 className='entry-input'
                 id='tooltip-mail'
@@ -140,10 +140,11 @@ function Entry() {
                   disabled={isLoadingLogin || isLoadingReg}
                 />
               </div>
-            </form>
+            </form> */}
+            <RegistrationForm />
           </div>
         </div>
-      </main>
+      </div>
     </>
   );
 }

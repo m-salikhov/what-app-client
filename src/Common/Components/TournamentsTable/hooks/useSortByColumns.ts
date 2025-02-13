@@ -1,7 +1,19 @@
 import { TournamentShortType } from 'Common/Types/tournament';
 import { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
+import { z } from 'zod';
 
-type FieldName = keyof Omit<TournamentShortType, 'id'>;
+const fieldNameSchema = z.enum([
+  'title',
+  'date',
+  'tours',
+  'questionsQuantity',
+  'uploader',
+  'dateUpload',
+  'uploaderUuid',
+  'link',
+]);
+
+type FieldName = z.infer<typeof fieldNameSchema>;
 
 const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
   if (fieldName === 'uploader' || fieldName === 'title') {
@@ -14,21 +26,25 @@ const sortFunction = (arr: TournamentShortType[], fieldName: FieldName) => {
 
   return [
     ...arr.sort(function (a, b) {
-      return a[fieldName] > b[fieldName] ? 1 : -1;
+      return a[fieldName] < b[fieldName] ? 1 : -1;
     }),
   ];
 };
 
 export function useSortByColumns(setTournaments: Dispatch<SetStateAction<TournamentShortType[]>>) {
-  const [filterField, setFilterField] = useState<FieldName | null>(null);
+  const [filterField, setFilterField] = useState<FieldName>('dateUpload');
 
   function handleSort(e: MouseEvent<HTMLDivElement>) {
-    const filter = e.currentTarget.id as FieldName;
-    if (filterField === filter) {
-      setTournaments((prev) => [...prev.reverse()]);
-    } else {
-      setTournaments((prev) => sortFunction(prev, filter));
-      setFilterField(filter);
+    try {
+      const filter = fieldNameSchema.parse(e.currentTarget.id);
+      if (filterField === filter) {
+        setTournaments((prev) => [...prev.reverse()]);
+      } else {
+        setTournaments((prev) => sortFunction(prev, filter));
+        setFilterField(filter);
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 

@@ -10,11 +10,7 @@ function List() {
 
   dispatch(playModeActions.resetState());
 
-  return (
-    <main>
-      <TournamentsTable />
-    </main>
-  );
+  return <TournamentsTable />;
 }
 
 export default List;

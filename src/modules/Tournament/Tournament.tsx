@@ -15,14 +15,18 @@ function Tournament() {
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
+  if (error) return <h2>{extractServerErrorMessage(error)}</h2>;
+
+  if (isLoading) return <Spinner />;
+
   return (
-    <main className='tournament-container'>
+    <div className='tournament-container'>
       {isLoading && <Spinner />}
 
       {error && <h2>{extractServerErrorMessage(error)}</h2>}
 
       {isSuccess && <TournamentContent tournament={tournament} />}
-    </main>
+    </div>
   );
 }
 

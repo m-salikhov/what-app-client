@@ -39,7 +39,7 @@ function PlayMode() {
   if (isLoading) return <Spinner />;
 
   return (
-    <main>
+    <>
       <h2>{title}</h2>
 
       {showProgressBar && <ProgressBar tournament={tournament} />}
@@ -47,7 +47,7 @@ function PlayMode() {
       {isError && <p className='pm-error'> Ошибка: Не удалось загрузить турнир</p>}
 
       {isSuccess && playModeStepChange(step, tournament)}
-    </main>
+    </>
   );
 }
 

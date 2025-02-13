@@ -4,11 +4,7 @@ import { useDocTitle } from 'Common/Hooks/useDocTitle';
 function AllTournaments() {
   useDocTitle('Все турниры');
 
-  return (
-    <main>
-      <TournamentsTable />
-    </main>
-  );
+  return <TournamentsTable />;
 }
 
 export default AllTournaments;

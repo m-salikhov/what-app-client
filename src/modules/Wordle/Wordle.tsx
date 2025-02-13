@@ -40,7 +40,7 @@ export default function Wordle() {
   }, []);
 
   return (
-    <main
+    <div
       className='wordle'
       tabIndex={0}
       onKeyDown={(e) => {
@@ -96,6 +96,6 @@ export default function Wordle() {
       <GameEndModal />
       <div className='wordle-container'>{getWordleDIV()}</div>
       <Board />
-    </main>
+    </div>
   );
 }

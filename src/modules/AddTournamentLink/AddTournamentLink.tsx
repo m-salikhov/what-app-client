@@ -70,7 +70,7 @@ function AddTournamentLink() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <main className='addlink-container'>
+    <div className='addlink-container'>
       <div className='addlink'>
         <input
           type='text'
@@ -112,7 +112,7 @@ function AddTournamentLink() {
       ) : (
         <Instruction />
       )}
-    </main>
+    </div>
   );
 }
 

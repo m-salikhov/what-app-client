@@ -11,29 +11,27 @@ function MainPage() {
   useDocTitle();
 
   return (
-    <main>
-      <div className='main-content'>
-        <RandomQuestions />
+    <div className='main-content'>
+      <RandomQuestions />
 
-        <div className='main-content-right'>
-          <Stats />
+      <div className='main-content-right'>
+        <Stats />
 
-          <LastTournaments />
+        <LastTournaments />
 
-          <div className='main-content-banner'>
-            <h2>Игровой режим</h2>
-            <p>Сыграйте любой из турниров с таймером и ведением счёта </p>
-            <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/playmode')} />
-          </div>
+        <div className='main-content-banner'>
+          <h2>Игровой режим</h2>
+          <p>Сыграйте любой из турниров с таймером и ведением счёта </p>
+          <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/playmode')} />
+        </div>
 
-          <div className='main-content-banner'>
-            <h2>WORDLE</h2>
-            <p>Отгадайте слово из 5 букв </p>
-            <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/wordle')} />
-          </div>
+        <div className='main-content-banner'>
+          <h2>WORDLE</h2>
+          <p>Отгадайте слово из 5 букв </p>
+          <Button title='ПОПРОБОВАТЬ' onClick={() => navigate('/wordle')} />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

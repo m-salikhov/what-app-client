@@ -45,16 +45,6 @@
   }
 
   .edit-t-editors {
-    /* div {
-      position: relative;
-      p {
-        position: absolute;
-        top: 5px;
-        left: 95%;
-        font-weight: bold;
-        cursor: pointer;
-      } */
-
     div {
       display: flex;
       textarea {

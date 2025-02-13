@@ -6,10 +6,10 @@ function NotFound() {
   useDocTitle('404');
 
   return (
-    <main className='not-found'>
+    <div className='not-found'>
       <h2>СТРАНИЦА НЕ НАЙДЕНА</h2>
       <NotFoundOwl />
-    </main>
+    </div>
   );
 }
 

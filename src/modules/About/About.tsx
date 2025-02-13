@@ -7,7 +7,7 @@ function About() {
   useDocTitle('О сайте');
 
   return (
-    <main className='about'>
+    <div className='about'>
       <h2>О сайте</h2>
       <p>Сайт создан исключительно в целях тренировки практических навыков. Является полностью некоммерческим.</p>
       <p>
@@ -54,7 +54,7 @@ function About() {
           </p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

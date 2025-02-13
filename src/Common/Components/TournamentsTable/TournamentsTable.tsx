@@ -16,9 +16,9 @@ export default function TournamentsTable() {
   const [search, setSearch] = useState('');
   const { pathname } = useLocation();
 
-  if (error) {
-    return <h2>{extractServerErrorMessage(error)}</h2>;
-  }
+  if (error) return <h2>{extractServerErrorMessage(error)}</h2>;
+
+  if (isLoading) return <Spinner />;
 
   return (
     <>
@@ -72,8 +72,6 @@ export default function TournamentsTable() {
             </div>{' '}
           </div>
         </div>
-
-        {isLoading && <Spinner />}
 
         {filterTournamentsByTitleSearchString(tournaments, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
