@@ -11,15 +11,15 @@ import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage'
 import { initFormUser } from 'Common/Helpers/initValues';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { FormUser } from 'Common/Types/user';
-import Button from 'Common/Components/Button/Button';
-import RegistrationForm from './Components/RegForm';
+import RegistrationForm from './Components/Forms/RegForm';
+import LoginForm from './Components/Forms/LoginForm';
 
 function Entry() {
   useDocTitle('Вход');
 
   const [formUser, setFormUser] = useState<FormUser>(initFormUser);
   const [errorMessage, setErrorMessage] = useState('');
-  const [isReg, setReg] = useState(false);
+  const [showLoginOrRegForm, setShowLoginOrRegForm] = useState(true);
 
   const {
     login,
@@ -37,33 +37,24 @@ function Entry() {
     reset: resetReg,
   } = useRegistration();
 
-  const onSubmit = async (e: FormEvent<EventTarget>) => {
-    e.preventDefault();
-    isReg ? resetReg() : resetLogin();
+  // const onSubmit = async (e: FormEvent<EventTarget>) => {
+  //   e.preventDefault();
+  //   isReg ? resetReg() : resetLogin();
 
-    const FormFieldsErrors = checkFormFields(formUser, isReg);
-    if (FormFieldsErrors) {
-      setErrorMessage(FormFieldsErrors);
-      return;
-    }
+  //   const FormFieldsErrors = checkFormFields(formUser, isReg);
+  //   if (FormFieldsErrors) {
+  //     setErrorMessage(FormFieldsErrors);
+  //     return;
+  //   }
 
-    isReg ? registration(formUser) : login(formUser);
-  };
+  //   isReg ? registration(formUser) : login(formUser);
+  // };
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setErrorMessage('');
-
-    setFormUser((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const onClickAuthRegChangeBtn = () => {
-    setErrorMessage('');
-    isReg ? resetReg() : resetLogin();
-    setReg(!isReg);
-  };
+  // const onClickAuthRegChangeBtn = () => {
+  //   setErrorMessage('');
+  //   isReg ? resetReg() : resetLogin();
+  //   setReg(!isReg);
+  // };
 
   if (errorLogin || errorReg) {
     const errMessage = extractServerErrorMessage(errorLogin || errorReg);
@@ -141,9 +132,11 @@ function Entry() {
                 />
               </div>
             </form> */}
-            <RegistrationForm />
+            {showLoginOrRegForm ? <LoginForm /> : <RegistrationForm />}
 
-            <p>Авторизоваться</p>
+            <p className='entry-switch' onClick={() => setShowLoginOrRegForm(!showLoginOrRegForm)}>
+              {showLoginOrRegForm ? 'Нет аккаунта?' : 'Есть аккаунт?'}
+            </p>
           </div>
         </div>
       </div>

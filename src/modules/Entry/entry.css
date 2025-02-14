@@ -46,23 +46,27 @@
           }
         }
       }
+
+      .entry-switch {
+        cursor: pointer;
+        color: rgb(76, 36, 206);
+      }
     }
   }
 }
 
 .entry-error {
   display: flex;
-  align-items: center;
   background-color: rgb(180 136 136 / 30%);
   margin-top: 0.5rem;
   .entry-error-block {
-    width: 1rem;
-    min-height: 2.5rem;
+    width: 15px;
     background-color: crimson;
   }
 
   p {
     padding-left: 0.4rem;
+    width: 100%;
   }
 }
 

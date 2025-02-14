@@ -1,19 +1,19 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { registrationSchema, RegistrationType } from '../Schema/EntrySchema';
+import { loginSchema, LoginType } from '../../Schema/EntrySchema';
 import Button from 'Common/Components/Button/Button';
 import FormFieldError from './FormError';
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RegistrationType>({
-    resolver: zodResolver(registrationSchema),
+  } = useForm<LoginType>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: RegistrationType) => {
+  const onSubmit = (data: LoginType) => {
     console.log('Данные регистрации:', data);
     // Здесь можно добавить логику отправки данных на сервер
   };
@@ -27,14 +27,6 @@ const RegistrationForm = () => {
       <FormFieldError message={errors.email?.message} />
 
       <div className='entry-input'>
-        <label htmlFor='username' className='entry-input'>
-          Логин:
-        </label>
-        <input type='text' autoComplete='username' id='username' {...register('username')} />
-      </div>
-      <FormFieldError message={errors.username?.message} />
-
-      <div className='entry-input'>
         <label htmlFor='password' className='entry-input'>
           Пароль:
         </label>
@@ -42,17 +34,9 @@ const RegistrationForm = () => {
       </div>
       <FormFieldError message={errors.password?.message} />
 
-      <div className='entry-input'>
-        <label htmlFor='confirmPassword' className='entry-input'>
-          Повторите пароль:
-        </label>
-        <input type='password' autoComplete='off' id='confirmPassword' {...register('confirmPassword')} />
-      </div>
-      <FormFieldError message={errors.confirmPassword?.message} />
-
-      <Button type='submit' title='Зарегистрироваться' onSubmit={handleSubmit(onSubmit)} />
+      <Button type='submit' title='Войти' onSubmit={handleSubmit(onSubmit)} />
     </form>
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;
