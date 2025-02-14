@@ -10,7 +10,7 @@ function PrivateRoute({ children }: Props) {
   const { data: currentUser } = useInitialLoginQuery(undefined);
 
   if (!currentUser) {
-    return <Navigate to='/entry' />;
+    return <Navigate to='/' />;
   }
   return <>{children}</>;
 }
