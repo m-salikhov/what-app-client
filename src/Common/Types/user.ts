@@ -7,11 +7,6 @@ export interface UserType {
   date: number;
 }
 
-export interface UserAuth {
-  email: string;
-  password: string;
-}
-
 export type getUserType =
   | {
       id: string;
@@ -28,14 +23,6 @@ export type getUserType =
       email?: never;
       username: string;
     };
-
-export interface FormUser {
-  email: string;
-  username: string;
-  role: string;
-  password: string;
-  passRepeat: string;
-}
 
 export interface Result {
   id: string;

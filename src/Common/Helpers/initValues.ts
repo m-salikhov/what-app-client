@@ -9,7 +9,6 @@ export const initTournamentShort: TournamentShortType = {
   tours: 0,
   questionsQuantity: 0,
   uploader: '',
-  editors: [],
   dateUpload: 0,
   uploaderUuid: '',
   link: '',
@@ -17,6 +16,7 @@ export const initTournamentShort: TournamentShortType = {
 
 export const initTournament: TournamentType = {
   ...initTournamentShort,
+  editors: [],
   questions: [],
 };
 

@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl, serverRoutes } from 'Common/Constants/constants';
-import { UserType, UserAuth, FormUser, Result } from 'Common/Types/user';
+import { UserType, Result } from 'Common/Types/user';
+import { UserLogin, UserReg } from 'Store/Types/userApi.types';
 
 export const userAPI = createApi({
   reducerPath: 'userAPI',
@@ -17,7 +18,7 @@ export const userAPI = createApi({
       query: () => serverRoutes.authLogout,
     }),
 
-    login: build.mutation<UserType, UserAuth>({
+    login: build.mutation<UserType, UserLogin>({
       query: (body) => ({
         url: serverRoutes.authLogin,
         method: 'POST',
@@ -25,7 +26,7 @@ export const userAPI = createApi({
       }),
     }),
 
-    registration: build.mutation<UserType, FormUser>({
+    registration: build.mutation<UserType, UserReg>({
       query: (body) => ({
         url: serverRoutes.users,
         method: 'POST',
