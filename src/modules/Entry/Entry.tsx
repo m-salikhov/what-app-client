@@ -12,7 +12,7 @@ import { initFormUser } from 'Common/Helpers/initValues';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { FormUser } from 'Common/Types/user';
 import Button from 'Common/Components/Button/Button';
-import RegistrationForm from './Components/LoginForm';
+import RegistrationForm from './Components/RegForm';
 
 function Entry() {
   useDocTitle('Вход');
@@ -142,6 +142,8 @@ function Entry() {
               </div>
             </form> */}
             <RegistrationForm />
+
+            <p>Авторизоваться</p>
           </div>
         </div>
       </div>

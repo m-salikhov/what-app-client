@@ -18,7 +18,7 @@ export const registrationSchema = z
       return values.password === values.confirmPassword;
     },
     {
-      message: 'Passwords must match!',
+      message: 'Повторите пароль',
       path: ['confirmPassword'],
     }
   );

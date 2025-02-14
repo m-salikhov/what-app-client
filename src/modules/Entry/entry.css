@@ -7,7 +7,6 @@
     display: flex;
     justify-content: center;
     width: 22rem;
-    margin-top: 1rem;
     border: 3px solid var(--main-border-color);
     border-radius: 30px;
 
@@ -23,8 +22,9 @@
       }
 
       .entry-form {
-        width: 75%;
         margin-top: 0.5rem;
+        width: 100%;
+
         .react-tooltip {
           span {
             color: antiquewhite;
@@ -32,28 +32,17 @@
         }
 
         .entry-input {
-          display: flex;
-          flex-direction: column;
-          max-height: 50px;
-          padding: 0.25rem 0;
-          overflow: hidden;
-          transition: all 1s;
-
-          &.reg {
-            max-height: 0;
-            padding: 0;
-          }
-
-          h2 {
+          padding-top: 0.5rem;
+          label {
             font-size: 0.9rem;
+            font-weight: bold;
           }
-
           input {
             padding: 0.2rem 0 0.2rem 0.3rem;
+            width: 100%;
             font-size: 1.1rem;
             border: var(--main-border);
             box-shadow: none;
-            transition: all 0.8s;
           }
         }
       }
@@ -65,10 +54,10 @@
   display: flex;
   align-items: center;
   background-color: rgb(180 136 136 / 30%);
-
+  margin-top: 0.5rem;
   .entry-error-block {
     width: 1rem;
-    min-height: 3.5rem;
+    min-height: 2.5rem;
     background-color: crimson;
   }
 
