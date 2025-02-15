@@ -4,13 +4,14 @@ import { getDate } from 'Common/Helpers/getDate';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { useGetTournamentsAllByUploaderQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { useInitialLoginQuery, useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 function Profile() {
   useDocTitle('Профиль');
 
   const { data: currentUser } = useInitialLoginQuery(undefined);
-  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id || '');
-  const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id || '');
+  const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id ?? skipToken);
+  const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id ?? skipToken);
 
   return (
     <div className='profile'>

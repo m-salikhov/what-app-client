@@ -18,17 +18,7 @@ export const tournamentAPI = createApi({
     getTournamentsLastShort: build.query<TournamentsLastShort, { amount: number; page: number; withSkip: boolean }>({
       query: ({ amount, page, withSkip }) =>
         serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
-      providesTags: (result) => {
-        return result
-          ? [
-              ...result.tournaments.map(({ id }) => ({
-                type: 'shorts' as const,
-                id,
-              })),
-              'shorts',
-            ]
-          : ['shorts'];
-      },
+      providesTags: ['shorts'],
     }),
 
     getRandom: build.query<QuestionType[], number>({
@@ -43,9 +33,7 @@ export const tournamentAPI = createApi({
 
     getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
       query: () => serverRoutes.tournamentsAllShort,
-      providesTags: (result) => {
-        return result ? [...result.map(({ id }) => ({ type: 'shorts' as const, id })), 'shorts'] : ['shorts'];
-      },
+      providesTags: ['shorts'],
     }),
 
     parseLink: build.mutation<TournamentType, { link: string }>({

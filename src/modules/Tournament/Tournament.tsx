@@ -5,11 +5,12 @@ import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage'
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { useGetTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import TournamentContent from './Components/TournamentContent';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 function Tournament() {
-  const { id = '' } = useParams();
+  const { id } = useParams();
 
-  const { data: tournament, isSuccess, isLoading, error } = useGetTournamentQuery(id);
+  const { data: tournament, isSuccess, isLoading, error } = useGetTournamentQuery(id ?? skipToken);
 
   useDocTitle(tournament?.title || 'Турнир');
 

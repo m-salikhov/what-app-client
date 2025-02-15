@@ -103,8 +103,10 @@
     justify-content: center;
     padding-top: 0.4rem;
 
-    div {
+    div,
+    button {
       width: 1.6rem;
+      background-color: var(--main-bg-color);
 
       img {
         cursor: pointer;

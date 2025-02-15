@@ -17,30 +17,34 @@ function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
-  const { data: { tournaments, pageCount } = initial } = useGetTournamentsLastShortQuery({
+  const { data: { tournaments, pageCount } = initial, isFetching } = useGetTournamentsLastShortQuery({
     amount,
     page,
     withSkip: true,
   });
 
-  const changePageNumber = (e: MouseEvent<HTMLDivElement>) => {
-    const { className } = e.currentTarget;
-
-    if (className === 'next' && page < pageCount) {
-      setPage((p) => p + 1);
-    }
-    if (className === 'back' && page > 1) {
-      setPage((p) => p - 1);
+  const changePageNumber = (e: MouseEvent<HTMLButtonElement>) => {
+    switch (e.currentTarget.className) {
+      case 'next':
+        setPage((p) => p + 1);
+        break;
+      case 'back':
+        setPage((p) => p - 1);
+        break;
+      default:
+        break;
     }
   };
 
   return (
     <div className='main-content-tournaments'>
       <h2>Последние добавленные турниры</h2>
+
       <div className='tournaments-header'>
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
+
       {tournaments.map((v) => {
         return (
           <div className='tournaments-item' key={v.id}>
@@ -51,16 +55,15 @@ function LastTournaments() {
           </div>
         );
       })}
+
       <div className='tournaments-footer'>
-        <div className='back' onClick={changePageNumber}>
-          {' '}
+        <button type='button' className='back' disabled={isFetching || page === 1} onClick={changePageNumber}>
           <img src={back} alt='предыдущая страница списка турниров' />
-        </div>
+        </button>
         <p>{page}</p>
-        <div className='next' onClick={changePageNumber}>
-          {' '}
-          <img src={next} alt='предыдущая страница списка турниров' />
-        </div>
+        <button type='button' className='next' disabled={isFetching || page === pageCount} onClick={changePageNumber}>
+          <img src={next} alt='следующая страница списка турниров' />
+        </button>
       </div>
     </div>
   );
