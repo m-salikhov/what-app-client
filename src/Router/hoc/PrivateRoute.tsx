@@ -1,13 +1,15 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
+import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
 
 interface Props {
   children: ReactNode;
 }
 
 function PrivateRoute({ children }: Props) {
-  const { data: currentUser } = useInitialLoginQuery(undefined);
+  const { currentUser } = useInitialLogin();
+
+  console.log('Private');
 
   if (!currentUser) {
     return <Navigate to='/' />;

@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { showScroll, hideScroll } from 'Common/Helpers/scrollDisplay';
-import { useInitialLoginQuery, useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
+import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
 import Button from 'Common/Components/Button/Button';
 import Modal from 'Common/Components/Modal/Modal';
+import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
@@ -10,9 +11,7 @@ export function ChangePass() {
   const [newPassRepeat, setNewPassRepeat] = useState('');
   const [message, setMessage] = useState('');
 
-  const { data: currentUser } = useInitialLoginQuery(undefined);
-
-  const id = currentUser?.id || '';
+  const { currentUser } = useInitialLogin();
 
   const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
@@ -26,7 +25,7 @@ export function ChangePass() {
       return;
     }
 
-    changePassword({ newPass, id })
+    changePassword({ newPass, id: currentUser?.id || '' })
       .then(() => {
         setNewPass('');
         setNewPassRepeat('');

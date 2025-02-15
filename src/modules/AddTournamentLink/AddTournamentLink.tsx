@@ -10,9 +10,9 @@ import { guest } from 'Common/Constants/constants';
 import { checkTournament } from './helpers/checkTournament';
 import extractServerErrorMessage from 'Common/Helpers/extractServerErrorMessage';
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
-import { useInitialLoginQuery } from 'Store/ToolkitAPIs/userAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
+import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -25,7 +25,8 @@ function AddTournamentLink() {
 
   const [t, dispatch] = useReducer(reducer, addLinkInitTournament);
 
-  const { data: currentUser } = useInitialLoginQuery(undefined);
+  const { currentUser } = useInitialLogin();
+
   const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 

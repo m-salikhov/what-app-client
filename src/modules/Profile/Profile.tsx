@@ -3,13 +3,15 @@ import { ChangePass } from './Components/ChangePass';
 import { getDate } from 'Common/Helpers/getDate';
 import { useDocTitle } from 'Common/Hooks/useDocTitle';
 import { useGetTournamentsAllByUploaderQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { useInitialLoginQuery, useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
 import { skipToken } from '@reduxjs/toolkit/query';
+import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
 
 function Profile() {
   useDocTitle('Профиль');
 
-  const { data: currentUser } = useInitialLoginQuery(undefined);
+  const { currentUser } = useInitialLogin();
+
   const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id ?? skipToken);
   const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id ?? skipToken);
 

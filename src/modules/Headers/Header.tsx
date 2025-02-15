@@ -4,8 +4,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Link, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from '../../Common/Hooks/useLogout';
 import { useWindowSize } from '../../Common/Hooks/useWindowSize';
-import { useInitialLoginQuery } from '../../Store/ToolkitAPIs/userAPI';
 import DarkMode from '../../Common/Components/DarkMode/DarkMode';
+import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
 
 const logoNavigate = (
   isManePage: boolean,
@@ -36,7 +36,7 @@ function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { data: currentUser } = useInitialLoginQuery(undefined);
+  const { currentUser } = useInitialLogin();
 
   const { isFullSize } = useWindowSize();
   const logout = useLogout();
