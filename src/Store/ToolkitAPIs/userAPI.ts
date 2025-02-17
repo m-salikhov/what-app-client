@@ -36,7 +36,7 @@ export const userAPI = createApi({
 
     changePassword: build.mutation<string, { newPass: string; id: string }>({
       query: (body) => ({
-        url: serverRoutes.users,
+        url: serverRoutes.usersChangePassword,
         method: 'PUT',
         body,
       }),

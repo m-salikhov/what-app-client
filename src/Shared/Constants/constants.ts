@@ -18,6 +18,7 @@ export const serverRoutes = {
   authLogout: 'auth/logout',
   userResultShort: 'users/userresultshort',
   users: 'users',
+  usersChangePassword: 'users/changepassword',
   userResultPost: 'users/userresult',
   wordleRandom: 'wordle/random-word',
   wordleCheckExist: 'wordle/check-exist',

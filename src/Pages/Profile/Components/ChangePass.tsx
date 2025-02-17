@@ -31,7 +31,6 @@ export function ChangePass() {
       changePassword({ newPass: data.newPassword, id: currentUser.id })
         .unwrap()
         .then(() => {
-          console.log('success');
           setServerMessage('Пароль успешно изменён');
           reset();
         })
