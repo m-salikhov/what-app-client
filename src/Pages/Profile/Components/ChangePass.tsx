@@ -4,39 +4,30 @@ import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
 import Button from 'Shared/Components/Button/Button';
 import Modal from 'Shared/Components/Modal/Modal';
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
-  const [newPass, setNewPass] = useState('');
-  const [newPassRepeat, setNewPassRepeat] = useState('');
-  const [message, setMessage] = useState('');
-
   const { currentUser } = useInitialLogin();
-
   const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
 
-  const onSubmit = () => {
-    if (message) {
-      setMessage('');
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<ChangePassType>({
+    resolver: zodResolver(ChangePassSchema),
+  });
+
+  const onSubmit = (data: ChangePassType) => {
+    if (currentUser) {
+      changePassword({ newPass: data.newPassword, id: currentUser.id }).then(() => {
+        reset();
+      });
     }
-
-    if (!newPass || newPass !== newPassRepeat) {
-      setMessage('Пароль не совпадает');
-      return;
-    }
-
-    changePassword({ newPass, id: currentUser?.id || '' })
-      .then(() => {
-        setNewPass('');
-        setNewPassRepeat('');
-      })
-      .catch(() => setMessage('Ошибка сервера'));
-  };
-
-  const clearTextStates = () => {
-    setMessage('');
-    setNewPass('');
-    setNewPassRepeat('');
   };
 
   return (
@@ -45,6 +36,7 @@ export function ChangePass() {
         <p
           onClick={() => {
             setChangePass(true);
+            reset();
             hideScroll();
           }}
         >
@@ -56,40 +48,36 @@ export function ChangePass() {
         active={changePass}
         onClose={() => setChangePass(false)}
         onDestroyed={() => {
-          clearTextStates();
           showScroll();
         }}
       >
         <div className='profile-pass'>
-          <form>
+          <form onSubmit={handleSubmit(onSubmit)}>
             {' '}
             <div className='profile-pass-container'>
               <label>
                 <p>Новый пароль</p>
-                <input
-                  type='password'
-                  onChange={(e) => setNewPass(e.target.value)}
-                  value={newPass}
-                  autoComplete='off'
-                />
-              </label>
-              <label>
-                <p>Повторите пароль</p>
-                <input
-                  type='password'
-                  onChange={(e) => setNewPassRepeat(e.target.value)}
-                  value={newPassRepeat}
-                  autoComplete='off'
-                />
+                <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' />
               </label>
 
-              {(message || isError) && <p className='profile-pass-error'>{message}</p>}
+              <label>
+                <p>Повторите пароль</p>
+                <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
+              </label>
+
+              {errors && (
+                <p className='profile-pass-error'>
+                  {errors.newPassword?.message || errors.confirmNewPassword?.message}
+                </p>
+              )}
+
+              {isError && <p className='profile-pass-error'>{'Ошибка сервера. Повторите попытку позже'}</p>}
 
               {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
 
               <div className='profile-pass-control'>
                 <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
-                <Button type='submit' title='Отправить' onClick={onSubmit} />
+                <Button type='submit' title='Отправить' onClick={handleSubmit(onSubmit)} />
               </div>
             </div>
           </form>

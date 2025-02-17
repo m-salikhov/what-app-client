@@ -1,12 +1,9 @@
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { useRegistrationMutation, userAPI } from 'Store/ToolkitAPIs/userAPI';
-import { useState } from 'react';
 import { RegistrationType } from '../Schema/EntrySchema';
 
 export function useRegistration() {
-  const [registrationFunc, { isLoading, isSuccess }] = useRegistrationMutation();
-
-  const [error, setError] = useState(undefined);
+  const [registrationFunc, { isLoading, isSuccess, error }] = useRegistrationMutation();
 
   const dispatch = useAppDispatch();
 
@@ -19,9 +16,7 @@ export function useRegistration() {
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })
-      .catch((e) => {
-        setError(e);
-      });
+      .catch(() => {});
   }
 
   return { isSuccess, error, isLoading, registration };
