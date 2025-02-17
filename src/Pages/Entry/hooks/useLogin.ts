@@ -1,11 +1,9 @@
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { useLoginMutation, userAPI } from 'Store/ToolkitAPIs/userAPI';
 import { LoginType } from '../Schema/EntrySchema';
-import { useState } from 'react';
 
 export function useLogin() {
-  const [loginFunc, { isSuccess, isLoading }] = useLoginMutation();
-  const [error, setError] = useState(undefined);
+  const [loginFunc, { isSuccess, isLoading, error }] = useLoginMutation();
 
   const dispatch = useAppDispatch();
 
@@ -16,9 +14,7 @@ export function useLogin() {
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })
-      .catch((e) => {
-        setError(e);
-      });
+      .catch(() => {});
   }
 
   return { isSuccess, error, isLoading, login };

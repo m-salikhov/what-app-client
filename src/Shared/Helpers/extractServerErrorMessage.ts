@@ -1,14 +1,9 @@
-import { SerializedError } from '@reduxjs/toolkit';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
-import { ErrorServer } from 'Shared/Types/errorServer';
+import { ErrorServerSchema } from 'Shared/Types/errorServer';
 
-const extractServerErrorMessage = (err: SerializedError | FetchBaseQueryError | undefined) => {
-  if (typeof err === 'undefined') {
-    return '';
-  }
+const extractServerErrorMessage = (err: unknown) => {
+  const { data: result, success } = ErrorServerSchema.safeParse(err);
 
-  const e = err as ErrorServer;
-  return e.data?.message || 'Ошибка';
+  return success ? result.data.message : 'Ошибка';
 };
 
 export default extractServerErrorMessage;
