@@ -1,5 +1,5 @@
-import { baseUrl, serverRoutes } from 'Common/Constants/constants';
-import { TournamentShortType } from 'Common/Types/tournament';
+import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
+import { TournamentShortType } from 'Shared/Types/tournament';
 import { expect, test } from 'vitest';
 import { allshort } from './__fixtures__/allshort';
 

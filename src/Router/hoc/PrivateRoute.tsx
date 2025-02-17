@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
-import { useInitialLogin } from 'Common/Hooks/useInitialLogin';
+import { useInitialLogin } from 'src/Shared/Hooks/useInitialLogin';
 
 interface Props {
   children: ReactNode;

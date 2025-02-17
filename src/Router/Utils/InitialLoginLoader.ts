@@ -1,4 +1,4 @@
-import { ErrorServerSchema } from 'Common/Types/errorServer';
+import { ErrorServerSchema } from 'src/Shared/Types/errorServer';
 import { store } from 'Store/store';
 import { userAPI } from 'Store/ToolkitAPIs/userAPI';
 

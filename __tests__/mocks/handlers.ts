@@ -1,5 +1,5 @@
 import { http, HttpResponse } from 'msw';
-import { baseUrl, serverRoutes } from 'Common/Constants/constants';
+import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
 import { allshort } from '../__fixtures__/allshort';
 
 export const handlers = [

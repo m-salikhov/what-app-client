@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, serverRoutes, guest } from 'Common/Constants/constants';
-import { QuestionType } from 'Common/Types/question';
-import { TournamentType, TournamentShortType } from 'Common/Types/tournament';
+import { baseUrl, serverRoutes, guest } from 'Shared/Constants/constants';
+import { QuestionType } from 'Shared/Types/question';
+import { TournamentType, TournamentShortType } from 'Shared/Types/tournament';
 import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
 
 export const tournamentAPI = createApi({

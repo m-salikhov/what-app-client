@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "Common/*": ["./src/Common/*"],
+      "Shared/*": ["./src/Shared/*"],
       "Store/*": ["./src/Store/*"],
       "src/*": ["./src/*"]
     },

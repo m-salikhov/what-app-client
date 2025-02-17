@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { hideScroll } from 'Common/Helpers/scrollDisplay';
+import { hideScroll } from 'Shared/Helpers/scrollDisplay';
 
 type ClassName = 'in-place' | 'out-of-place' | 'miss';
 

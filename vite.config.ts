@@ -8,7 +8,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      Common: '/src/Common',
+      Shared: '/src/Shared',
       Store: '/src/Store',
       src: '/src',
     },
