@@ -17,25 +17,21 @@ describe('TournamentsTable', () => {
   test('работает поиск по таблице турниров', async () => {
     renderWithProviders(<TournamentsTable />);
 
-    const inputElement = screen.getByRole('textbox');
+    const inputElement = await screen.findByRole('textbox');
 
     //при вводе одной буквы поиск не происходит
     await userEvent.type(inputElement, 'б');
-    let tournament1 = screen.queryByText('Рождественский Романс');
-    expect(tournament1).toBeInTheDocument();
+    expect(screen.queryByText('Рождественский Романс')).toBeInTheDocument();
     await userEvent.clear(inputElement);
 
     //при вводе более одной буквы поиск происходит фильтрации по таблице турниров
     await userEvent.type(inputElement, 'балт');
-    tournament1 = screen.queryByText('Рождественский Романс');
-    const tournament2 = screen.queryByText('Балтийский Бриз. Challenger III');
-    expect(tournament1).not.toBeInTheDocument();
-    expect(tournament2).toBeInTheDocument();
+    expect(screen.queryByText('Рождественский Романс')).not.toBeInTheDocument();
+    expect(screen.queryByText('Балтийский Бриз. Challenger III')).toBeInTheDocument();
 
     // при очистке поля поиска все турниры отображаются
     await userEvent.clear(inputElement);
-    tournament1 = screen.queryByText('Рождественский Романс');
-    expect(tournament1).toBeInTheDocument();
+    expect(screen.queryByText('Рождественский Романс')).toBeInTheDocument();
   });
 
   test('работает сортировка по названию турниров: первое нажатие сортирует по алфавиту, повторное нажатие сортирует обратно', async () => {

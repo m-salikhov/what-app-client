@@ -9,8 +9,6 @@ interface Props {
 function PrivateRoute({ children }: Props) {
   const { currentUser } = useInitialLogin();
 
-  console.log('Private');
-
   if (!currentUser) {
     return <Navigate to='/' />;
   }

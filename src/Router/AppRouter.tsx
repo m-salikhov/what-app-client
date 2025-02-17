@@ -1,9 +1,10 @@
 import { createHashRouter } from 'react-router-dom';
-import PrivateRoute from './hoc/PrivateRoute';
+import PrivateRoute from './HOC/PrivateRoute';
 import { lazy, Suspense } from 'react';
 import Layout from 'src/modules/Layout/Layout';
 import MainPage from 'src/modules/Main/MainPage';
 import { Spinner } from 'Common/Components/Spinner/Spinner';
+import { initialLoginLoader } from './Utils/InitialLoginLoader';
 
 const Entry = lazy(() => import('src/modules/Entry/Entry'));
 const AddTournamentLink = lazy(() => import('src/modules/AddTournamentLink/AddTournamentLink'));
@@ -20,6 +21,7 @@ const router = createHashRouter([
   {
     path: '/',
     element: <Layout />,
+    loader: initialLoginLoader,
     children: [
       {
         index: true,

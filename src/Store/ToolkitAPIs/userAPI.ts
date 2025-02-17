@@ -10,7 +10,7 @@ export const userAPI = createApi({
   keepUnusedDataFor: 86400,
 
   endpoints: (build) => ({
-    initialLogin: build.query<UserType, undefined>({
+    getCurrentUser: build.query<UserType, undefined>({
       query: () => serverRoutes.authLogFirst,
     }),
 
@@ -59,8 +59,7 @@ export const userAPI = createApi({
 });
 
 export const {
-  useInitialLoginQuery,
-  useLazyInitialLoginQuery,
+  useGetCurrentUserQuery,
   useLogoutQuery,
   useLazyLogoutQuery,
   useLoginMutation,

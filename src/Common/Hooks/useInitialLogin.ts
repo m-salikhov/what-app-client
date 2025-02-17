@@ -1,4 +1,4 @@
-import { useInitialLoginQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 export function useInitialLogin() {
   const flag = localStorage.getItem('rememberMe');
@@ -11,7 +11,7 @@ export function useInitialLogin() {
     refetch,
     isFetching,
     isSuccess,
-  } = useInitialLoginQuery(undefined, { skip: Boolean(!flag) });
+  } = useGetCurrentUserQuery(undefined, { skip: Boolean(!flag) });
 
   if (isError) localStorage.removeItem('rememberMe');
 

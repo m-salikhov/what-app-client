@@ -15,7 +15,7 @@ export function useRegistration() {
 
     await registrationFunc(userData)
       .unwrap()
-      .then((data) => dispatch(userAPI.util.upsertQueryData('initialLogin', undefined, data)))
+      .then((data) => dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, data)))
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })
