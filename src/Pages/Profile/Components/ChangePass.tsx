@@ -10,8 +10,10 @@ import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
+  const [serverMessage, setServerMessage] = useState('');
+
   const { currentUser } = useInitialLogin();
-  const [changePassword, { isSuccess, isError }] = useChangePasswordMutation();
+  const [changePassword, { isSuccess }] = useChangePasswordMutation();
 
   const {
     register,
@@ -23,10 +25,17 @@ export function ChangePass() {
   });
 
   const onSubmit = (data: ChangePassType) => {
+    setServerMessage('');
+
     if (currentUser) {
-      changePassword({ newPass: data.newPassword, id: currentUser.id }).then(() => {
-        reset();
-      });
+      changePassword({ newPass: data.newPassword, id: currentUser.id })
+        .unwrap()
+        .then(() => {
+          console.log('success');
+          setServerMessage('Пароль успешно изменён');
+          reset();
+        })
+        .catch(() => setServerMessage('Ошибка сервера. Повторите попытку позже'));
     }
   };
 
@@ -48,6 +57,7 @@ export function ChangePass() {
         active={changePass}
         onClose={() => setChangePass(false)}
         onDestroyed={() => {
+          setServerMessage('');
           showScroll();
         }}
       >
@@ -71,9 +81,7 @@ export function ChangePass() {
                 </p>
               )}
 
-              {isError && <p className='profile-pass-error'>{'Ошибка сервера. Повторите попытку позже'}</p>}
-
-              {isSuccess && <p className='profile-pass-success'>{'Пароль успешно изменён'}</p>}
+              {serverMessage && <p className={`profile-pass-${isSuccess ? 'success' : 'error'}`}>{serverMessage}</p>}
 
               <div className='profile-pass-control'>
                 <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
