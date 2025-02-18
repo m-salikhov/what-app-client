@@ -1,4 +1,4 @@
-import { createHashRouter } from 'react-router-dom';
+import { createBrowserRouter } from 'react-router-dom';
 import PrivateRoute from './HOC/PrivateRoute';
 import { lazy, Suspense } from 'react';
 import Layout from 'src/Shared/Components/Layout/Layout';
@@ -17,7 +17,7 @@ const About = lazy(() => import('src/Pages/About/About'));
 const Wordle = lazy(() => import('src/Pages/Wordle/Wordle'));
 const Tournament = lazy(() => import('src/Pages/Tournament/Tournament'));
 
-const router = createHashRouter([
+const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,

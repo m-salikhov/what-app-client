@@ -17,6 +17,7 @@ export const serverRoutes = {
   authLogFirst: 'auth/logfirst',
   authLogout: 'auth/logout',
   userResultShort: 'users/userresultshort',
+  userResultFull: 'users/userresultfull',
   users: 'users',
   usersChangePassword: 'users/changepassword',
   userResultPost: 'users/userresult',

@@ -1,9 +1,9 @@
-import { ResultType } from 'Store/Slices/PlayModeSlice';
 import { makeResultTable } from '../../Helpers/makeResultTable';
 import { useAppSelector } from 'Shared/Hooks/redux';
+import { ResultElementType } from 'Shared/Schemas/ResultSchema';
 import { finalResult } from 'Store/Selectors/PlayModeSelectors';
 
-const calcTourResult = (tour: number, res: ResultType) => {
+const calcTourResult = (tour: number, res: { [tourNumber: number]: ResultElementType[] }) => {
   let count = 0;
   res[tour].forEach((v) => {
     if (v.ans) count++;

@@ -1,12 +1,3 @@
-export interface UserType {
-  id: string;
-  email: string;
-  username: string;
-  role: 'user' | 'superuser' | 'admin' | '';
-  password?: string;
-  date: number;
-}
-
 export type getUserType =
   | {
       id: string;
@@ -23,13 +14,3 @@ export type getUserType =
       email?: never;
       username: string;
     };
-
-export interface Result {
-  id: string;
-  userId: string;
-  date: string;
-  tournamentId: number;
-  title: string;
-  tournamentLength: number;
-  resultNumber: number;
-}
