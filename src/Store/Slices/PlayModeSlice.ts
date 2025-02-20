@@ -1,16 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 
 export type Step = 'START' | 'QUESTION' | 'END_OF_TOUR' | 'END';
-
-export type ResultType = {
-  [tourNumber: number]: { num: number; ans: boolean }[];
-};
 
 export interface PlayModeState {
   step: Step;
   currentQuestionIndex: number;
   currentTourNumber: number;
-  result: ResultType;
+  result: ResultElementClientType[];
   totalAnsweredCount: number;
   totalQuestionsCount: number;
   selectedResultQuestion: number;
@@ -23,7 +20,7 @@ const initialState: PlayModeState = {
   step: 'START',
   currentQuestionIndex: 0,
   currentTourNumber: 0,
-  result: {},
+  result: [],
   totalAnsweredCount: 0,
   totalQuestionsCount: 0,
   selectedResultQuestion: 0,
@@ -56,15 +53,11 @@ const playModeSlice = createSlice({
 
     setResult(state, action: PayloadAction<setResultAction>) {
       const { isAnswered, qNumber, tourNumber } = action.payload;
-      const { result } = state;
 
-      if (!(tourNumber in result) && tourNumber) {
-        result[tourNumber] = [];
-      }
-
-      result[tourNumber].push({
+      state.result.push({
         ans: isAnswered,
         num: qNumber,
+        tour: tourNumber,
       });
 
       state.totalQuestionsCount++;

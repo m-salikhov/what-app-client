@@ -1,32 +1,37 @@
 import { makeResultTable } from '../../Helpers/makeResultTable';
 import { useAppSelector } from 'Shared/Hooks/redux';
-import { ResultElementType } from 'Shared/Schemas/ResultSchema';
-import { finalResult } from 'Store/Selectors/PlayModeSelectors';
+import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
+import { currentTourNumberPM, finalResult } from 'Store/Selectors/PlayModeSelectors';
 
-const calcTourResult = (tour: number, res: { [tourNumber: number]: ResultElementType[] }) => {
-  let count = 0;
-  res[tour].forEach((v) => {
-    if (v.ans) count++;
-  });
+const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
+  const tourResult = res.reduce(
+    (acc, v) => {
+      if (v.tour === tour) {
+        acc[1]++;
+        if (v.ans) acc[0]++;
+      }
+      return acc;
+    },
+    [0, 0]
+  );
 
-  return [count, res[tour].length];
+  return tourResult;
 };
 
 function ResBlock() {
   const { result, totalAnsweredCount, totalQuestionsCount } = useAppSelector(finalResult);
+  const currentTour = useAppSelector(currentTourNumberPM);
 
-  const tour = Object.keys(result).length;
-
-  const [TourCount, TourLength] = calcTourResult(tour, result);
+  const [TourCount, TourLength] = calcTourResult(currentTour, result);
 
   return (
     <>
       <div className='resblock'>
         <p>
-          {`Результат ${tour}-го тура:`}
+          {`Результат ${currentTour}-го тура:`}
           <span>{`${TourCount} из ${TourLength}`}</span>{' '}
         </p>
-        {tour > 1 && (
+        {currentTour > 1 && (
           <p>
             {`Результат общий:`}
             <span>{`${totalAnsweredCount} из ${totalQuestionsCount}`}</span>{' '}

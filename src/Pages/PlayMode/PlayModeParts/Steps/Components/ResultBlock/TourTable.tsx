@@ -2,13 +2,16 @@ import { useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import green_ans from './green_mark.svg';
 import red_ans from './red_cross.svg';
+import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 
 interface Props {
-  tourResult: { num: number; ans: boolean }[];
+  tourResult: ResultElementClientType[] | undefined;
 }
 
 function TourTable({ tourResult }: Props) {
   const dispatch = useAppDispatch();
+
+  if (!tourResult) return null;
 
   return (
     <div className='tour-end-tbl'>
