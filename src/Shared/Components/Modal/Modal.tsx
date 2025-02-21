@@ -1,6 +1,7 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useRef } from 'react';
 import './Modal.css';
 import { animated, useTransition } from '@react-spring/web';
+import { scrollVisibility } from './Helpers/scrollVisibility';
 
 interface Props {
   active: boolean;
@@ -9,6 +10,9 @@ interface Props {
 }
 //HOC для модальных окон.
 export default function Modal({ active, onClose, onDestroyed, children }: PropsWithChildren<Props>) {
+  //чтобы onDestroyed не срабатывал при первом рендере
+  const ref = useRef(null);
+
   const transition = useTransition(active, {
     from: {
       scale: 0.8,
@@ -23,10 +27,18 @@ export default function Modal({ active, onClose, onDestroyed, children }: PropsW
       opacity: 0.5,
     },
 
-    onDestroyed(item) {
-      if (item && onDestroyed) {
+    onDestroyed() {
+      if (!ref.current) {
+        scrollVisibility('show');
+      }
+
+      if (onDestroyed && !ref.current) {
         onDestroyed();
       }
+    },
+
+    onStart() {
+      scrollVisibility('hide');
     },
 
     config: { duration: 200 },
@@ -36,6 +48,7 @@ export default function Modal({ active, onClose, onDestroyed, children }: PropsW
     active ? (
       <div
         className='modal'
+        ref={ref}
         onClick={(e) => {
           if (e.target === e.currentTarget) {
             onClose();

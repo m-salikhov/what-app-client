@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { showScroll, hideScroll } from 'Shared/Helpers/scrollDisplay';
 import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
 import Button from 'Shared/Components/Button/Button';
 import Modal from 'Shared/Components/Modal/Modal';
@@ -45,7 +44,6 @@ export function ChangePass() {
           onClick={() => {
             setChangePass(true);
             reset();
-            hideScroll();
           }}
         >
           изменить пароль
@@ -57,7 +55,6 @@ export function ChangePass() {
         onClose={() => setChangePass(false)}
         onDestroyed={() => {
           setServerMessage('');
-          showScroll();
         }}
       >
         <div className='profile-pass'>
