@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Footer from 'Shared/Components/Footer/Footer';
-import Header from 'Shared/Components/Headers/Header';
+import { Footer } from 'Shared/Components/Footer/Footer';
+import { Header } from 'Shared/Components/Headers/Header';
 
-function Layout() {
+export function Layout() {
   return (
     <>
       <Header />
@@ -13,5 +13,3 @@ function Layout() {
     </>
   );
 }
-
-export default Layout;

@@ -1,11 +1,11 @@
 import { parseDate } from '@internationalized/date';
-import EditFormQuestion from './EditFormQuestion';
+import { EditFormQuestion } from './EditFormQuestion';
 import { Action, actionTypes } from '../../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 import { getDateYYYY_MM_DD } from 'Shared/Helpers/getDate';
 import { TournamentType } from 'Shared/Types/tournament';
-import EditFormEditors from './EditFormEditors';
+import { EditFormEditors } from './EditFormEditors';
 
 interface Props {
   t: TournamentType;
@@ -13,7 +13,7 @@ interface Props {
   setEdit: (edit: boolean) => void;
 }
 
-function EditForm({ t, dispatch, setEdit }: Props) {
+export function EditForm({ t, dispatch, setEdit }: Props) {
   return (
     <main
       onKeyDown={(e) => {
@@ -59,5 +59,3 @@ function EditForm({ t, dispatch, setEdit }: Props) {
     </main>
   );
 }
-
-export default EditForm;

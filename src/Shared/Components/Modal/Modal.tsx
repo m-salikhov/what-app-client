@@ -9,7 +9,7 @@ interface Props {
   onDestroyed?: () => void;
 }
 //HOC для модальных окон.
-export default function Modal({ active, onClose, onDestroyed, children }: PropsWithChildren<Props>) {
+export function Modal({ active, onClose, onDestroyed, children }: PropsWithChildren<Props>) {
   const transition = useTransition(active, {
     from: {
       scale: 0.8,

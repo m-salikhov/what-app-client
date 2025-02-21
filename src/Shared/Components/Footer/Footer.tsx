@@ -4,7 +4,7 @@ import Mail from './icons/email.svg?react';
 import Github from './icons/github.svg?react';
 import { useMatch } from 'react-router-dom';
 
-function Footer() {
+export function Footer() {
   const match = useMatch({ path: 'playmode', end: false });
 
   return (
@@ -24,5 +24,3 @@ function Footer() {
     </footer>
   );
 }
-
-export default Footer;

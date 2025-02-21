@@ -1,4 +1,4 @@
-import ResultTable from 'Shared/Components/ResultTable/ResultTable';
+import { ResultTable } from 'Shared/Components/ResultTable/ResultTable';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 import { currentTourNumberPM, finalResult } from 'Store/Selectors/PlayModeSelectors';
@@ -18,7 +18,7 @@ const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
   return tourResult;
 };
 
-function ResBlock() {
+export function ResBlock() {
   const { result, totalAnsweredCount, totalQuestionsCount } = useAppSelector(finalResult);
   const currentTour = useAppSelector(currentTourNumberPM);
 
@@ -43,5 +43,3 @@ function ResBlock() {
     </>
   );
 }
-
-export default ResBlock;

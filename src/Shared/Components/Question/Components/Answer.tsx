@@ -1,7 +1,7 @@
-import ExternalLinkText from 'src/Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from 'src/Shared/Components/Text/ExternalLinkText/ExternalLinkText';
 import { QuestionType } from 'src/Shared/Types/question';
 
-function Answer({ q }: { q: QuestionType }) {
+export function Answer({ q }: { q: QuestionType }) {
   return (
     <div className='answer'>
       <p>
@@ -45,5 +45,3 @@ function Answer({ q }: { q: QuestionType }) {
     </div>
   );
 }
-
-export default Answer;

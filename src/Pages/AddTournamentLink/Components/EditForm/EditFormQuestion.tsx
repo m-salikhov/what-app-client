@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Action, actionTypes } from '../../helpers/reducer';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 import { QuestionType } from 'Shared/Types/question';
 
 interface Props {
@@ -13,7 +13,7 @@ const btnTextOption = {
   back: 'Вернуть',
 };
 
-function EditFormQuestion({ q, dispatch }: Props) {
+export function EditFormQuestion({ q, dispatch }: Props) {
   const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
 
   const removeQuestion = () => {
@@ -203,5 +203,3 @@ function EditFormQuestion({ q, dispatch }: Props) {
     </div>
   );
 }
-
-export default EditFormQuestion;

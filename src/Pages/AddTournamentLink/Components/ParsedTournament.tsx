@@ -1,6 +1,6 @@
-import Button from 'Shared/Components/Button/Button';
-import QuestionPlane from 'Shared/Components/Question/QuestionPlane';
-import TournamentHeader from 'Shared/Components/TournamentHeader/TournamentHeader';
+import { Button } from 'Shared/Components/Button/Button';
+import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
+import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';
 import { TournamentType } from 'Shared/Types/tournament';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
   handleAddTournament: () => void;
 }
 
-function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
+export function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
   return (
     <>
       <TournamentHeader tournament={t} />
@@ -35,5 +35,3 @@ function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }:
     </>
   );
 }
-
-export default ParsedTournament;

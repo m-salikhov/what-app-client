@@ -4,10 +4,10 @@ import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { board } from 'Store/Selectors/WordleSelectors';
-import Modal from 'Shared/Components/Modal/Modal';
+import { Modal } from 'Shared/Components/Modal/Modal';
 import { useEffect, useState } from 'react';
 
-export default function GameEndModal() {
+export function GameEndModal() {
   const { result, currentLetterNumber } = useAppSelector(board);
   const { data: answer = { word: '' }, refetch } = useGetRandomWordQuery(undefined);
   const [modalOpen, setModalOpen] = useState(false);

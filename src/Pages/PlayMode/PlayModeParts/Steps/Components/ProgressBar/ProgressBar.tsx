@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import ProgressBarItem from './ProgressBarItem';
+import { ProgressBarItem } from './ProgressBarItem';
 import { TournamentType } from 'Shared/Types/tournament';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { currentTourNumberPM } from 'Store/Selectors/PlayModeSelectors';
@@ -14,17 +14,14 @@ export const getProgressBarItems = (first: number, last: number) => {
   return arr;
 };
 
-export default function ProgressBar({ tournament }: { tournament: TournamentType }) {
+export function ProgressBar({ tournament }: { tournament: TournamentType }) {
   const currentTourNumber = useAppSelector(currentTourNumberPM);
 
-  const firstTourQuestionIndex = useMemo(
-    () => tournament.questions.findIndex((v) => v.tourNumber === currentTourNumber),
-    [currentTourNumber]
-  );
-  const lastTourQuestionIndex = useMemo(
-    () => tournament.questions.findLastIndex((v) => v.tourNumber === currentTourNumber),
-    [currentTourNumber]
-  );
+  const { first, last } = useMemo(() => {
+    const first = tournament.questions.findIndex((v) => v.tourNumber === currentTourNumber);
+    const last = tournament.questions.findLastIndex((v) => v.tourNumber === currentTourNumber);
+    return { first, last };
+  }, [currentTourNumber]);
 
-  return <div className='progress-bar'>{getProgressBarItems(firstTourQuestionIndex, lastTourQuestionIndex)}</div>;
+  return <div className='progress-bar'>{getProgressBarItems(first, last)}</div>;
 }

@@ -2,7 +2,7 @@ import './tournamentsTable.css';
 import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import extractServerErrorMessage from 'Shared/Helpers/extractServerErrorMessage';
+import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useSortByColumns } from './hooks/useSortByColumns';
 import { useGetAllTournamentsShorts } from './hooks/useGetAllTournamentsShorts';
@@ -10,7 +10,7 @@ import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { linkBuilder } from './Helpers/linkBuilder';
 import { filterTournamentsByTitleSearchString } from './Helpers/filterTournamentsByTitleSearchString';
 
-export default function TournamentsTable() {
+export function TournamentsTable() {
   const { error, tournaments, setTournaments, isLoading } = useGetAllTournamentsShorts();
   const { handleSort } = useSortByColumns(setTournaments);
   const [search, setSearch] = useState('');

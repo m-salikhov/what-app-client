@@ -1,6 +1,6 @@
 import { useGetStatsQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
-function Stats() {
+export function Stats() {
   const { data: stats } = useGetStatsQuery(undefined);
 
   return (
@@ -11,5 +11,3 @@ function Stats() {
     </div>
   );
 }
-
-export default Stats;

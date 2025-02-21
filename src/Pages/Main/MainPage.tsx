@@ -1,12 +1,12 @@
 import './mainPage.css';
 import { useNavigate } from 'react-router-dom';
-import LastTournaments from './Components/LastTournaments';
-import Stats from './Components/Stats';
-import RandomQuestions from './Components/RandomQuestions';
+import { LastTournaments } from './Components/LastTournaments';
+import { Stats } from './Components/Stats';
+import { RandomQuestions } from './Components/RandomQuestions';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 
-function MainPage() {
+export function MainPage() {
   const navigate = useNavigate();
   useDocTitle();
 
@@ -34,5 +34,3 @@ function MainPage() {
     </div>
   );
 }
-
-export default MainPage;

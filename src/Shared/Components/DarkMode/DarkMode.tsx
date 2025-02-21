@@ -2,9 +2,9 @@ import './DarkMode.css';
 import Sun from './Sun.svg?react';
 import Moon from './Moon.svg?react';
 import { useState } from 'react';
-import useTheme from 'Shared/Hooks/useTheme';
+import { useTheme } from 'Shared/Hooks/useTheme';
 
-function DarkMode() {
+export function DarkMode() {
   const { theme, changeTheme } = useTheme();
   const [checked, setChecked] = useState(theme === 'light' ? false : true);
 
@@ -26,5 +26,3 @@ function DarkMode() {
     </div>
   );
 }
-
-export default DarkMode;

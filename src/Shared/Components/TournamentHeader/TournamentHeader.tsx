@@ -6,7 +6,7 @@ interface Props {
   tournament: TournamentType;
 }
 
-export default function TournamentHeader({ tournament }: Props) {
+export function TournamentHeader({ tournament }: Props) {
   return (
     <div className='tournament-header'>
       <div className='tournament-header-t'>

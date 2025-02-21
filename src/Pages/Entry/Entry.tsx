@@ -1,8 +1,8 @@
 import './entry.css';
-import { useState } from 'react';
 import entryImg from './entry_img.svg';
+import { useState } from 'react';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
-import RegistrationForm from './Components/Forms/RegForm';
+import { RegistrationForm } from './Components/Forms/RegForm';
 import LoginForm from './Components/Forms/LoginForm';
 
 function Entry() {

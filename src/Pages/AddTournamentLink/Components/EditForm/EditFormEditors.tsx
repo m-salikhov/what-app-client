@@ -5,7 +5,7 @@ interface Props {
   editors: TournamentType['editors'];
   dispatch: (action: Action) => void;
 }
-export default function EditFormEditors({ editors, dispatch }: Props) {
+export function EditFormEditors({ editors, dispatch }: Props) {
   return (
     <div className='edit-t-editors'>
       <p>Редактор(ы):</p>

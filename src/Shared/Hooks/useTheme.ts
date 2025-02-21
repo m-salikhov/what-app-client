@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-function useTheme() {
+export function useTheme() {
   const [theme, setTheme] = useState(localStorage.getItem('app-theme') || 'light');
 
   useEffect(() => {
@@ -14,5 +14,3 @@ function useTheme() {
 
   return { theme, changeTheme };
 }
-
-export default useTheme;

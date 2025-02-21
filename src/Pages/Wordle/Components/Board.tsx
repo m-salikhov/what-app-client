@@ -45,7 +45,7 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
   return arr;
 }
 
-export default function Board() {
+export function Board() {
   const dispatch = useAppDispatch();
 
   const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(board);

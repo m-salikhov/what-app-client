@@ -1,12 +1,12 @@
 import { animated, useTransition } from '@react-spring/web';
 import { useRef } from 'react';
 import { getToursParagraphs, scroll } from './scrollLogic';
-import Back from 'Shared/Components/Back/Back';
-import Question from 'Shared/Components/Question/Question';
-import TournamentHeader from 'Shared/Components/TournamentHeader/TournamentHeader';
+import { Back } from 'Shared/Components/Back/Back';
+import { Question } from 'Shared/Components/Question/Question';
+import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';
 import { TournamentType } from 'Shared/Types/tournament';
 
-function TournamentContent({ tournament }: { tournament: TournamentType }) {
+export function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);
 
   const transitions = useTransition(tournament.questions, {
@@ -43,5 +43,3 @@ function TournamentContent({ tournament }: { tournament: TournamentType }) {
     </>
   );
 }
-
-export default TournamentContent;

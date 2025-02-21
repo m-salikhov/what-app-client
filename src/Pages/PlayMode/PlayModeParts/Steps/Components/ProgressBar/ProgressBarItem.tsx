@@ -1,7 +1,7 @@
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { currentQuestionIndexPM, stepPM } from 'Store/Selectors/PlayModeSelectors';
 
-function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
+export function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
   const currentQuestionIndex = useAppSelector(currentQuestionIndexPM);
   const step = useAppSelector(stepPM);
 
@@ -15,5 +15,3 @@ function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
     </div>
   );
 }
-
-export default ProgressBarItem;

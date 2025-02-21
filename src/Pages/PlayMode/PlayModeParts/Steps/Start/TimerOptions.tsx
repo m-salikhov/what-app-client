@@ -1,10 +1,10 @@
-import { Checkbox, NumberField, Group, Button, Input } from 'react-aria-components';
 import green_mark from './green_mark.svg';
+import { Checkbox, NumberField, Group, Button, Input } from 'react-aria-components';
 import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { timerOptions } from 'Store/Selectors/PlayModeSelectors';
 
-export default function TimerOptions() {
+export function TimerOptions() {
   const { withTimer, answerTimer, questionTimer } = useAppSelector(timerOptions);
 
   const dispatch = useAppDispatch();

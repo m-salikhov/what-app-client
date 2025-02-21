@@ -1,10 +1,10 @@
 import './playmode.css';
 import { useParams } from 'react-router-dom';
-import Start from './PlayModeParts/Steps/Start/Start';
-import PMQuestion from './PlayModeParts/Steps/Components/PMQuestion/PMQuestion';
-import TourEnd from './PlayModeParts/Steps/TourEnd/TourEnd';
-import End from './PlayModeParts/Steps/TournamentEnd/End';
-import ProgressBar from './PlayModeParts/Steps/Components/ProgressBar/ProgressBar';
+import { Start } from './PlayModeParts/Steps/Start/Start';
+import { PMQuestion } from './PlayModeParts/Steps/Components/PMQuestion/PMQuestion';
+import { TourEnd } from './PlayModeParts/Steps/TourEnd/TourEnd';
+import { End } from './PlayModeParts/Steps/TournamentEnd/End';
+import { ProgressBar } from './PlayModeParts/Steps/Components/ProgressBar/ProgressBar';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { TournamentType } from 'Shared/Types/tournament';

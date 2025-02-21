@@ -1,6 +1,6 @@
 import './skeletonQuestion.css';
 
-function SkeletonQuestion({ count }: { count: number }) {
+export function SkeletonQuestion({ count }: { count: number }) {
   const skeletonQuestion = (i: number) => {
     return (
       <div className='sk-q' key={i}>
@@ -21,5 +21,3 @@ function SkeletonQuestion({ count }: { count: number }) {
 
   return <>{arrElements}</>;
 }
-
-export default SkeletonQuestion;

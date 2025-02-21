@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import refreshIcon from '../assets/refresh.svg';
-import Question from 'Shared/Components/Question/Question';
-import SkeletonQuestion from 'Shared/Components/Question/SkeletonQuestion';
+import { useState } from 'react';
+import { Question } from 'Shared/Components/Question/Question';
+import { SkeletonQuestion } from 'Shared/Components/Question/SkeletonQuestion';
 import { useGetRandomQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
-export default function RandomQuestions() {
+export function RandomQuestions() {
   const amountRandomQuestions = 4;
 
   const [isRandomRefetch, setIsRandomRefetch] = useState(false);

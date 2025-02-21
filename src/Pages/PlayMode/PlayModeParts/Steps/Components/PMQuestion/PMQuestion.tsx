@@ -1,15 +1,15 @@
 import { useState, useMemo, useEffect } from 'react';
-import Timer from './Timer';
-import ButtonsBlock from './ButtonsBlock';
-import Add from 'Shared/Components/Question/Components/Add';
-import Answer from 'Shared/Components/Question/Components/Answer';
+import { Timer } from './Timer';
+import { ButtonsBlock } from './ButtonsBlock';
+import { Add } from 'Shared/Components/Question/Components/Add';
+import { Answer } from 'Shared/Components/Question/Components/Answer';
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
 import { QuestionType } from 'Shared/Types/question';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 import { currentQuestionIndexPM, withTimerPM } from 'Store/Selectors/PlayModeSelectors';
 
-function PMQuestion({ tournament: { questions } }: { tournament: { questions: QuestionType[] } }) {
+export function PMQuestion({ tournament: { questions } }: { tournament: { questions: QuestionType[] } }) {
   const dispatch = useAppDispatch();
 
   //чистит турнир от нулевых вопросов, оставляя только игровые
@@ -50,5 +50,3 @@ function PMQuestion({ tournament: { questions } }: { tournament: { questions: Qu
     </div>
   );
 }
-
-export default PMQuestion;

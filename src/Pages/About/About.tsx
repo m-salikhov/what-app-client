@@ -1,60 +1,60 @@
 import './about.css';
-import ExternalLinkText from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import myPhoto from './photo_profile_copy.jpg';
-import { z } from 'zod';
+import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { useDocTitle } from 'Shared/Hooks/useDocTitle';
+// import { z } from 'zod';
 
-const ResultElementSchema = z.object({
-  num: z.number({ message: 'Ответ' }),
-  ans: z.boolean({ message: 'Правильность' }),
-});
+// const ResultElementSchema = z.object({
+//   num: z.number({ message: 'Ответ' }),
+//   ans: z.boolean({ message: 'Правильность' }),
+// });
 
-const ResultSchema = z.object({
-  id: z.string({ message: 'ID RESULT' }),
-  res: z.array(ResultElementSchema),
-});
+// const ResultSchema = z.object({
+//   id: z.string({ message: 'ID RESULT' }),
+//   res: z.array(ResultElementSchema),
+// });
 
-const FullSchema = z.object({
-  id: z.string({ message: 'ID FULL' }),
-  fullResults: z.array(ResultSchema),
-});
+// const FullSchema = z.object({
+//   id: z.string({ message: 'ID FULL' }),
+//   fullResults: z.array(ResultSchema),
+// });
 
-//mock results
-const results = [
-  {
-    id: 'aaa',
-    res: [
-      { num: 1, ans: true },
-      { num: 2, ans: true },
-    ],
-  },
-  {
-    id: '2',
-    res: [
-      { num: 1, ans: false },
-      { num: 3, ans: false },
-    ],
-  },
-  {
-    id: 4,
-    res: [
-      { num: 4, ans: 'true' },
-      { num: 8, ans: false },
-    ],
-  },
-];
-//mock full results
-const mockFull = {
-  id: 3,
-  fullResults: results,
-};
+// //mock results
+// const results = [
+//   {
+//     id: 'aaa',
+//     res: [
+//       { num: 1, ans: true },
+//       { num: 2, ans: true },
+//     ],
+//   },
+//   {
+//     id: '2',
+//     res: [
+//       { num: 1, ans: false },
+//       { num: 3, ans: false },
+//     ],
+//   },
+//   {
+//     id: 4,
+//     res: [
+//       { num: 4, ans: 'true' },
+//       { num: 8, ans: false },
+//     ],
+//   },
+// ];
+// //mock full results
+// const mockFull = {
+//   id: 3,
+//   fullResults: results,
+// };
 
-const { error } = FullSchema.safeParse(mockFull);
-if (error) {
-  // const { errors } = error;
-  // errors.forEach((err) => console.log(results[+err.path[0]].id, err.message));
-  console.log(error.errors);
-}
+// const { error } = FullSchema.safeParse(mockFull);
+// if (error) {
+//   // const { errors } = error;
+//   // errors.forEach((err) => console.log(results[+err.path[0]].id, err.message));
+//   console.log(error.errors);
+// }
 
 function About() {
   useDocTitle('О сайте');

@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
-import ResBlock from '../Components/ResultBlock/ResBlock';
-import QuestionPlane from 'Shared/Components/Question/QuestionPlane';
+import { ResBlock } from '../Components/ResultBlock/ResBlock';
+import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import extractServerErrorMessage from 'Shared/Helpers/extractServerErrorMessage';
+import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { TournamentType } from 'Shared/Types/tournament';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
 import { useSaveResult } from './useSaveResult';
 
-function End({ tournament }: { tournament: TournamentType }) {
+export function End({ tournament }: { tournament: TournamentType }) {
   const navigate = useNavigate();
 
   const { isLoading, isSuccess, error } = useSaveResult(tournament);
@@ -33,5 +33,3 @@ function End({ tournament }: { tournament: TournamentType }) {
     </div>
   );
 }
-
-export default End;

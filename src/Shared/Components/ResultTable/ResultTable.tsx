@@ -5,7 +5,7 @@ interface Props {
   result: ResultElementClientType[];
 }
 
-export default function ResultTable({ result }: Props) {
+export function ResultTable({ result }: Props) {
   const resByTour = Object.groupBy(result, (v) => v.tour);
 
   const resultTable = [];

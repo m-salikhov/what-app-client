@@ -2,7 +2,7 @@ import './back.css';
 import { useNavigate } from 'react-router-dom';
 import arrow_left from './arrow_left.svg';
 
-function Back() {
+export function Back() {
   const navigate = useNavigate();
   return (
     <>
@@ -14,5 +14,3 @@ function Back() {
     </>
   );
 }
-
-export default Back;

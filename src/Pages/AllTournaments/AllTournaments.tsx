@@ -1,4 +1,4 @@
-import TournamentsTable from 'Shared/Components/TournamentsTable/TournamentsTable';
+import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 
 function AllTournaments() {

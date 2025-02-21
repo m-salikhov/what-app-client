@@ -11,15 +11,7 @@ interface ButtonProps {
   onSubmit?: (e: FormEvent<EventTarget>) => void;
 }
 
-function Button({
-  onClick,
-  title,
-  extraClass,
-  disabled,
-  onSubmit,
-  type,
-  id,
-}: ButtonProps) {
+export function Button({ onClick, title, extraClass, disabled, onSubmit, type, id }: ButtonProps) {
   return (
     <div className='btn-elem'>
       <button
@@ -35,5 +27,3 @@ function Button({
     </div>
   );
 }
-
-export default Button;

@@ -7,7 +7,7 @@ interface Props {
   qNumber: number;
 }
 
-function Timer({ setShowAnswer, qNumber }: Props) {
+export function Timer({ setShowAnswer, qNumber }: Props) {
   const { questionTimer, answerTimer } = useAppSelector(timerOptions);
   const [time, setTime] = useState(questionTimer);
 
@@ -41,5 +41,3 @@ function Timer({ setShowAnswer, qNumber }: Props) {
     </div>
   );
 }
-
-export default Timer;

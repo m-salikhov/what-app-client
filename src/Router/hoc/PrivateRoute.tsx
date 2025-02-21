@@ -6,7 +6,7 @@ interface Props {
   children: ReactNode;
 }
 
-function PrivateRoute({ children }: Props) {
+export function PrivateRoute({ children }: Props) {
   const { currentUser } = useInitialLogin();
 
   if (!currentUser) {
@@ -14,5 +14,3 @@ function PrivateRoute({ children }: Props) {
   }
   return <>{children}</>;
 }
-
-export default PrivateRoute;

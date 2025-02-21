@@ -7,7 +7,7 @@ import { useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 
-function Profile() {
+export default function Profile() {
   useDocTitle('Профиль');
 
   const { currentUser } = useInitialLogin();
@@ -68,5 +68,3 @@ function Profile() {
     </div>
   );
 }
-
-export default Profile;

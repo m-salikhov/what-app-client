@@ -1,6 +1,6 @@
 const checkLinkOrText = (str: string) => /^http/.test(str);
 
-function Add({ add }: { add: string }) {
+export function Add({ add }: { add: string }) {
   return (
     <div className='question-add'>
       <p>Раздаточный материал:</p>
@@ -8,5 +8,3 @@ function Add({ add }: { add: string }) {
     </div>
   );
 }
-
-export default Add;

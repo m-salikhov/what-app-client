@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registrationSchema, RegistrationType } from '../../Schema/EntrySchema';
-import Button from 'Shared/Components/Button/Button';
-import FormFieldError from './FormError';
+import { Button } from 'Shared/Components/Button/Button';
+import { FormFieldError } from './FormError';
 import { useRegistration } from '../../hooks/useRegistration';
-import extractServerErrorMessage from 'Shared/Helpers/extractServerErrorMessage';
-import ModalReg from '../ModalReg';
+import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
+import { ModalReg } from '../ModalReg';
 
-const RegistrationForm = () => {
+export const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
@@ -63,5 +63,3 @@ const RegistrationForm = () => {
     </>
   );
 };
-
-export default RegistrationForm;

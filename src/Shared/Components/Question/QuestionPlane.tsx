@@ -1,13 +1,13 @@
 import { QuestionType } from 'Shared/Types/question';
-import Add from './Components/Add';
-import Answer from './Components/Answer';
+import { Add } from './Components/Add';
+import { Answer } from './Components/Answer';
 import './question.css';
 
 interface Props {
   q: QuestionType;
 }
 
-function QuestionPlane({ q }: Props) {
+export function QuestionPlane({ q }: Props) {
   return (
     <div className='question'>
       <div className='question-header'>
@@ -23,5 +23,3 @@ function QuestionPlane({ q }: Props) {
     </div>
   );
 }
-
-export default QuestionPlane;

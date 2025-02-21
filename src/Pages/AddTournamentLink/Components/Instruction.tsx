@@ -1,9 +1,9 @@
-import ExternalLinkText from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
 
 const exampleGOTLink = 'https://gotquestions.online/pack/6001';
 const exampleDBLink = 'https://db.chgk.info/tour/olivye21_u';
 
-function Instruction() {
+export function Instruction() {
   return (
     <div className='addlink-instruction'>
       <p>
@@ -30,5 +30,3 @@ function Instruction() {
     </div>
   );
 }
-
-export default Instruction;

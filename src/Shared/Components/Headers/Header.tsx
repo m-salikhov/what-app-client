@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { Link, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from 'Shared/Hooks/useLogout';
 import { useWindowSize } from 'Shared/Hooks/useWindowSize';
-import DarkMode from 'Shared/Components/DarkMode/DarkMode';
+import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
 import { useInitialLogin } from 'src/Shared/Hooks/useInitialLogin';
 
 const logoNavigate = (
@@ -30,7 +30,7 @@ const logoNavigate = (
   }
 };
 
-function Header() {
+export function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
 
   const navigate = useNavigate();
@@ -120,5 +120,3 @@ function Header() {
     </header>
   );
 }
-
-export default Header;

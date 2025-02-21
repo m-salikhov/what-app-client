@@ -2,9 +2,9 @@ import { getDate } from 'src/Shared/Helpers/getDate';
 import { useAppDispatch } from 'src/Shared/Hooks/redux';
 import { TournamentType } from 'src/Shared/Types/tournament';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import TimerOptions from './TimerOptions';
+import { TimerOptions } from './TimerOptions';
 
-function Start({ tournament }: { tournament: TournamentType }) {
+export function Start({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
   return (
@@ -30,5 +30,3 @@ function Start({ tournament }: { tournament: TournamentType }) {
     </div>
   );
 }
-
-export default Start;

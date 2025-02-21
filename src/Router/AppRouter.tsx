@@ -1,8 +1,8 @@
 import { createHashRouter } from 'react-router-dom';
-import PrivateRoute from './HOC/PrivateRoute';
+import { PrivateRoute } from './HOC/PrivateRoute';
 import { lazy, Suspense } from 'react';
-import Layout from 'src/Shared/Components/Layout/Layout';
-import MainPage from 'src/Pages/Main/MainPage';
+import { Layout } from 'src/Shared/Components/Layout/Layout';
+import { MainPage } from 'src/Pages/Main/MainPage';
 import { Spinner } from 'src/Shared/Components/Spinner/Spinner';
 import { initialLoginLoader } from './Utils/InitialLoginLoader';
 

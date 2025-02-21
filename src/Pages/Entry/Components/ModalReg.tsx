@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
-function ModalReg() {
+export function ModalReg() {
   const [counter, setCounter] = useState(5);
 
   useEffect(() => {
@@ -25,5 +25,3 @@ function ModalReg() {
     </>
   );
 }
-
-export default ModalReg;

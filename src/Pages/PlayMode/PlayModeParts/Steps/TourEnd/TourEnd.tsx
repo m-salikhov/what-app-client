@@ -1,12 +1,12 @@
-import QuestionPlane from 'Shared/Components/Question/QuestionPlane';
+import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import ResBlock from '../Components/ResultBlock/ResBlock';
+import { ResBlock } from '../Components/ResultBlock/ResBlock';
 import { TournamentType } from 'Shared/Types/tournament';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
 
-function TourEnd({ tournament }: { tournament: TournamentType }) {
+export function TourEnd({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
   const questionNumber = useAppSelector(selectedResultQuestionNumberPM);
@@ -29,5 +29,3 @@ function TourEnd({ tournament }: { tournament: TournamentType }) {
     </div>
   );
 }
-
-export default TourEnd;

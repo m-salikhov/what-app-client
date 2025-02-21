@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { QuestionType } from 'Shared/Types/question';
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import Button from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/Button/Button';
 
 interface Props {
   currentQuestion: QuestionType;
@@ -10,7 +10,7 @@ interface Props {
   setShowAnswer: (showAnswer: boolean) => void;
 }
 
-function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props) {
+export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props) {
   const dispatch = useAppDispatch();
 
   const [answer, setAnswer] = useState<boolean | undefined>(undefined);
@@ -49,5 +49,3 @@ function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props
     </div>
   );
 }
-
-export default ButtonsBlock;

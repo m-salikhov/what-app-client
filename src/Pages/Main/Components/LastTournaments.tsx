@@ -1,7 +1,7 @@
+import next from '../assets/next.svg';
+import back from '../assets/back.svg';
 import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
-import back from '../assets/back.svg';
-import next from '../assets/next.svg';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
@@ -13,7 +13,7 @@ const initial: TournamentsLastShort = {
   count: 0,
 };
 
-function LastTournaments() {
+export function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
@@ -68,5 +68,3 @@ function LastTournaments() {
     </div>
   );
 }
-
-export default LastTournaments;
