@@ -20,7 +20,7 @@ function TourTable({ tourResult }: Props) {
           <div
             className='tour-end-tbl-el'
             key={v.num}
-            onClick={() => dispatch(playModeActions.setSelectedResultQuestion(v.num))}
+            onClick={() => dispatch(playModeActions.setSelectedResultQuestionNumber(v.num))}
           >
             <div>{v.num}</div>
 

@@ -4,17 +4,19 @@ import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import ResBlock from '../Components/ResultBlock/ResBlock';
 import { TournamentType } from 'Shared/Types/tournament';
 import Button from 'Shared/Components/Button/Button';
-import { selectedResultQuestionPM } from 'Store/Selectors/PlayModeSelectors';
+import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
 
 function TourEnd({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
-  const selectedResultQuestion = useAppSelector(selectedResultQuestionPM);
+  const questionNumber = useAppSelector(selectedResultQuestionNumberPM);
+
+  const selectedQuestion = tournament.questions.find((q) => q.qNumber === questionNumber);
 
   const onClick = () => {
     dispatch(playModeActions.currentQuestionIndexIncrement());
     dispatch(playModeActions.setStep('QUESTION'));
-    dispatch(playModeActions.setSelectedResultQuestion(0));
+    dispatch(playModeActions.setSelectedResultQuestionNumber(-100));
   };
 
   return (
@@ -23,7 +25,7 @@ function TourEnd({ tournament }: { tournament: TournamentType }) {
 
       <Button title='Следующий тур' onClick={onClick} />
 
-      {Boolean(selectedResultQuestion) && <QuestionPlane q={tournament.questions[selectedResultQuestion - 1]} />}
+      {selectedQuestion && <QuestionPlane q={selectedQuestion} />}
     </div>
   );
 }

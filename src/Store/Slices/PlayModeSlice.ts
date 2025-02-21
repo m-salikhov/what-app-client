@@ -10,7 +10,7 @@ export interface PlayModeState {
   result: ResultElementClientType[];
   totalAnsweredCount: number;
   totalQuestionsCount: number;
-  selectedResultQuestion: number;
+  selectedResultQuestionNumber: number;
   withTimer: boolean;
   questionTimer: number;
   answerTimer: number;
@@ -23,7 +23,7 @@ const initialState: PlayModeState = {
   result: [],
   totalAnsweredCount: 0,
   totalQuestionsCount: 0,
-  selectedResultQuestion: 0,
+  selectedResultQuestionNumber: 0,
   withTimer: true,
   questionTimer: 15,
   answerTimer: 30,
@@ -67,9 +67,9 @@ const playModeSlice = createSlice({
       }
     },
 
-    setSelectedResultQuestion(state, action: PayloadAction<number>) {
-      if (state.selectedResultQuestion !== action.payload) {
-        state.selectedResultQuestion = action.payload;
+    setSelectedResultQuestionNumber(state, action: PayloadAction<number>) {
+      if (state.selectedResultQuestionNumber !== action.payload) {
+        state.selectedResultQuestionNumber = action.payload;
       }
     },
 

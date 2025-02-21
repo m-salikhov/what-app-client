@@ -7,7 +7,7 @@ export const currentQuestionIndexPM = (state: RootState) => state.playModeReduce
 export const currentTourNumberPM = (state: RootState) => state.playModeReducer.currentTourNumber;
 export const questionTimerPM = (state: RootState) => state.playModeReducer.questionTimer;
 export const resultPM = (state: RootState) => state.playModeReducer.result;
-export const selectedResultQuestionPM = (state: RootState) => state.playModeReducer.selectedResultQuestion;
+export const selectedResultQuestionNumberPM = (state: RootState) => state.playModeReducer.selectedResultQuestionNumber;
 export const totalAnsweredCountPM = (state: RootState) => state.playModeReducer.totalAnsweredCount;
 export const withTimerPM = (state: RootState) => state.playModeReducer.withTimer;
 export const totalQuestionsCountPM = (state: RootState) => state.playModeReducer.totalQuestionsCount;
@@ -22,11 +22,10 @@ export const timerOptions = createSelector(
 );
 
 export const finalResult = createSelector(
-  [totalAnsweredCountPM, totalQuestionsCountPM, resultPM, selectedResultQuestionPM],
-  (totalAnsweredCount, totalQuestionsCount, result, selectedResultQuestion) => ({
+  [totalAnsweredCountPM, totalQuestionsCountPM, resultPM],
+  (totalAnsweredCount, totalQuestionsCount, result) => ({
     totalAnsweredCount,
     totalQuestionsCount,
     result,
-    selectedResultQuestion,
   })
 );

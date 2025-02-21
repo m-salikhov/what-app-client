@@ -26,6 +26,15 @@ export const ResultElementClientSchema = ResultElementSchema.omit({
   id: true,
 });
 
+export const ResultClientSchema = z.object({
+  userId: z.string().uuid(),
+  tournamentId: z.number(),
+  title: z.string(),
+  tournamentLength: z.number(),
+  resultNumber: z.number(),
+  result: z.array(ResultElementClientSchema),
+});
+
 export type ResultFullType = z.infer<typeof ResultFullSchema>;
 export type ResultType = z.infer<typeof ResultSchema>;
 export type ResultElementType = z.infer<typeof ResultElementSchema>;
