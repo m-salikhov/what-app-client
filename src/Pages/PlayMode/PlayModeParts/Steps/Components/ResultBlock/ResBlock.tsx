@@ -1,4 +1,4 @@
-import { makeResultTable } from '../../Helpers/makeResultTable';
+import ResultTable from 'Shared/Components/ResultTable/ResultTable';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 import { currentTourNumberPM, finalResult } from 'Store/Selectors/PlayModeSelectors';
@@ -39,7 +39,7 @@ function ResBlock() {
         )}
       </div>
 
-      {makeResultTable(result)}
+      <ResultTable result={result} />
     </>
   );
 }
