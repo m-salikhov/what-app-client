@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
+import { Spinner } from 'Shared/Components/Spinner/Spinner';
 
 const initial: TournamentsLastShort = {
   tournaments: [],
@@ -17,7 +18,11 @@ export function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
-  const { data: { tournaments, pageCount } = initial, isFetching } = useGetTournamentsLastShortQuery({
+  const {
+    data: { tournaments, pageCount } = initial,
+    isFetching,
+    isLoading,
+  } = useGetTournamentsLastShortQuery({
     amount,
     page,
     withSkip: true,
@@ -35,6 +40,14 @@ export function LastTournaments() {
         break;
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className='main-content-tournaments-loading'>
+        <Spinner />
+      </div>
+    );
+  }
 
   return (
     <div className='main-content-tournaments'>

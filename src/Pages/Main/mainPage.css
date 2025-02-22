@@ -61,6 +61,13 @@
   }
 }
 
+.main-content-tournaments-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px;
+}
+
 .main-content-tournaments {
   padding-top: 0.9rem;
   margin-left: 2rem;

@@ -1,4 +1,4 @@
-import { TournamentShortType } from 'Shared/Types/tournament';
+import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 
 export const allshort: TournamentShortType[] = [
   {
