@@ -1,4 +1,4 @@
-import { QuestionType } from 'Shared/Schemas/QuestionSchema';
+import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 import { ExternalLinkText } from 'src/Shared/Components/Text/ExternalLinkText/ExternalLinkText';
 
 export function Answer({ q }: { q: QuestionType }) {

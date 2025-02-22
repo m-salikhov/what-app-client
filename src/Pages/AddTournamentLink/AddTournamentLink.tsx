@@ -7,12 +7,12 @@ import { ParsedTournament } from './Components/ParsedTournament';
 import { Button } from 'Shared/Components/Button/Button';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { guest } from 'Shared/Constants/constants';
-import { checkTournament } from './helpers/checkTournament';
 import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
+import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -21,10 +21,10 @@ function AddTournamentLink() {
   const [message, setMessage] = useState('');
   const [showParsedTournament, setShowParsedTournament] = useState(false);
   const [edit, setEdit] = useState(false);
-  const [errorsFilling, setErrorsFilling] = useState<string[] | null>(null);
 
   const [t, dispatch] = useReducer(reducer, addLinkInitTournament);
 
+  const { errorsFilling, checkTournament, resetErrors } = useCheckParsingErrors();
   const { currentUser } = useInitialLogin();
 
   const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
@@ -32,13 +32,9 @@ function AddTournamentLink() {
 
   const handleAddTournament = async () => {
     setMessage('');
-    setErrorsFilling(null);
+    resetErrors();
 
-    const errors = checkTournament(t);
-    if (errors) {
-      setErrorsFilling(errors);
-      return;
-    }
+    if (!checkTournament(t)) return;
 
     await addT({
       ...t,
@@ -52,7 +48,7 @@ function AddTournamentLink() {
 
   const handleParseLink = async () => {
     setMessage('');
-    setErrorsFilling(null);
+    resetErrors();
     setShowParsedTournament(false);
 
     await parseT({ link })
@@ -88,7 +84,7 @@ function AddTournamentLink() {
         <Button title='Открыть' onClick={handleParseLink} disabled={isLoadingAdd || isLoading} />
       </div>
 
-      {errorsFilling &&
+      {errorsFilling.length > 0 &&
         errorsFilling.map((error, i) => (
           <p className='addlink-errors-filling' key={i}>
             {error}
@@ -107,8 +103,10 @@ function AddTournamentLink() {
         <ParsedTournament
           t={t}
           handleAddTournament={handleAddTournament}
-          setEdit={setEdit}
-          setErrorsFilling={setErrorsFilling}
+          onClickEdit={() => {
+            setEdit(true);
+            resetErrors();
+          }}
         />
       ) : (
         <Instruction />

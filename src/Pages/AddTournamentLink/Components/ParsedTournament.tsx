@@ -5,24 +5,17 @@ import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   t: TournamentType;
-  setEdit: (callback: (prev: boolean) => boolean) => void;
-  setErrorsFilling: (errors: null) => void;
+  onClickEdit: () => void;
   handleAddTournament: () => void;
 }
 
-export function ParsedTournament({ t, setEdit, setErrorsFilling, handleAddTournament }: Props) {
+export function ParsedTournament({ t, onClickEdit, handleAddTournament }: Props) {
   return (
     <>
       <TournamentHeader tournament={t} />
 
       <div className='addlink-buttons'>
-        <Button
-          title={'Редактировать турнир'}
-          onClick={() => {
-            setEdit((prev) => !prev);
-            setErrorsFilling(null);
-          }}
-        ></Button>
+        <Button title={'Редактировать турнир'} onClick={onClickEdit}></Button>
         <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
       </div>
       <div className='tournament-content'>

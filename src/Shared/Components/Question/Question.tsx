@@ -4,7 +4,7 @@ import { Add } from './Components/Add';
 import { Answer } from './Components/Answer';
 import { AiOutlineDown } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
-import { QuestionType } from 'Shared/Schemas/QuestionSchema';
+import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   q: QuestionType;

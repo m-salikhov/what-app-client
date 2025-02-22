@@ -1,8 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl, serverRoutes, guest } from 'Shared/Constants/constants';
 import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
-import { QuestionType } from 'Shared/Schemas/QuestionSchema';
-import { TournamentShortType, TournamentType } from 'Shared/Schemas/TournamentSchema';
+import { QuestionType } from 'Shared/Schemas/TournamentSchema';
+import { TournamentShortType, TournamentType, TournamentTypeSchema } from 'Shared/Schemas/TournamentSchema';
 
 export const tournamentAPI = createApi({
   reducerPath: 'tournamentAPI',
@@ -42,6 +42,11 @@ export const tournamentAPI = createApi({
         method: 'POST',
         body,
       }),
+      transformResponse: (response: unknown) => {
+        const result = TournamentTypeSchema.parse(response);
+
+        return result;
+      },
     }),
 
     addTournament: build.mutation<number, TournamentType>({

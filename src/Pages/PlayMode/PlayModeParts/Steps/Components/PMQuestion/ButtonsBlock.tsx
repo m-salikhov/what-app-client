@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { Button } from 'Shared/Components/Button/Button';
-import { QuestionType } from 'Shared/Schemas/QuestionSchema';
+import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   currentQuestion: QuestionType;

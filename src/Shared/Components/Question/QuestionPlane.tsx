@@ -1,4 +1,4 @@
-import { QuestionType } from 'Shared/Schemas/QuestionSchema';
+import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 import { Add } from './Components/Add';
 import { Answer } from './Components/Answer';
 import './question.css';
