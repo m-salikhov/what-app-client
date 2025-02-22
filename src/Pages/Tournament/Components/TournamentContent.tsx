@@ -21,10 +21,7 @@ export function TournamentContent({ tournament }: { tournament: TournamentType }
 
       <div className='tournament-content' ref={ref}>
         <div className='tournament-content-header'>
-          {' '}
-          <div className='back'>
-            <Back />
-          </div>
+          <Back />
           <div className='tournament-content-tours' onClick={(e) => scroll(e, ref.current, tournament)}>
             {getToursParagraphs(tournament.tours)}
           </div>

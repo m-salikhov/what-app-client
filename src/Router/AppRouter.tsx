@@ -11,6 +11,7 @@ const AddTournamentLink = lazy(() => import('src/Pages/AddTournamentLink/AddTour
 const List = lazy(() => import('src/Pages/PlayMode/List'));
 const PlayMode = lazy(() => import('src/Pages/PlayMode/PlayMode'));
 const Profile = lazy(() => import('src/Pages/Profile/Profile'));
+const ProfileResultTable = lazy(() => import('src/Pages/Profile/Components/ProfileResultTable/ProfileResultTable'));
 const NotFound = lazy(() => import('src/Pages/NotFound/NotFound'));
 const AllTournaments = lazy(() => import('src/Pages/AllTournaments/AllTournaments'));
 const About = lazy(() => import('src/Pages/About/About'));
@@ -27,6 +28,7 @@ const router = createHashRouter([
         index: true,
         element: <MainPage />,
       },
+
       {
         path: 'about',
         element: (
@@ -36,6 +38,7 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'tournament/:id',
         element: (
@@ -45,6 +48,7 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'addbylink',
         element: (
@@ -53,6 +57,7 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'all',
         element: (
@@ -62,6 +67,7 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'entry',
         element: (
@@ -70,16 +76,33 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'profile',
-        element: (
-          <PrivateRoute>
-            <Suspense fallback={<Spinner />}>
-              <Profile />
-            </Suspense>
-          </PrivateRoute>
-        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <PrivateRoute>
+                <Suspense fallback={<Spinner />}>
+                  <Profile />
+                </Suspense>
+              </PrivateRoute>
+            ),
+          },
+          {
+            path: ':tournamentId/:userId',
+            element: (
+              <PrivateRoute>
+                <Suspense fallback={<Spinner />}>
+                  <ProfileResultTable />
+                </Suspense>
+              </PrivateRoute>
+            ),
+          },
+        ],
       },
+
       {
         path: 'wordle',
         element: (
@@ -88,6 +111,7 @@ const router = createHashRouter([
           </Suspense>
         ),
       },
+
       {
         path: 'playmode',
         children: [
@@ -109,6 +133,7 @@ const router = createHashRouter([
           },
         ],
       },
+
       {
         path: '*',
         element: (

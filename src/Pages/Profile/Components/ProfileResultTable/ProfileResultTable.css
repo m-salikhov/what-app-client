@@ -1,0 +1,15 @@
+.profile-result-table {
+  .profile-result-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding-top: 0.7rem;
+
+    & > p:last-of-type {
+      color: rgb(103, 97, 97);
+    }
+  }
+  h2 {
+    text-align: center;
+  }
+}

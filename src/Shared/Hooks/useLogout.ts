@@ -1,12 +1,12 @@
 import { useLazyLogoutQuery, userAPI } from 'Store/ToolkitAPIs/userAPI';
 import { useAppDispatch } from './redux';
-import { UserType } from 'Shared/Types/user';
+import { UserType } from 'Shared/Schemas/UserSchema';
 
 export const initUser: UserType = {
   id: '',
   email: '',
   username: '',
-  role: '',
+  role: 'user',
   date: 0,
 };
 

@@ -1,11 +1,12 @@
 import './profile.css';
-import { ChangePass } from './Components/ChangePass';
+import { ChangePass } from './Components/ChangePass/ChangePass';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { useGetTournamentsAllByUploaderQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { useGetUserResultShortQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useGetUserResultFullQuery } from 'Store/ToolkitAPIs/userAPI';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   useDocTitle('Профиль');
@@ -13,7 +14,9 @@ export default function Profile() {
   const { currentUser } = useInitialLogin();
 
   const { data: tournaments } = useGetTournamentsAllByUploaderQuery(currentUser?.id ?? skipToken);
-  const { data: results = [] } = useGetUserResultShortQuery(currentUser?.id ?? skipToken);
+  const { data: results = [] } = useGetUserResultFullQuery(currentUser?.id ?? skipToken);
+
+  if (!currentUser) return null;
 
   return (
     <div className='profile'>
@@ -21,19 +24,19 @@ export default function Profile() {
         <section className='user-info'>
           <div>
             <p>Имя</p>
-            <p>{currentUser?.username}</p>
+            <p>{currentUser.username}</p>
           </div>
           <div>
             <p>Почта</p>
-            <p>{currentUser?.email}</p>
+            <p>{currentUser.email}</p>
           </div>
           <div>
             <p>Зарегистрирован</p>
-            <p>{currentUser ? getDate(currentUser?.date) : null}</p>
+            <p>{getDate(currentUser.date)}</p>
           </div>
           <div>
             <p>Статус</p>
-            <p>{currentUser?.role}</p>
+            <p>{currentUser.role}</p>
           </div>
         </section>
         <ChangePass />{' '}
@@ -42,10 +45,10 @@ export default function Profile() {
           {results.length > 0 ? (
             results.map((v) => {
               return (
-                <div key={v.id}>
+                <Link key={v.id} to={`/profile/${v.tournamentId}/${currentUser.id}`}>
                   <p>{`${v.title}:`}</p>
                   <p>{`${v.resultNumber} из ${v.tournamentLength}`}</p>
-                </div>
+                </Link>
               );
             })
           ) : (
@@ -56,7 +59,11 @@ export default function Profile() {
           <h2>Добавленные вами турниры:</h2>
           {tournaments ? (
             tournaments.map((v) => {
-              return <p key={v.id}>{v.title}</p>;
+              return (
+                <Link to={`/tournament/${v.id}`} key={v.id}>
+                  <p>{v.title}</p>
+                </Link>
+              );
             })
           ) : (
             <div>

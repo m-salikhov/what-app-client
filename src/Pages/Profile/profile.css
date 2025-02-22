@@ -72,7 +72,7 @@
     .profile-results {
       padding-top: 1rem;
 
-      div {
+      a {
         display: flex;
         justify-content: space-between;
         margin-left: 10px;
@@ -80,6 +80,10 @@
 
         p:last-child {
           width: 85px;
+        }
+
+        &:hover {
+          background-color: var(--a-main-list-bg-color);
         }
       }
 
@@ -89,13 +93,16 @@
     }
 
     .profile-adds {
-      display: flex;
-      flex-direction: column;
       padding-top: 1rem;
 
-      p {
-        text-align: left;
+      a {
+        display: flex;
         margin-left: 10px;
+        border-bottom: 2px solid var(--border-color-quiet);
+
+        &:hover {
+          background-color: var(--a-main-list-bg-color);
+        }
       }
     }
   }

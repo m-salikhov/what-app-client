@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 import { screen } from '@testing-library/react';
-import TournamentsTable from 'Shared/Components/TournamentsTable/TournamentsTable';
+import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { renderWithProviders } from '../utils/renderWithProviders';
 import userEvent from '@testing-library/user-event';
 import { allshort } from '../__fixtures__/allshort';
