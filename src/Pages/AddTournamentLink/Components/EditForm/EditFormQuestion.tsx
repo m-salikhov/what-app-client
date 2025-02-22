@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Action, actionTypes } from '../../helpers/reducer';
 import { Button } from 'Shared/Components/Button/Button';
-import { QuestionType } from 'Shared/Types/question';
+import { QuestionType } from 'Shared/Schemas/QuestionSchema';
 
 interface Props {
   q: QuestionType;
@@ -149,7 +149,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
       </label>
 
       <p>Источник(и):</p>
-      {q.source.map((v, i) => {
+      {q.source?.map((v, i) => {
         return (
           <div key={i} className='edit-q-container-source'>
             <textarea
@@ -167,7 +167,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
             />
             <p
               onClick={() => {
-                if (q.source.length === 1) return;
+                if (q.source?.length === 1) return;
                 dispatch({ type: actionTypes.removeSource, questionID: q.id, sourceID: v.id });
               }}
             >

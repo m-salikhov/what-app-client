@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { ResultClientSchema } from 'Shared/Schemas/ResultSchema';
-import { TournamentType } from 'Shared/Types/tournament';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 import { finalResult } from 'Store/Selectors/PlayModeSelectors';
 import { usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
 

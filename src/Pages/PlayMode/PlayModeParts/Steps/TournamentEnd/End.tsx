@@ -4,10 +4,10 @@ import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { useAppSelector } from 'Shared/Hooks/redux';
-import { TournamentType } from 'Shared/Types/tournament';
 import { Button } from 'Shared/Components/Button/Button';
 import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
 import { useSaveResult } from './useSaveResult';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export function End({ tournament }: { tournament: TournamentType }) {
   const navigate = useNavigate();

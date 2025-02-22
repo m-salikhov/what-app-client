@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
+import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { useGetTournamentsAllShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { TournamentShortType } from 'Shared/Types/tournament';
 
 export function useGetAllTournamentsShorts() {
   const { data = [], isSuccess, error, isLoading } = useGetTournamentsAllShortQuery(undefined);

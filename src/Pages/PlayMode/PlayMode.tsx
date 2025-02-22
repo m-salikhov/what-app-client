@@ -7,10 +7,10 @@ import { End } from './PlayModeParts/Steps/TournamentEnd/End';
 import { ProgressBar } from './PlayModeParts/Steps/Components/ProgressBar/ProgressBar';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { useAppSelector } from 'Shared/Hooks/redux';
-import { TournamentType } from 'Shared/Types/tournament';
 import { Step } from 'Store/Slices/PlayModeSlice';
 import { useGetTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { stepPM } from 'Store/Selectors/PlayModeSelectors';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 function playModeStepChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {

@@ -1,4 +1,4 @@
-import { TournamentType } from 'Shared/Types/tournament';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export type Action =
   | {
@@ -90,13 +90,7 @@ const reducer = (state: TournamentType, action: Action) => {
   if (type === actionTypes.loaded) {
     const t = structuredClone(action.payload);
 
-    const randomKeys: number[] = [];
-    while (randomKeys.length < t.questions.length) {
-      const key = Math.floor(Math.random() * 1000 + 1);
-      if (!randomKeys.includes(key)) randomKeys.push(key);
-    }
-
-    t.questions.forEach((q, i) => (q.id = randomKeys[i]));
+    console.log({ t });
 
     return t;
   }
@@ -166,23 +160,36 @@ const reducer = (state: TournamentType, action: Action) => {
 
     case actionTypes.source:
       const sourceQuestions = [...state.questions];
+
       const questionIndex = sourceQuestions.findIndex((q) => q.id === action.questionID);
-      sourceQuestions[questionIndex].source.forEach((s) => {
-        if (s.id === action.sourceID) s.link = action.payload;
-      });
+
+      if (sourceQuestions[questionIndex].source) {
+        sourceQuestions[questionIndex].source.forEach((s) => {
+          if (s.id === action.sourceID) return (s.link = action.payload);
+        });
+      }
+
       return { ...state, questions: sourceQuestions };
 
     case actionTypes.removeSource:
       const removeSourceQuestions = [...state.questions];
       const questionIndexRemove = removeSourceQuestions.findIndex((q) => q.id === action.questionID);
-      const sourcesRemove = removeSourceQuestions[questionIndexRemove].source.filter((s) => s.id !== action.sourceID);
-      removeSourceQuestions[questionIndexRemove].source = sourcesRemove;
+
+      if (removeSourceQuestions[questionIndexRemove].source) {
+        const sourcesRemove = removeSourceQuestions[questionIndexRemove].source.filter((s) => s.id !== action.sourceID);
+        removeSourceQuestions[questionIndexRemove].source = sourcesRemove;
+      }
+
       return { ...state, questions: removeSourceQuestions };
 
     case actionTypes.addSource:
       const addSourceQuestions = [...state.questions];
       const questionIndexAdd = addSourceQuestions.findIndex((q) => q.id === action.questionID);
-      addSourceQuestions[questionIndexAdd].source.push({ id: Date.now(), link: '' });
+
+      if (addSourceQuestions[questionIndexAdd].source) {
+        addSourceQuestions[questionIndexAdd].source.push({ id: Date.now(), link: '' });
+      }
+
       return { ...state, questions: addSourceQuestions };
 
     case actionTypes.qNumber:

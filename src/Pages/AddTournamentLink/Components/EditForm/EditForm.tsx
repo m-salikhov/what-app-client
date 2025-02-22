@@ -4,8 +4,8 @@ import { Action, actionTypes } from '../../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
 import { Button } from 'Shared/Components/Button/Button';
 import { getDateYYYY_MM_DD } from 'Shared/Helpers/getDate';
-import { TournamentType } from 'Shared/Types/tournament';
 import { EditFormEditors } from './EditFormEditors';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   t: TournamentType;

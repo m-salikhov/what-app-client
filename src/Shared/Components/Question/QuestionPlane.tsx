@@ -1,4 +1,4 @@
-import { QuestionType } from 'Shared/Types/question';
+import { QuestionType } from 'Shared/Schemas/QuestionSchema';
 import { Add } from './Components/Add';
 import { Answer } from './Components/Answer';
 import './question.css';

@@ -2,9 +2,9 @@ import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { ResBlock } from '../Components/ResultBlock/ResBlock';
-import { TournamentType } from 'Shared/Types/tournament';
 import { Button } from 'Shared/Components/Button/Button';
 import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export function TourEnd({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();

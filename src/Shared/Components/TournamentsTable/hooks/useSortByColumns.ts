@@ -1,5 +1,5 @@
-import { TournamentShortType } from 'Shared/Types/tournament';
 import { useState, MouseEvent, Dispatch, SetStateAction } from 'react';
+import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
 
 const fieldNameSchema = z.enum([

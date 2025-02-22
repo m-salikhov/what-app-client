@@ -19,11 +19,7 @@ export const QuestionTypeSchema = z.object({
   comment: z.string().optional(),
   source: z.array(SourceTypeSchema).optional(),
   author: z.string(),
-});
-
-export const QuestionFullType = QuestionTypeSchema.extend({
-  tournament: z.array(TournamentShortTypeSchema),
+  tournament: TournamentShortTypeSchema.optional(),
 });
 
 export type QuestionType = z.infer<typeof QuestionTypeSchema>;
-export type QuestionFullType = z.infer<typeof QuestionFullType>;

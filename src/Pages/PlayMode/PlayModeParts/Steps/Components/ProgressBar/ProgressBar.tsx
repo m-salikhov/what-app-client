@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { ProgressBarItem } from './ProgressBarItem';
-import { TournamentType } from 'Shared/Types/tournament';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { currentTourNumberPM } from 'Store/Selectors/PlayModeSelectors';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export const getProgressBarItems = (first: number, last: number) => {
   const arr = [];

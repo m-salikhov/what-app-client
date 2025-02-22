@@ -1,5 +1,5 @@
-import { TournamentType } from 'Shared/Types/tournament';
 import { MouseEvent } from 'react';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 const getToursAnchors = (tournament: TournamentType) => {
   const tours: number[] = [];

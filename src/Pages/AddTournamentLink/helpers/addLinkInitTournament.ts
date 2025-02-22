@@ -1,4 +1,4 @@
-import { TournamentType } from 'Shared/Types/tournament';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export const addLinkInitTournament: TournamentType = {
   id: 0,

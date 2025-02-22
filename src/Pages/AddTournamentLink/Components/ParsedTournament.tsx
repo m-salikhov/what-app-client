@@ -1,7 +1,7 @@
 import { Button } from 'Shared/Components/Button/Button';
 import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';
-import { TournamentType } from 'Shared/Types/tournament';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   t: TournamentType;

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { QuestionType } from 'Shared/Types/question';
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { Button } from 'Shared/Components/Button/Button';
+import { QuestionType } from 'Shared/Schemas/QuestionSchema';
 
 interface Props {
   currentQuestion: QuestionType;

@@ -4,7 +4,7 @@ import { getToursParagraphs, scroll } from './scrollLogic';
 import { Back } from 'Shared/Components/Back/Back';
 import { Question } from 'Shared/Components/Question/Question';
 import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';
-import { TournamentType } from 'Shared/Types/tournament';
+import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 export function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);

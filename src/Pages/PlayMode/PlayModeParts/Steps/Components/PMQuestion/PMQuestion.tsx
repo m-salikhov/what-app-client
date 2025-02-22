@@ -4,10 +4,10 @@ import { ButtonsBlock } from './ButtonsBlock';
 import { Add } from 'Shared/Components/Question/Components/Add';
 import { Answer } from 'Shared/Components/Question/Components/Answer';
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
-import { QuestionType } from 'Shared/Types/question';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { Button } from 'Shared/Components/Button/Button';
 import { currentQuestionIndexPM, withTimerPM } from 'Store/Selectors/PlayModeSelectors';
+import { QuestionType } from 'Shared/Schemas/QuestionSchema';
 
 export function PMQuestion({ tournament: { questions } }: { tournament: { questions: QuestionType[] } }) {
   const dispatch = useAppDispatch();
