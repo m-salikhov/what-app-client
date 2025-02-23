@@ -1,24 +1,36 @@
 import './tournamentsTable.css';
 import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { useState } from 'react';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
+import { useState, MouseEvent } from 'react';
 import { getDate } from 'Shared/Helpers/getDate';
-import { useSortByColumns } from './hooks/useSortByColumns';
-import { useGetAllTournamentsShorts } from './hooks/useGetAllTournamentsShorts';
-import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { linkBuilder } from './Helpers/linkBuilder';
 import { filterTournamentsByTitleSearchString } from './Helpers/filterTournamentsByTitleSearchString';
+import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
+import { z } from 'zod';
 
-export function TournamentsTable() {
-  const { error, tournaments, setTournaments, isLoading } = useGetAllTournamentsShorts();
-  const { handleSort } = useSortByColumns(setTournaments);
+const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
+
+export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
   const [search, setSearch] = useState('');
+  const [filterField, setFilterField] = useState('dsc');
+
   const { pathname } = useLocation();
 
-  if (error) return <h2>{extractServerErrorMessage(error)}</h2>;
+  function handleSort(e: MouseEvent<HTMLDivElement>) {
+    const filter = fieldNameSchema.parse(e.currentTarget.id);
 
-  if (isLoading) return <Spinner />;
+    if (filter === 'uploader' || filter === 'title') {
+      tournaments.sort(function (a, b) {
+        return filterField === 'dsc' ? a[filter].localeCompare(b[filter]) : b[filter].localeCompare(a[filter]);
+      });
+    } else {
+      tournaments.sort(function (a, b) {
+        return filterField === 'dsc' ? a[filter] - b[filter] : b[filter] - a[filter];
+      });
+    }
+
+    setFilterField(filterField === 'asc' ? 'desc' : 'asc');
+  }
 
   return (
     <>
