@@ -20,13 +20,5 @@ export default function Tournament() {
 
   if (isLoading) return <Spinner />;
 
-  return (
-    <div className='tournament-container'>
-      {isLoading && <Spinner />}
-
-      {error && <h2>{extractServerErrorMessage(error)}</h2>}
-
-      {isSuccess && <TournamentContent tournament={tournament} />}
-    </div>
-  );
+  return <div className='tournament-container'>{isSuccess && <TournamentContent tournament={tournament} />}</div>;
 }

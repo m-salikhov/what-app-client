@@ -14,6 +14,7 @@ function List() {
   if (error) return <h2>{extractServerErrorMessage(error)}</h2>;
 
   if (isLoading) return <Spinner />;
+
   if (!isSuccess) return null;
 
   const dispatch = useAppDispatch();

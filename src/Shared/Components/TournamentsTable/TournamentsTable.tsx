@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useState, MouseEvent } from 'react';
 import { getDate } from 'Shared/Helpers/getDate';
 import { linkBuilder } from './Helpers/linkBuilder';
-import { filterTournamentsByTitleSearchString } from './Helpers/filterTournamentsByTitleSearchString';
+import { filterTournaments } from './Helpers/filterTournaments';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
 
@@ -16,7 +16,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 
   const { pathname } = useLocation();
 
-  function handleSort(e: MouseEvent<HTMLDivElement>) {
+  function sortTournaments(e: MouseEvent<HTMLDivElement>) {
     const filter = fieldNameSchema.parse(e.currentTarget.id);
 
     if (filter === 'uploader' || filter === 'title') {
@@ -44,48 +44,48 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 
           <div>
             Название
-            <div className='tournaments-table-icon' id='title' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='title' onClick={sortTournaments}>
               <img src={chart} alt='сортировать по названию' />
             </div>{' '}
           </div>
 
           <div>
             Дата отыгрыша{' '}
-            <div className='tournaments-table-icon' id='date' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='date' onClick={sortTournaments}>
               <img src={chart} alt='сортировать по дате отыгрыша' />
             </div>{' '}
           </div>
 
           <div>
             Вопросы{' '}
-            <div className='tournaments-table-icon' id='questionsQuantity' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='questionsQuantity' onClick={sortTournaments}>
               <img src={chart} alt='сортировать по количеству вопросов' />
             </div>{' '}
           </div>
 
           <div>
             Туры{' '}
-            <div className='tournaments-table-icon' id='tours' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='tours' onClick={sortTournaments}>
               <img src={chart} alt='сортировать количество туров' />
             </div>{' '}
           </div>
 
           <div>
             Добавлен{' '}
-            <div className='tournaments-table-icon' id='dateUpload' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='dateUpload' onClick={sortTournaments}>
               <img src={chart} alt='сортировать по дате добавления' />
             </div>{' '}
           </div>
 
           <div>
             Добавил{' '}
-            <div className='tournaments-table-icon' id='uploader' onClick={handleSort}>
+            <div className='tournaments-table-icon' id='uploader' onClick={sortTournaments}>
               <img src={chart} alt='сортировать по добавившему' />
             </div>{' '}
           </div>
         </div>
 
-        {filterTournamentsByTitleSearchString(tournaments, search).map((item, i) => (
+        {filterTournaments(tournaments, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>

@@ -2,17 +2,21 @@ import { MouseEvent } from 'react';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 const getToursAnchors = (tournament: TournamentType) => {
-  const tours: number[] = [];
-  const toursAnchors: number[] = [];
+  const { toursAnchors } = tournament.questions.reduce(
+    (acc, question, index) => {
+      if (question.qNumber < 1) {
+        return acc;
+      }
 
-  tournament.questions.forEach((v, i) => {
-    if (v.qNumber < 1) return;
+      if (!acc.tours.includes(question.tourNumber)) {
+        acc.tours.push(question.tourNumber);
+        acc.toursAnchors.push(index);
+      }
 
-    if (!tours.includes(v.tourNumber)) {
-      tours.push(v.tourNumber);
-      toursAnchors.push(i);
-    }
-  });
+      return acc;
+    },
+    { tours: [], toursAnchors: [] } as { tours: number[]; toursAnchors: number[] }
+  );
 
   return toursAnchors;
 };
