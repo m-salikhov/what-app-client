@@ -1,7 +1,11 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl, serverRoutes, guest } from 'Shared/Constants/constants';
-import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
-import { QuestionType } from 'Shared/Schemas/TournamentSchema';
+import {
+  QuestionType,
+  TournamentShortTypeSchema,
+  TournamentsLastShortSchema,
+  TournamentsLastShortType,
+} from 'Shared/Schemas/TournamentSchema';
 import { TournamentShortType, TournamentType, TournamentTypeSchema } from 'Shared/Schemas/TournamentSchema';
 
 export const tournamentAPI = createApi({
@@ -13,13 +17,25 @@ export const tournamentAPI = createApi({
   endpoints: (build) => ({
     getTournament: build.query<TournamentType, string | number>({
       query: (id: string | number) => `/tournaments/${id}`,
+      transformResponse: (response: unknown) => {
+        const result = TournamentTypeSchema.parse(response);
+
+        return result;
+      },
     }),
 
-    getTournamentsLastShort: build.query<TournamentsLastShort, { amount: number; page: number; withSkip: boolean }>({
-      query: ({ amount, page, withSkip }) =>
-        serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
-      providesTags: ['shorts'],
-    }),
+    getTournamentsLastShort: build.query<TournamentsLastShortType, { amount: number; page: number; withSkip: boolean }>(
+      {
+        query: ({ amount, page, withSkip }) =>
+          serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
+        transformResponse: (response) => {
+          const result = TournamentsLastShortSchema.parse(response);
+
+          return result;
+        },
+        providesTags: ['shorts'],
+      }
+    ),
 
     getRandom: build.query<QuestionType[], number>({
       query: (n: number) => `/tournaments/random/${n}`,
@@ -33,6 +49,11 @@ export const tournamentAPI = createApi({
 
     getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
       query: () => serverRoutes.tournamentsAllShort,
+      transformResponse: (response: unknown) => {
+        const result = TournamentShortTypeSchema.array().parse(response);
+
+        return result;
+      },
       providesTags: ['shorts'],
     }),
 

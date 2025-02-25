@@ -4,25 +4,14 @@ import { MouseEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { TournamentsLastShort } from 'Store/Types/tournamentAPI.types';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-
-const initial: TournamentsLastShort = {
-  tournaments: [],
-  pageCount: 0,
-  hasMorePage: false,
-  count: 0,
-};
+import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 
 export function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
-  const {
-    data: { tournaments, pageCount } = initial,
-    isFetching,
-    isLoading,
-  } = useGetTournamentsLastShortQuery({
+  const { data, isFetching, isLoading, error } = useGetTournamentsLastShortQuery({
     amount,
     page,
     withSkip: true,
@@ -49,6 +38,10 @@ export function LastTournaments() {
     );
   }
 
+  if (error) {
+    return <h2>{extractServerErrorMessage(error)}</h2>;
+  }
+
   return (
     <div className='main-content-tournaments'>
       <h2>Последние добавленные турниры</h2>
@@ -58,7 +51,7 @@ export function LastTournaments() {
         <h3>Добавлен</h3>
       </div>
 
-      {tournaments.map((v) => {
+      {data?.tournaments.map((v) => {
         return (
           <div className='tournaments-item' key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
@@ -74,7 +67,12 @@ export function LastTournaments() {
           <img src={back} alt='предыдущая страница списка турниров' />
         </button>
         <p>{page}</p>
-        <button type='button' className='next' disabled={isFetching || page === pageCount} onClick={changePageNumber}>
+        <button
+          type='button'
+          className='next'
+          disabled={isFetching || page === data?.pageCount}
+          onClick={changePageNumber}
+        >
           <img src={next} alt='следующая страница списка турниров' />
         </button>
       </div>

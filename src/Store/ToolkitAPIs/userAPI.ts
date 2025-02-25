@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
-import { ResultFullSchema, ResultFullType, ResultSchema, ResultType } from 'Shared/Schemas/ResultSchema';
+import { ResultFullSchema, ResultFullType, ResultType } from 'Shared/Schemas/ResultSchema';
 import { UserSchema, UserType } from 'Shared/Schemas/UserSchema';
 import { UserLogin, UserReg } from 'Store/Types/userApi.types';
 
@@ -59,16 +59,6 @@ export const userAPI = createApi({
       }),
     }),
 
-    getUserResultShort: build.query<ResultType[], string>({
-      query: (userID) => serverRoutes.userResultShort + '/' + userID,
-      transformResponse: (response: unknown) => {
-        const result = ResultSchema.array().parse(response);
-
-        return result;
-      },
-      providesTags: ['result'],
-    }),
-
     getUserResultFull: build.query<ResultFullType[], string>({
       query: (userID) => serverRoutes.userResultFull + '/' + userID,
       transformResponse: (response: unknown) => {
@@ -85,11 +75,6 @@ export const userAPI = createApi({
         method: 'POST',
         body,
       }),
-      transformResponse: (response: unknown) => {
-        const result = ResultFullSchema.parse(response);
-
-        return result;
-      },
       invalidatesTags: ['result'],
     }),
   }),
@@ -101,7 +86,6 @@ export const {
   useLazyLogoutQuery,
   useLoginMutation,
   useRegistrationMutation,
-  useGetUserResultShortQuery,
   useGetUserResultFullQuery,
   usePostUserResultMutation,
   useChangePasswordMutation,

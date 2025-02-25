@@ -43,6 +43,14 @@ export const TournamentTypeSchema = TournamentShortTypeSchema.extend({
   editors: z.array(EditorTypeSchema),
 });
 
+export const TournamentsLastShortSchema = z.object({
+  count: z.number(),
+  pageCount: z.number(),
+  hasMorePage: z.boolean(),
+  tournaments: z.array(TournamentShortTypeSchema),
+});
+
 export type TournamentShortType = z.infer<typeof TournamentShortTypeSchema>;
 export type TournamentType = z.infer<typeof TournamentTypeSchema>;
 export type QuestionType = z.infer<typeof QuestionTypeSchema>;
+export type TournamentsLastShortType = z.infer<typeof TournamentsLastShortSchema>;
