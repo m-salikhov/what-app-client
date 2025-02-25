@@ -21,11 +21,11 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 
     if (filter === 'uploader' || filter === 'title') {
       tournaments.sort(function (a, b) {
-        return filterField === 'dsc' ? a[filter].localeCompare(b[filter]) : b[filter].localeCompare(a[filter]);
+        return filterField === 'asc' ? a[filter].localeCompare(b[filter]) : b[filter].localeCompare(a[filter]);
       });
     } else {
       tournaments.sort(function (a, b) {
-        return filterField === 'dsc' ? a[filter] - b[filter] : b[filter] - a[filter];
+        return filterField === 'asc' ? a[filter] - b[filter] : b[filter] - a[filter];
       });
     }
 
