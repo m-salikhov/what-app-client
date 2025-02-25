@@ -1,11 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { ResBlock } from '../Components/ResultBlock/ResBlock';
-import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
-import { useAppSelector } from 'Shared/Hooks/redux';
 import { Button } from 'Shared/Components/Button/Button';
-import { selectedResultQuestionNumberPM } from 'Store/Selectors/PlayModeSelectors';
 import { useSaveResult } from './useSaveResult';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
@@ -14,12 +11,9 @@ export function End({ tournament }: { tournament: TournamentType }) {
 
   const { isLoading, isSuccess, error } = useSaveResult(tournament);
 
-  const questionNumber = useAppSelector(selectedResultQuestionNumberPM);
-  const selectedQuestion = tournament.questions.find((q) => q.qNumber === questionNumber);
-
   return (
     <div className='end-tournament'>
-      <ResBlock />
+      <ResBlock tournamentId={tournament.id} />
 
       {isLoading && <Spinner width='30' />}
 
@@ -28,8 +22,6 @@ export function End({ tournament }: { tournament: TournamentType }) {
       {error && <p>{extractServerErrorMessage(error) || 'Ошибка при сохранении результата'}</p>}
 
       <Button title='К выбору турнира' onClick={() => navigate('/playmode')} />
-
-      {selectedQuestion && <QuestionPlane q={selectedQuestion} />}
     </div>
   );
 }

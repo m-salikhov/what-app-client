@@ -18,7 +18,7 @@ const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
   return tourResult;
 };
 
-export function ResBlock() {
+export function ResBlock({ tournamentId }: { tournamentId: number }) {
   const { result, totalAnsweredCount, totalQuestionsCount } = useAppSelector(finalResult);
   const currentTour = useAppSelector(currentTourNumberPM);
 
@@ -39,7 +39,7 @@ export function ResBlock() {
         )}
       </div>
 
-      <ResultTable result={result} />
+      <ResultTable result={result} tournamentId={+tournamentId} />
     </>
   );
 }

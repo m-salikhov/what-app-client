@@ -1,28 +1,21 @@
 import './ResultTable.css';
 import green_ans from './green_mark.svg';
 import red_ans from './red_cross.svg';
-import { useAppDispatch } from 'Shared/Hooks/redux';
-import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 
 interface Props {
   tourResult: ResultElementClientType[] | undefined;
+  setSelectedQuestionNumber: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export function TourTable({ tourResult }: Props) {
-  const dispatch = useAppDispatch();
-
+export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
   if (!tourResult) return null;
 
   return (
     <div className='result-table-tour'>
       {tourResult.map((v) => {
         return (
-          <div
-            className='result-table-el'
-            key={v.num}
-            onClick={() => dispatch(playModeActions.setSelectedResultQuestionNumber(v.num))}
-          >
+          <div className='result-table-el' key={v.num} onClick={() => setSelectedQuestionNumber(v.num)}>
             <div>{v.num}</div>
 
             <div>

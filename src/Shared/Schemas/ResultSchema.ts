@@ -19,12 +19,12 @@ export const ResultSchema = z.object({
 
 export const ResultFullSchema = ResultSchema.extend({
   result: z.array(ResultElementSchema),
-});
+}).strict();
 
-//когда результат еще не сохранен.
+// когда результат еще не сохранен.
 export const ResultElementClientSchema = ResultElementSchema.omit({
   id: true,
-});
+}).strict();
 
 export const ResultClientSchema = z.object({
   userId: z.string().uuid(),
