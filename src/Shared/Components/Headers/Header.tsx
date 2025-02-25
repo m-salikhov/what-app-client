@@ -1,7 +1,7 @@
 import './header.css';
 import owlGreen from './owlGreen.svg';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { Link, NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
+import { NavigateFunction, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useLogout } from 'Shared/Hooks/useLogout';
 import { useWindowSize } from 'Shared/Hooks/useWindowSize';
 import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
@@ -72,42 +72,42 @@ export function Header() {
             <DarkMode />{' '}
           </li>
           <li>
-            <Link to='/about'>О сайте</Link>
+            <NavLink to='/about'>О сайте</NavLink>
           </li>
 
           <li>
-            <Link to='/playmode'>Игровой режим </Link>
+            <NavLink to='/playmode'>Игровой режим </NavLink>
           </li>
 
           {currentUser?.role === 'superuser' && (
             <li>
-              <Link to='/edit'> Редактировать</Link>
+              <NavLink to='/edit'> Редактировать</NavLink>
             </li>
           )}
 
           <li>
-            <Link to='/addbylink'> Добавить турнир</Link>
+            <NavLink to='/addbylink'> Добавить турнир</NavLink>
           </li>
 
           <li>
-            <Link to='/all'>Все турниры</Link>
+            <NavLink to='/all'>Все турниры</NavLink>
           </li>
 
           {currentUser?.id && (
             <li>
-              <Link to='/profile'>Профиль</Link>
+              <NavLink to='/profile'>Профиль</NavLink>
             </li>
           )}
 
           {currentUser?.id ? (
             <li>
-              <Link to='/' onClick={logout}>
+              <NavLink to='/' onClick={logout}>
                 Выйти
-              </Link>
+              </NavLink>
             </li>
           ) : (
             <li>
-              <Link to='/entry'>Войти</Link>
+              <NavLink to='/entry'>Войти</NavLink>
             </li>
           )}
         </ul>

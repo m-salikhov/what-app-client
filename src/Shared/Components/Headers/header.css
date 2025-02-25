@@ -33,8 +33,10 @@ nav {
       font-size: 1.125rem;
       font-weight: 600;
       color: var(--nav-text-color);
-
       &:hover {
+        color: var(--nav-text-color-hover);
+      }
+      & .active {
         color: var(--nav-text-color-hover);
       }
     }
