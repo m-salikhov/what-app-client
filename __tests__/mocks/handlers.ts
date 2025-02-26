@@ -13,4 +13,23 @@ export const handlers = [
   http.get('https://andvarifserv.ru/tournaments/allshort', () => {
     return HttpResponse.json(allshort);
   }),
+
+  http.post<{ email: string; password: string } | { username: string; password: string }>(
+    'https://andvarifserv.ru/auth/login',
+    async ({ request }) => {
+      const body: { email: string; password: string } = await request.clone().json();
+
+      if (body.email === 'test-error@ya.ru') {
+        return new HttpResponse(null, { status: 400 });
+      }
+
+      return HttpResponse.json({
+        id: '123e4567-e89b-12d3-a456-426655440000',
+        date: 1111,
+        email: 'example@ya.ru',
+        username: 'example@ya.ru',
+        role: 'user',
+      });
+    }
+  ),
 ];

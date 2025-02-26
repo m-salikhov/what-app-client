@@ -20,133 +20,144 @@ const About = lazy(() => import('src/Pages/About/About'));
 const Wordle = lazy(() => import('src/Pages/Wordle/Wordle'));
 const Tournament = lazy(() => import('src/Pages/Tournament/Tournament'));
 
-const router = createHashRouter([
+const router = createHashRouter(
+  [
+    {
+      path: '/',
+      element: <Layout />,
+      loader: initialLoginLoader,
+      children: [
+        {
+          index: true,
+          element: <MainPage />,
+        },
+
+        {
+          path: 'about',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              {' '}
+              <About />{' '}
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'tournament/:id',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              {' '}
+              <Tournament />{' '}
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'addbylink',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              <AddTournamentLink />
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'all',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              {' '}
+              <AllTournaments />
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'entry',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              <Entry />
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'profile',
+          children: [
+            {
+              index: true,
+              element: (
+                <PrivateRoute>
+                  <Suspense fallback={<Spinner />}>
+                    <Profile />
+                  </Suspense>
+                </PrivateRoute>
+              ),
+            },
+            {
+              path: ':tournamentId/:userId',
+              element: (
+                <PrivateRoute>
+                  <Suspense fallback={<Spinner />}>
+                    <ProfileResultTable />
+                  </Suspense>
+                </PrivateRoute>
+              ),
+            },
+          ],
+        },
+
+        {
+          path: 'wordle',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              <Wordle />
+            </Suspense>
+          ),
+        },
+
+        {
+          path: 'playmode',
+          children: [
+            {
+              index: true,
+              element: (
+                <Suspense fallback={<Spinner />}>
+                  <List />{' '}
+                </Suspense>
+              ),
+            },
+            {
+              path: ':id/:title',
+              element: (
+                <Suspense fallback={<Spinner />}>
+                  <PlayMode />
+                </Suspense>
+              ),
+              loader: () => store.dispatch(playModeActions.resetState()),
+            },
+          ],
+        },
+
+        {
+          path: '*',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              <NotFound />
+            </Suspense>
+          ),
+        },
+      ],
+    },
+  ],
   {
-    path: '/',
-    element: <Layout />,
-    loader: initialLoginLoader,
-    children: [
-      {
-        index: true,
-        element: <MainPage />,
-      },
-
-      {
-        path: 'about',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            {' '}
-            <About />{' '}
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'tournament/:id',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            {' '}
-            <Tournament />{' '}
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'addbylink',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <AddTournamentLink />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'all',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            {' '}
-            <AllTournaments />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'entry',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <Entry />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'profile',
-        children: [
-          {
-            index: true,
-            element: (
-              <PrivateRoute>
-                <Suspense fallback={<Spinner />}>
-                  <Profile />
-                </Suspense>
-              </PrivateRoute>
-            ),
-          },
-          {
-            path: ':tournamentId/:userId',
-            element: (
-              <PrivateRoute>
-                <Suspense fallback={<Spinner />}>
-                  <ProfileResultTable />
-                </Suspense>
-              </PrivateRoute>
-            ),
-          },
-        ],
-      },
-
-      {
-        path: 'wordle',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <Wordle />
-          </Suspense>
-        ),
-      },
-
-      {
-        path: 'playmode',
-        children: [
-          {
-            index: true,
-            element: (
-              <Suspense fallback={<Spinner />}>
-                <List />{' '}
-              </Suspense>
-            ),
-          },
-          {
-            path: ':id/:title',
-            element: (
-              <Suspense fallback={<Spinner />}>
-                <PlayMode />
-              </Suspense>
-            ),
-            loader: () => store.dispatch(playModeActions.resetState()),
-          },
-        ],
-      },
-
-      {
-        path: '*',
-        element: (
-          <Suspense fallback={<Spinner />}>
-            <NotFound />
-          </Suspense>
-        ),
-      },
-    ],
-  },
-]);
+    future: {
+      v7_fetcherPersist: true,
+      v7_normalizeFormMethod: true,
+      v7_partialHydration: true,
+      v7_relativeSplatPath: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+);
 
 export default router;
