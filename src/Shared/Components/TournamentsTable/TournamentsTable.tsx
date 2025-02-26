@@ -89,7 +89,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>
-              <Link to={linkBuilder(item, pathname)}>{item.title}</Link>
+              <Link to={linkBuilder(item.id, item.title, pathname)}>{item.title}</Link>
             </div>
             <div>{getDate(item.date)}</div>
             <div>{item.questionsQuantity}</div>

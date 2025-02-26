@@ -10,7 +10,7 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
-describe('', () => {
+describe('Форма логина', () => {
   test('рендерит форму Login по умолчанию', () => {
     renderWithProviders(<Entry />);
 

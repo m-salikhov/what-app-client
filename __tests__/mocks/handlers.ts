@@ -14,10 +14,32 @@ export const handlers = [
     return HttpResponse.json(allshort);
   }),
 
+  http.post('https://andvarifserv.ru/auth/login', async ({ request }) => {
+    const body: { email: string; password: string } = await request.clone().json();
+
+    if (body.email === 'test-error@ya.ru') {
+      return new HttpResponse(null, { status: 400 });
+    }
+
+    return HttpResponse.json({
+      id: '123e4567-e89b-12d3-a456-426655440000',
+      date: 1111,
+      email: 'example@ya.ru',
+      username: 'example@ya.ru',
+      role: 'user',
+    });
+  }),
+
   http.post<{ email: string; password: string } | { username: string; password: string }>(
-    'https://andvarifserv.ru/auth/login',
+    'https://andvarifserv.ru/users',
     async ({ request }) => {
-      const body: { email: string; password: string } = await request.clone().json();
+      const body: {
+        email: string;
+        username: string;
+        role: 'user' | 'superuser' | 'admin' | '';
+        password: string;
+        date: number;
+      } = await request.clone().json();
 
       if (body.email === 'test-error@ya.ru') {
         return new HttpResponse(null, { status: 400 });

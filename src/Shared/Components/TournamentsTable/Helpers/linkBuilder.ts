@@ -1,10 +1,8 @@
-import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
-
-export function linkBuilder(tournament: TournamentShortType, pathname: string) {
+export function linkBuilder(id: number, title: string, pathname: string) {
   if (pathname.includes('all')) {
-    return `/tournament/${tournament.id}`;
+    return `/tournament/${id}`;
   }
   if (pathname.includes('playmode')) {
-    return `/playmode/${tournament.id}/${tournament.title}`;
+    return `/playmode/${id}/${title}`;
   } else return '';
 }
