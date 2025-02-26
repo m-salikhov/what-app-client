@@ -1,6 +1,4 @@
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
-import { useAppDispatch } from 'Shared/Hooks/redux';
-import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
@@ -16,10 +14,6 @@ function List() {
   if (isLoading) return <Spinner />;
 
   if (!isSuccess) return null;
-
-  const dispatch = useAppDispatch();
-
-  dispatch(playModeActions.resetState());
 
   return <TournamentsTable tournaments={structuredClone(tournaments)} />;
 }

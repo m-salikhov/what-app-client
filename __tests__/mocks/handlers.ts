@@ -1,5 +1,4 @@
 import { http, HttpResponse } from 'msw';
-import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
 import { allshort } from '../__fixtures__/allshort';
 
 export const handlers = [
@@ -11,7 +10,7 @@ export const handlers = [
     });
   }),
 
-  http.get(baseUrl + '/' + serverRoutes.tournamentsAllShort, () => {
+  http.get('https://andvarifserv.ru/tournaments/allshort', () => {
     return HttpResponse.json(allshort);
   }),
 ];

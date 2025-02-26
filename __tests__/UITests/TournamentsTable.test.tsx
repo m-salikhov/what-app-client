@@ -1,13 +1,25 @@
-import { describe, expect, test } from 'vitest';
+import { beforeEach, describe, expect, test } from 'vitest';
 import { screen } from '@testing-library/react';
 import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { renderWithProviders } from '../utils/renderWithProviders';
 import userEvent from '@testing-library/user-event';
 import { allshort } from '../__fixtures__/allshort';
+import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
+
+let tournaments: TournamentShortType[];
+beforeEach(async () => {
+  const response = await fetch('https://andvarifserv.ru/tournaments/allshort');
+
+  if (!response.ok) {
+    throw new Error(`Request failed. URL: ${response.url}`);
+  }
+
+  tournaments = await response.json();
+});
 
 describe('TournamentsTable', () => {
   test('получает и рендерит турниры', async () => {
-    renderWithProviders(<TournamentsTable />);
+    renderWithProviders(<TournamentsTable tournaments={tournaments} />);
 
     const title = await screen.findByText(allshort[0].title);
 
@@ -15,7 +27,7 @@ describe('TournamentsTable', () => {
   });
 
   test('работает поиск по таблице турниров', async () => {
-    renderWithProviders(<TournamentsTable />);
+    renderWithProviders(<TournamentsTable tournaments={tournaments} />);
 
     const inputElement = await screen.findByRole('textbox');
 
@@ -35,7 +47,7 @@ describe('TournamentsTable', () => {
   });
 
   test('работает сортировка по названию турниров: первое нажатие сортирует по алфавиту, повторное нажатие сортирует обратно', async () => {
-    renderWithProviders(<TournamentsTable />);
+    renderWithProviders(<TournamentsTable tournaments={tournaments} />);
 
     let links = await screen.findAllByRole('link');
     const sortIcon = screen.getByAltText('сортировать по названию');

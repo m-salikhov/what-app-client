@@ -5,6 +5,8 @@ import { Layout } from 'src/Shared/Components/Layout/Layout';
 import { MainPage } from 'src/Pages/Main/MainPage';
 import { Spinner } from 'src/Shared/Components/Spinner/Spinner';
 import { initialLoginLoader } from './Utils/InitialLoginLoader';
+import { store } from 'Store/store';
+import { playModeActions } from 'Store/Slices/PlayModeSlice';
 
 const Entry = lazy(() => import('src/Pages/Entry/Entry'));
 const AddTournamentLink = lazy(() => import('src/Pages/AddTournamentLink/AddTournamentLink'));
@@ -130,6 +132,7 @@ const router = createHashRouter([
                 <PlayMode />
               </Suspense>
             ),
+            loader: () => store.dispatch(playModeActions.resetState()),
           },
         ],
       },
