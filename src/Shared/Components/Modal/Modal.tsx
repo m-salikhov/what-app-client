@@ -2,6 +2,7 @@ import './Modal.css';
 import { PropsWithChildren, useEffect } from 'react';
 import { animated, useTransition } from '@react-spring/web';
 import { scrollVisibility } from './Helpers/scrollVisibility';
+import { createPortal } from 'react-dom';
 
 interface Props {
   active: boolean;
@@ -43,20 +44,27 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
     }
   }, [active]);
 
-  return transition((style, active) =>
-    active ? (
-      <div
-        className='modal'
-        onClick={(e) => {
-          if (e.target === e.currentTarget && onClose) {
-            onClose();
-          }
-        }}
-      >
-        <animated.div className='modal-content' style={style}>
-          {children}
-        </animated.div>
-      </div>
-    ) : null
+  return (
+    <>
+      {createPortal(
+        transition((style, active) =>
+          active ? (
+            <div
+              className='modal'
+              onClick={(e) => {
+                if (e.target === e.currentTarget && onClose) {
+                  onClose();
+                }
+              }}
+            >
+              <animated.div className='modal-content' style={style}>
+                {children}
+              </animated.div>
+            </div>
+          ) : null
+        ),
+        document.body
+      )}
+    </>
   );
 }
