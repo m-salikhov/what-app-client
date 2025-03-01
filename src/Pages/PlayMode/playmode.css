@@ -1,4 +1,4 @@
-main {
+.playmode {
   & > h2 {
     padding-bottom: 0.4rem;
     text-align: center;
@@ -49,7 +49,7 @@ main {
   }
 }
 
-.pm-info {
+.pm-start-info {
   h2 {
     text-align: center;
   }
@@ -71,100 +71,6 @@ main {
       padding: 0 0.5rem;
     }
   }
-  & > div:nth-child(3) {
-    flex-direction: column;
-    align-items: center;
-    width: fit-content;
-    border: 2px solid var(--border-color-quiet);
-    border-radius: 8px;
-    justify-self: center;
-    padding: 1rem;
-    margin-top: 1rem;
-
-    .react-aria-Checkbox {
-      width: 300px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: var(--p-color);
-      margin-bottom: 0.7rem;
-
-      .pm-info-checkbox-icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        .pm-info-checkbox-icon-circle {
-          width: 22px;
-          height: 22px;
-          border: 2px solid gray;
-          border-radius: 5px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          cursor: pointer;
-
-          img {
-            width: 22px;
-          }
-        }
-      }
-      p {
-        padding-left: 0.5rem;
-        font-weight: 800;
-      }
-    }
-
-    .react-aria-NumberField {
-      display: flex;
-      width: 300px;
-      padding-top: 0.5rem;
-
-      .react-aria-Group {
-        width: fit-content;
-        border-radius: 4px;
-
-        .react-aria-Input {
-          border-top: 1px solid rgb(0, 0, 0);
-          border-bottom: 1px solid rgb(0, 0, 0);
-          width: 30px;
-          font-size: 1.4rem;
-          text-align: center;
-        }
-
-        &[data-focus-within] {
-          outline: 1px solid rgb(120, 91, 201);
-          .react-aria-Input,
-          .react-aria-Button {
-            border-color: rgb(120, 91, 201);
-          }
-        }
-
-        .react-aria-Button {
-          font-size: 1.4rem;
-          width: 2.3rem;
-          border: 1px solid rgb(0, 0, 0);
-
-          border-radius: 4px;
-
-          &[slot='decrement'] {
-            border-start-end-radius: 0;
-            border-end-end-radius: 0;
-          }
-
-          &[slot='increment'] {
-            border-start-start-radius: 0;
-            border-end-start-radius: 0;
-          }
-        }
-      }
-
-      p {
-        padding: unset;
-        padding-left: 0.5rem;
-      }
-    }
-  }
 
   & > div:nth-child(4) {
     margin-top: 1rem;
@@ -179,6 +85,99 @@ main {
         font-weight: 800;
         background-color: rgb(97 161 153 / 20%);
       }
+    }
+  }
+}
+
+.pm-timer-options {
+  flex-direction: column;
+  width: fit-content;
+  border: 2px solid var(--border-color-quiet);
+  border-radius: 8px;
+  justify-self: center;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  .react-aria-Checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--p-color);
+    margin-bottom: 0.7rem;
+
+    .pm-info-checkbox-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .pm-info-checkbox-icon-circle {
+        width: 22px;
+        height: 22px;
+        border: 2px solid gray;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        img {
+          width: 22px;
+        }
+      }
+    }
+    p {
+      padding-left: 0.5rem;
+      font-weight: 800;
+    }
+  }
+
+  .react-aria-NumberField {
+    display: flex;
+    padding-top: 0.5rem;
+
+    .react-aria-Group {
+      border-radius: 4px;
+      min-width: 6.9rem;
+      max-height: fit-content;
+
+      .react-aria-Input {
+        border-top: 1px solid rgb(0, 0, 0);
+        border-bottom: 1px solid rgb(0, 0, 0);
+        width: 2.3rem;
+        font-size: 1.4rem;
+        text-align: center;
+      }
+
+      &[data-focus-within] {
+        outline: 1px solid rgb(120, 91, 201);
+        .react-aria-Input,
+        .react-aria-Button {
+          border-color: rgb(120, 91, 201);
+        }
+      }
+
+      .react-aria-Button {
+        font-size: 1.4rem;
+        width: 2.3rem;
+        border: 1px solid rgb(0, 0, 0);
+
+        border-radius: 4px;
+
+        &[slot='decrement'] {
+          border-start-end-radius: 0;
+          border-end-end-radius: 0;
+        }
+
+        &[slot='increment'] {
+          border-start-start-radius: 0;
+          border-end-start-radius: 0;
+        }
+      }
+    }
+
+    p {
+      padding: unset;
+      padding-left: 0.5rem;
     }
   }
 }

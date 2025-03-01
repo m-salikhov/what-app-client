@@ -8,7 +8,7 @@ export function Start({ tournament }: { tournament: TournamentType }) {
   const dispatch = useAppDispatch();
 
   return (
-    <div className='pm-info'>
+    <div className='pm-start-info'>
       <div>
         <p>Вопросов: {tournament.questionsQuantity}</p>
         <p>Туров: {tournament.tours}</p>

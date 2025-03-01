@@ -10,11 +10,11 @@ export function TimerOptions() {
   const dispatch = useAppDispatch();
 
   return (
-    <div>
+    <div className='pm-timer-options'>
       <Checkbox isSelected={withTimer} onChange={() => dispatch(playModeActions.setWithTimer())}>
         <div className='pm-info-checkbox-icon'>
           <div className='pm-info-checkbox-icon-circle'>
-            {withTimer && <img src={green_mark} alt='todo completed icon' />}
+            {withTimer && <img src={green_mark} alt='таймер включен\выключен' />}
           </div>
         </div>
         <p>играть с таймером </p>

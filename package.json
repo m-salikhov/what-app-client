@@ -48,7 +48,7 @@
     "stylelint": "^16.8.1",
     "stylelint-config-recess-order": "^5.0.1",
     "stylelint-config-standard-scss": "^13.1.0",
-    "typescript": "^5.2.2",
+    "typescript": "^5.8.2",
     "vite": "^5.3.4",
     "vite-plugin-svgr": "^4.2.0",
     "vitest": "^2.1.8"
