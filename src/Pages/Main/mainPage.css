@@ -63,8 +63,8 @@
 
 .main-content-tournaments-loading {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 450px;
 }
 

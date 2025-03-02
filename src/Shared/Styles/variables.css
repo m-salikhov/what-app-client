@@ -19,7 +19,7 @@ html {
   --external-link: #0645ad;
   --external-link-hover: #931af1;
   --p-color: #222427;
-  --h-color: #000000;
+  --h-color: #000;
   --a-main-list-color: #104a37;
   --a-main-list-bg-color: #cadcda;
   --bg-hover-pm-table: #cde2df;
@@ -28,7 +28,7 @@ html {
   --input-bg-color: #f8f8f8;
   --edit-question-bg-color: #f8f8f8;
   --edit-question-bg-color-del: #a5a5a6;
-  --banner-gradient: linear-gradient(90deg, rgba(222, 212, 241, 1) 0%, rgba(241, 241, 212, 1) 100%);
+  --banner-gradient: linear-gradient(90deg, rgb(222 212 241 / 100%) 0%, rgb(241 241 212 / 100%) 100%);
 }
 
 html[data-theme='dark'] {
@@ -46,5 +46,5 @@ html[data-theme='dark'] {
   --input-bg-color: #a8a9ae;
   --edit-question-bg-color: #353131;
   --edit-question-bg-color-del: #614b4b;
-  --banner-gradient: linear-gradient(90deg, rgba(78, 71, 130, 1) 0%, rgba(46, 56, 81, 1) 100%);
+  --banner-gradient: linear-gradient(90deg, rgb(78 71 130 / 100%) 0%, rgb(46 56 81 / 100%) 100%);
 }

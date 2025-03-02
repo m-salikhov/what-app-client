@@ -1,5 +1,5 @@
-@import 'nullstyle';
-@import 'variables';
+@import url('nullstyle');
+@import url('variables');
 
 body {
   font-family: var(--font-stack);
@@ -12,9 +12,9 @@ p {
   font-size: 1.1rem;
   line-height: 1.5;
   color: var(--p-color);
-  word-spacing: 0.1rem;
   text-wrap: pretty;
   white-space: pre-wrap;
+  word-spacing: 0.1rem;
 
   &::selection {
     background-color: var(--bg-grey);

@@ -11,39 +11,41 @@
   }
 
   .progress-bar {
-    height: 1.5rem;
     display: flex;
     align-items: stretch;
+    height: 1.5rem;
 
     .progress-bar-item {
-      border: var(--main-border);
-      flex-grow: 1;
       display: flex;
-      justify-content: center;
+      flex-grow: 1;
       align-items: center;
+      justify-content: center;
       background: linear-gradient(to right, rgb(97 161 153 / 90%) 50%, var(--main-bg-color) 50%);
-      background-size: 200% 100%;
       background-position: right bottom;
+      background-size: 200% 100%;
+      border: var(--main-border);
 
       &:first-child {
-        border-radius: 5px 0px 0px 5px;
+        border-radius: 5px 0 0 5px;
       }
+
       &:last-child {
-        border-radius: 0px 5px 5px 0px;
+        border-radius: 0 5px 5px 0;
       }
 
       &.fill {
         background-position: left bottom;
         transition: all 0.5s ease-out;
+
         p {
           color: white;
         }
       }
 
       .progress-bar-item-number {
-        line-height: unset;
         padding-top: 1px;
         font-size: 1.2rem;
+        line-height: unset;
       }
     }
   }
@@ -74,6 +76,7 @@
 
   & > div:nth-child(4) {
     margin-top: 1rem;
+
     button {
       width: 300px;
       height: 30px;
@@ -91,40 +94,41 @@
 
 .pm-timer-options {
   flex-direction: column;
-  width: fit-content;
-  border: 2px solid var(--border-color-quiet);
-  border-radius: 8px;
   justify-self: center;
+  width: fit-content;
   padding: 1rem;
   margin-top: 1rem;
+  border: 2px solid var(--border-color-quiet);
+  border-radius: 8px;
 
   .react-aria-Checkbox {
     display: flex;
-    justify-content: center;
     align-items: center;
-    color: var(--p-color);
+    justify-content: center;
     margin-bottom: 0.7rem;
+    color: var(--p-color);
 
     .pm-info-checkbox-icon {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
 
       .pm-info-checkbox-icon-circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 22px;
         height: 22px;
+        cursor: pointer;
         border: 2px solid gray;
         border-radius: 5px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
 
         img {
           width: 22px;
         }
       }
     }
+
     p {
       padding-left: 0.5rem;
       font-weight: 800;
@@ -136,31 +140,31 @@
     padding-top: 0.5rem;
 
     .react-aria-Group {
-      border-radius: 4px;
       min-width: 6.9rem;
       max-height: fit-content;
+      border-radius: 4px;
 
       .react-aria-Input {
-        border-top: 1px solid rgb(0, 0, 0);
-        border-bottom: 1px solid rgb(0, 0, 0);
         width: 2.3rem;
         font-size: 1.4rem;
         text-align: center;
+        border-top: 1px solid rgb(0 0 0);
+        border-bottom: 1px solid rgb(0 0 0);
       }
 
       &[data-focus-within] {
-        outline: 1px solid rgb(120, 91, 201);
+        outline: 1px solid rgb(120 91 201);
+
         .react-aria-Input,
         .react-aria-Button {
-          border-color: rgb(120, 91, 201);
+          border-color: rgb(120 91 201);
         }
       }
 
       .react-aria-Button {
-        font-size: 1.4rem;
         width: 2.3rem;
-        border: 1px solid rgb(0, 0, 0);
-
+        font-size: 1.4rem;
+        border: 1px solid rgb(0 0 0);
         border-radius: 4px;
 
         &[slot='decrement'] {
@@ -205,8 +209,8 @@
 
 .pmq {
   max-width: 700px;
-  margin: 0 auto;
   padding-top: 1rem;
+  margin: 0 auto;
 
   .buttons-block {
     padding-bottom: 1rem;
@@ -214,9 +218,11 @@
     .buttons-block-answer {
       display: flex;
       justify-content: center;
+
       p {
         margin: auto 0;
       }
+
       .btn-elem {
         margin-left: 1rem;
       }
@@ -242,6 +248,7 @@
         font-weight: 800;
       }
     }
+
     & > p:first-child {
       font-weight: bold;
       color: #45877e;

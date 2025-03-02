@@ -9,9 +9,9 @@ export function DarkMode() {
   const [checked, setChecked] = useState(theme === 'light' ? false : true);
 
   return (
-    <div className='dark_mode'>
+    <div className='dark-mode'>
       <input
-        className='dark_mode_input'
+        className='dark-mode-input'
         title='Toggle dark mode'
         type='checkbox'
         id='darkmode-toggle'
@@ -19,7 +19,7 @@ export function DarkMode() {
         onChange={() => setChecked(!checked)}
         checked={checked}
       />
-      <label className='dark_mode_label' htmlFor='darkmode-toggle'>
+      <label className='dark-mode-label' htmlFor='darkmode-toggle'>
         <Sun />
         <Moon />
       </label>

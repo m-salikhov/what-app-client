@@ -22,8 +22,8 @@
       }
 
       .entry-form {
-        margin-top: 0.5rem;
         width: 100%;
+        margin-top: 0.5rem;
 
         .react-tooltip {
           span {
@@ -33,13 +33,15 @@
 
         .entry-input {
           padding-top: 0.5rem;
+
           label {
             font-size: 0.9rem;
             font-weight: bold;
           }
+
           input {
-            padding: 0.2rem 0 0.2rem 0.3rem;
             width: 100%;
+            padding: 0.2rem 0 0.2rem 0.3rem;
             font-size: 1.1rem;
             border: var(--main-border);
             box-shadow: none;
@@ -52,8 +54,8 @@
       }
 
       .entry-switch {
+        color: rgb(76 36 206);
         cursor: pointer;
-        color: rgb(76, 36, 206);
       }
     }
   }
@@ -61,16 +63,17 @@
 
 .entry-error {
   display: flex;
-  background-color: rgb(180 136 136 / 30%);
   margin-top: 0.5rem;
+  background-color: rgb(180 136 136 / 30%);
+
   .entry-error-block {
     width: 15px;
     background-color: crimson;
   }
 
   p {
-    padding-left: 0.4rem;
     width: 100%;
+    padding-left: 0.4rem;
   }
 }
 

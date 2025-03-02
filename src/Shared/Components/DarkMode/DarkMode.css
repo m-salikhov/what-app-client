@@ -1,67 +1,73 @@
-.dark_mode {
-  padding: 0.5px 0px 0px 5px;
+.dark-mode {
   display: flex;
   align-items: center;
+  padding: 0.5px 0 0 5px;
 }
 
-.dark_mode_label {
-  width: 50px;
-  height: 24px;
+.dark-mode-label {
   position: relative;
   display: block;
+  width: 50px;
+  height: 24px;
+  cursor: pointer;
   background: #ebebeb;
   border-radius: 200px;
-  box-shadow: inset 0px 5px 15px rgba(0, 0, 0, 0.4),
-    inset 0px -5px 15px rgba(255, 255, 255, 0.4);
-  cursor: pointer;
+  box-shadow: inset 0 5px 15px rgb(0 0 0 / 40%), inset 0 -5px 15px rgb(255 255 255 / 40%);
   transition: 0.3s;
 }
 
-.dark_mode_label:after {
-  content: '';
-  width: 20px;
-  height: 20px;
+.dark-mode-label::after {
   position: absolute;
   top: 2px;
   left: 2px;
+  width: 20px;
+  height: 20px;
+  content: '';
   background: linear-gradient(180deg, #ffcc89, #d8860b);
   border-radius: 180px;
-  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgb(0 0 0 / 20%);
   transition: 0.3s;
 }
-.dark_mode_input {
+
+.dark-mode-input {
   width: 0;
   height: 0;
   visibility: hidden;
 }
-.dark_mode_input:checked + .dark_mode_label {
+
+.dark-mode-input:checked + .dark-mode-label {
   background: #242424;
 }
-.dark_mode_input:checked + .dark_mode_label:after {
+
+.dark-mode-input:checked + .dark-mode-label::after {
   left: 48px;
-  transform: translateX(-100%);
   background: linear-gradient(180deg, #777, #3a3a3a);
+  transform: translateX(-100%);
 }
 
-.dark_mode_label svg {
+.dark-mode-label svg {
   position: absolute;
-  width: 18px;
   top: 3px;
   z-index: 100;
+  width: 18px;
 }
-.dark_mode_label svg.sun {
+
+.dark-mode-label svg.sun {
   left: 3px;
   fill: #fff;
   transition: 0.3s;
 }
-.dark_mode_label svg.moon {
+
+.dark-mode-label svg.moon {
   right: 3px;
   fill: #7e7e7e;
   transition: 0.3s;
 }
-.dark_mode_input:checked + .dark_mode_label svg.sun {
+
+.dark-mode-input:checked + .dark-mode-label svg.sun {
   fill: #7e7e7e;
 }
-.dark_mode_input:checked + .dark_mode_label svg.moon {
+
+.dark-mode-input:checked + .dark-mode-label svg.moon {
   fill: #fff;
 }

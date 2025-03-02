@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   .result-table-tour {
     display: flex;
     justify-content: center;
@@ -16,11 +17,12 @@
     }
 
     .result-table-el {
+      color: var(--p-color);
       cursor: pointer;
       border-top: 2px solid var(--border-color-quiet);
       border-right: 2px solid var(--border-color-quiet);
       border-bottom: 2px solid var(--border-color-quiet);
-      color: var(--p-color);
+
       &:hover {
         font-weight: bold;
         background-color: var(--bg-hover-pm-table);
