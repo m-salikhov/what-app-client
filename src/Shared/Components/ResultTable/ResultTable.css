@@ -50,6 +50,29 @@
   }
 
   .question {
+    width: 100%;
     max-width: 800px;
+  }
+}
+
+@media (max-width: 425px) {
+  .result-table {
+    .result-table-tour {
+      .result-table-el {
+        div:first-child {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        div:last-child {
+          width: 1.5rem;
+          height: 1.5rem;
+
+          img {
+            width: 1.5rem;
+          }
+        }
+      }
+    }
   }
 }

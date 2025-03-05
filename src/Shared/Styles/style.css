@@ -9,7 +9,7 @@ body {
 }
 
 p {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   line-height: 1.5;
   color: var(--p-color);
   text-wrap: pretty;
@@ -22,7 +22,7 @@ p {
 }
 
 span {
-  font-size: 1.1rem;
+  font-size: 1rem;
   line-height: 1.5;
   color: var(--p-color);
 }
@@ -39,17 +39,17 @@ h6 {
 
 h1 {
   font-family: Rubik-Semibold, sans-serif;
-  font-size: 2.125rem;
+  font-size: 2rem;
 }
 
 h2 {
   font-family: Rubik-Semibold, sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.25rem;
 }
 
 h3,
 h4 {
-  font-size: 1.3rem;
+  font-size: 1.125rem;
 }
 
 input {
