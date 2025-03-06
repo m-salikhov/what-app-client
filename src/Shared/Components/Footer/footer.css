@@ -4,37 +4,27 @@ footer {
   width: 100%;
   border-top: 2px solid var(--border-color-quiet);
 
-  .footer-icons {
+  svg {
+    fill: var(--p-color);
+  }
+
+  a {
     display: flex;
+    height: 2.5rem;
+    margin: 1rem 2rem 1rem 0rem;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
 
     svg {
-      fill: var(--p-color);
-    }
-
-    div,
-    a {
-      display: flex;
-      height: 2.5rem;
-      margin: 1rem;
-
-      p {
-        padding-left: 0.3rem;
-        margin: auto 0;
-      }
+      width: 40px;
+      height: 40px;
     }
   }
 }
 
-footer.footer-hide {
+footer.hide {
   display: none;
-}
-
-@media (width <= 340px) {
-  footer {
-    .footer-icons {
-      div {
-        margin: 0.5rem 0.3rem;
-      }
-    }
-  }
 }

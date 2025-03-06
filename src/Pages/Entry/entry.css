@@ -8,7 +8,7 @@
     justify-content: center;
     width: 22rem;
     border: 3px solid var(--main-border-color);
-    border-radius: 30px;
+    border-radius: 2rem;
 
     .entry-container {
       display: flex;
@@ -67,7 +67,7 @@
   background-color: rgb(180 136 136 / 30%);
 
   .entry-error-block {
-    width: 15px;
+    width: 1rem;
     background-color: crimson;
   }
 

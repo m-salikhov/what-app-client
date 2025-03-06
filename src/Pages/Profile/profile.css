@@ -26,29 +26,7 @@
       }
     }
 
-    .profile-results {
-      padding-top: 1rem;
-
-      a {
-        display: flex;
-        justify-content: space-between;
-        margin-left: 10px;
-        border-bottom: 2px solid var(--border-color-quiet);
-
-        p:last-child {
-          width: 85px;
-        }
-
-        &:hover {
-          background-color: var(--a-main-list-bg-color);
-        }
-      }
-
-      & > p {
-        margin-left: 10px;
-      }
-    }
-
+    .profile-results,
     .profile-adds {
       padding-top: 1rem;
 
@@ -59,6 +37,21 @@
 
         &:hover {
           background-color: var(--a-main-list-bg-color);
+        }
+      }
+
+      & > p {
+        margin-left: 10px;
+        border-bottom: 2px solid var(--border-color-quiet);
+      }
+    }
+
+    .profile-results {
+      a {
+        justify-content: space-between;
+
+        p:last-child {
+          width: 85px;
         }
       }
     }

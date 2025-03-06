@@ -33,7 +33,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
   }
 
   return (
-    <>
+    <div className='tournaments-table'>
       {' '}
       <label className='tournaments-table-search'>
         <input type='text' name='tournaments-search' onChange={(e) => setSearch(e.target.value)} placeholder='поиск' />
@@ -99,6 +99,6 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
