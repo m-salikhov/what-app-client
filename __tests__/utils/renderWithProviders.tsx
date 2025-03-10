@@ -5,8 +5,6 @@ import { Provider } from 'react-redux';
 import { AppStore, RootState, setupStore } from 'Store/store';
 import { MemoryRouter } from 'react-router-dom';
 
-// This type interface extends the default options for render from RTL, as well
-// as allows the user to specify other things such as initialState, store.
 interface ExtendedRenderOptions extends Omit<RenderOptions, 'queries'> {
   preloadedState?: Partial<RootState>;
   store?: AppStore;
@@ -21,7 +19,7 @@ export function renderWithProviders(
     ...renderOptions
   }: ExtendedRenderOptions = {}
 ) {
-  function Wrapper({ children }: PropsWithChildren<{}>): JSX.Element {
+  function Wrapper({ children }: PropsWithChildren): React.JSX.Element {
     return (
       <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Provider store={store}>{children}</Provider>

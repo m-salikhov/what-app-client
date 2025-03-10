@@ -11,19 +11,25 @@ import { Step } from 'Store/Slices/PlayModeSlice';
 import { useGetTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { stepPM } from 'Store/Selectors/PlayModeSelectors';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
+import { skipToken } from '@reduxjs/toolkit/query';
 
 function playModeStepChange(stepName: Step, tournament: TournamentType) {
   switch (stepName) {
-    case 'START':
+    case 'START': {
       return <Start tournament={tournament} />;
-    case 'QUESTION':
+    }
+    case 'QUESTION': {
       return <PMQuestion tournament={tournament} />;
-    case 'END_OF_TOUR':
+    }
+    case 'END_OF_TOUR': {
       return <TourEnd tournament={tournament} />;
-    case 'END':
+    }
+    case 'END': {
       return <End tournament={tournament} />;
-    default:
+    }
+    default: {
       return null;
+    }
   }
 }
 
@@ -32,7 +38,7 @@ function PlayMode() {
 
   const step = useAppSelector(stepPM);
 
-  const { data: tournament, isLoading, isSuccess, isError } = useGetTournamentQuery(id as string);
+  const { data: tournament, isLoading, isSuccess, isError } = useGetTournamentQuery(id ?? skipToken);
 
   const showProgressBar = isSuccess && step !== 'START' && step !== 'END';
 

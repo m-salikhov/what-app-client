@@ -2,7 +2,7 @@ import { MouseEvent } from 'react';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 const getToursAnchors = (tournament: TournamentType) => {
-  const { toursAnchors } = tournament.questions.reduce(
+  const { toursAnchors } = tournament.questions.reduce<{ tours: number[]; toursAnchors: number[] }>(
     (acc, question, index) => {
       if (question.qNumber < 1) {
         return acc;
@@ -15,7 +15,7 @@ const getToursAnchors = (tournament: TournamentType) => {
 
       return acc;
     },
-    { tours: [], toursAnchors: [] } as { tours: number[]; toursAnchors: number[] }
+    { tours: [], toursAnchors: [] }
   );
 
   return toursAnchors;

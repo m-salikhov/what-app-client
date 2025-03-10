@@ -19,14 +19,17 @@ export function LastTournaments() {
 
   const changePageNumber = (e: MouseEvent<HTMLButtonElement>) => {
     switch (e.currentTarget.className) {
-      case 'next':
+      case 'next': {
         setPage((p) => p + 1);
         break;
-      case 'back':
+      }
+      case 'back': {
         setPage((p) => p - 1);
         break;
-      default:
+      }
+      default: {
         break;
+      }
     }
   };
 

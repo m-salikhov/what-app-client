@@ -28,8 +28,8 @@ export function useSaveResult(tournament: TournamentType) {
     try {
       ResultClientSchema.parse(userResult);
       saveUserResult(userResult);
-    } catch (err) {
-      console.log(err);
+    } catch (error_) {
+      console.log(error_);
     }
   }, [
     tournament.questionsQuantity,
@@ -39,6 +39,7 @@ export function useSaveResult(tournament: TournamentType) {
     result,
     totalAnsweredCount,
     saveUserResult,
+    totalQuestionsCount,
   ]);
 
   return {

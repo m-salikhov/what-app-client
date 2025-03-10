@@ -61,7 +61,7 @@ export function Header() {
       <nav
         className={openMobMenu ? 'mob-menu' : undefined}
         onClick={(e) => {
-          if (e.target instanceof HTMLElement && e.target.localName.match(/^(nav|a)$/)) {
+          if (e.target instanceof HTMLElement && /^(nav|a)$/.test(e.target.localName)) {
             handleMobMenu();
           }
         }}

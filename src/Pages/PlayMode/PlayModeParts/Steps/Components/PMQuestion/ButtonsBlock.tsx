@@ -28,9 +28,9 @@ export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }
 
     if (!nextQTourNumber) {
       dispatch(playModeActions.setStep('END'));
-    } else if (currentQuestion.tourNumber !== nextQTourNumber) {
+    } else if (currentQuestion.tourNumber === nextQTourNumber) {dispatch(playModeActions.currentQuestionIndexIncrement());} else {
       dispatch(playModeActions.setStep('END_OF_TOUR'));
-    } else dispatch(playModeActions.currentQuestionIndexIncrement());
+    }
 
     setShowAnswer(false);
   };

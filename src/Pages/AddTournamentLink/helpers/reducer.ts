@@ -90,75 +90,83 @@ const reducer = (state: TournamentType, action: Action) => {
   if (type === actionTypes.loaded) {
     const t = structuredClone(action.payload);
 
-    console.log({ t });
-
     return t;
   }
 
   switch (type) {
-    case actionTypes.date:
+    case actionTypes.date: {
       return { ...state, date: action.payload };
+    }
 
-    case actionTypes.title:
+    case actionTypes.title: {
       return { ...state, title: action.payload };
+    }
 
-    case actionTypes.editors:
+    case actionTypes.editors: {
       const editors = [...state.editors].map((editor) => {
         if (editor.id === action.editorID) return { ...editor, name: action.payload };
         return editor;
       });
       return { ...state, editors };
+    }
 
-    case actionTypes.questionType:
+    case actionTypes.questionType: {
       const TypesQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, type: action.payload };
         return q;
       });
       return { ...state, questions: TypesQuestions };
+    }
 
-    case actionTypes.add:
+    case actionTypes.add: {
       const addQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, add: action.payload };
         return q;
       });
       return { ...state, questions: addQuestions };
+    }
 
-    case actionTypes.text:
+    case actionTypes.text: {
       const textQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, text: action.payload };
         return q;
       });
       return { ...state, questions: textQuestions };
+    }
 
-    case actionTypes.answer:
+    case actionTypes.answer: {
       const answerQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, answer: action.payload };
         return q;
       });
       return { ...state, questions: answerQuestions };
+    }
 
-    case actionTypes.alterAnswer:
+    case actionTypes.alterAnswer: {
       const alterAnswerQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, alterAnswer: action.payload };
         return q;
       });
       return { ...state, questions: alterAnswerQuestions };
+    }
 
-    case actionTypes.comment:
+    case actionTypes.comment: {
       const commentQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, comment: action.payload };
         return q;
       });
       return { ...state, questions: commentQuestions };
+    }
 
-    case actionTypes.author:
+    case actionTypes.author: {
       const authorQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, author: action.payload };
         return q;
       });
       return { ...state, questions: authorQuestions };
+    }
 
-    case actionTypes.source:
+    case actionTypes.source: {
       const sourceQuestions = [...state.questions];
 
       const questionIndex = sourceQuestions.findIndex((q) => q.id === action.questionID);
@@ -170,8 +178,9 @@ const reducer = (state: TournamentType, action: Action) => {
       }
 
       return { ...state, questions: sourceQuestions };
+    }
 
-    case actionTypes.removeSource:
+    case actionTypes.removeSource: {
       const removeSourceQuestions = [...state.questions];
       const questionIndexRemove = removeSourceQuestions.findIndex((q) => q.id === action.questionID);
 
@@ -181,8 +190,9 @@ const reducer = (state: TournamentType, action: Action) => {
       }
 
       return { ...state, questions: removeSourceQuestions };
+    }
 
-    case actionTypes.addSource:
+    case actionTypes.addSource: {
       const addSourceQuestions = [...state.questions];
       const questionIndexAdd = addSourceQuestions.findIndex((q) => q.id === action.questionID);
 
@@ -191,31 +201,36 @@ const reducer = (state: TournamentType, action: Action) => {
       }
 
       return { ...state, questions: addSourceQuestions };
+    }
 
-    case actionTypes.qNumber:
+    case actionTypes.qNumber: {
       const qNumberQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, qNumber: action.payload };
         return q;
       });
       return { ...state, questions: qNumberQuestions };
+    }
 
-    case actionTypes.tourNumber:
+    case actionTypes.tourNumber: {
       const tourNumberQuestions = [...state.questions].map((q) => {
         if (q.id === action.questionID) return { ...q, tourNumber: action.payload };
         return q;
       });
       return { ...state, questions: tourNumberQuestions };
+    }
 
-    case actionTypes.addEditor:
+    case actionTypes.addEditor: {
       return { ...state, editors: [...state.editors, { id: Date.now(), name: '' }] };
+    }
 
-    case actionTypes.removeEditor:
+    case actionTypes.removeEditor: {
       return {
         ...state,
         editors: state.editors.filter((editor) => editor.id !== action.editorID),
       };
+    }
 
-    case actionTypes.removeQuestion:
+    case actionTypes.removeQuestion: {
       const questions = [...state.questions];
       let { questionsQuantity } = state;
 
@@ -264,9 +279,11 @@ const reducer = (state: TournamentType, action: Action) => {
       }
 
       return { ...state, questions, questionsQuantity };
+    }
 
-    default:
+    default: {
       return state;
+    }
   }
 };
 

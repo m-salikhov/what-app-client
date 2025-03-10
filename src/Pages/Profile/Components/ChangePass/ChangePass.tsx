@@ -71,11 +71,7 @@ export function ChangePass() {
                 <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
               </label>
 
-              {errors && (
-                <p className='profile-pass-error'>
-                  {errors.newPassword?.message || errors.confirmNewPassword?.message}
-                </p>
-              )}
+              <p className='profile-pass-error'>{errors.newPassword?.message || errors.confirmNewPassword?.message}</p>
 
               {serverMessage && <p className={`profile-pass-${isSuccess ? 'success' : 'error'}`}>{serverMessage}</p>}
 

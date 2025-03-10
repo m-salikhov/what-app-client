@@ -1,11 +1,16 @@
 import ReactDOM from 'react-dom/client';
+import { scan } from 'react-scan';
 import { Provider } from 'react-redux';
 import { store } from 'Store/store';
 import { RouterProvider } from 'react-router-dom';
 import router from 'src/Router/AppRouter';
 import 'Shared/Styles/style.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+scan({
+  enabled: true,
+});
+
+const root = ReactDOM.createRoot(document.querySelector('#root')!);
 root.render(
   <Provider store={store}>
     <RouterProvider

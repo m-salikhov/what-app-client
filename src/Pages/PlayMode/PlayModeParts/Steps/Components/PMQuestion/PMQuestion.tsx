@@ -27,7 +27,7 @@ export function PMQuestion({ tournament: { questions } }: { tournament: { questi
 
   useEffect(() => {
     dispatch(playModeActions.setCurrentTourNumber(currentQuestion.tourNumber));
-  }, []);
+  }, [currentQuestion.tourNumber]);
 
   return (
     <div className='pmq'>

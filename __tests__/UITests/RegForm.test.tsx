@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../utils/renderWithProviders';
 import userEvent from '@testing-library/user-event';
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -55,7 +55,9 @@ describe('Форма регистрации', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
+    const errorMessage = await screen.findByText('Ошибка сервера. Попробуйте позже.');
+
     //отображается сообщение об ошибке
-    expect(screen.queryByText('Ошибка сервера. Попробуйте позже.')).toBeInTheDocument();
+    expect(errorMessage).toBeInTheDocument();
   });
 });

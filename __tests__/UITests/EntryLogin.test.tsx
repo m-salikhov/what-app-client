@@ -4,7 +4,7 @@ import { screen } from '@testing-library/react';
 import { renderWithProviders } from '../utils/renderWithProviders';
 import userEvent from '@testing-library/user-event';
 
-global.ResizeObserver = vi.fn().mockImplementation(() => ({
+globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   observe: vi.fn(),
   unobserve: vi.fn(),
   disconnect: vi.fn(),
@@ -41,8 +41,8 @@ describe('Форма логина', () => {
   test('ошибка валидации на клиенте', async () => {
     renderWithProviders(<Entry />);
 
-    const emailInput = screen.getByLabelText('Почта:') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('Пароль:') as HTMLInputElement;
+    const emailInput = screen.getByLabelText('Почта:');
+    const passwordInput = screen.getByLabelText('Пароль:');
 
     await userEvent.type(emailInput, 'example@yaru');
     await userEvent.type(passwordInput, '123');
@@ -62,8 +62,8 @@ describe('Форма логина', () => {
   test('ошибка сервера', async () => {
     renderWithProviders(<Entry />);
 
-    const emailInput = screen.getByLabelText('Почта:') as HTMLInputElement;
-    const passwordInput = screen.getByLabelText('Пароль:') as HTMLInputElement;
+    const emailInput = screen.getByLabelText('Почта:');
+    const passwordInput = screen.getByLabelText('Пароль:');
 
     await userEvent.type(emailInput, 'test-error@ya.ru');
     await userEvent.type(passwordInput, '1234');

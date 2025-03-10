@@ -34,7 +34,7 @@ export function RandomQuestions() {
         </div>
       </div>
 
-      {isLoading && <SkeletonQuestion count={amountRandomQuestions} />}
+      {isLoading && <SkeletonQuestion length={amountRandomQuestions} />}
 
       {!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
     </div>

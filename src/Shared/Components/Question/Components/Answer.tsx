@@ -30,7 +30,7 @@ export function Answer({ q }: { q: QuestionType }) {
       {q.source && q.source.length > 1 && (
         <div>
           <p className='answer-source-many'>Источники:</p>
-          {q.source?.map((v, i) => {
+          {q.source.map((v, i) => {
             return (
               <p key={v.link}>
                 {++i}. {v.link.startsWith('http') ? <ExternalLinkText text={v.link} href={v.link} /> : v.link}

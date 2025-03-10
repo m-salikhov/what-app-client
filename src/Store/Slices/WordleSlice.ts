@@ -44,7 +44,7 @@ const WordleSlice = createSlice({
       if (letter === 'DEL' || letter === 'BACKSPACE') {
         if (state.currentRowNumber === state.words.length) {
           return;
-        } else if (state.letters.length && Math.ceil(state.currentLetterNumber / 5) == state.currentRowNumber) {
+        } else if (state.letters.length > 0 && Math.ceil(state.currentLetterNumber / 5) == state.currentRowNumber) {
           state.letters.pop();
           state.allowNextLetter = true;
           state.currentLetterNumber--;

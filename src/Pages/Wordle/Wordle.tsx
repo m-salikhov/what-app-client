@@ -55,7 +55,7 @@ export default function Wordle() {
             return;
           }
 
-          if (word === answer?.word) {
+          if (word === answer.word) {
             dispatch(
               wordleActions.setWords({
                 answer: answer.word,

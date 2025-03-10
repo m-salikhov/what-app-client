@@ -9,8 +9,8 @@ export async function initialLoginLoader() {
 
   try {
     await store.dispatch(userAPI.endpoints.getCurrentUser.initiate(undefined));
-  } catch (e) {
-    const { data: error } = ErrorServerSchema.safeParse(e);
+  } catch (error_) {
+    const { data: error } = ErrorServerSchema.safeParse(error_);
 
     if (error && error.data.message === 'Unauthorized') {
       localStorage.removeItem('rememberMe');

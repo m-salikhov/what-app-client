@@ -59,12 +59,12 @@ describe('TournamentsTable', () => {
     await userEvent.click(sortIcon);
     links = await screen.findAllByRole('link');
     expect(links[0].textContent).toBe('Балтийский Бриз. Challenger III');
-    expect(links[links.length - 1].textContent).toBe('Сентябрьский Марш - 2021');
+    expect(links.at(-1).textContent).toBe('Сентябрьский Марш - 2021');
 
     //при повторном нажатии сортировка происходит по названию в обратном алфавитном порядке
     await userEvent.click(sortIcon);
     links = await screen.findAllByRole('link');
     expect(links[0].textContent).toBe('Сентябрьский Марш - 2021');
-    expect(links[links.length - 1].textContent).toBe('Балтийский Бриз. Challenger III');
+    expect(links.at(-1).textContent).toBe('Балтийский Бриз. Challenger III');
   });
 });

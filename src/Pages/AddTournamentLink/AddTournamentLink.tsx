@@ -93,11 +93,11 @@ function AddTournamentLink() {
 
       {message && <p className='addlink-message'>{message}</p>}
 
-      {(errorParse || errorAdd) && (
+      {(errorParse ?? errorAdd) && (
         <p className='addlink-message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
       )}
 
-      {(isLoading || isLoadingAdd) && <Spinner />}
+      {(isLoading ?? isLoadingAdd) && <Spinner />}
 
       {showParsedTournament ? (
         <ParsedTournament

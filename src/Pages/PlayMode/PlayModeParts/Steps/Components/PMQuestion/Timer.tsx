@@ -30,7 +30,7 @@ export function Timer({ setShowAnswer, qNumber }: Props) {
     }
 
     return () => clearTimeout(timeout);
-  }, [time, qNumber, flag, setShowAnswer]);
+  }, [time, qNumber, flag, setShowAnswer, answerTimer]);
 
   return (
     <div className='timer'>

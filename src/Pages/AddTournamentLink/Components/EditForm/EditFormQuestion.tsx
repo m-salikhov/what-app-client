@@ -14,7 +14,7 @@ const btnTextOption = {
 };
 
 export function EditFormQuestion({ q, dispatch }: Props) {
-  const [btnText, setBtnText] = useState<string>(q.qNumber !== -1 ? btnTextOption.def : btnTextOption.back);
+  const [btnText, setBtnText] = useState<string>(q.qNumber === -1 ? btnTextOption.back : btnTextOption.def);
 
   const removeQuestion = () => {
     setBtnText((prev) => {

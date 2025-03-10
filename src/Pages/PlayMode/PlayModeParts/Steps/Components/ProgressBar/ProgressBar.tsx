@@ -4,7 +4,7 @@ import { useAppSelector } from 'Shared/Hooks/redux';
 import { currentTourNumberPM } from 'Store/Selectors/PlayModeSelectors';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
-export const getProgressBarItems = (first: number, last: number) => {
+const getProgressBarItems = (first: number, last: number) => {
   const arr = [];
 
   for (let i = first; i <= last; i++) {
@@ -21,7 +21,7 @@ export function ProgressBar({ tournament }: { tournament: TournamentType }) {
     const first = tournament.questions.findIndex((v) => v.tourNumber === currentTourNumber);
     const last = tournament.questions.findLastIndex((v) => v.tourNumber === currentTourNumber);
     return { first, last };
-  }, [currentTourNumber]);
+  }, [currentTourNumber, tournament.questions]);
 
   return <div className='progress-bar'>{getProgressBarItems(first, last)}</div>;
 }

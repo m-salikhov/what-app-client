@@ -20,7 +20,7 @@ export default function ProfileResultTable() {
           <h2>{tournamentResult.title}</h2>
           <div className='profile-result-info'>
             <p>{`Ваш результат: ${tournamentResult.resultNumber} из ${tournamentResult.tournamentLength}`}</p>
-            <p>{`${getDate(tournamentResult.date)}`}</p>
+            <p>{getDate(tournamentResult.date)}</p>
           </div>
           {tournamentId && <ResultTable result={tournamentResult.result} tournamentId={+tournamentId} />}
         </>

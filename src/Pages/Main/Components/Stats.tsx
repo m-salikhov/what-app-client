@@ -6,7 +6,7 @@ export function Stats() {
   return (
     <div className='main-stats'>
       <p>
-        Всего турниров <strong>{stats?.tc || 0}</strong>, вопросов <strong>{stats?.qc || 0}</strong>
+        Всего турниров <strong>{stats?.tc ?? 0}</strong>, вопросов <strong>{stats?.qc ?? 0}</strong>
       </p>
     </div>
   );

@@ -1,6 +1,6 @@
 import './skeletonQuestion.css';
 
-export function SkeletonQuestion({ count }: { count: number }) {
+export function SkeletonQuestion({ length }: { length: number }) {
   const skeletonQuestion = (i: number) => {
     return (
       <div className='sk-q' key={i}>
@@ -13,7 +13,7 @@ export function SkeletonQuestion({ count }: { count: number }) {
     );
   };
 
-  const arr = [...Array(count).keys()];
+  const arr = [...Array.from({ length }).keys()];
 
   const arrElements = arr.map((v) => {
     return skeletonQuestion(v);
