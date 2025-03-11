@@ -14,5 +14,10 @@
       font-weight: bold;
       box-shadow: 2px 2px 3px 2px rgb(34 60 80 / 20%);
     }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
   }
 }
