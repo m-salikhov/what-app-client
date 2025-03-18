@@ -4,13 +4,14 @@ import tseslint from 'typescript-eslint';
 
 import eslint from '@eslint/js';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
 
 export default tseslint.config(
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,
   tseslint.configs.stylisticTypeChecked,
   eslintPluginUnicorn.configs.recommended,
-
+  jsxA11y.flatConfigs.recommended,
   {
     languageOptions: {
       parserOptions: {

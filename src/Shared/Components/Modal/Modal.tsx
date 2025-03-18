@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 
 interface Props {
   active: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   onDestroyed?: () => void;
 }
 //HOC для модальных окон.
@@ -46,7 +46,7 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (onClose && event.key === 'Escape') {
+      if (event.key === 'Escape') {
         onClose();
       }
     };
@@ -63,10 +63,10 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
       {createPortal(
         transition((style, active) =>
           active ? (
-            <div
+            <dialog
               className='modal'
               onClick={(e) => {
-                if (e.target === e.currentTarget && onClose) {
+                if (e.target === e.currentTarget) {
                   onClose();
                 }
               }}
@@ -74,7 +74,7 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
               <animated.div className='modal-content' style={style}>
                 {children}
               </animated.div>
-            </div>
+            </dialog>
           ) : null
         ),
         document.body

@@ -13,20 +13,20 @@ export default function ProfileResultTable() {
 
   const tournamentResult = results?.find((t) => t.tournamentId === Number(tournamentId));
 
-  return (
-    <div className='profile-result-table'>
-      {tournamentResult && (
-        <>
-          <h2>{tournamentResult.title}</h2>
-          <div className='profile-result-info'>
-            <p>{`Ваш результат: ${tournamentResult.resultNumber} из ${tournamentResult.tournamentLength}`}</p>
-            <p>{getDate(tournamentResult.date)}</p>
-          </div>
-          {tournamentId && <ResultTable result={tournamentResult.result} tournamentId={+tournamentId} />}
-        </>
-      )}
+  if (!tournamentResult || !tournamentId) return null;
 
+  return (
+    <>
       <Back />
-    </div>
+
+      <div className='profile-result-table'>
+        <h2>{tournamentResult.title}</h2>
+        <div className='profile-result-info'>
+          <p>{`Ваш результат: ${tournamentResult.resultNumber} из ${tournamentResult.tournamentLength}`}</p>
+          <p>{getDate(tournamentResult.date)}</p>
+        </div>
+        <ResultTable result={tournamentResult.result} tournamentId={Number(tournamentId)} />
+      </div>
+    </>
   );
 }

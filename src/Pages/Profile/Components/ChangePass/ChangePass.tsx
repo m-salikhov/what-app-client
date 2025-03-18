@@ -63,7 +63,7 @@ export function ChangePass() {
             <div className='profile-pass-container'>
               <label>
                 <p>Новый пароль</p>
-                <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' />
+                <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' autoFocus />
               </label>
 
               <label>
