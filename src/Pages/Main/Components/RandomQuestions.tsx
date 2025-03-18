@@ -15,13 +15,7 @@ export function RandomQuestions() {
     <div className='main-content-random'>
       <div className='main-content-refresh'>
         {' '}
-        <div
-          className='refresh'
-          onClick={() => {
-            refetch();
-            setIsRandomRefetch(!isRandomRefetch);
-          }}
-        >
+        <div className='refresh'>
           {' '}
           <h2>Случайные вопросы</h2>
           <div>
@@ -29,6 +23,11 @@ export function RandomQuestions() {
               className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow r'}
               src={refreshIcon}
               alt='обновить случайные'
+              role='button'
+              onClick={() => {
+                refetch();
+                setIsRandomRefetch(!isRandomRefetch);
+              }}
             />
           </div>
         </div>

@@ -14,7 +14,9 @@ export function useLogin() {
       .then(() => {
         localStorage.setItem('rememberMe', 'yes');
       })
-      .catch(() => {});
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   return { isSuccess, error, isLoading, login };

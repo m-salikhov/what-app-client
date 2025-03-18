@@ -10,11 +10,11 @@
 
       .refresh {
         display: flex;
-        cursor: pointer;
 
         & div {
           width: 1.6rem;
           margin-left: 1rem;
+          cursor: pointer;
 
           .refresh-arrow {
             transition: all 1s;

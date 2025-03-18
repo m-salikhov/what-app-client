@@ -24,8 +24,6 @@ export function ChangePass() {
   });
 
   const onSubmit = (data: ChangePassType) => {
-    setServerMessage('');
-
     if (currentUser) {
       changePassword({ newPass: data.newPassword, id: currentUser.id })
         .unwrap()
@@ -71,13 +69,23 @@ export function ChangePass() {
                 <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
               </label>
 
-              <p className='profile-pass-error'>{errors.newPassword?.message || errors.confirmNewPassword?.message}</p>
+              {Object.keys(errors).length > 0 &&
+                Object.values(errors).map((error) => {
+                  return <p className='profile-pass-error'>{error.message}</p>;
+                })}
 
               {serverMessage && <p className={`profile-pass-${isSuccess ? 'success' : 'error'}`}>{serverMessage}</p>}
 
               <div className='profile-pass-control'>
                 <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
-                <Button type='submit' title='Отправить' onClick={handleSubmit(onSubmit)} />
+                <Button
+                  type='submit'
+                  title='Отправить'
+                  onClick={() => {
+                    setServerMessage('');
+                    handleSubmit(onSubmit);
+                  }}
+                />
               </div>
             </div>
           </form>

@@ -31,7 +31,6 @@ export function GameEndModal() {
     <Modal
       active={modalOpen}
       onClose={() => {
-        console.log(modalOpen);
         setModalOpen(false);
       }}
       onDestroyed={onDestroyed}
