@@ -180,6 +180,23 @@
 .addlink-instruction {
   max-width: 900px;
   margin: 1rem auto;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--p-color);
+  text-wrap: pretty;
+  word-spacing: 0.1rem;
+  &::selection {
+    background-color: var(--bg-grey);
+  }
+
+  .copy-icon {
+    margin: 0 0.5rem;
+    cursor: pointer;
+  }
+
+  .Toastify__toast--success {
+    background-color: rgb(200, 233, 207);
+  }
 }
 
 .react-aria-DateField {
@@ -196,7 +213,6 @@
   forced-color-adjust: none;
 
   &[data-focus-within] {
-    /* outline: 2px solid var(--main-border-color); */
     outline-offset: -1px;
   }
 }
