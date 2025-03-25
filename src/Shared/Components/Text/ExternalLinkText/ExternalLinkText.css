@@ -1,4 +1,6 @@
 .text-external-link {
+  display: inline-flex;
+  align-items: center;
   color: var(--external-link);
 
   &:visited {

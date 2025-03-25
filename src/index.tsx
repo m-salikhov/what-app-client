@@ -10,7 +10,7 @@ scan({
   enabled: true,
 });
 
-const root = ReactDOM.createRoot(document.querySelector('#root')!);
+const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLElement);
 root.render(
   <Provider store={store}>
     <RouterProvider

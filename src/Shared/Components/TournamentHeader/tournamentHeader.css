@@ -12,10 +12,8 @@
     display: flex;
     padding-bottom: 1rem;
 
-    p {
-      padding-left: 2rem;
-      margin-top: auto;
-      font-size: 1.25rem;
+    a {
+      padding-left: 1rem;
     }
   }
 

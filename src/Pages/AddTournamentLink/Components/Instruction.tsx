@@ -7,7 +7,7 @@ export function Instruction() {
   return (
     <div className='addlink-instruction'>
       <p>
-        Чтобы добавить турнир надо сначала загрузить его из
+        Чтобы добавить турнир надо сначала загрузить его из{' '}
         <ExternalLinkText href='https://gotquestions.online/' text=' gotquestions.online ' />
         (предпочтительно) или
         <ExternalLinkText href='https://db.chgk.info/' text=' db.chgk.info' /> (сайт уже почти не обновляется).

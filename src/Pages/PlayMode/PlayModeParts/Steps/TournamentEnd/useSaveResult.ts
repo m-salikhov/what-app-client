@@ -28,8 +28,8 @@ export function useSaveResult(tournament: TournamentType) {
     try {
       ResultClientSchema.parse(userResult);
       saveUserResult(userResult);
-    } catch (error_) {
-      console.log(error_);
+    } catch (_error) {
+      console.log(_error);
     }
   }, [
     tournament.questionsQuantity,

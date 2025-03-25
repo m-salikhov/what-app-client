@@ -1,6 +1,7 @@
 import './tournamentHeader.css';
 import { getDate } from 'Shared/Helpers/getDate';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
+import { ExternalLinkText } from '../Text/ExternalLinkText/ExternalLinkText';
 
 interface Props {
   tournament: TournamentType;
@@ -11,6 +12,7 @@ export function TournamentHeader({ tournament }: Props) {
     <div className='tournament-header'>
       <div className='tournament-header-t'>
         <h2>{tournament.title}</h2>
+        <ExternalLinkText href={tournament.link} text={'источник'} />
       </div>
 
       <div className='tournament-header-m'>
