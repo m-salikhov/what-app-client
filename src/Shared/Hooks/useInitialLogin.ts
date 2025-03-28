@@ -1,19 +1,9 @@
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 export function useInitialLogin() {
-  const flag = localStorage.getItem('rememberMe');
+  const { data: currentUser, ...rest } = useGetCurrentUserQuery(undefined);
 
-  const {
-    isError,
-    data: currentUser,
-    isLoading,
-    error,
-    refetch,
-    isFetching,
-    isSuccess,
-  } = useGetCurrentUserQuery(undefined, { skip: Boolean(!flag) });
+  if (rest.isError) localStorage.removeItem('rememberMe');
 
-  if (isError) localStorage.removeItem('rememberMe');
-
-  return { currentUser, isLoading, error, refetch, isFetching, isSuccess };
+  return { currentUser, ...rest };
 }

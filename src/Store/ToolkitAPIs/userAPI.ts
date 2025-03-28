@@ -11,9 +11,11 @@ export const userAPI = createApi({
   keepUnusedDataFor: 86400,
 
   endpoints: (build) => ({
-    getCurrentUser: build.query<UserType, undefined>({
+    getCurrentUser: build.query<UserType | undefined, undefined>({
       query: () => serverRoutes.authLogFirst,
-      transformResponse: (response: unknown): UserType => {
+      transformResponse: (response: unknown): UserType | undefined => {
+        if (!response) return undefined;
+
         const result = UserSchema.parse(response);
 
         return result;
