@@ -6,6 +6,7 @@ import { Button } from 'Shared/Components/Button/Button';
 import { getDateYYYY_MM_DD } from 'Shared/Helpers/getDate';
 import { EditFormEditors } from './EditFormEditors';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
+import { ScrollToTop } from 'Shared/Components/ScrollToTop/ScrollToTop';
 
 interface Props {
   t: TournamentType;
@@ -56,6 +57,8 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
           <EditFormQuestion q={v} dispatch={dispatch} key={v.id} />
         ))}
       </div>
+
+      <ScrollToTop />
     </main>
   );
 }

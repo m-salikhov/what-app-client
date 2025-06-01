@@ -20,8 +20,6 @@ export function TournamentContent({ tournament }: { tournament: TournamentType }
     <>
       <TournamentHeader tournament={tournament} />
 
-      <ScrollToTop />
-
       <div className='tournament-content' ref={ref}>
         <div className='tournament-content-header'>
           <Back />
@@ -40,6 +38,8 @@ export function TournamentContent({ tournament }: { tournament: TournamentType }
           })}
         </div>
       </div>
+
+      <ScrollToTop />
     </>
   );
 }

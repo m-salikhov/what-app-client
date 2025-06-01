@@ -7,6 +7,7 @@ import { linkBuilder } from './Helpers/linkBuilder';
 import { filterTournaments } from './Helpers/filterTournaments';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
+import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 
 const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
 
@@ -99,6 +100,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
         ))}
       </div>
+      <ScrollToTop />
     </div>
   );
 }
