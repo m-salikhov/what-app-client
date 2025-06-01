@@ -12,7 +12,9 @@
           "text-wrap: pretty",
           "text-size-adjust",
           "forced-color-adjust",
-          "forced-color-adjust: none"
+          "forced-color-adjust: none",
+          "scrollbar-width",
+          "scrollbar-width: none"
         ]
       }
     ],

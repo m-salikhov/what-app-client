@@ -5,6 +5,7 @@ import { Back } from 'Shared/Components/Back/Back';
 import { Question } from 'Shared/Components/Question/Question';
 import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
+import { ScrollToTop } from 'Shared/Components/ScrollToTop/ScrollToTop';
 
 export function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);
@@ -18,6 +19,8 @@ export function TournamentContent({ tournament }: { tournament: TournamentType }
   return (
     <>
       <TournamentHeader tournament={tournament} />
+
+      <ScrollToTop />
 
       <div className='tournament-content' ref={ref}>
         <div className='tournament-content-header'>

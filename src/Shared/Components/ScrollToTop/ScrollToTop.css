@@ -1,0 +1,13 @@
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1000;
+  color: var(--nav-text-color);
+}
+
+.scroll-to-top.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
