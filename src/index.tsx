@@ -1,14 +1,17 @@
 import ReactDOM from 'react-dom/client';
-import { scan } from 'react-scan';
 import { Provider } from 'react-redux';
 import { store } from 'Store/store';
 import { RouterProvider } from 'react-router-dom';
 import router from 'src/Router/AppRouter';
 import 'Shared/Styles/style.css';
 
-scan({
-  enabled: true,
-});
+if (import.meta.env.DEV) {
+  import('react-scan').then(({ scan }) => {
+    scan({
+      enabled: true,
+    });
+  });
+}
 
 const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLElement);
 root.render(

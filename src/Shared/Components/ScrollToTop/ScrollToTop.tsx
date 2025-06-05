@@ -28,5 +28,5 @@ export function ScrollToTop() {
 
   if (!visible) return null;
 
-  return <BsArrowUpSquareFill className={`scroll-to-top ${visible ? '' : 'hidden'}`} onClick={scrollToTop} size={36} />;
+  return <BsArrowUpSquareFill className='scroll-to-top' onClick={scrollToTop} size={36} />;
 }
