@@ -1,13 +1,12 @@
 import './wordle.css';
 import { Board } from './Components/Board';
-import { getWordToCheck } from './helpers/getWordToCheck';
 import { useEffect } from 'react';
 import { useLetterClassName } from './helpers/useLetterClassName';
 import { GameEndModal } from './Components/GameEndModal';
 import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
-import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
-import { board, lettersW } from 'Store/Selectors/WordleSelectors';
+import { lettersW } from 'Store/Selectors/WordleSelectors';
+import { useWordleInput } from './helpers/useWordleInput';
 
 const getWordleDIV = () => {
   const arr = [];
@@ -26,12 +25,9 @@ const getWordleDIV = () => {
 };
 
 export default function Wordle() {
-  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(board);
-
   const dispatch = useAppDispatch();
 
-  const [check] = useCheckMutation();
-  const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
+  const { checkInput } = useWordleInput();
 
   useEffect(() => {
     return () => {
@@ -40,59 +36,7 @@ export default function Wordle() {
   }, []);
 
   return (
-    <div
-      className='wordle'
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (result) {
-          return;
-        }
-
-        if (!allowNextLetter && e.key === 'Enter') {
-          const word = getWordToCheck(letters, currentLetterNumber);
-
-          if (!word || words.at(-1) === word) {
-            return;
-          }
-
-          if (word === answer.word) {
-            dispatch(
-              wordleActions.setWords({
-                answer: answer.word,
-                version: word,
-              })
-            );
-            dispatch(wordleActions.setResult('win'));
-            return;
-          }
-
-          check(word).then(({ data }) => {
-            if (data?.isExist && currentLetterNumber === 30) {
-              dispatch(wordleActions.setResult('lose'));
-            } else if (data?.isExist) {
-              dispatch(wordleActions.setAllowNextLetter(true));
-              dispatch(
-                wordleActions.setWords({
-                  answer: answer.word,
-                  version: data.word,
-                })
-              );
-            } else {
-              dispatch(wordleActions.setWrongWordFlag(true));
-              setTimeout(() => {
-                dispatch(wordleActions.setWrongWordFlag(false));
-              }, 500);
-            }
-          });
-        }
-
-        if (!allowNextLetter && e.key !== 'Backspace') {
-          return;
-        }
-
-        dispatch(wordleActions.setLetters(e.key));
-      }}
-    >
+    <div className='wordle' tabIndex={0} onKeyDown={(e) => checkInput(e.key)}>
       <GameEndModal />
       <div className='wordle-container'>{getWordleDIV()}</div>
       <Board />

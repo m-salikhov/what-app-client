@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
-import { useCheckMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
+import { useCheckWordInDBMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from '../helpers/getWordToCheck';
 import { MouseEventHandler } from 'react';
 import { board, letterStateW } from 'Store/Selectors/WordleSelectors';
@@ -50,7 +50,7 @@ export function Board() {
 
   const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(board);
 
-  const [check] = useCheckMutation();
+  const [checkWordInDB] = useCheckWordInDBMutation();
   const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
 
   function onEnterClick() {
@@ -75,7 +75,7 @@ export function Board() {
       return;
     }
 
-    check(word).then(({ data }) => {
+    checkWordInDB(word).then(({ data }) => {
       if (data?.isExist && currentLetterNumber === 30) {
         dispatch(wordleActions.setResult('lose'));
       } else if (data?.isExist) {
