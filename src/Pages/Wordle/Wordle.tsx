@@ -27,7 +27,7 @@ const getWordleDIV = () => {
 export default function Wordle() {
   const dispatch = useAppDispatch();
 
-  const { checkInput } = useWordleInput();
+  const { handleInput } = useWordleInput();
 
   useEffect(() => {
     return () => {
@@ -36,7 +36,7 @@ export default function Wordle() {
   }, []);
 
   return (
-    <div className='wordle' tabIndex={0} onKeyDown={(e) => checkInput(e.key)}>
+    <div className='wordle' tabIndex={0} onKeyDown={(e) => handleInput(e.key)}>
       <GameEndModal />
       <div className='wordle-container'>{getWordleDIV()}</div>
       <Board />

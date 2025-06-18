@@ -11,7 +11,7 @@ export const wordleAPI = createApi({
       query: () => serverRoutes.wordleRandom,
     }),
 
-    checkWordInDB: build.mutation<{ isExist: boolean; word: string }, string>({
+    verifyWordInDB: build.mutation<{ isExist: boolean; word: string }, string>({
       query: (word) => ({
         url: serverRoutes.wordleCheckExist + `/check?word=${word}`,
         method: 'GET',
@@ -20,4 +20,4 @@ export const wordleAPI = createApi({
   }),
 });
 
-export const { useGetRandomWordQuery, useCheckWordInDBMutation } = wordleAPI;
+export const { useGetRandomWordQuery, useVerifyWordInDBMutation } = wordleAPI;

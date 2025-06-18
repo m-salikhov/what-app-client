@@ -1,9 +1,6 @@
-import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
-import { wordleActions } from 'Store/Slices/WordleSlice';
-import { useCheckWordInDBMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
-import { getWordToCheck } from '../helpers/getWordToCheck';
-import { MouseEventHandler } from 'react';
-import { board, letterStateW } from 'Store/Selectors/WordleSelectors';
+import { useAppSelector } from 'Shared/Hooks/redux';
+import { letterStateW } from 'Store/Selectors/WordleSelectors';
+import { useWordleInput } from '../helpers/useWordleInput';
 
 const keyboard = {
   1: ['й', 'ц', 'у', 'к', 'е', 'н', 'г', 'ш', 'щ', 'з', 'х', 'ъ'],
@@ -13,10 +10,12 @@ const keyboard = {
 
 type KeyboardRowIndex = keyof typeof keyboard;
 
-function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
+function getKeyboard() {
   const arr = [];
 
   const letterState = useAppSelector(letterStateW);
+
+  const { handleInput } = useWordleInput();
 
   for (let i = 1; i < 4; i++) {
     arr.push(
@@ -33,7 +32,7 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
           }
 
           return (
-            <div onClick={letter === '⏎' ? onEnterClick : undefined} className={state} key={letter}>
+            <div onClick={() => handleInput(letter)} className={state} key={letter}>
               {letter}
             </div>
           );
@@ -46,75 +45,5 @@ function getKeyboard(onEnterClick: MouseEventHandler<HTMLDivElement>) {
 }
 
 export function Board() {
-  const dispatch = useAppDispatch();
-
-  const { currentLetterNumber, allowNextLetter, letters, words, result } = useAppSelector(board);
-
-  const [checkWordInDB] = useCheckWordInDBMutation();
-  const { data: answer = { word: '' } } = useGetRandomWordQuery(undefined);
-
-  function onEnterClick() {
-    if (result) {
-      return;
-    }
-
-    const word = getWordToCheck(letters, currentLetterNumber);
-
-    if (!word || words.at(-1) === word) {
-      return;
-    }
-
-    if (word === answer.word) {
-      dispatch(
-        wordleActions.setWords({
-          answer: answer.word,
-          version: word,
-        })
-      );
-      dispatch(wordleActions.setResult('win'));
-      return;
-    }
-
-    checkWordInDB(word).then(({ data }) => {
-      if (data?.isExist && currentLetterNumber === 30) {
-        dispatch(wordleActions.setResult('lose'));
-      } else if (data?.isExist) {
-        dispatch(wordleActions.setAllowNextLetter(true));
-        dispatch(
-          wordleActions.setWords({
-            answer: answer.word,
-            version: data.word,
-          })
-        );
-      } else {
-        dispatch(wordleActions.setWrongWordFlag(true));
-        setTimeout(() => {
-          dispatch(wordleActions.setWrongWordFlag(false));
-        }, 500);
-      }
-    });
-  }
-
-  return (
-    <div
-      className='board-container'
-      onClick={(e) => {
-        if (result) {
-          return;
-        }
-
-        if (e.target instanceof HTMLElement) {
-          if (!allowNextLetter && e.target.innerText !== 'DEL') {
-            return;
-          }
-
-          if (e.target.className !== 'board-container') {
-            dispatch(wordleActions.setLetters(e.target.innerText));
-          }
-        }
-      }}
-    >
-      {getKeyboard(onEnterClick)}
-    </div>
-  );
+  return <div className='board-container'>{getKeyboard()}</div>;
 }
