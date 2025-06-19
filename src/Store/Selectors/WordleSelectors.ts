@@ -1,17 +1,17 @@
 import { createSelector } from 'reselect';
 import { RootState } from 'Store/store';
 
-export const allowNextLetterW = (state: RootState) => state.wordleReducer.allowNextLetter;
-export const currentRowNumberW = (state: RootState) => state.wordleReducer.currentRowNumber;
-export const currentLetterNumberW = (state: RootState) => state.wordleReducer.currentLetterNumber;
-export const lettersW = (state: RootState) => state.wordleReducer.letters;
-export const wrongWordFlagW = (state: RootState) => state.wordleReducer.wrongWordFlag;
-export const resultW = (state: RootState) => state.wordleReducer.result;
-export const wordsW = (state: RootState) => state.wordleReducer.words;
-export const letterStateW = (state: RootState) => state.wordleReducer.letterState;
+export const allowNextLetterSelector = (state: RootState) => state.wordleReducer.allowNextLetter;
+export const currentRowNumberSelector = (state: RootState) => state.wordleReducer.currentRowNumber;
+export const currentLetterNumberSelector = (state: RootState) => state.wordleReducer.currentLetterNumber;
+export const lettersSelector = (state: RootState) => state.wordleReducer.letters;
+export const wrongWordFlagSelector = (state: RootState) => state.wordleReducer.wrongWordFlag;
+export const resultSelector = (state: RootState) => state.wordleReducer.result;
+export const wordsSelector = (state: RootState) => state.wordleReducer.words;
+export const letterStateSelector = (state: RootState) => state.wordleReducer.letterState;
 
-export const board = createSelector(
-  [allowNextLetterW, currentLetterNumberW, lettersW, resultW, wordsW],
+export const boardSelector = createSelector(
+  [allowNextLetterSelector, currentLetterNumberSelector, lettersSelector, resultSelector, wordsSelector],
   (allowNextLetter, currentLetterNumber, letters, result, words) => ({
     allowNextLetter,
     currentLetterNumber,

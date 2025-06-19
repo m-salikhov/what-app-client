@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
-import { board } from 'Store/Selectors/WordleSelectors';
+import {  boardSelector } from 'Store/Selectors/WordleSelectors';
 import { useVerifyWordInDBMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './getWordToCheck';
 import { wordleActions } from 'Store/Slices/WordleSlice';
@@ -13,7 +13,7 @@ function normalizeInput(str: string) {
 export function useWordleInput() {
   const dispatch = useAppDispatch();
 
-  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(board);
+  const { letters, allowNextLetter, currentLetterNumber, words, result } = useAppSelector(boardSelector);
   const { data: answer } = useGetRandomWordQuery(undefined);
   const [verifyWordInDB] = useVerifyWordInDBMutation();
 

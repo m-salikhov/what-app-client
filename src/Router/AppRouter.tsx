@@ -7,6 +7,7 @@ import { Spinner } from 'src/Shared/Components/Spinner/Spinner';
 import { initialLoginLoader } from './Utils/InitialLoginLoader';
 import { store } from 'Store/store';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
+import { wordleLoader } from './Utils/wordleLoader';
 
 const Entry = lazy(() => import('src/Pages/Entry/Entry'));
 const AddTournamentLink = lazy(() => import('src/Pages/AddTournamentLink/AddTournamentLink'));
@@ -108,6 +109,7 @@ const router = createHashRouter(
 
         {
           path: 'wordle',
+          loader: wordleLoader,
           element: (
             <Suspense fallback={<Spinner />}>
               <Wordle />

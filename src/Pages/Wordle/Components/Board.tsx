@@ -1,5 +1,5 @@
 import { useAppSelector } from 'Shared/Hooks/redux';
-import { letterStateW } from 'Store/Selectors/WordleSelectors';
+import { letterStateSelector } from 'Store/Selectors/WordleSelectors';
 import { useWordleInput } from '../helpers/useWordleInput';
 
 const keyboard = {
@@ -13,7 +13,7 @@ type KeyboardRowIndex = keyof typeof keyboard;
 function getKeyboard() {
   const arr = [];
 
-  const letterState = useAppSelector(letterStateW);
+  const letterState = useAppSelector(letterStateSelector);
 
   const { handleInput } = useWordleInput();
 

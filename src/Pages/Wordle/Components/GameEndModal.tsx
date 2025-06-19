@@ -3,60 +3,44 @@ import { TfiLock } from 'react-icons/tfi';
 import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
-import { board } from 'Store/Selectors/WordleSelectors';
+import { currentLetterNumberSelector } from 'Store/Selectors/WordleSelectors';
 import { Modal } from 'Shared/Components/Modal/Modal';
-import { useEffect, useState } from 'react';
 
-export function GameEndModal() {
-  const { result, currentLetterNumber } = useAppSelector(board);
+export function GameEndModal({ result }: { result: string }) {
+  const currentLetterNumber = useAppSelector(currentLetterNumberSelector);
   const { data: answer = { word: '' }, refetch } = useGetRandomWordQuery(undefined);
-  const [modalOpen, setModalOpen] = useState(false);
 
   const dispatch = useAppDispatch();
 
   const attempts = currentLetterNumber / 5;
 
-  function onDestroyed() {
+  function onClose() {
     dispatch(wordleActions.resetState());
     refetch();
   }
 
-  useEffect(() => {
-    if (result) {
-      setModalOpen(true);
-    }
-  }, [result]);
-
   return (
-    <Modal
-      active={modalOpen}
-      onClose={() => {
-        setModalOpen(false);
-      }}
-      onDestroyed={onDestroyed}
-    >
+    <Modal active={Boolean(result)} onClose={onClose}>
       {' '}
       <div className='wordle-result-wrapper'>
         <div className='wordle-result-icon'>
-          {result === 'win' ? (
-            <GrAchievement size={'100px'} color='#FFC300' />
-          ) : (
-            <TfiLock size={'100px'} color='#FFC300' />
-          )}
+          {result === 'win' && <GrAchievement size={'100px'} color='#FFC300' />}
+          {result === 'lose' && <TfiLock size={'100px'} color='#FFC300' />}
         </div>
 
-        {result === 'win' ? (
+        {result === 'win' && (
           <p className='wordle-result-text'>
             Вы отгадали слово <span>{answer.word}</span> <br /> {attempts === 2 ? 'со' : 'с'} {attempts}-
             {attempts === 3 ? 'ей' : 'ой'} попытки!
           </p>
-        ) : (
+        )}
+        {result === 'lose' && (
           <p className='wordle-result-text'>
             Увы! Вам не удалось отгадать <br /> слово <span>{answer.word}</span>
           </p>
         )}
 
-        <div className='wordle-result-new' onClick={() => setModalOpen(false)}>
+        <div className='wordle-result-new' onClick={onClose}>
           <p>новое слово</p>
         </div>
       </div>
