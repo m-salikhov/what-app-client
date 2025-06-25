@@ -42,6 +42,10 @@ export const tournamentAPI = createApi({
       keepUnusedDataFor: 1,
     }),
 
+    getRandomTournament: build.query<TournamentShortType, string>({
+      query: (userId: string) => `${serverRoutes.randomTournament}/${userId}`,
+    }),
+
     getStats: build.query<{ tc: number; qc: number }, undefined>({
       query: () => serverRoutes.tournamentsStats,
       providesTags: ['stats'],

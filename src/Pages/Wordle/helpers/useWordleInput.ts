@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
-import {  boardSelector } from 'Store/Selectors/WordleSelectors';
+import { boardSelector } from 'Store/Selectors/WordleSelectors';
 import { useVerifyWordInDBMutation, useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { getWordToCheck } from './getWordToCheck';
 import { wordleActions } from 'Store/Slices/WordleSlice';

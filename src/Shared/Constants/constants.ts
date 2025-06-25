@@ -13,6 +13,7 @@ export const serverRoutes = {
   tournamentsStats: 'tournaments/statistics',
   tournamentsAmountPages: 'tournaments/amountpages',
   tournamentsAllByUploader: 'tournaments/allbyuploader',
+  randomTournament: 'tournaments/random-tournament',
   authLogin: 'auth/login',
   authLogFirst: 'auth/logfirst',
   authLogout: 'auth/logout',
