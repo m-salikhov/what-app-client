@@ -8,6 +8,7 @@ import { filterTournaments } from './Helpers/filterTournaments';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
+import { RandomTournament } from './Components/RandomTournament';
 
 const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
 
@@ -36,9 +37,17 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
   return (
     <div className='tournaments-table'>
       {' '}
-      <label className='tournaments-table-search'>
-        <input type='text' name='tournaments-search' onChange={(e) => setSearch(e.target.value)} placeholder='поиск' />
-      </label>
+      <div className='tournaments-table-header'>
+        <label className='tournaments-table-search'>
+          <input
+            type='text'
+            name='tournaments-search'
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder='поиск'
+          />
+        </label>
+        <RandomTournament pathname={pathname} />
+      </div>
       <div className='tournaments-table-wrapper'>
         <div className='tournaments-table-line'>
           <div>№</div>

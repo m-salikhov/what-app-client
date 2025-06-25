@@ -1,6 +1,23 @@
+import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
+import { useLazyGetRandomTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { useNavigate } from 'react-router-dom';
+import { linkBuilder } from '../Helpers/linkBuilder';
+
 interface Props {
-  pathName: string;
+  pathname: string;
 }
-export function RandomTournament({ pathName }: Props) {
-  return <div></div>;
+export function RandomTournament({ pathname }: Props) {
+  const { currentUser } = useInitialLogin();
+  const navigate = useNavigate();
+  const [fetchData] = useLazyGetRandomTournamentQuery();
+
+  const handleClick = async () => {
+    const { data } = await fetchData(currentUser?.id ?? '');
+    if (data) {
+      navigate(linkBuilder(data.id, data.title, pathname));
+    }
+  };
+
+  return <GiPerspectiveDiceSixFacesRandom size={'40px'} onClick={handleClick} />;
 }

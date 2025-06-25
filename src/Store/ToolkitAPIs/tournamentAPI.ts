@@ -43,7 +43,7 @@ export const tournamentAPI = createApi({
     }),
 
     getRandomTournament: build.query<TournamentShortType, string>({
-      query: (userId: string) => `${serverRoutes.randomTournament}/${userId}`,
+      query: (userId: string) => `${serverRoutes.randomTournament}?userId=${userId}`,
     }),
 
     getStats: build.query<{ tc: number; qc: number }, undefined>({
@@ -95,6 +95,8 @@ export const {
   usePrefetch,
   useGetTournamentQuery,
   useGetRandomQuery,
+  useGetRandomTournamentQuery,
+  useLazyGetRandomTournamentQuery,
   useAddTournamentMutation,
   useParseLinkMutation,
   useGetTournamentsAllShortQuery,

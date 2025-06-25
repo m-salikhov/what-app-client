@@ -53,16 +53,28 @@
   }
 }
 
-.tournaments-table-search {
+.tournaments-table-header {
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  input {
-    width: 250px;
-    padding: 2px 14px;
-    font-size: 1.3rem;
-    border: var(--main-border);
-    border-radius: 6px;
+  .tournaments-table-search {
+    display: flex;
+    justify-content: center;
+    padding-right: 10px;
+
+    input {
+      width: 250px;
+      padding: 2px 14px;
+      font-size: 1.3rem;
+      border: var(--main-border);
+      border-radius: 6px;
+    }
+  }
+
+  svg {
+    cursor: pointer;
+    color: var(--h-color);
   }
 }
 
