@@ -13,8 +13,9 @@ import { RandomTournament } from './Components/RandomTournament';
 const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
+  const [sortedTournaments, setSortedTournaments] = useState([...tournaments]);
   const [search, setSearch] = useState('');
-  const [filterField, setFilterField] = useState('dsc');
+  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   const { pathname } = useLocation();
 
@@ -22,16 +23,18 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
     const filter = fieldNameSchema.parse(e.currentTarget.id);
 
     if (filter === 'uploader' || filter === 'title') {
-      tournaments.sort(function (a, b) {
-        return filterField === 'asc' ? b[filter].localeCompare(a[filter]) : a[filter].localeCompare(b[filter]);
-      });
+      setSortedTournaments((prev) =>
+        [...prev].sort((a, b) =>
+          sortDirection === 'asc' ? b[filter].localeCompare(a[filter]) : a[filter].localeCompare(b[filter])
+        )
+      );
     } else {
-      tournaments.sort(function (a, b) {
-        return filterField === 'asc' ? b[filter] - a[filter] : a[filter] - b[filter];
-      });
+      setSortedTournaments((prev) =>
+        [...prev].sort((a, b) => (sortDirection === 'asc' ? b[filter] - a[filter] : a[filter] - b[filter]))
+      );
     }
 
-    setFilterField(filterField === 'asc' ? 'desc' : 'asc');
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
   }
 
   return (
@@ -95,7 +98,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
         </div>
 
-        {filterTournaments(tournaments, search).map((item, i) => (
+        {filterTournaments(sortedTournaments, search).map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>

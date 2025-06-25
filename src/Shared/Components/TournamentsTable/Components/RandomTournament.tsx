@@ -1,6 +1,6 @@
 import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { useLazyGetRandomTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
+import { GiPerspectiveDiceSixFacesRandom as DiceIcon } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 import { linkBuilder } from '../Helpers/linkBuilder';
 
@@ -19,5 +19,5 @@ export function RandomTournament({ pathname }: Props) {
     }
   };
 
-  return <GiPerspectiveDiceSixFacesRandom size={'40px'} onClick={handleClick} />;
+  return <DiceIcon size={'40px'} onClick={handleClick} />;
 }

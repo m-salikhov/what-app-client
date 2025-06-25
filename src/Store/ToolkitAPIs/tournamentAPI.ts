@@ -95,7 +95,6 @@ export const {
   usePrefetch,
   useGetTournamentQuery,
   useGetRandomQuery,
-  useGetRandomTournamentQuery,
   useLazyGetRandomTournamentQuery,
   useAddTournamentMutation,
   useParseLinkMutation,
