@@ -1,11 +1,11 @@
-import next from '../assets/next.svg';
-import back from '../assets/back.svg';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
+import { HiArrowNarrowRight as RightArrow } from 'react-icons/hi';
+import { HiArrowNarrowLeft as LeftArrow } from 'react-icons/hi';
 
 export function LastTournaments() {
   const [page, setPage] = useState(1);
@@ -17,20 +17,14 @@ export function LastTournaments() {
     withSkip: true,
   });
 
-  const changePageNumber = (e: MouseEvent<HTMLButtonElement>) => {
-    switch (e.currentTarget.className) {
-      case 'next': {
-        setPage((p) => p + 1);
-        break;
-      }
-      case 'back': {
-        setPage((p) => p - 1);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+  const handlePrevPage = () => {
+    if (page === 1 || isFetching) return;
+    setPage((prevPage) => prevPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (data?.hasMorePage === false || isFetching) return;
+    setPage((prevPage) => prevPage + 1);
   };
 
   if (isLoading) {
@@ -66,18 +60,9 @@ export function LastTournaments() {
       })}
 
       <div className='tournaments-footer'>
-        <button type='button' className='back' disabled={isFetching || page === 1} onClick={changePageNumber}>
-          <img src={back} alt='предыдущая страница списка турниров' />
-        </button>
+        <LeftArrow size={25} onClick={handlePrevPage} />
         <p>{page}</p>
-        <button
-          type='button'
-          className='next'
-          disabled={isFetching || page === data?.pageCount}
-          onClick={changePageNumber}
-        >
-          <img src={next} alt='следующая страница списка турниров' />
-        </button>
+        <RightArrow size={25} onClick={handleNextPage} />
       </div>
     </div>
   );

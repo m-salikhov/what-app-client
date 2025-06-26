@@ -11,17 +11,17 @@
       .refresh {
         display: flex;
 
-        & div {
-          width: 1.6rem;
-          margin-left: 1rem;
+        h2 {
+          margin-right: 0.5rem;
+        }
+
+        .refresh-arrow {
+          transition: transform 1s;
           cursor: pointer;
+          color: var(--h-color);
 
-          .refresh-arrow {
-            transition: all 1s;
-
-            &.r {
-              transform: rotate(-360deg);
-            }
+          &.rotate {
+            transform: rotate(-360deg);
           }
         }
       }
@@ -93,10 +93,13 @@
     }
 
     a {
-      padding: 0.5rem 0;
+      padding: 0.5rem 0.5rem 0.5rem 0;
       font-size: 1.3rem;
       color: var(--a-main-list-color);
       cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     h5 {
@@ -108,21 +111,19 @@
   .tournaments-footer {
     display: flex;
     justify-content: center;
+    align-items: center;
     padding-top: 0.4rem;
 
-    div,
-    button {
-      width: 1.6rem;
-      background-color: var(--main-bg-color);
-
-      img {
-        cursor: pointer;
-      }
+    svg {
+      cursor: pointer;
+      color: var(--p-color);
     }
 
     p {
       margin: auto 1rem;
       font-size: 1.25rem;
+      -webkit-user-select: none;
+      user-select: none;
     }
   }
 }
@@ -134,6 +135,8 @@
   background: var(--banner-gradient);
   border: 3px solid var(--main-border-color);
   border-radius: 20px;
+  -webkit-user-select: none;
+  user-select: none;
 
   h2 {
     text-align: center;

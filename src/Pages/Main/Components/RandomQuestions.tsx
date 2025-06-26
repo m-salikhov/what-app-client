@@ -1,8 +1,8 @@
-import refreshIcon from '../assets/refresh.svg';
 import { useState } from 'react';
 import { Question } from 'Shared/Components/Question/Question';
 import { SkeletonQuestion } from 'Shared/Components/Question/SkeletonQuestion';
 import { useGetRandomQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { HiRefresh } from 'react-icons/hi';
 
 export function RandomQuestions() {
   const amountRandomQuestions = 4;
@@ -18,18 +18,14 @@ export function RandomQuestions() {
         <div className='refresh'>
           {' '}
           <h2>Случайные вопросы</h2>
-          <div>
-            <img
-              className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow r'}
-              src={refreshIcon}
-              alt='обновить случайные'
-              role='button'
-              onClick={() => {
-                refetch();
-                setIsRandomRefetch(!isRandomRefetch);
-              }}
-            />
-          </div>
+          <HiRefresh
+            size={24}
+            className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow rotate'}
+            onClick={() => {
+              refetch();
+              setIsRandomRefetch(!isRandomRefetch);
+            }}
+          />
         </div>
       </div>
 
