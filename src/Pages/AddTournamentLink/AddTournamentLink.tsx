@@ -17,6 +17,7 @@ import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
 
+  const { currentUser } = useInitialLogin();
   const [link, setLink] = useState('');
   const [message, setMessage] = useState('');
   const [showParsedTournament, setShowParsedTournament] = useState(false);
@@ -25,12 +26,9 @@ function AddTournamentLink() {
   const [t, dispatch] = useReducer(reducer, addLinkInitTournament);
 
   const { errorsFilling, checkTournament, resetErrors } = useCheckParsingErrors();
-  const { currentUser } = useInitialLogin();
 
-  const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
+  const [addTournament, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
-
-  console.log(t);
 
   const handleAddTournament = async () => {
     setMessage('');
@@ -38,7 +36,7 @@ function AddTournamentLink() {
 
     if (!checkTournament(t)) return;
 
-    await addT({
+    await addTournament({
       ...t,
       questions: t.questions.filter((q) => q.qNumber !== -1),
       uploaderUuid: currentUser ? currentUser.id : guest.id,
