@@ -30,6 +30,8 @@ function AddTournamentLink() {
   const [addT, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
   const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
 
+  console.log(t);
+
   const handleAddTournament = async () => {
     setMessage('');
     resetErrors();
@@ -38,6 +40,7 @@ function AddTournamentLink() {
 
     await addT({
       ...t,
+      questions: t.questions.filter((q) => q.qNumber !== -1),
       uploaderUuid: currentUser ? currentUser.id : guest.id,
       uploader: currentUser ? currentUser.username : guest.username,
     }).then(() => {

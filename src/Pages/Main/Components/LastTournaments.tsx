@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { HiArrowNarrowRight as RightArrow } from 'react-icons/hi';
 import { HiArrowNarrowLeft as LeftArrow } from 'react-icons/hi';
 
@@ -11,7 +10,7 @@ export function LastTournaments() {
   const [page, setPage] = useState(1);
   const amount = 10;
 
-  const { data, isFetching, isLoading, error } = useGetTournamentsLastShortQuery({
+  const { data, isFetching, isLoading } = useGetTournamentsLastShortQuery({
     amount,
     page,
     withSkip: true,
@@ -35,10 +34,6 @@ export function LastTournaments() {
     );
   }
 
-  if (error) {
-    return <h2>{extractServerErrorMessage(error)}</h2>;
-  }
-
   return (
     <div className='main-content-tournaments'>
       <h2>Последние добавленные турниры</h2>
@@ -60,9 +55,9 @@ export function LastTournaments() {
       })}
 
       <div className='tournaments-footer'>
-        <LeftArrow size={25} onClick={handlePrevPage} />
+        <LeftArrow size={24} onClick={handlePrevPage} />
         <p>{page}</p>
-        <RightArrow size={25} onClick={handleNextPage} />
+        <RightArrow size={24} onClick={handleNextPage} />
       </div>
     </div>
   );
