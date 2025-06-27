@@ -1,41 +1,17 @@
 import './tournamentsTable.css';
 import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
-import { useState, MouseEvent } from 'react';
 import { getDate } from 'Shared/Helpers/getDate';
 import { linkBuilder } from './Helpers/linkBuilder';
-import { filterTournaments } from './Helpers/filterTournaments';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
-import { z } from 'zod';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 import { RandomTournament } from './Components/RandomTournament';
-
-const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
+import { useTournamentListManager } from './Helpers/useTournamentListManager';
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
-  const [sortedTournaments, setSortedTournaments] = useState([...tournaments]);
-  const [search, setSearch] = useState('');
-  const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
-
   const { pathname } = useLocation();
-
-  function sortTournaments(e: MouseEvent<HTMLDivElement>) {
-    const filter = fieldNameSchema.parse(e.currentTarget.id);
-
-    if (filter === 'uploader' || filter === 'title') {
-      setSortedTournaments((prev) =>
-        [...prev].sort((a, b) =>
-          sortDirection === 'asc' ? b[filter].localeCompare(a[filter]) : a[filter].localeCompare(b[filter])
-        )
-      );
-    } else {
-      setSortedTournaments((prev) =>
-        [...prev].sort((a, b) => (sortDirection === 'asc' ? b[filter] - a[filter] : a[filter] - b[filter]))
-      );
-    }
-
-    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-  }
+  const { tournamentsList, handleChangeFilterString, filterString, sortTournaments } =
+    useTournamentListManager(tournaments);
 
   return (
     <div className='tournaments-table'>
@@ -45,7 +21,8 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           <input
             type='text'
             name='tournaments-search'
-            onChange={(e) => setSearch(e.target.value)}
+            value={filterString}
+            onChange={handleChangeFilterString}
             placeholder='поиск'
           />
         </label>
@@ -98,7 +75,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
         </div>
 
-        {filterTournaments(sortedTournaments, search).map((item, i) => (
+        {tournamentsList.map((item, i) => (
           <div className='tournaments-table-line' key={item.id}>
             <div>{i + 1}</div>
             <div className='link'>
