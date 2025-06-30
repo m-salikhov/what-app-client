@@ -5,7 +5,7 @@ import { NavigateFunction, NavLink, useLocation, useNavigate } from 'react-route
 import { useLogout } from 'Shared/Hooks/useLogout';
 import { useWindowSize } from 'Shared/Hooks/useWindowSize';
 import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
-import { useInitialLogin } from 'src/Shared/Hooks/useInitialLogin';
+import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 const logoNavigate = (
   isManePage: boolean,
@@ -36,7 +36,7 @@ export function Header() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  const { currentUser } = useInitialLogin();
+  const { data: currentUser } = useGetCurrentUserQuery(undefined);
 
   const { isFullSize } = useWindowSize();
   const logout = useLogout();

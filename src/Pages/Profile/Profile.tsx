@@ -2,13 +2,13 @@ import './profile.css';
 import { ChangePass } from './Components/ChangePass/ChangePass';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
-import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { ProfileInfo } from './Components/ProfileInfo';
+import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 export default function Profile() {
   useDocTitle('Профиль');
 
-  const { currentUser } = useInitialLogin();
+  const { data: currentUser } = useGetCurrentUserQuery(undefined);
 
   if (!currentUser) return null;
 

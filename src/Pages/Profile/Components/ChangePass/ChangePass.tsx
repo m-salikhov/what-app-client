@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
+import { useChangePasswordMutation, useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 import { Button } from 'Shared/Components/Button/Button';
 import { Modal } from 'Shared/Components/Modal/Modal';
-import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
@@ -11,7 +10,8 @@ export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
   const [serverMessage, setServerMessage] = useState('');
 
-  const { currentUser } = useInitialLogin();
+  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+
   const [changePassword, { isSuccess }] = useChangePasswordMutation();
 
   const {

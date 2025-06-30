@@ -14,11 +14,12 @@ export const userAPI = createApi({
     getCurrentUser: build.query<UserType | undefined, undefined>({
       query: () => serverRoutes.authLogFirst,
       transformResponse: (response: unknown): UserType | undefined => {
-        if (!response) return undefined;
-
-        const result = UserSchema.parse(response);
-
-        return result;
+        try {
+          const result = UserSchema.parse(response);
+          return result;
+        } catch (error) {
+          return undefined;
+        }
       },
     }),
 
@@ -32,6 +33,7 @@ export const userAPI = createApi({
         method: 'POST',
         body,
       }),
+
       transformResponse: (response: unknown) => {
         const result = UserSchema.parse(response);
 
@@ -85,7 +87,6 @@ export const userAPI = createApi({
 export const {
   useGetCurrentUserQuery,
   useLogoutQuery,
-  useLazyLogoutQuery,
   useLoginMutation,
   useRegistrationMutation,
   useGetUserResultFullQuery,

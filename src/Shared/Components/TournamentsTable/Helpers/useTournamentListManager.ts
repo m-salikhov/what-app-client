@@ -6,7 +6,7 @@ const fieldNameSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', '
 
 export function useTournamentListManager(tournaments: TournamentShortType[]) {
   const [filterString, setFilterString] = useState('');
-  const [sortedTournaments, setSortedTournaments] = useState([...tournaments]);
+  const [sortedTournaments, setSortedTournaments] = useState(tournaments);
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   function sortTournaments(e: MouseEvent<HTMLDivElement | SVGElement>) {

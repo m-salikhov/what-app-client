@@ -11,13 +11,14 @@ import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMess
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
-import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
+import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
 
-  const { currentUser } = useInitialLogin();
+  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+
   const [link, setLink] = useState('');
   const [message, setMessage] = useState('');
   const [showParsedTournament, setShowParsedTournament] = useState(false);
