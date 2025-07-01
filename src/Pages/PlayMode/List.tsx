@@ -1,7 +1,6 @@
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { useGetTournamentsAllShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
 
 function List() {
@@ -9,7 +8,7 @@ function List() {
 
   const { data: tournaments, isSuccess, error, isLoading } = useGetTournamentsAllShortQuery(undefined);
 
-  if (error) return <h2>{extractServerErrorMessage(error)}</h2>;
+  if (error) return <h2>Ошибка при получении турниров</h2>;
 
   if (isLoading) return <Spinner />;
 

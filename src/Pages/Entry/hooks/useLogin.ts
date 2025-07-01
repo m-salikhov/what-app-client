@@ -15,7 +15,7 @@ export function useLogin() {
         localStorage.setItem('rememberMe', 'yes');
       })
       .catch((e) => {
-        console.log(e);
+        console.error(e);
       });
   }
 

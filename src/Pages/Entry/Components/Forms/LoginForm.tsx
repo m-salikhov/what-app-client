@@ -5,8 +5,8 @@ import { Button } from 'Shared/Components/Button/Button';
 import { FormFieldError } from './FormError';
 import { Navigate } from 'react-router-dom';
 import { useLogin } from '../../hooks/useLogin';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { Tooltip } from 'react-tooltip';
+import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
 
 const LoginForm = () => {
   const {
@@ -49,7 +49,7 @@ const LoginForm = () => {
       </div>
       <FormFieldError message={errors.password?.message} />
 
-      {error && <FormFieldError message={extractServerErrorMessage(error)} />}
+      {error && <FormFieldError message={getServerErrorMessage(error, 'Ошибка')} />}
 
       <Button type='submit' disabled={isLoading} title='Войти' onSubmit={handleSubmit(onSubmit)} />
     </form>

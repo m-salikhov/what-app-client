@@ -7,12 +7,12 @@ import { ParsedTournament } from './Components/ParsedTournament';
 import { Button } from 'Shared/Components/Button/Button';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { guest } from 'Shared/Constants/constants';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
 import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
+import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
@@ -95,11 +95,11 @@ function AddTournamentLink() {
 
       {message && <p className='addlink-message'>{message}</p>}
 
-      {(errorParse ?? errorAdd) && (
-        <p className='addlink-message'>{extractServerErrorMessage(errorParse || errorAdd)}</p>
-      )}
+      {errorParse && <p className='addlink-message'>{getServerErrorMessage(errorParse, 'Ошибка парсинга ссылки')}</p>}
 
-      {(isLoading ?? isLoadingAdd) && <Spinner />}
+      {errorAdd && <p className='addlink-message'>{getServerErrorMessage(errorAdd, 'Ошибка сохранения турнира')}</p>}
+
+      {(isLoading || isLoadingAdd) && <Spinner />}
 
       {showParsedTournament ? (
         <ParsedTournament

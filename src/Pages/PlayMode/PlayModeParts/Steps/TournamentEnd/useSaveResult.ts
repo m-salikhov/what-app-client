@@ -1,13 +1,12 @@
 import { useEffect } from 'react';
 import { useAppSelector } from 'Shared/Hooks/redux';
-import { useInitialLogin } from 'Shared/Hooks/useInitialLogin';
 import { ResultClientSchema } from 'Shared/Schemas/ResultSchema';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 import { finalResult } from 'Store/Selectors/PlayModeSelectors';
-import { usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
+import { useGetCurrentUserQuery, usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
 
 export function useSaveResult(tournament: TournamentType) {
-  const { currentUser } = useInitialLogin();
+  const { data: currentUser } = useGetCurrentUserQuery(undefined);
 
   const [saveUserResult, { isSuccess, error, isLoading }] = usePostUserResultMutation();
 

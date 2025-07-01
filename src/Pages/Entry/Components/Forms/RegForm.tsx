@@ -4,8 +4,8 @@ import { registrationSchema, RegistrationType } from '../../Schema/EntrySchema';
 import { Button } from 'Shared/Components/Button/Button';
 import { FormFieldError } from './FormError';
 import { useRegistration } from '../../hooks/useRegistration';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { ModalReg } from '../ModalReg';
+import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
 
 export const RegistrationForm = () => {
   const {
@@ -56,7 +56,7 @@ export const RegistrationForm = () => {
         </div>
         <FormFieldError message={errors.confirmPassword?.message} />
 
-        {error && <FormFieldError message={extractServerErrorMessage(error)} />}
+        {error && <FormFieldError message={getServerErrorMessage(error, 'Ошибка')} />}
 
         <Button type='submit' disabled={isLoading} title='Зарегистрироваться' onSubmit={handleSubmit(onSubmit)} />
       </form>

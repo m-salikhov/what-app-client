@@ -18,9 +18,12 @@ export const tournamentAPI = createApi({
     getTournament: build.query<TournamentType, string | number>({
       query: (id: string | number) => `/tournaments/${id}`,
       transformResponse: (response: unknown) => {
-        const result = TournamentTypeSchema.parse(response);
-
-        return result;
+        try {
+          const result = TournamentTypeSchema.parse(response);
+          return result;
+        } catch (error) {
+          throw error;
+        }
       },
     }),
 

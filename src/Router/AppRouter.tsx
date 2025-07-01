@@ -8,6 +8,7 @@ import { initialLoginLoader } from './Utils/InitialLoginLoader';
 import { store } from 'Store/store';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { wordleLoader } from './Utils/wordleLoader';
+import { tournamentLoader } from './Utils/tournamentLoader';
 
 const Entry = lazy(() => import('src/Pages/Entry/Entry'));
 const AddTournamentLink = lazy(() => import('src/Pages/AddTournamentLink/AddTournamentLink'));
@@ -27,6 +28,8 @@ const router = createBrowserRouter(
       path: '/',
       element: <Layout />,
       loader: initialLoginLoader,
+      errorElement: <NotFound />,
+
       children: [
         {
           index: true,
@@ -51,6 +54,7 @@ const router = createBrowserRouter(
               <Tournament />{' '}
             </Suspense>
           ),
+          loader: tournamentLoader,
         },
 
         {

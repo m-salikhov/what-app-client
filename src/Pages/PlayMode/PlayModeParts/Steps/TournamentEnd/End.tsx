@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { ResBlock } from '../Components/ResultBlock/ResBlock';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import { extractServerErrorMessage } from 'Shared/Helpers/extractServerErrorMessage';
 import { Button } from 'Shared/Components/Button/Button';
 import { useSaveResult } from './useSaveResult';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
@@ -19,7 +18,7 @@ export function End({ tournament }: { tournament: TournamentType }) {
 
       {isSuccess && <p>Ваш результат доступен в Профиле</p>}
 
-      {error && <p>{extractServerErrorMessage(error) || 'Ошибка при сохранении результата'}</p>}
+      {error && <p> 'Ошибка при сохранении результата'</p>}
 
       <Button title='К выбору турнира' onClick={() => navigate('/playmode')} />
     </div>
