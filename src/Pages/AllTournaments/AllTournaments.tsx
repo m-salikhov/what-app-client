@@ -14,7 +14,7 @@ function AllTournaments() {
 
   if (!isSuccess) return null;
 
-  return <TournamentsTable tournaments={structuredClone(tournaments)} />;
+  return <TournamentsTable tournaments={tournaments} />;
 }
 
 export default AllTournaments;

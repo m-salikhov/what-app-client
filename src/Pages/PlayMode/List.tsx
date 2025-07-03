@@ -14,7 +14,7 @@ function List() {
 
   if (!isSuccess) return null;
 
-  return <TournamentsTable tournaments={structuredClone(tournaments)} />;
+  return <TournamentsTable tournaments={tournaments} />;
 }
 
 export default List;

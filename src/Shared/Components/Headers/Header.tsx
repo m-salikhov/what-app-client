@@ -6,6 +6,7 @@ import { useLogout } from 'Shared/Hooks/useLogout';
 import { useWindowSize } from 'Shared/Hooks/useWindowSize';
 import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
+import { usePrefetch } from 'Store/ToolkitAPIs/tournamentAPI';
 
 const logoNavigate = (
   isManePage: boolean,
@@ -32,6 +33,8 @@ const logoNavigate = (
 
 export function Header() {
   const [openMobMenu, setOpenMobMenu] = useState(false);
+
+  const prefetchTournaments = usePrefetch('getTournamentsAllShort');
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -75,7 +78,7 @@ export function Header() {
             <NavLink to='/about'>О сайте</NavLink>
           </li>
 
-          <li>
+          <li onMouseEnter={() => prefetchTournaments(undefined)}>
             <NavLink to='/playmode'>Игровой режим </NavLink>
           </li>
 
@@ -89,7 +92,7 @@ export function Header() {
             <NavLink to='/addbylink'> Добавить турнир</NavLink>
           </li>
 
-          <li>
+          <li onMouseEnter={() => prefetchTournaments(undefined)}>
             <NavLink to='/all'>Все турниры</NavLink>
           </li>
 

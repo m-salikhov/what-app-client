@@ -4,10 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { linkBuilder } from '../Helpers/linkBuilder';
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
-interface Props {
-  pathname: string;
-}
-export function RandomTournament({ pathname }: Props) {
+export function RandomTournament({ pathname }: { pathname: string }) {
   const { data: currentUser } = useGetCurrentUserQuery(undefined);
 
   const navigate = useNavigate();

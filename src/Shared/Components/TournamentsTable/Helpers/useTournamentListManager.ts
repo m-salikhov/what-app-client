@@ -1,4 +1,4 @@
-import { useState, MouseEvent } from 'react';
+import { useState, MouseEvent, ChangeEvent } from 'react';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
 
@@ -27,7 +27,7 @@ export function useTournamentListManager(tournaments: TournamentShortType[]) {
     setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
   }
 
-  const handleChangeFilterString = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFilterString = (event: ChangeEvent<HTMLInputElement>) => {
     setFilterString(event.target.value);
   };
 
