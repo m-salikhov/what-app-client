@@ -1,4 +1,4 @@
-import './tournament.css';
+import styles from './tournament.module.css';
 import { useLoaderData } from 'react-router-dom';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
@@ -26,29 +26,25 @@ export default function Tournament() {
   });
 
   return (
-    <div className='tournament-container'>
+    <>
       <TournamentHeader tournament={tournament} />
 
-      <div className='tournament-content' ref={ref}>
-        <div className='tournament-content-header'>
-          <Back />
-          <div className='tournament-content-tours' onClick={(e) => scroll(e, ref.current, tournament)}>
-            {getToursParagraphs(tournament.tours)}
-          </div>
+      <div ref={ref}>
+        <Back />
+        <div className={styles.tours} onClick={(e) => scroll(e, ref.current, tournament)}>
+          {getToursParagraphs(tournament.tours)}
         </div>
 
-        <div className='tournament-content-qs'>
-          {transitions((style, v) => {
-            return (
-              <animated.div className='tournament-content-qs-item' style={style}>
-                <Question q={v} />
-              </animated.div>
-            );
-          })}
-        </div>
+        {transitions((style, v) => {
+          return (
+            <animated.div className={styles.question} style={style}>
+              <Question q={v} />
+            </animated.div>
+          );
+        })}
       </div>
 
       <ScrollToTop />
-    </div>
+    </>
   );
 }

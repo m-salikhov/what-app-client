@@ -5,6 +5,7 @@ import { Modal } from 'Shared/Components/Modal/Modal';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
+import styles from '../../profile.module.css';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
@@ -37,7 +38,7 @@ export function ChangePass() {
 
   return (
     <>
-      <div className='change-pass-text'>
+      <div className={styles.changePass}>
         <p
           onClick={() => {
             setChangePass(true);
@@ -55,38 +56,32 @@ export function ChangePass() {
           setServerMessage('');
         }}
       >
-        <div className='profile-pass'>
+        <div className={styles.modal}>
           <form onSubmit={handleSubmit(onSubmit)}>
             {' '}
-            <div className='profile-pass-container'>
-              <label>
-                <p>Новый пароль</p>
-                <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' autoFocus />
-              </label>
-
-              <label>
-                <p>Повторите пароль</p>
-                <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
-              </label>
-
-              {Object.keys(errors).length > 0 &&
-                Object.values(errors).map((error) => {
-                  return <p className='profile-pass-error'>{error.message}</p>;
-                })}
-
-              {serverMessage && <p className={`profile-pass-${isSuccess ? 'success' : 'error'}`}>{serverMessage}</p>}
-
-              <div className='profile-pass-control'>
-                <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
-                <Button
-                  type='submit'
-                  title='Отправить'
-                  onClick={() => {
-                    setServerMessage('');
-                    handleSubmit(onSubmit);
-                  }}
-                />
-              </div>
+            <label>
+              <p>Новый пароль</p>
+              <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' autoFocus />
+            </label>
+            <label>
+              <p>Повторите пароль</p>
+              <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
+            </label>
+            {Object.keys(errors).length > 0 &&
+              Object.values(errors).map((error) => {
+                return <p className={styles.error}>{error.message}</p>;
+              })}
+            {serverMessage && <p className={isSuccess ? styles.success : styles.error}>{serverMessage}</p>}
+            <div className={styles.control}>
+              <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
+              <Button
+                type='submit'
+                title='Отправить'
+                onClick={() => {
+                  setServerMessage('');
+                  handleSubmit(onSubmit);
+                }}
+              />
             </div>
           </form>
         </div>

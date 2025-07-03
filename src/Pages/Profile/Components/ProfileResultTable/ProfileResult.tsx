@@ -1,4 +1,4 @@
-import './ProfileResultTable.css';
+import styles from './profile-result.module.css';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useParams } from 'react-router-dom';
 import { Back } from 'Shared/Components/Back/Back';
@@ -19,14 +19,12 @@ export default function ProfileResultTable() {
     <>
       <Back />
 
-      <div className='profile-result-table'>
-        <h2>{tournamentResult.title}</h2>
-        <div className='profile-result-info'>
-          <p>{`Ваш результат: ${tournamentResult.resultNumber} из ${tournamentResult.tournamentLength}`}</p>
-          <p>{getDate(tournamentResult.date)}</p>
-        </div>
-        <ResultTable result={tournamentResult.result} tournamentId={Number(tournamentId)} />
+      <h2 className={styles.title}>{tournamentResult.title}</h2>
+      <div className={styles.info}>
+        <p>{`Ваш результат: ${tournamentResult.resultNumber} из ${tournamentResult.tournamentLength}`}</p>
+        <p>{getDate(tournamentResult.date)}</p>
       </div>
+      <ResultTable result={tournamentResult.result} tournamentId={Number(tournamentId)} />
     </>
   );
 }

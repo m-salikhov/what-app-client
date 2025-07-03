@@ -1,3 +1,4 @@
+import styles from '../../entry.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registrationSchema, RegistrationType } from '../../Schema/EntrySchema';
@@ -25,14 +26,14 @@ export const RegistrationForm = () => {
   return (
     <>
       {isSuccess ? <ModalReg /> : null}
-      <form className='entry-form' onSubmit={handleSubmit(onSubmit)}>
-        <div className='entry-input'>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.formInput}>
           <label htmlFor='email'>Почта:</label>
           <input type='email' autoComplete='email' id='email' {...register('email')} />
         </div>
         <FormFieldError message={errors.email?.message} />
 
-        <div className='entry-input'>
+        <div className={styles.formInput}>
           <label htmlFor='username' className='entry-input'>
             Логин:
           </label>
@@ -40,7 +41,7 @@ export const RegistrationForm = () => {
         </div>
         <FormFieldError message={errors.username?.message} />
 
-        <div className='entry-input'>
+        <div className={styles.formInput}>
           <label htmlFor='password' className='entry-input'>
             Пароль:
           </label>
@@ -48,10 +49,8 @@ export const RegistrationForm = () => {
         </div>
         <FormFieldError message={errors.password?.message} />
 
-        <div className='entry-input'>
-          <label htmlFor='confirmPassword' className='entry-input'>
-            Повторите пароль:
-          </label>
+        <div className={styles.formInput}>
+          <label htmlFor='confirmPassword'>Повторите пароль:</label>
           <input type='password' autoComplete='off' id='confirmPassword' {...register('confirmPassword')} />
         </div>
         <FormFieldError message={errors.confirmPassword?.message} />

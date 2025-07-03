@@ -1,4 +1,4 @@
-import './entry.css';
+import styles from './entry.module.css';
 import entryImg from './entry_img.svg';
 import { useState } from 'react';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
@@ -12,16 +12,16 @@ function Entry() {
 
   return (
     <>
-      <div className='entry-wrapper'>
-        <div className='entry'>
-          <div className='entry-container'>
-            <div className='entry-img'>
-              <img src={entryImg} alt='заглавное изображение' />
+      <div className={styles.wrapper}>
+        <div className={styles.container}>
+          <div className={styles.entry}>
+            <div className={styles.img}>
+              <img src={entryImg} alt='логотип на форме входа\регистрации' />
             </div>
 
             {showLoginOrRegForm ? <LoginForm /> : <RegistrationForm />}
 
-            <p className='entry-switch' onClick={() => setShowLoginOrRegForm(!showLoginOrRegForm)}>
+            <p className={styles.switch} onClick={() => setShowLoginOrRegForm(!showLoginOrRegForm)}>
               {showLoginOrRegForm ? 'Нет аккаунта?' : 'Есть аккаунт?'}
             </p>
           </div>

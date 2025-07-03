@@ -1,3 +1,4 @@
+import styles from '../entry.module.css';
 import { useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -15,9 +16,9 @@ export function ModalReg() {
   return (
     <>
       {' '}
-      <div className='modal-background'>
+      <div className={styles.modal}>
         {' '}
-        <div className='modal-wrapper'>
+        <div className={styles.modalText}>
           <h2>Вы успешно зарегистрировались</h2>
           <p>Через несколько секунд откроется главная {counter} </p>
         </div>{' '}

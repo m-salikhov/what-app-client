@@ -1,3 +1,4 @@
+import styles from '../../entry.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginType } from '../../Schema/EntrySchema';
@@ -28,23 +29,27 @@ const LoginForm = () => {
   }
 
   return (
-    <form className='entry-form' onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div
-        className='entry-input'
+        className={styles.formInput}
         id='tooltip-mail'
-        data-tooltip-html='Можно зарегистрировать или зайти под тестовым аккаунтом<br /> почта: test@gmail.com, пароль: test'
+        data-tooltip-html='Можно зарегистрировать или зайти под аккаунтом<br /> почта: test@gmail.com, пароль: test'
       >
         <label htmlFor='email'>Почта:</label>
         <input type='email' autoComplete='email' id='email' {...register('email')} />
       </div>
-      <Tooltip anchorSelect='#tooltip-mail' place='top' opacity={1} />
+      <Tooltip
+        anchorSelect='#tooltip-mail'
+        place='top'
+        opacity={0.8}
+        className={styles.tooltip}
+        style={{ maxWidth: '380px' }}
+      />
 
       <FormFieldError message={errors.email?.message} />
 
-      <div className='entry-input'>
-        <label htmlFor='password' className='entry-input'>
-          Пароль:
-        </label>
+      <div className={styles.formInput}>
+        <label htmlFor='password'>Пароль:</label>
         <input type='password' autoComplete='off' id='password' {...register('password')} />
       </div>
       <FormFieldError message={errors.password?.message} />

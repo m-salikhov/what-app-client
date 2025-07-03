@@ -1,8 +1,8 @@
-import './profile.css';
+import styles from './profile.module.css';
 import { ChangePass } from './Components/ChangePass/ChangePass';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
-import { ProfileInfo } from './Components/ProfileInfo';
+import { ProfileContent } from './Components/ProfileContent';
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 export default function Profile() {
@@ -13,9 +13,9 @@ export default function Profile() {
   if (!currentUser) return null;
 
   return (
-    <div className='profile'>
-      <div className='profile-wrapper'>
-        <section className='user-info'>
+    <div className={styles.container}>
+      <div className={styles.profile}>
+        <section className={styles.userInfo}>
           <div>
             <p>Имя</p>
             <p>{currentUser.username}</p>
@@ -34,7 +34,7 @@ export default function Profile() {
           </div>
         </section>
         <ChangePass />
-        <ProfileInfo userId={currentUser.id} />
+        <ProfileContent userId={currentUser.id} />
       </div>
     </div>
   );

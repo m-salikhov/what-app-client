@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+}
+
+.info {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  padding-top: 0.7rem;
+
+  & > p:last-of-type {
+    color: rgb(103 97 97);
+  }
+}
