@@ -21,7 +21,9 @@ export function Question({ q, random = false }: Props) {
         {random && <Link to={`tournament/${q.tournament?.id}`}>{q.tournament?.title}</Link>}
         {!random && <h3>Тур {q.tourNumber}</h3>}
       </div>
+
       {q.add && <Add add={q.add} />}
+
       <div className='question-text'>
         <p>{q.text}</p>
       </div>
@@ -30,6 +32,7 @@ export function Question({ q, random = false }: Props) {
         <h4>Ответ</h4>
         <AiOutlineDown className={showAnswer ? 'ans-arrow-o' : 'ans-arrow-c'} size={'30px'} />
       </div>
+
       <div className={showAnswer ? 'ans open' : 'ans close'}>
         <Answer q={q} />
       </div>

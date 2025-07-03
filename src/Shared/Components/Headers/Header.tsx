@@ -1,68 +1,30 @@
 import './header.css';
 import owlGreen from './owlGreen.svg';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { NavigateFunction, NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useLogout } from 'Shared/Hooks/useLogout';
-import { useWindowSize } from 'Shared/Hooks/useWindowSize';
 import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
 import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 import { usePrefetch } from 'Store/ToolkitAPIs/tournamentAPI';
-
-const logoNavigate = (
-  isManePage: boolean,
-  isFullSize: boolean,
-  openMobMenu: boolean,
-  navigate: NavigateFunction,
-  setOpenMobMenu: Dispatch<SetStateAction<boolean>>
-) => {
-  if (isFullSize && isManePage) {
-    return;
-  } else if (isFullSize) {
-    navigate('/');
-  } else if (openMobMenu && isManePage) {
-    document.body.style.overflow = 'visible';
-    setOpenMobMenu(false);
-  } else if (openMobMenu) {
-    document.body.style.overflow = 'visible';
-    setOpenMobMenu(false);
-    navigate('/');
-  } else if (!isManePage) {
-    navigate('/');
-  }
-};
+import { Squash as Hamburger } from 'hamburger-react';
+import { useHeaderNavigation } from './helpers/useHeaderNavigation';
 
 export function Header() {
-  const [openMobMenu, setOpenMobMenu] = useState(false);
-
   const prefetchTournaments = usePrefetch('getTournamentsAllShort');
-
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-
   const { data: currentUser } = useGetCurrentUserQuery(undefined);
-
-  const { isFullSize } = useWindowSize();
   const logout = useLogout();
-
-  const handleMobMenu = () => {
-    if (isFullSize) return;
-
-    document.body.style.overflow = openMobMenu ? 'visible' : 'hidden';
-
-    setOpenMobMenu((prev) => !prev);
-  };
+  const { logoNavigate, handleMobMenu, isOpenMobMenu, isDesktop } = useHeaderNavigation();
 
   return (
     <header>
       <div>
-        <div onClick={() => logoNavigate(pathname === '/', isFullSize, openMobMenu, navigate, setOpenMobMenu)}>
-          <img src={owlGreen} alt='заглавное изображение' />
+        <div onClick={logoNavigate}>
+          <img src={owlGreen} alt='Логотип Базы вопросов Что? Где? Когда?' />
           <h2>База вопросов "Что? Где? Когда?"</h2>
         </div>
       </div>
 
       <nav
-        className={openMobMenu ? 'mob-menu' : undefined}
+        className={isOpenMobMenu ? 'mob-menu' : undefined}
         onClick={(e) => {
           if (e.target instanceof HTMLElement && /^(nav|a)$/.test(e.target.localName)) {
             handleMobMenu();
@@ -115,11 +77,8 @@ export function Header() {
           )}
         </ul>
       </nav>
-      <div className={openMobMenu ? 'mob-btn open' : 'mob-btn'} onClick={handleMobMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+
+      {!isDesktop && <Hamburger size={25} toggled={isOpenMobMenu} onToggle={handleMobMenu} color='var(--h-color)' />}
     </header>
   );
 }

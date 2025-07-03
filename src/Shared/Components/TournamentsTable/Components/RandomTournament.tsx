@@ -6,7 +6,6 @@ import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 
 export function RandomTournament({ pathname }: { pathname: string }) {
   const { data: currentUser } = useGetCurrentUserQuery(undefined);
-
   const navigate = useNavigate();
   const [fetchData] = useLazyGetRandomTournamentQuery();
 

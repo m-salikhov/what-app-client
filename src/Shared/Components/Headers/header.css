@@ -45,37 +45,6 @@ nav {
   }
 }
 
-.mob-btn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 0.7rem;
-
-  span {
-    width: 25px;
-    height: 3px;
-    margin: 2px 0;
-    background-color: var(--nav-text-color);
-    transition: 0.3s;
-  }
-}
-
-.mob-btn.open {
-  span:first-child {
-    transition: 0.3s;
-    transform: rotate(45deg) translateY(5px);
-  }
-
-  span:nth-child(2) {
-    display: none;
-  }
-
-  span:last-child {
-    transition: 0.3s;
-    transform: rotate(-45deg) translateY(-5px);
-  }
-}
-
 @media (width <= 1130px) {
   header {
     div {
