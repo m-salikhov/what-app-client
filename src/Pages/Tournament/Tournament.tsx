@@ -40,7 +40,7 @@ export default function Tournament() {
         <div className='tournament-content-qs'>
           {transitions((style, v) => {
             return (
-              <animated.div style={style}>
+              <animated.div className='tournament-content-qs-item' style={style}>
                 <Question q={v} />
               </animated.div>
             );

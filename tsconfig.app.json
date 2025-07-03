@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "types": ["vite/client"],
+    "typeRoots": ["node_modules/@types", "src/global.d.ts"],
     "paths": {
       "Shared/*": ["./src/Shared/*"],
       "Store/*": ["./src/Store/*"],
@@ -29,5 +31,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "__tests__"]
+  "include": ["src/**/*", "__tests__/**/*", "src/vite-env.d.ts"],
+  "exclude": ["**/*.test.tsx", "**/*.test.ts", "node_modules", "dist"]
 }

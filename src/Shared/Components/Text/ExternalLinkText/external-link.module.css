@@ -1,4 +1,4 @@
-.text-external-link {
+.externalLink {
   display: inline-flex;
   align-items: center;
   color: var(--external-link);

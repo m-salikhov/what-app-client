@@ -1,3 +1,4 @@
+import styles from './result-table.module.css';
 import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
 import { TourTable } from './TourTable';
 import { QuestionPlane } from '../Question/QuestionPlane';
@@ -13,7 +14,7 @@ interface Props {
 export function ResultTable({ result, tournamentId }: Props) {
   const resByTour = Object.groupBy(result, (v) => v.tour);
 
-  const [selectedQuestionNumber, setSelectedQuestionNumber] = useState(-1);
+  const [selectedQuestionNumber, setSelectedQuestionNumber] = useState<number | null>(null);
 
   const { data: tournament } = useGetTournamentQuery(tournamentId ?? skipToken);
 
@@ -27,7 +28,7 @@ export function ResultTable({ result, tournamentId }: Props) {
   }
 
   return (
-    <div className='result-table'>
+    <div className={styles.container}>
       {resultTable}
       {selectedQuestion && <QuestionPlane q={selectedQuestion} />}
     </div>

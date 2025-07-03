@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BsArrowUpSquareFill } from 'react-icons/bs';
-import './scrollToTop.css';
+import { BsArrowUpSquareFill as ArrowUp } from 'react-icons/bs';
+import styles from './scroll-to-top.module.css';
 
 export function ScrollToTop() {
   const [visible, setVisible] = useState(false);
@@ -28,5 +28,5 @@ export function ScrollToTop() {
 
   if (!visible) return null;
 
-  return <BsArrowUpSquareFill className='scroll-to-top' onClick={scrollToTop} size={36} />;
+  return <ArrowUp className={styles.scroll} onClick={scrollToTop} size={36} />;
 }

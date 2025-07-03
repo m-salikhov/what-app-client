@@ -84,7 +84,7 @@ export const actionTypes = {
   removeQuestion: 'removeQuestion',
 } as const;
 
-const reducer = (state: TournamentType, action: Action) => {
+export const reducer = (state: TournamentType, action: Action) => {
   const { type } = action;
 
   if (type === actionTypes.loaded) {
@@ -286,5 +286,3 @@ const reducer = (state: TournamentType, action: Action) => {
     }
   }
 };
-
-export default reducer;

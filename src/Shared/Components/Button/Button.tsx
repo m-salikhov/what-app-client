@@ -1,4 +1,4 @@
-import './btn.css';
+import styles from './button.module.css';
 
 interface ButtonProps {
   extraClass?: string;
@@ -10,8 +10,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 export function Button({ title, extraClass, type, ...props }: ButtonProps) {
   return (
-    <div className='btn-elem'>
-      <button className={extraClass ? `btn ${extraClass}` : 'btn'} type={type || 'button'} {...props}>
+    <div className={styles.buttonContainer}>
+      <button
+        className={extraClass ? `${styles.button} ${extraClass}` : styles.button}
+        type={type || 'button'}
+        {...props}
+      >
         {title}
       </button>
     </div>

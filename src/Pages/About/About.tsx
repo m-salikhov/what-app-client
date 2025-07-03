@@ -1,13 +1,13 @@
-import './about.css';
 import myPhoto from './photo_profile_copy.jpg';
 import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
+import styles from './about.module.css';
 
 function About() {
   useDocTitle('О сайте');
 
   return (
-    <div className='about'>
+    <div className={styles.about}>
       <h2>О сайте</h2>
       <p>Сайт создан исключительно в целях тренировки практических навыков. Является полностью некоммерческим.</p>
       <p>
@@ -41,9 +41,9 @@ function About() {
         технологии.
       </p>
       <h2>Об авторе</h2>
-      <div className='about-author'>
+      <div className={styles.aboutAuthor}>
         <img src={myPhoto} alt='фото автора сайта' />
-        <div className='about-info'>
+        <div className={styles.aboutInfo}>
           <p>
             Меня зовут Максим, мне 36 лет. Я начинающий разработчик.
             <br /> <br />

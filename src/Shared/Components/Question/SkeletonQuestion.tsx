@@ -1,14 +1,14 @@
-import './skeletonQuestion.css';
+import styles from './skeletonQuestion.module.css';
 
 export function SkeletonQuestion({ length }: { length: number }) {
   const skeletonQuestion = (i: number) => {
     return (
-      <div className='sk-q' key={i}>
-        <div className='sk-q-header'></div>
-        <div className='sk-q-line'></div>
-        <div className='sk-q-line'></div>
-        <div className='sk-q-line'></div>
-        <div className='sk-q-ans'></div>
+      <div className={styles.container} key={i}>
+        <div className={styles.header}></div>
+        <div className={styles.line}></div>
+        <div className={styles.line}></div>
+        <div className={styles.line}></div>
+        <div className={styles.shortLine}></div>
       </div>
     );
   };

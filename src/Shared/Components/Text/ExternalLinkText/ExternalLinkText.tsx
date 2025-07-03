@@ -1,4 +1,4 @@
-import './ExternalLinkText.css';
+import styles from './external-link.module.css';
 
 interface Props {
   text: string;
@@ -7,7 +7,7 @@ interface Props {
 
 export function ExternalLinkText({ text, href }: Props) {
   return (
-    <a className='text-external-link' href={href} target='_blank' rel='noreferrer'>
+    <a className={styles.externalLink} href={href} target='_blank' rel='noreferrer'>
       {text}
     </a>
   );

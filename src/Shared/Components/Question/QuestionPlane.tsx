@@ -1,19 +1,19 @@
 import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 import { Add } from './Components/Add';
 import { Answer } from './Components/Answer';
-import './question.css';
+import styles from './question.module.css';
 
 export function QuestionPlane({ q }: { q: QuestionType }) {
   return (
-    <div className='question'>
-      <div className='question-header'>
+    <div className={styles.question}>
+      <div className={styles.questionHeader}>
         <h3>Вопрос {q.qNumber}</h3>
         <h3>Тур {q.tourNumber}</h3>
       </div>
 
       {q.add && <Add add={q.add} />}
 
-      <div className='question-text'>
+      <div className={styles.questionText}>
         <p>{q.text}</p>
       </div>
 

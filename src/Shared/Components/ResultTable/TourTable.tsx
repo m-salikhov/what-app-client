@@ -1,24 +1,24 @@
-import './ResultTable.css';
 import green_ans from './green_mark.svg';
 import red_ans from './red_cross.svg';
 import { ResultElementClientType } from 'Shared/Schemas/ResultSchema';
+import styles from './result-table.module.css';
 
 interface Props {
   tourResult: ResultElementClientType[] | undefined;
-  setSelectedQuestionNumber: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedQuestionNumber: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
 export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
   if (!tourResult) return null;
 
   return (
-    <div className='result-table-tour'>
+    <div className={styles.table}>
       {tourResult.map((v) => {
         return (
-          <div className='result-table-el' key={v.num} onClick={() => setSelectedQuestionNumber(v.num)}>
-            <div>{v.num}</div>
+          <div className={styles.tableElement} key={v.num} onClick={() => setSelectedQuestionNumber(v.num)}>
+            <div className={styles.questionNumber}>{v.num}</div>
 
-            <div>
+            <div className={styles.iconContainer}>
               <img src={v.ans ? green_ans : red_ans} alt='answer icon' />
             </div>
           </div>

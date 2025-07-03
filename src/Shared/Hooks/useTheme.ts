@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react';
 
 export function useTheme() {
-  const [theme, setTheme] = useState(localStorage.getItem('app-theme') ?? 'light');
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('app-theme');
+    return savedTheme || 'light';
+  });
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;

@@ -1,4 +1,4 @@
-import './spinner.css';
+import styles from './spinner.module.css';
 import { RotatingLines } from 'react-loader-spinner';
 
 type Props = Parameters<typeof RotatingLines>[0];
@@ -13,7 +13,7 @@ const defaultProps: Props = {
 
 export function Spinner(props: Props) {
   return (
-    <div className='spinner'>
+    <div className={styles.spinner}>
       <RotatingLines {...{ ...defaultProps, ...props }} />
     </div>
   );

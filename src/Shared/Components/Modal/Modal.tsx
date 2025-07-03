@@ -1,4 +1,4 @@
-import './Modal.css';
+import styles from './modal.module.css';
 import { PropsWithChildren, useEffect } from 'react';
 import { animated, useTransition } from '@react-spring/web';
 import { scrollVisibility } from './Helpers/scrollVisibility';
@@ -64,14 +64,14 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
         transition((style, active) =>
           active ? (
             <dialog
-              className='modal'
+              className={styles.modal}
               onClick={(e) => {
                 if (e.target === e.currentTarget) {
                   onClose();
                 }
               }}
             >
-              <animated.div className='modal-content' style={style}>
+              <animated.div className={styles.content} style={style}>
                 {children}
               </animated.div>
             </dialog>

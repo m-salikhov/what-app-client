@@ -1,4 +1,4 @@
-import './DarkMode.css';
+import styles from './darkmode.module.css';
 import Sun from './Sun.svg?react';
 import Moon from './Moon.svg?react';
 import { useState } from 'react';
@@ -9,9 +9,9 @@ export function DarkMode() {
   const [checked, setChecked] = useState(theme === 'light' ? false : true);
 
   return (
-    <div className='dark-mode'>
+    <div className={styles.container}>
       <input
-        className='dark-mode-input'
+        className={styles.input}
         title='Toggle dark mode'
         type='checkbox'
         id='darkmode-toggle'
@@ -19,9 +19,9 @@ export function DarkMode() {
         onChange={() => setChecked(!checked)}
         checked={checked}
       />
-      <label className='dark-mode-label' htmlFor='darkmode-toggle'>
-        <Sun />
-        <Moon />
+      <label className={styles.toggle} htmlFor='darkmode-toggle'>
+        <Sun className={styles.sun} />
+        <Moon className={styles.moon} />
       </label>
     </div>
   );

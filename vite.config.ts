@@ -36,6 +36,13 @@ export default defineConfig({
     },
   },
 
+  css: {
+    modules: {
+      localsConvention: 'camelCase',
+      generateScopedName: '[local]-[name]-[hash:base64:5]',
+    },
+  },
+
   test: {
     globals: true,
     environment: 'jsdom',

@@ -1,10 +1,10 @@
-import './notFound.css';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import NotFoundOwl from './NotFoundOwl.svg?react';
 import { useRouteError } from 'react-router-dom';
 import { Header } from 'Shared/Components/Headers/Header';
+import styles from './notFound.module.css';
 
-function NotFound() {
+function NotFound({ routerError }: { routerError: boolean }) {
   useDocTitle('404');
 
   const error = useRouteError();
@@ -12,9 +12,9 @@ function NotFound() {
 
   return (
     <>
-      <Header />
+      {routerError && <Header />}
 
-      <div className='not-found'>
+      <div className={styles.container}>
         <h2>СТРАНИЦА НЕ НАЙДЕНА</h2>
         <NotFoundOwl />
         <p>Ошибка сервера. Попробуйте перезагрузить страницу</p>

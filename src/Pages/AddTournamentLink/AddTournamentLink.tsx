@@ -1,5 +1,5 @@
 import './addTournamentLink.css';
-import reducer from './helpers/reducer';
+import { reducer } from './helpers/reducer';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { EditForm } from './Components/EditForm/EditForm';
 import { Instruction } from './Components/Instruction';

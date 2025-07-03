@@ -1,9 +1,10 @@
 import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 import { ExternalLinkText } from 'src/Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import styles from '../question.module.css';
 
 export function Answer({ q }: { q: QuestionType }) {
   return (
-    <div className='answer'>
+    <div className={styles.answer}>
       <p>
         <span>Ответ:</span> {q.answer}
       </p>
@@ -18,7 +19,7 @@ export function Answer({ q }: { q: QuestionType }) {
         </p>
       )}
       {q.source?.length === 1 && (
-        <p className='answer-source-one'>
+        <p className={styles.answerSourceOne}>
           <span>Источник: </span>{' '}
           {q.source[0].link.startsWith('http') ? (
             <ExternalLinkText text={q.source[0].link} href={q.source[0].link} />
@@ -29,7 +30,7 @@ export function Answer({ q }: { q: QuestionType }) {
       )}
       {q.source && q.source.length > 1 && (
         <div>
-          <p className='answer-source-many'>Источники:</p>
+          <p className={styles.answerSourceMany}>Источники:</p>
           {q.source.map((v, i) => {
             return (
               <p key={v.link}>

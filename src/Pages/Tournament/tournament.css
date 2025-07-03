@@ -16,12 +16,11 @@
       }
     }
   }
+}
 
-  .question {
-    max-width: 800px;
-    margin-right: auto;
-    margin-left: auto;
-  }
+.tournament-content-qs-item {
+  display: flex;
+  justify-content: center;
 }
 
 @media (width <= 400px) {

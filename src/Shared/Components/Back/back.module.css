@@ -1,0 +1,10 @@
+.previousPage {
+  display: flex;
+  width: 1.6rem;
+  cursor: pointer;
+}
+
+.previousPage p {
+  padding-left: 1rem;
+  margin: auto 0;
+}

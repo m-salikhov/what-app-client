@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       path: '/',
       element: <Layout />,
       loader: initialLoginLoader,
-      errorElement: <NotFound />,
+      errorElement: <NotFound routerError={true} />,
 
       children: [
         {
@@ -146,11 +146,7 @@ const router = createBrowserRouter(
 
         {
           path: '*',
-          element: (
-            <Suspense fallback={<Spinner />}>
-              <NotFound />
-            </Suspense>
-          ),
+          element: <NotFound routerError={false} />,
         },
       ],
     },
