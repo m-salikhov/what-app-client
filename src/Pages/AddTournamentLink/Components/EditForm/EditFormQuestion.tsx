@@ -1,3 +1,4 @@
+import styles from './edit-form.module.css';
 import { useState } from 'react';
 import { Action, actionTypes } from '../../helpers/reducer';
 import { Button } from 'Shared/Components/Button/Button';
@@ -9,16 +10,16 @@ interface Props {
 }
 
 const btnTextOption = {
-  def: 'Удалить',
+  del: 'Удалить',
   back: 'Вернуть',
 };
 
 export function EditFormQuestion({ q, dispatch }: Props) {
-  const [btnText, setBtnText] = useState<string>(q.qNumber === -1 ? btnTextOption.back : btnTextOption.def);
+  const [btnText, setBtnText] = useState<string>(q.qNumber === -1 ? btnTextOption.back : btnTextOption.del);
 
   const removeQuestion = () => {
     setBtnText((prev) => {
-      return prev === btnTextOption.def ? btnTextOption.back : btnTextOption.def;
+      return prev === btnTextOption.del ? btnTextOption.back : btnTextOption.del;
     });
     dispatch({
       type: actionTypes.removeQuestion,
@@ -27,9 +28,11 @@ export function EditFormQuestion({ q, dispatch }: Props) {
   };
 
   return (
-    <div className='edit-q-container'>
-      <div className='edit-q-numbers'>
-        <label className='edit-q-tour'>
+    <div
+      className={btnText === btnTextOption.del ? styles.questionContainer : `${styles.questionContainer} ${styles.del}`}
+    >
+      <div className={styles.questionHeader}>
+        <label>
           <p> Номер вопроса:</p>
           <input
             type='number'
@@ -45,7 +48,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
             disabled={q.qNumber === -1 ? true : false}
           />
         </label>{' '}
-        <label className='edit-q-tour'>
+        <label>
           <p> Номер тура:</p>
           <input
             type='number'
@@ -61,11 +64,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
             disabled={q.qNumber === -1 ? true : false}
           />
         </label>{' '}
-        <Button
-          onClick={removeQuestion}
-          title={btnText}
-          extraClass={btnText === btnTextOption.def ? 'def' : 'back'}
-        ></Button>
+        <Button onClick={removeQuestion} title={btnText}></Button>
       </div>
 
       <label>
@@ -151,7 +150,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
       <p>Источник(и):</p>
       {q.source?.map((v, i) => {
         return (
-          <div key={i} className='edit-q-container-source'>
+          <div key={i} className={styles.questionSource}>
             <textarea
               title='Источник'
               onChange={(e) =>
@@ -177,7 +176,7 @@ export function EditFormQuestion({ q, dispatch }: Props) {
         );
       })}
       <button
-        className='edit-q-container-add-source'
+        className={styles.addSource}
         onClick={() => dispatch({ type: actionTypes.addSource, questionID: q.id })}
         type='button'
         disabled={q.qNumber === -1 ? true : false}

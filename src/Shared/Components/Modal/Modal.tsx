@@ -7,10 +7,11 @@ import { createPortal } from 'react-dom';
 interface Props {
   active: boolean;
   onClose: () => void;
-  onDestroyed?: () => void;
+  onElementDestroyed?: () => void;
 }
+
 //HOC для модальных окон.
-export function Modal({ active, onClose, onDestroyed, children }: PropsWithChildren<Props>) {
+export function Modal({ active, onClose, onElementDestroyed, children }: PropsWithChildren<Props>) {
   const transition = useTransition(active, {
     from: {
       scale: 0.8,
@@ -30,8 +31,8 @@ export function Modal({ active, onClose, onDestroyed, children }: PropsWithChild
         scrollVisibility('show');
       }
 
-      if (onDestroyed && !active) {
-        onDestroyed();
+      if (onElementDestroyed && !active) {
+        onElementDestroyed();
       }
     },
 

@@ -4,10 +4,10 @@
   border: 2px solid var(--main-border-color);
   border-radius: 10px;
   max-width: 800px;
-}
 
-.question p {
-  font-size: 1.25rem;
+  p {
+    font-size: 1.25rem;
+  }
 }
 
 .questionHeader {
@@ -16,56 +16,51 @@
   padding: 0.5rem;
   background-color: rgb(173 216 230 / 40%);
   border-bottom: var(--main-border);
-}
 
-.questionHeader h3 {
-  font-weight: 800;
-}
+  h3 {
+    font-weight: 800;
+  }
 
-.questionHeader a {
-  padding-left: 0.5rem;
-  font-size: 1.25rem;
-  color: var(--p-color);
-}
+  a {
+    padding-left: 0.5rem;
+    font-size: 1.25rem;
+    color: var(--p-color);
 
-.questionHeader a:hover {
-  font-weight: bold;
+    &:hover {
+      font-weight: bold;
+    }
+  }
 }
 
 .questionText {
   padding: 0.5rem;
+  p {
+    padding: 0.25rem 0;
+  }
 }
 
-.questionText p {
-  padding: 0.25rem 0;
-}
-
-.questionAdd {
+.razdatka {
   padding-top: 0.5rem;
 }
 
-.questionAdd > p {
+.razdatka > p {
   padding-left: 0.5rem;
   color: rgb(87 85 85);
 }
 
-.questionAdd div {
+.razdatka div {
   display: flex;
   justify-content: center;
   padding: 1rem 0;
 }
 
-.questionAdd div img {
+.razdatka div img {
   max-width: 60%;
 }
 
-.questionAdd div p {
+.razdatka div p {
   padding-left: 0.5rem;
   font-size: 1.25rem;
-}
-
-.question h4 {
-  padding-left: 0.5rem;
 }
 
 .answer {
@@ -100,6 +95,7 @@
 
 .answerSourceMany ~ p {
   padding-left: 0.5rem;
+  overflow-x: auto;
 }
 
 .answerArrow {
@@ -109,6 +105,10 @@
   padding-right: 1rem;
   cursor: pointer;
   border-top: var(--main-border);
+
+  h4 {
+    padding-left: 0.5rem;
+  }
 }
 
 .answerArrowOpen {
@@ -121,19 +121,6 @@
   color: rgb(109 85 98);
   transition: all 0.5s;
   transform: rotate(0deg);
-}
-
-.answerArrow div {
-  width: 1rem;
-  margin-left: 2rem;
-}
-
-.arrow {
-  transition: all 1s;
-}
-
-.arrowO {
-  transform: rotate(180deg);
 }
 
 .ans {

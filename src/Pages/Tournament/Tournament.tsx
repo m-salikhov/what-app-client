@@ -23,13 +23,14 @@ export default function Tournament() {
     from: { opacity: 0, transform: 'scale(0.8) translateY(5rem)' },
     enter: { opacity: 1, transform: 'scale(1) translateY(0)' },
     config: { duration: 400 },
+    keys: (q) => q.id,
   });
 
   return (
     <>
       <TournamentHeader tournament={tournament} />
 
-      <div ref={ref}>
+      <div ref={ref} data-type='question'>
         <Back />
         <div className={styles.tours} onClick={(e) => scroll(e, ref.current, tournament)}>
           {getToursParagraphs(tournament.tours)}

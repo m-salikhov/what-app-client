@@ -1,3 +1,4 @@
+import styles from './edit-form.module.css';
 import { parseDate } from '@internationalized/date';
 import { EditFormQuestion } from './EditFormQuestion';
 import { Action, actionTypes } from '../../helpers/reducer';
@@ -25,9 +26,9 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
     >
       <Button title='Закончить редактирование' onClick={() => setEdit(false)} />
 
-      <div className='edit-t'>
-        <div className='edit-t-top'>
-          <label className='edit-t-title'>
+      <div className={styles.edit}>
+        <div className={styles.editTop}>
+          <label>
             <p> Название турнира</p>
             <input
               placeholder='Название турнира'

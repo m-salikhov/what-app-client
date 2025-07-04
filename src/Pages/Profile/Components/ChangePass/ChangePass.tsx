@@ -52,7 +52,7 @@ export function ChangePass() {
       <Modal
         active={changePass}
         onClose={() => setChangePass(false)}
-        onDestroyed={() => {
+        onElementDestroyed={() => {
           setServerMessage('');
         }}
       >

@@ -1,4 +1,4 @@
-import './addTournamentLink.css';
+import styles from './add-tournament-link.module.css';
 import { reducer } from './helpers/reducer';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { EditForm } from './Components/EditForm/EditForm';
@@ -69,8 +69,8 @@ function AddTournamentLink() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
-    <div className='addlink-container'>
-      <div className='addlink'>
+    <div className={styles.container}>
+      <div className={styles.addlink}>
         <input
           type='text'
           placeholder='Ссылка на турнир'
@@ -88,16 +88,16 @@ function AddTournamentLink() {
 
       {errorsFilling.length > 0 &&
         errorsFilling.map((error, i) => (
-          <p className='addlink-errors-filling' key={i}>
+          <p className={styles.errorFilling} key={i}>
             {error}
           </p>
         ))}
 
-      {message && <p className='addlink-message'>{message}</p>}
+      {message && <p className={styles.message}>{message}</p>}
 
-      {errorParse && <p className='addlink-message'>{getServerErrorMessage(errorParse, 'Ошибка парсинга ссылки')}</p>}
+      {errorParse && <p className={styles.message}>{getServerErrorMessage(errorParse, 'Ошибка парсинга ссылки')}</p>}
 
-      {errorAdd && <p className='addlink-message'>{getServerErrorMessage(errorAdd, 'Ошибка сохранения турнира')}</p>}
+      {errorAdd && <p className={styles.message}>{getServerErrorMessage(errorAdd, 'Ошибка сохранения турнира')}</p>}
 
       {(isLoading || isLoadingAdd) && <Spinner />}
 

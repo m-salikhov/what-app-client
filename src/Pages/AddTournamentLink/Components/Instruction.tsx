@@ -1,3 +1,4 @@
+import styles from '../add-tournament-link.module.css';
 import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
 import { GrCopy } from 'react-icons/gr';
 import { ToastContainer, toast } from 'react-toastify';
@@ -14,7 +15,7 @@ const handleCopy = async (textToCopy: string) => {
 
         {
           hideProgressBar: true,
-          autoClose: 1000,
+          autoClose: 1200,
           pauseOnHover: true,
         }
       );
@@ -26,7 +27,7 @@ const handleCopy = async (textToCopy: string) => {
 
 export function Instruction() {
   return (
-    <div className='addlink-instruction'>
+    <div className={styles.instruction}>
       Чтобы добавить турнир надо сначала загрузить его из{' '}
       <ExternalLinkText href='https://gotquestions.online/' text=' gotquestions.online ' /> (предпочтительно) или{' '}
       <ExternalLinkText href='https://db.chgk.info/' text=' db.chgk.info' /> (сайт уже почти не обновляется).
@@ -36,10 +37,10 @@ export function Instruction() {
       "Открыть".
       <br />
       Ссылки должны обязательно вести на страницу турнира. Например, {exampleGOTLink}
-      <GrCopy onClick={() => handleCopy(exampleGOTLink)} className='copy-icon' />
+      <GrCopy onClick={() => handleCopy(exampleGOTLink)} className={styles.copyIcon} />
       или {exampleDBLink}
-      <GrCopy onClick={() => handleCopy(exampleDBLink)} className='copy-icon' />
-      <ToastContainer />
+      <GrCopy onClick={() => handleCopy(exampleDBLink)} className={styles.copyIcon} />
+      <ToastContainer toastClassName={styles.toastSuccess} />
       <br />
       Если всё в порядке то турнир распарсится и откроется предпросмотр. Там же будет возможность отредактировать любое
       из полей. Некоторые поля обязательные, например, Дата отыгрыша или Ответ в каждом из вопросов. Их заполнение

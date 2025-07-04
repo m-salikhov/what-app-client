@@ -1,3 +1,4 @@
+import styles from '../add-tournament-link.module.css';
 import { Button } from 'Shared/Components/Button/Button';
 import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { ScrollToTop } from 'Shared/Components/ScrollToTop/ScrollToTop';
@@ -15,11 +16,11 @@ export function ParsedTournament({ t, onClickEdit, handleAddTournament }: Props)
     <>
       <TournamentHeader tournament={t} />
 
-      <div className='addlink-buttons'>
+      <div className={styles.buttons}>
         <Button title={'Редактировать турнир'} onClick={onClickEdit}></Button>
         <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
       </div>
-      <div className='tournament-content'>
+      <div className={styles.parsedTournament}>
         {t.questions
           .filter((q) => q.qNumber !== -1)
           .map((v) => (

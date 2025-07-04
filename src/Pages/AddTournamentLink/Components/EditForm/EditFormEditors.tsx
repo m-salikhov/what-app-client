@@ -1,3 +1,4 @@
+import styles from './edit-form.module.css';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 import { Action, actionTypes } from '../../helpers/reducer';
 
@@ -7,7 +8,7 @@ interface Props {
 }
 export function EditFormEditors({ editors, dispatch }: Props) {
   return (
-    <div className='edit-t-editors'>
+    <div className={styles.editors}>
       <p>Редактор(ы):</p>
 
       {editors.map((editor) => (
