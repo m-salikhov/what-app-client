@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
 import styles from '../../profile.module.css';
+import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
@@ -32,7 +33,7 @@ export function ChangePass() {
           setServerMessage('Пароль успешно изменён');
           reset();
         })
-        .catch(() => setServerMessage('Ошибка сервера. Повторите попытку позже'));
+        .catch((error) => setServerMessage(getServerErrorMessage(error, 'Произошла ошибка')));
     }
   };
 

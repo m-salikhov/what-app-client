@@ -55,7 +55,7 @@ describe('Форма регистрации', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    const errorMessage = await screen.findByText('Ошибка сервера. Попробуйте позже.');
+    const errorMessage = await screen.findByText('Ошибка');
 
     //отображается сообщение об ошибке
     expect(errorMessage).toBeInTheDocument();

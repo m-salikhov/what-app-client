@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import Sitemap from 'vite-plugin-sitemap';
 
+const isDev = process.env.NODE_ENV === 'development';
+
 const sitemapOptions: Parameters<typeof Sitemap>[0] = {
   hostname: 'https://4gk-base.andvarif.ru/',
   dynamicRoutes: ['/entry', '/playmode', '/addbylink', '/all', '/about'],
@@ -39,7 +41,7 @@ export default defineConfig({
   css: {
     modules: {
       localsConvention: 'camelCase',
-      generateScopedName: '[local]-[name]-[hash:base64:5]',
+      generateScopedName: isDev ? '[local]-[name]-[hash:base64:5]' : '[hash:base64:5]',
     },
   },
 

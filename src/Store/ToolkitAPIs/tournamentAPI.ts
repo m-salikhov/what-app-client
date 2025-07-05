@@ -17,25 +17,15 @@ export const tournamentAPI = createApi({
   endpoints: (build) => ({
     getTournament: build.query<TournamentType, string | number>({
       query: (id: string | number) => `/tournaments/${id}`,
-      transformResponse: (response: unknown) => {
-        try {
-          const result = TournamentTypeSchema.parse(response);
-          return result;
-        } catch (error) {
-          throw error;
-        }
-      },
+
+      responseSchema: TournamentTypeSchema,
     }),
 
     getTournamentsLastShort: build.query<TournamentsLastShortType, { amount: number; page: number; withSkip: boolean }>(
       {
         query: ({ amount, page, withSkip }) =>
           serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
-        transformResponse: (response) => {
-          const result = TournamentsLastShortSchema.parse(response);
-
-          return result;
-        },
+        responseSchema: TournamentsLastShortSchema,
         providesTags: ['shorts'],
       }
     ),
@@ -47,6 +37,7 @@ export const tournamentAPI = createApi({
 
     getRandomTournament: build.query<TournamentShortType, string>({
       query: (userId: string) => `${serverRoutes.randomTournament}?userId=${userId}`,
+      responseSchema: TournamentShortTypeSchema,
     }),
 
     getStats: build.query<{ tc: number; qc: number }, undefined>({
@@ -56,11 +47,7 @@ export const tournamentAPI = createApi({
 
     getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
       query: () => serverRoutes.tournamentsAllShort,
-      transformResponse: (response: unknown) => {
-        const result = TournamentShortTypeSchema.array().parse(response);
-
-        return result;
-      },
+      responseSchema: TournamentShortTypeSchema.array(),
       providesTags: ['shorts'],
     }),
 
@@ -70,11 +57,7 @@ export const tournamentAPI = createApi({
         method: 'POST',
         body,
       }),
-      transformResponse: (response: unknown) => {
-        const result = TournamentTypeSchema.parse(response);
-
-        return result;
-      },
+      responseSchema: TournamentTypeSchema,
     }),
 
     addTournament: build.mutation<number, TournamentType>({
@@ -89,6 +72,7 @@ export const tournamentAPI = createApi({
 
     getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
       query: (userID) => serverRoutes.tournamentsAllByUploader + '/' + userID,
+      responseSchema: TournamentShortTypeSchema.array(),
       providesTags: ['shorts'],
     }),
   }),

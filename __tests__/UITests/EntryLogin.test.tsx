@@ -68,6 +68,6 @@ describe('Форма логина', () => {
     await userEvent.type(emailInput, 'test-error@ya.ru');
     await userEvent.type(passwordInput, '1234');
     await userEvent.click(screen.getByRole('button'));
-    expect(screen.queryByText('Ошибка сервера. Попробуйте позже.')).toBeInTheDocument();
+    expect(screen.queryByText('Ошибка')).toBeInTheDocument();
   });
 });

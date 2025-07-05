@@ -33,7 +33,7 @@ const LoginForm = () => {
       <div
         className={styles.formInput}
         id='tooltip-mail'
-        data-tooltip-html='Можно зарегистрировать или зайти под аккаунтом<br /> почта: test@gmail.com, пароль: test'
+        data-tooltip-html='Можно зарегистрироваться или зайти под публичным аккаунтом <br /> почта: test@test.com, пароль: test'
       >
         <label htmlFor='email'>Почта:</label>
         <input type='email' autoComplete='email' id='email' {...register('email')} />

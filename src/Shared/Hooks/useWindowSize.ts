@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 
 export function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
@@ -7,7 +7,7 @@ export function useWindowSize() {
     isDesktop: true,
   });
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handler = () => {
       const isDesktop = window.innerWidth > 1050;
 
