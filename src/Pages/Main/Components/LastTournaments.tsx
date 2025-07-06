@@ -1,3 +1,4 @@
+import styles from './main-components.module.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
@@ -28,24 +29,24 @@ export function LastTournaments() {
 
   if (isLoading) {
     return (
-      <div className='main-content-tournaments-loading'>
+      <div className={styles.loading}>
         <Spinner />
       </div>
     );
   }
 
   return (
-    <div className='main-content-tournaments'>
+    <div className={styles.tournaments}>
       <h2>Последние добавленные турниры</h2>
 
-      <div className='tournaments-header'>
+      <div className={styles.header}>
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>
 
       {data?.tournaments.map((v) => {
         return (
-          <div className='tournaments-item' key={v.id}>
+          <div className={styles.line} key={v.id}>
             <Link to={`tournament/${v.id}`}>{v.title}</Link>
             <div>
               <h5>{getDate(v.dateUpload)}</h5>
@@ -54,7 +55,7 @@ export function LastTournaments() {
         );
       })}
 
-      <div className='tournaments-footer'>
+      <div className={styles.footer}>
         <LeftArrow size={24} onClick={handlePrevPage} />
         <p>{page}</p>
         <RightArrow size={24} onClick={handleNextPage} />

@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import { PrivateRoute } from './HOC/PrivateRoute';
 import { lazy, Suspense } from 'react';
 import { Layout } from 'src/Shared/Components/Layout/Layout';
-import { MainPage } from 'src/Pages/Main/MainPage';
+import { Main } from 'src/Pages/Main/Main';
 import { Spinner } from 'src/Shared/Components/Spinner/Spinner';
 import { initialLoginLoader } from './Utils/InitialLoginLoader';
 import { store } from 'Store/store';
@@ -33,7 +33,7 @@ const router = createBrowserRouter(
       children: [
         {
           index: true,
-          element: <MainPage />,
+          element: <Main />,
         },
 
         {

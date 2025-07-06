@@ -1,3 +1,4 @@
+import styles from './main-components.module.css';
 import { useState } from 'react';
 import { Question } from 'Shared/Components/Question/Question';
 import { SkeletonQuestion } from 'Shared/Components/Question/SkeletonQuestion';
@@ -12,15 +13,15 @@ export function RandomQuestions() {
   const { data: randomQuestions = [], refetch, isLoading } = useGetRandomQuery(amountRandomQuestions);
 
   return (
-    <div className='main-content-random'>
-      <div className='main-content-refresh'>
+    <div className={styles.random}>
+      <div className={styles.refreshContainer}>
         {' '}
-        <div className='refresh'>
+        <div className={styles.refresh}>
           {' '}
           <h2>Случайные вопросы</h2>
           <HiRefresh
             size={24}
-            className={isRandomRefetch ? 'refresh-arrow' : 'refresh-arrow rotate'}
+            className={isRandomRefetch ? styles.refreshIcon : `${styles.refreshIcon} ${styles.rotate}`}
             onClick={() => {
               refetch();
               setIsRandomRefetch(!isRandomRefetch);

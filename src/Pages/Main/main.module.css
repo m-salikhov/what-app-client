@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.rightSide {
+  width: 50%;
+}
+
+.banner {
+  padding: 1.2rem;
+  margin-top: 1rem;
+  margin-left: 2rem;
+  background: var(--banner-gradient);
+  border: 3px solid var(--main-border-color);
+  border-radius: 20px;
+  -webkit-user-select: none;
+  user-select: none;
+
+  h2 {
+    text-align: center;
+  }
+
+  p {
+    padding: 1rem 0;
+    text-align: center;
+  }
+}
+
+@media (width <= 800px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .rightSide {
+    width: 100%;
+  }
+
+  .banner {
+    margin-left: unset;
+  }
+}

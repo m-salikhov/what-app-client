@@ -13,14 +13,7 @@ export const userAPI = createApi({
   endpoints: (build) => ({
     getCurrentUser: build.query<UserType | undefined, undefined>({
       query: () => serverRoutes.authLogFirst,
-      transformResponse: (response: unknown): UserType | undefined => {
-        try {
-          const result = UserSchema.parse(response);
-          return result;
-        } catch (error) {
-          return undefined;
-        }
-      },
+      responseSchema: UserSchema,
     }),
 
     logout: build.query<{ message: string }, undefined>({
@@ -34,11 +27,7 @@ export const userAPI = createApi({
         body,
       }),
 
-      transformResponse: (response: unknown) => {
-        const result = UserSchema.parse(response);
-
-        return result;
-      },
+      responseSchema: UserSchema,
     }),
 
     registration: build.mutation<UserType, UserReg>({
@@ -48,11 +37,7 @@ export const userAPI = createApi({
         body,
       }),
 
-      transformResponse: (response: unknown) => {
-        const result = UserSchema.parse(response);
-
-        return result;
-      },
+      responseSchema: UserSchema,
     }),
 
     changePassword: build.mutation<string, { newPass: string; id: string }>({
@@ -65,11 +50,8 @@ export const userAPI = createApi({
 
     getUserResultFull: build.query<ResultFullType[], string>({
       query: (userID) => serverRoutes.userResultFull + '/' + userID,
-      transformResponse: (response: unknown) => {
-        const result = ResultFullSchema.array().parse(response);
+      responseSchema: ResultFullSchema.array(),
 
-        return result;
-      },
       providesTags: ['result'],
     }),
 
