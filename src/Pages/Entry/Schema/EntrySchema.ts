@@ -8,7 +8,6 @@ export const registrationSchema = z
       .min(3, 'Логин должен содержать минимум 3 символа')
       .max(20, 'Логин должен содержать максимум 20 символов'),
     role: z.enum(['user', 'admin', 'superuser']).default('user'),
-    date: z.number().default(Date.now()),
     password: z
       .string()
       .min(4, 'Пароль должен содержать минимум 4 символа')

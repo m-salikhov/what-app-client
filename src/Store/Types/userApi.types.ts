@@ -8,5 +8,4 @@ export interface UserReg {
   username: string;
   role: 'user' | 'superuser' | 'admin' | '';
   password: string;
-  date: number;
 }

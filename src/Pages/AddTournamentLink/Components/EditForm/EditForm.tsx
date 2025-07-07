@@ -46,9 +46,12 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
               });
             }}
             defaultValue={t.date ? parseDate(getDateYYYY_MM_DD(t.date)) : null}
+            className={styles.dateField}
           >
             <Label>Дата отыгрыша</Label>
-            <DateInput>{(segment) => <DateSegment segment={segment} />}</DateInput>
+            <DateInput className={styles.dateInput}>
+              {(segment) => <DateSegment className={styles.dateSegment} segment={segment} />}
+            </DateInput>
           </DateField>
 
           <EditFormEditors editors={t.editors} dispatch={dispatch} />

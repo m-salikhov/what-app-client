@@ -142,11 +142,11 @@
   }
 }
 
-.react-aria-DateField {
+.dateField {
   color: var(--text-color);
 }
 
-.react-aria-DateInput {
+.dateInput {
   display: flex;
   width: fit-content;
   padding: 0.25rem 0.33rem;
@@ -160,7 +160,7 @@
   }
 }
 
-.react-aria-DateSegment {
+.dateSegment {
   padding: 0 2px;
   font-weight: bold;
   color: var(--p-color);
