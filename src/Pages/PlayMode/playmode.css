@@ -219,6 +219,7 @@
     .buttons-block-answer {
       display: flex;
       justify-content: center;
+      gap: 1rem;
 
       p {
         margin: auto 0;
