@@ -1,15 +1,17 @@
-import { userAPI } from 'Store/ToolkitAPIs/userAPI';
+import { useLogoutMutation, userAPI } from 'Store/ToolkitAPIs/userAPI';
 import { useAppDispatch } from './redux';
 
 export function useLogout() {
   const dispatch = useAppDispatch();
 
-  const logout = () => {
+  const [logoutMutation, { isLoading }] = useLogoutMutation();
+
+  const logout = async () => {
     localStorage.removeItem('rememberMe');
 
-    dispatch(userAPI.endpoints.logout.initiate(undefined));
-    dispatch(userAPI.util.resetApiState());
-    dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, undefined));
+    await logoutMutation(undefined);
+
+    await dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, undefined));
   };
 
   return logout;

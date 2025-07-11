@@ -4,7 +4,7 @@ import { lazy, Suspense } from 'react';
 import { Layout } from 'src/Shared/Components/Layout/Layout';
 import { Main } from 'src/Pages/Main/Main';
 import { Spinner } from 'src/Shared/Components/Spinner/Spinner';
-import { initialLoginLoader } from './Utils/InitialLoginLoader';
+import { initialLoginLoader } from '../Shared/Auth/InitialLoginLoader';
 import { store } from 'Store/store';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
 import { wordleLoader } from './Utils/wordleLoader';

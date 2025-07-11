@@ -7,17 +7,20 @@ import { UserLogin, UserReg } from 'Store/Types/userApi.types';
 export const userAPI = createApi({
   reducerPath: 'userAPI',
   baseQuery: fetchBaseQuery({ baseUrl, credentials: 'include' }),
-  tagTypes: ['result'],
+  tagTypes: ['result', 'user'],
   keepUnusedDataFor: 86400,
 
   endpoints: (build) => ({
     getCurrentUser: build.query<UserType | undefined, undefined>({
       query: () => serverRoutes.authLogFirst,
-      responseSchema: UserSchema,
+      responseSchema: UserSchema.optional(),
     }),
 
-    logout: build.query<{ message: string }, undefined>({
-      query: () => serverRoutes.authLogout,
+    logout: build.mutation<{ message: string }, void>({
+      query: () => ({
+        url: serverRoutes.authLogout,
+        method: 'POST',
+      }),
     }),
 
     login: build.mutation<UserType, UserLogin>({
@@ -26,7 +29,6 @@ export const userAPI = createApi({
         method: 'POST',
         body,
       }),
-
       responseSchema: UserSchema,
     }),
 
@@ -36,8 +38,8 @@ export const userAPI = createApi({
         method: 'POST',
         body,
       }),
-
       responseSchema: UserSchema,
+      invalidatesTags: ['user'],
     }),
 
     changePassword: build.mutation<string, { newPass: string; id: string }>({
@@ -68,7 +70,7 @@ export const userAPI = createApi({
 
 export const {
   useGetCurrentUserQuery,
-  useLogoutQuery,
+  useLogoutMutation,
   useLoginMutation,
   useRegistrationMutation,
   useGetUserResultFullQuery,

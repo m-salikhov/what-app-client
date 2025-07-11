@@ -11,10 +11,10 @@ export function Footer() {
       </a>
 
       <a href='https://github.com/m-salikhov' target='_blank' rel='noopener' title='Github' className={styles.link}>
-        <Github />
+        <Github className={styles.icon} />
       </a>
 
-      <div className={styles.iconContainer}>
+      <div className={styles.mail}>
         <Mail className={styles.icon} />
         <p> andvary@inbox.ru</p>
       </div>

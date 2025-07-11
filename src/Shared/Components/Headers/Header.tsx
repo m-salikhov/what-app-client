@@ -1,17 +1,15 @@
 import styles from './header.module.css';
 import owlGreen from './owlGreen.svg';
 import { NavLink } from 'react-router-dom';
-import { useLogout } from 'Shared/Hooks/useLogout';
 import { DarkMode } from 'Shared/Components/DarkMode/DarkMode';
-import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 import { usePrefetch } from 'Store/ToolkitAPIs/tournamentAPI';
 import { Squash as Hamburger } from 'hamburger-react';
 import { useHeaderNavigation } from './helpers/useHeaderNavigation';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 export function Header() {
   const prefetchTournaments = usePrefetch('getTournamentsAllShort');
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
-  const logout = useLogout();
+  const { handleLogout, user } = useAuth();
   const { logoNavigate, handleMobMenu, isOpenMobMenu, isDesktop } = useHeaderNavigation();
 
   return (
@@ -53,7 +51,7 @@ export function Header() {
             </NavLink>
           </li>
 
-          {currentUser?.role === 'superuser' && (
+          {user?.role === 'superuser' && (
             <li className={styles.navItem}>
               <NavLink
                 to='/edit'
@@ -82,7 +80,7 @@ export function Header() {
             </NavLink>
           </li>
 
-          {currentUser?.id && (
+          {user?.role && (
             <li className={styles.navItem}>
               <NavLink
                 to='/profile'
@@ -93,9 +91,9 @@ export function Header() {
             </li>
           )}
 
-          {currentUser?.id ? (
+          {user?.role ? (
             <li className={styles.navItem}>
-              <NavLink to='/' onClick={logout} className={styles.navLink}>
+              <NavLink to='' onClick={handleLogout} className={styles.navLink}>
                 Выйти
               </NavLink>
             </li>

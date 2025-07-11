@@ -60,19 +60,13 @@
 }
 
 /* Мобильное меню */
-@media (width <= 1130px) {
-  .logoText {
-    font-size: 1.5rem;
-  }
-}
-
-@media (width <= 460px) {
+@media (width <= 1300px) {
   .logoText {
     font-size: 1rem;
   }
 }
 
-@media (width <= 1050px) {
+@media (width <= 1110px) {
   .nav {
     position: absolute;
     top: 3rem;
@@ -120,7 +114,7 @@
   }
 }
 
-@media (width >= 1050px) {
+@media (width >= 1110px) {
   .mobBtn {
     display: none;
   }

@@ -4,7 +4,7 @@ interface Props {
   message: string | undefined;
 }
 
-export function FormFieldError({ message }: Props) {
+export function FormError({ message }: Props) {
   if (!message) return null;
 
   return (

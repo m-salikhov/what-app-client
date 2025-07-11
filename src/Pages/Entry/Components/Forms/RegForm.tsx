@@ -3,10 +3,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { registrationSchema, RegistrationType } from '../../Schema/EntrySchema';
 import { Button } from 'Shared/Components/Button/Button';
-import { FormFieldError } from './FormError';
-import { useRegistration } from '../../hooks/useRegistration';
+import { FormError } from './FormError';
 import { ModalReg } from '../ModalReg';
 import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 export const RegistrationForm = () => {
   const {
@@ -17,10 +17,13 @@ export const RegistrationForm = () => {
     resolver: zodResolver(registrationSchema),
   });
 
-  const { registration, error, isLoading, isSuccess } = useRegistration();
+  const {
+    handleRegistration,
+    registrationState: { isLoading, isSuccess, error },
+  } = useAuth();
 
   const onSubmit = (data: RegistrationType) => {
-    registration(data);
+    handleRegistration(data);
   };
 
   return (
@@ -31,7 +34,7 @@ export const RegistrationForm = () => {
           <label htmlFor='email'>Почта:</label>
           <input type='email' autoComplete='email' id='email' {...register('email')} />
         </div>
-        <FormFieldError message={errors.email?.message} />
+        <FormError message={errors.email?.message} />
 
         <div className={styles.formInput}>
           <label htmlFor='username' className='entry-input'>
@@ -39,7 +42,7 @@ export const RegistrationForm = () => {
           </label>
           <input type='text' autoComplete='username' id='username' {...register('username')} />
         </div>
-        <FormFieldError message={errors.username?.message} />
+        <FormError message={errors.username?.message} />
 
         <div className={styles.formInput}>
           <label htmlFor='password' className='entry-input'>
@@ -47,15 +50,15 @@ export const RegistrationForm = () => {
           </label>
           <input type='password' autoComplete='off' id='password' {...register('password')} />
         </div>
-        <FormFieldError message={errors.password?.message} />
+        <FormError message={errors.password?.message} />
 
         <div className={styles.formInput}>
           <label htmlFor='confirmPassword'>Повторите пароль:</label>
           <input type='password' autoComplete='off' id='confirmPassword' {...register('confirmPassword')} />
         </div>
-        <FormFieldError message={errors.confirmPassword?.message} />
+        <FormError message={errors.confirmPassword?.message} />
 
-        {error && <FormFieldError message={getServerErrorMessage(error, 'Ошибка')} />}
+        {error && <FormError message={getServerErrorMessage(error, 'Ошибка')} />}
 
         <Button type='submit' disabled={isLoading} title='Зарегистрироваться' onSubmit={handleSubmit(onSubmit)} />
       </form>
