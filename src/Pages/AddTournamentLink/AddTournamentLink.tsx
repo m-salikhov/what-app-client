@@ -11,13 +11,13 @@ import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPI
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
 import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
-import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
 import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 function AddTournamentLink() {
   useDocTitle('Добавить турнир');
 
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+  const { user } = useAuth();
 
   const [link, setLink] = useState('');
   const [message, setMessage] = useState('');
@@ -29,7 +29,7 @@ function AddTournamentLink() {
   const { errorsFilling, checkTournament, resetErrors } = useCheckParsingErrors();
 
   const [addTournament, { isLoading: isLoadingAdd, error: errorAdd }] = useAddTournamentMutation();
-  const [parseT, { isLoading, error: errorParse }] = useParseLinkMutation();
+  const [parseTournament, { isLoading, error: errorParse }] = useParseLinkMutation();
 
   const handleAddTournament = async () => {
     setMessage('');
@@ -40,8 +40,8 @@ function AddTournamentLink() {
     await addTournament({
       ...t,
       questions: t.questions.filter((q) => q.qNumber !== -1),
-      uploaderUuid: currentUser ? currentUser.id : guest.id,
-      uploader: currentUser ? currentUser.username : guest.username,
+      uploaderUuid: user?.id || guest.id,
+      uploader: user?.username || guest.username,
     }).then(() => {
       setMessage('Турнир успешно сохранён в базе');
       setShowParsedTournament(false);
@@ -49,17 +49,18 @@ function AddTournamentLink() {
   };
 
   const handleParseLink = async () => {
-    setMessage('');
-    resetErrors();
-    setShowParsedTournament(false);
+    try {
+      setMessage('');
+      resetErrors();
+      setShowParsedTournament(false);
 
-    await parseT({ link })
-      .unwrap()
-      .then((data) => {
-        dispatch({ type: 'loaded', payload: data });
-        setShowParsedTournament(true);
-      })
-      .catch(() => {});
+      const data = await parseTournament({ link }).unwrap();
+
+      dispatch({ type: 'loaded', payload: data });
+      setShowParsedTournament(true);
+    } catch (error) {
+      console.error('Failed to parse link:', error);
+    }
   };
 
   if (edit) {

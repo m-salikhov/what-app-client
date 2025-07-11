@@ -1,22 +1,23 @@
 import { useEffect } from 'react';
+import { useAuth } from 'Shared/Auth/useAuth';
 import { useAppSelector } from 'Shared/Hooks/redux';
 import { ResultClientSchema } from 'Shared/Schemas/ResultSchema';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 import { finalResult } from 'Store/Selectors/PlayModeSelectors';
-import { useGetCurrentUserQuery, usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
+import { usePostUserResultMutation } from 'Store/ToolkitAPIs/userAPI';
 
 export function useSaveResult(tournament: TournamentType) {
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+  const { user } = useAuth();
 
   const [saveUserResult, { isSuccess, error, isLoading }] = usePostUserResultMutation();
 
   const { result, totalAnsweredCount, totalQuestionsCount } = useAppSelector(finalResult);
 
   useEffect(() => {
-    if (!currentUser?.id) return;
+    if (!user) return;
 
     const userResult = {
-      userId: currentUser.id,
+      userId: user.id,
       title: tournament.title,
       tournamentId: tournament.id,
       tournamentLength: totalQuestionsCount,
@@ -34,7 +35,7 @@ export function useSaveResult(tournament: TournamentType) {
     tournament.questionsQuantity,
     tournament.id,
     tournament.title,
-    currentUser,
+    user,
     result,
     totalAnsweredCount,
     saveUserResult,

@@ -8,7 +8,7 @@ import { Button } from 'Shared/Components/Button/Button';
 
 export function Main() {
   const navigate = useNavigate();
-  useDocTitle();
+  useDocTitle('База вопросов');
 
   return (
     <div className={styles.container}>

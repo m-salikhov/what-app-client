@@ -3,14 +3,14 @@ import { ChangePass } from './Components/ChangePass/ChangePass';
 import { getDate } from 'Shared/Helpers/getDate';
 import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { ProfileContent } from './Components/ProfileContent';
-import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 export default function Profile() {
   useDocTitle('Профиль');
 
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+  const { user } = useAuth();
 
-  if (!currentUser) return null;
+  if (!user) return null;
 
   return (
     <div className={styles.container}>
@@ -18,23 +18,23 @@ export default function Profile() {
         <section className={styles.userInfo}>
           <div>
             <p>Имя</p>
-            <p>{currentUser.username}</p>
+            <p>{user.username}</p>
           </div>
           <div>
             <p>Почта</p>
-            <p>{currentUser.email}</p>
+            <p>{user.email}</p>
           </div>
           <div>
             <p>Зарегистрирован</p>
-            <p>{getDate(currentUser.date)}</p>
+            <p>{getDate(user.date)}</p>
           </div>
           <div>
             <p>Статус</p>
-            <p>{currentUser.role}</p>
+            <p>{user.role}</p>
           </div>
         </section>
         <ChangePass />
-        <ProfileContent userId={currentUser.id} />
+        <ProfileContent userId={user.id} />
       </div>
     </div>
   );

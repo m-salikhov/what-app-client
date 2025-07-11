@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useChangePasswordMutation, useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
 import { Button } from 'Shared/Components/Button/Button';
 import { Modal } from 'Shared/Components/Modal/Modal';
 import { useForm } from 'react-hook-form';
@@ -7,12 +7,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
 import styles from '../../profile.module.css';
 import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 export function ChangePass() {
   const [changePass, setChangePass] = useState(false);
   const [serverMessage, setServerMessage] = useState('');
 
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+  const { user } = useAuth();
 
   const [changePassword, { isSuccess }] = useChangePasswordMutation();
 
@@ -26,8 +27,8 @@ export function ChangePass() {
   });
 
   const onSubmit = (data: ChangePassType) => {
-    if (currentUser) {
-      changePassword({ newPass: data.newPassword, id: currentUser.id })
+    if (user) {
+      changePassword({ newPass: data.newPassword, id: user.id })
         .unwrap()
         .then(() => {
           setServerMessage('Пароль успешно изменён');

@@ -17,16 +17,16 @@ export function useAuth() {
   const [login, loginState] = useLoginMutation();
   const [registration, registrationState] = useRegistrationMutation();
 
-  const handleLogin = async (credentials: LoginType) => {
+  const handleLogin = async (loginData: LoginType) => {
     try {
-      const data = await login(credentials).unwrap();
+      const data = await login(loginData).unwrap();
       dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, data));
       localStorage.setItem('rememberMe', 'yes');
     } catch (e) {}
   };
 
-  const handleRegistration = async (user: RegistrationType) => {
-    const { confirmPassword, ...userData } = user;
+  const handleRegistration = async (registrationData: RegistrationType) => {
+    const { confirmPassword, ...userData } = registrationData;
     try {
       const data = await registration(userData).unwrap();
       dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, data));

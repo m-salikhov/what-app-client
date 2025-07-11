@@ -2,15 +2,15 @@ import { useLazyGetRandomTournamentQuery } from 'Store/ToolkitAPIs/tournamentAPI
 import { GiPerspectiveDiceSixFacesRandom as DiceIcon } from 'react-icons/gi';
 import { useNavigate } from 'react-router-dom';
 import { linkBuilder } from '../Helpers/linkBuilder';
-import { useGetCurrentUserQuery } from 'Store/ToolkitAPIs/userAPI';
+import { useAuth } from 'Shared/Auth/useAuth';
 
 export function RandomTournament({ pathname }: { pathname: string }) {
-  const { data: currentUser } = useGetCurrentUserQuery(undefined);
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [fetchData] = useLazyGetRandomTournamentQuery();
 
   const handleClick = async () => {
-    const { data } = await fetchData(currentUser?.id ?? '');
+    const { data } = await fetchData(user?.id ?? '');
     if (data) {
       navigate(linkBuilder(data.id, data.title, pathname));
     }
