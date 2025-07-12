@@ -32,7 +32,7 @@ const LoginForm = () => {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <div
         className={styles.formInput}
         id='tooltip-mail'

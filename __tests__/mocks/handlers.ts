@@ -30,6 +30,16 @@ export const handlers = [
     });
   }),
 
+  http.get('https://andvarifserv.ru/auth/logfirst', async () => {
+    return HttpResponse.json({
+      id: '123e4567-e89b-12d3-a456-426655440000',
+      date: 1111,
+      email: 'example@ya.ru',
+      username: 'example@ya.ru',
+      role: 'user',
+    });
+  }),
+
   http.post<{ email: string; password: string } | { username: string; password: string }>(
     'https://andvarifserv.ru/users',
     async ({ request }) => {

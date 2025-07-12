@@ -6,10 +6,7 @@ import { Question } from 'Shared/Components/Question/Question';
 import styles from '../tournament.module.css';
 import { Back } from 'Shared/Components/Back/Back';
 
-interface Props {
-  tournament: TournamentType;
-}
-export default function TournamentContent({ tournament }: Props) {
+export default function TournamentContent({ tournament }: { tournament: TournamentType }) {
   const ref = useRef(null);
 
   const transitions = useTransition(tournament.questions, {
@@ -18,6 +15,7 @@ export default function TournamentContent({ tournament }: Props) {
     config: { duration: 400 },
     keys: (q) => q.id,
   });
+
   return (
     <div ref={ref} data-type='question'>
       <Back />

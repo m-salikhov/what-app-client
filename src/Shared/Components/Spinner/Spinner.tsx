@@ -1,9 +1,9 @@
 import styles from './spinner.module.css';
 import { RotatingLines } from 'react-loader-spinner';
 
-type Props = Parameters<typeof RotatingLines>[0];
+type SpinnerProps = Parameters<typeof RotatingLines>[0];
 
-const defaultProps: Props = {
+const defaultProps: SpinnerProps = {
   strokeColor: '#61a199e6',
   strokeWidth: '3',
   animationDuration: '0.75',
@@ -11,7 +11,7 @@ const defaultProps: Props = {
   visible: true,
 };
 
-export function Spinner(props: Props) {
+export function Spinner(props: SpinnerProps) {
   return (
     <div className={styles.spinner}>
       <RotatingLines {...{ ...defaultProps, ...props }} />

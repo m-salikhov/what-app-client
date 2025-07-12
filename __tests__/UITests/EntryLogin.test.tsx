@@ -34,7 +34,7 @@ describe('Форма логина', () => {
 
     await userEvent.click(screen.getByRole('button'));
 
-    //сработала переадресация при успехе
+    // сработала переадресация при успехе
     expect(screen.queryByText('Почта:')).not.toBeInTheDocument();
   });
 

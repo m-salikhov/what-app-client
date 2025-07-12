@@ -7,6 +7,7 @@ import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 export default function Tournament() {
   const tournament = useLoaderData() as TournamentType;
+
   setDocTitle(tournament.title);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
