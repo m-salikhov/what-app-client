@@ -1,6 +1,5 @@
 import styles from './add-tournament-link.module.css';
 import { reducer } from './helpers/reducer';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { EditForm } from './Components/EditForm/EditForm';
 import { Instruction } from './Components/Instruction';
 import { ParsedTournament } from './Components/ParsedTournament';
@@ -13,9 +12,10 @@ import { useReducer, useState } from 'react';
 import { useCheckParsingErrors } from './Hooks/useCheckParsingErrors';
 import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
 import { useAuth } from 'Shared/Auth/useAuth';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 function AddTournamentLink() {
-  useDocTitle('Добавить турнир');
+  setDocTitle('Добавить турнир');
 
   const { user } = useAuth();
 
@@ -24,7 +24,7 @@ function AddTournamentLink() {
   const [showParsedTournament, setShowParsedTournament] = useState(false);
   const [edit, setEdit] = useState(false);
 
-  const [t, dispatch] = useReducer(reducer, addLinkInitTournament);
+  const [tournament, dispatch] = useReducer(reducer, addLinkInitTournament);
 
   const { errorsFilling, checkTournament, resetErrors } = useCheckParsingErrors();
 
@@ -35,11 +35,11 @@ function AddTournamentLink() {
     setMessage('');
     resetErrors();
 
-    if (!checkTournament(t)) return;
+    if (!checkTournament(tournament)) return;
 
     await addTournament({
-      ...t,
-      questions: t.questions.filter((q) => q.qNumber !== -1),
+      ...tournament,
+      questions: tournament.questions.filter((q) => q.qNumber !== -1),
       uploaderUuid: user?.id || guest.id,
       uploader: user?.username || guest.username,
     }).then(() => {
@@ -64,7 +64,7 @@ function AddTournamentLink() {
   };
 
   if (edit) {
-    return <EditForm t={t} dispatch={dispatch} setEdit={setEdit}></EditForm>;
+    return <EditForm tournament={tournament} dispatch={dispatch} setEdit={setEdit}></EditForm>;
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -104,7 +104,7 @@ function AddTournamentLink() {
 
       {showParsedTournament ? (
         <ParsedTournament
-          t={t}
+          tournament={tournament}
           handleAddTournament={handleAddTournament}
           onClickEdit={() => {
             setEdit(true);

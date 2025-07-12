@@ -6,25 +6,25 @@ import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentH
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
-  t: TournamentType;
+  tournament: TournamentType;
   onClickEdit: () => void;
   handleAddTournament: () => void;
 }
 
-export function ParsedTournament({ t, onClickEdit, handleAddTournament }: Props) {
+export function ParsedTournament({ tournament, onClickEdit, handleAddTournament }: Props) {
   return (
     <>
-      <TournamentHeader tournament={t} />
+      <TournamentHeader tournament={tournament} />
 
       <div className={styles.buttons}>
         <Button title={'Редактировать турнир'} onClick={onClickEdit}></Button>
         <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
       </div>
       <div className={styles.parsedTournament}>
-        {t.questions
-          .filter((q) => q.qNumber !== -1)
-          .map((v) => (
-            <QuestionPlane q={v} key={v.id} />
+        {tournament.questions
+          .filter((question) => question.qNumber !== -1)
+          .map((question) => (
+            <QuestionPlane q={question} key={question.id} />
           ))}
       </div>
 

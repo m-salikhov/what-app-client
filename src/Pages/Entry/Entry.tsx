@@ -1,12 +1,12 @@
 import styles from './entry.module.css';
 import entryImg from './entry_img.svg';
 import { useState } from 'react';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { RegistrationForm } from './Components/Forms/RegForm';
 import LoginForm from './Components/Forms/LoginForm';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 function Entry() {
-  useDocTitle('Вход');
+  setDocTitle('Вход');
 
   const [showLoginOrRegForm, setShowLoginOrRegForm] = useState(true);
 

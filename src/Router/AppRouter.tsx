@@ -47,17 +47,6 @@ const router = createBrowserRouter(
         },
 
         {
-          path: 'tournament/:id',
-          element: (
-            <Suspense fallback={<Spinner />}>
-              {' '}
-              <Tournament />{' '}
-            </Suspense>
-          ),
-          loader: tournamentLoader,
-        },
-
-        {
           path: 'addbylink',
           element: (
             <Suspense fallback={<Spinner />}>
@@ -142,6 +131,17 @@ const router = createBrowserRouter(
               loader: () => store.dispatch(playModeActions.resetState()),
             },
           ],
+        },
+
+        {
+          path: 'tournament/:id',
+          element: (
+            <Suspense fallback={<Spinner />}>
+              {' '}
+              <Tournament />{' '}
+            </Suspense>
+          ),
+          loader: tournamentLoader,
         },
 
         {

@@ -31,7 +31,11 @@ export const getToursParagraphs = (tours: number) => {
   return arr;
 };
 
-export const scroll = (e: MouseEvent<HTMLDivElement>, nodeList: HTMLDivElement | null, tournament: TournamentType) => {
+export const scrollTournament = (
+  e: MouseEvent<HTMLDivElement>,
+  nodeList: HTMLDivElement | null,
+  tournament: TournamentType
+) => {
   const arrAnchors = getToursAnchors(tournament);
 
   let id: number;

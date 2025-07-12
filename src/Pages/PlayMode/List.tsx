@@ -1,10 +1,10 @@
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { TournamentsTable } from 'Shared/Components/TournamentsTable/TournamentsTable';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { useGetTournamentsAllShortQuery } from 'Store/ToolkitAPIs/tournamentAPI';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 function List() {
-  useDocTitle('Игровой режим');
+  setDocTitle('Игровой режим');
 
   const { data: tournaments, isSuccess, error, isLoading } = useGetTournamentsAllShortQuery(undefined);
 

@@ -1,12 +1,12 @@
 import styles from './profile.module.css';
 import { ChangePass } from './Components/ChangePass/ChangePass';
 import { getDate } from 'Shared/Helpers/getDate';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { ProfileContent } from './Components/ProfileContent';
 import { useAuth } from 'Shared/Auth/useAuth';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 export default function Profile() {
-  useDocTitle('Профиль');
+  setDocTitle('Профиль');
 
   const { user } = useAuth();
 

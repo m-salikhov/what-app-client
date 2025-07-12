@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { LastTournaments } from './Components/LastTournaments';
 import { Stats } from './Components/Stats';
 import { RandomQuestions } from './Components/RandomQuestions';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import { Button } from 'Shared/Components/Button/Button';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 export function Main() {
   const navigate = useNavigate();
-  useDocTitle('База вопросов');
+  setDocTitle('База вопросов');
 
   return (
     <div className={styles.container}>

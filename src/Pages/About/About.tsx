@@ -1,10 +1,10 @@
 import myPhoto from './photo_profile_copy.jpg';
 import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
-import { useDocTitle } from 'Shared/Hooks/useDocTitle';
 import styles from './about.module.css';
+import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 function About() {
-  useDocTitle('О сайте');
+  setDocTitle('О сайте');
 
   return (
     <div className={styles.about}>

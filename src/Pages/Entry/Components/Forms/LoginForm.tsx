@@ -54,7 +54,7 @@ const LoginForm = () => {
 
       <div className={styles.formInput}>
         <label htmlFor='password'>Пароль:</label>
-        <input type='password' id='password' {...register('password')} />
+        <input type='password' autoComplete='current-password' id='password' {...register('password')} />
       </div>
 
       <FormError message={errors.password?.message} />

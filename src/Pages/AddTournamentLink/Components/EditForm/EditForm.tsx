@@ -10,12 +10,12 @@ import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 import { ScrollToTop } from 'Shared/Components/ScrollToTop/ScrollToTop';
 
 interface Props {
-  t: TournamentType;
+  tournament: TournamentType;
   dispatch: (action: Action) => void;
   setEdit: (edit: boolean) => void;
 }
 
-export function EditForm({ t, dispatch, setEdit }: Props) {
+export function EditForm({ tournament, dispatch, setEdit }: Props) {
   return (
     <main
       onKeyDown={(e) => {
@@ -34,7 +34,7 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
               placeholder='Название турнира'
               type='text'
               onChange={(e) => dispatch({ type: actionTypes.title, payload: e.target.value })}
-              value={t.title}
+              value={tournament.title}
             />
           </label>
 
@@ -45,7 +45,7 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
                 payload: e && e.year > 1900 ? Date.parse(e.toString()) : 0,
               });
             }}
-            defaultValue={t.date ? parseDate(getDateYYYY_MM_DD(t.date)) : null}
+            defaultValue={tournament.date ? parseDate(getDateYYYY_MM_DD(tournament.date)) : null}
             className={styles.dateField}
           >
             <Label>Дата отыгрыша</Label>
@@ -54,11 +54,11 @@ export function EditForm({ t, dispatch, setEdit }: Props) {
             </DateInput>
           </DateField>
 
-          <EditFormEditors editors={t.editors} dispatch={dispatch} />
+          <EditFormEditors editors={tournament.editors} dispatch={dispatch} />
         </div>
 
-        {t.questions.map((v) => (
-          <EditFormQuestion q={v} dispatch={dispatch} key={v.id} />
+        {tournament.questions.map((question) => (
+          <EditFormQuestion q={question} dispatch={dispatch} key={question.id} />
         ))}
       </div>
 
