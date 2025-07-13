@@ -88,10 +88,12 @@
   }
 
   p {
-    margin: auto 1rem;
+    margin: 0 0.5rem;
     font-size: 1.25rem;
     -webkit-user-select: none;
     user-select: none;
+    min-width: 24px;
+    text-align: center;
   }
 }
 
