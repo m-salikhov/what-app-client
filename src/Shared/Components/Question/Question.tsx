@@ -8,7 +8,7 @@ import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   q: QuestionType;
-  random?: boolean;
+  random: boolean;
 }
 
 export function Question({ q, random = false }: Props) {
@@ -17,7 +17,7 @@ export function Question({ q, random = false }: Props) {
   return (
     <div className={styles.question}>
       <div className={styles.questionHeader}>
-        <h3>Вопрос {q.qNumber}</h3>
+        <h3 className={styles.questionNumber}>Вопрос {q.qNumber}</h3>
         {random && <Link to={`/tournament/${q.tournament?.id}`}>{q.tournament?.title}</Link>}
         {!random && <h3>Тур {q.tourNumber}</h3>}
       </div>
