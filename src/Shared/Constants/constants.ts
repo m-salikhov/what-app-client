@@ -1,6 +1,5 @@
 export const serverRoutes = {
   tournaments: 'tournaments',
-  tournamentsGuest: 'tournaments/quest',
   tournamentsCreateByLink: 'tournaments/create-by-link',
   tournamentsAllShort: `tournaments/all-short`,
   tournamentsLastShort: 'tournaments/last',

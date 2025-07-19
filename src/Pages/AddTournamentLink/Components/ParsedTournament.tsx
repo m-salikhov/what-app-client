@@ -8,17 +8,17 @@ import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 interface Props {
   tournament: TournamentType;
   onClickEdit: () => void;
-  handleAddTournament: () => void;
+  onClickSave: (tournament: TournamentType) => Promise<void>;
 }
 
-export function ParsedTournament({ tournament, onClickEdit, handleAddTournament }: Props) {
+export function ParsedTournament({ tournament, onClickEdit, onClickSave }: Props) {
   return (
     <>
       <TournamentHeader tournament={tournament} />
 
       <div className={styles.buttons}>
         <Button title={'Редактировать турнир'} onClick={onClickEdit}></Button>
-        <Button title='Добавить в базу' onClick={handleAddTournament}></Button>
+        <Button title='Добавить в базу' onClick={() => onClickSave(tournament)}></Button>
       </div>
       <div className={styles.parsedTournament}>
         {tournament.questions

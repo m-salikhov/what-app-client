@@ -90,7 +90,7 @@ export const reducer = (state: TournamentType, action: Action) => {
   if (type === actionTypes.loaded) {
     const t = structuredClone(action.payload);
 
-    return t;
+    return { ...state, ...t };
   }
 
   switch (type) {
