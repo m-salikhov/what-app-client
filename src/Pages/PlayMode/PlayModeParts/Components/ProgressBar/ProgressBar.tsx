@@ -18,8 +18,11 @@ export function ProgressBar({ tournament }: { tournament: TournamentType }) {
   const currentTourNumber = useAppSelector(currentTourNumberPM);
 
   const { first, last } = useMemo(() => {
-    const first = tournament.questions.findIndex((v) => v.tourNumber === currentTourNumber);
-    const last = tournament.questions.findLastIndex((v) => v.tourNumber === currentTourNumber);
+    //оставляем только игровые вопросы
+    const questions = tournament.questions.filter((v) => v.type !== 'outside');
+
+    const first = questions.findIndex((v) => v.tourNumber === currentTourNumber);
+    const last = questions.findLastIndex((v) => v.tourNumber === currentTourNumber);
     return { first, last };
   }, [currentTourNumber, tournament.questions]);
 
