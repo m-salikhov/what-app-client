@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, serverRoutes, guest } from 'Shared/Constants/constants';
+import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
 import {
   QuestionType,
   TournamentShortTypeSchema,
@@ -62,9 +62,8 @@ export const tournamentAPI = createApi({
 
     addTournament: build.mutation<number, TournamentType>({
       query: (body) => ({
-        url: body.uploader === guest.username ? serverRoutes.tournamentsGuest : serverRoutes.tournaments,
+        url: serverRoutes.tournaments,
         method: 'POST',
-        credentials: 'include',
         body,
       }),
       invalidatesTags: ['shorts', 'stats', 'lastTournamentsShort'],

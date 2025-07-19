@@ -5,7 +5,6 @@ import { Instruction } from './Components/Instruction';
 import { ParsedTournament } from './Components/ParsedTournament';
 import { Button } from 'Shared/Components/Button/Button';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import { guest } from 'Shared/Constants/constants';
 import { useAddTournamentMutation, useParseLinkMutation } from 'Store/ToolkitAPIs/tournamentAPI';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';
@@ -40,8 +39,8 @@ function AddTournamentLink() {
     await addTournament({
       ...tournament,
       questions: tournament.questions.filter((q) => q.qNumber !== -1),
-      uploaderUuid: user?.id || guest.id,
-      uploader: user?.username || guest.username,
+      uploaderUuid: user?.id || '',
+      uploader: user?.username || '',
     }).then(() => {
       setMessage('Турнир успешно сохранён в базе');
       setShowParsedTournament(false);
