@@ -56,11 +56,11 @@
   border-left: var(--main-border);
 
   &:nth-child(4) {
-    min-width: 80px;
+    min-width: 90px;
   }
 
   &:nth-child(5) {
-    min-width: 55px;
+    min-width: 65px;
   }
 }
 
@@ -78,8 +78,16 @@
     }
 
     .headerCellIcon {
-      min-width: 20px;
-      margin-left: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      svg {
+        position: absolute;
+        top: -0.4rem;
+        left: 0.1rem;
+      }
     }
   }
 }
@@ -112,9 +120,6 @@
     .headerCellData {
       span {
         font-size: 0.8rem;
-      }
-      .headerCellIcon {
-        min-width: 15px;
       }
     }
   }

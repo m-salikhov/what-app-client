@@ -1,5 +1,4 @@
 import styles from './tournaments-table.module.css';
-import chart from './bar_chart.svg';
 import { Link, useLocation } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { linkBuilder } from './Helpers/linkBuilder';
@@ -7,10 +6,12 @@ import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 import { RandomTournament } from './Components/RandomTournament';
 import { useTournamentListManager } from './Helpers/useTournamentListManager';
+import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronUp } from 'react-icons/fa';
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
   const { pathname } = useLocation();
-  const { tournamentsList, handleChangeFilterString, filterString, sortTournaments } =
+  const { tournamentsList, handleChangeFilterString, filterString, sortTournaments, sortField, sortDirection } =
     useTournamentListManager(tournaments);
 
   return (
@@ -37,55 +38,61 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='title' onClick={sortTournaments}>
               <span>Название</span>
-              <div className={styles.headerCellIcon} id='title' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать по названию' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'title' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'title' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='date' onClick={sortTournaments}>
               <span>Дата</span>
-              <div className={styles.headerCellIcon} id='date' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать по дате отыгрыша' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'date' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'date' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='questionsQuantity' onClick={sortTournaments}>
               <span>Вопросы</span>
-              <div className={styles.headerCellIcon} id='questionsQuantity' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать по количеству вопросов' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'questionsQuantity' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'questionsQuantity' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='tours' onClick={sortTournaments}>
               <span>Туры</span>
-              <div className={styles.headerCellIcon} id='tours' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать количество туров' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'tours' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'tours' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='dateUpload' onClick={sortTournaments}>
               <span>Добавлен</span>
-              <div className={styles.headerCellIcon} id='dateUpload' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать по дате добавления' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'dateUpload' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'dateUpload' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
 
           <div className={styles.headerCell}>
-            <div className={styles.headerCellData}>
+            <div className={styles.headerCellData} data-field='uploader' onClick={sortTournaments}>
               <span>Добавил</span>
-              <div className={styles.headerCellIcon} id='uploader' onClick={sortTournaments}>
-                <img src={chart} alt='сортировать по добавившему' />
+              <div className={styles.headerCellIcon}>
+                {sortField === 'uploader' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'uploader' && sortDirection === 'desc' && <FaChevronUp />}
               </div>{' '}
             </div>
           </div>
