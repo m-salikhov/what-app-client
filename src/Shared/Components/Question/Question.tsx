@@ -8,7 +8,7 @@ import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
   q: QuestionType;
-  random: boolean;
+  random?: boolean;
 }
 
 export function Question({ q, random = false }: Props) {

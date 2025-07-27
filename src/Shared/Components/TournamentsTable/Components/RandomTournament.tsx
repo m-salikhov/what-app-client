@@ -9,14 +9,14 @@ import { useState } from 'react';
 export function RandomTournament({ pathname }: { pathname: string }) {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [fetchData] = useLazyGetRandomTournamentQuery();
+  const [fetchRandomTournament] = useLazyGetRandomTournamentQuery();
   const [isFetching, setIsFetching] = useState(false);
 
   const handleClick = async () => {
     setIsFetching(true);
 
     try {
-      const data = await fetchData(user?.id ?? '').unwrap();
+      const data = await fetchRandomTournament(user?.id ?? '').unwrap();
       navigate(linkBuilder(data.id, data.title, pathname));
     } catch (error) {
       setIsFetching(false);

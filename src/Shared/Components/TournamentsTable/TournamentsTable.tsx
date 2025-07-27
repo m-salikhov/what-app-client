@@ -29,63 +29,79 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
         <RandomTournament pathname={pathname} />
       </div>
       <div className={styles.table}>
-        <div className={styles.line}>
-          <div className={styles.column}>№</div>
-
-          <div className={styles.column}>
-            Название
-            <div className={styles.columnIcon} id='title' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать по названию' />
-            </div>{' '}
+        <div className={styles.headerLine}>
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>№</span>
+            </div>
           </div>
 
-          <div className={styles.column}>
-            Дата отыгрыша{' '}
-            <div className={styles.columnIcon} id='date' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать по дате отыгрыша' />
-            </div>{' '}
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Название</span>
+              <div className={styles.headerCellIcon} id='title' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать по названию' />
+              </div>{' '}
+            </div>
           </div>
 
-          <div className={styles.column}>
-            Вопросы{' '}
-            <div className={styles.columnIcon} id='questionsQuantity' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать по количеству вопросов' />
-            </div>{' '}
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Дата</span>
+              <div className={styles.headerCellIcon} id='date' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать по дате отыгрыша' />
+              </div>{' '}
+            </div>
           </div>
 
-          <div className={styles.column}>
-            Туры{' '}
-            <div className={styles.columnIcon} id='tours' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать количество туров' />
-            </div>{' '}
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Вопросы</span>
+              <div className={styles.headerCellIcon} id='questionsQuantity' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать по количеству вопросов' />
+              </div>{' '}
+            </div>
           </div>
 
-          <div className={styles.column}>
-            Добавлен{' '}
-            <div className={styles.columnIcon} id='dateUpload' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать по дате добавления' />
-            </div>{' '}
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Туры</span>
+              <div className={styles.headerCellIcon} id='tours' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать количество туров' />
+              </div>{' '}
+            </div>
           </div>
 
-          <div className={styles.column}>
-            Добавил{' '}
-            <div className={styles.columnIcon} id='uploader' onClick={sortTournaments}>
-              <img src={chart} alt='сортировать по добавившему' />
-            </div>{' '}
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Добавлен</span>
+              <div className={styles.headerCellIcon} id='dateUpload' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать по дате добавления' />
+              </div>{' '}
+            </div>
+          </div>
+
+          <div className={styles.headerCell}>
+            <div className={styles.headerCellData}>
+              <span>Добавил</span>
+              <div className={styles.headerCellIcon} id='uploader' onClick={sortTournaments}>
+                <img src={chart} alt='сортировать по добавившему' />
+              </div>{' '}
+            </div>
           </div>
         </div>
 
         {tournamentsList.map((item, i) => (
           <div className={styles.line} key={item.id}>
-            <div className={styles.column}>{i + 1}</div>
-            <div className={styles.column}>
+            <div className={styles.cell}>{i + 1}</div>
+            <div className={styles.cell}>
               <Link to={linkBuilder(item.id, item.title, pathname)}>{item.title}</Link>
             </div>
-            <div className={styles.column}>{getDate(item.date)}</div>
-            <div className={styles.column}>{item.questionsQuantity}</div>
-            <div className={styles.column}>{item.tours}</div>
-            <div className={styles.column}>{getDate(item.dateUpload)}</div>
-            <div className={styles.column}>{item.uploader}</div>
+            <div className={styles.cell}>{getDate(item.date)}</div>
+            <div className={styles.cell}>{item.questionsQuantity}</div>
+            <div className={styles.cell}>{item.tours}</div>
+            <div className={styles.cell}>{getDate(item.dateUpload)}</div>
+            <div className={styles.cell}>{item.uploader}</div>
           </div>
         ))}
       </div>

@@ -1,58 +1,4 @@
-.table {
-  max-width: 1700px;
-  margin: 1rem auto;
-  border-right: var(--main-border);
-  border-bottom: var(--main-border);
-}
-
-.line {
-  display: grid;
-  grid-template-columns: 35px 2.5fr 1fr 0.9fr 0.8fr 1fr 1.2fr;
-
-  &:first-child {
-    font-weight: bold;
-    color: var(--h-color);
-    background-color: rgb(15 110 78 / 50%);
-  }
-
-  &:nth-child(2n + 3) {
-    background-color: rgb(97 161 153 / 20%);
-  }
-}
-
-.column {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 5px;
-  overflow: hidden;
-  color: var(--p-color);
-  text-align: center;
-  border-top: var(--main-border);
-  border-left: var(--main-border);
-
-  &:nth-child(4) {
-    min-width: 80px;
-  }
-
-  &:nth-child(5) {
-    min-width: 55px;
-  }
-
-  a:hover {
-    font-weight: bold;
-  }
-}
-
-.columnIcon {
-  min-width: 20px;
-  margin-left: 8px;
-
-  img {
-    cursor: pointer;
-  }
-}
-
+/*    HEADER    */
 .header {
   display: flex;
   justify-content: center;
@@ -78,12 +24,79 @@
   }
 }
 
+/*    TABLE    */
+
+.table {
+  max-width: 1700px;
+  margin: 1rem auto;
+  border-right: var(--main-border);
+  border-bottom: var(--main-border);
+}
+
+.headerLine,
+.line {
+  display: grid;
+  grid-template-columns: 35px 2.5fr 1fr 0.9fr 0.8fr 1fr 1.2fr;
+}
+
+.line:nth-child(2n + 3) {
+  background-color: rgb(97 161 153 / 20%);
+}
+
+.headerCell,
+.cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 5px;
+  overflow: hidden;
+  color: var(--p-color);
+  text-align: center;
+  border-top: var(--main-border);
+  border-left: var(--main-border);
+
+  &:nth-child(4) {
+    min-width: 80px;
+  }
+
+  &:nth-child(5) {
+    min-width: 55px;
+  }
+}
+
+.headerCell {
+  background-color: rgb(15 110 78 / 50%);
+
+  .headerCellData {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    span {
+      font-weight: bold;
+    }
+
+    .headerCellIcon {
+      min-width: 20px;
+      margin-left: 2px;
+    }
+  }
+}
+
+.cell {
+  a:hover {
+    font-weight: bold;
+  }
+}
+
 @media (width <= 800px) {
   .table {
     font-size: 0.8rem;
   }
 
-  .line {
+  .line,
+  .headerLine {
     > div:nth-child(3),
     div:nth-child(6),
     div:nth-child(7) {
@@ -95,7 +108,14 @@
     }
   }
 
-  .columnIcon {
-    min-width: 15px;
+  .headerCell {
+    .headerCellData {
+      span {
+        font-size: 0.8rem;
+      }
+      .headerCellIcon {
+        min-width: 15px;
+      }
+    }
   }
 }
