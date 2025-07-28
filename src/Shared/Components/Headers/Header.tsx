@@ -11,6 +11,7 @@ export function Header() {
   const prefetchTournaments = usePrefetch('getTournamentsAllShort');
   const { handleLogout, user } = useAuth();
   const { logoNavigate, handleMobMenu, isOpenMobMenu, isDesktop } = useHeaderNavigation();
+  console.log('🚀 ~ Header   isOpenMobMenu, isDesktop:', isOpenMobMenu, isDesktop);
 
   return (
     <header className={styles.header}>
