@@ -25,6 +25,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
             value={filterString}
             onChange={handleChangeFilterString}
             placeholder='поиск'
+            autoComplete='off'
           />
         </label>
         <RandomTournament pathname={pathname} />
