@@ -10,18 +10,20 @@
 
 .logoContainer {
   display: flex;
-  height: 3rem;
   cursor: pointer;
-}
 
-.logoImage {
-  padding: 0.4rem 0 0.4rem 0.4rem;
+  img {
+    height: 3rem;
+    padding: 0.4rem 0 0.4rem 0.4rem;
+  }
 }
 
 .logoText {
+  display: flex;
+  align-items: center;
   padding-left: 0.5rem;
-  margin: auto 0;
-  font-size: 1.9rem;
+  font-size: clamp(1rem, 2.6vw, 1.9rem);
+  white-space: nowrap;
   color: var(--h-color);
 }
 
@@ -33,7 +35,6 @@
 .navList {
   display: flex;
   align-items: center;
-  height: 100%;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -57,13 +58,6 @@
 
 .active {
   color: var(--nav-text-color-hover) !important;
-}
-
-/* Мобильное меню */
-@media (width <= 1300px) {
-  .logoText {
-    font-size: 1rem;
-  }
 }
 
 @media (width <= 1110px) {

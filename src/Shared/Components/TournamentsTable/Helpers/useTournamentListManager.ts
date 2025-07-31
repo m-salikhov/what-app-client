@@ -9,7 +9,6 @@ export function useTournamentListManager(tournaments: TournamentShortType[]) {
   const [filterString, setFilterString] = useState('');
   const [sortedTournaments, setSortedTournaments] = useState(tournaments);
   const [sortField, setSortField] = useState<SortFieldType>('dateUpload');
-
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('desc');
 
   function sortTournaments(e: MouseEvent<HTMLDivElement | SVGElement>) {
