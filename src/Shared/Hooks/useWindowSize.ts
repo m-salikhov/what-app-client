@@ -9,7 +9,7 @@ export function useWindowSize() {
 
   useLayoutEffect(() => {
     const handler = () => {
-      const isDesktop = window.innerWidth > 1110;
+      const isDesktop = window.innerWidth > 1000;
 
       setWindowSize({
         width: window.innerWidth,

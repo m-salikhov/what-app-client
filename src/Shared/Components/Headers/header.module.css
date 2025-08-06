@@ -16,15 +16,15 @@
     height: 3rem;
     padding: 0.4rem 0 0.4rem 0.4rem;
   }
-}
 
-.logoText {
-  display: flex;
-  align-items: center;
-  padding-left: 0.5rem;
-  font-size: clamp(1rem, 2.6vw, 1.9rem);
-  white-space: nowrap;
-  color: var(--h-color);
+  .logoText {
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    font-size: clamp(1rem, 2vw, 1.9rem);
+    white-space: nowrap;
+    color: var(--h-color);
+  }
 }
 
 .nav {
@@ -60,7 +60,7 @@
   color: var(--nav-text-color-hover) !important;
 }
 
-@media (width <= 1110px) {
+@media (width <= 1000px) {
   .nav {
     position: absolute;
     top: 3rem;
@@ -106,7 +106,7 @@
   }
 }
 
-@media (width >= 1110px) {
+@media (width >= 1000px) {
   .mobBtn {
     display: none;
   }
