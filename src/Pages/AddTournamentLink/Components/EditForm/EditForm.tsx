@@ -54,6 +54,17 @@ export function EditForm({ tournament, dispatch, setEdit }: Props) {
             </DateInput>
           </DateField>
 
+          <label>
+            <p>Сложность</p>
+            <input
+              type='number'
+              min={0}
+              step='0.1'
+              onChange={(e) => dispatch({ type: actionTypes.difficulty, payload: +e.target.value })}
+              value={tournament.difficulty}
+            />
+          </label>
+
           <EditFormEditors editors={tournament.editors} dispatch={dispatch} />
         </div>
 

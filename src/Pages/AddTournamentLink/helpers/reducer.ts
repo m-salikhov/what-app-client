@@ -19,6 +19,10 @@ export type Action =
       payload: number;
     }
   | {
+      type: 'difficulty';
+      payload: number;
+    }
+  | {
       type: 'add' | 'text' | 'answer' | 'alterAnswer' | 'comment' | 'author';
       questionID: number;
       payload: string;
@@ -82,6 +86,7 @@ export const actionTypes = {
   qNumber: 'qNumber',
   tourNumber: 'tourNumber',
   removeQuestion: 'removeQuestion',
+  difficulty: 'difficulty',
 } as const;
 
 export const reducer = (state: TournamentType, action: Action) => {
@@ -100,6 +105,10 @@ export const reducer = (state: TournamentType, action: Action) => {
 
     case actionTypes.title: {
       return { ...state, title: action.payload };
+    }
+
+    case actionTypes.difficulty: {
+      return { ...state, difficulty: action.payload };
     }
 
     case actionTypes.editors: {

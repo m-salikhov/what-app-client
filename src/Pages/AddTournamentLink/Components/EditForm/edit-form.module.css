@@ -35,12 +35,6 @@
   textarea {
     width: 100%;
   }
-
-  & > label {
-    p {
-      padding-top: 0.7rem;
-    }
-  }
 }
 
 .questionSource {

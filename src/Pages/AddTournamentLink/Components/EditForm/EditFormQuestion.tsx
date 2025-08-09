@@ -32,38 +32,9 @@ export function EditFormQuestion({ q, dispatch }: Props) {
       className={btnText === btnTextOption.del ? styles.questionContainer : `${styles.questionContainer} ${styles.del}`}
     >
       <div className={styles.questionHeader}>
-        <label>
-          <p> Номер вопроса:</p>
-          <input
-            type='number'
-            min={0}
-            value={q.qNumber}
-            onChange={(e) =>
-              dispatch({
-                type: actionTypes.qNumber,
-                questionID: q.id,
-                payload: +e.target.value,
-              })
-            }
-            disabled={q.qNumber === -1 ? true : false}
-          />
-        </label>{' '}
-        <label>
-          <p> Номер тура:</p>
-          <input
-            type='number'
-            min={0}
-            value={q.tourNumber}
-            onChange={(e) =>
-              dispatch({
-                type: actionTypes.tourNumber,
-                questionID: q.id,
-                payload: +e.target.value,
-              })
-            }
-            disabled={q.qNumber === -1 ? true : false}
-          />
-        </label>{' '}
+        <p>Номер вопроса: {q.qNumber}</p>
+        <p>Номер тура: {q.tourNumber}</p>
+
         <Button onClick={removeQuestion} title={btnText}></Button>
       </div>
 
