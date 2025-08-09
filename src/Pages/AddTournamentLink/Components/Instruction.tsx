@@ -4,7 +4,6 @@ import { GrCopy } from 'react-icons/gr';
 import { ToastContainer, toast } from 'react-toastify';
 
 const exampleGOTLink = 'https://gotquestions.online/pack/6001';
-const exampleDBLink = 'https://db.chgk.info/tour/olivye21_u';
 
 const handleCopy = async (textToCopy: string) => {
   await navigator.clipboard
@@ -29,17 +28,15 @@ export function Instruction() {
   return (
     <div className={styles.instruction}>
       Чтобы добавить турнир надо сначала загрузить его из{' '}
-      <ExternalLinkText href='https://gotquestions.online/' text=' gotquestions.online ' /> (предпочтительно) или{' '}
-      <ExternalLinkText href='https://db.chgk.info/' text=' db.chgk.info' /> (сайт уже почти не обновляется).
+      <ExternalLinkText href='https://gotquestions.online/' text=' gotquestions.online ' />
       <br />
       <br />
       Для этого откройте страницу любого из турниров на указанных сайтах. Вставьте ссылку на неё в поле выше и нажмите
       "Открыть".
       <br />
-      Ссылки должны обязательно вести на страницу турнира. Например, {exampleGOTLink}
+      Ссылки должны обязательно вести на страницу турнира.
+      <br /> Например, {exampleGOTLink}
       <GrCopy onClick={() => handleCopy(exampleGOTLink)} className={styles.copyIcon} />
-      или {exampleDBLink}
-      <GrCopy onClick={() => handleCopy(exampleDBLink)} className={styles.copyIcon} />
       <ToastContainer toastClassName={styles.toastSuccess} />
       <br />
       Если всё в порядке то турнир распарсится и откроется предпросмотр. Там же будет возможность отредактировать любое
