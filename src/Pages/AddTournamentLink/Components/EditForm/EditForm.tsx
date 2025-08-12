@@ -60,7 +60,7 @@ export function EditForm({ tournament, dispatch, setEdit }: Props) {
               type='number'
               min={0}
               step='0.1'
-              onChange={(e) => dispatch({ type: actionTypes.difficulty, payload: +e.target.value })}
+              onChange={(e) => dispatch({ type: actionTypes.difficulty, payload: parseFloat(e.target.value) })}
               value={tournament.difficulty}
             />
           </label>

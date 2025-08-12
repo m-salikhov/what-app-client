@@ -9,6 +9,7 @@ export const addLinkInitTournament: TournamentType = {
   date: 0,
   tours: 0,
   questionsQuantity: 0,
+  difficulty: 0,
   dateUpload: 0,
   editors: [],
   questions: [],

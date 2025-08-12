@@ -27,7 +27,7 @@ export function TournamentHeader({ tournament }: Props) {
         </h3>
       </div>
       <h3>
-        Сложность: <span>{tournament.difficulty}</span>
+        Сложность: <span>{tournament.difficulty <= 0 ? 'не указана' : tournament.difficulty}</span>
       </h3>
       <h3>
         Редакция: <span>{tournament.editors.map((v) => v.name).join(', ')}</span>

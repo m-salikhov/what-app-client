@@ -13,7 +13,7 @@ if (import.meta.env.DEV) {
   });
 }
 
-const root = ReactDOM.createRoot(document.querySelector('#root') as HTMLElement);
+const root = ReactDOM.createRoot(document.querySelector('#root')!);
 root.render(
   <Provider store={store}>
     <RouterProvider
