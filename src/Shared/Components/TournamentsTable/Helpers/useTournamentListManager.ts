@@ -2,7 +2,7 @@ import { useState, MouseEvent, ChangeEvent } from 'react';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
 
-const sortFieldSchema = z.enum(['title', 'date', 'tours', 'questionsQuantity', 'uploader', 'dateUpload']);
+const sortFieldSchema = z.enum(['title', 'date', 'tours', 'difficulty', 'questionsQuantity', 'uploader', 'dateUpload']);
 type SortFieldType = z.infer<typeof sortFieldSchema>;
 
 export function useTournamentListManager(tournaments: TournamentShortType[]) {

@@ -59,6 +59,16 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
 
           <div className={styles.headerCell}>
+            <div className={styles.headerCellData} data-field='difficulty' onClick={sortTournaments}>
+              <span>DF</span>
+              <div className={styles.headerCellIcon}>
+                {sortField === 'difficulty' && sortDirection === 'asc' && <FaChevronDown />}
+                {sortField === 'difficulty' && sortDirection === 'desc' && <FaChevronUp />}
+              </div>{' '}
+            </div>
+          </div>
+
+          <div className={styles.headerCell}>
             <div className={styles.headerCellData} data-field='questionsQuantity' onClick={sortTournaments}>
               <span>Вопросы</span>
               <div className={styles.headerCellIcon}>
@@ -106,6 +116,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
               <Link to={linkBuilder(item.id, item.title, pathname)}>{item.title}</Link>
             </div>
             <div className={styles.cell}>{getDate(item.date)}</div>
+            <div className={styles.cell}>{item.difficulty <= 0 ? '-' : item.difficulty}</div>
             <div className={styles.cell}>{item.questionsQuantity}</div>
             <div className={styles.cell}>{item.tours}</div>
             <div className={styles.cell}>{getDate(item.dateUpload)}</div>
