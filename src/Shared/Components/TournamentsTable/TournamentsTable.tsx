@@ -8,6 +8,7 @@ import { RandomTournament } from './Components/RandomTournament';
 import { useTournamentListManager } from './Helpers/useTournamentListManager';
 import { FaChevronDown } from 'react-icons/fa';
 import { FaChevronUp } from 'react-icons/fa';
+import TableTooltipDF from './Components/TableTooltipDF';
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
   const { pathname } = useLocation();
@@ -60,7 +61,8 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 
           <div className={styles.headerCell}>
             <div className={styles.headerCellData} data-field='difficulty' onClick={sortTournaments}>
-              <span>DF</span>
+              <span id='tooltip-df'>DF</span>
+              <TableTooltipDF anchor='tooltip-df' />
               <div className={styles.headerCellIcon}>
                 {sortField === 'difficulty' && sortDirection === 'asc' && <FaChevronDown />}
                 {sortField === 'difficulty' && sortDirection === 'desc' && <FaChevronUp />}

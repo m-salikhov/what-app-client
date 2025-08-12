@@ -106,6 +106,17 @@
   }
 }
 
+.tooltip {
+  h3,
+  p {
+    color: #a9b0ba;
+  }
+
+  p {
+    text-align: left;
+  }
+}
+
 @media (width <= 900px) {
   .table {
     font-size: 0.8rem;
