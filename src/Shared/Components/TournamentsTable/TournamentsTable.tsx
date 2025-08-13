@@ -1,7 +1,6 @@
 import styles from './tournaments-table.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
-import { linkBuilder } from './Helpers/linkBuilder';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
 import { RandomTournament } from './Components/RandomTournament';
@@ -12,7 +11,7 @@ import TableTooltipDF from './Components/TableTooltipDF';
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
   const { pathname } = useLocation();
-  const { tournamentsList, handleChangeFilterString, filterString, sortTournaments, sortField, sortDirection } =
+  const { list, handleChangeFilterString, filterString, sortTournaments, sortField, sortDirection } =
     useTournamentListManager(tournaments);
 
   return (
@@ -111,14 +110,16 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
           </div>
         </div>
 
-        {tournamentsList.map((item, i) => (
+        {list.map((item, i) => (
           <div className={styles.line} key={item.id}>
             <div className={styles.cell}>{i + 1}</div>
             <div className={styles.cell}>
-              <Link to={linkBuilder(item.id, item.title, pathname)}>{item.title}</Link>
+              <Link to={item.innerLink}>{item.title}</Link>
             </div>
             <div className={styles.cell}>{getDate(item.date)}</div>
-            <div className={styles.cell}>{item.difficulty <= 0 ? '-' : item.difficulty}</div>
+            <div className={styles.cell} style={{ backgroundColor: item.difficultyBGC }}>
+              <p>{item.difficulty <= 0 ? '-' : item.difficulty}</p>
+            </div>
             <div className={styles.cell}>{item.questionsQuantity}</div>
             <div className={styles.cell}>{item.tours}</div>
             <div className={styles.cell}>{getDate(item.dateUpload)}</div>

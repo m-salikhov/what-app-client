@@ -4,6 +4,7 @@ import { store } from 'Store/store';
 import { RouterProvider } from 'react-router-dom';
 import router from 'src/Router/AppRouter';
 import 'Shared/Styles/style.css';
+import { ThemeProvider } from 'Shared/Context/ThemeContext';
 
 if (import.meta.env.DEV) {
   import('react-scan').then(({ scan }) => {
@@ -15,12 +16,14 @@ if (import.meta.env.DEV) {
 
 const root = ReactDOM.createRoot(document.querySelector('#root')!);
 root.render(
-  <Provider store={store}>
-    <RouterProvider
-      router={router}
-      future={{
-        v7_startTransition: true,
-      }}
-    />
-  </Provider>
+  <ThemeProvider>
+    <Provider store={store}>
+      <RouterProvider
+        router={router}
+        future={{
+          v7_startTransition: true,
+        }}
+      />
+    </Provider>
+  </ThemeProvider>
 );
