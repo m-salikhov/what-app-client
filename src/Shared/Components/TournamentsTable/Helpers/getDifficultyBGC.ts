@@ -1,4 +1,6 @@
-export function getDifficultyBGC(difficulty: number, theme: string) {
+import { ThemeType } from 'Shared/Context/ThemeContext';
+
+export function getDifficultyBGC(difficulty: number, theme: ThemeType) {
   if (difficulty < 3 && difficulty > 0) {
     return theme === 'light' ? '#68E449' : '#76f956';
   }

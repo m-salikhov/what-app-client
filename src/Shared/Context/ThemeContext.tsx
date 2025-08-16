@@ -1,13 +1,17 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import z from 'zod';
 
-const ThemeContext = createContext({
+const ThemeSchema = z.enum(['light', 'dark']);
+export type ThemeType = z.infer<typeof ThemeSchema>;
+
+const ThemeContext = createContext<{ theme: ThemeType; changeTheme: () => void }>({
   theme: 'light',
   changeTheme: () => {},
 });
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('app-theme');
+  const [theme, setTheme] = useState<ThemeType>(() => {
+    const savedTheme = ThemeSchema.safeParse(localStorage.getItem('app-theme')).data;
     return savedTheme || 'light';
   });
 
