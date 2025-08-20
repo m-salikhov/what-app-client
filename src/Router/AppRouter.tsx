@@ -122,7 +122,7 @@ const router = createBrowserRouter(
               ),
             },
             {
-              path: ':id/:title',
+              path: ':id',
               element: (
                 <Suspense fallback={<Spinner />}>
                   <PlayMode />

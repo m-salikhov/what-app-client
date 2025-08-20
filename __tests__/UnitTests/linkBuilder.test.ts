@@ -1,4 +1,4 @@
-import { linkBuilder } from 'Shared/Components/TournamentsTable/Helpers/linkBuilder';
+import { linkBuilder } from 'Shared/Helpers/linkBuilder';
 import { describe, expect, test } from 'vitest';
 
 describe('linkBuilder', () => {

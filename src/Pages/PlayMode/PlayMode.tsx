@@ -34,7 +34,7 @@ function playModeStepChange(stepName: Step, tournament: TournamentType) {
 }
 
 function PlayMode() {
-  const { id, title } = useParams();
+  const { id } = useParams();
 
   const step = useAppSelector(stepPM);
 
@@ -46,7 +46,7 @@ function PlayMode() {
 
   return (
     <div className='playmode'>
-      <h2>{title}</h2>
+      <h2>{tournament?.title}</h2>
 
       {showProgressBar && <ProgressBar tournament={tournament} />}
 

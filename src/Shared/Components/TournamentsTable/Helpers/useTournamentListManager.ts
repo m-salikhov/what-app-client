@@ -1,7 +1,7 @@
 import { useState, MouseEvent, ChangeEvent, useMemo } from 'react';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { z } from 'zod';
-import { linkBuilder } from './linkBuilder';
+import { linkBuilder } from '../../../Helpers/linkBuilder';
 import { useLocation } from 'react-router-dom';
 import { getDifficultyBGC } from './getDifficultyBGC';
 import { useTheme } from 'Shared/Context/ThemeContext';
@@ -21,7 +21,7 @@ export function useTournamentListManager(tournaments: TournamentShortType[]) {
   const memoList: ListTournamentType[] = useMemo(() => {
     return tournaments.map((el) => ({
       ...el,
-      innerLink: linkBuilder(el.id, el.title, pathname),
+      innerLink: linkBuilder(el.id, pathname),
       difficultyBGC: getDifficultyBGC(el.difficulty, theme),
     }));
   }, [tournaments, theme, pathname]);

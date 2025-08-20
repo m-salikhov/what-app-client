@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
-import { RandomTournament } from './Components/RandomTournament';
+import { RandomTournament } from '../RandomTournament/RandomTournament';
 import { useTournamentListManager } from './Helpers/useTournamentListManager';
 import { FaChevronDown } from 'react-icons/fa';
 import { FaChevronUp } from 'react-icons/fa';
