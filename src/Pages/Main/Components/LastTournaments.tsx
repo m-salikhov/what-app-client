@@ -6,6 +6,7 @@ import { useGetTournamentsLastShortQuery } from 'Store/ToolkitAPIs/tournamentAPI
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { HiArrowNarrowRight as RightArrow } from 'react-icons/hi';
 import { HiArrowNarrowLeft as LeftArrow } from 'react-icons/hi';
+import { RandomTournament } from 'Shared/Components/RandomTournament/RandomTournament';
 
 export function LastTournaments() {
   const [page, setPage] = useState(1);
@@ -37,9 +38,12 @@ export function LastTournaments() {
 
   return (
     <div className={styles.tournaments}>
-      <h2>Последние добавленные турниры</h2>
+      <div className={styles.tournamentsHeader}>
+        <h2>Последние добавленные турниры</h2>
+        <RandomTournament size='30' />
+      </div>
 
-      <div className={styles.header}>
+      <div className={styles.tableHeader}>
         <h3>Название</h3>
         <h3>Добавлен</h3>
       </div>

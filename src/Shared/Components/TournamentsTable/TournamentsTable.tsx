@@ -1,5 +1,5 @@
 import styles from './tournaments-table.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getDate } from 'Shared/Helpers/getDate';
 import { TournamentShortType } from 'Shared/Schemas/TournamentSchema';
 import { ScrollToTop } from '../ScrollToTop/ScrollToTop';
@@ -10,7 +10,6 @@ import { FaChevronUp } from 'react-icons/fa';
 import TableTooltipDF from './Components/TableTooltipDF';
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
-  const { pathname } = useLocation();
   const { list, handleChangeFilterString, filterString, sortTournaments, sortField, sortDirection } =
     useTournamentListManager(tournaments);
 
@@ -28,7 +27,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
             autoComplete='off'
           />
         </label>
-        <RandomTournament pathname={pathname} />
+        <RandomTournament />
       </div>
       <div className={styles.table}>
         <div className={styles.headerLine}>

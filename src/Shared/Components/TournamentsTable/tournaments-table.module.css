@@ -3,11 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
-  svg {
-    cursor: pointer;
-    color: var(--h-color);
-  }
 }
 
 .search {

@@ -1,3 +1,5 @@
+/* Блок со случаными вопросами */
+
 .random {
   width: 50%;
 }
@@ -24,6 +26,8 @@
   }
 }
 
+/* Блок со списком турниров */
+
 .loading {
   display: flex;
   align-items: center;
@@ -36,7 +40,14 @@
   margin-left: 2rem;
 }
 
-.header {
+.tournamentsHeader {
+  display: flex;
+  h2 {
+    margin: auto 0;
+  }
+}
+
+.tableHeader {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem 0 0.2rem;
@@ -96,6 +107,8 @@
     text-align: center;
   }
 }
+
+/* Блок со статистикой */
 
 .stats {
   p {
