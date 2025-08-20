@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { LastTournaments } from './Components/LastTournaments';
 import { Stats } from './Components/Stats';
 import { RandomQuestions } from './Components/RandomQuestions';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 
 export function Main() {

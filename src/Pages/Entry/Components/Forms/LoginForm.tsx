@@ -2,7 +2,7 @@ import styles from '../../entry.module.css';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { loginSchema, LoginType } from '../../Schema/EntrySchema';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { FormError } from './FormError';
 import { Navigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip';

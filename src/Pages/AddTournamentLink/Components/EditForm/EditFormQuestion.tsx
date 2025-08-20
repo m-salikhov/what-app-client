@@ -1,7 +1,7 @@
 import styles from './edit-form.module.css';
 import { useState } from 'react';
 import { Action, actionTypes } from '../../helpers/reducer';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {

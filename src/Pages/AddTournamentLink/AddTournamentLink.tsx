@@ -3,7 +3,7 @@ import { reducer } from './helpers/reducer';
 import { EditForm } from './Components/EditForm/EditForm';
 import { Instruction } from './Components/Instruction';
 import { ParsedTournament } from './Components/ParsedTournament';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
 import { addLinkInitTournament } from './helpers/addLinkInitTournament';
 import { useReducer, useState } from 'react';

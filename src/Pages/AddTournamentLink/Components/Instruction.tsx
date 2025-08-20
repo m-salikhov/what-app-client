@@ -1,5 +1,5 @@
 import styles from '../add-tournament-link.module.css';
-import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from 'Shared/Components/UI/ExternalLinkText/ExternalLinkText';
 import { GrCopy } from 'react-icons/gr';
 import { ToastContainer, toast } from 'react-toastify';
 

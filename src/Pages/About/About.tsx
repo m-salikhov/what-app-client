@@ -1,5 +1,5 @@
 import myPhoto from './photo_profile_copy.jpg';
-import { ExternalLinkText } from 'Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from 'Shared/Components/UI/ExternalLinkText/ExternalLinkText';
 import styles from './about.module.css';
 import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 

@@ -1,7 +1,7 @@
 import styles from './tournament-header.module.css';
 import { getDate } from 'Shared/Helpers/getDate';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
-import { ExternalLinkText } from '../Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from '../UI/ExternalLinkText/ExternalLinkText';
 
 interface Props {
   tournament: TournamentType;

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ResBlock } from '../Components/ResultBlock/ResBlock';
 import { Spinner } from 'Shared/Components/Spinner/Spinner';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { useSaveResult } from './useSaveResult';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 

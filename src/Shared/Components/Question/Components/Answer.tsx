@@ -1,5 +1,5 @@
 import { QuestionType } from 'Shared/Schemas/TournamentSchema';
-import { ExternalLinkText } from 'src/Shared/Components/Text/ExternalLinkText/ExternalLinkText';
+import { ExternalLinkText } from 'Shared/Components/UI/ExternalLinkText/ExternalLinkText';
 import styles from '../question.module.css';
 
 export function Answer({ q }: { q: QuestionType }) {

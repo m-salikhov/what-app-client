@@ -1,7 +1,7 @@
 import styles from './profile-result.module.css';
 import { skipToken } from '@reduxjs/toolkit/query';
 import { useParams } from 'react-router-dom';
-import { Back } from 'Shared/Components/Back/Back';
+import { Back } from 'Shared/Components/UI/Back/Back';
 import { ResultTable } from 'Shared/Components/ResultTable/ResultTable';
 import { useGetUserResultFullQuery } from 'Store/ToolkitAPIs/userAPI';
 import { getDate } from 'Shared/Helpers/getDate';

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
-import { Button } from 'Shared/Components/Button/Button';
-import { Modal } from 'Shared/Components/Modal/Modal';
+import { Button } from 'Shared/Components/UI/Button/Button';
+import { Modal } from 'Shared/Components/UI/Modal/Modal';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ChangePassSchema, ChangePassType } from './ChangePassSchema';

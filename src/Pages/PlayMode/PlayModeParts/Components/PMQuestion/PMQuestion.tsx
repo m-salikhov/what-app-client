@@ -5,7 +5,7 @@ import { Add } from 'Shared/Components/Question/Components/Add';
 import { Answer } from 'Shared/Components/Question/Components/Answer';
 import { useAppDispatch, useAppSelector } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { currentQuestionIndexPM, withTimerPM } from 'Store/Selectors/PlayModeSelectors';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
 

@@ -1,5 +1,5 @@
 import styles from '../add-tournament-link.module.css';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { QuestionPlane } from 'Shared/Components/Question/QuestionPlane';
 import { ScrollToTop } from 'Shared/Components/ScrollToTop/ScrollToTop';
 import { TournamentHeader } from 'Shared/Components/TournamentHeader/TournamentHeader';

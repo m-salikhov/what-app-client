@@ -4,7 +4,7 @@ import { useAppSelector, useAppDispatch } from 'Shared/Hooks/redux';
 import { wordleActions } from 'Store/Slices/WordleSlice';
 import { useGetRandomWordQuery } from 'Store/ToolkitAPIs/wordleAPI';
 import { currentLetterNumberSelector } from 'Store/Selectors/WordleSelectors';
-import { Modal } from 'Shared/Components/Modal/Modal';
+import { Modal } from 'Shared/Components/UI/Modal/Modal';
 
 export function GameEndModal({ result }: { result: string }) {
   const currentLetterNumber = useAppSelector(currentLetterNumberSelector);

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from 'Shared/Hooks/redux';
 import { playModeActions } from 'Store/Slices/PlayModeSlice';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { QuestionType } from 'Shared/Schemas/TournamentSchema';
 
 interface Props {
@@ -28,7 +28,9 @@ export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }
 
     if (!nextQTourNumber) {
       dispatch(playModeActions.setStep('END'));
-    } else if (currentQuestion.tourNumber === nextQTourNumber) {dispatch(playModeActions.currentQuestionIndexIncrement());} else {
+    } else if (currentQuestion.tourNumber === nextQTourNumber) {
+      dispatch(playModeActions.currentQuestionIndexIncrement());
+    } else {
       dispatch(playModeActions.setStep('END_OF_TOUR'));
     }
 

@@ -3,7 +3,7 @@ import { parseDate } from '@internationalized/date';
 import { EditFormQuestion } from './EditFormQuestion';
 import { Action, actionTypes } from '../../helpers/reducer';
 import { DateField, Label, DateInput, DateSegment } from 'react-aria-components';
-import { Button } from 'Shared/Components/Button/Button';
+import { Button } from 'Shared/Components/UI/Button/Button';
 import { getDateYYYY_MM_DD } from 'Shared/Helpers/getDate';
 import { EditFormEditors } from './EditFormEditors';
 import { TournamentType } from 'Shared/Schemas/TournamentSchema';
