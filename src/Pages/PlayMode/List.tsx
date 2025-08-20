@@ -6,12 +6,10 @@ import { setDocTitle } from 'Shared/Helpers/setDocTitle';
 function List() {
   setDocTitle('Игровой режим');
 
-  const { data: tournaments, isSuccess, error, isLoading } = useGetTournamentsAllShortQuery(undefined);
+  const { data: tournaments, isSuccess, isError, isLoading } = useGetTournamentsAllShortQuery(undefined);
 
-  if (error) return <h2>Ошибка при получении турниров</h2>;
-
+  if (isError) return <h2>Ошибка при получении турниров</h2>;
   if (isLoading) return <Spinner />;
-
   if (!isSuccess) return null;
 
   return <TournamentsTable tournaments={tournaments} />;

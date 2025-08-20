@@ -1,3 +1,5 @@
 export function setDocTitle(title: string) {
-  document.title = title;
+  if (!title) {
+    document.title = 'База вопросов';
+  } else document.title = title;
 }

@@ -21,6 +21,7 @@ export function RandomTournament({ size }: { size?: string }) {
       navigate(linkBuilder(tournament.id, pathname));
     } catch (error) {
       setIsFetching(false);
+      console.log(error);
     }
   };
 
