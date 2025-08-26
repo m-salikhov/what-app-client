@@ -12,12 +12,11 @@ export const tournamentAPI = createApi({
   reducerPath: 'tournamentAPI',
   tagTypes: ['tournaments', 'shorts', 'stats', 'lastTournamentsShort'],
   baseQuery: fetchBaseQuery({ baseUrl }),
-  keepUnusedDataFor: 86400,
+  keepUnusedDataFor: 3600,
 
   endpoints: (build) => ({
     getTournament: build.query<TournamentType, string | number>({
       query: (id: string | number) => `/tournaments/${id}`,
-
       responseSchema: TournamentTypeSchema,
     }),
 

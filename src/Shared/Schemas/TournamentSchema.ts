@@ -20,7 +20,8 @@ export const TournamentShortTypeSchema = z.object({
   uploader: z.string(),
   dateUpload: z.number(),
   difficulty: z.number(),
-  uploaderUuid: z.string(),
+  status: z.enum(['published', 'draft', 'moderation']),
+  uploaderUuid: z.string().optional(),
   link: z.string().url(),
 });
 
