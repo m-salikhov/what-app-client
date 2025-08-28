@@ -13,7 +13,7 @@ export const wordleAPI = createApi({
 
     verifyWordInDB: build.mutation<{ isExist: boolean; word: string }, string>({
       query: (word) => ({
-        url: serverRoutes.wordleCheckExist + `/check?word=${word}`,
+        url: serverRoutes.wordleCheckExist + `?word=${word}`,
         method: 'GET',
       }),
     }),

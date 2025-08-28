@@ -23,7 +23,7 @@ export const tournamentAPI = createApi({
     getTournamentsLastShort: build.query<TournamentsLastShortType, { amount: number; page: number; withSkip: boolean }>(
       {
         query: ({ amount, page, withSkip }) =>
-          serverRoutes.tournamentsLastShort + `/last?amount=${amount}&page=${page}&withSkip=${withSkip}`,
+          `${serverRoutes.tournamentsLastShort}?amount=${amount}&page=${page}&withSkip=${withSkip}`,
         responseSchema: TournamentsLastShortSchema,
         providesTags: ['shorts'],
       }
