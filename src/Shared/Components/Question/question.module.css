@@ -45,6 +45,9 @@
 
 .razdatka {
   padding-top: 0.5rem;
+  margin: 0.5rem;
+  border: 2px solid rgb(87 85 85);
+  border-radius: 0.5rem;
 }
 
 .razdatka > p {
