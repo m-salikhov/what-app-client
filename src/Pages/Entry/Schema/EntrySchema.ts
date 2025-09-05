@@ -2,12 +2,11 @@ import { z } from 'zod';
 
 export const registrationSchema = z
   .object({
-    email: z.string().email('Неверный формат почты'),
+    email: z.email('Неверный формат почты'),
     username: z
       .string()
       .min(3, 'Логин должен содержать минимум 3 символа')
       .max(20, 'Логин должен содержать максимум 20 символов'),
-    role: z.enum(['user', 'admin', 'superuser']).default('user'),
     password: z
       .string()
       .min(4, 'Пароль должен содержать минимум 4 символа')
@@ -27,7 +26,7 @@ export const registrationSchema = z
 export type RegistrationType = z.infer<typeof registrationSchema>;
 
 export const loginSchema = z.object({
-  email: z.string().email('Неверный формат почты'),
+  email: z.email('Неверный формат почты'),
   password: z
     .string()
     .min(4, 'Пароль должен содержать минимум 4 символа')

@@ -46,7 +46,6 @@ export const handlers = [
       const body: {
         email: string;
         username: string;
-        role: 'user' | 'superuser' | 'admin' | '';
         password: string;
         date: number;
       } = await request.clone().json();

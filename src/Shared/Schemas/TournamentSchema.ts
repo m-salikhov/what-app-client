@@ -22,7 +22,7 @@ export const TournamentShortTypeSchema = z.object({
   difficulty: z.number(),
   status: z.enum(['published', 'draft', 'moderation']),
   uploaderUuid: z.string().optional(),
-  link: z.string().url(),
+  link: z.url(),
 });
 
 export const QuestionTypeSchema = z.object({

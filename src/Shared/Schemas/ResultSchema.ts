@@ -8,8 +8,8 @@ export const ResultElementSchema = z.object({
 });
 
 export const ResultSchema = z.object({
-  id: z.string().uuid(),
-  userId: z.string().uuid(),
+  id: z.uuid(),
+  userId: z.uuid(),
   date: z.number(),
   tournamentId: z.number(),
   title: z.string(),
@@ -27,7 +27,7 @@ export const ResultElementClientSchema = ResultElementSchema.omit({
 }).strict();
 
 export const ResultClientSchema = z.object({
-  userId: z.string().uuid(),
+  userId: z.uuid(),
   tournamentId: z.number(),
   title: z.string(),
   tournamentLength: z.number(),

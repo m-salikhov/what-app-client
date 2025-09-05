@@ -6,6 +6,5 @@ export interface UserLogin {
 export interface UserReg {
   email: string;
   username: string;
-  role: 'user' | 'superuser' | 'admin' | '';
   password: string;
 }

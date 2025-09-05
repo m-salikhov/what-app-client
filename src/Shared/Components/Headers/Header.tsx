@@ -51,17 +51,6 @@ export function Header() {
             </NavLink>
           </li>
 
-          {user?.role === 'superuser' && (
-            <li className={styles.navItem}>
-              <NavLink
-                to='/edit'
-                className={({ isActive }) => (isActive ? `${styles.navLink} ${styles.active}` : styles.navLink)}
-              >
-                Редактировать
-              </NavLink>
-            </li>
-          )}
-
           <li className={styles.navItem}>
             <NavLink
               to='/addbylink'
