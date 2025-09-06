@@ -24,12 +24,15 @@ export function useSaveTournament() {
   const handleSaveTournament = async (tournament: TournamentType) => {
     setErrorsFilling([]);
 
-    const parse = TournamentTypeSchema.safeParse(tournament);
-    if (parse.error) {
-      const { errors } = parse.error;
-      errors.forEach((e) => {
-        if (e.path[0] === 'questions') {
-          setErrorsFilling((prev) => [...prev, `Вопрос ${tournament.questions[+e.path[1]].qNumber}: ${e.message}`]);
+    const parseResult = TournamentTypeSchema.safeParse(tournament);
+    if (parseResult.error) {
+      const errors = parseResult.error;
+
+      errors.issues.forEach((e) => {
+        const index = e.path[1];
+
+        if (typeof index === 'number' && tournament.questions[index].qNumber !== -1) {
+          setErrorsFilling((prev) => [...prev, `Вопрос ${tournament.questions[index].qNumber}: ${e.message}`]);
         } else {
           setErrorsFilling((prev) => [...prev, e.message]);
         }
@@ -47,6 +50,7 @@ export function useSaveTournament() {
       }).unwrap();
       reset();
     } catch (error) {
+      console.log('error 1');
       console.log(error);
     }
   };

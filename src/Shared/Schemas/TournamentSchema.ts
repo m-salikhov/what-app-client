@@ -16,7 +16,7 @@ export const TournamentShortTypeSchema = z.object({
   title: z.string().min(1, { message: 'Нет названия турнира' }),
   date: z.number(),
   tours: z.number(),
-  questionsQuantity: z.number(),
+  questionsQuantity: z.number().min(10, { message: 'Минимум 10 вопросов' }),
   uploader: z.string(),
   dateUpload: z.number(),
   difficulty: z.number(),
@@ -41,8 +41,12 @@ export const QuestionTypeSchema = z.object({
 });
 
 export const TournamentTypeSchema = TournamentShortTypeSchema.extend({
-  questions: z.array(QuestionTypeSchema),
-  editors: z.array(EditorTypeSchema),
+  questions: z.array(QuestionTypeSchema).min(10, { message: 'Минимум 10 вопросов' }),
+  editors: z
+    .array(EditorTypeSchema)
+    .refine((editors) => editors.every((editor) => editor.name && editor.name.length >= 3), {
+      message: 'Имя каждого редактора должно содержать минимум 4 символа',
+    }),
 });
 
 export const TournamentsLastShortSchema = z.object({
