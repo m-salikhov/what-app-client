@@ -69,7 +69,10 @@ export const tournamentAPI = createApi({
     }),
 
     getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
-      query: (userID) => serverRoutes.tournamentsAllByUploader + '/' + userID,
+      query: (userID) => ({
+        url: serverRoutes.tournamentsAllByUploader + '/' + userID,
+        credentials: 'include',
+      }),
       responseSchema: TournamentShortTypeSchema.array(),
       providesTags: ['shorts'],
     }),

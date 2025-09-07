@@ -59,7 +59,7 @@ export function ChangePass() {
         }}
       >
         <div className={styles.modal}>
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
             {' '}
             <label>
               <p>Новый пароль</p>
