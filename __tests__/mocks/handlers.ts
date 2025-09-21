@@ -30,7 +30,7 @@ export const handlers = [
     });
   }),
 
-  http.get('https://andvarifserv.ru/auth/logfirst', async () => {
+  http.get('https://andvarifserv.ru/auth/login-first', async () => {
     return HttpResponse.json({
       id: '123e4567-e89b-12d3-a456-426655440000',
       date: 1111,

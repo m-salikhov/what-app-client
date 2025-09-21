@@ -44,14 +44,14 @@ export const userAPI = createApi({
 
     changePassword: build.mutation<string, { newPass: string; id: string }>({
       query: (body) => ({
-        url: `/users/${body.id}/change-password`,
+        url: serverRoutes.usersChangePassword(body.id),
         method: 'PUT',
         body: { newPass: body.newPass },
       }),
     }),
 
     getUserResultFull: build.query<ResultFullType[], string>({
-      query: (userID) => serverRoutes.userResultFull + '/' + userID,
+      query: (userID) => serverRoutes.userResultFull(userID),
       responseSchema: ResultFullSchema.array(),
 
       providesTags: ['result'],
