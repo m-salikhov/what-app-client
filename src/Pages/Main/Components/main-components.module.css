@@ -1,131 +1,131 @@
 /* Блок со случаными вопросами */
 
 .random {
-  width: 50%;
+	width: 50%;
 }
 
 .refreshContainer {
-  display: flex;
+	display: flex;
 }
 
 .refresh {
-  display: flex;
+	display: flex;
 
-  h2 {
-    margin-right: 0.5rem;
-  }
+	h2 {
+		margin-right: 0.5rem;
+	}
 }
 
 .refreshIcon {
-  transition: transform 1s;
-  cursor: pointer;
-  color: var(--h-color);
+	transition: transform 1s;
+	cursor: pointer;
+	color: var(--h-color);
 
-  &.rotate {
-    transform: rotate(-360deg);
-  }
+	&.rotate {
+		transform: rotate(-360deg);
+	}
 }
 
 /* Блок со списком турниров */
 
 .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 450px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 450px;
 }
 
 .tournaments {
-  padding-top: 0.9rem;
-  margin-left: 2rem;
+	padding-top: 0.9rem;
+	margin-left: 2rem;
 }
 
 .tournamentsHeader {
-  display: flex;
-  h2 {
-    margin: auto 0;
-  }
+	display: flex;
+	h2 {
+		margin: auto 0;
+	}
 }
 
 .tableHeader {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem 0 0.2rem;
+	display: flex;
+	justify-content: space-between;
+	padding: 0.5rem 0 0.2rem;
 
-  h3:last-child {
-    padding-right: 0.25rem;
-  }
+	h3:last-child {
+		padding-right: 0.25rem;
+	}
 }
 
 .line {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-top: var(--main-border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-top: var(--main-border);
 
-  &:hover {
-    background-color: var(--a-main-list-bg-color);
-  }
+	&:hover {
+		background-color: var(--a-main-list-bg-color);
+	}
 
-  a {
-    padding: 0.5rem 0.5rem 0.5rem 0;
-    font-size: 1.3rem;
-    color: var(--a-main-list-color);
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+	a {
+		padding: 0.5rem 0.5rem 0.5rem 0;
+		font-size: 1.3rem;
+		color: var(--a-main-list-color);
+		cursor: pointer;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 
-    &:visited {
-      color: var(--a-main-list-color);
-    }
-  }
+		&:visited {
+			color: var(--a-main-list-color);
+		}
+	}
 
-  h5 {
-    width: 85px;
-    color: var(--a-main-list-color);
-  }
+	h5 {
+		width: 85px;
+		color: var(--a-main-list-color);
+	}
 }
 
 .footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 0.4rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 0.4rem;
 
-  svg {
-    cursor: pointer;
-    color: var(--p-color);
-  }
+	svg {
+		cursor: pointer;
+		color: var(--p-color);
+	}
 
-  p {
-    margin: 0 0.5rem;
-    font-size: 1.25rem;
-    -webkit-user-select: none;
-    user-select: none;
-    min-width: 1.5rem;
-    text-align: center;
-  }
+	p {
+		margin: 0 0.5rem;
+		font-size: 1.25rem;
+		-webkit-user-select: none;
+		user-select: none;
+		min-width: 1.5rem;
+		text-align: center;
+	}
 }
 
 /* Блок со статистикой */
 
 .stats {
-  p {
-    text-align: center;
-  }
+	p {
+		text-align: center;
+	}
 }
 
 @media (width <= 800px) {
-  .refreshContainer {
-    width: 100%;
-  }
+	.refreshContainer {
+		width: 100%;
+	}
 
-  .random {
-    width: 100%;
-  }
+	.random {
+		width: 100%;
+	}
 
-  .tournaments {
-    margin-left: unset;
-  }
+	.tournaments {
+		margin-left: unset;
+	}
 }

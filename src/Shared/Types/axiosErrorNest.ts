@@ -1,7 +1,7 @@
-import { AxiosError } from 'axios';
+import type { AxiosError } from "axios";
 
 export type AxiosErrorNest = AxiosError<{
-  message: string;
-  error: string;
-  statusCode: number;
+	message: string;
+	error: string;
+	statusCode: number;
 }>;

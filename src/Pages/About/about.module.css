@@ -1,43 +1,43 @@
 .about {
-  padding: 0 6%;
+	padding: 0 6%;
 }
 
 .about h2 {
-  padding: 0.25rem 0 0;
-  text-align: left;
+	padding: 0.25rem 0 0;
+	text-align: left;
 }
 
 .about p {
-  padding: 0.5rem 0;
-  font-size: 1.25rem;
-  line-height: 1.9rem;
+	padding: 0.5rem 0;
+	font-size: 1.25rem;
+	line-height: 1.9rem;
 }
 
 .aboutAuthor {
-  display: flex;
-  padding-top: 0.5rem;
+	display: flex;
+	padding-top: 0.5rem;
 }
 
 .aboutAuthor img {
-  width: 250px;
-  height: 310px;
+	width: 250px;
+	height: 310px;
 }
 
 .aboutAuthor p {
-  padding-left: 1rem;
+	padding-left: 1rem;
 }
 
 @media (width <= 800px) {
-  .aboutAuthor {
-    flex-direction: column;
-  }
+	.aboutAuthor {
+		flex-direction: column;
+	}
 
-  .aboutAuthor img {
-    margin: 0 auto;
-  }
+	.aboutAuthor img {
+		margin: 0 auto;
+	}
 
-  .aboutInfo p {
-    padding: unset;
-    padding-top: 0.5rem;
-  }
+	.aboutInfo p {
+		padding: unset;
+		padding-top: 0.5rem;
+	}
 }

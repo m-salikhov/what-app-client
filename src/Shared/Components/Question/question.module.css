@@ -1,159 +1,159 @@
 .question {
-  margin: 1rem 0;
-  overflow: hidden;
-  border: 2px solid var(--main-border-color);
-  border-radius: 10px;
-  max-width: min(800px, 100%);
+	margin: 1rem 0;
+	overflow: hidden;
+	border: 2px solid var(--main-border-color);
+	border-radius: 10px;
+	max-width: min(800px, 100%);
 
-  p {
-    font-size: 1.25rem;
-  }
+	p {
+		font-size: 1.25rem;
+	}
 }
 
 .questionHeader {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-  background-color: rgb(173 216 230 / 40%);
-  border-bottom: var(--main-border);
+	display: flex;
+	justify-content: space-between;
+	padding: 0.5rem;
+	background-color: rgb(173 216 230 / 40%);
+	border-bottom: var(--main-border);
 
-  h3 {
-    font-weight: 800;
-  }
+	h3 {
+		font-weight: 800;
+	}
 
-  .questionNumber {
-    min-width: 98px;
-  }
+	.questionNumber {
+		min-width: 98px;
+	}
 
-  a {
-    padding-left: 0.5rem;
-    font-size: 1.25rem;
-    color: var(--p-color);
+	a {
+		padding-left: 0.5rem;
+		font-size: 1.25rem;
+		color: var(--p-color);
 
-    &:hover {
-      font-weight: bold;
-    }
-  }
+		&:hover {
+			font-weight: bold;
+		}
+	}
 }
 
 .questionText {
-  padding: 0.5rem;
-  p {
-    padding: 0.25rem 0;
-  }
+	padding: 0.5rem;
+	p {
+		padding: 0.25rem 0;
+	}
 }
 
 .razdatka {
-  padding-top: 0.5rem;
-  margin: 0.5rem;
-  border: 2px solid rgb(87 85 85);
-  border-radius: 0.5rem;
+	padding-top: 0.5rem;
+	margin: 0.5rem;
+	border: 2px solid rgb(87 85 85);
+	border-radius: 0.5rem;
 }
 
 .razdatka > p {
-  padding-left: 0.5rem;
-  color: rgb(87 85 85);
+	padding-left: 0.5rem;
+	color: rgb(87 85 85);
 }
 
 .razdatka div {
-  display: flex;
-  justify-content: center;
-  padding: 1rem 0;
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0;
 }
 
 .razdatka div img {
-  max-width: 60%;
+	max-width: 60%;
 }
 
 .razdatka div p {
-  padding-left: 0.5rem;
-  font-size: 1.25rem;
+	padding-left: 0.5rem;
+	font-size: 1.25rem;
 }
 
 .answer {
-  padding: 0.25rem 0.5rem;
+	padding: 0.25rem 0.5rem;
 }
 
 .answer p {
-  padding: 0.25rem 0;
-  word-wrap: break-word;
+	padding: 0.25rem 0;
+	word-wrap: break-word;
 }
 
 .answer p span {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .answer > p:first-child {
-  font-weight: bold;
-  color: #45877e;
+	font-weight: bold;
+	color: #45877e;
 }
 
 .answer > p:first-child span {
-  color: var(--p-color);
+	color: var(--p-color);
 }
 
 .answerSourceOne {
-  overflow-x: auto;
+	overflow-x: auto;
 }
 
 .answer div p:first-child {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .answerSourceMany ~ p {
-  padding-left: 0.5rem;
-  overflow-x: auto;
+	padding-left: 0.5rem;
+	overflow-x: auto;
 }
 
 .answerArrow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-right: 1rem;
-  cursor: pointer;
-  border-top: var(--main-border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 1rem;
+	cursor: pointer;
+	border-top: var(--main-border);
 
-  h4 {
-    padding-left: 0.5rem;
-  }
+	h4 {
+		padding-left: 0.5rem;
+	}
 }
 
 .answerArrowOpen {
-  color: rgb(109 85 98);
-  transition: all 0.25s;
-  transform: rotate(180deg);
+	color: rgb(109 85 98);
+	transition: all 0.25s;
+	transform: rotate(180deg);
 }
 
 .answerArrowClose {
-  color: rgb(109 85 98);
-  transition: all 0.5s;
-  transform: rotate(0deg);
+	color: rgb(109 85 98);
+	transition: all 0.5s;
+	transform: rotate(0deg);
 }
 
 .ans {
-  max-height: 1800px;
-  overflow: hidden;
-  transition: max-height 0.5s;
+	max-height: 1800px;
+	overflow: hidden;
+	transition: max-height 0.5s;
 }
 
 .ansClose {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.25s;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.25s;
 }
 
 @media (width <= 600px) {
-  .questionHeader {
-    padding: 0.5rem;
+	.questionHeader {
+		padding: 0.5rem;
 
-    h3 {
-      font-size: 1rem;
-    }
+		h3 {
+			font-size: 1rem;
+		}
 
-    a {
-      display: flex;
-      align-items: center;
-      font-size: 1rem;
-    }
-  }
+		a {
+			display: flex;
+			align-items: center;
+			font-size: 1rem;
+		}
+	}
 }

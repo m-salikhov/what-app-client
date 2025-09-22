@@ -1,57 +1,57 @@
 import {
-  useGetCurrentUserQuery,
-  useLoginMutation,
-  useLogoutMutation,
-  userAPI,
-  useRegistrationMutation,
-} from 'Store/ToolkitAPIs/userAPI';
-import { useAppDispatch } from '../Hooks/redux';
-import { LoginType, RegistrationType } from 'src/Pages/Entry/Schema/EntrySchema';
+	useGetCurrentUserQuery,
+	useLoginMutation,
+	useLogoutMutation,
+	useRegistrationMutation,
+	userAPI,
+} from "Store/ToolkitAPIs/userAPI";
+import type { LoginType, RegistrationType } from "src/Pages/Entry/Schema/EntrySchema";
+import { useAppDispatch } from "../Hooks/redux";
 
 export function useAuth() {
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-  const { data: user } = useGetCurrentUserQuery(undefined);
+	const { data: user } = useGetCurrentUserQuery(undefined);
 
-  const [logout] = useLogoutMutation();
-  const [login, loginState] = useLoginMutation();
-  const [registration, registrationState] = useRegistrationMutation();
+	const [logout] = useLogoutMutation();
+	const [login, loginState] = useLoginMutation();
+	const [registration, registrationState] = useRegistrationMutation();
 
-  const handleLogin = async (loginData: LoginType) => {
-    try {
-      const data = await login(loginData).unwrap();
-      dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, data));
-      localStorage.setItem('rememberMe', 'yes');
-    } catch (e) {}
-  };
+	const handleLogin = async (loginData: LoginType) => {
+		try {
+			const data = await login(loginData).unwrap();
+			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, data));
+			localStorage.setItem("rememberMe", "yes");
+		} catch (_e) {}
+	};
 
-  const handleRegistration = async (registrationData: RegistrationType) => {
-    const { confirmPassword, ...userData } = registrationData;
-    try {
-      const data = await registration(userData).unwrap();
-      dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, data));
-      localStorage.setItem('rememberMe', 'yes');
-    } catch (e) {}
-  };
+	const handleRegistration = async (registrationData: RegistrationType) => {
+		const { confirmPassword: _, ...userData } = registrationData;
+		try {
+			const data = await registration(userData).unwrap();
+			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, data));
+			localStorage.setItem("rememberMe", "yes");
+		} catch (_e) {}
+	};
 
-  const handleLogout = async () => {
-    try {
-      localStorage.removeItem('rememberMe');
+	const handleLogout = async () => {
+		try {
+			localStorage.removeItem("rememberMe");
 
-      await logout(undefined);
+			await logout(undefined);
 
-      dispatch(userAPI.util.upsertQueryData('getCurrentUser', undefined, undefined));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, undefined));
+		} catch (err) {
+			console.error(err);
+		}
+	};
 
-  return {
-    user,
-    handleLogout,
-    handleLogin,
-    loginState,
-    handleRegistration,
-    registrationState,
-  };
+	return {
+		user,
+		handleLogout,
+		handleLogin,
+		loginState,
+		handleRegistration,
+		registrationState,
+	};
 }

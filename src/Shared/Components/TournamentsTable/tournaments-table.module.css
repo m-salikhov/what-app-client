@@ -1,162 +1,162 @@
 /*    HEADER    */
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .search {
-  display: flex;
-  justify-content: center;
-  padding-right: 10px;
+	display: flex;
+	justify-content: center;
+	padding-right: 10px;
 
-  input {
-    width: 250px;
-    padding: 2px 14px;
-    font-size: 1.3rem;
-    border: var(--main-border);
-    border-radius: 6px;
-  }
+	input {
+		width: 250px;
+		padding: 2px 14px;
+		font-size: 1.3rem;
+		border: var(--main-border);
+		border-radius: 6px;
+	}
 }
 
 /*    TABLE    */
 
 .table {
-  max-width: 1700px;
-  margin: 1rem auto;
-  border-right: var(--main-border);
-  border-bottom: var(--main-border);
+	max-width: 1700px;
+	margin: 1rem auto;
+	border-right: var(--main-border);
+	border-bottom: var(--main-border);
 }
 
 .headerLine,
 .line {
-  display: grid;
-  grid-template-columns: 35px 2.5fr 1fr 60px 0.9fr 0.8fr 1fr 1.2fr;
+	display: grid;
+	grid-template-columns: 35px 2.5fr 1fr 60px 0.9fr 0.8fr 1fr 1.2fr;
 }
 
 .line:nth-child(2n + 3) {
-  background-color: rgb(97 161 153 / 20%);
+	background-color: rgb(97 161 153 / 20%);
 }
 
 .headerCell,
 .cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 5px;
-  overflow: hidden;
-  color: var(--p-color);
-  text-align: center;
-  border-top: var(--main-border);
-  border-left: var(--main-border);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 8px 5px;
+	overflow: hidden;
+	color: var(--p-color);
+	text-align: center;
+	border-top: var(--main-border);
+	border-left: var(--main-border);
 
-  &:nth-child(3) {
-    min-width: 80px;
-  }
+	&:nth-child(3) {
+		min-width: 80px;
+	}
 
-  &:nth-child(4) {
-    min-width: 50px;
+	&:nth-child(4) {
+		min-width: 50px;
 
-    p {
-      font-size: 1rem;
-    }
-  }
+		p {
+			font-size: 1rem;
+		}
+	}
 
-  &:nth-child(5) {
-    min-width: 82px;
-  }
+	&:nth-child(5) {
+		min-width: 82px;
+	}
 
-  &:nth-child(6) {
-    min-width: 65px;
-  }
+	&:nth-child(6) {
+		min-width: 65px;
+	}
 }
 
 .headerCell {
-  background-color: rgb(15 110 78 / 50%);
+	background-color: rgb(15 110 78 / 50%);
 
-  .headerCellData {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+	.headerCellData {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
 
-    span {
-      font-weight: bold;
-    }
+		span {
+			font-weight: bold;
+		}
 
-    .headerCellIcon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
+		.headerCellIcon {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: relative;
 
-      svg {
-        position: absolute;
-        top: -0.5rem;
-        left: 0.1rem;
-      }
-    }
-  }
+			svg {
+				position: absolute;
+				top: -0.5rem;
+				left: 0.1rem;
+			}
+		}
+	}
 }
 
 .cell {
-  a:hover {
-    font-weight: bold;
-  }
+	a:hover {
+		font-weight: bold;
+	}
 }
 
 .tooltip {
-  h3,
-  p {
-    color: #a9b0ba;
-  }
+	h3,
+	p {
+		color: #a9b0ba;
+	}
 
-  p {
-    text-align: left;
-  }
+	p {
+		text-align: left;
+	}
 }
 
 @media (width <= 900px) {
-  .table {
-    font-size: 0.8rem;
-  }
+	.table {
+		font-size: 0.8rem;
+	}
 
-  .line,
-  .headerLine {
-    > div:nth-child(6),
-    div:nth-child(7),
-    div:nth-child(8) {
-      display: none;
-    }
+	.line,
+	.headerLine {
+		> div:nth-child(6),
+		div:nth-child(7),
+		div:nth-child(8) {
+			display: none;
+		}
 
-    > div:nth-child(2) {
-      grid-column: span 4;
-    }
-  }
+		> div:nth-child(2) {
+			grid-column: span 4;
+		}
+	}
 
-  .headerCell {
-    .headerCellData {
-      span {
-        font-size: 0.8rem;
-      }
+	.headerCell {
+		.headerCellData {
+			span {
+				font-size: 0.8rem;
+			}
 
-      .headerCellIcon {
-        svg {
-          width: 10px;
-          top: -5px;
-          left: 2px;
-        }
-      }
-    }
-  }
+			.headerCellIcon {
+				svg {
+					width: 10px;
+					top: -5px;
+					left: 2px;
+				}
+			}
+		}
+	}
 
-  .cell {
-    &:nth-child(4) {
-      min-width: 50px;
+	.cell {
+		&:nth-child(4) {
+			min-width: 50px;
 
-      p {
-        font-size: 0.8rem;
-      }
-    }
-  }
+			p {
+				font-size: 0.8rem;
+			}
+		}
+	}
 }

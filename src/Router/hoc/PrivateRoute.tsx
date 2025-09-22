@@ -1,16 +1,16 @@
-import { ReactNode } from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from 'Shared/Auth/useAuth';
+import { useAuth } from "Shared/Auth/useAuth";
+import type { ReactNode } from "react";
+import { Navigate } from "react-router-dom";
 
 interface Props {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 export function PrivateRoute({ children }: Props) {
-  const { user } = useAuth();
+	const { user } = useAuth();
 
-  if (!user) {
-    return <Navigate to='/' />;
-  }
-  return <>{children}</>;
+	if (!user) {
+		return <Navigate to="/" />;
+	}
+	return <>{children}</>;
 }

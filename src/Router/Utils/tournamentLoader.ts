@@ -1,13 +1,13 @@
-import { Params } from 'react-router-dom';
-import { store } from 'Store/store';
-import { tournamentAPI } from 'Store/ToolkitAPIs/tournamentAPI';
+import { store } from "Store/store";
+import { tournamentAPI } from "Store/ToolkitAPIs/tournamentAPI";
+import type { Params } from "react-router-dom";
 
 export async function tournamentLoader({ params }: { params: Params }) {
-  if (!params.id) return null;
+	if (!params.id) return null;
 
-  try {
-    return await store.dispatch(tournamentAPI.endpoints.getTournament.initiate(params.id)).unwrap();
-  } catch (error) {
-    throw error;
-  }
+	try {
+		return await store.dispatch(tournamentAPI.endpoints.getTournament.initiate(params.id)).unwrap();
+	} catch (error) {
+		throw error;
+	}
 }

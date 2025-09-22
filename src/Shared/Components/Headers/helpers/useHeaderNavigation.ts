@@ -1,37 +1,37 @@
-import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useWindowSize } from 'Shared/Hooks/useWindowSize';
+import { useWindowSize } from "Shared/Hooks/useWindowSize";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export function useHeaderNavigation() {
-  const [isOpenMobMenu, setIsOpenMobMenu] = useState(false);
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
-  const { isDesktop } = useWindowSize();
+	const [isOpenMobMenu, setIsOpenMobMenu] = useState(false);
+	const navigate = useNavigate();
+	const { pathname } = useLocation();
+	const { isDesktop } = useWindowSize();
 
-  function logoNavigate() {
-    if (isDesktop && pathname === '/') {
-      return;
-    }
+	function logoNavigate() {
+		if (isDesktop && pathname === "/") {
+			return;
+		}
 
-    if (isOpenMobMenu) {
-      document.body.style.overflow = 'visible';
-      setIsOpenMobMenu(false);
-    }
+		if (isOpenMobMenu) {
+			document.body.style.overflow = "visible";
+			setIsOpenMobMenu(false);
+		}
 
-    if (isOpenMobMenu && pathname === '/') {
-      return;
-    }
+		if (isOpenMobMenu && pathname === "/") {
+			return;
+		}
 
-    navigate('/');
-  }
+		navigate("/");
+	}
 
-  const handleMobMenu = () => {
-    if (isDesktop) return;
+	const handleMobMenu = () => {
+		if (isDesktop) return;
 
-    document.body.style.overflow = isOpenMobMenu ? 'visible' : 'hidden';
+		document.body.style.overflow = isOpenMobMenu ? "visible" : "hidden";
 
-    setIsOpenMobMenu((prev) => !prev);
-  };
+		setIsOpenMobMenu((prev) => !prev);
+	};
 
-  return { isOpenMobMenu, logoNavigate, handleMobMenu, isDesktop };
+	return { isOpenMobMenu, logoNavigate, handleMobMenu, isDesktop };
 }

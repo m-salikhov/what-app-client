@@ -1,30 +1,30 @@
-import { useState, useLayoutEffect } from 'react';
+import { useLayoutEffect, useState } from "react";
 
 export function useWindowSize() {
-  const [windowSize, setWindowSize] = useState({
-    width: 0,
-    height: 0,
-    isDesktop: true,
-  });
+	const [windowSize, setWindowSize] = useState({
+		width: 0,
+		height: 0,
+		isDesktop: true,
+	});
 
-  useLayoutEffect(() => {
-    const handler = () => {
-      const isDesktop = window.innerWidth > 1000;
+	useLayoutEffect(() => {
+		const handler = () => {
+			const isDesktop = window.innerWidth > 1000;
 
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-        isDesktop,
-      });
-    };
+			setWindowSize({
+				width: window.innerWidth,
+				height: window.innerHeight,
+				isDesktop,
+			});
+		};
 
-    handler();
-    window.addEventListener('resize', handler);
+		handler();
+		window.addEventListener("resize", handler);
 
-    return () => {
-      window.removeEventListener('resize', handler);
-    };
-  }, []);
+		return () => {
+			window.removeEventListener("resize", handler);
+		};
+	}, []);
 
-  return windowSize;
+	return windowSize;
 }

@@ -1,178 +1,178 @@
 .edit {
-  textarea {
-    padding: 0.3rem 0 0.3rem 0.3rem;
-    margin-bottom: 0.25rem;
-    font-size: 1.2rem;
-    background-color: var(--input-bg-color);
-    border: var(--main-border);
-  }
+	textarea {
+		padding: 0.3rem 0 0.3rem 0.3rem;
+		margin-bottom: 0.25rem;
+		font-size: 1.2rem;
+		background-color: var(--input-bg-color);
+		border: var(--main-border);
+	}
 }
 
 .editTop {
-  padding-top: 1rem;
+	padding-top: 1rem;
 
-  label {
-    input {
-      min-height: 2rem;
-      padding-left: 0.3rem;
-      font-size: 1rem;
-      font-weight: 900;
-      border: var(--main-border);
-    }
+	label {
+		input {
+			min-height: 2rem;
+			padding-left: 0.3rem;
+			font-size: 1rem;
+			font-weight: 900;
+			border: var(--main-border);
+		}
 
-    input[type='text'] {
-      width: 100%;
-    }
-  }
+		input[type="text"] {
+			width: 100%;
+		}
+	}
 }
 
 .questionContainer {
-  padding: 1rem;
-  margin-top: 2rem;
-  background-color: var(--edit-question-bg-color);
-  border: 2px solid var(--main-border-color);
+	padding: 1rem;
+	margin-top: 2rem;
+	background-color: var(--edit-question-bg-color);
+	border: 2px solid var(--main-border-color);
 
-  textarea {
-    width: 100%;
-    resize: vertical;
-  }
+	textarea {
+		width: 100%;
+		resize: vertical;
+	}
 }
 
 .questionSource {
-  display: flex;
+	display: flex;
 
-  p {
-    margin: auto 0;
-    cursor: pointer;
-  }
+	p {
+		margin: auto 0;
+		cursor: pointer;
+	}
 }
 
 .addSource {
-  padding: 0.2rem;
-  border: var(--main-border);
-  border-radius: 5px;
+	padding: 0.2rem;
+	border: var(--main-border);
+	border-radius: 5px;
 
-  &:hover {
-    font-weight: bold;
-  }
+	&:hover {
+		font-weight: bold;
+	}
 }
 
 .questionHeader {
-  display: flex;
+	display: flex;
 
-  label {
-    display: flex;
+	label {
+		display: flex;
 
-    p {
-      margin: auto 0;
-    }
+		p {
+			margin: auto 0;
+		}
 
-    input {
-      width: 5rem;
-      min-height: 2rem;
-      padding-left: 0.5rem;
-      font-size: 1.5rem;
-      text-align: center;
-      border: var(--main-border);
-    }
-  }
+		input {
+			width: 5rem;
+			min-height: 2rem;
+			padding-left: 0.5rem;
+			font-size: 1.5rem;
+			text-align: center;
+			border: var(--main-border);
+		}
+	}
 
-  & :nth-child(2) {
-    margin-left: 1rem;
-  }
+	& :nth-child(2) {
+		margin-left: 1rem;
+	}
 
-  & :nth-child(3) {
-    margin-left: auto;
-  }
+	& :nth-child(3) {
+		margin-left: auto;
+	}
 }
 
 .questionContainer.del {
-  background-color: var(--edit-question-bg-color-del);
+	background-color: var(--edit-question-bg-color-del);
 
-  input {
-    background-color: var(--main-bg-color);
-  }
+	input {
+		background-color: var(--main-bg-color);
+	}
 
-  .questionSource {
-    p {
-      z-index: -1;
-    }
-  }
+	.questionSource {
+		p {
+			z-index: -1;
+		}
+	}
 
-  textarea {
-    background-color: var(--main-bg-color);
-  }
+	textarea {
+		background-color: var(--main-bg-color);
+	}
 
-  .addSource {
-    cursor: default;
+	.addSource {
+		cursor: default;
 
-    &:hover {
-      font-weight: normal;
-    }
-  }
+		&:hover {
+			font-weight: normal;
+		}
+	}
 }
 
 .editors {
-  div {
-    display: flex;
+	div {
+		display: flex;
 
-    textarea {
-      width: 350px;
-    }
+		textarea {
+			width: 350px;
+		}
 
-    p {
-      margin: auto 0;
-      cursor: pointer;
-    }
-  }
+		p {
+			margin: auto 0;
+			cursor: pointer;
+		}
+	}
 
-  button {
-    padding: 0.2rem;
-    border: var(--main-border);
-    border-radius: 5px;
+	button {
+		padding: 0.2rem;
+		border: var(--main-border);
+		border-radius: 5px;
 
-    &:hover {
-      font-weight: bold;
-    }
-  }
+		&:hover {
+			font-weight: bold;
+		}
+	}
 }
 
 .dateField {
-  color: var(--text-color);
+	color: var(--text-color);
 }
 
 .dateInput {
-  display: flex;
-  width: fit-content;
-  padding: 0.25rem 0.33rem;
-  white-space: nowrap;
-  background: var(--field-background);
-  border: var(--main-border);
-  forced-color-adjust: none;
+	display: flex;
+	width: fit-content;
+	padding: 0.25rem 0.33rem;
+	white-space: nowrap;
+	background: var(--field-background);
+	border: var(--main-border);
+	forced-color-adjust: none;
 
-  &[data-focus-within] {
-    outline-offset: -1px;
-  }
+	&[data-focus-within] {
+		outline-offset: -1px;
+	}
 }
 
 .dateSegment {
-  padding: 0 2px;
-  font-weight: bold;
-  color: var(--p-color);
-  text-align: end;
+	padding: 0 2px;
+	font-weight: bold;
+	color: var(--p-color);
+	text-align: end;
 
-  &[data-type='literal'] {
-    padding: 0;
-  }
+	&[data-type="literal"] {
+		padding: 0;
+	}
 
-  &[data-placeholder] {
-    font-style: italic;
-  }
+	&[data-placeholder] {
+		font-style: italic;
+	}
 
-  &:focus {
-    color: blueviolet;
-    caret-color: transparent;
-    border-radius: 4px;
-    outline: none;
-  }
+	&:focus {
+		color: blueviolet;
+		caret-color: transparent;
+		border-radius: 4px;
+		outline: none;
+	}
 }

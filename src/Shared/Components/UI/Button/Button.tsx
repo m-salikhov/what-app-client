@@ -1,23 +1,23 @@
-import styles from './button.module.css';
+import styles from "./button.module.css";
 
 interface ButtonProps {
-  extraClass?: string;
+	extraClass?: string;
 }
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  extraClass?: string;
+	extraClass?: string;
 }
 
 export function Button({ title, extraClass, type, ...props }: ButtonProps) {
-  return (
-    <div className={styles.buttonContainer}>
-      <button
-        className={extraClass ? `${styles.button} ${extraClass}` : styles.button}
-        type={type || 'button'}
-        {...props}
-      >
-        {title}
-      </button>
-    </div>
-  );
+	return (
+		<div className={styles.buttonContainer}>
+			<button
+				className={extraClass ? `${styles.button} ${extraClass}` : styles.button}
+				type={type || "button"}
+				{...props}
+			>
+				{title}
+			</button>
+		</div>
+	);
 }

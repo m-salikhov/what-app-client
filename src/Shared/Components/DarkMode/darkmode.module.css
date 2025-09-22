@@ -1,72 +1,74 @@
 .container {
-  display: flex;
-  align-items: center;
-  padding: 0.5px 0 0 5px;
+	display: flex;
+	align-items: center;
+	padding: 0.5px 0 0 5px;
 }
 
 .toggle {
-  position: relative;
-  display: block;
-  width: 50px;
-  height: 24px;
-  cursor: pointer;
-  background: #ebebeb;
-  border-radius: 200px;
-  box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.4), inset 0 -5px 15px rgba(255, 255, 255, 0.4);
-  transition: 0.3s;
+	position: relative;
+	display: block;
+	width: 50px;
+	height: 24px;
+	cursor: pointer;
+	background: #ebebeb;
+	border-radius: 200px;
+	box-shadow:
+		inset 0 5px 15px rgba(0, 0, 0, 0.4),
+		inset 0 -5px 15px rgba(255, 255, 255, 0.4);
+	transition: 0.3s;
 }
 
 .toggle::after {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 20px;
-  height: 20px;
-  content: '';
-  background: linear-gradient(180deg, #ffcc89, #d8860b);
-  border-radius: 50%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  transition: 0.3s;
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 20px;
+	height: 20px;
+	content: "";
+	background: linear-gradient(180deg, #ffcc89, #d8860b);
+	border-radius: 50%;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
 }
 
 .input {
-  width: 0;
-  height: 0;
-  visibility: hidden;
+	width: 0;
+	height: 0;
+	visibility: hidden;
 }
 
 .input:checked + .toggle {
-  background: #242424;
+	background: #242424;
 }
 
 .input:checked + .toggle::after {
-  left: calc(100% - 22px);
-  background: linear-gradient(180deg, #777, #3a3a3a);
+	left: calc(100% - 22px);
+	background: linear-gradient(180deg, #777, #3a3a3a);
 }
 
 .sun,
 .moon {
-  position: absolute;
-  top: 3px;
-  width: 18px;
-  height: 18px;
-  transition: 0.3s;
+	position: absolute;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	transition: 0.3s;
 }
 
 .sun {
-  left: 3px;
-  fill: #fff;
+	left: 3px;
+	fill: #fff;
 }
 
 .moon {
-  right: 3px;
-  fill: #7e7e7e;
+	right: 3px;
+	fill: #7e7e7e;
 }
 
 .input:checked + .toggle .sun {
-  fill: #7e7e7e;
+	fill: #7e7e7e;
 }
 
 .input:checked + .toggle .moon {
-  fill: #fff;
+	fill: #fff;
 }

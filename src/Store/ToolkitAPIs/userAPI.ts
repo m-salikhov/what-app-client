@@ -1,79 +1,83 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { baseUrl, serverRoutes } from 'Shared/Constants/constants';
-import { ResultFullSchema, ResultFullType, ResultType } from 'Shared/Schemas/ResultSchema';
-import { UserSchema, UserType } from 'Shared/Schemas/UserSchema';
-import { UserLogin, UserReg } from 'Store/Types/userApi.types';
+import { baseUrl, serverRoutes } from "Shared/Constants/constants";
+import {
+	ResultFullSchema,
+	type ResultFullType,
+	type ResultType,
+} from "Shared/Schemas/ResultSchema";
+import { UserSchema, type UserType } from "Shared/Schemas/UserSchema";
+import type { UserLogin, UserReg } from "Store/Types/userApi.types";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const userAPI = createApi({
-  reducerPath: 'userAPI',
-  baseQuery: fetchBaseQuery({ baseUrl, credentials: 'include' }),
-  tagTypes: ['result', 'user'],
-  keepUnusedDataFor: 86400,
+	reducerPath: "userAPI",
+	baseQuery: fetchBaseQuery({ baseUrl, credentials: "include" }),
+	tagTypes: ["result", "user"],
+	keepUnusedDataFor: 86400,
 
-  endpoints: (build) => ({
-    getCurrentUser: build.query<UserType | undefined, undefined>({
-      query: () => serverRoutes.authLogFirst,
-      responseSchema: UserSchema.optional(),
-    }),
+	endpoints: (build) => ({
+		getCurrentUser: build.query<UserType | undefined, undefined>({
+			query: () => serverRoutes.authLogFirst,
+			responseSchema: UserSchema.optional(),
+		}),
 
-    logout: build.mutation<{ message: string }, void>({
-      query: () => ({
-        url: serverRoutes.authLogout,
-        method: 'POST',
-      }),
-    }),
+		logout: build.mutation<{ message: string }, void>({
+			query: () => ({
+				url: serverRoutes.authLogout,
+				method: "POST",
+			}),
+		}),
 
-    login: build.mutation<UserType, UserLogin>({
-      query: (body) => ({
-        url: serverRoutes.authLogin,
-        method: 'POST',
-        body,
-      }),
-      responseSchema: UserSchema,
-    }),
+		login: build.mutation<UserType, UserLogin>({
+			query: (body) => ({
+				url: serverRoutes.authLogin,
+				method: "POST",
+				body,
+			}),
+			responseSchema: UserSchema,
+		}),
 
-    registration: build.mutation<UserType, UserReg>({
-      query: (body) => ({
-        url: serverRoutes.users,
-        method: 'POST',
-        body,
-      }),
-      responseSchema: UserSchema,
-      invalidatesTags: ['user'],
-    }),
+		registration: build.mutation<UserType, UserReg>({
+			query: (body) => ({
+				url: serverRoutes.users,
+				method: "POST",
+				body,
+			}),
+			responseSchema: UserSchema,
+			invalidatesTags: ["user"],
+		}),
 
-    changePassword: build.mutation<string, { newPass: string; id: string }>({
-      query: (body) => ({
-        url: serverRoutes.usersChangePassword(body.id),
-        method: 'PUT',
-        body: { newPass: body.newPass },
-      }),
-    }),
+		changePassword: build.mutation<string, { newPass: string; id: string }>({
+			query: (body) => ({
+				url: serverRoutes.usersChangePassword(body.id),
+				method: "PUT",
+				body: { newPass: body.newPass },
+			}),
+		}),
 
-    getUserResultFull: build.query<ResultFullType[], string>({
-      query: (userID) => serverRoutes.userResultFull(userID),
-      responseSchema: ResultFullSchema.array(),
+		getUserResultFull: build.query<ResultFullType[], string>({
+			query: (userID) => serverRoutes.userResultFull(userID),
+			responseSchema: ResultFullSchema.array(),
 
-      providesTags: ['result'],
-    }),
+			providesTags: ["result"],
+		}),
 
-    postUserResult: build.mutation<ResultFullType, Omit<ResultType, 'id' | 'date'>>({
-      query: (body) => ({
-        url: serverRoutes.userResultPost,
-        method: 'POST',
-        body,
-      }),
-      invalidatesTags: ['result'],
-    }),
-  }),
+		postUserResult: build.mutation<ResultFullType, Omit<ResultType, "id" | "date">>({
+			query: (body) => ({
+				url: serverRoutes.userResultPost,
+				method: "POST",
+				body,
+			}),
+			invalidatesTags: ["result"],
+		}),
+	}),
 });
 
 export const {
-  useGetCurrentUserQuery,
-  useLogoutMutation,
-  useLoginMutation,
-  useRegistrationMutation,
-  useGetUserResultFullQuery,
-  usePostUserResultMutation,
-  useChangePasswordMutation,
+	useGetCurrentUserQuery,
+	useLogoutMutation,
+	useLoginMutation,
+	useRegistrationMutation,
+	useGetUserResultFullQuery,
+	usePostUserResultMutation,
+	useChangePasswordMutation,
 } = userAPI;

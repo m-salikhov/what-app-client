@@ -1,38 +1,44 @@
-import styles from './main-components.module.css';
-import { useState } from 'react';
-import { Question } from 'Shared/Components/Question/Question';
-import { SkeletonQuestion } from 'Shared/Components/Question/SkeletonQuestion';
-import { useGetRandomQuery } from 'Store/ToolkitAPIs/tournamentAPI';
-import { HiRefresh } from 'react-icons/hi';
+import { Question } from "Shared/Components/Question/Question";
+import { SkeletonQuestion } from "Shared/Components/Question/SkeletonQuestion";
+import { useGetRandomQuery } from "Store/ToolkitAPIs/tournamentAPI";
+import { useState } from "react";
+import { HiRefresh } from "react-icons/hi";
+import styles from "./main-components.module.css";
 
 export function RandomQuestions() {
-  const amountRandomQuestions = 4;
+	const amountRandomQuestions = 4;
 
-  const [isRandomRefetch, setIsRandomRefetch] = useState(false);
+	const [isRandomRefetch, setIsRandomRefetch] = useState(false);
 
-  const { data: randomQuestions = [], refetch, isLoading } = useGetRandomQuery(amountRandomQuestions);
+	const {
+		data: randomQuestions = [],
+		refetch,
+		isLoading,
+	} = useGetRandomQuery(amountRandomQuestions);
 
-  return (
-    <div className={styles.random}>
-      <div className={styles.refreshContainer}>
-        {' '}
-        <div className={styles.refresh}>
-          {' '}
-          <h2>Случайные вопросы</h2>
-          <HiRefresh
-            size={24}
-            className={isRandomRefetch ? styles.refreshIcon : `${styles.refreshIcon} ${styles.rotate}`}
-            onClick={() => {
-              refetch();
-              setIsRandomRefetch(!isRandomRefetch);
-            }}
-          />
-        </div>
-      </div>
+	return (
+		<div className={styles.random}>
+			<div className={styles.refreshContainer}>
+				{" "}
+				<div className={styles.refresh}>
+					{" "}
+					<h2>Случайные вопросы</h2>
+					<HiRefresh
+						size={24}
+						className={
+							isRandomRefetch ? styles.refreshIcon : `${styles.refreshIcon} ${styles.rotate}`
+						}
+						onClick={() => {
+							refetch();
+							setIsRandomRefetch(!isRandomRefetch);
+						}}
+					/>
+				</div>
+			</div>
 
-      {isLoading && <SkeletonQuestion length={amountRandomQuestions} />}
+			{isLoading && <SkeletonQuestion length={amountRandomQuestions} />}
 
-      {!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
-    </div>
-  );
+			{!isLoading && randomQuestions.map((v) => <Question q={v} random={true} key={v.id} />)}
+		</div>
+	);
 }

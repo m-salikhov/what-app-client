@@ -1,27 +1,27 @@
 .header {
-  h3 {
-    padding: 1rem 0;
-    font-weight: bold;
+	h3 {
+		padding: 1rem 0;
+		font-weight: bold;
 
-    span {
-      font-weight: normal;
-    }
-  }
+		span {
+			font-weight: normal;
+		}
+	}
 }
 
 .title {
-  display: flex;
-  padding-bottom: 1rem;
+	display: flex;
+	padding-bottom: 1rem;
 
-  a {
-    padding-left: 1rem;
-  }
+	a {
+		padding-left: 1rem;
+	}
 }
 
 .info {
-  display: flex;
+	display: flex;
 
-  h3:nth-child(n + 2) {
-    padding-left: 3rem;
-  }
+	h3:nth-child(n + 2) {
+		padding-left: 3rem;
+	}
 }

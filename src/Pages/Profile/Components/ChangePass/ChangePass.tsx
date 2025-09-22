@@ -1,93 +1,106 @@
-import { useState } from 'react';
-import { useChangePasswordMutation } from 'Store/ToolkitAPIs/userAPI';
-import { Button } from 'Shared/Components/UI/Button/Button';
-import { Modal } from 'Shared/Components/UI/Modal/Modal';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { ChangePassSchema, ChangePassType } from './ChangePassSchema';
-import styles from '../../profile.module.css';
-import { getServerErrorMessage } from 'Shared/Helpers/getServerErrorMessage';
-import { useAuth } from 'Shared/Auth/useAuth';
+import { useAuth } from "Shared/Auth/useAuth";
+import { Button } from "Shared/Components/UI/Button/Button";
+import { Modal } from "Shared/Components/UI/Modal/Modal";
+import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
+import { useChangePasswordMutation } from "Store/ToolkitAPIs/userAPI";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import styles from "../../profile.module.css";
+import { ChangePassSchema, type ChangePassType } from "./ChangePassSchema";
 
 export function ChangePass() {
-  const [changePass, setChangePass] = useState(false);
-  const [serverMessage, setServerMessage] = useState('');
+	const [changePass, setChangePass] = useState(false);
+	const [serverMessage, setServerMessage] = useState("");
 
-  const { user } = useAuth();
+	const { user } = useAuth();
 
-  const [changePassword, { isSuccess }] = useChangePasswordMutation();
+	const [changePassword, { isSuccess }] = useChangePasswordMutation();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm<ChangePassType>({
-    resolver: zodResolver(ChangePassSchema),
-  });
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+		reset,
+	} = useForm<ChangePassType>({
+		resolver: zodResolver(ChangePassSchema),
+	});
 
-  const onSubmit = (data: ChangePassType) => {
-    if (user) {
-      changePassword({ newPass: data.newPassword, id: user.id })
-        .unwrap()
-        .then(() => {
-          setServerMessage('Пароль успешно изменён');
-          reset();
-        })
-        .catch((error) => setServerMessage(getServerErrorMessage(error, 'Произошла ошибка')));
-    }
-  };
+	const onSubmit = (data: ChangePassType) => {
+		if (user) {
+			changePassword({ newPass: data.newPassword, id: user.id })
+				.unwrap()
+				.then(() => {
+					setServerMessage("Пароль успешно изменён");
+					reset();
+				})
+				.catch((error) => setServerMessage(getServerErrorMessage(error, "Произошла ошибка")));
+		}
+	};
 
-  return (
-    <>
-      <div className={styles.changePass}>
-        <p
-          onClick={() => {
-            setChangePass(true);
-            reset();
-          }}
-        >
-          изменить пароль
-        </p>
-      </div>
+	return (
+		<>
+			<div className={styles.changePass}>
+				<p
+					onClick={() => {
+						setChangePass(true);
+						reset();
+					}}
+				>
+					изменить пароль
+				</p>
+			</div>
 
-      <Modal
-        active={changePass}
-        onClose={() => setChangePass(false)}
-        onElementDestroyed={() => {
-          setServerMessage('');
-        }}
-      >
-        <div className={styles.modal}>
-          <form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
-            {' '}
-            <label>
-              <p>Новый пароль</p>
-              <input type='password' id='newPassword' {...register('newPassword')} autoComplete='off' autoFocus />
-            </label>
-            <label>
-              <p>Повторите пароль</p>
-              <input type='password' id='confirmNewPassword' {...register('confirmNewPassword')} autoComplete='off' />
-            </label>
-            {Object.keys(errors).length > 0 &&
-              Object.values(errors).map((error) => {
-                return <p className={styles.error}>{error.message}</p>;
-              })}
-            {serverMessage && <p className={isSuccess ? styles.success : styles.error}>{serverMessage}</p>}
-            <div className={styles.control}>
-              <Button type='button' title='Закрыть' onClick={() => setChangePass(false)} />
-              <Button
-                type='submit'
-                title='Отправить'
-                onClick={() => {
-                  setServerMessage('');
-                  handleSubmit(onSubmit);
-                }}
-              />
-            </div>
-          </form>
-        </div>
-      </Modal>
-    </>
-  );
+			<Modal
+				active={changePass}
+				onClose={() => setChangePass(false)}
+				onElementDestroyed={() => {
+					setServerMessage("");
+				}}
+			>
+				<div className={styles.modal}>
+					<form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
+						{" "}
+						<label>
+							<p>Новый пароль</p>
+							<input
+								type="password"
+								id="newPassword"
+								{...register("newPassword")}
+								autoComplete="off"
+								autoFocus
+							/>
+						</label>
+						<label>
+							<p>Повторите пароль</p>
+							<input
+								type="password"
+								id="confirmNewPassword"
+								{...register("confirmNewPassword")}
+								autoComplete="off"
+							/>
+						</label>
+						{Object.keys(errors).length > 0 &&
+							Object.values(errors).map((error) => {
+								return <p className={styles.error}>{error.message}</p>;
+							})}
+						{serverMessage && (
+							<p className={isSuccess ? styles.success : styles.error}>{serverMessage}</p>
+						)}
+						<div className={styles.control}>
+							<Button type="button" title="Закрыть" onClick={() => setChangePass(false)} />
+							<Button
+								type="submit"
+								title="Отправить"
+								onClick={() => {
+									setServerMessage("");
+									handleSubmit(onSubmit);
+								}}
+							/>
+						</div>
+					</form>
+				</div>
+			</Modal>
+		</>
+	);
 }

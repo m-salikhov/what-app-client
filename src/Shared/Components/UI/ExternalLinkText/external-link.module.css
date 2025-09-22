@@ -1,13 +1,13 @@
 .externalLink {
-  display: inline-flex;
-  align-items: center;
-  color: var(--external-link);
+	display: inline-flex;
+	align-items: center;
+	color: var(--external-link);
 
-  &:visited {
-    color: var(--external-link);
-  }
+	&:visited {
+		color: var(--external-link);
+	}
 
-  &:hover {
-    color: var(--external-link-hover);
-  }
+	&:hover {
+		color: var(--external-link-hover);
+	}
 }
