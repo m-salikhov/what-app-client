@@ -4,12 +4,14 @@ import { Modal } from "Shared/Components/UI/Modal/Modal";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { useChangePasswordMutation } from "Store/ToolkitAPIs/userAPI";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../profile.module.css";
 import { ChangePassSchema, type ChangePassType } from "./ChangePassSchema";
 
 export function ChangePass() {
+	const id = useId();
+
 	const [changePass, setChangePass] = useState(false);
 	const [serverMessage, setServerMessage] = useState("");
 
@@ -41,14 +43,15 @@ export function ChangePass() {
 	return (
 		<>
 			<div className={styles.changePass}>
-				<p
+				<button
+					type="button"
 					onClick={() => {
 						setChangePass(true);
 						reset();
 					}}
 				>
 					изменить пароль
-				</p>
+				</button>
 			</div>
 
 			<Modal
@@ -65,24 +68,27 @@ export function ChangePass() {
 							<p>Новый пароль</p>
 							<input
 								type="password"
-								id="newPassword"
+								id={`newPassword-${id}`}
 								{...register("newPassword")}
 								autoComplete="off"
-								autoFocus
 							/>
 						</label>
 						<label>
 							<p>Повторите пароль</p>
 							<input
 								type="password"
-								id="confirmNewPassword"
+								id={`confirmNewPassword-${id}`}
 								{...register("confirmNewPassword")}
 								autoComplete="off"
 							/>
 						</label>
 						{Object.keys(errors).length > 0 &&
 							Object.values(errors).map((error) => {
-								return <p className={styles.error}>{error.message}</p>;
+								return (
+									<p className={styles.error} key={error.message}>
+										{error.message}
+									</p>
+								);
 							})}
 						{serverMessage && (
 							<p className={isSuccess ? styles.success : styles.error}>{serverMessage}</p>

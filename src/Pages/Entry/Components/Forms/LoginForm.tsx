@@ -2,6 +2,7 @@ import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
@@ -10,6 +11,8 @@ import { type LoginType, loginSchema } from "../../Schema/EntrySchema";
 import { FormError } from "./FormError";
 
 const LoginForm = () => {
+	const id = useId();
+
 	const {
 		register,
 		handleSubmit,
@@ -35,15 +38,15 @@ const LoginForm = () => {
 		<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 			<div
 				className={styles.formInput}
-				id="tooltip-mail"
+				data-tooltip-id={`tooltip-${id}`}
 				data-tooltip-html="Можно зарегистрироваться или зайти под публичным аккаунтом <br /> почта: test@test.com, пароль: test"
 			>
-				<label htmlFor="email">Почта:</label>
-				<input type="email" autoComplete="email" id="email" {...register("email")} />
+				<label htmlFor={`email-${id}`}>Почта:</label>
+				<input type="email" autoComplete="email" id={`email-${id}`} {...register("email")} />
 			</div>
 
 			<Tooltip
-				anchorSelect="#tooltip-mail"
+				id={`tooltip-${id}`}
 				place="top"
 				opacity={0.8}
 				className={styles.tooltip}
@@ -53,11 +56,11 @@ const LoginForm = () => {
 			<FormError message={errors.email?.message} />
 
 			<div className={styles.formInput}>
-				<label htmlFor="password">Пароль:</label>
+				<label htmlFor={`password-${id}`}>Пароль:</label>
 				<input
 					type="password"
 					autoComplete="current-password"
-					id="password"
+					id={`password-${id}`}
 					{...register("password")}
 				/>
 			</div>

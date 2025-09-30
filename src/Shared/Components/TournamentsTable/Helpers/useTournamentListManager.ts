@@ -59,7 +59,7 @@ export function useTournamentListManager(tournaments: TournamentShortType[]) {
 		}
 	}, [sortDirection, sortField, memoList, filterString]);
 
-	function sortTournaments(e: MouseEvent<HTMLDivElement | SVGElement>) {
+	function sortTournaments(e: MouseEvent<HTMLButtonElement | SVGElement>) {
 		const field = sortFieldSchema.parse(e.currentTarget.dataset.field);
 		setSortField(field);
 		setSortDirection(sortDirection === "asc" ? "desc" : "asc");

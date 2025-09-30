@@ -12,7 +12,6 @@
 
 .tableElement {
 	color: var(--p-color);
-	cursor: pointer;
 	border-top: 2px solid var(--border-color-quiet);
 	border-right: 2px solid var(--border-color-quiet);
 	border-bottom: 2px solid var(--border-color-quiet);

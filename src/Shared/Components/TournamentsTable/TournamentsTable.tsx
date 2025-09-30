@@ -1,5 +1,6 @@
 import { getDate } from "Shared/Helpers/getDate";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
+import { useId } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
@@ -9,6 +10,8 @@ import { useTournamentListManager } from "./Helpers/useTournamentListManager";
 import styles from "./tournaments-table.module.css";
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
+	const id = useId();
+
 	const {
 		list,
 		handleChangeFilterString,
@@ -37,92 +40,115 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
 					<div className={styles.headerCell}>
-						<div className={styles.headerCellData}>
+						<div className={styles.headerCellNumber}>
 							<span>№</span>
 						</div>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div className={styles.headerCellData} data-field="title" onClick={sortTournaments}>
-							<span>Название</span>
+						<button
+							type="button"
+							className={styles.headerCellBtn}
+							data-field="title"
+							onClick={sortTournaments}
+						>
+							<span>НАЗВАНИЕ</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "title" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "title" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div className={styles.headerCellData} data-field="date" onClick={sortTournaments}>
-							<span>Дата</span>
+						<button
+							type="button"
+							className={styles.headerCellBtn}
+							data-field="date"
+							onClick={sortTournaments}
+						>
+							<span>ДАТА</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "date" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "date" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div
-							className={styles.headerCellData}
+						<button
+							type="button"
+							className={styles.headerCellBtn}
 							data-field="difficulty"
 							onClick={sortTournaments}
 						>
-							<span id="tooltip-df">DF</span>
-							<TableTooltipDF anchor="tooltip-df" />
+							<span data-tooltip-id={`tooltip-df-${id}`}>DF</span>
+							<TableTooltipDF id={`tooltip-df-${id}`} />
 							<div className={styles.headerCellIcon}>
 								{sortField === "difficulty" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "difficulty" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div
-							className={styles.headerCellData}
+						<button
+							type="button"
+							className={styles.headerCellBtn}
 							data-field="questionsQuantity"
 							onClick={sortTournaments}
 						>
-							<span>Вопросы</span>
+							<span>ВОПРОСЫ</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "questionsQuantity" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "questionsQuantity" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div className={styles.headerCellData} data-field="tours" onClick={sortTournaments}>
-							<span>Туры</span>
+						<button
+							type="button"
+							className={styles.headerCellBtn}
+							data-field="tours"
+							onClick={sortTournaments}
+						>
+							<span>ТУРЫ</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "tours" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "tours" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div
-							className={styles.headerCellData}
+						<button
+							type="button"
+							className={styles.headerCellBtn}
 							data-field="dateUpload"
 							onClick={sortTournaments}
 						>
-							<span>Добавлен</span>
+							<span>ДОБАВЛЕН</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "dateUpload" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "dateUpload" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 
 					<div className={styles.headerCell}>
-						<div className={styles.headerCellData} data-field="uploader" onClick={sortTournaments}>
-							<span>Добавил</span>
+						<button
+							type="button"
+							className={styles.headerCellBtn}
+							data-field="uploader"
+							onClick={sortTournaments}
+						>
+							<span>ДОБАВИЛ</span>
 							<div className={styles.headerCellIcon}>
 								{sortField === "uploader" && sortDirection === "asc" && <FaChevronDown />}
 								{sortField === "uploader" && sortDirection === "desc" && <FaChevronUp />}
 							</div>{" "}
-						</div>
+						</button>
 					</div>
 				</div>
 

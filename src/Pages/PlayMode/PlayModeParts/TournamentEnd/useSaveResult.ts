@@ -32,7 +32,6 @@ export function useSaveResult(tournament: TournamentType) {
 			console.log(_error);
 		}
 	}, [
-		tournament.questionsQuantity,
 		tournament.id,
 		tournament.title,
 		user,

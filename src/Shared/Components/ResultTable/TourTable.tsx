@@ -15,7 +15,8 @@ export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
 		<div className={styles.table}>
 			{tourResult.map((v) => {
 				return (
-					<div
+					<button
+						type="button"
 						className={styles.tableElement}
 						key={v.num}
 						onClick={() => setSelectedQuestionNumber(v.num)}
@@ -25,7 +26,7 @@ export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
 						<div className={styles.iconContainer}>
 							<img src={v.ans ? green_ans : red_ans} alt="answer icon" />
 						</div>
-					</div>
+					</button>
 				);
 			})}
 		</div>
