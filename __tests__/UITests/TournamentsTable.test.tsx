@@ -50,7 +50,7 @@ describe('TournamentsTable', () => {
     renderWithProviders(<TournamentsTable tournaments={tournaments} />);
 
     let links = await screen.findAllByRole('link');
-    const sortIcon = screen.getByAltText('сортировать по названию');
+    const sortIcon = screen.getByRole('button', { name: 'НАЗВАНИЕ' });
 
     //в начале сортировка происходит по дате добавления начиная с самого позднего
     expect(links[0].textContent).toBe('Киты на стене кофейни зимой');

@@ -37,7 +37,7 @@ describe('Форма регистрации', () => {
     await userEvent.type(screen.getByLabelText('Пароль:'), '123456');
     await userEvent.type(screen.getByLabelText('Повторите пароль:'), '123456');
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText('Зарегистрироваться'));
 
     //отображается сообщение об успешной регистрации
     expect(screen.queryByText('Вы успешно зарегистрировались')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('Форма регистрации', () => {
     await userEvent.type(screen.getByLabelText('Пароль:'), '123456');
     await userEvent.type(screen.getByLabelText('Повторите пароль:'), '123456');
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText('Зарегистрироваться'));
 
     const errorMessage = await screen.findByText('Ошибка');
 
