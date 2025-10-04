@@ -1,7 +1,6 @@
 import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
 import { Navigate } from "react-router-dom";
@@ -9,6 +8,7 @@ import { Tooltip } from "react-tooltip";
 import styles from "../../entry.module.css";
 import { type LoginType, loginSchema } from "../../Schema/EntrySchema";
 import { FormError } from "./FormError";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const LoginForm = () => {
 	const id = useId();
@@ -69,7 +69,7 @@ const LoginForm = () => {
 
 			{error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
 
-			<Button type="submit" disabled={isLoading} title="Войти" onSubmit={handleSubmit(onSubmit)} />
+			<Button type="submit" disabled={isLoading} title="Войти" />
 		</form>
 	);
 };

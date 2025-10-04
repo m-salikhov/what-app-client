@@ -1,11 +1,11 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { Modal } from "Shared/Components/UI/Modal/Modal";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { useChangePasswordMutation } from "Store/ToolkitAPIs/userAPI";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useId, useState } from "react";
-import { useForm } from "react-hook-form";
 import styles from "../../profile.module.css";
 import { ChangePassSchema, type ChangePassType } from "./ChangePassSchema";
 

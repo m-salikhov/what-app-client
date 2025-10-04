@@ -32,7 +32,7 @@ describe('Форма логина', () => {
 
     await userEvent.type(screen.getByLabelText('Пароль:'), '123456');
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText("Войти"));
 
     // сработала переадресация при успехе
     expect(screen.queryByText('Почта:')).not.toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('Форма логина', () => {
 
     await userEvent.type(emailInput, 'example@yaru');
     await userEvent.type(passwordInput, '123');
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText("Войти"));
     expect(screen.queryByText('Неверный формат почты')).toBeInTheDocument();
     expect(screen.queryByText('Пароль должен содержать минимум 4 символа')).toBeInTheDocument();
 
@@ -67,7 +67,7 @@ describe('Форма логина', () => {
 
     await userEvent.type(emailInput, 'test-error@ya.ru');
     await userEvent.type(passwordInput, '1234');
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText("Войти"));
     expect(screen.queryByText('Ошибка')).toBeInTheDocument();
   });
 });

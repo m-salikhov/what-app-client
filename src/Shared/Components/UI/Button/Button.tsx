@@ -1,9 +1,5 @@
 import styles from "./button.module.css";
 
-interface ButtonProps {
-	extraClass?: string;
-}
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	extraClass?: string;
 }

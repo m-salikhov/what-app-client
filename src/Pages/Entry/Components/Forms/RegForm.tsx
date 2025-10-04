@@ -78,12 +78,7 @@ export const RegistrationForm = () => {
 
 				{error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
 
-				<Button
-					type="submit"
-					disabled={isLoading}
-					title="Зарегистрироваться"
-					onSubmit={handleSubmit(onSubmit)}
-				/>
+				<Button type="submit" disabled={isLoading} title="Зарегистрироваться" />
 			</form>
 		</>
 	);
