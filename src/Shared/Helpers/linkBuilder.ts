@@ -3,9 +3,5 @@ export function linkBuilder(id: number, pathname: string): string {
 		return `/playmode/${id}`;
 	}
 
-	if (pathname.includes("all")) {
-		return `/tournament/${id}`;
-	}
-
-	return "";
+	return `/tournament/${id}`;
 }

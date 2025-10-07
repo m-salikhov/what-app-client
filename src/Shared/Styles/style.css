@@ -32,7 +32,8 @@ h2,
 h3,
 h4,
 h5,
-h6,label {
+h6,
+label {
 	color: var(--h-color);
 	text-wrap: balance;
 }
