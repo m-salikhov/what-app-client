@@ -20,8 +20,14 @@ export function GameEndModal({ result }: { result: string }) {
 		refetch();
 	}
 
+	const handleKeyDown = (event: KeyboardEvent) => {
+		if (event.key === "Enter") {
+			onClose();
+		}
+	};
+
 	return (
-		<Modal active={Boolean(result)} onClose={onClose}>
+		<Modal active={Boolean(result)} onClose={onClose} onKeyDown={handleKeyDown}>
 			{" "}
 			<div className="wordle-result-wrapper">
 				<div className="wordle-result-icon">

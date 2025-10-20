@@ -7,11 +7,18 @@ import styles from "./modal.module.css";
 interface Props {
 	active: boolean;
 	onClose: () => void;
+	onKeyDown?: (event: KeyboardEvent) => void;
 	onElementDestroyed?: () => void;
 }
 
 //HOC для модальных окон.
-export function Modal({ active, onClose, onElementDestroyed, children }: PropsWithChildren<Props>) {
+export function Modal({
+	active,
+	onClose,
+	onElementDestroyed,
+	onKeyDown,
+	children,
+}: PropsWithChildren<Props>) {
 	const transition = useTransition(active, {
 		from: {
 			scale: 0.8,
@@ -49,7 +56,10 @@ export function Modal({ active, onClose, onElementDestroyed, children }: PropsWi
 		const handleKeyDown = (event: KeyboardEvent) => {
 			if (event.key === "Escape") {
 				onClose();
+				return;
 			}
+
+			onKeyDown?.(event);
 		};
 
 		document.addEventListener("keydown", handleKeyDown);
@@ -57,7 +67,7 @@ export function Modal({ active, onClose, onElementDestroyed, children }: PropsWi
 		return () => {
 			document.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [onClose]);
+	}, [onClose, onKeyDown]);
 
 	return (
 		<>
