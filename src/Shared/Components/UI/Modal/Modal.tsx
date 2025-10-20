@@ -1,5 +1,5 @@
 import { animated, useTransition } from "@react-spring/web";
-import { type PropsWithChildren, useEffect } from "react";
+import { type PropsWithChildren, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { scrollVisibility } from "./Helpers/scrollVisibility";
 import styles from "./modal.module.css";
@@ -7,7 +7,7 @@ import styles from "./modal.module.css";
 interface Props {
 	active: boolean;
 	onClose: () => void;
-	onKeyDown?: (event: KeyboardEvent) => void;
+	onKeyDown?: (event: React.KeyboardEvent<HTMLDialogElement>) => void;
 	onElementDestroyed?: () => void;
 }
 
@@ -19,6 +19,8 @@ export function Modal({
 	onKeyDown,
 	children,
 }: PropsWithChildren<Props>) {
+	const dialogRef = useRef<HTMLDialogElement>(null);
+
 	const transition = useTransition(active, {
 		from: {
 			scale: 0.8,
@@ -46,42 +48,38 @@ export function Modal({
 		config: { duration: 200 },
 	});
 
-	useEffect(() => {
-		if (active) {
-			scrollVisibility("hide");
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
+		onKeyDown?.(event);
+
+		if (event.key === "Escape") {
+			onClose();
+			return;
 		}
-	}, [active]);
+	};
 
 	useEffect(() => {
-		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape") {
-				onClose();
-				return;
-			}
+		scrollVisibility("hide");
 
-			onKeyDown?.(event);
-		};
-
-		document.addEventListener("keydown", handleKeyDown);
-
-		return () => {
-			document.removeEventListener("keydown", handleKeyDown);
-		};
-	}, [onClose, onKeyDown]);
+		if (dialogRef.current) {
+			dialogRef.current.focus();
+		}
+	}, []);
 
 	return (
 		<>
 			{createPortal(
 				transition((style, active) =>
 					active ? (
-						// biome-ignore lint/a11y/useKeyWithClickEvents: TODO
 						<dialog
 							className={styles.modal}
+							ref={dialogRef}
+							open={active}
 							onClick={(e) => {
 								if (e.target === e.currentTarget) {
 									onClose();
 								}
 							}}
+							onKeyDown={handleKeyDown}
 						>
 							<animated.div className={styles.content} style={style}>
 								{children}

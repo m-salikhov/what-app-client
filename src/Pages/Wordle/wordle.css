@@ -107,11 +107,14 @@
 	}
 }
 
+
+/* модальное окно при завершении игры */
 .wordle-result-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+  padding-bottom: 15px;
 
 	.wordle-result-icon {
 		display: flex;

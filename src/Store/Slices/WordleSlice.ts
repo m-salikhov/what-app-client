@@ -55,7 +55,7 @@ const WordleSlice = createSlice({
 				} else return;
 			}
 
-			if (state.letters.length === 30) {
+			if (state.letters.length === 30 || state.result !== null) {
 				return;
 			}
 

@@ -69,8 +69,8 @@ export function useWordleInput() {
 							dispatch(wordleActions.setWrongWordFlag(false));
 						}, 500);
 					}
-				} catch (e) {
-					console.log("Verify word error");
+				} catch (err) {
+					console.log(err);
 				}
 
 				break;

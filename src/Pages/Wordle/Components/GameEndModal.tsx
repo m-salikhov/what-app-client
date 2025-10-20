@@ -20,7 +20,7 @@ export function GameEndModal({ result }: { result: string }) {
 		refetch();
 	}
 
-	const handleKeyDown = (event: KeyboardEvent) => {
+	const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
 		if (event.key === "Enter") {
 			onClose();
 		}
