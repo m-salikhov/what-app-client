@@ -57,13 +57,14 @@ export function Modal({ active, onClose, onElementDestroyed, children }: PropsWi
 		return () => {
 			document.removeEventListener("keydown", handleKeyDown);
 		};
-	}, []);
+	}, [onClose]);
 
 	return (
 		<>
 			{createPortal(
 				transition((style, active) =>
 					active ? (
+						// biome-ignore lint/a11y/useKeyWithClickEvents: TODO
 						<dialog
 							className={styles.modal}
 							onClick={(e) => {

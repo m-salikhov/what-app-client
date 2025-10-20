@@ -23,15 +23,16 @@ const showToast = () => {
 	);
 };
 
-const getWordleDIV = () => {
+const getWordleContainer = () => {
 	const arr = [];
 
 	const letters = useAppSelector(lettersSelector);
+	const classNames = Array.from({ length: 30 }, (_, i) => useLetterClassName(i));
 
 	for (let i = 0; i < 30; i++) {
 		arr.push(
-			<div key={i} className={useLetterClassName(i)}>
-				{letters[i] ? letters[i] : null}
+			<div key={i} className={classNames[i]}>
+				{letters[i] || null}
 			</div>,
 		);
 	}
@@ -43,9 +44,13 @@ export default function Wordle() {
 	const { handleInput } = useWordleInput();
 	const result = useAppSelector(resultSelector);
 
+	const wordleContainer = getWordleContainer();
+
 	return (
+		// biome-ignore lint/a11y/noStaticElementInteractions: toast
 		<div
 			className="wordle"
+			// biome-ignore lint/a11y/noNoninteractiveTabindex: toast
 			tabIndex={0}
 			onKeyDown={(e) => {
 				if (isEnglishKey(e.key)) {
@@ -56,7 +61,7 @@ export default function Wordle() {
 				handleInput(e.key);
 			}}
 		>
-			<div className="wordle-container">{getWordleDIV()}</div>
+			<div className="wordle-container">{wordleContainer}</div>
 			<Board />
 			{result && <GameEndModal result={result} />}
 			<ToastContainer />

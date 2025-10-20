@@ -17,11 +17,11 @@ export function useLetterClassName(index: number) {
 	}
 
 	if (letterState[index]) {
-		className = letterState[index].className + " letter";
+		className = `${letterState[index].className} letter`;
 	}
 
 	if (wrongWordFlag && index > currentLetterNumber - 6 && index < currentLetterNumber) {
-		className = className + " wrong-word";
+		className = `${className} wrong-word`;
 	}
 
 	return className ? className.trim() : undefined;

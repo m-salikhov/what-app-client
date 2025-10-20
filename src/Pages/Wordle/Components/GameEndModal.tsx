@@ -1,3 +1,4 @@
+import { Button } from "Shared/Components/UI/Button/Button";
 import { Modal } from "Shared/Components/UI/Modal/Modal";
 import { useAppDispatch, useAppSelector } from "Shared/Hooks/redux";
 import { currentLetterNumberSelector } from "Store/Selectors/WordleSelectors";
@@ -40,9 +41,7 @@ export function GameEndModal({ result }: { result: string }) {
 					</p>
 				)}
 
-				<div className="wordle-result-new" onClick={onClose}>
-					<p>новое слово</p>
-				</div>
+				<Button onClick={onClose} title="Новое слово" onKeyDown={() => console.log("enter")} />
 			</div>
 		</Modal>
 	);
