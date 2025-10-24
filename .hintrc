@@ -20,6 +20,12 @@
     ],
     "typescript-config/consistent-casing": "off",
     "no-inline-styles": "off",
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "axe/parsing": [
+      "default",
+      {
+        "duplicate-id-active": "off"
+      }
+    ]
   }
 }

@@ -7,8 +7,9 @@ import { useGetRandomWordQuery } from "Store/ToolkitAPIs/wordleAPI";
 import { GrAchievement } from "react-icons/gr";
 import { TfiLock } from "react-icons/tfi";
 
-export function GameEndModal({ result }: { result: string }) {
+export function GameEndModal({ result }: { result: string | null }) {
 	const currentLetterNumber = useAppSelector(currentLetterNumberSelector);
+
 	const { data: answer = { word: "" }, refetch } = useGetRandomWordQuery(undefined);
 
 	const dispatch = useAppDispatch();

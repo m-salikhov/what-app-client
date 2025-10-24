@@ -53,17 +53,16 @@ export function Modal({
 
 		if (event.key === "Escape") {
 			onClose();
-			return;
 		}
 	};
 
 	useEffect(() => {
 		scrollVisibility("hide");
 
-		if (dialogRef.current) {
+		if (dialogRef.current && active) {
 			dialogRef.current.focus();
 		}
-	}, []);
+	}, [active]);
 
 	return (
 		<>

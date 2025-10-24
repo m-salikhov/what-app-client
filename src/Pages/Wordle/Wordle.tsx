@@ -6,14 +6,25 @@ import { Board } from "./Components/Board";
 import { GameEndModal } from "./Components/GameEndModal";
 import { useLetterClassName } from "./helpers/useLetterClassName";
 import { useWordleInput } from "./helpers/useWordleInput";
+import { useLayoutEffect, useRef } from "react";
 
-const isEnglishKey = (key: string): boolean => {
-	return /^[a-zA-Z0-9!@#$%^&*()_+=\-[\]{}|;':",./<>?~` ]$/.test(key);
+const isValidInput = (key: string): boolean => {
+	const allowedKeys = ["Enter", "Delete", "Escape", "Backspace", "Alt", "Control", "Shift"];
+
+	if (/^[а-яА-Я]$/.test(key)) {
+		return true;
+	}
+
+	if (allowedKeys.includes(key)) {
+		return true;
+	}
+
+	return false;
 };
 
 const showToast = () => {
 	toast.error(
-		<p>Введите букву на русской раскладке</p>,
+		<p>Введите букву на русской раскладке (ё = е)</p>,
 
 		{
 			hideProgressBar: true,
@@ -44,7 +55,16 @@ export default function Wordle() {
 	const { handleInput } = useWordleInput();
 	const result = useAppSelector(resultSelector);
 
+	const ref = useRef<HTMLDivElement>(null);
+
 	const wordleContainer = getWordleContainer();
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: фокус возвращается при обновлении результата
+	useLayoutEffect(() => {
+		if (ref.current) {
+			ref.current.focus();
+		}
+	}, [result]);
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: toast
@@ -52,8 +72,9 @@ export default function Wordle() {
 			className="wordle"
 			// biome-ignore lint/a11y/noNoninteractiveTabindex: toast
 			tabIndex={0}
+			ref={ref}
 			onKeyDown={(e) => {
-				if (isEnglishKey(e.key)) {
+				if (!isValidInput(e.key)) {
 					showToast();
 					return;
 				}
