@@ -57,7 +57,9 @@ export function Modal({
 	};
 
 	useEffect(() => {
-		scrollVisibility("hide");
+		if (active) {
+			scrollVisibility("hide");
+		}
 
 		if (dialogRef.current && active) {
 			dialogRef.current.focus();
