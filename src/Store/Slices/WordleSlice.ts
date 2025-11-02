@@ -16,6 +16,7 @@ export interface WordleState {
 	letterState: LetterState[];
 	wrongWordFlag: boolean;
 	result: "win" | "lose" | null;
+	isGameOver: boolean;
 }
 
 const initialState: WordleState = {
@@ -27,6 +28,7 @@ const initialState: WordleState = {
 	letterState: [],
 	wrongWordFlag: false,
 	result: null,
+	isGameOver: false,
 };
 
 function pushState(value: string, className: ClassName, states: LetterState[]) {
@@ -127,6 +129,10 @@ const WordleSlice = createSlice({
 		setResult(state, action: PayloadAction<"win" | "lose">) {
 			state.allowNextLetter = false;
 			state.result = action.payload;
+		},
+
+		setIsGameOver(state, action: PayloadAction<boolean>) {
+			state.isGameOver = action.payload;
 		},
 
 		resetState: () => initialState,

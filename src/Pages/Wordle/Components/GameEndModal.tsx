@@ -1,14 +1,20 @@
 import { Button } from "Shared/Components/UI/Button/Button";
 import { Modal } from "Shared/Components/UI/Modal/Modal";
 import { useAppDispatch, useAppSelector } from "Shared/Hooks/redux";
-import { currentLetterNumberSelector } from "Store/Selectors/WordleSelectors";
+import {
+	currentLetterNumberSelector,
+	isGameOverSelector,
+	resultSelector,
+} from "Store/Selectors/WordleSelectors";
 import { wordleActions } from "Store/Slices/WordleSlice";
 import { useGetRandomWordQuery } from "Store/ToolkitAPIs/wordleAPI";
 import { GrAchievement } from "react-icons/gr";
 import { TfiLock } from "react-icons/tfi";
 
-export function GameEndModal({ result }: { result: string | null }) {
+export function GameEndModal() {
 	const currentLetterNumber = useAppSelector(currentLetterNumberSelector);
+	const isGameOver = useAppSelector(isGameOverSelector);
+	const result = useAppSelector(resultSelector);
 
 	const { data: answer = { word: "" }, refetch } = useGetRandomWordQuery(undefined);
 
@@ -17,6 +23,10 @@ export function GameEndModal({ result }: { result: string | null }) {
 	const attempts = currentLetterNumber / 5;
 
 	function onClose() {
+		dispatch(wordleActions.setIsGameOver(false));
+	}
+
+	function onElementDestroyed() {
 		dispatch(wordleActions.resetState());
 		refetch();
 	}
@@ -28,8 +38,12 @@ export function GameEndModal({ result }: { result: string | null }) {
 	};
 
 	return (
-		<Modal active={Boolean(result)} onClose={onClose} onKeyDown={handleKeyDown}>
-			{" "}
+		<Modal
+			active={isGameOver}
+			onClose={onClose}
+			onKeyDown={handleKeyDown}
+			onElementDestroyed={onElementDestroyed}
+		>
 			<div className="wordle-result-wrapper">
 				<div className="wordle-result-icon">
 					{result === "win" && <GrAchievement size={"100px"} color="#FFC300" />}
@@ -48,7 +62,7 @@ export function GameEndModal({ result }: { result: string | null }) {
 					</p>
 				)}
 
-				<Button onClick={onClose} title="Новое слово" onKeyDown={() => console.log("enter")} />
+				<Button onClick={onClose} title="Новое слово" />
 			</div>
 		</Modal>
 	);

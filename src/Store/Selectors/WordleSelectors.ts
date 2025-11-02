@@ -10,6 +10,7 @@ export const wrongWordFlagSelector = (state: RootState) => state.wordleReducer.w
 export const resultSelector = (state: RootState) => state.wordleReducer.result;
 export const wordsSelector = (state: RootState) => state.wordleReducer.words;
 export const letterStateSelector = (state: RootState) => state.wordleReducer.letterState;
+export const isGameOverSelector = (state: RootState) => state.wordleReducer.isGameOver;
 
 export const boardSelector = createSelector(
 	[

@@ -1,6 +1,6 @@
 import "./wordle.css";
 import { useAppSelector } from "Shared/Hooks/redux";
-import { lettersSelector, resultSelector } from "Store/Selectors/WordleSelectors";
+import { lettersSelector, isGameOverSelector } from "Store/Selectors/WordleSelectors";
 import { ToastContainer, toast } from "react-toastify";
 import { Board } from "./Components/Board";
 import { GameEndModal } from "./Components/GameEndModal";
@@ -53,18 +53,17 @@ const getWordleContainer = () => {
 
 export default function Wordle() {
 	const { handleInput } = useWordleInput();
-	const result = useAppSelector(resultSelector);
+	const isGameOver = useAppSelector(isGameOverSelector);
 
 	const ref = useRef<HTMLDivElement>(null);
 
 	const wordleContainer = getWordleContainer();
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: фокус возвращается при обновлении результата
 	useLayoutEffect(() => {
-		if (ref.current) {
+		if (ref.current && !isGameOver) {
 			ref.current.focus();
 		}
-	}, [result]);
+	}, [isGameOver]);
 
 	return (
 		// biome-ignore lint/a11y/noStaticElementInteractions: toast
@@ -84,7 +83,7 @@ export default function Wordle() {
 		>
 			<div className="wordle-container">{wordleContainer}</div>
 			<Board />
-			{result && <GameEndModal result={result} />}
+			<GameEndModal />
 			<ToastContainer />
 		</div>
 	);
