@@ -9,7 +9,7 @@ describe("getDateYYYY_MM_DD", () => {
 });
 
 describe("getDate", () => {
-	test("should return correct date", () => {
+	test("should return date string in correct format", () => {
 		const date = new Date("2022-06-01");
 		const dateStr = "1654041600000";
 		const dateNum = 1654041600000;

@@ -1,4 +1,4 @@
-import { baseUrl, serverRoutes } from "Shared/Constants/constants";
+import { serverRoutes } from "Shared/Constants/constants";
 import {
 	ResultFullSchema,
 	type ResultFullType,
@@ -6,11 +6,12 @@ import {
 } from "Shared/Schemas/ResultSchema";
 import { UserSchema, type UserType } from "Shared/Schemas/UserSchema";
 import type { UserLogin, UserReg } from "Store/Types/userApi.types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "./toolkitAPI.config";
 
 export const userAPI = createApi({
 	reducerPath: "userAPI",
-	baseQuery: fetchBaseQuery({ baseUrl, credentials: "include" }),
+	baseQuery,
 	tagTypes: ["result", "user"],
 	keepUnusedDataFor: 86400,
 

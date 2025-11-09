@@ -1,25 +1,24 @@
 import { TournamentsTable } from "Shared/Components/TournamentsTable/TournamentsTable";
-import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { beforeEach, describe, expect, test } from "vitest";
+import { describe, expect, test } from "vitest";
 import { allshort } from "../__fixtures__/allshort";
 import { renderWithProviders } from "../utils/renderWithProviders";
 
-let tournaments: TournamentShortType[];
-beforeEach(async () => {
-	const response = await fetch("https://andvarifserv.ru/tournaments/allshort");
+// let tournaments: TournamentShortType[];
+// beforeEach(async () => {
+// 	const response = await fetch("https://andvarifserv.ru/tournaments/allshort");
 
-	if (!response.ok) {
-		throw new Error(`Request failed. URL: ${response.url}`);
-	}
+// 	if (!response.ok) {
+// 		throw new Error(`Request failed. URL: ${response.url}`);
+// 	}
 
-	tournaments = await response.json();
-});
+// 	tournaments = await response.json();
+// });
 
 describe("TournamentsTable", () => {
 	test("получает и рендерит турниры", async () => {
-		renderWithProviders(<TournamentsTable tournaments={tournaments} />);
+		renderWithProviders(<TournamentsTable tournaments={allshort} />);
 
 		const title = await screen.findByText(allshort[0].title);
 
@@ -27,7 +26,7 @@ describe("TournamentsTable", () => {
 	});
 
 	test("работает поиск по таблице турниров", async () => {
-		renderWithProviders(<TournamentsTable tournaments={tournaments} />);
+		renderWithProviders(<TournamentsTable tournaments={allshort} />);
 
 		const inputElement = await screen.findByRole("textbox");
 
@@ -47,7 +46,7 @@ describe("TournamentsTable", () => {
 	});
 
 	test("работает сортировка по названию турниров: первое нажатие сортирует по алфавиту, повторное нажатие сортирует обратно", async () => {
-		renderWithProviders(<TournamentsTable tournaments={tournaments} />);
+		renderWithProviders(<TournamentsTable tournaments={allshort} />);
 
 		let links = await screen.findAllByRole("link");
 		const sortIcon = screen.getByRole("button", { name: "НАЗВАНИЕ" });
@@ -59,12 +58,12 @@ describe("TournamentsTable", () => {
 		await userEvent.click(sortIcon);
 		links = await screen.findAllByRole("link");
 		expect(links[0].textContent).toBe("Балтийский Бриз. Challenger III");
-		expect(links.at(-1)!.textContent).toBe("Сентябрьский Марш - 2021");
+		expect(links.at(-1)?.textContent).toBe("Сентябрьский Марш - 2021");
 
 		//при повторном нажатии сортировка происходит по названию в обратном алфавитном порядке
 		await userEvent.click(sortIcon);
 		links = await screen.findAllByRole("link");
 		expect(links[0].textContent).toBe("Сентябрьский Марш - 2021");
-		expect(links.at(-1)!.textContent).toBe("Балтийский Бриз. Challenger III");
+		expect(links.at(-1)?.textContent).toBe("Балтийский Бриз. Challenger III");
 	});
 });

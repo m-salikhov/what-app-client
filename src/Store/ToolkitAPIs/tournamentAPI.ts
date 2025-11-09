@@ -1,4 +1,4 @@
-import { baseUrl, serverRoutes } from "Shared/Constants/constants";
+import { serverRoutes } from "Shared/Constants/constants";
 import {
 	type QuestionType,
 	type TournamentShortType,
@@ -8,12 +8,13 @@ import {
 	type TournamentType,
 	TournamentTypeSchema,
 } from "Shared/Schemas/TournamentSchema";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "./toolkitAPI.config";
 
 export const tournamentAPI = createApi({
 	reducerPath: "tournamentAPI",
 	tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
-	baseQuery: fetchBaseQuery({ baseUrl }),
+	baseQuery,
 	keepUnusedDataFor: 3600,
 
 	endpoints: (build) => ({
@@ -73,7 +74,7 @@ export const tournamentAPI = createApi({
 
 		getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
 			query: (userID) => ({
-				url: serverRoutes.tournamentsAllByUploader + "/" + userID,
+				url: `${serverRoutes.tournamentsAllByUploader}/${userID}`,
 				credentials: "include",
 			}),
 			responseSchema: TournamentShortTypeSchema.array(),

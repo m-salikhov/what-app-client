@@ -5,6 +5,7 @@ import Sitemap from 'vite-plugin-sitemap';
 
 const isDev = process.env.NODE_ENV === 'development';
 
+
 const sitemapOptions: Parameters<typeof Sitemap>[0] = {
   hostname: 'https://4gk-base.andvarif.ru/',
   dynamicRoutes: ['/entry', '/playmode', '/addbylink', '/all', '/about'],
