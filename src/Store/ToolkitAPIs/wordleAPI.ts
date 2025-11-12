@@ -1,9 +1,10 @@
-import { baseUrl, serverRoutes } from "Shared/Constants/constants";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { serverRoutes } from "Shared/Constants/constants";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "./toolkitAPI.config";
 
 export const wordleAPI = createApi({
 	reducerPath: "wordleAPI",
-	baseQuery: fetchBaseQuery({ baseUrl }),
+	baseQuery,
 	keepUnusedDataFor: 3600,
 
 	endpoints: (build) => ({

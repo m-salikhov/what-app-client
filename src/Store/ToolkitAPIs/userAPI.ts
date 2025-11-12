@@ -13,7 +13,7 @@ export const userAPI = createApi({
 	reducerPath: "userAPI",
 	baseQuery,
 	tagTypes: ["result", "user"],
-	keepUnusedDataFor: 86400,
+	keepUnusedDataFor: 24 * 60 * 60,
 
 	endpoints: (build) => ({
 		getCurrentUser: build.query<UserType | undefined, undefined>({

@@ -15,7 +15,7 @@ export const tournamentAPI = createApi({
 	reducerPath: "tournamentAPI",
 	tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
 	baseQuery,
-	keepUnusedDataFor: 3600,
+	keepUnusedDataFor: 60 * 60,
 
 	endpoints: (build) => ({
 		getTournament: build.query<TournamentType, string | number>({
