@@ -83,6 +83,7 @@
 
 		span {
 			font-weight: bold;
+			font-size: clamp(0.65rem, 2vw, 1rem);
 		}
 
 		.headerCellIcon {
@@ -101,6 +102,9 @@
 }
 
 .cell {
+	a {
+		font-size: clamp(0.7rem, 2vw, 1rem);
+	}
 	a:hover {
 		font-weight: bold;
 	}
