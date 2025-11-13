@@ -59,9 +59,9 @@ export function LastTournaments() {
 			})}
 
 			<div className={styles.footer}>
-				<LeftArrow size={24} onClick={handlePrevPage} />
+				<LeftArrow title="LastTournamentsPrev" size={24} onClick={handlePrevPage} />
 				<p>{page}</p>
-				<RightArrow size={24} onClick={handleNextPage} />
+				<RightArrow title="lastTournamentsNext" size={24} onClick={handleNextPage} />
 			</div>
 		</div>
 	);

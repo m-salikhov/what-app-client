@@ -4,7 +4,7 @@ export const lastTournamentsFirstCall: TournamentsLastShortType = {
 	tournaments: [
 		{
 			id: 261,
-			title: "Полесские хроники. Орёл",
+			title: "Полесские хроники.Орёл",
 			date: 1723852800000,
 			tours: 3,
 			questionsQuantity: 36,
@@ -16,7 +16,7 @@ export const lastTournamentsFirstCall: TournamentsLastShortType = {
 		},
 		{
 			id: 260,
-			title: "Полесские хроники. Решка",
+			title: "Полесские хроники.Решка",
 			date: 1724457600000,
 			tours: 3,
 			questionsQuantity: 36,
@@ -76,7 +76,7 @@ export const lastTournamentsFirstCall: TournamentsLastShortType = {
 		},
 		{
 			id: 253,
-			title: "Чемпионат Эстонии — 2022",
+			title: "Чемпионат Эстонии",
 			date: 1665187200000,
 			tours: 6,
 			questionsQuantity: 90,
