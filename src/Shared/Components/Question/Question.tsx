@@ -28,13 +28,17 @@ export function Question({ q, random = false }: Props) {
 				<p>{q.text}</p>
 			</div>
 
-			<div className={styles.answerArrow} onClick={() => setShowAnswer(!showAnswer)}>
+			<button
+				type="button"
+				className={styles.answerArrow}
+				onClick={() => setShowAnswer(!showAnswer)}
+			>
 				<h4>Ответ</h4>
 				<AiOutlineDown
 					className={showAnswer ? styles.answerArrowOpen : styles.answerArrowClose}
 					size={"30px"}
 				/>
-			</div>
+			</button>
 
 			<div className={showAnswer ? styles.ans : `${styles.ans} ${styles.ansClose}`}>
 				<Answer q={q} />

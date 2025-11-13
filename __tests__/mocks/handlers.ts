@@ -1,5 +1,8 @@
 import { HttpResponse, http } from "msw";
-import { allshort } from "../__fixtures__/allshort";
+import { allshort } from "../__fixtures__/allshort.fixture";
+import { lastTournamentsFirstCall } from "../__fixtures__/lastTournaments.fixture";
+import { questions } from "../__fixtures__/questions.fixture";
+import { statsFixture } from "../__fixtures__/stats.fixture";
 
 export const handlers = [
 	http.get("https://example.com/user", () => {
@@ -12,6 +15,23 @@ export const handlers = [
 
 	http.get("https://andvarifserv.ru/tournaments/allshort", () => {
 		return HttpResponse.json(allshort);
+	}),
+
+	http.get("https://andvarifserv.ru/tournaments/statistics", () => {
+		return HttpResponse.json(statsFixture);
+	}),
+
+	http.get("https://andvarifserv.ru/tournaments/last", ({ request }) => {
+		const url = new URL(request.url);
+		const page = url.searchParams.get("page");
+		console.log("🚀 ~ page:", page);
+
+		// Возвращаем нужные данные
+		return HttpResponse.json(lastTournamentsFirstCall);
+	}),
+
+	http.get("https://andvarifserv.ru/tournaments/random/4", () => {
+		return HttpResponse.json(questions.slice(0, 4));
 	}),
 
 	http.post("https://andvarifserv.ru/auth/login", async ({ request }) => {

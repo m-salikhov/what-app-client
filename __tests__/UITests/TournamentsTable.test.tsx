@@ -2,7 +2,7 @@ import { TournamentsTable } from "Shared/Components/TournamentsTable/Tournaments
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
-import { allshort } from "../__fixtures__/allshort";
+import { allshort } from "../__fixtures__/allshort.fixture";
 import { renderWithProviders } from "../utils/renderWithProviders";
 
 // let tournaments: TournamentShortType[];
@@ -16,7 +16,7 @@ import { renderWithProviders } from "../utils/renderWithProviders";
 // 	tournaments = await response.json();
 // });
 
-describe("TournamentsTable", () => {
+describe("Таблица со всеми турнирами", () => {
 	test("получает и рендерит турниры", async () => {
 		renderWithProviders(<TournamentsTable tournaments={allshort} />);
 
