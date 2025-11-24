@@ -1,12 +1,10 @@
 import { z } from "zod";
 
-// import { QuestionTypeSchema } from './QuestionSchema';
-
 const SourceTypeSchema = z.object({
 	id: z.number(),
 	link: z.string(),
 });
-// Схема для EditorType
+
 const EditorTypeSchema = z.object({
 	name: z.string(),
 	id: z.number(),
@@ -21,7 +19,7 @@ export const TournamentShortTypeSchema = z.object({
 	uploader: z.string(),
 	dateUpload: z.number(),
 	difficulty: z.number(),
-	status: z.enum(["published", "draft", "moderation"]),
+	status: z.enum(["published", "draft"]),
 	uploaderUuid: z.string().optional(),
 	link: z.url(),
 });
