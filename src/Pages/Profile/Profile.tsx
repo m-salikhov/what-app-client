@@ -33,7 +33,9 @@ export default function Profile() {
 						<p>{user.role}</p>
 					</div>
 				</section>
+
 				<ChangePass />
+
 				<ProfileContent userId={user.id} />
 			</div>
 		</div>

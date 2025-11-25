@@ -25,14 +25,18 @@ function ProfileContentComponent({ userId }: { userId: string }) {
 					<p>Нет сыгранных турниров</p>
 				)}
 			</section>
+
 			<section className={styles.adds}>
 				<h2>Добавленные вами турниры:</h2>
 				{tournaments.length > 0 ? (
 					tournaments.map((v) => {
 						return (
-							<Link to={`/tournament/${v.id}`} key={v.id}>
-								<p>{v.title}</p>
-							</Link>
+							<div key={v.id}>
+								<Link to={`/tournament/${v.id}`}>
+									<p>{v.title}</p>
+								</Link>
+								<p>{v.status === "draft" ? "На рассмотрении" : "Опубликован"}</p>
+							</div>
 						);
 					})
 				) : (

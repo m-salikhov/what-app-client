@@ -8,36 +8,6 @@
 	border-radius: 20px;
 }
 
-.results {
-	a {
-		justify-content: space-between;
-
-		p:last-child {
-			width: 85px;
-		}
-	}
-}
-
-.results,
-.adds {
-	padding-top: 1rem;
-
-	a {
-		display: flex;
-		margin-left: 10px;
-		border-bottom: 2px solid var(--border-color-quiet);
-
-		&:hover {
-			background-color: var(--a-main-list-bg-color);
-		}
-	}
-
-	& > p {
-		margin-left: 10px;
-		border-bottom: 2px solid var(--border-color-quiet);
-	}
-}
-
 .userInfo {
 	div {
 		display: flex;
@@ -49,6 +19,7 @@
 	}
 }
 
+/* Смена пароля в модальном окне */
 .changePass {
 	display: flex;
 
@@ -101,6 +72,55 @@
 
 .success {
 	color: green;
+}
+
+/* секция с результатами */
+.results {
+	padding-top: 1rem;
+
+	a {
+		display: flex;
+		justify-content: space-between;
+		margin-left: 10px;
+		border-bottom: 2px solid var(--border-color-quiet);
+
+		&:hover {
+			background-color: var(--a-main-list-bg-color);
+		}
+
+		p:last-child {
+			display: flex;
+			align-items: center;
+			width: 85px;
+		}
+	}
+}
+
+/* секция с добавленными турнирами */
+.adds {
+	padding-top: 1rem;
+
+	a {
+		display: flex;
+		margin-left: 10px;
+	}
+
+	& > div {
+		display: flex;
+		justify-content: space-between;
+		margin-left: 10px;
+		border-bottom: 2px solid var(--border-color-quiet);
+
+		&:hover {
+			background-color: var(--a-main-list-bg-color);
+		}
+
+		& > p {
+			display: flex;
+			align-items: center;
+			font-size: 0.7rem;
+		}
+	}
 }
 
 @media (width <= 500px) {
