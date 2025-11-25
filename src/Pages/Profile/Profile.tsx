@@ -1,12 +1,15 @@
 import { useAuth } from "Shared/Auth/useAuth";
+import { Button } from "Shared/Components/UI/Button/Button";
 import { getDate } from "Shared/Helpers/getDate";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
+import { useNavigate } from "react-router-dom";
 import { ChangePass } from "./Components/ChangePass/ChangePass";
 import { ProfileContent } from "./Components/ProfileContent";
 import styles from "./profile.module.css";
 
 export default function Profile() {
 	setDocTitle("Профиль");
+	const navigate = useNavigate();
 
 	const { user } = useAuth();
 
@@ -35,6 +38,10 @@ export default function Profile() {
 				</section>
 
 				<ChangePass />
+
+				{user.role === "admin" && (
+					<Button title="Панель администратора" onClick={() => navigate("/admin")} />
+				)}
 
 				<ProfileContent userId={user.id} />
 			</div>

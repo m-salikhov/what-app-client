@@ -76,7 +76,7 @@ export const RegistrationForm = () => {
 				</div>
 				<FormError message={errors.confirmPassword?.message} />
 
-				{error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
+				{!!error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
 
 				<Button type="submit" disabled={isLoading} title="Зарегистрироваться" />
 			</form>

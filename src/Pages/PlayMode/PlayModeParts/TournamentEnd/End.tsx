@@ -18,7 +18,7 @@ export function End({ tournament }: { tournament: TournamentType }) {
 
 			{isSuccess && <p>Ваш результат доступен в Профиле</p>}
 
-			{error && <p> 'Ошибка при сохранении результата'</p>}
+			{!!error && <p> 'Ошибка при сохранении результата'</p>}
 
 			<Button title="К выбору турнира" onClick={() => navigate("/playmode")} />
 		</div>

@@ -67,7 +67,7 @@ const LoginForm = () => {
 
 			<FormError message={errors.password?.message} />
 
-			{error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
+			{!!error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
 
 			<Button type="submit" disabled={isLoading} title="Войти" />
 		</form>
