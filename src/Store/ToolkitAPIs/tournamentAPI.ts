@@ -8,14 +8,10 @@ import {
 	type TournamentType,
 	TournamentTypeSchema,
 } from "Shared/Schemas/TournamentSchema";
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./toolkitAPI.config";
+import { baseApi } from "./baseApi";
 
-export const tournamentAPI = createApi({
-	reducerPath: "tournamentAPI",
-	tagTypes: ["tournaments", "shorts", "stats", "lastTournamentsShort"],
-	baseQuery,
-	keepUnusedDataFor: 60 * 60,
+export const tournamentAPI = baseApi.injectEndpoints({
+	overrideExisting: false,
 
 	endpoints: (build) => ({
 		getTournament: build.query<TournamentType, string | number>({

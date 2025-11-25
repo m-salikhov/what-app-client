@@ -32,4 +32,4 @@ const baseQuery: BaseQueryFn = async (args, api, extraOptions) => {
 	return rawBaseQuery(modifiedArgs, api, extraOptions);
 };
 
-export { rawBaseQuery, baseQuery };
+export { baseQuery };

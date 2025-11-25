@@ -1,11 +1,8 @@
 import { serverRoutes } from "Shared/Constants/constants";
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./toolkitAPI.config";
+import { baseApi } from "./baseApi";
 
-export const wordleAPI = createApi({
-	reducerPath: "wordleAPI",
-	baseQuery,
-	keepUnusedDataFor: 3600,
+export const wordleAPI = baseApi.injectEndpoints({
+	overrideExisting: false,
 
 	endpoints: (build) => ({
 		getRandomWord: build.query<{ word: string }, undefined>({

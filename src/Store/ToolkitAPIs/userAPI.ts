@@ -6,18 +6,15 @@ import {
 } from "Shared/Schemas/ResultSchema";
 import { UserSchema, type UserType } from "Shared/Schemas/UserSchema";
 import type { UserLogin, UserReg } from "Store/Types/userApi.types";
-import { createApi } from "@reduxjs/toolkit/query/react";
-import { baseQuery } from "./toolkitAPI.config";
+import { baseApi } from "./baseApi";
 
-export const userAPI = createApi({
-	reducerPath: "userAPI",
-	baseQuery,
-	tagTypes: ["result", "user"],
-	keepUnusedDataFor: 24 * 60 * 60,
+export const userAPI = baseApi.injectEndpoints({
+	overrideExisting: false,
 
 	endpoints: (build) => ({
 		getCurrentUser: build.query<UserType | undefined, undefined>({
 			query: () => serverRoutes.authLogFirst,
+			keepUnusedDataFor: 24 * 60 * 60,
 			responseSchema: UserSchema.optional(),
 		}),
 
@@ -32,6 +29,7 @@ export const userAPI = createApi({
 			query: (body) => ({
 				url: serverRoutes.authLogin,
 				method: "POST",
+				keepUnusedDataFor: 24 * 60 * 60,
 				body,
 			}),
 			responseSchema: UserSchema,
@@ -41,6 +39,7 @@ export const userAPI = createApi({
 			query: (body) => ({
 				url: serverRoutes.users,
 				method: "POST",
+				keepUnusedDataFor: 24 * 60 * 60,
 				body,
 			}),
 			responseSchema: UserSchema,
@@ -58,7 +57,6 @@ export const userAPI = createApi({
 		getUserResultFull: build.query<ResultFullType[], string>({
 			query: (userID) => serverRoutes.userResultFull(userID),
 			responseSchema: ResultFullSchema.array(),
-
 			providesTags: ["result"],
 		}),
 

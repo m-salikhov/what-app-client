@@ -11,13 +11,9 @@ interface Props {
 export function PrivateRoute({ children, requiredRole }: Props) {
 	const { user } = useAuth();
 
-	if (!user) {
-		return <Navigate to="/" />;
-	}
+	if (requiredRole === "user" && user) return <>{children}</>;
 
-	if (requiredRole === "user") return <>{children}</>;
-
-	if (requiredRole === "admin" && user.role === "admin") return <>{children}</>;
+	if (requiredRole === "admin" && user?.role === "admin") return <>{children}</>;
 
 	return <Navigate to="/" />;
 }

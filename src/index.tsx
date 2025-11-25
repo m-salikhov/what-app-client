@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import router from "src/Router/AppRouter";
 import "Shared/Styles/style.css";
 import { ThemeProvider } from "Shared/Context/ThemeContext";
+import "Store/ToolkitAPIs/Config/registeredAPIs";
 
 if (import.meta.env.DEV) {
 	import("react-scan").then(({ scan }) => {

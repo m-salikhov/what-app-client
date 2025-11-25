@@ -1,23 +1,19 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { playModeReducer } from "./Slices/PlayModeSlice";
 import { wordleReducer } from "./Slices/WordleSlice";
-import { tournamentAPI } from "./ToolkitAPIs/tournamentAPI";
-import { userAPI } from "./ToolkitAPIs/userAPI";
-import { wordleAPI } from "./ToolkitAPIs/wordleAPI";
+import { baseApi } from "./ToolkitAPIs/baseApi";
 
 const rootReducer = combineReducers({
 	wordleReducer,
 	playModeReducer,
-	[tournamentAPI.reducerPath]: tournamentAPI.reducer,
-	[userAPI.reducerPath]: userAPI.reducer,
-	[wordleAPI.reducerPath]: wordleAPI.reducer,
+
+	[baseApi.reducerPath]: baseApi.reducer,
 });
 
 export const setupStore = (preloadedState?: Partial<RootState>) => {
 	return configureStore({
 		reducer: rootReducer,
-		middleware: (getMidlleware) =>
-			getMidlleware().concat(tournamentAPI.middleware, userAPI.middleware, wordleAPI.middleware),
+		middleware: (getMidlleware) => getMidlleware().concat(baseApi.middleware),
 		preloadedState,
 	});
 };
