@@ -11,3 +11,4 @@ export const UserSchema = z
 	.strict();
 
 export type UserType = z.infer<typeof UserSchema>;
+export type UserRoles = z.infer<typeof UserSchema>["role"];

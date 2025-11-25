@@ -22,6 +22,7 @@ const AllTournaments = lazy(() => import("src/Pages/AllTournaments/AllTournament
 const About = lazy(() => import("src/Pages/About/About"));
 const Wordle = lazy(() => import("src/Pages/Wordle/Wordle"));
 const Tournament = lazy(() => import("src/Pages/Tournament/Tournament"));
+const Admin = lazy(() => import("src/Pages/Admin/AdminPage"));
 
 const router = createBrowserRouter(
 	[
@@ -81,7 +82,7 @@ const router = createBrowserRouter(
 						{
 							index: true,
 							element: (
-								<PrivateRoute>
+								<PrivateRoute requiredRole="user">
 									<Suspense fallback={<Spinner />}>
 										<Profile />
 									</Suspense>
@@ -91,7 +92,7 @@ const router = createBrowserRouter(
 						{
 							path: ":tournamentId/:userId",
 							element: (
-								<PrivateRoute>
+								<PrivateRoute requiredRole="user">
 									<Suspense fallback={<Spinner />}>
 										<ProfileResultTable />
 									</Suspense>
@@ -99,6 +100,17 @@ const router = createBrowserRouter(
 							),
 						},
 					],
+				},
+
+				{
+					path: "admin",
+					element: (
+						<PrivateRoute requiredRole="admin">
+							<Suspense fallback={<Spinner />}>
+								<Admin />
+							</Suspense>
+						</PrivateRoute>
+					),
 				},
 
 				{
