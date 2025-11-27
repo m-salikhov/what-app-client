@@ -8,6 +8,6 @@ export async function tournamentLoader({ params }: { params: Params }) {
 	try {
 		return await store.dispatch(tournamentAPI.endpoints.getTournament.initiate(params.id)).unwrap();
 	} catch (error) {
-		throw error;
+		console.log(error);
 	}
 }

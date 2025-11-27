@@ -6,7 +6,6 @@ import { baseApi } from "./ToolkitAPIs/baseApi";
 const rootReducer = combineReducers({
 	wordleReducer,
 	playModeReducer,
-
 	[baseApi.reducerPath]: baseApi.reducer,
 });
 

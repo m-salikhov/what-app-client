@@ -1,4 +1,5 @@
 import { serverRoutes } from "Shared/Constants/constants";
+import { wordleActions } from "Store/Slices/WordleSlice";
 import { baseApi } from "./baseApi";
 
 export const wordleAPI = baseApi.injectEndpoints({
@@ -7,6 +8,11 @@ export const wordleAPI = baseApi.injectEndpoints({
 	endpoints: (build) => ({
 		getRandomWord: build.query<{ word: string }, undefined>({
 			query: () => serverRoutes.wordleRandom,
+			async onQueryStarted(_arg, { dispatch }) {
+				// Сразу сбрасываем состояние игры
+				dispatch(wordleActions.resetState());
+			},
+			keepUnusedDataFor: 0,
 		}),
 
 		verifyWordInDB: build.mutation<{ isExist: boolean; word: string }, string>({

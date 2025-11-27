@@ -31,7 +31,7 @@ export const tournamentAPI = baseApi.injectEndpoints({
 
 		getRandom: build.query<QuestionType[], number>({
 			query: (n: number) => `/tournaments/random/${n}`,
-			keepUnusedDataFor: 1,
+			keepUnusedDataFor: 15,
 		}),
 
 		getRandomTournament: build.query<TournamentShortType, string>({

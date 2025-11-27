@@ -16,7 +16,7 @@ export function GameEndModal() {
 	const isGameOver = useAppSelector(isGameOverSelector);
 	const result = useAppSelector(resultSelector);
 
-	const { data: answer = { word: "" }, refetch } = useGetRandomWordQuery(undefined);
+	const { data, refetch } = useGetRandomWordQuery(undefined);
 
 	const dispatch = useAppDispatch();
 
@@ -27,7 +27,6 @@ export function GameEndModal() {
 	}
 
 	function onElementDestroyed() {
-		dispatch(wordleActions.resetState());
 		refetch();
 	}
 
@@ -52,13 +51,13 @@ export function GameEndModal() {
 
 				{result === "win" && (
 					<p className="wordle-result-text">
-						Вы отгадали слово <span>{answer.word}</span> <br /> {attempts === 2 ? "со" : "с"}{" "}
+						Вы отгадали слово <span>{data?.word}</span> <br /> {attempts === 2 ? "со" : "с"}{" "}
 						{attempts}-{attempts === 3 ? "ей" : "ой"} попытки!
 					</p>
 				)}
 				{result === "lose" && (
 					<p className="wordle-result-text">
-						Увы! Вам не удалось отгадать <br /> слово <span>{answer.word}</span>
+						Увы! Вам не удалось отгадать <br /> слово <span>{data?.word}</span>
 					</p>
 				)}
 

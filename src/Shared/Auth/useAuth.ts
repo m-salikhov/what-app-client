@@ -48,10 +48,13 @@ export function useAuth() {
 
 	return {
 		user,
-		handleLogout,
+
 		handleLogin,
 		loginState,
+
 		handleRegistration,
 		registrationState,
+
+		handleLogout,
 	};
 }

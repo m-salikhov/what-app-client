@@ -7,7 +7,6 @@ import { Layout } from "src/Shared/Components/Layout/Layout";
 import { Spinner } from "src/Shared/Components/Spinner/Spinner";
 import { initialLoginLoader } from "../Shared/Auth/InitialLoginLoader";
 import { PrivateRoute } from "./HOC/PrivateRoute";
-import { wordleLoader } from "./Utils/wordleLoader";
 
 const Entry = lazy(() => import("src/Pages/Entry/Entry"));
 const AddTournamentLink = lazy(() => import("src/Pages/AddTournamentLink/AddTournamentLink"));
@@ -115,7 +114,6 @@ const router = createBrowserRouter(
 
 				{
 					path: "wordle",
-					loader: wordleLoader,
 					element: (
 						<Suspense fallback={<Spinner />}>
 							<Wordle />
