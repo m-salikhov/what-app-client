@@ -23,16 +23,21 @@ export function RandomQuestions() {
 				<div className={styles.refresh}>
 					{" "}
 					<h2>Случайные вопросы</h2>
-					<HiRefresh
-						size={24}
-						className={
-							isRandomRefetch ? styles.refreshIcon : `${styles.refreshIcon} ${styles.rotate}`
-						}
+					<button
+						type="button"
+						title="случайные вопросы"
 						onClick={() => {
 							refetch();
 							setIsRandomRefetch(!isRandomRefetch);
 						}}
-					/>
+					>
+						<HiRefresh
+							size={24}
+							className={
+								isRandomRefetch ? styles.refreshIcon : `${styles.refreshIcon} ${styles.rotate}`
+							}
+						/>
+					</button>
 				</div>
 			</div>
 

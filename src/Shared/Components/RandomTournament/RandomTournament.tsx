@@ -29,12 +29,9 @@ export function RandomTournament({ size }: { size?: string }) {
 		<>
 			{isFetching && <Spinner width={size ? size : "40"} />}
 			{!isFetching && (
-				<DiceIcon
-					size={size ? size : "40"}
-					onClick={handleClick}
-					cursor="pointer"
-					color="var(--h-color)"
-				/>
+				<button type="button" title="открыть случайный турнир" onClick={handleClick}>
+					<DiceIcon size={size ? size : "40"} cursor="pointer" color="var(--h-color)" />
+				</button>
 			)}
 		</>
 	);
