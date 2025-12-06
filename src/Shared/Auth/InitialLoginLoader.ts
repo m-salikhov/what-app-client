@@ -9,10 +9,11 @@ export async function initialLoginLoader() {
 		return null;
 	}
 
-	try {
-		await store.dispatch(userAPI.endpoints.getCurrentUser.initiate(undefined));
-	} catch (error) {
-		throw error;
+	const { isError } = await store.dispatch(userAPI.endpoints.getCurrentUser.initiate(undefined));
+
+	if (isError) {
+		localStorage.removeItem("rememberMe");
+		await store.dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, undefined));
 	}
 
 	return null;
