@@ -1,0 +1,28 @@
+.container {
+	border-right: 1px solid var(--border-color-quiet);
+	border-left: 1px solid var(--border-color-quiet);
+	border-top: 1px solid var(--border-color-quiet);
+}
+
+.line {
+	display: grid;
+	grid-template-columns: 40px 2.2fr 40px 30px 0.8fr 1.2fr 1.2fr 0.8fr 1fr;
+	border-bottom: 1px solid var(--border-color-quiet);
+
+	.cell {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0.5rem 0;
+		border-right: 1px solid var(--border-color-quiet);
+
+		&:nth-child(2) {
+			font-size: 0.8rem;
+		}
+	}
+
+	button:hover {
+		background: var(--border-color-quiet);
+		/* all: unset; */
+	}
+}

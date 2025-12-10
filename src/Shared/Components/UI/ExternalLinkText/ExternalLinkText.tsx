@@ -3,11 +3,17 @@ import styles from "./external-link.module.css";
 interface Props {
 	text: string;
 	href: string;
+	extraClass?: string;
 }
 
-export function ExternalLinkText({ text, href }: Props) {
+export function ExternalLinkText({ text, href, extraClass }: Props) {
 	return (
-		<a className={styles.externalLink} href={href} target="_blank" rel="noreferrer">
+		<a
+			className={extraClass ? `${styles.externalLink} ${extraClass}` : styles.externalLink}
+			href={href}
+			target="_blank"
+			rel="noreferrer"
+		>
 			{text}
 		</a>
 	);

@@ -4,6 +4,11 @@ import {
 } from "Shared/Schemas/TournamentSchema";
 import { baseApi } from "Store/ToolkitAPIs/baseApi";
 
+export interface ChangeTournamentStatusBody {
+	id: number;
+	status: TournamentShortType["status"];
+}
+
 export const adminAPI = baseApi.injectEndpoints({
 	overrideExisting: false,
 
@@ -12,7 +17,15 @@ export const adminAPI = baseApi.injectEndpoints({
 			query: () => "tournaments/drafts",
 			responseSchema: TournamentShortTypeSchema.array(),
 		}),
+
+		changeTournamentStatus: build.mutation<ChangeTournamentStatusBody, ChangeTournamentStatusBody>({
+			query: (body) => ({
+				url: "tournaments/change-status",
+				method: "PATCH",
+				body,
+			}),
+		}),
 	}),
 });
 
-export const { useGetDraftsQuery } = adminAPI;
+export const { useGetDraftsQuery, useChangeTournamentStatusMutation } = adminAPI;
