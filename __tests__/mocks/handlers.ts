@@ -1,6 +1,9 @@
 import { HttpResponse, http } from "msw";
 import { allshort } from "../__fixtures__/allshort.fixture";
-import { lastTournamentsFirstCall } from "../__fixtures__/lastTournaments.fixture";
+import {
+	lastTournamentsFirstCall,
+	lastTournamentsSecondCall,
+} from "../__fixtures__/lastTournaments.fixture";
 import { questions } from "../__fixtures__/questions.fixture";
 import { statsFixture } from "../__fixtures__/stats.fixture";
 
@@ -24,10 +27,14 @@ export const handlers = [
 	http.get("https://andvarifserv.ru/tournaments/last", ({ request }) => {
 		const url = new URL(request.url);
 		const page = url.searchParams.get("page");
-		console.log("🚀 ~ page:", page);
 
-		// Возвращаем нужные данные
-		return HttpResponse.json(lastTournamentsFirstCall);
+		if (page === "1") {
+			return HttpResponse.json(lastTournamentsFirstCall);
+		}
+
+		if (page === "2") {
+			return HttpResponse.json(lastTournamentsSecondCall);
+		}
 	}),
 
 	http.get("https://andvarifserv.ru/tournaments/random/4", () => {

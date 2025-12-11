@@ -1,11 +1,14 @@
 import { Main } from "src/Pages/Main/Main";
 import { renderWithProviders } from "../utils/renderWithProviders";
 import { screen } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
-import { lastTournamentsFirstCall } from "../__fixtures__/lastTournaments.fixture";
+import {
+	lastTournamentsFirstCall,
+	lastTournamentsSecondCall,
+} from "../__fixtures__/lastTournaments.fixture";
 import { statsFixture } from "../__fixtures__/stats.fixture";
 import userEvent from "@testing-library/user-event";
 import { questions } from "../__fixtures__/questions.fixture";
+import { describe, expect, test } from "vitest";
 
 describe("Главная страница", () => {
 	test("рендерит главную страницу", async () => {
@@ -32,5 +35,9 @@ describe("Главная страница", () => {
 		const rightArrow = screen.getByTitle("lastTournamentsNext");
 		expect(rightArrow).toBeInTheDocument();
 		await userEvent.click(rightArrow);
+		//получил и отрендерил 2 страницу списка турниров после нажатия стрелки
+		for (const tournament of lastTournamentsSecondCall.tournaments) {
+			await screen.findByText(tournament.title);
+		}
 	});
 });

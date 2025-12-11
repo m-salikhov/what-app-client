@@ -5,17 +5,6 @@ import { describe, expect, test } from "vitest";
 import { allshort } from "../__fixtures__/allshort.fixture";
 import { renderWithProviders } from "../utils/renderWithProviders";
 
-// let tournaments: TournamentShortType[];
-// beforeEach(async () => {
-// 	const response = await fetch("https://andvarifserv.ru/tournaments/allshort");
-
-// 	if (!response.ok) {
-// 		throw new Error(`Request failed. URL: ${response.url}`);
-// 	}
-
-// 	tournaments = await response.json();
-// });
-
 describe("Таблица со всеми турнирами", () => {
 	test("получает и рендерит турниры", async () => {
 		renderWithProviders(<TournamentsTable tournaments={allshort} />);

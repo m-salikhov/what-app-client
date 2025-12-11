@@ -1,5 +1,5 @@
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
-import { useState } from "react";
+import { Activity, useState } from "react";
 import LoginForm from "./Components/Forms/LoginForm";
 import { RegistrationForm } from "./Components/Forms/RegForm";
 import styles from "./entry.module.css";
@@ -18,7 +18,13 @@ function Entry() {
 						<img src={entryImg} alt="логотип на форме входа\регистрации" />
 					</div>
 
-					{showLoginOrRegForm ? <LoginForm /> : <RegistrationForm />}
+					<Activity mode={showLoginOrRegForm ? "visible" : "hidden"}>
+						<LoginForm />
+					</Activity>
+
+					<Activity mode={showLoginOrRegForm ? "hidden" : "visible"}>
+						<RegistrationForm />
+					</Activity>
 
 					<button
 						type="button"

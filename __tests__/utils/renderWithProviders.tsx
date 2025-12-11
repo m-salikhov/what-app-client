@@ -22,7 +22,7 @@ export function renderWithProviders(
 ) {
 	function Wrapper({ children }: PropsWithChildren): React.JSX.Element {
 		return (
-			<MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+			<MemoryRouter>
 				<Provider store={store}>{children}</Provider>
 			</MemoryRouter>
 		);
