@@ -1,5 +1,5 @@
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
-import { Activity, useState } from "react";
+import { useState } from "react";
 import LoginForm from "./Components/Forms/LoginForm";
 import { RegistrationForm } from "./Components/Forms/RegForm";
 import styles from "./entry.module.css";
@@ -8,7 +8,7 @@ import entryImg from "./entry_img.svg";
 function Entry() {
 	setDocTitle("Вход");
 
-	const [showLoginOrRegForm, setShowLoginOrRegForm] = useState(true);
+	const [showForm, setShowForm] = useState<"login" | "registration">("login");
 
 	return (
 		<div className={styles.wrapper}>
@@ -18,20 +18,15 @@ function Entry() {
 						<img src={entryImg} alt="логотип на форме входа\регистрации" />
 					</div>
 
-					<Activity mode={showLoginOrRegForm ? "visible" : "hidden"}>
-						<LoginForm />
-					</Activity>
-
-					<Activity mode={showLoginOrRegForm ? "hidden" : "visible"}>
-						<RegistrationForm />
-					</Activity>
+					{showForm === "login" && <LoginForm />}
+					{showForm === "registration" && <RegistrationForm />}
 
 					<button
 						type="button"
 						className={styles.switch}
-						onClick={() => setShowLoginOrRegForm(!showLoginOrRegForm)}
+						onClick={() => setShowForm(showForm === "login" ? "registration" : "login")}
 					>
-						{showLoginOrRegForm ? "Нет аккаунта?" : "Есть аккаунт?"}
+						{showForm === "login" ? "Нет аккаунта?" : "Есть аккаунт?"}
 					</button>
 				</div>
 			</div>

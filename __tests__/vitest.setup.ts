@@ -7,10 +7,15 @@ import { SpinnerMock } from "./mocks/SpinnerMock";
 // нужен так как библиотека jsdom не поддерживает react-loader-spinner
 vi.mock("../src/Shared/Components/Spinner/Spinner", () => {
 	return {
-		// Если Spinner — именованный экспорт
 		Spinner: SpinnerMock,
 	};
 });
+
+globalThis.ResizeObserver = class ResizeObserver {
+	observe = vi.fn();
+	unobserve = vi.fn();
+	disconnect = vi.fn();
+};
 
 beforeAll(() => server.listen());
 afterEach(() => {

@@ -1,14 +1,8 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Entry from "src/Pages/Entry/Entry";
-import { describe, expect, test, vi } from "vitest";
+import { describe, expect, test } from "vitest";
 import { renderWithProviders } from "../utils/renderWithProviders";
-
-globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
-	observe: vi.fn(),
-	unobserve: vi.fn(),
-	disconnect: vi.fn(),
-}));
 
 describe("Форма логина", () => {
 	test("рендерит форму Login по умолчанию", () => {
