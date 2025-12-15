@@ -19,12 +19,7 @@ const root = ReactDOM.createRoot(document.querySelector("#root") as HTMLElement)
 root.render(
 	<ThemeProvider>
 		<Provider store={store}>
-			<RouterProvider
-				router={router}
-				future={{
-					v7_startTransition: true,
-				}}
-			/>
+			<RouterProvider router={router} />
 		</Provider>
 	</ThemeProvider>,
 );
