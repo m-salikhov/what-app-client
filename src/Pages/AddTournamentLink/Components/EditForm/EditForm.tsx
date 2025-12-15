@@ -12,19 +12,19 @@ import styles from "./edit-form.module.css";
 interface Props {
 	tournament: TournamentType;
 	dispatch: (action: Action) => void;
-	setEdit: (edit: boolean) => void;
+	setShowEditForm: (edit: boolean) => void;
 }
 
-export function EditForm({ tournament, dispatch, setEdit }: Props) {
+export function EditForm({ tournament, dispatch, setShowEditForm }: Props) {
 	return (
 		<main
 			onKeyDown={(e) => {
 				if (e.key === "Enter" && e.ctrlKey) {
-					setEdit(false);
+					setShowEditForm(false);
 				}
 			}}
 		>
-			<Button title="Закончить редактирование" onClick={() => setEdit(false)} />
+			<Button title="Закончить редактирование" onClick={() => setShowEditForm(false)} />
 
 			<div className={styles.edit}>
 				<div className={styles.editTop}>

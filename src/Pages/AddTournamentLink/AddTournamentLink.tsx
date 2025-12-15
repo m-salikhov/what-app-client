@@ -2,7 +2,7 @@ import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
-import { useReducer, useState } from "react";
+import { Activity, useReducer, useState } from "react";
 import styles from "./add-tournament-link.module.css";
 import { EditForm } from "./Components/EditForm/EditForm";
 import { Instruction } from "./Components/Instruction";
@@ -15,7 +15,7 @@ function AddTournamentLink() {
 	setDocTitle("Добавить турнир");
 
 	const [link, setLink] = useState("");
-	const [edit, setEdit] = useState(false);
+	const [showEditForm, setShowEditForm] = useState(false);
 
 	const [tournament, dispatch] = useReducer(reducer, addLinkInitTournament);
 
@@ -29,8 +29,14 @@ function AddTournamentLink() {
 		handleSaveTournament,
 	} = useSaveTournament();
 
-	if (edit) {
-		return <EditForm tournament={tournament} dispatch={dispatch} setEdit={setEdit}></EditForm>;
+	if (showEditForm) {
+		return (
+			<EditForm
+				tournament={tournament}
+				dispatch={dispatch}
+				setShowEditForm={setShowEditForm}
+			></EditForm>
+		);
 	}
 
 	window.scrollTo({ top: 0, behavior: "smooth" });
@@ -73,15 +79,17 @@ function AddTournamentLink() {
 
 			{isLoading && <Spinner />}
 
-			{isSuccessParse ? (
+			<Activity mode={isSuccessParse ? "visible" : "hidden"}>
 				<ParsedTournament
 					tournament={tournament}
-					onClickEdit={() => setEdit(true)}
+					onClickEdit={() => setShowEditForm(true)}
 					onClickSave={handleSaveTournament}
 				/>
-			) : (
+			</Activity>
+
+			<Activity mode={!isSuccessParse ? "visible" : "hidden"}>
 				<Instruction />
-			)}
+			</Activity>
 		</div>
 	);
 }
