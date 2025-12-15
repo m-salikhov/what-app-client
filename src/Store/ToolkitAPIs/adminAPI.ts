@@ -16,7 +16,7 @@ export const adminAPI = baseApi.injectEndpoints({
 		getDrafts: build.query<TournamentShortType[] | undefined, undefined>({
 			query: () => "tournaments/drafts",
 			responseSchema: TournamentShortTypeSchema.array(),
-			providesTags: ["drafts"],
+			providesTags: ["tournaments"],
 		}),
 
 		changeTournamentStatus: build.mutation<ChangeTournamentStatusBody, ChangeTournamentStatusBody>({
@@ -25,7 +25,7 @@ export const adminAPI = baseApi.injectEndpoints({
 				method: "PATCH",
 				body,
 			}),
-			invalidatesTags: ["drafts"],
+			invalidatesTags: ["tournaments"],
 		}),
 	}),
 });

@@ -26,7 +26,7 @@ export const tournamentAPI = baseApi.injectEndpoints({
 			query: ({ amount, page, withSkip }) =>
 				`${serverRoutes.tournamentsLastShort}?amount=${amount}&page=${page}&withSkip=${withSkip}`,
 			responseSchema: TournamentsLastShortSchema,
-			providesTags: ["shorts"],
+			providesTags: ["tournaments"],
 		}),
 
 		getRandom: build.query<QuestionType[], number>({
@@ -41,13 +41,13 @@ export const tournamentAPI = baseApi.injectEndpoints({
 
 		getStats: build.query<{ tc: number; qc: number }, undefined>({
 			query: () => serverRoutes.tournamentsStats,
-			providesTags: ["stats"],
+			providesTags: ["tournaments"],
 		}),
 
 		getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
 			query: () => serverRoutes.tournamentsAllShort,
 			responseSchema: TournamentShortTypeSchema.array(),
-			providesTags: ["shorts"],
+			providesTags: ["tournaments"],
 		}),
 
 		parseLink: build.mutation<TournamentType, { link: string }>({
@@ -65,7 +65,7 @@ export const tournamentAPI = baseApi.injectEndpoints({
 				method: "POST",
 				body,
 			}),
-			invalidatesTags: ["shorts", "stats", "lastTournamentsShort"],
+			invalidatesTags: ["tournaments"],
 		}),
 
 		getTournamentsAllByUploader: build.query<TournamentShortType[], string>({
@@ -74,7 +74,7 @@ export const tournamentAPI = baseApi.injectEndpoints({
 				credentials: "include",
 			}),
 			responseSchema: TournamentShortTypeSchema.array(),
-			providesTags: ["shorts"],
+			providesTags: ["tournaments"],
 		}),
 	}),
 });
