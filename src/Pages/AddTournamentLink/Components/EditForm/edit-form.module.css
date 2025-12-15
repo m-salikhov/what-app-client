@@ -1,7 +1,6 @@
 .edit {
 	textarea {
 		padding: 0.3rem 0 0.3rem 0.3rem;
-		margin-bottom: 0.25rem;
 		font-size: 1.2rem;
 		background-color: var(--input-bg-color);
 		border: var(--main-border);
@@ -40,11 +39,7 @@
 
 .questionSource {
 	display: flex;
-
-	p {
-		margin: auto 0;
-		cursor: pointer;
-	}
+	margin-bottom: 0.25rem;
 }
 
 .addSource {
@@ -115,18 +110,14 @@
 .editors {
 	div {
 		display: flex;
+		margin-bottom: 0.25rem;
 
 		textarea {
 			width: 350px;
 		}
-
-		p {
-			margin: auto 0;
-			cursor: pointer;
-		}
 	}
 
-	button {
+	.addEditorBtn {
 		padding: 0.2rem;
 		border: var(--main-border);
 		border-radius: 5px;

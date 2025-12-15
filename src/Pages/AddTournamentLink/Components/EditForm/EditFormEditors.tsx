@@ -26,18 +26,21 @@ export function EditFormEditors({ editors, dispatch }: Props) {
 						value={editor.name}
 						rows={1}
 					/>
-					<p
+					<button
+						type="button"
+						title="Удалить редактора"
 						onClick={() => {
 							if (editors.length === 1) return;
 							dispatch({ type: actionTypes.removeEditor, editorID: editor.id });
 						}}
 					>
 						❌
-					</p>
+					</button>
 				</div>
 			))}
 
 			<button
+				className={styles.addEditorBtn}
 				type="button"
 				title="Добавить редактора"
 				onClick={() => dispatch({ type: actionTypes.addEditor })}

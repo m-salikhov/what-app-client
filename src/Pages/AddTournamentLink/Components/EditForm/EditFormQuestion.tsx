@@ -141,14 +141,15 @@ export function EditFormQuestion({ q, dispatch }: Props) {
 							value={v.link}
 							disabled={q.qNumber === -1}
 						/>
-						<p
+						<button
+							type="button"
 							onClick={() => {
 								if (q.source?.length === 1) return;
 								dispatch({ type: actionTypes.removeSource, questionID: q.id, sourceID: v.id });
 							}}
 						>
 							❌
-						</p>
+						</button>
 					</div>
 				);
 			})}
