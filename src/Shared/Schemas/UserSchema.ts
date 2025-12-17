@@ -6,7 +6,7 @@ export const UserSchema = z
 		email: z.email(),
 		username: z.string(),
 		role: z.enum(["user", "admin"]),
-		date: z.number(),
+		date: z.iso.date(),
 	})
 	.strict();
 
