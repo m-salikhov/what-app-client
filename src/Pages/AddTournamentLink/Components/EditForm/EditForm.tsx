@@ -4,7 +4,7 @@ import { getDateYYYY_MM_DD } from "Shared/Helpers/getDate";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { parseDate } from "@internationalized/date";
 import { DateField, DateInput, DateSegment, Label } from "react-aria-components";
-import { type Action, actionTypes } from "../../helpers/reducer";
+import { type Action, actionTypes } from "../../Reducer/reducer";
 import { EditFormEditors } from "./EditFormEditors";
 import { EditFormQuestion } from "./EditFormQuestion";
 import styles from "./edit-form.module.css";

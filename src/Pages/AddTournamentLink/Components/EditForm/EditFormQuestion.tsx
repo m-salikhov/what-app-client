@@ -1,7 +1,7 @@
 import { Button } from "Shared/Components/UI/Button/Button";
 import type { QuestionType } from "Shared/Schemas/TournamentSchema";
 import { useState } from "react";
-import { type Action, actionTypes } from "../../helpers/reducer";
+import { type Action, actionTypes } from "../../Reducer/reducer";
 import styles from "./edit-form.module.css";
 
 interface Props {
@@ -143,6 +143,8 @@ export function EditFormQuestion({ q, dispatch }: Props) {
 						/>
 						<button
 							type="button"
+							disabled={q.qNumber === -1}
+							title="Удалить источник"
 							onClick={() => {
 								if (q.source?.length === 1) return;
 								dispatch({ type: actionTypes.removeSource, questionID: q.id, sourceID: v.id });

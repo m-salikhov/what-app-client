@@ -1,5 +1,5 @@
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
-import { type Action, actionTypes } from "../../helpers/reducer";
+import { type Action, actionTypes } from "../../Reducer/reducer";
 import styles from "./edit-form.module.css";
 
 interface Props {

@@ -1,6 +1,6 @@
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 
-export const addLinkInitTournament: TournamentType = {
+export const initState: TournamentType = {
 	id: 0,
 	uploaderUuid: "",
 	uploader: "",

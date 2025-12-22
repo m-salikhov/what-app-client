@@ -8,7 +8,7 @@ import styles from "../add-tournament-link.module.css";
 interface Props {
 	tournament: TournamentType;
 	onClickEdit: () => void;
-	onClickSave: (tournament: TournamentType) => Promise<void>;
+	onClickSave: (tournament: TournamentType) => void;
 }
 
 export function ParsedTournament({ tournament, onClickEdit, onClickSave }: Props) {
@@ -17,7 +17,7 @@ export function ParsedTournament({ tournament, onClickEdit, onClickSave }: Props
 			<TournamentHeader tournament={tournament} />
 
 			<div className={styles.buttons}>
-				<Button title={"Редактировать турнир"} onClick={onClickEdit}></Button>
+				<Button title="Редактировать турнир" onClick={onClickEdit}></Button>
 				<Button title="Добавить в базу" onClick={() => onClickSave(tournament)}></Button>
 			</div>
 			<div className={styles.parsedTournament}>

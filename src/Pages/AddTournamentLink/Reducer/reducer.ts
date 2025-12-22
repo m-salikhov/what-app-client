@@ -92,13 +92,12 @@ export const actionTypes = {
 export const reducer = (state: TournamentType, action: Action) => {
 	const { type } = action;
 
-	if (type === actionTypes.loaded) {
-		const t = structuredClone(action.payload);
-
-		return { ...state, ...t };
-	}
-
 	switch (type) {
+		case actionTypes.loaded: {
+			const t = structuredClone(action.payload);
+			return { ...state, ...t };
+		}
+
 		case actionTypes.date: {
 			return { ...state, date: action.payload };
 		}

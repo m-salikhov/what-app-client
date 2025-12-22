@@ -8,8 +8,11 @@ import { EditForm } from "./Components/EditForm/EditForm";
 import { Instruction } from "./Components/Instruction";
 import { ParsedTournament } from "./Components/ParsedTournament";
 import { useSaveTournament } from "./Hooks/useSaveTournament";
-import { addLinkInitTournament } from "./helpers/addLinkInitTournament";
-import { reducer } from "./helpers/reducer";
+import { initState } from "./Reducer/initState";
+import { reducer } from "./Reducer/reducer";
+import { useParseTournament } from "./Hooks/useParseTournament";
+import type { TournamentType } from "Shared/Schemas/TournamentSchema";
+import { useCheckTournament } from "./Hooks/useCheckTournament";
 
 function AddTournamentLink() {
 	setDocTitle("Добавить турнир");
@@ -17,17 +20,31 @@ function AddTournamentLink() {
 	const [link, setLink] = useState("");
 	const [showEditForm, setShowEditForm] = useState(false);
 
-	const [tournament, dispatch] = useReducer(reducer, addLinkInitTournament);
+	const [tournament, dispatch] = useReducer(reducer, initState);
 
-	const {
-		isLoading,
-		error,
-		errorsFilling,
-		handleParseLink,
-		isSuccessParse,
-		isSuccessSave,
-		handleSaveTournament,
-	} = useSaveTournament();
+	const { isLoadingSave, errorOnSave, isSuccessSave, handleSaveTournament, resetSaveState } =
+		useSaveTournament();
+
+	const { isLoadingParse, isSuccessParse, errorOnParse, handleParseLink, resetParseState } =
+		useParseTournament();
+
+	const { errorsTournamentSchema, resetErrorsTournamentSchema, checkTournamentSchema } =
+		useCheckTournament();
+
+	const isLoading = isLoadingParse || isLoadingSave;
+	const error = errorOnParse || errorOnSave;
+
+	const onClickSave = async (tournament: TournamentType) => {
+		const isValid = checkTournamentSchema(tournament);
+
+		if (!isValid) return;
+
+		const isSuccess = await handleSaveTournament(tournament);
+
+		if (isSuccess) {
+			resetParseState();
+		}
+	};
 
 	if (showEditForm) {
 		return (
@@ -50,22 +67,29 @@ function AddTournamentLink() {
 					onChange={(e) => {
 						setLink(e.target.value);
 					}}
+					value={link}
 					disabled={isLoading}
 					onKeyDown={(e) => {
 						if (e.key === "Enter") {
 							handleParseLink(dispatch, link);
+							resetErrorsTournamentSchema();
+							resetSaveState();
 						}
 					}}
 				/>
 				<Button
 					title="Открыть"
-					onClick={() => handleParseLink(dispatch, link)}
+					onClick={() => {
+						handleParseLink(dispatch, link);
+						resetErrorsTournamentSchema();
+						resetSaveState();
+					}}
 					disabled={isLoading}
 				/>
 			</div>
 
-			{errorsFilling.length > 0 &&
-				errorsFilling.map((error) => (
+			{errorsTournamentSchema.length > 0 &&
+				errorsTournamentSchema.map((error) => (
 					<p className={styles.errorFilling} key={error.id}>
 						{error.message}
 					</p>
@@ -83,11 +107,11 @@ function AddTournamentLink() {
 				<ParsedTournament
 					tournament={tournament}
 					onClickEdit={() => setShowEditForm(true)}
-					onClickSave={handleSaveTournament}
+					onClickSave={onClickSave}
 				/>
 			</Activity>
 
-			<Activity mode={!isSuccessParse ? "visible" : "hidden"}>
+			<Activity mode={isSuccessParse ? "hidden" : "visible"}>
 				<Instruction />
 			</Activity>
 		</div>
