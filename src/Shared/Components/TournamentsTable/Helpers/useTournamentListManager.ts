@@ -46,7 +46,12 @@ export function useTournamentListManager(tournaments: TournamentShortType[]) {
 			result = memoList;
 		}
 
-		if (sortField === "uploader" || sortField === "title") {
+		if (
+			sortField === "uploader" ||
+			sortField === "title" ||
+			sortField === "dateUpload" ||
+			sortField === "date"
+		) {
 			return [...result].sort((a, b) =>
 				sortDirection === "asc"
 					? b[sortField].localeCompare(a[sortField])

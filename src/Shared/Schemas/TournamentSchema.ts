@@ -13,11 +13,11 @@ const EditorTypeSchema = z.object({
 export const TournamentShortTypeSchema = z.object({
 	id: z.number(),
 	title: z.string().min(1, { message: "Нет названия турнира" }),
-	date: z.number(),
+	date: z.iso.date(),
 	tours: z.number(),
 	questionsQuantity: z.number().min(10, { message: "Минимум 10 вопросов" }),
 	uploader: z.string(),
-	dateUpload: z.number(),
+	dateUpload: z.iso.date(),
 	difficulty: z.number(),
 	status: z.enum(["published", "draft"]),
 	uploaderUuid: z.string().optional(),
