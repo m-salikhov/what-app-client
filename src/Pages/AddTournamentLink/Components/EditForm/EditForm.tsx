@@ -1,6 +1,5 @@
 import { ScrollToTop } from "Shared/Components/ScrollToTop/ScrollToTop";
 import { Button } from "Shared/Components/UI/Button/Button";
-import { getDateYYYY_MM_DD } from "Shared/Helpers/getDate";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { parseDate } from "@internationalized/date";
 import { DateField, DateInput, DateSegment, Label } from "react-aria-components";
@@ -42,10 +41,10 @@ export function EditForm({ tournament, dispatch, setShowEditForm }: Props) {
 						onChange={(e) => {
 							dispatch({
 								type: actionTypes.date,
-								payload: e && e.year > 1900 ? Date.parse(e.toString()) : 0,
+								payload: e && e.year > 1900 ? e.toString() : "",
 							});
 						}}
-						defaultValue={tournament.date ? parseDate(getDateYYYY_MM_DD(tournament.date)) : null}
+						defaultValue={parseDate(tournament.date)}
 						className={styles.dateField}
 					>
 						<Label>Дата отыгрыша</Label>

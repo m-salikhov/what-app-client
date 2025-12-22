@@ -16,7 +16,7 @@ export type Action =
 	  }
 	| {
 			type: "date";
-			payload: number;
+			payload: string;
 	  }
 	| {
 			type: "difficulty";
