@@ -1,5 +1,6 @@
 import type { QuestionType } from "Shared/Schemas/TournamentSchema";
 import { useState } from "react";
+import { Disclosure, DisclosurePanel } from "react-aria-components";
 import { AiOutlineDown } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { Add } from "./Components/Add";
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export function Question({ q, random = false }: Props) {
-	const [showAnswer, setShowAnswer] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
 		<div className={styles.question}>
@@ -28,21 +29,16 @@ export function Question({ q, random = false }: Props) {
 				<p>{q.text}</p>
 			</div>
 
-			<button
-				type="button"
-				className={styles.answerArrow}
-				onClick={() => setShowAnswer(!showAnswer)}
-			>
-				<h4>Ответ</h4>
-				<AiOutlineDown
-					className={showAnswer ? styles.answerArrowOpen : styles.answerArrowClose}
-					size={"30px"}
-				/>
-			</button>
+			<Disclosure isExpanded={isExpanded} className={styles.disclosure}>
+				<button type="button" onClick={() => setIsExpanded(!isExpanded)}>
+					<p>Ответ</p>
+					<AiOutlineDown size={"30px"} />
+				</button>
 
-			<div className={showAnswer ? styles.ans : `${styles.ans} ${styles.ansClose}`}>
-				<Answer q={q} />
-			</div>
+				<DisclosurePanel className={styles.disclosurePanel}>
+					<Answer q={q} />
+				</DisclosurePanel>
+			</Disclosure>
 		</div>
 	);
 }

@@ -4,10 +4,6 @@
 	border: 2px solid var(--main-border-color);
 	border-radius: 10px;
 	max-width: min(800px, 100%);
-
-	p {
-		font-size: 1.25rem;
-	}
 }
 
 .questionHeader {
@@ -70,77 +66,67 @@
 	font-size: 1.25rem;
 }
 
+/* АККОРДЕОН ОТВЕТА */
+
+.disclosure {
+	border-top: var(--main-border);
+	button {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 0.5rem;
+		transition: all 200ms;
+
+		svg {
+			color: var(--p-color);
+			rotate: 0deg;
+			transition: rotate 200ms;
+		}
+	}
+
+	&[data-expanded] button svg {
+		rotate: -180deg;
+	}
+
+	.disclosurePanel {
+		height: var(--disclosure-panel-height);
+		transition: height 250ms;
+		overflow: clip;
+	}
+}
+
+/* ОТВЕТ */
+
 .answer {
-	padding: 0.25rem 0.5rem;
-}
+	padding: 0 0.5rem;
 
-.answer p {
-	padding: 0.25rem 0;
-	word-wrap: break-word;
-}
+	p {
+		padding: 0.25rem 0;
+		word-wrap: break-word;
 
-.answer p span {
-	font-weight: bold;
-}
+		span {
+			font-weight: bold;
+		}
+	}
 
-.answer > p:first-child {
-	font-weight: bold;
-	color: #45877e;
-}
-
-.answer > p:first-child span {
-	color: var(--p-color);
+	& .answerText {
+		font-weight: bold;
+		color: #45877e;
+	}
 }
 
 .answerSourceOne {
 	overflow-x: auto;
 }
 
-.answer div p:first-child {
+.answerSourceMany {
 	font-weight: bold;
-}
 
-.answerSourceMany ~ p {
-	padding-left: 0.5rem;
-	overflow-x: auto;
-}
-
-.answerArrow {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-right: 1rem;
-	cursor: pointer;
-	border-top: var(--main-border);
-
-	h4 {
+	& ~ p {
 		padding-left: 0.5rem;
+		overflow-x: auto;
 	}
-}
-
-.answerArrowOpen {
-	color: rgb(109 85 98);
-	transition: all 0.25s;
-	transform: rotate(180deg);
-}
-
-.answerArrowClose {
-	color: rgb(109 85 98);
-	transition: all 0.5s;
-	transform: rotate(0deg);
-}
-
-.ans {
-	max-height: 1800px;
-	overflow: hidden;
-	transition: max-height 0.5s;
-}
-
-.ansClose {
-	max-height: 0;
-	overflow: hidden;
-	transition: max-height 0.25s;
 }
 
 @media (width <= 600px) {

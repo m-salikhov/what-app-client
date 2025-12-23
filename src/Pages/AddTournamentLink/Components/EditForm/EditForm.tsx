@@ -44,7 +44,7 @@ export function EditForm({ tournament, dispatch, setShowEditForm }: Props) {
 								payload: e && e.year > 1900 ? e.toString() : "",
 							});
 						}}
-						defaultValue={parseDate(tournament.date)}
+						defaultValue={parseDate(tournament.date.split("T")[0])}
 						className={styles.dateField}
 					>
 						<Label>Дата отыгрыша</Label>

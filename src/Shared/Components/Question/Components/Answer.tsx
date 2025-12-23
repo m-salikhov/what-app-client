@@ -5,19 +5,20 @@ import styles from "../question.module.css";
 export function Answer({ q }: { q: QuestionType }) {
 	return (
 		<div className={styles.answer}>
-			<p>
-				<span>Ответ:</span> {q.answer}
-			</p>
+			<p className={styles.answerText}>{q.answer}</p>
+
 			{q.alterAnswer && (
 				<p>
 					<span>Зачёт:</span> {q.alterAnswer}
 				</p>
 			)}
+
 			{q.comment && (
 				<p>
 					<span>Комментарий:</span> {q.comment}
 				</p>
 			)}
+
 			{q.source?.length === 1 && (
 				<p className={styles.answerSourceOne}>
 					<span>Источник: </span>{" "}
@@ -28,7 +29,8 @@ export function Answer({ q }: { q: QuestionType }) {
 					)}
 				</p>
 			)}
-			{q.source && q.source.length > 1 && (
+
+			{q.source.length > 1 && (
 				<div>
 					<p className={styles.answerSourceMany}>Источники:</p>
 					{q.source.map((v, i) => {
