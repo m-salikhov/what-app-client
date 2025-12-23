@@ -31,7 +31,13 @@ export function PMQuestion({ tournament }: { tournament: TournamentType }) {
 
 	return (
 		<div className="pmq">
-			{!showAnswer && withTimer && <Timer setShowAnswer={setShowAnswer} />}
+			{!showAnswer && (
+				<div className="pmq-timer-block">
+					{withTimer && <Timer setShowAnswer={setShowAnswer} />}
+					{<Button onClick={() => setShowAnswer(true)} title="Готов ответ?" />}
+				</div>
+			)}
+
 			{showAnswer && (
 				<ButtonsBlock
 					currentQuestion={currentQuestion}
@@ -42,11 +48,9 @@ export function PMQuestion({ tournament }: { tournament: TournamentType }) {
 
 			{currentQuestion.add && <Add add={currentQuestion.add} />}
 
-			<p>{currentQuestion.text}</p>
+			<p className="pmq-text">{currentQuestion.text}</p>
 
 			{showAnswer && <Answer q={currentQuestion} />}
-
-			{!showAnswer && <Button onClick={() => setShowAnswer(true)} title="Готов ответ?" />}
 		</div>
 	);
 }
