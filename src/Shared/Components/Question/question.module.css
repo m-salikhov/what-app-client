@@ -3,7 +3,7 @@
 	overflow: hidden;
 	border: 2px solid var(--main-border-color);
 	border-radius: 10px;
-	max-width: min(800px, 100%);
+	width: min(800px, 100%);
 }
 
 .questionHeader {
