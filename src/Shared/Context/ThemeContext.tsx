@@ -1,6 +1,6 @@
 import type React from "react";
 import { createContext, useContext, useEffect, useState } from "react";
-import z from "zod";
+import * as z from "zod";
 
 const ThemeSchema = z.enum(["light", "dark"]);
 export type ThemeType = z.infer<typeof ThemeSchema>;

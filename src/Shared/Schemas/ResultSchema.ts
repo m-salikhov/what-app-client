@@ -1,4 +1,4 @@
-import { z } from "zod";
+import * as z from "zod";
 
 export const ResultElementSchema = z.object({
 	id: z.number(),

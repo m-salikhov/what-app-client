@@ -2,7 +2,7 @@ import { useTheme } from "Shared/Context/ThemeContext";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
 import { type ChangeEvent, type MouseEvent, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { z } from "zod";
+import * as z from "zod";
 import { linkBuilder } from "../../../Helpers/linkBuilder";
 import { getDifficultyBGC } from "./getDifficultyBGC";
 

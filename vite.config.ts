@@ -2,9 +2,11 @@ import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import svgr from 'vite-plugin-svgr';
 import Sitemap from 'vite-plugin-sitemap';
+import { analyzer } from 'vite-bundle-analyzer'
+
+const shouldAnalyze = process.env.ANALYZE === "true";
 
 const isDev = process.env.NODE_ENV === 'development';
-
 
 const sitemapOptions: Parameters<typeof Sitemap>[0] = {
   hostname: 'https://4gk-base.andvarif.ru/',
@@ -29,7 +31,7 @@ const sitemapOptions: Parameters<typeof Sitemap>[0] = {
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react(), svgr(), Sitemap(sitemapOptions)],
+  plugins: [react(), svgr(), Sitemap(sitemapOptions),shouldAnalyze && analyzer(),],
 
   resolve: {
     alias: {
