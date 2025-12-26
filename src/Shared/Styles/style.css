@@ -38,12 +38,12 @@ label {
 }
 
 h1 {
-	font-family: Rubik-Semibold, sans-serif;
+	font-family: Rubik-Medium, sans-serif;
 	font-size: 2rem;
 }
 
 h2 {
-	font-family: Rubik-Semibold, sans-serif;
+	font-family: Rubik-Medium, sans-serif;
 	font-size: 1.25rem;
 }
 
@@ -54,12 +54,10 @@ h4 {
 
 input {
 	background-color: var(--input-bg-color);
-	font-family: var(--font-stack);
 }
 
 button {
 	background-color: var(--main-bg-color);
-	font-family: var(--font-stack);
 }
 
 #root {

@@ -1,15 +1,15 @@
 @font-face {
-	font-family: Rubik-Semibold;
-	src: url("Fonts/Rubik-SemiBold.ttf");
+	font-family: Rubik-Regular;
+	src: url("Fonts/Rubik-Regular.woff2");
 }
 
 @font-face {
-	font-family: Rubik-Regular;
-	src: url("Fonts/Rubik-Regular.ttf");
+	font-family: Rubik-Medium;
+	src: url("Fonts/Rubik-Medium.woff2");
 }
 
 html {
-	--font-stack: "Rubik-Regular", system-ui, arial, helvetica;
+	--font-stack: "Rubik-Regular", system-ui;
 	--main-border-color: #0d1117;
 	--border-color-quiet: #a5aab0;
 	--main-bg-color: #f8f8f8;
