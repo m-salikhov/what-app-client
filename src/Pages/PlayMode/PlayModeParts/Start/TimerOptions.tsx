@@ -3,6 +3,7 @@ import { timerOptions } from "Store/Selectors/PlayModeSelectors";
 import { playModeActions } from "Store/Slices/PlayModeSlice";
 import { Button, Checkbox, Group, Input, NumberField } from "react-aria-components";
 import green_mark from "./green_mark.svg";
+import styles from "../../playmode.module.css";
 
 export function TimerOptions() {
 	const { withTimer, answerTimer, questionTimer } = useAppSelector(timerOptions);
@@ -10,14 +11,18 @@ export function TimerOptions() {
 	const dispatch = useAppDispatch();
 
 	return (
-		<div className="pm-timer-options">
-			<Checkbox isSelected={withTimer} onChange={() => dispatch(playModeActions.setWithTimer())}>
-				<div className="pm-info-checkbox-icon">
-					<div className="pm-info-checkbox-icon-circle">
+		<div className={styles.timerOptions}>
+			<Checkbox
+				className={styles.checkbox}
+				isSelected={withTimer}
+				onChange={() => dispatch(playModeActions.setWithTimer())}
+			>
+				<div className={styles.checkboxIcon}>
+					<div className={styles.checkboxIconCircle}>
 						{withTimer && <img src={green_mark} alt="таймер включен\выключен" />}
 					</div>
 				</div>
-				<p>играть с таймером </p>
+				<p className={styles.checkboxText}>играть с таймером </p>
 			</Checkbox>
 
 			<NumberField
@@ -27,13 +32,18 @@ export function TimerOptions() {
 				maxValue={99}
 				isDisabled={!withTimer}
 				aria-label="Question timer"
+				className={styles.numberField}
 			>
-				<Group>
-					<Button slot="decrement">-</Button>
-					<Input placeholder="15" maxLength={2} />
-					<Button slot="increment">+</Button>
+				<Group className={styles.group}>
+					<Button slot="decrement" className={styles.groupButton}>
+						-
+					</Button>
+					<Input placeholder="15" maxLength={2} className={styles.groupInput} />
+					<Button slot="increment" className={styles.groupButton}>
+						+
+					</Button>
 				</Group>
-				<p>время на чтение вопроса</p>
+				<p className={styles.numberFieldText}>время на чтение вопроса</p>
 			</NumberField>
 
 			<NumberField
@@ -43,13 +53,18 @@ export function TimerOptions() {
 				maxValue={99}
 				isDisabled={!withTimer}
 				aria-label="Answer timer"
+				className={styles.numberField}
 			>
-				<Group>
-					<Button slot="decrement">-</Button>
-					<Input placeholder="30" maxLength={2} />
-					<Button slot="increment">+</Button>
+				<Group className={styles.group}>
+					<Button slot="decrement" className={styles.groupButton}>
+						-
+					</Button>
+					<Input placeholder="30" maxLength={2} className={styles.groupInput} />
+					<Button slot="increment" className={styles.groupButton}>
+						+
+					</Button>
 				</Group>
-				<p>время на поиск ответа</p>
+				<p className={styles.numberFieldText}>время на поиск ответа</p>
 			</NumberField>
 		</div>
 	);

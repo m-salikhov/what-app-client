@@ -3,6 +3,7 @@ import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { currentTourNumberPM } from "Store/Selectors/PlayModeSelectors";
 import { useMemo } from "react";
 import { ProgressBarItem } from "./ProgressBarItem";
+import styles from "../../../playmode.module.css";
 
 const getProgressBarItems = (first: number, last: number) => {
 	const arr = [];
@@ -26,5 +27,5 @@ export function ProgressBar({ tournament }: { tournament: TournamentType }) {
 		return { first, last };
 	}, [currentTourNumber, tournament.questions]);
 
-	return <div className="progress-bar">{getProgressBarItems(first, last)}</div>;
+	return <div className={styles.progressBar}>{getProgressBarItems(first, last)}</div>;
 }

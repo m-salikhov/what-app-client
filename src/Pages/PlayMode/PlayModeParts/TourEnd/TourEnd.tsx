@@ -13,9 +13,8 @@ export function TourEnd({ tournament }: { tournament: TournamentType }) {
 	};
 
 	return (
-		<div className="tour-end">
+		<div>
 			<ResBlock tournamentId={tournament.id} />
-
 			<Button title="Следующий тур" onClick={onClick} />
 		</div>
 	);

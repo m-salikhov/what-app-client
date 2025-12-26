@@ -12,9 +12,12 @@ export interface PlayModeState {
 	totalQuestionsCount: number;
 	selectedResultQuestionNumber: number;
 	withTimer: boolean;
-	questionTimer: number;
-	answerTimer: number;
+	questionTime: number;
+	answerTime: number;
 }
+// seconds
+const defaultQuestionTimer = 15;
+const defaultAnswerTimer = 30;
 
 const initialState: PlayModeState = {
 	step: "START",
@@ -25,8 +28,8 @@ const initialState: PlayModeState = {
 	totalQuestionsCount: 0,
 	selectedResultQuestionNumber: 0,
 	withTimer: true,
-	questionTimer: 15,
-	answerTimer: 30,
+	questionTime: defaultQuestionTimer,
+	answerTime: defaultAnswerTimer,
 };
 
 interface setResultAction {
@@ -78,11 +81,11 @@ const playModeSlice = createSlice({
 		},
 
 		setQuestionTimer(state, action: PayloadAction<number>) {
-			state.questionTimer = Number.isNaN(action.payload) ? 15 : action.payload;
+			state.questionTime = Number.isNaN(action.payload) ? defaultQuestionTimer : action.payload;
 		},
 
 		setAnswerTimer(state, action: PayloadAction<number>) {
-			state.answerTimer = Number.isNaN(action.payload) ? 30 : action.payload;
+			state.answerTime = Number.isNaN(action.payload) ? defaultAnswerTimer : action.payload;
 		},
 
 		resetState: () => initialState,

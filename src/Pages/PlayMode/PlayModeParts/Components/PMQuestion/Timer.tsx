@@ -1,6 +1,7 @@
 import { useAppSelector } from "Shared/Hooks/redux";
 import { timerOptions } from "Store/Selectors/PlayModeSelectors";
 import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import styles from "../../../playmode.module.css";
 
 interface Props {
 	setShowAnswer: Dispatch<SetStateAction<boolean>>;
@@ -32,11 +33,9 @@ export function Timer({ setShowAnswer }: Props) {
 	}, [time, flag, setShowAnswer, answerTimer]);
 
 	return (
-		<div className="timer">
-			<div>
-				{flag ? <p>Время найти ответ</p> : <p>Время прочитать вопрос</p>}
-				<h2>{time}</h2>
-			</div>
+		<div className={styles.timer}>
+			<p className={styles.timerText}>{flag ? "Время найти ответ" : "Время прочитать вопрос"}</p>
+			<h2>{time}</h2>
 		</div>
 	);
 }

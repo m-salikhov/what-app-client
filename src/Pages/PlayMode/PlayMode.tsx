@@ -1,4 +1,3 @@
-import "./playmode.css";
 import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { useAppSelector } from "Shared/Hooks/redux";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
@@ -12,6 +11,7 @@ import { ProgressBar } from "./PlayModeParts/Components/ProgressBar/ProgressBar"
 import { Start } from "./PlayModeParts/Start/Start";
 import { TourEnd } from "./PlayModeParts/TourEnd/TourEnd";
 import { End } from "./PlayModeParts/TournamentEnd/End";
+import styles from "./playmode.module.css";
 
 function playModeStepChange(stepName: Step, tournament: TournamentType) {
 	switch (stepName) {
@@ -38,26 +38,22 @@ function PlayMode() {
 
 	const step = useAppSelector(stepPM);
 
-	const {
-		data: tournament,
-		isLoading,
-		isSuccess,
-		isError,
-	} = useGetTournamentQuery(id ?? skipToken);
+	const { data: tournament, isLoading, isSuccess } = useGetTournamentQuery(id ?? skipToken);
 
-	const showProgressBar = isSuccess && step !== "START" && step !== "END";
+	const showProgressBar = step === "QUESTION" || step === "END_OF_TOUR";
 
 	if (isLoading) return <Spinner />;
 
+	if (!isSuccess)
+		return <p className={styles.errorTournamentLoading}> Ошибка: Не удалось загрузить турнир</p>;
+
 	return (
-		<div className="playmode">
-			<h2>{tournament?.title}</h2>
+		<div className={styles.playmode}>
+			<h2>{tournament.title}</h2>
 
 			{showProgressBar && <ProgressBar tournament={tournament} />}
 
-			{isError && <p className="pm-error"> Ошибка: Не удалось загрузить турнир</p>}
-
-			{isSuccess && playModeStepChange(step, tournament)}
+			{playModeStepChange(step, tournament)}
 		</div>
 	);
 }

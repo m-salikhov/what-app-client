@@ -2,11 +2,11 @@ import type { RootState } from "Store/store";
 import { createSelector } from "reselect";
 
 export const stepPM = (state: RootState) => state.playModeReducer.step;
-export const answerTimerPM = (state: RootState) => state.playModeReducer.answerTimer;
+export const answerTimerPM = (state: RootState) => state.playModeReducer.answerTime;
 export const currentQuestionIndexPM = (state: RootState) =>
 	state.playModeReducer.currentQuestionIndex;
 export const currentTourNumberPM = (state: RootState) => state.playModeReducer.currentTourNumber;
-export const questionTimerPM = (state: RootState) => state.playModeReducer.questionTimer;
+export const questionTimerPM = (state: RootState) => state.playModeReducer.questionTime;
 export const resultPM = (state: RootState) => state.playModeReducer.result;
 export const selectedResultQuestionNumberPM = (state: RootState) =>
 	state.playModeReducer.selectedResultQuestionNumber;

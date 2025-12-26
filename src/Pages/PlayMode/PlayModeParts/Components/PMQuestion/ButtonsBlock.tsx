@@ -3,6 +3,7 @@ import { useAppDispatch } from "Shared/Hooks/redux";
 import type { QuestionType } from "Shared/Schemas/TournamentSchema";
 import { playModeActions } from "Store/Slices/PlayModeSlice";
 import { useState } from "react";
+import styles from "../../../playmode.module.css";
 
 interface Props {
 	currentQuestion: QuestionType;
@@ -38,9 +39,9 @@ export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }
 	};
 
 	return (
-		<div className="buttons-block">
+		<div className={styles.buttonsBlock}>
 			{answer ?? (
-				<div className="buttons-block-answer">
+				<div className={styles.buttonBlockText}>
 					<p>Вы правильно ответили?</p>
 					<Button title="Да" onClick={() => setAnswer(true)} />
 					<Button title="Нет" onClick={() => setAnswer(false)} />

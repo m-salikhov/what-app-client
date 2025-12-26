@@ -6,6 +6,7 @@ import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { currentQuestionIndexPM, withTimerPM } from "Store/Selectors/PlayModeSelectors";
 import { playModeActions } from "Store/Slices/PlayModeSlice";
 import { useEffect, useMemo, useState } from "react";
+import styles from "../../../playmode.module.css";
 import { ButtonsBlock } from "./ButtonsBlock";
 import { Timer } from "./Timer";
 
@@ -30,9 +31,9 @@ export function PMQuestion({ tournament }: { tournament: TournamentType }) {
 	}, [currentQuestion.tourNumber, dispatch]);
 
 	return (
-		<div className="pmq">
+		<div className={styles.question}>
 			{!showAnswer && (
-				<div className="pmq-timer-block">
+				<div className={styles.timerContainer}>
 					{withTimer && <Timer setShowAnswer={setShowAnswer} />}
 					{<Button onClick={() => setShowAnswer(true)} title="Готов ответ?" />}
 				</div>

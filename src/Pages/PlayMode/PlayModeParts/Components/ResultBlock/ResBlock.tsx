@@ -2,6 +2,7 @@ import { ResultTable } from "Shared/Components/ResultTable/ResultTable";
 import { useAppSelector } from "Shared/Hooks/redux";
 import type { ResultElementClientType } from "Shared/Schemas/ResultSchema";
 import { currentTourNumberPM, finalResult } from "Store/Selectors/PlayModeSelectors";
+import styles from "../../../playmode.module.css";
 
 const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
 	const tourResult = res.reduce(
@@ -26,13 +27,13 @@ export function ResBlock({ tournamentId }: { tournamentId: number }) {
 
 	return (
 		<>
-			<div className="resblock">
-				<p>
+			<div className={styles.resblock}>
+				<p className={styles.resblockText}>
 					{`Результат ${currentTour}-го тура:`}
 					<span>{`${TourCount} из ${TourLength}`}</span>{" "}
 				</p>
 				{currentTour > 1 && (
-					<p>
+					<p className={styles.resblockText}>
 						{`Результат общий:`}
 						<span>{`${totalAnsweredCount} из ${totalQuestionsCount}`}</span>{" "}
 					</p>

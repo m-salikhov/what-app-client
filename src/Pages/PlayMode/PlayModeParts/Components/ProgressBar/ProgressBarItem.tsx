@@ -1,5 +1,6 @@
 import { useAppSelector } from "Shared/Hooks/redux";
 import { currentQuestionIndexPM, stepPM } from "Store/Selectors/PlayModeSelectors";
+import styles from "../../../playmode.module.css";
 
 export function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
 	const currentQuestionIndex = useAppSelector(currentQuestionIndexPM);
@@ -9,11 +10,11 @@ export function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
 		<div
 			className={
 				questionIndex < currentQuestionIndex || step === "END_OF_TOUR"
-					? "progress-bar-item fill"
-					: "progress-bar-item"
+					? `${styles.progressBarItem} ${styles.fill}`
+					: styles.progressBarItem
 			}
 		>
-			<p className="progress-bar-item-number">{questionIndex + 1}</p>
+			<p className={styles.progressBarItemNumber}>{questionIndex + 1}</p>
 		</div>
 	);
 }
