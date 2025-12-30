@@ -22,13 +22,13 @@ export function Main() {
 				<div className={styles.banner}>
 					<h2>Игровой режим</h2>
 					<p>Сыграйте любой из турниров с таймером и ведением счёта </p>
-					<Button title="ПОПРОБОВАТЬ" onClick={() => navigate("/playmode")} />
+					<Button onClick={() => navigate("/playmode")}>ПОПРОБОВАТЬ </Button>
 				</div>
 
 				<div className={styles.banner}>
 					<h2>WORDLE</h2>
 					<p>Отгадайте слово из 5 букв </p>
-					<Button title="ПОПРОБОВАТЬ" onClick={() => navigate("/wordle")} />
+					<Button onClick={() => navigate("/wordle")}> ПОПРОБОВАТЬ </Button>
 				</div>
 			</div>
 		</div>

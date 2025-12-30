@@ -15,13 +15,15 @@ export function End({ tournament }: { tournament: TournamentType }) {
 		<div className={styles.end}>
 			<ResBlock tournamentId={tournament.id} />
 
+			<div className={styles.endButton}>
+				<Button onClick={() => navigate("/playmode")}> К выбору турнира</Button>
+			</div>
+
 			{isLoading && <Spinner width="30" />}
 
 			{isSuccess && <p className={styles.endText}>Ваш результат доступен в Профиле</p>}
 
 			{!!error && <p className={styles.endText}> Ошибка при сохранении результата</p>}
-
-			<Button title="К выбору турнира" onClick={() => navigate("/playmode")} />
 		</div>
 	);
 }

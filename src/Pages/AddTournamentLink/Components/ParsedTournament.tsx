@@ -17,8 +17,8 @@ export function ParsedTournament({ tournament, onClickEdit, onClickSave }: Props
 			<TournamentHeader tournament={tournament} />
 
 			<div className={styles.buttons}>
-				<Button title="Редактировать турнир" onClick={onClickEdit}></Button>
-				<Button title="Добавить в базу" onClick={() => onClickSave(tournament)}></Button>
+				<Button onClick={onClickEdit}>Редактировать турнир</Button>
+				<Button onClick={() => onClickSave(tournament)}>Добавить в базу</Button>
 			</div>
 			<div className={styles.parsedTournament}>
 				{tournament.questions

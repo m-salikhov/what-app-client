@@ -14,16 +14,12 @@
 	background: var(--banner-gradient);
 	border: 3px solid var(--main-border-color);
 	border-radius: 20px;
+	text-align: center;
 	-webkit-user-select: none;
 	user-select: none;
 
-	h2 {
-		text-align: center;
-	}
-
 	p {
 		padding: 1rem 0;
-		text-align: center;
 	}
 }
 

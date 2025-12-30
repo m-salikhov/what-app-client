@@ -43,12 +43,12 @@ export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }
 			{answer ?? (
 				<div className={styles.buttonBlockText}>
 					<p>Вы правильно ответили?</p>
-					<Button title="Да" onClick={() => setAnswer(true)} />
-					<Button title="Нет" onClick={() => setAnswer(false)} />
+					<Button onClick={() => setAnswer(true)}> Да </Button>
+					<Button onClick={() => setAnswer(false)}> Нет </Button>
 				</div>
 			)}
 
-			{answer !== undefined && <Button title="Следующий вопрос" onClick={onClick} />}
+			{answer !== undefined && <Button onClick={onClick}> Следующий вопрос </Button>}
 		</div>
 	);
 }

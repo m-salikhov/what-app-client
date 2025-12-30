@@ -85,7 +85,9 @@ function AddTournamentLink() {
 						resetSaveState();
 					}}
 					disabled={isLoading}
-				/>
+				>
+					Открыть{" "}
+				</Button>
 			</div>
 
 			{errorsTournamentSchema.length > 0 &&

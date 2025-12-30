@@ -41,7 +41,12 @@ export function EditFormQuestion({ q, dispatch }: Props) {
 				<p>Номер вопроса: {q.qNumber}</p>
 				<p>Номер тура: {q.tourNumber}</p>
 
-				<Button onClick={removeQuestion} title={btnText}></Button>
+				<Button
+					onClick={removeQuestion}
+					variant={btnText === btnTextOption.back ? "secondary" : "danger"}
+				>
+					{btnText}
+				</Button>
 			</div>
 
 			<label>

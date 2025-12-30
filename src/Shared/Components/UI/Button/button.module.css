@@ -1,42 +1,45 @@
-/* .btn-elem {
-  display: flex;
-  justify-content: center;
-
-  button {
-    padding: 6px 18px;
-    margin: 5px 0;
-    font-size: 15px;
-    color: white;
-    background: rgb(97 161 153 / 90%);
-    border-radius: 6px;
-
-    &:hover {
-      font-weight: bold;
-      box-shadow: 2px 2px 3px 2px rgb(34 60 80 / 20%);
-    }
-
-    &:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-  }
-} */
-
-.buttonContainer {
-	display: flex;
-	justify-content: center;
-}
-
 .button {
-	padding: 6px 18px;
-	margin: 5px 0;
-	font-size: 15px;
 	color: white;
-	background: rgb(97 161 153 / 90%);
-	border-radius: 6px;
 	border: none;
 	cursor: pointer;
+	border-radius: 6px;
 	transition: all 0.2s ease;
+}
+
+.button-primary {
+	background-color: rgb(97 161 153 / 90%);
+}
+
+.button-secondary {
+	background-color: rgb(107, 114, 128);
+}
+
+.button-danger {
+	background-color: rgb(239 68 68 / 90%);
+}
+
+.button-tiny {
+	padding: 4px 8px;
+	font-size: 0.7rem;
+}
+
+.button-small {
+	padding: 6px 12px;
+	font-size: 0.8rem;
+}
+
+.button-medium {
+	padding: 8px 16px;
+	font-size: 1rem;
+}
+
+.button-large {
+	padding: 10px 20px;
+	font-size: 1.2rem;
+}
+
+.button-full-width {
+	width: 100%;
 }
 
 .button:hover {
@@ -47,4 +50,6 @@
 .button:disabled {
 	opacity: 0.5;
 	cursor: not-allowed;
+	font-weight: normal;
+	box-shadow: none;
 }

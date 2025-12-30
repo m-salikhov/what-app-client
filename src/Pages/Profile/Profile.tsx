@@ -40,7 +40,9 @@ export default function Profile() {
 				<ChangePass />
 
 				{user.role === "admin" && (
-					<Button title="Панель администратора" onClick={() => navigate("/admin")} />
+					<Button onClick={() => navigate("/admin")} size="tiny" variant="secondary">
+						панель администратора
+					</Button>
 				)}
 
 				<ProfileContent userId={user.id} />

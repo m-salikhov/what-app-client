@@ -43,15 +43,16 @@ export function ChangePass() {
 	return (
 		<>
 			<div className={styles.changePass}>
-				<button
-					type="button"
+				<Button
+					size="tiny"
+					variant="secondary"
 					onClick={() => {
 						setChangePass(true);
 						reset();
 					}}
 				>
 					изменить пароль
-				</button>
+				</Button>
 			</div>
 
 			<Modal
@@ -94,15 +95,16 @@ export function ChangePass() {
 							<p className={isSuccess ? styles.success : styles.error}>{serverMessage}</p>
 						)}
 						<div className={styles.control}>
-							<Button type="button" title="Закрыть" onClick={() => setChangePass(false)} />
+							<Button onClick={() => setChangePass(false)}> Закрыть </Button>
 							<Button
 								type="submit"
-								title="Отправить"
 								onClick={() => {
 									setServerMessage("");
 									handleSubmit(onSubmit);
 								}}
-							/>
+							>
+								Сохранить
+							</Button>
 						</div>
 					</form>
 				</div>

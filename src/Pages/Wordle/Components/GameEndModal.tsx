@@ -61,7 +61,7 @@ export function GameEndModal() {
 					</p>
 				)}
 
-				<Button onClick={onClose} title="Новое слово" />
+				<Button onClick={onClose}> Новое слово </Button>
 			</div>
 		</Modal>
 	);

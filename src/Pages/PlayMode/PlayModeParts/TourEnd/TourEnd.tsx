@@ -1,3 +1,4 @@
+import styles from "../../playmode.module.css";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { useAppDispatch } from "Shared/Hooks/redux";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
@@ -13,9 +14,11 @@ export function TourEnd({ tournament }: { tournament: TournamentType }) {
 	};
 
 	return (
-		<div>
+		<div className={styles.tourEnd}>
 			<ResBlock tournamentId={tournament.id} />
-			<Button title="Следующий тур" onClick={onClick} />
+			<div className={styles.tourEndButton}>
+				<Button onClick={onClick}> Следующий тур</Button>
+			</div>
 		</div>
 	);
 }

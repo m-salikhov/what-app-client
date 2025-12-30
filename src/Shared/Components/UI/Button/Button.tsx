@@ -1,19 +1,38 @@
+import type { ButtonHTMLAttributes } from "react";
 import styles from "./button.module.css";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonVariant = "primary" | "secondary" | "danger";
+type ButtonSize = "tiny" | "small" | "medium" | "large";
+
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 	extraClass?: string;
+	variant?: ButtonVariant;
+	size?: ButtonSize;
+	fullWidth?: boolean;
 }
 
-export function Button({ title, extraClass, type, ...props }: ButtonProps) {
+export function Button({
+	variant = "primary",
+	size = "medium",
+	extraClass = "",
+	fullWidth = false,
+	type = "button",
+	children,
+	...props
+}: Props) {
+	const classes = [
+		styles.button,
+		styles[`button-${variant}`],
+		styles[`button-${size}`],
+		fullWidth && styles["button-full-width"],
+		extraClass,
+	]
+		.filter(Boolean)
+		.join(" ");
+
 	return (
-		<div className={styles.buttonContainer}>
-			<button
-				className={extraClass ? `${styles.button} ${extraClass}` : styles.button}
-				type={type || "button"}
-				{...props}
-			>
-				{title}
-			</button>
-		</div>
+		<button type={type} className={classes} {...props}>
+			{children}
+		</button>
 	);
 }

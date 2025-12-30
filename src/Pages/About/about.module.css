@@ -2,6 +2,10 @@
 	padding: 0 6%;
 }
 
+.buttons {
+	text-align: center;
+}
+
 .about h2 {
 	padding: 0.25rem 0 0;
 	text-align: left;

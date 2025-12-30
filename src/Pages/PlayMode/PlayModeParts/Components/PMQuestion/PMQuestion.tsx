@@ -35,7 +35,7 @@ export function PMQuestion({ tournament }: { tournament: TournamentType }) {
 			{!showAnswer && (
 				<div className={styles.timerContainer}>
 					{withTimer && <Timer setShowAnswer={setShowAnswer} />}
-					{<Button onClick={() => setShowAnswer(true)} title="Готов ответ?" />}
+					<Button onClick={() => setShowAnswer(true)}> Готов ответ </Button>
 				</div>
 			)}
 

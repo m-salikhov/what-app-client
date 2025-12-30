@@ -23,7 +23,7 @@ export function EditForm({ tournament, dispatch, setShowEditForm }: Props) {
 				}
 			}}
 		>
-			<Button title="Закончить редактирование" onClick={() => setShowEditForm(false)} />
+			<Button onClick={() => setShowEditForm(false)}>Закончить редактирование </Button>
 
 			<div className={styles.edit}>
 				<div className={styles.editTop}>

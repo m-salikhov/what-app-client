@@ -33,31 +33,32 @@
 	width: 100%;
 	margin-top: 0.5rem;
 
-	button {
-		margin-top: 1rem;
+	.formInput {
+		padding-top: 0.5rem;
+
+		label {
+			font-size: 0.9rem;
+			font-weight: bold;
+		}
+
+		input {
+			width: 100%;
+			padding: 0.2rem 0 0.2rem 0.3rem;
+			font-size: 1.1rem;
+			border: var(--main-border);
+			box-shadow: none;
+		}
+	}
+
+	.formButton {
+		margin: 0.5rem 0;
+		text-align: center;
 	}
 }
 
 .tooltip {
 	span {
 		color: antiquewhite;
-	}
-}
-
-.formInput {
-	padding-top: 0.5rem;
-
-	label {
-		font-size: 0.9rem;
-		font-weight: bold;
-	}
-
-	input {
-		width: 100%;
-		padding: 0.2rem 0 0.2rem 0.3rem;
-		font-size: 1.1rem;
-		border: var(--main-border);
-		box-shadow: none;
 	}
 }
 

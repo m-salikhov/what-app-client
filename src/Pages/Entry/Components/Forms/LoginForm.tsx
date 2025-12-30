@@ -69,7 +69,11 @@ const LoginForm = () => {
 
 			{!!error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
 
-			<Button type="submit" disabled={isLoading} title="Войти" />
+			<div className={styles.formButton}>
+				<Button type="submit" disabled={isLoading}>
+					Войти
+				</Button>
+			</div>
 		</form>
 	);
 };
