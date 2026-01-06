@@ -1,5 +1,5 @@
 import type { RootState } from "Store/store";
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
 export const stepPM = (state: RootState) => state.playModeReducer.step;
 export const answerTimerPM = (state: RootState) => state.playModeReducer.answerTime;

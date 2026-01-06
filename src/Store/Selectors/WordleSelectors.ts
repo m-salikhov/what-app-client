@@ -1,5 +1,5 @@
 import type { RootState } from "Store/store";
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
 export const allowNextLetterSelector = (state: RootState) => state.wordleReducer.allowNextLetter;
 export const currentRowNumberSelector = (state: RootState) => state.wordleReducer.currentRowNumber;

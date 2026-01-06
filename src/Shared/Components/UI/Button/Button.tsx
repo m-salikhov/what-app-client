@@ -27,7 +27,7 @@ export function Button({
 		fullWidth && styles["button-full-width"],
 		extraClass,
 	]
-		.filter(Boolean)
+		.filter((el) => Boolean(el))
 		.join(" ");
 
 	return (
