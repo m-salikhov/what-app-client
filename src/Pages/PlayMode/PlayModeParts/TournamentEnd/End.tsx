@@ -1,19 +1,18 @@
 import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { Button } from "Shared/Components/UI/Button/Button";
-import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { useNavigate } from "react-router-dom";
 import styles from "../../playmode.module.css";
 import { ResBlock } from "../Components/ResultBlock/ResBlock";
 import { useSaveResult } from "./useSaveResult";
 
-export function End({ tournament }: { tournament: TournamentType }) {
+export function End() {
 	const navigate = useNavigate();
 
-	const { isLoading, isSuccess, error } = useSaveResult(tournament);
+	const { isLoading, isSuccess, error } = useSaveResult();
 
 	return (
 		<div className={styles.end}>
-			<ResBlock tournamentId={tournament.id} />
+			<ResBlock />
 
 			<div className={styles.endButton}>
 				<Button onClick={() => navigate("/playmode")}> К выбору турнира</Button>

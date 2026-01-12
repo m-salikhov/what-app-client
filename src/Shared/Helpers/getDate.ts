@@ -1,4 +1,6 @@
 export function getDate(date: Date | string | number) {
+	if (!date) return "";
+
 	const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
 	if (typeof date === "string" && dateRegex.test(date)) {
@@ -19,7 +21,6 @@ export function getDate(date: Date | string | number) {
 	const dateObj = new Date(date);
 
 	if (dateObj.toString() === "Invalid Date") {
-		console.log(`некорректная дата: ${date}`);
 		return "";
 	}
 

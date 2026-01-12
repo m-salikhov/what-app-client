@@ -1,7 +1,6 @@
 import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { useAppSelector } from "Shared/Hooks/redux";
-import type { TournamentType } from "Shared/Schemas/TournamentSchema";
-import { stepPM } from "Store/Selectors/PlayModeSelectors";
+import { stepSelector } from "Store/Selectors/PlayModeSelectors";
 import type { Step } from "Store/Slices/PlayModeSlice";
 import { useGetTournamentQuery } from "Store/ToolkitAPIs/tournamentAPI";
 import { skipToken } from "@reduxjs/toolkit/query";
@@ -12,20 +11,21 @@ import { Start } from "./PlayModeParts/Start/Start";
 import { TourEnd } from "./PlayModeParts/TourEnd/TourEnd";
 import { End } from "./PlayModeParts/TournamentEnd/End";
 import styles from "./playmode.module.css";
+import { useSetTournament } from "./PlayModeParts/Hooks/useSetTournament";
 
-function playModeStepChange(stepName: Step, tournament: TournamentType) {
+function playModeStepChange(stepName: Step) {
 	switch (stepName) {
 		case "START": {
-			return <Start tournament={tournament} />;
+			return <Start />;
 		}
 		case "QUESTION": {
-			return <PMQuestion tournament={tournament} />;
+			return <PMQuestion />;
 		}
 		case "END_OF_TOUR": {
-			return <TourEnd tournament={tournament} />;
+			return <TourEnd />;
 		}
 		case "END": {
-			return <End tournament={tournament} />;
+			return <End />;
 		}
 		default: {
 			return null;
@@ -35,8 +35,9 @@ function playModeStepChange(stepName: Step, tournament: TournamentType) {
 
 function PlayMode() {
 	const { id } = useParams();
+	useSetTournament(id);
 
-	const step = useAppSelector(stepPM);
+	const step = useAppSelector(stepSelector);
 
 	const { data: tournament, isLoading, isSuccess } = useGetTournamentQuery(id ?? skipToken);
 
@@ -51,9 +52,9 @@ function PlayMode() {
 		<div className={styles.playmode}>
 			<h2>{tournament.title}</h2>
 
-			{showProgressBar && <ProgressBar tournament={tournament} />}
+			{showProgressBar && <ProgressBar />}
 
-			{playModeStepChange(step, tournament)}
+			{playModeStepChange(step)}
 		</div>
 	);
 }
