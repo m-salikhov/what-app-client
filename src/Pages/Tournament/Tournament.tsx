@@ -21,9 +21,8 @@ export default function Tournament() {
 
 	window.scrollTo({ top: 0, behavior: "smooth" });
 
-	if (isError) return <h2>Ошибка при получении турнира</h2>;
+	if (isError || !isSuccess) return <h2>Ошибка при получении турнира</h2>;
 	if (isLoading) return <Spinner />;
-	if (!isSuccess) return null;
 
 	return (
 		<>

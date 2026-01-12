@@ -15,10 +15,10 @@ export function TourEnd({ tournament }: { tournament: TournamentType }) {
 
 	return (
 		<div className={styles.tourEnd}>
-			<ResBlock tournamentId={tournament.id} />
 			<div className={styles.tourEndButton}>
 				<Button onClick={onClick}> Следующий тур</Button>
 			</div>
+			<ResBlock tournamentId={tournament.id} />
 		</div>
 	);
 }
