@@ -1,16 +1,12 @@
 import type { RootState } from "Store/store";
 import { createSelector } from "@reduxjs/toolkit";
 
-export const answerTimerPM = (state: RootState) => state.playModeReducer.answerTime;
+export const answerTimerSelector = (state: RootState) => state.playModeReducer.answerTime;
+export const questionTimerSelector = (state: RootState) => state.playModeReducer.questionTime;
+export const withTimerSelector = (state: RootState) => state.playModeReducer.withTimer;
 
-export const questionTimerPM = (state: RootState) => state.playModeReducer.questionTime;
-export const resultPM = (state: RootState) => state.playModeReducer.result;
-export const selectedResultQuestionNumberPM = (state: RootState) =>
+export const selectedResultQuestionNumberSelector = (state: RootState) =>
 	state.playModeReducer.selectedResultQuestionNumber;
-export const totalAnsweredCountPM = (state: RootState) => state.playModeReducer.totalAnsweredCount;
-export const withTimerPM = (state: RootState) => state.playModeReducer.withTimer;
-export const totalQuestionsCountPM = (state: RootState) =>
-	state.playModeReducer.totalQuestionsCount;
 
 export const tournamentInfoSelector = (state: RootState) => state.playModeReducer.tournamentInfo;
 export const questionsSelector = (state: RootState) => state.playModeReducer.questions;
@@ -23,22 +19,14 @@ export const currentQuestionIndexSelector = (state: RootState) =>
 export const stepSelector = (state: RootState) => state.playModeReducer.step;
 export const currentTourNumberSelector = (state: RootState) =>
 	state.playModeReducer.currentTourNumber;
+export const resultSelector = (state: RootState) => state.playModeReducer.result;
 
 export const timerOptions = createSelector(
-	[withTimerPM, answerTimerPM, questionTimerPM],
+	[withTimerSelector, answerTimerSelector, questionTimerSelector],
 	(withTimer, answerTimer, questionTimer) => ({
 		withTimer,
 		answerTimer,
 		questionTimer,
-	}),
-);
-
-export const finalResult = createSelector(
-	[totalAnsweredCountPM, totalQuestionsCountPM, resultPM],
-	(totalAnsweredCount, totalQuestionsCount, result) => ({
-		totalAnsweredCount,
-		totalQuestionsCount,
-		result,
 	}),
 );
 

@@ -6,42 +6,29 @@ export type Step = "START" | "QUESTION" | "END_OF_TOUR" | "END";
 
 export interface PlayModeState {
 	step: Step;
-	// currentQuestionIndex: number;
 	result: ResultElementClientType[];
-	totalAnsweredCount: number;
-	totalQuestionsCount: number;
 	selectedResultQuestionNumber: number;
-
-	// timer options
-	withTimer: boolean;
-	questionTime: number;
-	answerTime: number;
-
-	// new variant
 	questions: QuestionType[];
 	tournamentInfo: Omit<TournamentType, "questions">;
 	tourEndQuestionIndexes: number[];
 	currentQuestionIndex: number;
 	tournamentEndQuestionIndex: number;
 	currentTourNumber: number;
+
+	// timer options
+	withTimer: boolean;
+	questionTime: number;
+	answerTime: number;
 }
+
 // seconds
-const defaultQuestionTimer = 15;
-const defaultAnswerTimer = 30;
+const defaultQuestionTime = 15;
+const defaultAnswerTime = 30;
 
 const initialState: PlayModeState = {
 	step: "START",
 	result: [],
-	totalAnsweredCount: 0,
-	totalQuestionsCount: 0,
 	selectedResultQuestionNumber: 0,
-
-	// timer options
-	withTimer: true,
-	questionTime: defaultQuestionTimer,
-	answerTime: defaultAnswerTimer,
-
-	// new variant
 	questions: [],
 	tournamentInfo: {
 		id: 0,
@@ -61,55 +48,17 @@ const initialState: PlayModeState = {
 	currentQuestionIndex: -1,
 	tournamentEndQuestionIndex: -1,
 	currentTourNumber: 0,
-};
 
-interface setResultAction {
-	isAnswered: boolean;
-	qNumber: number;
-	tourNumber: number;
-}
+	// timer options
+	withTimer: true,
+	questionTime: defaultQuestionTime,
+	answerTime: defaultAnswerTime,
+};
 
 const playModeSlice = createSlice({
 	name: "playModeSlice",
 	initialState,
 	reducers: {
-		setResult(state, action: PayloadAction<setResultAction>) {
-			const { isAnswered, qNumber, tourNumber } = action.payload;
-
-			state.result.push({
-				ans: isAnswered,
-				num: qNumber,
-				tour: tourNumber,
-			});
-
-			state.totalQuestionsCount++;
-
-			if (isAnswered) {
-				state.totalAnsweredCount++;
-			}
-		},
-
-		setSelectedResultQuestionNumber(state, action: PayloadAction<number>) {
-			if (state.selectedResultQuestionNumber !== action.payload) {
-				state.selectedResultQuestionNumber = action.payload;
-			}
-		},
-
-		setWithTimer(state) {
-			state.withTimer = !state.withTimer;
-		},
-
-		setQuestionTimer(state, action: PayloadAction<number>) {
-			state.questionTime = Number.isNaN(action.payload) ? defaultQuestionTimer : action.payload;
-		},
-
-		setAnswerTimer(state, action: PayloadAction<number>) {
-			state.answerTime = Number.isNaN(action.payload) ? defaultAnswerTimer : action.payload;
-		},
-
-		resetState: () => initialState,
-
-		// new variant
 		setTournament(state, action: PayloadAction<TournamentType>) {
 			const { questions, ...tournamentInfo } = action.payload;
 
@@ -129,9 +78,38 @@ const playModeSlice = createSlice({
 			state.tourEndQuestionIndexes = tourEndQuestionIndexes;
 		},
 
+		setResult(state, action: PayloadAction<boolean>) {
+			state.result.push({
+				ans: action.payload,
+				num: state.questions[state.currentQuestionIndex].qNumber,
+				tour: state.questions[state.currentQuestionIndex].tourNumber,
+			});
+		},
+
+		setSelectedResultQuestionNumber(state, action: PayloadAction<number>) {
+			if (state.selectedResultQuestionNumber !== action.payload) {
+				state.selectedResultQuestionNumber = action.payload;
+			}
+		},
+
+		setWithTimer(state) {
+			state.withTimer = !state.withTimer;
+		},
+
+		setQuestionTimer(state, action: PayloadAction<number>) {
+			state.questionTime = Number.isNaN(action.payload) ? defaultQuestionTime : action.payload;
+		},
+
+		setAnswerTimer(state, action: PayloadAction<number>) {
+			state.answerTime = Number.isNaN(action.payload) ? defaultAnswerTime : action.payload;
+		},
+
 		setStep(state) {
-			const isEndOfTournament = state.currentQuestionIndex === state.tournamentEndQuestionIndex;
-			const isEndOfTour = state.tourEndQuestionIndexes.includes(state.currentQuestionIndex);
+			const isLastQuestionInTour = state.tourEndQuestionIndexes.includes(
+				state.currentQuestionIndex,
+			);
+			const isLastQuestionInTournament =
+				state.currentQuestionIndex === state.tournamentEndQuestionIndex;
 
 			switch (state.step) {
 				case "START":
@@ -140,11 +118,11 @@ const playModeSlice = createSlice({
 					state.currentTourNumber = 1;
 					break;
 				case "QUESTION":
-					if (!isEndOfTour && !isEndOfTournament) {
+					if (!isLastQuestionInTour && !isLastQuestionInTournament) {
 						state.currentQuestionIndex += 1;
-					} else if (isEndOfTour) {
+					} else if (isLastQuestionInTour) {
 						state.step = "END_OF_TOUR";
-					} else if (isEndOfTournament) {
+					} else if (isLastQuestionInTournament) {
 						state.step = "END";
 					}
 					break;
@@ -157,6 +135,8 @@ const playModeSlice = createSlice({
 					break;
 			}
 		},
+
+		resetState: () => initialState,
 	},
 });
 

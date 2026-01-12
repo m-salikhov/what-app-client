@@ -5,7 +5,7 @@ import styles from "./result-table.module.css";
 
 interface Props {
 	tourResult: ResultElementClientType[] | undefined;
-	setSelectedQuestionNumber: React.Dispatch<React.SetStateAction<number | null>>;
+	setSelectedQuestionNumber: (value: number) => void;
 }
 
 export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {

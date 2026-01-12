@@ -2,15 +2,15 @@ import { Add } from "Shared/Components/Question/Components/Add";
 import { Answer } from "Shared/Components/Question/Components/Answer";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { useAppSelector } from "Shared/Hooks/redux";
-import { currentQuestionSelector, withTimerPM } from "Store/Selectors/PlayModeSelectors";
+import { currentQuestionSelector, withTimerSelector } from "Store/Selectors/PlayModeSelectors";
 import { useState } from "react";
 import styles from "../../../playmode.module.css";
 import { ButtonsBlock } from "./ButtonsBlock";
 import { Timer } from "./Timer";
 
-export function PMQuestion() {
+export function PlayModeQuestion() {
 	const currentQuestion = useAppSelector(currentQuestionSelector);
-	const withTimer = useAppSelector(withTimerPM);
+	const withTimer = useAppSelector(withTimerSelector);
 
 	const [showAnswer, setShowAnswer] = useState(false);
 
@@ -23,9 +23,7 @@ export function PMQuestion() {
 				</div>
 			)}
 
-			{showAnswer && (
-				<ButtonsBlock currentQuestion={currentQuestion} setShowAnswer={setShowAnswer} />
-			)}
+			{showAnswer && <ButtonsBlock setShowAnswer={setShowAnswer} />}
 
 			{currentQuestion.add && <Add add={currentQuestion.add} />}
 

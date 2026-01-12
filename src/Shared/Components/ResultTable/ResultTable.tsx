@@ -8,15 +8,15 @@ import { TourTable } from "./TourTable";
 
 interface Props {
 	result: ResultElementClientType[];
-	tournamentId: number | undefined;
+	tournamentId: number | string | undefined;
 }
 
-export function ResultTable({ result, tournamentId }: Props) {
+export function ResultTable({ result, tournamentId: id }: Props) {
 	const resByTour = Object.groupBy(result, (v) => v.tour);
 
 	const [selectedQuestionNumber, setSelectedQuestionNumber] = useState<number | null>(null);
 
-	const { data: tournament } = useGetTournamentQuery(tournamentId ?? skipToken);
+	const { data: tournament } = useGetTournamentQuery(id ? String(id) : skipToken);
 
 	const selectedQuestion = tournament?.questions.find((q) => q.qNumber === selectedQuestionNumber);
 

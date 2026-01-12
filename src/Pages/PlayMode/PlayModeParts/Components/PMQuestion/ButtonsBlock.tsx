@@ -1,29 +1,21 @@
 import { Button } from "Shared/Components/UI/Button/Button";
 import { useAppDispatch } from "Shared/Hooks/redux";
-import type { QuestionType } from "Shared/Schemas/TournamentSchema";
 import { playModeActions } from "Store/Slices/PlayModeSlice";
 import { useState } from "react";
 import styles from "../../../playmode.module.css";
 
 interface Props {
-	currentQuestion: QuestionType;
 	setShowAnswer: (showAnswer: boolean) => void;
 }
 
-export function ButtonsBlock({ currentQuestion, setShowAnswer }: Props) {
+export function ButtonsBlock({ setShowAnswer }: Props) {
 	const dispatch = useAppDispatch();
 
 	const [answer, setAnswer] = useState<boolean | undefined>(undefined);
 
 	const onClick = () => {
 		if (answer !== undefined) {
-			dispatch(
-				playModeActions.setResult({
-					qNumber: currentQuestion.qNumber,
-					tourNumber: currentQuestion.tourNumber,
-					isAnswered: answer,
-				}),
-			);
+			dispatch(playModeActions.setResult(answer));
 		}
 
 		dispatch(playModeActions.setStep());
