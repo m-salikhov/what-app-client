@@ -7,11 +7,10 @@ import styles from "../../../playmode.module.css";
 
 interface Props {
 	currentQuestion: QuestionType;
-	nextQTourNumber: number;
 	setShowAnswer: (showAnswer: boolean) => void;
 }
 
-export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }: Props) {
+export function ButtonsBlock({ currentQuestion, setShowAnswer }: Props) {
 	const dispatch = useAppDispatch();
 
 	const [answer, setAnswer] = useState<boolean | undefined>(undefined);
@@ -27,13 +26,7 @@ export function ButtonsBlock({ currentQuestion, nextQTourNumber, setShowAnswer }
 			);
 		}
 
-		if (!nextQTourNumber) {
-			dispatch(playModeActions.setStep("END"));
-		} else if (currentQuestion.tourNumber === nextQTourNumber) {
-			dispatch(playModeActions.currentQuestionIndexIncrement());
-		} else {
-			dispatch(playModeActions.setStep("END_OF_TOUR"));
-		}
+		dispatch(playModeActions.setStep());
 
 		setShowAnswer(false);
 	};

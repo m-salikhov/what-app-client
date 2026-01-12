@@ -1,10 +1,10 @@
 import { useAppSelector } from "Shared/Hooks/redux";
-import { currentQuestionIndexPM, stepPM } from "Store/Selectors/PlayModeSelectors";
+import { currentQuestionIndexSelector, stepSelector } from "Store/Selectors/PlayModeSelectors";
 import styles from "../../../playmode.module.css";
 
 export function ProgressBarItem({ questionIndex }: { questionIndex: number }) {
-	const currentQuestionIndex = useAppSelector(currentQuestionIndexPM);
-	const step = useAppSelector(stepPM);
+	const currentQuestionIndex = useAppSelector(currentQuestionIndexSelector);
+	const step = useAppSelector(stepSelector);
 
 	return (
 		<div

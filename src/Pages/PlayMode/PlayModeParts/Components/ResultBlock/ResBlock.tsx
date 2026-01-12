@@ -1,7 +1,11 @@
 import { ResultTable } from "Shared/Components/ResultTable/ResultTable";
 import { useAppSelector } from "Shared/Hooks/redux";
 import type { ResultElementClientType } from "Shared/Schemas/ResultSchema";
-import { currentTourNumberPM, finalResult } from "Store/Selectors/PlayModeSelectors";
+import {
+	currentTourNumberSelector,
+	finalResult,
+	tournamentInfoSelector,
+} from "Store/Selectors/PlayModeSelectors";
 import styles from "../../../playmode.module.css";
 
 const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
@@ -19,9 +23,10 @@ const calcTourResult = (tour: number, res: ResultElementClientType[]) => {
 	return tourResult;
 };
 
-export function ResBlock({ tournamentId }: { tournamentId: number }) {
+export function ResBlock() {
 	const { result, totalAnsweredCount, totalQuestionsCount } = useAppSelector(finalResult);
-	const currentTour = useAppSelector(currentTourNumberPM);
+	const currentTour = useAppSelector(currentTourNumberSelector);
+	const { id } = useAppSelector(tournamentInfoSelector);
 
 	const [TourCount, TourLength] = calcTourResult(currentTour, result);
 
@@ -40,7 +45,7 @@ export function ResBlock({ tournamentId }: { tournamentId: number }) {
 				)}
 			</div>
 
-			<ResultTable result={result} tournamentId={+tournamentId} />
+			<ResultTable result={result} tournamentId={id} />
 		</>
 	);
 }
