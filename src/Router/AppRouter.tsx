@@ -30,6 +30,7 @@ const router = createBrowserRouter(
 			element: <Layout />,
 			loader: initialLoginLoader,
 			errorElement: <NotFound routerError={true} />,
+			hydrateFallbackElement: <></>,
 
 			children: [
 				{
@@ -163,11 +164,10 @@ const router = createBrowserRouter(
 	],
 	{
 		future: {
-			v7_fetcherPersist: true,
 			v7_normalizeFormMethod: true,
-			v7_partialHydration: false,
 			v7_relativeSplatPath: true,
 			v7_skipActionErrorRevalidation: true,
+			v7_startTransition: true,
 		},
 	},
 );
