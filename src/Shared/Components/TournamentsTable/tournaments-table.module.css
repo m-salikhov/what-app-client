@@ -1,5 +1,4 @@
-/*    HEADER    */
-.header {
+/*    HEADER    */ .header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -159,5 +158,60 @@
 				font-size: 0.8rem;
 			}
 		}
+	}
+}
+
+.difficultyLowLight {
+	background-color: #68e449;
+}
+
+.difficultyLowDark {
+	background-color: #76f956;
+	.difficultyText {
+		color: rgb(66, 47, 91);
+	}
+}
+
+.difficultyMediumLight {
+	background-color: #a7f594;
+}
+
+.difficultyMediumDark {
+	background-color: #9affab;
+	.difficultyText {
+		color: rgb(66, 47, 91);
+	}
+}
+
+.difficultyHighLight {
+	background-color: #eaf582;
+}
+
+.difficultyHighDark {
+	background-color: #f1fb93;
+	.difficultyText {
+		color: rgb(66, 47, 91);
+	}
+}
+
+.difficultyVeryHighLight {
+	background-color: #ffc2c2;
+}
+
+.difficultyVeryHighDark {
+	background-color: #cc5b44;
+	.difficultyText {
+		color: rgb(66, 47, 91);
+	}
+}
+
+.difficultyExtremeLight {
+	background-color: #ffaa99;
+}
+
+.difficultyExtremeDark {
+	background-color: #be4f38;
+	.difficultyText {
+		color: rgb(66, 47, 91);
 	}
 }

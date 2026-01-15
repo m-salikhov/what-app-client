@@ -1,16 +1,38 @@
 import { getDate } from "Shared/Helpers/getDate";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
-import { useId } from "react";
+import { useId, useMemo } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 import TableTooltipDF from "./Components/TableTooltipDF";
 import { useTournamentListManager } from "./Helpers/useTournamentListManager";
 import styles from "./tournaments-table.module.css";
+import { getDifficultyClass } from "./Helpers/getDifficultyClass";
+import { useTheme } from "Shared/Context/ThemeContext";
+import { linkBuilder } from "Shared/Helpers/linkBuilder";
+
+export type EnrichedTournamentType = TournamentShortType & {
+	eternalLink: string;
+	background: string;
+	dateUploadFormat: string;
+	dateFormat: string;
+};
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
 	const id = useId();
+	const { theme } = useTheme();
+	const { pathname } = useLocation();
+
+	const enrichedTournaments = useMemo(() => {
+		return tournaments.map((t) => ({
+			...t,
+			eternalLink: linkBuilder(t.id, pathname),
+			background: getDifficultyClass(t.difficulty, theme),
+			dateUploadFormat: getDate(t.dateUpload),
+			dateFormat: getDate(t.date),
+		}));
+	}, [tournaments, pathname, theme]);
 
 	const {
 		list,
@@ -19,7 +41,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 		sortTournaments,
 		sortField,
 		sortDirection,
-	} = useTournamentListManager(tournaments);
+	} = useTournamentListManager(enrichedTournaments);
 
 	return (
 		<>
@@ -156,15 +178,17 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 					<div className={styles.line} key={item.id}>
 						<div className={styles.cell}>{i + 1}</div>
 						<div className={styles.cell}>
-							<Link to={item.innerLink}>{item.title}</Link>
+							<Link to={item.eternalLink}>{item.title}</Link>
 						</div>
-						<div className={styles.cell}>{getDate(item.date)}</div>
-						<div className={styles.cell} style={{ backgroundColor: item.difficultyBGC }}>
-							<p>{item.difficulty <= 0 ? "-" : item.difficulty}</p>
+						<div className={styles.cell}>{item.dateFormat}</div>
+						<div className={`${styles.cell} ${styles[item.background]}`}>
+							<p className={styles.difficultyText}>
+								{item.difficulty <= 0 ? "-" : item.difficulty}
+							</p>
 						</div>
 						<div className={styles.cell}>{item.questionsQuantity}</div>
 						<div className={styles.cell}>{item.tours}</div>
-						<div className={styles.cell}>{getDate(item.dateUpload)}</div>
+						<div className={styles.cell}>{item.dateUploadFormat}</div>
 						<div className={styles.cell}>{item.uploader}</div>
 					</div>
 				))}
