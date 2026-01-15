@@ -52,7 +52,7 @@ export function LastTournaments() {
 					<div className={styles.line} key={v.id}>
 						<Link to={`tournament/${v.id}`}>{v.title}</Link>
 						<div>
-							<h5>{getDate(v.dateUpload)}</h5>
+							<p className={styles.date}>{getDate(v.dateUpload)}</p>
 						</div>
 					</div>
 				);

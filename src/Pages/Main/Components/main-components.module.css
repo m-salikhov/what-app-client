@@ -81,7 +81,8 @@
 		}
 	}
 
-	h5 {
+	.date {
+		font-size: 1rem;
 		width: 85px;
 		color: var(--a-main-list-color);
 	}

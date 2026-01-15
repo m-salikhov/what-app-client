@@ -6,7 +6,7 @@ import { GiPerspectiveDiceSixFacesRandom as DiceIcon } from "react-icons/gi";
 import { useLocation, useNavigate } from "react-router-dom";
 import { linkBuilder } from "../../Helpers/linkBuilder";
 
-export function RandomTournament({ size }: { size?: string }) {
+export function RandomTournament({ size }: { size: string }) {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const [fetchRandomTournament] = useLazyGetRandomTournamentQuery();
@@ -27,9 +27,14 @@ export function RandomTournament({ size }: { size?: string }) {
 
 	return (
 		<>
-			{isFetching && <Spinner width={size ? size : "40"} />}
+			{isFetching && <Spinner width={size} height={size} />}
 			{!isFetching && (
-				<button type="button" title="открыть случайный турнир" onClick={handleClick}>
+				<button
+					type="button"
+					title="открыть случайный турнир"
+					onClick={handleClick}
+					style={{ height: `${size}px`, width: `${size}px` }}
+				>
 					<DiceIcon size={size ? size : "40"} cursor="pointer" color="var(--h-color)" />
 				</button>
 			)}

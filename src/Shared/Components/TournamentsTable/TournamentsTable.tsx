@@ -35,7 +35,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 						autoComplete="off"
 					/>
 				</label>
-				<RandomTournament />
+				<RandomTournament size="40" />
 			</div>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
