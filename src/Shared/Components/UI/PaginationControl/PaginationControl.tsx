@@ -1,5 +1,4 @@
 import { HiArrowNarrowLeft as LeftArrow, HiArrowNarrowRight as RightArrow } from "react-icons/hi";
-
 import styles from "./pagination-control.module.css";
 
 interface PaginationProps {
@@ -20,6 +19,47 @@ export function PaginationControl({ currentPage, totalPages, onPageChange }: Pag
 			onPageChange(currentPage + 1);
 		}
 	};
+
+	if (totalPages === 0) {
+		return null;
+	}
+
+	if (totalPages < 7) {
+		return (
+			<div className={styles.container}>
+				<button
+					className={styles.arrow}
+					onClick={handlePrev}
+					type="button"
+					disabled={currentPage === 1}
+					title="предыдущая страница"
+				>
+					<LeftArrow size={24} />
+				</button>
+
+				{Array.from({ length: totalPages }, (_, index) => (
+					<button
+						// biome-ignore lint/suspicious/noArrayIndexKey: <не меняется содержимое>
+						key={index + 1}
+						type="button"
+						onClick={() => onPageChange(index + 1)}
+						className={`${styles.page}  ${currentPage === index + 1 && styles.active}`}
+					>
+						{index + 1}
+					</button>
+				))}
+				<button
+					type="button"
+					onClick={handleNext}
+					disabled={currentPage === totalPages}
+					title="следующая страница"
+					className={styles.arrow}
+				>
+					<RightArrow size={24} />
+				</button>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

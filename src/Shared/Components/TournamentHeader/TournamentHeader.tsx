@@ -1,4 +1,4 @@
-import { getDate } from "Shared/Helpers/formatDate";
+import { formatDate } from "Shared/Helpers/formatDate";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { ExternalLinkText } from "../UI/ExternalLinkText/ExternalLinkText";
 import styles from "./tournament-header.module.css";
@@ -17,7 +17,7 @@ export function TournamentHeader({ tournament }: Props) {
 
 			<div className={styles.info}>
 				<h3>
-					Дата отыгрыша: <span>{tournament.date ? getDate(tournament.date) : null}</span>
+					Дата отыгрыша: <span>{tournament.date ? formatDate(tournament.date) : null}</span>
 				</h3>
 				<h3>
 					Туры: <span>{tournament.tours}</span>

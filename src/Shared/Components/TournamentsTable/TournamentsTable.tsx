@@ -1,5 +1,5 @@
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
-import { useId, useMemo } from "react";
+import { useId, useMemo, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
@@ -10,24 +10,36 @@ import styles from "./tournaments-table.module.css";
 import { getDifficultyClass } from "./Helpers/getDifficultyClass";
 import { useTheme } from "Shared/Context/ThemeContext";
 import { linkBuilder } from "Shared/Helpers/linkBuilder";
+import { useGetTournamentsLastShortQuery } from "Store/ToolkitAPIs/tournamentAPI";
+import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
+import { Spinner } from "../Spinner/Spinner";
 
 export type EnrichedTournamentType = TournamentShortType & {
 	eternalLink: string;
 	background: string;
 };
 
-export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
+export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 	const id = useId();
 	const { theme } = useTheme();
 	const { pathname } = useLocation();
+	const [currentPage, setCurrentPage] = useState(1);
+
+	const { data, isLoading, isError, isSuccess } = useGetTournamentsLastShortQuery({
+		amount,
+		page: currentPage,
+		withSkip: true,
+	});
 
 	const enrichedTournaments = useMemo(() => {
-		return tournaments.map((t) => ({
+		if (!data) return [];
+
+		return data.tournaments.map((t) => ({
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),
 			background: getDifficultyClass(t.difficulty, theme),
 		}));
-	}, [tournaments, pathname, theme]);
+	}, [data, pathname, theme]);
 
 	const {
 		list,
@@ -37,6 +49,12 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 		sortField,
 		sortDirection,
 	} = useTournamentListManager(enrichedTournaments);
+
+	if (isError) return <h2>Ошибка при получении турниров</h2>;
+
+	if (isLoading) return <Spinner />;
+
+	if (!isSuccess) return null;
 
 	return (
 		<>
@@ -54,6 +72,11 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 				</label>
 				<RandomTournament size="40" />
 			</div>
+			<PaginationControl
+				currentPage={currentPage}
+				totalPages={data?.pageCount || 0}
+				onPageChange={setCurrentPage}
+			/>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
 					<div className={styles.headerCell}>
@@ -171,7 +194,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 
 				{list.map((item, i) => (
 					<div className={styles.line} key={item.id}>
-						<div className={styles.cell}>{i + 1}</div>
+						<div className={styles.cell}>{i + 1 + (currentPage - 1) * amount}</div>
 						<div className={styles.cell}>
 							<Link to={item.eternalLink}>{item.title}</Link>
 						</div>
