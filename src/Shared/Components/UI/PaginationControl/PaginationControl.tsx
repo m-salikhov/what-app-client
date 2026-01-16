@@ -4,10 +4,18 @@ import styles from "./pagination-control.module.css";
 interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
+	isBlock?: boolean;
 	onPageChange: (page: number) => void;
 }
 
-export function PaginationControl({ currentPage, totalPages, onPageChange }: PaginationProps) {
+export function PaginationControl({
+	currentPage,
+	totalPages,
+	onPageChange,
+	isBlock = false,
+}: PaginationProps) {
+	if (isBlock) return null;
+
 	const handlePrev = () => {
 		if (currentPage > 1) {
 			onPageChange(currentPage - 1);
@@ -19,10 +27,6 @@ export function PaginationControl({ currentPage, totalPages, onPageChange }: Pag
 			onPageChange(currentPage + 1);
 		}
 	};
-
-	if (totalPages === 0) {
-		return null;
-	}
 
 	if (totalPages < 7) {
 		return (

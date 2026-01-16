@@ -6,6 +6,7 @@ export const serverRoutes = {
 	tournamentsRandom: "tournaments/random",
 	tournamentsStats: "tournaments/statistics",
 	tournamentsAllByUploader: "tournaments/all-by-uploader",
+	tournamentsSearch: "tournaments/search",
 	randomTournament: "tournaments/random-tournament",
 	authLogin: "auth/login",
 	authLogFirst: "auth/login-first",

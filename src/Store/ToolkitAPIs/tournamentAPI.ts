@@ -42,6 +42,19 @@ export const tournamentAPI = baseApi.injectEndpoints({
 			providesTags: ["tournaments"],
 		}),
 
+		search: build.query<TournamentShortType[], { title: string }>({
+			query: ({ title }) => `${serverRoutes.tournamentsSearch}?title=${title}`,
+			responseSchema: TournamentShortTypeSchema.array(),
+			transformResponse: (tournaments: TournamentShortType[]) => {
+				return tournaments.map((tournament) => ({
+					...tournament,
+					date: formatDate(tournament.date),
+					dateUpload: formatDate(tournament.dateUpload),
+				}));
+			},
+			providesTags: ["search"],
+		}),
+
 		getRandom: build.query<QuestionType[], number>({
 			query: (n: number) => `/tournaments/random/${n}`,
 			keepUnusedDataFor: 15,
@@ -104,6 +117,7 @@ export const {
 	useGetTournamentQuery,
 	useGetRandomQuery,
 	useLazyGetRandomTournamentQuery,
+	useLazySearchQuery,
 	useAddTournamentMutation,
 	useParseLinkMutation,
 	useGetTournamentsAllShortQuery,

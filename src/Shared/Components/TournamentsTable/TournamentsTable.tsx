@@ -1,81 +1,79 @@
-import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
-import { useId, useMemo, useState } from "react";
+import { useId, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 import TableTooltipDF from "./Components/TableTooltipDF";
-import { useTournamentListManager } from "./Helpers/useTournamentListManager";
+import { useTableListManager } from "./Helpers/useTableListManager";
 import styles from "./tournaments-table.module.css";
-import { getDifficultyClass } from "./Helpers/getDifficultyClass";
-import { useTheme } from "Shared/Context/ThemeContext";
-import { linkBuilder } from "Shared/Helpers/linkBuilder";
-import { useGetTournamentsLastShortQuery } from "Store/ToolkitAPIs/tournamentAPI";
+import { BsSearch as Search } from "react-icons/bs";
+import { RiCloseLargeFill as Clear } from "react-icons/ri";
+
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { Spinner } from "../Spinner/Spinner";
-
-export type EnrichedTournamentType = TournamentShortType & {
-	eternalLink: string;
-	background: string;
-};
+import { useGetTableList } from "./Helpers/useGetTableList";
 
 export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 	const id = useId();
-	const { theme } = useTheme();
-	const { pathname } = useLocation();
 	const [currentPage, setCurrentPage] = useState(1);
+	const [filterString, setFilterString] = useState("");
 
-	const { data, isLoading, isError, isSuccess } = useGetTournamentsLastShortQuery({
+	const { tournaments, pageCount, queryState, searchByTitle, clearSearchResult } = useGetTableList(
 		amount,
-		page: currentPage,
-		withSkip: true,
-	});
+		currentPage,
+	);
 
-	const enrichedTournaments = useMemo(() => {
-		if (!data) return [];
+	const { list, sortTournaments, sortField, sortDirection } = useTableListManager(tournaments);
 
-		return data.tournaments.map((t) => ({
-			...t,
-			eternalLink: linkBuilder(t.id, pathname),
-			background: getDifficultyClass(t.difficulty, theme),
-		}));
-	}, [data, pathname, theme]);
+	function handleInputClear() {
+		setFilterString("");
+		clearSearchResult();
+	}
 
-	const {
-		list,
-		handleChangeFilterString,
-		filterString,
-		sortTournaments,
-		sortField,
-		sortDirection,
-	} = useTournamentListManager(enrichedTournaments);
+	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
 
-	if (isError) return <h2>Ошибка при получении турниров</h2>;
-
-	if (isLoading) return <Spinner />;
-
-	if (!isSuccess) return null;
+	if (queryState.isLoading) return <Spinner />;
 
 	return (
 		<>
 			{" "}
 			<div className={styles.header}>
-				<label className={styles.search}>
-					<input
-						type="text"
-						name="tournaments-search"
-						value={filterString}
-						onChange={handleChangeFilterString}
-						placeholder="поиск"
-						autoComplete="off"
-					/>
-				</label>
+				<div className={styles.searchContainer}>
+					<label className={styles.searchLabel}>
+						<input
+							type="text"
+							name="tournaments-search"
+							value={filterString}
+							onChange={(e) => setFilterString(e.target.value)}
+							placeholder="поиск"
+							autoComplete="off"
+						/>
+					</label>
+					<button
+						className={styles.searchClear}
+						type="button"
+						title="очистить поиск"
+						onClick={handleInputClear}
+					>
+						<Clear size="20" />
+					</button>
+					<button
+						className={styles.searchIcon}
+						type="button"
+						title="поиск"
+						onClick={() => searchByTitle(filterString)}
+					>
+						<Search size="28" color="var(--h-color)" />
+					</button>
+				</div>
+
 				<RandomTournament size="40" />
 			</div>
 			<PaginationControl
 				currentPage={currentPage}
-				totalPages={data?.pageCount || 0}
+				totalPages={pageCount}
 				onPageChange={setCurrentPage}
+				isBlock={queryState.searchSuccess}
 			/>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
