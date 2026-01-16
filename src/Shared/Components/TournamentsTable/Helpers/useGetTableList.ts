@@ -61,8 +61,6 @@ export function useGetTableList(amount: number, currentPage: number) {
 	const resultSearch = useMemo(() => {
 		if (!searchList) return [];
 
-		console.log("searchList memo");
-
 		return searchList.map((t) => ({
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),

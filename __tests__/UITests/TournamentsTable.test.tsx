@@ -7,7 +7,7 @@ import { renderWithProviders } from "../utils/renderWithProviders";
 
 describe("Таблица со всеми турнирами", () => {
 	test("получает и рендерит турниры", async () => {
-		renderWithProviders(<TournamentsTable tournaments={allshort} />);
+		renderWithProviders(<TournamentsTable amount={50} />);
 
 		const title = await screen.findByText(allshort[0].title);
 
@@ -15,7 +15,7 @@ describe("Таблица со всеми турнирами", () => {
 	});
 
 	test("работает поиск по таблице турниров", async () => {
-		renderWithProviders(<TournamentsTable tournaments={allshort} />);
+		renderWithProviders(<TournamentsTable amount={50} />);
 
 		const inputElement = await screen.findByRole("textbox");
 
@@ -35,7 +35,7 @@ describe("Таблица со всеми турнирами", () => {
 	});
 
 	test("работает сортировка по названию турниров: первое нажатие сортирует по алфавиту, повторное нажатие сортирует обратно", async () => {
-		renderWithProviders(<TournamentsTable tournaments={allshort} />);
+		renderWithProviders(<TournamentsTable amount={50} />);
 
 		let links = await screen.findAllByRole("link");
 		const sortIcon = screen.getByRole("button", { name: "НАЗВАНИЕ" });

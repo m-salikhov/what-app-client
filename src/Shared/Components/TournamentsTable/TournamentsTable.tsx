@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useId, useRef, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
@@ -8,7 +8,6 @@ import { useTableListManager } from "./Helpers/useTableListManager";
 import styles from "./tournaments-table.module.css";
 import { BsSearch as Search } from "react-icons/bs";
 import { RiCloseLargeFill as Clear } from "react-icons/ri";
-
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { Spinner } from "../Spinner/Spinner";
 import { useGetTableList } from "./Helpers/useGetTableList";
@@ -17,6 +16,7 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 	const id = useId();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [filterString, setFilterString] = useState("");
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const { tournaments, pageCount, queryState, searchByTitle, clearSearchResult } = useGetTableList(
 		amount,
@@ -26,8 +26,23 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 	const { list, sortTournaments, sortField, sortDirection } = useTableListManager(tournaments);
 
 	function handleInputClear() {
-		setFilterString("");
-		clearSearchResult();
+		if (filterString.length > 1) {
+			setFilterString("");
+		}
+
+		if (queryState.searchSuccess) {
+			clearSearchResult();
+		}
+
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	}
+
+	function handleSearch() {
+		if (filterString.length > 1) {
+			searchByTitle(filterString);
+		}
 	}
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
@@ -45,8 +60,9 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 							name="tournaments-search"
 							value={filterString}
 							onChange={(e) => setFilterString(e.target.value)}
-							placeholder="поиск"
+							placeholder="поиск по названию"
 							autoComplete="off"
+							ref={inputRef}
 						/>
 					</label>
 					<button
@@ -57,12 +73,7 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 					>
 						<Clear size="20" />
 					</button>
-					<button
-						className={styles.searchIcon}
-						type="button"
-						title="поиск"
-						onClick={() => searchByTitle(filterString)}
-					>
+					<button className={styles.searchIcon} type="button" title="поиск" onClick={handleSearch}>
 						<Search size="28" color="var(--h-color)" />
 					</button>
 				</div>
