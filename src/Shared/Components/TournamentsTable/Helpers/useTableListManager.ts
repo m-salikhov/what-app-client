@@ -1,4 +1,4 @@
-import { type ChangeEvent, type MouseEvent, useMemo, useState } from "react";
+import { type MouseEvent, useMemo, useState } from "react";
 import type { EnrichedTournamentType } from "./useGetTableList";
 
 const sortFieldMap = {
@@ -23,37 +23,28 @@ const compareDates = (str1: string, str2: string) => {
 };
 
 export function useTableListManager(tournaments: EnrichedTournamentType[]) {
-	const [filterString, setFilterString] = useState("");
 	const [sortField, setSortField] = useState<SortFieldType>("dateUpload");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
-	const filteredList = useMemo(() => {
-		if (filterString.length > 1) {
-			return tournaments.filter((t) => t.title.toLowerCase().includes(filterString.toLowerCase()));
-		} else {
-			return tournaments;
-		}
-	}, [tournaments, filterString]);
-
 	const list = useMemo(() => {
 		if (sortField === "dateUpload" || sortField === "date") {
-			return [...filteredList].sort((a, b) =>
+			return [...tournaments].sort((a, b) =>
 				sortDirection === "asc"
 					? compareDates(b[sortField], a[sortField])
 					: compareDates(a[sortField], b[sortField]),
 			);
 		} else if (sortField === "uploader" || sortField === "title") {
-			return [...filteredList].sort((a, b) =>
+			return [...tournaments].sort((a, b) =>
 				sortDirection === "asc"
 					? b[sortField].localeCompare(a[sortField])
 					: a[sortField].localeCompare(b[sortField]),
 			);
 		} else {
-			return [...filteredList].sort((a, b) =>
+			return [...tournaments].sort((a, b) =>
 				sortDirection === "asc" ? b[sortField] - a[sortField] : a[sortField] - b[sortField],
 			);
 		}
-	}, [sortDirection, sortField, filteredList]);
+	}, [sortDirection, sortField, tournaments]);
 
 	function sortTournaments(e: MouseEvent<HTMLButtonElement | SVGElement>) {
 		const field = e.currentTarget.dataset.field;
@@ -66,15 +57,8 @@ export function useTableListManager(tournaments: EnrichedTournamentType[]) {
 		}
 	}
 
-	function handleChangeFilterString(event: ChangeEvent<HTMLInputElement>) {
-		const str = event.target.value;
-		setFilterString(str);
-	}
-
 	return {
 		list,
-		handleChangeFilterString,
-		filterString,
 		sortTournaments,
 		sortField,
 		sortDirection,
