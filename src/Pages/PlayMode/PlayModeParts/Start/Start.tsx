@@ -1,5 +1,5 @@
 import { playModeActions } from "Store/Slices/PlayModeSlice";
-import { getDate } from "src/Shared/Helpers/getDate";
+import { formatDate } from "Shared/Helpers/formatDate";
 import { useAppDispatch, useAppSelector } from "src/Shared/Hooks/redux";
 import { TimerOptions } from "./TimerOptions";
 import styles from "../../playmode.module.css";
@@ -14,7 +14,7 @@ export function Start() {
 			<div className={styles.startInfo}>
 				<p>Вопросов: {questionsQuantity}</p>
 				<p>Туров: {tours}</p>
-				<p>Дата: {getDate(date)}</p>
+				<p>Дата: {formatDate(date)}</p>
 			</div>
 
 			<div className={styles.startEditors}>

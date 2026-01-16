@@ -1,11 +1,11 @@
 import { RandomTournament } from "Shared/Components/RandomTournament/RandomTournament";
 import { Spinner } from "Shared/Components/Spinner/Spinner";
-import { getDate } from "Shared/Helpers/getDate";
 import { useGetTournamentsLastShortQuery } from "Store/ToolkitAPIs/tournamentAPI";
 import { useState } from "react";
 import { HiArrowNarrowLeft as LeftArrow, HiArrowNarrowRight as RightArrow } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import styles from "./main-components.module.css";
+import { PaginationControl } from "Shared/Components/UI/PaginationControl/PaginationControl";
 
 export function LastTournaments() {
 	const [page, setPage] = useState(1);
@@ -52,17 +52,22 @@ export function LastTournaments() {
 					<div className={styles.line} key={v.id}>
 						<Link to={`tournament/${v.id}`}>{v.title}</Link>
 						<div>
-							<p className={styles.date}>{getDate(v.dateUpload)}</p>
+							<p className={styles.date}>{v.dateUpload}</p>
 						</div>
 					</div>
 				);
 			})}
 
-			<div className={styles.footer}>
-				<LeftArrow title="LastTournamentsPrev" size={24} onClick={handlePrevPage} />
+			{/* <div className={styles.footer}> */}
+			{/* <LeftArrow title="LastTournamentsPrev" size={24} onClick={handlePrevPage} />
 				<p>{page}</p>
-				<RightArrow title="lastTournamentsNext" size={24} onClick={handleNextPage} />
-			</div>
+				<RightArrow title="lastTournamentsNext" size={24} onClick={handleNextPage} /> */}
+			<PaginationControl
+				currentPage={page}
+				totalPages={data?.pageCount || 0}
+				onPageChange={setPage}
+			/>
+			{/* </div> */}
 		</div>
 	);
 }

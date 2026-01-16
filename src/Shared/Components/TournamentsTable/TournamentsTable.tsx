@@ -1,4 +1,3 @@
-import { getDate } from "Shared/Helpers/getDate";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
 import { useId, useMemo } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
@@ -15,8 +14,6 @@ import { linkBuilder } from "Shared/Helpers/linkBuilder";
 export type EnrichedTournamentType = TournamentShortType & {
 	eternalLink: string;
 	background: string;
-	dateUploadFormat: string;
-	dateFormat: string;
 };
 
 export function TournamentsTable({ tournaments }: { tournaments: TournamentShortType[] }) {
@@ -29,8 +26,6 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),
 			background: getDifficultyClass(t.difficulty, theme),
-			dateUploadFormat: getDate(t.dateUpload),
-			dateFormat: getDate(t.date),
 		}));
 	}, [tournaments, pathname, theme]);
 
@@ -180,7 +175,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 						<div className={styles.cell}>
 							<Link to={item.eternalLink}>{item.title}</Link>
 						</div>
-						<div className={styles.cell}>{item.dateFormat}</div>
+						<div className={styles.cell}>{item.date}</div>
 						<div className={`${styles.cell} ${styles[item.background]}`}>
 							<p className={styles.difficultyText}>
 								{item.difficulty <= 0 ? "-" : item.difficulty}
@@ -188,7 +183,7 @@ export function TournamentsTable({ tournaments }: { tournaments: TournamentShort
 						</div>
 						<div className={styles.cell}>{item.questionsQuantity}</div>
 						<div className={styles.cell}>{item.tours}</div>
-						<div className={styles.cell}>{item.dateUploadFormat}</div>
+						<div className={styles.cell}>{item.dateUpload}</div>
 						<div className={styles.cell}>{item.uploader}</div>
 					</div>
 				))}

@@ -1,4 +1,4 @@
-import { getDate } from "Shared/Helpers/getDate";
+import { getDate } from "Shared/Helpers/formatDate";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { ExternalLinkText } from "../UI/ExternalLinkText/ExternalLinkText";
 import styles from "./tournament-header.module.css";

@@ -19,7 +19,7 @@ function AllTournaments() {
 
 	if (!isSuccess) return null;
 
-	return <TournamentsTable tournaments={tournaments.slice(0, 50)} />;
+	return <TournamentsTable tournaments={tournaments} />;
 }
 
 export default AllTournaments;

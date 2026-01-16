@@ -1,4 +1,4 @@
-import { getDate, getDateYYYY_MM_DD } from "Shared/Helpers/getDate";
+import { formatDate, getDateYYYY_MM_DD } from "Shared/Helpers/formatDate";
 import { describe, expect, test } from "vitest";
 
 describe("getDateYYYY_MM_DD", () => {
@@ -13,8 +13,8 @@ describe("getDate", () => {
 		const date = new Date("2022-06-01");
 		const dateStr = "2022-06-01";
 		const dateNum = 1654041600000;
-		expect(getDate(dateStr)).toBe("01.06.2022");
-		expect(getDate(dateNum)).toBe("01.06.2022");
-		expect(getDate(date)).toBe("01.06.2022");
+		expect(formatDate(dateStr)).toBe("01.06.2022");
+		expect(formatDate(dateNum)).toBe("01.06.2022");
+		expect(formatDate(date)).toBe("01.06.2022");
 	});
 });

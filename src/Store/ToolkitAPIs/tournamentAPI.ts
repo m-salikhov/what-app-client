@@ -9,6 +9,7 @@ import {
 	TournamentTypeSchema,
 } from "Shared/Schemas/TournamentSchema";
 import { baseApi } from "./baseApi";
+import { formatDate } from "Shared/Helpers/formatDate";
 
 export const tournamentAPI = baseApi.injectEndpoints({
 	overrideExisting: false,
@@ -26,6 +27,18 @@ export const tournamentAPI = baseApi.injectEndpoints({
 			query: ({ amount, page, withSkip }) =>
 				`${serverRoutes.tournamentsLastShort}?amount=${amount}&page=${page}&withSkip=${withSkip}`,
 			responseSchema: TournamentsLastShortSchema,
+			transformResponse: (response: TournamentsLastShortType) => {
+				const tournaments = response.tournaments.map((tournament) => ({
+					...tournament,
+					date: formatDate(tournament.date),
+					dateUpload: formatDate(tournament.dateUpload),
+				}));
+
+				return {
+					...response,
+					tournaments,
+				};
+			},
 			providesTags: ["tournaments"],
 		}),
 
@@ -47,6 +60,13 @@ export const tournamentAPI = baseApi.injectEndpoints({
 		getTournamentsAllShort: build.query<TournamentShortType[], undefined>({
 			query: () => serverRoutes.tournamentsAllShort,
 			responseSchema: TournamentShortTypeSchema.array(),
+			transformResponse: (response: TournamentShortType[]) => {
+				return response.map((tournament) => ({
+					...tournament,
+					date: formatDate(tournament.date),
+					dateUpload: formatDate(tournament.dateUpload),
+				}));
+			},
 			providesTags: ["tournaments"],
 		}),
 

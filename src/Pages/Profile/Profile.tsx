@@ -1,6 +1,6 @@
 import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
-import { getDate } from "Shared/Helpers/getDate";
+import { formatDate } from "Shared/Helpers/formatDate";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
 import { useNavigate } from "react-router-dom";
 import { ChangePass } from "./Components/ChangePass/ChangePass";
@@ -29,7 +29,7 @@ export default function Profile() {
 					</div>
 					<div>
 						<p>Зарегистрирован</p>
-						<p>{getDate(user.date)}</p>
+						<p>{formatDate(user.date)}</p>
 					</div>
 					<div>
 						<p>Статус</p>

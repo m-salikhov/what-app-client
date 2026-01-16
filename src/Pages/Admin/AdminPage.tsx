@@ -1,5 +1,5 @@
 import { ExternalLinkText } from "Shared/Components/UI/ExternalLinkText/ExternalLinkText";
-import { getDate } from "Shared/Helpers/getDate";
+import { formatDate } from "Shared/Helpers/formatDate";
 import {
 	type ChangeTournamentStatusBody,
 	useChangeTournamentStatusMutation,
@@ -31,7 +31,7 @@ export default function AdminPage() {
 					<div className={styles.cell}>{item.title}</div>
 					<div className={styles.cell}>{item.questionsQuantity}</div>
 					<div className={styles.cell}>{item.tours}</div>
-					<div className={styles.cell}>{getDate(item.dateUpload)}</div>
+					<div className={styles.cell}>{formatDate(item.dateUpload)}</div>
 					<div className={styles.cell}>{item.uploader}</div>
 					<div className={styles.cell}>{item.uploader}</div>
 					<ExternalLinkText href={item.link} text={"источник"} extraClass={styles.cell} />

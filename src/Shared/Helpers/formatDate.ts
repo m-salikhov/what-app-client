@@ -1,4 +1,4 @@
-export function getDate(date: Date | string | number) {
+export function formatDate(date: Date | string | number, locale: string = "ru-RU") {
 	if (!date) return "";
 
 	const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
@@ -8,7 +8,7 @@ export function getDate(date: Date | string | number) {
 		return `${day}.${month}.${year}`;
 	}
 
-	const formatter = new Intl.DateTimeFormat("ru-RU", {
+	const formatter = new Intl.DateTimeFormat(locale, {
 		day: "2-digit",
 		month: "2-digit",
 		year: "numeric",
