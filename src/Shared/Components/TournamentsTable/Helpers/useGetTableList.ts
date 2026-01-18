@@ -1,7 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { linkBuilder } from "Shared/Helpers/linkBuilder";
 import {
-	tournamentAPI,
 	useGetTournamentsLastShortQuery,
 	useLazySearchQuery,
 } from "Store/ToolkitAPIs/tournamentAPI";
@@ -9,7 +8,6 @@ import { getDifficultyClass } from "./getDifficultyClass";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "Shared/Context/ThemeContext";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
-import { useDispatch } from "react-redux";
 
 export type EnrichedTournamentType = TournamentShortType & {
 	eternalLink: string;
@@ -19,12 +17,7 @@ export type EnrichedTournamentType = TournamentShortType & {
 export function useGetTableList(amount: number, currentPage: number) {
 	const { theme } = useTheme();
 	const { pathname } = useLocation();
-	const dispatch = useDispatch();
-
-	const clearSearchResult = () => {
-		dispatch(tournamentAPI.util.resetApiState());
-		// dispatch(tournamentAPI.util.invalidateTags(["search"]));
-	};
+	const [showSearchResult, setShowSearchResult] = useState(false);
 
 	const {
 		data,
@@ -48,6 +41,17 @@ export function useGetTableList(amount: number, currentPage: number) {
 		},
 	] = useLazySearchQuery();
 
+	const hideSearchResult = () => {
+		setShowSearchResult(false);
+	};
+
+	async function handleSearch(filterString: string) {
+		if (filterString.length > 1) {
+			await trigger({ title: filterString });
+			setShowSearchResult(true);
+		}
+	}
+
 	const resultPagination = useMemo(() => {
 		if (!data) return [];
 
@@ -61,6 +65,8 @@ export function useGetTableList(amount: number, currentPage: number) {
 	const resultSearch = useMemo(() => {
 		if (!searchList) return [];
 
+		setShowSearchResult(true);
+
 		return searchList.map((t) => ({
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),
@@ -68,7 +74,7 @@ export function useGetTableList(amount: number, currentPage: number) {
 		}));
 	}, [searchList, pathname, theme]);
 
-	const tournaments = searchList ? resultSearch : resultPagination;
+	const tournaments = showSearchResult ? resultSearch : resultPagination;
 
 	return {
 		tournaments,
@@ -76,7 +82,9 @@ export function useGetTableList(amount: number, currentPage: number) {
 		pageCount: data?.pageCount ?? 1,
 		searchByTitle: (str: string) => trigger({ title: str }),
 
-		clearSearchResult,
+		hideSearchResult,
+		handleSearch,
+		showSearchResult,
 
 		queryState: {
 			isFetching: paginationFetching || searchFetching,

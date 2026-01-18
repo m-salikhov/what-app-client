@@ -18,20 +18,18 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 	const [filterString, setFilterString] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const { tournaments, pageCount, queryState, searchByTitle, clearSearchResult } = useGetTableList(
-		amount,
-		currentPage,
-	);
+	const { tournaments, pageCount, queryState, handleSearch, hideSearchResult, showSearchResult } =
+		useGetTableList(amount, currentPage);
 
 	const { list, sortTournaments, sortField, sortDirection } = useTableListManager(tournaments);
 
 	function handleInputClear() {
-		if (filterString.length > 1) {
+		if (filterString.length > 0) {
 			setFilterString("");
 		}
 
 		if (queryState.searchSuccess) {
-			clearSearchResult();
+			hideSearchResult();
 		}
 
 		if (inputRef.current) {
@@ -39,9 +37,13 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 		}
 	}
 
-	function handleSearch() {
-		if (filterString.length > 1) {
-			searchByTitle(filterString);
+	function inputOnKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+		if (e.key === "Enter") {
+			handleSearch(filterString);
+		}
+
+		if (e.key === "Escape") {
+			handleInputClear();
 		}
 	}
 
@@ -60,6 +62,7 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 							name="tournaments-search"
 							value={filterString}
 							onChange={(e) => setFilterString(e.target.value)}
+							onKeyDown={inputOnKeyDown}
 							placeholder="поиск по названию"
 							autoComplete="off"
 							ref={inputRef}
@@ -73,7 +76,12 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 					>
 						<Clear size="20" />
 					</button>
-					<button className={styles.searchIcon} type="button" title="поиск" onClick={handleSearch}>
+					<button
+						className={styles.searchIcon}
+						type="button"
+						title="поиск"
+						onClick={() => handleSearch(filterString)}
+					>
 						<Search size="28" color="var(--h-color)" />
 					</button>
 				</div>
@@ -84,7 +92,7 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 				currentPage={currentPage}
 				totalPages={pageCount}
 				onPageChange={setCurrentPage}
-				isBlock={queryState.searchSuccess}
+				isBlock={showSearchResult}
 			/>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
@@ -203,7 +211,11 @@ export function TournamentsTable({ amount = 10 }: { amount?: number }) {
 
 				{list.map((item, i) => (
 					<div className={styles.line} key={item.id}>
-						<div className={styles.cell}>{i + 1 + (currentPage - 1) * amount}</div>
+						{!showSearchResult && (
+							<div className={styles.cell}>{i + 1 + (currentPage - 1) * amount}</div>
+						)}
+						{showSearchResult && <div className={styles.cell}>{i + 1}</div>}
+
 						<div className={styles.cell}>
 							<Link to={item.eternalLink}>{item.title}</Link>
 						</div>

@@ -6,7 +6,7 @@ import { Main } from "src/Pages/Main/Main";
 import { Layout } from "src/Shared/Components/Layout/Layout";
 import { Spinner } from "src/Shared/Components/Spinner/Spinner";
 import { initialLoginLoader } from "../Shared/Auth/InitialLoginLoader";
-import { PrivateRoute } from "./HOC/PrivateRoute";
+import { PrivateRoute } from "./Components/PrivateRoute";
 
 const Entry = lazy(() => import("src/Pages/Entry/Entry"));
 const AddTournamentLink = lazy(() => import("src/Pages/AddTournamentLink/AddTournamentLink"));
