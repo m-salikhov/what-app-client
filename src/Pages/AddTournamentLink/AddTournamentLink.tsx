@@ -3,7 +3,6 @@ import { Button } from "Shared/Components/UI/Button/Button";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
 import { Activity, useReducer, useState } from "react";
-import styles from "./add-tournament-link.module.css";
 import { EditForm } from "./Components/EditForm/EditForm";
 import { Instruction } from "./Components/Instruction";
 import { ParsedTournament } from "./Components/ParsedTournament";
@@ -13,6 +12,7 @@ import { reducer } from "./Reducer/reducer";
 import { useParseTournament } from "./Hooks/useParseTournament";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { useCheckTournament } from "./Hooks/useCheckTournament";
+import styles from "./add-tournament-link.module.css";
 
 function AddTournamentLink() {
 	setDocTitle("Добавить турнир");

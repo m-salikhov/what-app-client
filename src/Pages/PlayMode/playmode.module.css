@@ -215,6 +215,10 @@
 				font-size: 1rem;
 				font-weight: 800;
 			}
+
+			.timerCount {
+				font-weight: bold;
+			}
 		}
 	}
 

@@ -1,5 +1,4 @@
-import type React from "react";
-import { createContext, useContext, useLayoutEffect, useState } from "react";
+import { createContext, type ReactNode, useContext, useLayoutEffect, useState } from "react";
 import * as z from "zod";
 
 const ThemeSchema = z.enum(["light", "dark"]);
@@ -10,7 +9,11 @@ const ThemeContext = createContext<{ theme: ThemeType; changeTheme: () => void }
 	changeTheme: () => {},
 });
 
-export function ThemeProvider({ children }: { children: React.ReactNode }) {
+export function useTheme() {
+	return useContext(ThemeContext);
+}
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
 	const [theme, setTheme] = useState<ThemeType>(() => {
 		const savedTheme = ThemeSchema.safeParse(localStorage.getItem("app-theme")).data;
 		return savedTheme || "light";
@@ -25,9 +28,5 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 		setTheme((prev) => (prev === "light" ? "dark" : "light"));
 	}
 
-	return <ThemeContext.Provider value={{ theme, changeTheme }}>{children}</ThemeContext.Provider>;
-}
-
-export function useTheme() {
-	return useContext(ThemeContext);
+	return <ThemeContext value={{ theme, changeTheme }}>{children}</ThemeContext>;
 }

@@ -12,7 +12,7 @@ import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { Spinner } from "../Spinner/Spinner";
 import { useGetTableList } from "./Helpers/useGetTableList";
 
-export function TournamentsTable({ amount = 10 }: { amount?: number }) {
+export function TournamentsTable({ amount }: { amount: number }) {
 	const id = useId();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [filterString, setFilterString] = useState("");

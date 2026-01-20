@@ -1,6 +1,6 @@
 import { useAppSelector } from "Shared/Hooks/redux";
 import { timerOptions } from "Store/Selectors/PlayModeSelectors";
-import { type Dispatch, type SetStateAction, useEffect, useState } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from "react";
 import styles from "../../../playmode.module.css";
 
 interface Props {
@@ -10,32 +10,41 @@ interface Props {
 export function Timer({ setShowAnswer }: Props) {
 	const { questionTimer, answerTimer } = useAppSelector(timerOptions);
 	const [time, setTime] = useState(questionTimer);
-
-	//Флаг, что время на чтение вопроса окончено
-	const [flag, setFlag] = useState(false);
+	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+	const isQuestionPhase = useRef(true); // заменили flag
 
 	useEffect(() => {
-		const timeout = setTimeout(() => {
-			setTime((prev) => prev - 1);
+		intervalRef.current = setInterval(() => {
+			setTime((prev) => {
+				if (prev <= 1) {
+					if (isQuestionPhase.current) {
+						// Переход к фазе ответа
+						isQuestionPhase.current = false;
+						return answerTimer;
+					} else {
+						// Время ответа закончилось
+						setShowAnswer(true);
+						return 0;
+					}
+				}
+				return prev - 1;
+			});
 		}, 1000);
 
-		if (time === 0 && !flag) {
-			setTime(answerTimer);
-			setFlag(true);
-		}
-
-		if (time === 0 && flag) {
-			clearTimeout(timeout);
-			setShowAnswer(true);
-		}
-
-		return () => clearTimeout(timeout);
-	}, [time, flag, setShowAnswer, answerTimer]);
+		// Очистка при размонтировании
+		return () => {
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+		};
+	}, [setShowAnswer, answerTimer]);
 
 	return (
 		<div className={styles.timer}>
-			<p className={styles.timerText}>{flag ? "Время найти ответ" : "Время прочитать вопрос"}</p>
-			<h2>{time}</h2>
+			<p className={styles.timerText}>
+				{isQuestionPhase.current ? "Время прочитать вопрос" : "Время найти ответ"}
+			</p>
+			<p className={styles.timerCount}>{time}</p>
 		</div>
 	);
 }
