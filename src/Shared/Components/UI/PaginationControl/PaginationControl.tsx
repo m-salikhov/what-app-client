@@ -1,30 +1,31 @@
 import { HiArrowNarrowLeft as LeftArrow, HiArrowNarrowRight as RightArrow } from "react-icons/hi";
 import styles from "./pagination-control.module.css";
+import type { Dispatch, SetStateAction } from "react";
 
 interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
-	isBlock?: boolean;
-	onPageChange: (page: number) => void;
+	setCurrentPage: Dispatch<SetStateAction<number>>;
+	show?: boolean;
 }
 
 export function PaginationControl({
 	currentPage,
 	totalPages,
-	onPageChange,
-	isBlock = false,
+	setCurrentPage,
+	show = true,
 }: PaginationProps) {
-	if (isBlock) return null;
+	if (!show) return null;
 
 	const handlePrev = () => {
 		if (currentPage > 1) {
-			onPageChange(currentPage - 1);
+			setCurrentPage(currentPage - 1);
 		}
 	};
 
 	const handleNext = () => {
 		if (currentPage < totalPages) {
-			onPageChange(currentPage + 1);
+			setCurrentPage(currentPage + 1);
 		}
 	};
 
@@ -46,7 +47,7 @@ export function PaginationControl({
 						// biome-ignore lint/suspicious/noArrayIndexKey: <не меняется содержимое>
 						key={index + 1}
 						type="button"
-						onClick={() => onPageChange(index + 1)}
+						onClick={() => setCurrentPage(index + 1)}
 						className={`${styles.page}  ${currentPage === index + 1 && styles.active}`}
 					>
 						{index + 1}
@@ -79,7 +80,7 @@ export function PaginationControl({
 
 			<button
 				type="button"
-				onClick={() => onPageChange(1)}
+				onClick={() => setCurrentPage(1)}
 				className={`${styles.page}  ${currentPage === 1 && styles.active}`}
 			>
 				1
@@ -88,7 +89,11 @@ export function PaginationControl({
 			{currentPage > 3 && <span className={styles.dots}>...</span>}
 
 			{currentPage > 2 && (
-				<button type="button" onClick={() => onPageChange(currentPage - 1)} className={styles.page}>
+				<button
+					type="button"
+					onClick={() => setCurrentPage(currentPage - 1)}
+					className={styles.page}
+				>
 					{currentPage - 1}
 				</button>
 			)}
@@ -100,7 +105,11 @@ export function PaginationControl({
 			)}
 
 			{currentPage < totalPages - 1 && (
-				<button type="button" onClick={() => onPageChange(currentPage + 1)} className={styles.page}>
+				<button
+					type="button"
+					onClick={() => setCurrentPage(currentPage + 1)}
+					className={styles.page}
+				>
 					{currentPage + 1}
 				</button>
 			)}
@@ -109,7 +118,7 @@ export function PaginationControl({
 
 			<button
 				type="button"
-				onClick={() => onPageChange(totalPages)}
+				onClick={() => setCurrentPage(totalPages)}
 				className={`${styles.page}  ${currentPage === totalPages && styles.active}`}
 			>
 				{totalPages}

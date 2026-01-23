@@ -1,4 +1,4 @@
-import { useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
@@ -15,6 +15,7 @@ import { useGetTableList } from "./Helpers/useGetTableList";
 export function TournamentsTable({ amount }: { amount: number }) {
 	const id = useId();
 	const [currentPage, setCurrentPage] = useState(1);
+	const [loadedPage, setLoadedPage] = useState(1);
 	const [filterString, setFilterString] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
 
@@ -46,6 +47,12 @@ export function TournamentsTable({ amount }: { amount: number }) {
 			handleInputClear();
 		}
 	}
+
+	useEffect(() => {
+		if (tournaments && !queryState.isFetching) {
+			setLoadedPage(currentPage); // Когда данные пришли — обновляем загруженную страницу
+		}
+	}, [tournaments, queryState.isFetching, currentPage]);
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
 
@@ -91,8 +98,8 @@ export function TournamentsTable({ amount }: { amount: number }) {
 			<PaginationControl
 				currentPage={currentPage}
 				totalPages={pageCount}
-				onPageChange={setCurrentPage}
-				isBlock={showSearchResult}
+				setCurrentPage={setCurrentPage}
+				show={!showSearchResult}
 			/>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
@@ -212,7 +219,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 				{list.map((item, i) => (
 					<div className={styles.line} key={item.id}>
 						{!showSearchResult && (
-							<div className={styles.cell}>{i + 1 + (currentPage - 1) * amount}</div>
+							<div className={styles.cell}>{i + 1 + (loadedPage - 1) * amount}</div>
 						)}
 						{showSearchResult && <div className={styles.cell}>{i + 1}</div>}
 

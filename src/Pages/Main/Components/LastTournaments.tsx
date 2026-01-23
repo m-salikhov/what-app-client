@@ -50,7 +50,7 @@ export function LastTournaments() {
 			<PaginationControl
 				currentPage={page}
 				totalPages={data?.pageCount || 0}
-				onPageChange={setPage}
+				setCurrentPage={setPage}
 			/>
 		</div>
 	);

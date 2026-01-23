@@ -11,7 +11,7 @@ export function Timer({ setShowAnswer }: Props) {
 	const { questionTimer, answerTimer } = useAppSelector(timerOptions);
 	const [time, setTime] = useState(questionTimer);
 	const intervalRef = useRef<NodeJS.Timeout | null>(null);
-	const isQuestionPhase = useRef(true); // заменили flag
+	const isQuestionPhase = useRef(true);
 
 	useEffect(() => {
 		intervalRef.current = setInterval(() => {

@@ -1,4 +1,4 @@
-import { createContext, type ReactNode, useContext, useLayoutEffect, useState } from "react";
+import { createContext, type ReactNode, useContext, useEffect, useState } from "react";
 import * as z from "zod";
 
 const ThemeSchema = z.enum(["light", "dark"]);
@@ -19,7 +19,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 		return savedTheme || "light";
 	});
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		document.documentElement.dataset.theme = theme;
 		localStorage.setItem("app-theme", theme);
 	}, [theme]);
