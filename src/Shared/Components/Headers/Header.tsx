@@ -10,7 +10,7 @@ import { useHeaderNavigation } from "./helpers/useHeaderNavigation";
 import owlGreen from "./owlGreen.svg";
 
 export function Header() {
-	const prefetchTournaments = usePrefetch("getTournamentsAllShort");
+	const prefetchTournaments = usePrefetch("getTournamentsLastShort");
 	const { handleLogout, user } = useAuth();
 	const { logoNavigate, handleMobMenu, isOpenMobMenu, isDesktop } = useHeaderNavigation();
 
@@ -50,7 +50,16 @@ export function Header() {
 						</NavLink>
 					</li>
 
-					<li className={styles.navItem} onMouseEnter={() => prefetchTournaments(undefined)}>
+					<li
+						className={styles.navItem}
+						onMouseEnter={() =>
+							prefetchTournaments({
+								amount: 50,
+								page: 1,
+								withSkip: true,
+							})
+						}
+					>
 						<NavLink
 							to="/playmode"
 							className={({ isActive }) =>
@@ -72,7 +81,16 @@ export function Header() {
 						</NavLink>
 					</li>
 
-					<li className={styles.navItem} onMouseEnter={() => prefetchTournaments(undefined)}>
+					<li
+						className={styles.navItem}
+						onMouseEnter={() =>
+							prefetchTournaments({
+								amount: 50,
+								page: 1,
+								withSkip: true,
+							})
+						}
+					>
 						<NavLink
 							to="/all"
 							className={({ isActive }) =>

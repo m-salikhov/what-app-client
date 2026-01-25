@@ -11,11 +11,7 @@ export type Action =
 			payload: TournamentType;
 	  }
 	| {
-			type: "title";
-			payload: string;
-	  }
-	| {
-			type: "date";
+			type: "title" | "date";
 			payload: string;
 	  }
 	| {

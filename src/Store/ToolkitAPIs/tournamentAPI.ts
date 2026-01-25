@@ -89,7 +89,6 @@ export const tournamentAPI = baseApi.injectEndpoints({
 				method: "POST",
 				body,
 			}),
-			responseSchema: TournamentTypeSchema,
 		}),
 
 		addTournament: build.mutation<number, TournamentType>({

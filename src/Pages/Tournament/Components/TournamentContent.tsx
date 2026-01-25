@@ -21,8 +21,8 @@ export default function TournamentContent({ tournament }: { tournament: Tourname
 				{toursParagraphs}
 			</button>
 
-			{tournament.questions.map((q) => (
-				<div key={q.id} className={`${styles.question} ${styles["question-enter"]}`}>
+			{tournament.questions.map((q, i) => (
+				<div key={q.id} className={`${styles.question} ${i <= 3 ? styles["question-enter"] : ""}`}>
 					<Question q={q} />
 				</div>
 			))}

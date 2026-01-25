@@ -50,7 +50,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 
 	useEffect(() => {
 		if (tournaments && !queryState.isFetching) {
-			setLoadedPage(currentPage); // Когда данные пришли — обновляем загруженную страницу
+			setLoadedPage(currentPage);
 		}
 	}, [tournaments, queryState.isFetching, currentPage]);
 
