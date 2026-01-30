@@ -11,7 +11,6 @@ interface Props {
 	onElementDestroyed?: () => void;
 }
 
-//HOC для модальных окон.
 export function Modal({
 	active,
 	onClose,

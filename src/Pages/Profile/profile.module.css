@@ -25,14 +25,8 @@
 }
 
 .modal {
-	position: absolute;
-	top: calc(50% - 160px);
-	left: calc(50% - 125px);
 	width: 285px;
-	height: fit-content;
 	padding: 20px 40px;
-	background-color: var(--main-bg-color);
-	border: 2px solid var(--main-border-color);
 
 	p {
 		text-align: center;

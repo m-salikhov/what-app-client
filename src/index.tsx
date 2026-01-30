@@ -1,11 +1,11 @@
 import { store } from "Store/store";
-import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { RouterProvider } from "react-router-dom";
 import router from "src/Router/AppRouter";
 import "Shared/Styles/style.css";
 import { ThemeProvider } from "Shared/Context/ThemeContext";
 import "Store/ToolkitAPIs/Config/registeredAPIs";
+import { createRoot } from "react-dom/client";
 
 if (import.meta.env.DEV) {
 	import("react-scan").then(({ scan }) => {
@@ -15,7 +15,7 @@ if (import.meta.env.DEV) {
 	});
 }
 
-const root = ReactDOM.createRoot(document.querySelector("#root") as HTMLElement);
+const root = createRoot(document.querySelector("#root") as HTMLElement);
 root.render(
 	<ThemeProvider>
 		<Provider store={store}>
