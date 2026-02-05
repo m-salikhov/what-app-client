@@ -239,6 +239,12 @@ export function TournamentsTable({ amount }: { amount: number }) {
 					</div>
 				))}
 			</div>
+			<PaginationControl
+				currentPage={currentPage}
+				totalPages={pageCount}
+				setCurrentPage={setCurrentPage}
+				show={!showSearchResult}
+			/>
 			<ScrollToTop />
 		</>
 	);

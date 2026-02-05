@@ -4,6 +4,8 @@
 	cursor: pointer;
 	border-radius: 6px;
 	transition: all 0.2s ease;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 .button-primary {

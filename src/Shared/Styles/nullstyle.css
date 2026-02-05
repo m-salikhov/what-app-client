@@ -16,6 +16,13 @@
 	outline: none;
 }
 
+:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #0062ff;
+  border-radius: 0.25rem;
+}
+
+
 html,
 body {
 	width: 100%;
