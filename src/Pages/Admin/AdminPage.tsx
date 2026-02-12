@@ -25,16 +25,23 @@ export default function AdminPage() {
 		<div className={styles.container}>
 			{data.length === 0 && <h2>Нет черновиков</h2>}
 
+			<div className={styles.line}>
+				<div className={styles.cell}>id</div>
+				<div className={styles.cell}>Название</div>
+				<div className={styles.cell}>Вопросов</div>
+				<div className={styles.cell}>Туров</div>
+				<div className={styles.cell}>Загружен</div>
+				<div className={styles.cell}>Загрузил</div>
+			</div>
+
 			{data.map((item) => (
 				<div className={styles.line} key={item.id}>
 					<div className={styles.cell}>{item.id}</div>
-					<div className={styles.cell}>{item.title}</div>
+					<ExternalLinkText href={item.link} text={item.title} extraClass={styles.cell} />
 					<div className={styles.cell}>{item.questionsQuantity}</div>
 					<div className={styles.cell}>{item.tours}</div>
 					<div className={styles.cell}>{formatDate(item.dateUpload)}</div>
 					<div className={styles.cell}>{item.uploader}</div>
-					<div className={styles.cell}>{item.uploader}</div>
-					<ExternalLinkText href={item.link} text={"источник"} extraClass={styles.cell} />
 					<button type="button" onClick={() => handlePublish({ id: item.id, status: "published" })}>
 						Опубликовать
 					</button>
