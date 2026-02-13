@@ -1,3 +1,5 @@
+
+
 .wordle {
 	display: flex;
 	flex-direction: column;
@@ -62,6 +64,8 @@
 		}
 	}
 
+  
+
 	.board-container {
 		margin-top: 2rem;
 
@@ -107,6 +111,11 @@
 	}
 }
 
+.wordle:focus-visible {
+  box-shadow: none;
+  border-radius: none;
+  outline: none;
+}
 
 /* модальное окно при завершении игры */
 .wordle-result-wrapper {

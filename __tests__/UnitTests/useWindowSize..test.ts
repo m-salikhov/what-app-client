@@ -11,7 +11,6 @@ function mockWindowSize(width: number, height: number) {
 
 describe("useWindowSize", () => {
 	beforeEach(() => {
-		// Мокаем requestAnimationFrame для useLayoutEffect
 		vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
 			cb(0);
 			return 0;

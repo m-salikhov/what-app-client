@@ -7,9 +7,9 @@ export function Add({ add }: { add: string }) {
 	const isImage = add.startsWith("http");
 
 	return (
-		<div className={styles.razdatka}>
+		<div className={styles.razdatkaContainer}>
 			<p>Раздаточный материал:</p>
-			<div>
+			<div className={styles.razdatka}>
 				{isImage && !isImageLoaded && <div style={{ height: "250px" }}></div>}
 
 				{isImage && (

@@ -2,6 +2,7 @@ import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { useMemo, type MouseEvent } from "react";
 
 export const useTournamentScroll = (tournament: TournamentType) => {
+	//номера первых вопросов в утре
 	const toursAnchors = useMemo(() => {
 		return tournament.questions.reduce<{ tours: number[]; toursAnchors: number[] }>(
 			(acc, question, index) => {
