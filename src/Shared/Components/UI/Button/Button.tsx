@@ -1,10 +1,10 @@
-import type { ButtonHTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 import styles from "./button.module.css";
 
 type ButtonVariant = "primary" | "secondary" | "danger";
 type ButtonSize = "tiny" | "small" | "medium" | "large";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends ComponentProps<"button"> {
 	extraClass?: string;
 	variant?: ButtonVariant;
 	size?: ButtonSize;

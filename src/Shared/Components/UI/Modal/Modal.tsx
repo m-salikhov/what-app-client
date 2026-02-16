@@ -1,13 +1,13 @@
 import { animated, useTransition } from "@react-spring/web";
-import { type PropsWithChildren, useEffect, useRef } from "react";
+import { type KeyboardEvent, type ComponentProps, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { scrollVisibility } from "./Helpers/scrollVisibility";
 import styles from "./modal.module.css";
 
-interface Props {
+interface Props extends ComponentProps<"dialog"> {
 	active: boolean;
 	onClose: () => void;
-	onKeyDown?: (event: React.KeyboardEvent<HTMLDialogElement>) => void;
+	onKeyDown?: (event: KeyboardEvent<HTMLDialogElement>) => void;
 	onElementDestroyed?: () => void;
 }
 
@@ -17,7 +17,8 @@ export function Modal({
 	onElementDestroyed,
 	onKeyDown,
 	children,
-}: PropsWithChildren<Props>) {
+	...props
+}: Props) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
 	const transition = useTransition(active, {
@@ -47,8 +48,8 @@ export function Modal({
 		config: { duration: 200 },
 	});
 
-	const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
-		onKeyDown?.(event);
+	const handleKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
+		if (onKeyDown) onKeyDown(event);
 
 		if (event.key === "Escape") {
 			onClose();
@@ -80,6 +81,7 @@ export function Modal({
 								}
 							}}
 							onKeyDown={handleKeyDown}
+							{...props}
 						>
 							<animated.div className={styles.content} style={style}>
 								{children}

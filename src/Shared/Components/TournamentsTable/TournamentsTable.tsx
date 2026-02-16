@@ -49,6 +49,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 	}
 
 	useEffect(() => {
+		// чтобы нумерация не обновлялась вперед загрузки страницы
 		if (tournaments && !queryState.isFetching) {
 			setLoadedPage(currentPage);
 		}

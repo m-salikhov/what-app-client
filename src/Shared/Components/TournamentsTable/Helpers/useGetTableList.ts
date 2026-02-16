@@ -55,11 +55,13 @@ export function useGetTableList(amount: number, currentPage: number) {
 	const resultPagination = useMemo(() => {
 		if (!data) return [];
 
-		return data.tournaments.map((t) => ({
+		const enrichedTournaments: EnrichedTournamentType[] = data.tournaments.map((t) => ({
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),
 			background: getDifficultyClass(t.difficulty, theme),
 		}));
+
+		return enrichedTournaments;
 	}, [data, pathname, theme]);
 
 	const resultSearch = useMemo(() => {
@@ -67,11 +69,13 @@ export function useGetTableList(amount: number, currentPage: number) {
 
 		setShowSearchResult(true);
 
-		return searchList.map((t) => ({
+		const enrichedTournaments: EnrichedTournamentType[] = searchList.map((t) => ({
 			...t,
 			eternalLink: linkBuilder(t.id, pathname),
 			background: getDifficultyClass(t.difficulty, theme),
 		}));
+
+		return enrichedTournaments;
 	}, [searchList, pathname, theme]);
 
 	const tournaments = showSearchResult ? resultSearch : resultPagination;
