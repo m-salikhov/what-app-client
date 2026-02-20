@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "src/Shared/Hooks/redux";
 import { TimerOptions } from "./TimerOptions";
 import styles from "../../playmode.module.css";
 import { tournamentInfoSelector } from "Store/Selectors/PlayModeSelectors";
+import { Button } from "Shared/Components/UI/Button/Button";
 
 export function Start() {
 	const dispatch = useAppDispatch();
@@ -25,9 +26,10 @@ export function Start() {
 			<TimerOptions />
 
 			<div className={styles.startButton}>
-				<button type="button" onClick={() => dispatch(playModeActions.setStep())}>
-					Начать игру
-				</button>
+				<Button size="large" onClick={() => dispatch(playModeActions.setStep())}>
+					{" "}
+					Начать игру{" "}
+				</Button>
 			</div>
 		</div>
 	);

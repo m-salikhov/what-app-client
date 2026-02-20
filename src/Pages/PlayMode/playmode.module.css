@@ -36,21 +36,7 @@
 	.startButton {
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
 		margin-top: 1rem;
-
-		button {
-			width: 300px;
-			height: 30px;
-			font-size: larger;
-			border: 1px solid #1b1b1b80;
-			border-radius: 5px;
-
-			&:hover {
-				font-weight: 800;
-				background-color: rgb(97 161 153 / 20%);
-			}
-		}
 	}
 }
 
@@ -129,6 +115,7 @@
 				font-size: 1.4rem;
 				border: 1px solid rgb(0 0 0);
 				border-radius: 4px;
+				background-color: var(--input-bg-color);
 
 				&[slot="decrement"] {
 					border-start-end-radius: 0;
