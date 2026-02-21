@@ -68,12 +68,13 @@
 
 	.board-container {
 		margin-top: 2rem;
+    width: 100%;
 
 		.board-row {
 			display: flex;
 			justify-content: center;
 
-			div {
+			button {
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -86,6 +87,7 @@
 				cursor: pointer;
 				background-color: rgb(255 228 196);
 				transition-duration: 0.8s;
+        
 
 				&.miss {
 					color: aliceblue;
@@ -101,9 +103,18 @@
 					color: aliceblue;
 					background-color: rgb(106 170 100);
 				}
+			}
+		}
+	}
+}
 
-				&:hover {
-					background-color: rgb(251 180 93);
+/* hover только на десктопе */
+@media (hover: hover) {
+	.wordle {
+		.board-container {
+			.board-row {
+				button:hover {
+          background-color: rgb(251 180 93);
 					transform: scale(1.1);
 				}
 			}
@@ -188,20 +199,27 @@
 			.board-row {
 				margin-top: 5px;
 
-				div {
-					width: 24px;
-					height: 60px;
+				button {
+          width: unset;
+					flex-grow: 1;
+					height: 40px;
 					margin: 2px;
 					font-size: 18px;
+
+          &:active {
+					  background-color: #004494;
+				  }
 				}
 
 				&:nth-child(3) {
-					div:first-child,
-					div:last-child {
-						width: 48px;
+					button:first-child,
+					button:last-child {
+						width: 24px;
 					}
 				}
 			}
 		}
 	}
 }
+
+

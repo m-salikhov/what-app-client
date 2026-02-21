@@ -32,9 +32,14 @@ function getKeyboard() {
 					}
 
 					return (
-						<div onClick={() => handleInput(letter)} className={state} key={letter}>
+						<button
+							type="button"
+							onClick={() => handleInput(letter)}
+							className={state}
+							key={letter}
+						>
 							{letter}
-						</div>
+						</button>
 					);
 				})}
 			</div>,
