@@ -9,14 +9,10 @@
 
 	.wordle-container {
 		display: grid;
-		grid-template-rows: repeat(6, 1fr);
 		grid-template-columns: repeat(5, 1fr);
 		gap: 8px;
-		width: fit-content;
-		height: fit-content;
 
 		div {
-			z-index: 10;
 			display: flex;
 			align-items: center;
 			justify-content: center;
@@ -27,7 +23,7 @@
 			color: var(--p-color);
 			border: var(--main-border);
 			border-radius: 5px;
-			transition-duration: 0.5s;
+			transition-duration: 500ms;
 			transition-property: background-color, color;
 
 			&.current-letter {
@@ -51,14 +47,14 @@
 
 			&.letter {
 				animation-name: letter-scale;
-				animation-duration: 1s;
+				animation-duration: 800ms;
 			}
 
 			&.wrong-word {
 				border-color: red;
 				border-width: 3px;
 				animation-name: wrong-word;
-				animation-duration: 100ms;
+				animation-duration: 200ms;
 				animation-iteration-count: infinite;
 			}
 		}
@@ -84,9 +80,9 @@
 				font-size: 18px;
 				font-weight: bold;
 				text-transform: uppercase;
-				cursor: pointer;
 				background-color: rgb(255 228 196);
-				transition-duration: 0.8s;
+        border-radius: 6px;
+				transition-duration: 400ms;
         
 
 				&.miss {
