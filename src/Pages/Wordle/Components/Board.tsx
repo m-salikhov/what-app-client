@@ -1,6 +1,7 @@
 import { useAppSelector } from "Shared/Hooks/redux";
 import { letterStateSelector } from "Store/Selectors/WordleSelectors";
 import { useWordleInput } from "../helpers/useWordleInput";
+import type { LetterState } from "Store/Slices/WordleSlice";
 
 const keyboard = {
 	1: ["й", "ц", "у", "к", "е", "н", "г", "ш", "щ", "з", "х", "ъ"],
@@ -10,12 +11,8 @@ const keyboard = {
 
 type KeyboardRowIndex = keyof typeof keyboard;
 
-function getKeyboard() {
+function getKeyboard(letterState: LetterState[], handleInput: (letter: string) => void) {
 	const arr = [];
-
-	const letterState = useAppSelector(letterStateSelector);
-
-	const { handleInput } = useWordleInput();
 
 	for (let i = 1; i < 4; i++) {
 		arr.push(
@@ -50,5 +47,8 @@ function getKeyboard() {
 }
 
 export function Board() {
-	return <div className="board-container">{getKeyboard()}</div>;
+	const letterState = useAppSelector(letterStateSelector);
+	const { handleInput } = useWordleInput();
+
+	return <div className="board-container">{getKeyboard(letterState, handleInput)}</div>;
 }

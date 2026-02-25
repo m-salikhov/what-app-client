@@ -50,6 +50,12 @@ export function Answer({ q }: { q: QuestionType }) {
 			<p>
 				<span>Автор:</span> {q.author}
 			</p>
+
+			{q.answerRatio && (
+				<p>
+					<span>Взятие:</span> {q.answerRatio}
+				</p>
+			)}
 		</div>
 	);
 }

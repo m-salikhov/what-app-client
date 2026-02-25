@@ -12,6 +12,7 @@ export const questions: QuestionType[] = [
 		source: [{ id: 1, link: "Source 1" }],
 		author: "Author 1",
 		tourNumber: 1,
+		answerRatio: `45/62 · 72.58%`,
 		tournament: {
 			id: 56,
 			title: "tournament 1",
@@ -36,6 +37,8 @@ export const questions: QuestionType[] = [
 		source: [{ id: 2, link: "Source 2" }],
 		author: "Author 2",
 		tourNumber: 1,
+		answerRatio: `45/62 · 72.58%`,
+
 		tournament: {
 			id: 57,
 			title: "tournament 2",
@@ -60,6 +63,8 @@ export const questions: QuestionType[] = [
 		source: [{ id: 3, link: "Source 3" }],
 		author: "Author 3",
 		tourNumber: 1,
+		answerRatio: `45/62 · 72.58%`,
+
 		tournament: {
 			id: 58,
 			title: "tournament 3",
@@ -84,6 +89,8 @@ export const questions: QuestionType[] = [
 		source: [{ id: 4, link: "Source 4" }],
 		author: "Author 4",
 		tourNumber: 1,
+		answerRatio: `45/62 · 72.58%`,
+
 		tournament: {
 			id: 59,
 			title: "tournament 4",
@@ -108,6 +115,7 @@ export const questions: QuestionType[] = [
 		comment: "Comment 5",
 		source: [{ id: 5, link: "Source 5" }],
 		author: "Author 5",
+		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
 		tournament: {
 			id: 60,
@@ -133,6 +141,7 @@ export const questions: QuestionType[] = [
 		comment: "Comment 6",
 		source: [{ id: 6, link: "Source 6" }],
 		author: "Author 6",
+		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
 		tournament: {
 			id: 61,
@@ -158,6 +167,7 @@ export const questions: QuestionType[] = [
 		comment: "Comment 7",
 		source: [{ id: 7, link: "Source 7" }],
 		author: "Author 7",
+		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
 		tournament: {
 			id: 62,
@@ -182,6 +192,7 @@ export const questions: QuestionType[] = [
 		alterAnswer: "Alter Answer 8",
 		comment: "Comment 8",
 		source: [{ id: 8, link: "Source 8" }],
+		answerRatio: `45/62 · 72.58%`,
 		author: "Author 8",
 		tourNumber: 1,
 		tournament: {

@@ -34,6 +34,7 @@ export const QuestionTypeSchema = z.object({
 	answer: z.string().min(1, { message: "Нет правильного ответа" }),
 	alterAnswer: z.string().optional(),
 	comment: z.string().optional(),
+	answerRatio: z.string(),
 	source: z.array(SourceTypeSchema),
 	author: z.string().min(1, { message: "Нет автора" }),
 	tournament: TournamentShortTypeSchema.optional(),

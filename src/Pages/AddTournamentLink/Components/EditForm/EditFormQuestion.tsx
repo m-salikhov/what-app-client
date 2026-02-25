@@ -184,6 +184,8 @@ export function EditFormQuestion({ q, dispatch }: Props) {
 					disabled={q.qNumber === -1}
 				/>
 			</label>
+
+			{q.answerRatio && <p>Взятие: {q.answerRatio}</p>}
 		</div>
 	);
 }
