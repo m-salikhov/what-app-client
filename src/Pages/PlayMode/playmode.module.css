@@ -192,19 +192,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
-			width: 15.5rem;
-			height: 40px;
 			padding: 0 0.5rem;
 			border: 3px solid rgb(97 161 153 / 50%);
 			border-radius: 5px;
 
 			.timerText {
 				font-size: 1rem;
+				width: 200px;
+				white-space: nowrap;
 				font-weight: 800;
 			}
 
 			.timerCount {
 				font-weight: bold;
+				min-width: 2rem;
+				text-align: end;
 			}
 		}
 	}
@@ -255,5 +257,31 @@
 
 	.endText {
 		padding-top: 0.5rem;
+	}
+}
+
+@media (width <= 415px) {
+	.question {
+		.timerContainer {
+			.timer {
+				.timerText {
+					width: 160px;
+					font-size: 0.8rem;
+				}
+			}
+		}
+
+		.buttonsBlock {
+			.buttonBlockText {
+				gap: 0.5rem;
+				p {
+					font-size: 1rem;
+				}
+			}
+		}
+	}
+
+	.timerButton {
+		font-size: 0.8rem;
 	}
 }

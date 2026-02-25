@@ -19,7 +19,9 @@ export function PlayModeQuestion() {
 			{!showAnswer && (
 				<div className={styles.timerContainer}>
 					{withTimer && <Timer setShowAnswer={setShowAnswer} />}
-					<Button onClick={() => setShowAnswer(true)}> Готов ответ </Button>
+					<Button extraClass={styles.timerButton} onClick={() => setShowAnswer(true)}>
+						Готов ответ
+					</Button>
 				</div>
 			)}
 
