@@ -1,5 +1,5 @@
 import { type MouseEvent, useMemo, useState } from "react";
-import type { EnrichedTournamentType } from "./useGetTableList";
+import type { EnrichedTournamentType } from "./useEnrichTournaments";
 
 const sortFieldMap = {
 	title: "title",
@@ -22,11 +22,11 @@ const compareDates = (str1: string, str2: string) => {
 	return 0;
 };
 
-export function useTableListManager(tournaments: EnrichedTournamentType[]) {
+export function useSortTournaments(tournaments: EnrichedTournamentType[]) {
 	const [sortField, setSortField] = useState<SortFieldType>("dateUpload");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
-	const list = useMemo(() => {
+	const tournamentsSorted = useMemo(() => {
 		if (sortField === "dateUpload" || sortField === "date") {
 			return [...tournaments].sort((a, b) =>
 				sortDirection === "asc"
@@ -58,7 +58,7 @@ export function useTableListManager(tournaments: EnrichedTournamentType[]) {
 	}
 
 	return {
-		list,
+		tournamentsSorted,
 		sortTournaments,
 		sortField,
 		sortDirection,

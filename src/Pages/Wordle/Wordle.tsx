@@ -4,7 +4,7 @@ import { lettersSelector, isGameOverSelector } from "Store/Selectors/WordleSelec
 import { ToastContainer, toast } from "react-toastify";
 import { Board } from "./Components/Board";
 import { GameEndModal } from "./Components/GameEndModal";
-import { useLetterClassName } from "./helpers/useLetterClassName";
+import { useLettersClassName } from "./helpers/useLetterClassName";
 import { useWordleInput } from "./helpers/useWordleInput";
 import { useLayoutEffect, useRef } from "react";
 
@@ -34,16 +34,15 @@ const showToast = () => {
 	);
 };
 
-const getWordleContainer = () => {
+const useGetWordleContainer = () => {
 	const arr = [];
-
 	const letters = useAppSelector(lettersSelector);
-	const classNames = Array.from({ length: 30 }, (_, i) => useLetterClassName(i));
+	const classNames = useLettersClassName();
 
 	for (let i = 0; i < 30; i++) {
 		arr.push(
 			<div key={i} className={classNames[i]}>
-				{letters[i] || null}
+				{letters[i]}
 			</div>,
 		);
 	}
@@ -53,11 +52,10 @@ const getWordleContainer = () => {
 
 export default function Wordle() {
 	const { handleInput } = useWordleInput();
+	const wordleContainer = useGetWordleContainer();
 	const isGameOver = useAppSelector(isGameOverSelector);
 
 	const ref = useRef<HTMLDivElement>(null);
-
-	const wordleContainer = getWordleContainer();
 
 	useLayoutEffect(() => {
 		if (ref.current && !isGameOver) {

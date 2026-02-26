@@ -5,9 +5,6 @@ export const answerTimerSelector = (state: RootState) => state.playModeReducer.a
 export const questionTimerSelector = (state: RootState) => state.playModeReducer.questionTime;
 export const withTimerSelector = (state: RootState) => state.playModeReducer.withTimer;
 
-export const selectedResultQuestionNumberSelector = (state: RootState) =>
-	state.playModeReducer.selectedResultQuestionNumber;
-
 export const tournamentInfoSelector = (state: RootState) => state.playModeReducer.tournamentInfo;
 export const questionsSelector = (state: RootState) => state.playModeReducer.questions;
 export const tourEndQuestionIndexesSelector = (state: RootState) =>

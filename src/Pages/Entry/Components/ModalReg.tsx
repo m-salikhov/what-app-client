@@ -6,9 +6,9 @@ export function ModalReg() {
 	const [counter, setCounter] = useState(5);
 
 	useEffect(() => {
-		const timer = setInterval(() => setCounter(counter - 1), 1000);
+		const timer = setInterval(() => setCounter((prev) => prev - 1), 1000);
 		return () => clearInterval(timer);
-	}, [counter]);
+	}, []);
 
 	if (counter === 0) {
 		return <Navigate to="/" />;

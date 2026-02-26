@@ -1,16 +1,14 @@
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 import TableTooltipDF from "./Components/TableTooltipDF";
-import { useTableListManager } from "./Helpers/useTableListManager";
 import styles from "./tournaments-table.module.css";
 import { BsSearch as Search } from "react-icons/bs";
 import { RiCloseLargeFill as Clear } from "react-icons/ri";
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
-import { Spinner } from "../Spinner/Spinner";
-import { useGetTableList } from "./Helpers/useGetTableList";
+import { useTableManager } from "./Hooks/useTableManager";
 
 export function TournamentsTable({ amount }: { amount: number }) {
 	const id = useId();
@@ -19,10 +17,17 @@ export function TournamentsTable({ amount }: { amount: number }) {
 	const [filterString, setFilterString] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
 
-	const { tournaments, pageCount, queryState, handleSearch, hideSearchResult, showSearchResult } =
-		useGetTableList(amount, currentPage);
-
-	const { list, sortTournaments, sortField, sortDirection } = useTableListManager(tournaments);
+	const {
+		pageCount,
+		handleSearch,
+		hideSearchResult,
+		showSearchResult,
+		tournamentsSorted,
+		sortTournaments,
+		sortField,
+		sortDirection,
+		queryState,
+	} = useTableManager(amount, currentPage);
 
 	function handleInputClear() {
 		if (filterString.length > 0) {
@@ -38,7 +43,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 		}
 	}
 
-	function inputOnKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+	function inputOnKeyDown(e: KeyboardEvent<HTMLInputElement>) {
 		if (e.key === "Enter") {
 			handleSearch(filterString);
 		}
@@ -46,18 +51,20 @@ export function TournamentsTable({ amount }: { amount: number }) {
 		if (e.key === "Escape") {
 			handleInputClear();
 		}
+
+		if (e.key === "Backspace" && filterString.length === 1) {
+			hideSearchResult();
+		}
 	}
 
 	useEffect(() => {
 		// чтобы нумерация не обновлялась вперед загрузки страницы
-		if (tournaments && !queryState.isFetching) {
+		if (tournamentsSorted && !queryState.isFetching) {
 			setLoadedPage(currentPage);
 		}
-	}, [tournaments, queryState.isFetching, currentPage]);
+	}, [tournamentsSorted, queryState.isFetching, currentPage]);
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
-
-	if (queryState.isLoading) return <Spinner />;
 
 	return (
 		<>
@@ -101,6 +108,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 				totalPages={pageCount}
 				setCurrentPage={setCurrentPage}
 				show={!showSearchResult}
+				isFetching={queryState.isFetching}
 			/>
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
@@ -217,7 +225,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 					</div>
 				</div>
 
-				{list.map((item, i) => (
+				{tournamentsSorted.map((item, i) => (
 					<div className={styles.line} key={item.id}>
 						{!showSearchResult && (
 							<div className={styles.cell}>{i + 1 + (loadedPage - 1) * amount}</div>
@@ -245,6 +253,7 @@ export function TournamentsTable({ amount }: { amount: number }) {
 				totalPages={pageCount}
 				setCurrentPage={setCurrentPage}
 				show={!showSearchResult}
+				isFetching={queryState.isFetching}
 			/>
 			<ScrollToTop />
 		</>

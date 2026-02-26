@@ -7,6 +7,7 @@ interface PaginationProps {
 	totalPages: number;
 	setCurrentPage: Dispatch<SetStateAction<number>>;
 	show?: boolean;
+	isFetching?: boolean;
 }
 
 export function PaginationControl({
@@ -14,18 +15,23 @@ export function PaginationControl({
 	totalPages,
 	setCurrentPage,
 	show = true,
+	isFetching = false,
 }: PaginationProps) {
 	if (!show) return null;
 
 	const handlePrev = () => {
+		if (isFetching) return;
+
 		if (currentPage > 1) {
-			setCurrentPage(currentPage - 1);
+			setCurrentPage((prev) => prev - 1);
 		}
 	};
 
 	const handleNext = () => {
+		if (isFetching) return;
+
 		if (currentPage < totalPages) {
-			setCurrentPage(currentPage + 1);
+			setCurrentPage((prev) => prev + 1);
 		}
 	};
 
@@ -91,7 +97,7 @@ export function PaginationControl({
 			{currentPage > 2 && (
 				<button
 					type="button"
-					onClick={() => setCurrentPage(currentPage - 1)}
+					onClick={() => setCurrentPage((prev) => prev - 1)}
 					className={styles.page}
 				>
 					{currentPage - 1}
@@ -107,7 +113,7 @@ export function PaginationControl({
 			{currentPage < totalPages - 1 && (
 				<button
 					type="button"
-					onClick={() => setCurrentPage(currentPage + 1)}
+					onClick={() => setCurrentPage((prev) => prev + 1)}
 					className={styles.page}
 				>
 					{currentPage + 1}
