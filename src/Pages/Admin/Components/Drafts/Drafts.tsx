@@ -1,25 +1,31 @@
-import styles from "./admin-page.module.css";
-import Drafts from "./Components/Drafts/Drafts";
+import { ExternalLinkText } from "Shared/Components/UI/ExternalLinkText/ExternalLinkText";
+import { formatDate } from "Shared/Helpers/formatDate";
+import {
+	type ChangeTournamentStatusBody,
+	useChangeTournamentStatusMutation,
+	useGetDraftsQuery,
+} from "Store/ToolkitAPIs/adminAPI";
+import styles from "./drafts.module.css";
+import { Spinner } from "Shared/Components/Spinner/Spinner";
 
-export default function AdminPage() {
-	// const { data, isSuccess, error, isLoading } = useGetDraftsQuery(undefined);
+export default function Drafts() {
+	const { data, isSuccess, error, isLoading } = useGetDraftsQuery(undefined);
 
-	// const [changeTournamentStatus] = useChangeTournamentStatusMutation();
+	const [changeTournamentStatus] = useChangeTournamentStatusMutation();
 
-	// const handlePublish = (data: ChangeTournamentStatusBody) => {
-	// 	changeTournamentStatus(data);
-	// };
+	const handlePublish = (data: ChangeTournamentStatusBody) => {
+		changeTournamentStatus(data);
+	};
 
-	// if (error) return <h2>Ошибка при получении турниров</h2>;
-	// if (isLoading) return <Spinner />;
-	// if (!isSuccess || !data) return null;
+	if (error) return <h2>Ошибка при получении турниров</h2>;
+	if (isLoading) return <Spinner />;
+	if (!isSuccess || !data) return null;
 
-	// if (data.length === 0) return <h2>Нет черновиков</h2>;
+	if (data.length === 0) return <h2>Нет черновиков</h2>;
 
 	return (
 		<div className={styles.container}>
-			<Drafts />
-			{/* <div className={styles.line}>
+			<div className={styles.line}>
 				<div className={styles.cell}>id</div>
 				<div className={styles.cell}>Название</div>
 				<div className={styles.cell}>Вопросов</div>
@@ -40,7 +46,7 @@ export default function AdminPage() {
 						Опубликовать
 					</button>
 				</div>
-			))} */}
+			))}
 		</div>
 	);
 }
