@@ -1,46 +1,12 @@
+import { Link } from "react-router-dom";
 import styles from "./admin-page.module.css";
 import Drafts from "./Components/Drafts/Drafts";
 
 export default function AdminPage() {
-	// const { data, isSuccess, error, isLoading } = useGetDraftsQuery(undefined);
-
-	// const [changeTournamentStatus] = useChangeTournamentStatusMutation();
-
-	// const handlePublish = (data: ChangeTournamentStatusBody) => {
-	// 	changeTournamentStatus(data);
-	// };
-
-	// if (error) return <h2>Ошибка при получении турниров</h2>;
-	// if (isLoading) return <Spinner />;
-	// if (!isSuccess || !data) return null;
-
-	// if (data.length === 0) return <h2>Нет черновиков</h2>;
-
 	return (
 		<div className={styles.container}>
 			<Drafts />
-			{/* <div className={styles.line}>
-				<div className={styles.cell}>id</div>
-				<div className={styles.cell}>Название</div>
-				<div className={styles.cell}>Вопросов</div>
-				<div className={styles.cell}>Туров</div>
-				<div className={styles.cell}>Загружен</div>
-				<div className={styles.cell}>Загрузил</div>
-			</div>
-
-			{data.map((item) => (
-				<div className={styles.line} key={item.id}>
-					<div className={styles.cell}>{item.id}</div>
-					<ExternalLinkText href={item.link} text={item.title} extraClass={styles.cell} />
-					<div className={styles.cell}>{item.questionsQuantity}</div>
-					<div className={styles.cell}>{item.tours}</div>
-					<div className={styles.cell}>{formatDate(item.dateUpload)}</div>
-					<div className={styles.cell}>{item.uploader}</div>
-					<button type="button" onClick={() => handlePublish({ id: item.id, status: "published" })}>
-						Опубликовать
-					</button>
-				</div>
-			))} */}
+			<Link to="/admin/edit-tournaments">Редактирование турниров</Link>
 		</div>
 	);
 }

@@ -5,5 +5,9 @@ export function linkBuilder(id: number, pathname: string): string {
 		return `/playmode/${id}`;
 	}
 
+	if (pathname.includes("admin")) {
+		return `/admin/edit-tournaments/${id}`;
+	}
+
 	return `/tournament/${id}`;
 }
