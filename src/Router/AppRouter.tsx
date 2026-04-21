@@ -22,6 +22,9 @@ const About = lazy(() => import("src/Pages/About/About"));
 const Wordle = lazy(() => import("src/Pages/Wordle/Wordle"));
 const Tournament = lazy(() => import("src/Pages/Tournament/Tournament"));
 const Admin = lazy(() => import("src/Pages/Admin/AdminPage"));
+const ModerateTournament = lazy(
+	() => import("src/Pages/Admin/Components/ModerateTournament/ModerateTournament"),
+);
 const EditTournaments = lazy(
 	() => import("src/Pages/Admin/Components/EditTournaments/EditTournaments"),
 );
@@ -125,6 +128,17 @@ const router = createBrowserRouter(
 								<PrivateRoute requiredRole="admin">
 									<Suspense fallback={<Spinner />}>
 										<EditTournaments />
+									</Suspense>
+								</PrivateRoute>
+							),
+						},
+
+						{
+							path: "moderate-tournament/:id",
+							element: (
+								<PrivateRoute requiredRole="admin">
+									<Suspense fallback={<Spinner />}>
+										<ModerateTournament />
 									</Suspense>
 								</PrivateRoute>
 							),
