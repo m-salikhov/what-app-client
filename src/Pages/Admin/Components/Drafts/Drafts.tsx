@@ -7,6 +7,7 @@ import {
 } from "Store/ToolkitAPIs/adminAPI";
 import styles from "./drafts.module.css";
 import { Spinner } from "Shared/Components/Spinner/Spinner";
+import { Link } from "react-router-dom";
 
 export default function Drafts() {
 	const { data, isSuccess, error, isLoading } = useGetDraftsQuery(undefined);
@@ -37,7 +38,10 @@ export default function Drafts() {
 			{data.map((item) => (
 				<div className={styles.line} key={item.id}>
 					<div className={styles.cell}>{item.id}</div>
-					<ExternalLinkText href={item.link} text={item.title} extraClass={styles.cell} />
+					<div className={`${styles.cell} ${styles.link}`}>
+						<Link to={`moderate-tournament/${item.id}`}>{item.title}</Link>
+						<ExternalLinkText href={item.link} text={"источник"} />
+					</div>
 					<div className={styles.cell}>{item.questionsQuantity}</div>
 					<div className={styles.cell}>{item.tours}</div>
 					<div className={styles.cell}>{formatDate(item.dateUpload)}</div>

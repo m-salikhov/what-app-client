@@ -13,11 +13,16 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		padding: 0.5rem 0;
+		padding: 0.5rem;
 		border-right: 1px solid var(--border-color-quiet);
+	}
 
-		&:nth-child(2) {
-			font-size: 0.8rem;
+	.link {
+		font-size: 0.8rem;
+		justify-content: space-between;
+
+		a:first-of-type:hover {
+			font-weight: bold;
 		}
 	}
 
