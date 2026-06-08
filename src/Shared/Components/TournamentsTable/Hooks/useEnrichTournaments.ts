@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { linkBuilder } from "Shared/Helpers/linkBuilder";
 import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
 import { useLocation } from "react-router-dom";
 import { useTheme, type ThemeType } from "Shared/Context/ThemeContext";
@@ -18,7 +17,7 @@ export function useEnrichTournaments(tournaments: TournamentShortType[]) {
 
 		return tournaments.map((tournament) => ({
 			...tournament,
-			eternalLink: linkBuilder(tournament.id, pathname),
+			eternalLink: `${pathname}/${tournament.id}`,
 			background: getDifficultyClass(tournament.difficulty, theme),
 		}));
 	}, [tournaments, pathname, theme]);

@@ -65,12 +65,25 @@ const router = createBrowserRouter(
 
 				{
 					path: "all",
-					element: (
-						<Suspense fallback={<Spinner />}>
-							{" "}
-							<AllTournaments />
-						</Suspense>
-					),
+					children: [
+						{
+							index: true,
+							element: (
+								<Suspense fallback={<Spinner />}>
+									{" "}
+									<AllTournaments />
+								</Suspense>
+							),
+						},
+						{
+							path: ":tournamentId",
+							element: (
+								<Suspense fallback={<Spinner />}>
+									<Tournament />
+								</Suspense>
+							),
+						},
+					],
 				},
 
 				{
@@ -134,7 +147,7 @@ const router = createBrowserRouter(
 						},
 
 						{
-							path: "moderate-tournament/:id",
+							path: "edit-tournaments/:id",
 							element: (
 								<PrivateRoute requiredRole="admin">
 									<Suspense fallback={<Spinner />}>
@@ -179,7 +192,7 @@ const router = createBrowserRouter(
 				},
 
 				{
-					path: "tournament/:id",
+					path: "tournament/:tournamentId",
 					element: (
 						<Suspense fallback={<Spinner />}>
 							{" "}

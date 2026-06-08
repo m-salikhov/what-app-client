@@ -8,14 +8,14 @@ import { useParams } from "react-router-dom";
 import TournamentContent from "./Components/TournamentContent";
 
 export default function Tournament() {
-	const { id } = useParams();
+	const { tournamentId } = useParams();
 
 	const {
 		data: tournament,
 		isLoading,
 		isSuccess,
 		isError,
-	} = useGetTournamentQuery(id ?? skipToken);
+	} = useGetTournamentQuery(tournamentId ?? skipToken);
 
 	setDocTitle(tournament?.title ?? "");
 

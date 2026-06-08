@@ -3,22 +3,20 @@ import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { useLazyGetRandomTournamentQuery } from "Store/ToolkitAPIs/tournamentAPI";
 import { useState } from "react";
 import { GiPerspectiveDiceSixFacesRandom as DiceIcon } from "react-icons/gi";
-import { useLocation, useNavigate } from "react-router-dom";
-import { linkBuilder } from "../../Helpers/linkBuilder";
+import { useNavigate } from "react-router-dom";
 
 export function RandomTournament({ size }: { size: string }) {
 	const { user } = useAuth();
 	const navigate = useNavigate();
 	const [fetchRandomTournament] = useLazyGetRandomTournamentQuery();
 	const [isFetching, setIsFetching] = useState(false);
-	const { pathname } = useLocation();
 
 	const handleClick = async () => {
 		setIsFetching(true);
 
 		try {
 			const tournament = await fetchRandomTournament(user?.id ?? "").unwrap();
-			navigate(linkBuilder(tournament.id, pathname));
+			navigate(`/tournament/${tournament.id}`);
 		} catch (error) {
 			setIsFetching(false);
 			console.log(error);
