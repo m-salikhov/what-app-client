@@ -39,7 +39,7 @@ export default function Drafts() {
 				<div className={styles.line} key={item.id}>
 					<div className={styles.cell}>{item.id}</div>
 					<div className={`${styles.cell} ${styles.link}`}>
-						<Link to={`moderate-tournament/${item.id}`}>{item.title}</Link>
+						<Link to={`/admin/edit-tournaments/${item.id}`}>{item.title}</Link>
 						<ExternalLinkText href={item.link} text={"источник"} />
 					</div>
 					<div className={styles.cell}>{item.questionsQuantity}</div>

@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { playModeReducer } from "./Slices/PlayModeSlice";
 import { wordleReducer } from "./Slices/WordleSlice";
 import { baseApi } from "./ToolkitAPIs/baseApi";
+import { moderateTournamentReducer } from "./Slices/ModerateTournamentSlice";
 
 const rootReducer = combineReducers({
 	wordleReducer,
 	playModeReducer,
+	moderateTournamentReducer,
 	[baseApi.reducerPath]: baseApi.reducer,
 });
 
