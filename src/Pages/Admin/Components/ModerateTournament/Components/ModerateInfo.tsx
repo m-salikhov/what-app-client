@@ -1,12 +1,14 @@
 import { parseDate } from "@internationalized/date";
-import { DateField } from "react-aria-components";
+import { DateField, DateInput, DateSegment, Label } from "react-aria-components";
 import { useAppDispatch, useAppSelector } from "Shared/Hooks/redux";
 import { moderateInfoSelector } from "Store/Selectors/moderateTournamentSelectors";
 import { moderateTournamentActions } from "Store/Slices/ModerateTournamentSlice";
+import { ModerateEditors } from "./ModerateEditors";
 
 export default function ModerateInfo() {
 	const info = useAppSelector(moderateInfoSelector);
 	const dispatch = useAppDispatch();
+	console.log(info);
 
 	return (
 		<div>
@@ -32,6 +34,20 @@ export default function ModerateInfo() {
 					value={info.difficulty}
 				/>
 			</label>
+
+			<DateField
+				onChange={(e) => {
+					dispatch(moderateTournamentActions.setDate(e && e.year > 1900 ? e.toString() : ""));
+				}}
+				value={parseDate(info.date.split("T")[0])}
+				defaultValue={parseDate(info.date.split("T")[0])}
+				// className={styles.dateField}
+			>
+				<Label>Дата отыгрыша</Label>
+				<DateInput>{(segment) => <DateSegment segment={segment} />}</DateInput>
+			</DateField>
+
+			<ModerateEditors editors={info.editors} />
 		</div>
 	);
 }

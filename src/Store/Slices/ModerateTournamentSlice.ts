@@ -12,12 +12,12 @@ const initialState: ModerateTournamentState = {
 		uploader: "",
 		title: "",
 		link: "",
-		date: "",
+		date: "2000-01-01T10:00:00.000Z",
 		tours: 0,
 		questionsQuantity: 0,
 		difficulty: 0,
 		status: "draft",
-		dateUpload: "",
+		dateUpload: "2000-01-01T10:00:00.000Z",
 		editors: [],
 		questions: [],
 	},
@@ -44,6 +44,20 @@ const ModerateTournamentSlice = createSlice({
 		},
 		setDifficulty: (state, action: PayloadAction<number>) => {
 			state.tournament.difficulty = action.payload;
+		},
+		addEditor: (state) => {
+			state.tournament.editors.push({ id: Date.now(), name: "" });
+		},
+		removeEditor: (state, action: PayloadAction<number>) => {
+			state.tournament.editors = state.tournament.editors.filter(
+				(editor) => editor.id !== action.payload,
+			);
+		},
+		changeEditorName: (state, action: PayloadAction<{ id: number; name: string }>) => {
+			state.tournament.editors = state.tournament.editors.map((editor) => {
+				if (editor.id === action.payload.id) return { ...editor, name: action.payload.name };
+				return editor;
+			});
 		},
 	},
 });
