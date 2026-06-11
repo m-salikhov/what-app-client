@@ -59,6 +59,41 @@ const ModerateTournamentSlice = createSlice({
 				return editor;
 			});
 		},
+
+		setQuestionText: (state, action: PayloadAction<{ id: number; text: string }>) => {
+			state.tournament.questions = state.tournament.questions.map((question) => {
+				if (question.id === action.payload.id) return { ...question, text: action.payload.text };
+				return question;
+			});
+		},
+		setQuestionAnswer: (state, action: PayloadAction<{ id: number; answer: string }>) => {
+			state.tournament.questions = state.tournament.questions.map((question) => {
+				if (question.id === action.payload.id)
+					return { ...question, answer: action.payload.answer };
+				return question;
+			});
+		},
+		setQuestionAuthor: (state, action: PayloadAction<{ id: number; author: string }>) => {
+			state.tournament.questions = state.tournament.questions.map((question) => {
+				if (question.id === action.payload.id)
+					return { ...question, author: action.payload.author };
+				return question;
+			});
+		},
+		setQuestionComment: (state, action: PayloadAction<{ id: number; comment: string }>) => {
+			state.tournament.questions = state.tournament.questions.map((question) => {
+				if (question.id === action.payload.id)
+					return { ...question, comment: action.payload.comment };
+				return question;
+			});
+		},
+		setQuestionAlterAnswer: (state, action: PayloadAction<{ id: number; alterAnswer: string }>) => {
+			state.tournament.questions = state.tournament.questions.map((question) => {
+				if (question.id === action.payload.id)
+					return { ...question, alterAnswer: action.payload.alterAnswer };
+				return question;
+			});
+		},
 	},
 });
 

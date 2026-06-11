@@ -1,7 +1,7 @@
 import { useAppDispatch } from "Shared/Hooks/redux";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { moderateTournamentActions } from "Store/Slices/ModerateTournamentSlice";
-// import styles from "./edit-form.module.css";
+import styles from "../moderate-tournament.module.css";
 
 interface Props {
 	editors: TournamentType["editors"];
@@ -10,7 +10,7 @@ export function ModerateEditors({ editors }: Props) {
 	const dispatch = useAppDispatch();
 
 	return (
-		<div>
+		<div className={styles.editors}>
 			<p>Редактор(ы):</p>
 
 			{editors.map((editor) => (
@@ -43,7 +43,7 @@ export function ModerateEditors({ editors }: Props) {
 			))}
 
 			<button
-				// className={styles.addEditorBtn}
+				className={styles.addEditorBtn}
 				type="button"
 				title="Добавить редактора"
 				onClick={() => dispatch(moderateTournamentActions.addEditor())}

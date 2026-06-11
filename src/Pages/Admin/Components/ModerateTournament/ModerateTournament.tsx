@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { useSetModerateTournament } from "./Hooks/useSetModerateTournament";
 import ModerateInfo from "./Components/ModerateInfo";
+import ModerateQuestions from "./Components/ModerateQuestions";
 
 export default function ModerateTournament() {
 	const { id } = useParams();
@@ -13,6 +14,7 @@ export default function ModerateTournament() {
 	return (
 		<div>
 			<ModerateInfo />
+			<ModerateQuestions />
 		</div>
 	);
 }

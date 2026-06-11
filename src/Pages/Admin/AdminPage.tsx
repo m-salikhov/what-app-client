@@ -4,9 +4,9 @@ import Drafts from "./Components/Drafts/Drafts";
 
 export default function AdminPage() {
 	return (
-		<div className={styles.container}>
+		<main className={styles.container}>
 			<Drafts />
 			<Link to="/admin/edit-tournaments">Редактирование турниров</Link>
-		</div>
+		</main>
 	);
 }

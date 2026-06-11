@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "Shared/Hooks/redux";
 import { moderateInfoSelector } from "Store/Selectors/moderateTournamentSelectors";
 import { moderateTournamentActions } from "Store/Slices/ModerateTournamentSlice";
 import { ModerateEditors } from "./ModerateEditors";
+import styles from "../moderate-tournament.module.css";
 
 export default function ModerateInfo() {
 	const info = useAppSelector(moderateInfoSelector);
@@ -11,9 +12,9 @@ export default function ModerateInfo() {
 	console.log(info);
 
 	return (
-		<div>
+		<div className={styles.info}>
 			<label>
-				<p> Название турнира</p>
+				<p>Название турнира</p>
 				<input
 					placeholder="Название турнира"
 					type="text"
@@ -41,10 +42,12 @@ export default function ModerateInfo() {
 				}}
 				value={parseDate(info.date.split("T")[0])}
 				defaultValue={parseDate(info.date.split("T")[0])}
-				// className={styles.dateField}
+				className={styles.dateField}
 			>
 				<Label>Дата отыгрыша</Label>
-				<DateInput>{(segment) => <DateSegment segment={segment} />}</DateInput>
+				<DateInput className={styles.dateInput}>
+					{(segment) => <DateSegment segment={segment} className={styles.dateSegment} />}
+				</DateInput>
 			</DateField>
 
 			<ModerateEditors editors={info.editors} />

@@ -1,0 +1,96 @@
+/* MODERATE INFO */
+
+.info {
+	label {
+		input {
+			min-height: 1.5rem;
+			padding-left: 0.3rem;
+			font-weight: 900;
+			border: var(--main-border);
+		}
+
+		input[type="text"] {
+			width: 50%;
+		}
+
+		input[type="number"] {
+			width: 10%;
+		}
+	}
+
+	p {
+		font-size: 1rem;
+	}
+}
+
+.dateField {
+	color: var(--text-color);
+}
+
+.dateInput {
+	display: flex;
+	width: fit-content;
+	padding: 0rem 0.33rem;
+	white-space: nowrap;
+	background: var(--field-background);
+	border: var(--main-border);
+	forced-color-adjust: none;
+
+	&[data-focus-within] {
+		outline-offset: -1px;
+	}
+}
+
+.dateSegment {
+	padding: 0 2px;
+	font-weight: bold;
+	color: var(--p-color);
+	text-align: end;
+
+	&[data-type="literal"] {
+		padding: 0;
+	}
+
+	&[data-placeholder] {
+		font-style: italic;
+	}
+
+	&:focus {
+		color: blueviolet;
+		caret-color: transparent;
+		border-radius: 4px;
+		outline: none;
+	}
+}
+
+/* MODERATE QUESTIONS */
+
+.questions {
+	margin-top: 1rem;
+}
+
+/* MODERATE EDITORS */
+
+.editors {
+	div {
+		display: flex;
+		margin-bottom: 0.25rem;
+
+		textarea {
+			width: 350px;
+			padding: 0.3rem 0 0.3rem 0.3rem;
+			background-color: var(--input-bg-color);
+			border: var(--main-border);
+		}
+	}
+
+	.addEditorBtn {
+		padding: 0.2rem;
+		border: var(--main-border);
+		border-radius: 5px;
+
+		&:hover {
+			font-weight: bold;
+		}
+	}
+}
