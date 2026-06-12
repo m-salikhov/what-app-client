@@ -16,6 +16,7 @@ html {
 	--border-color-quiet: #a5aab0;
 	--main-bg-color: #f8f8f8;
 	--main-border: 1px solid var(--main-border-color);
+	--main-border-bold: 2px solid var(--main-border-color);
 	--border-quiet: 1px solid var(--border-color-quiet);
 	--bg-grey: rgb(27 27 27 / 40%);
 	--external-link: #0645ad;

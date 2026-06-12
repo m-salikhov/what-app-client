@@ -7,23 +7,31 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 	const dispatch = useAppDispatch();
 
 	return (
-		<div>
-			<textarea
-				placeholder="текст вопроса"
-				onChange={(e) =>
-					dispatch(
-						moderateTournamentActions.setQuestionText({
-							id: question.id,
-							text: e.target.value,
-						}),
-					)
-				}
-				value={question.text}
-				rows={5}
-			/>
+		<div className={styles.question}>
+			<div className={styles.questionHeader}>
+				<h3>Вопрос {question.qNumber}</h3>
+				<h3>Тур {question.tourNumber}</h3>
+			</div>
 
 			<label>
-				<p>Ответ</p>
+				<p>текст вопроса</p>
+				<textarea
+					placeholder="текст вопроса"
+					onChange={(e) =>
+						dispatch(
+							moderateTournamentActions.setQuestionText({
+								id: question.id,
+								text: e.target.value,
+							}),
+						)
+					}
+					value={question.text}
+					rows={5}
+				/>
+			</label>
+
+			<label>
+				<p>ответ</p>
 				<input
 					placeholder="Ответ"
 					type="text"
@@ -40,9 +48,9 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 			</label>
 
 			<label>
-				<p>Зачет</p>
+				<p>зачет</p>
 				<input
-					placeholder="Ответ"
+					placeholder="ответ"
 					type="text"
 					onChange={(e) =>
 						dispatch(
@@ -56,22 +64,25 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 				/>
 			</label>
 
-			<textarea
-				placeholder="комментарий"
-				onChange={(e) =>
-					dispatch(
-						moderateTournamentActions.setQuestionComment({
-							id: question.id,
-							comment: e.target.value,
-						}),
-					)
-				}
-				value={question.comment}
-				rows={5}
-			/>
+			<label>
+				<p>комментарий</p>
+				<textarea
+					placeholder="комментарий"
+					onChange={(e) =>
+						dispatch(
+							moderateTournamentActions.setQuestionComment({
+								id: question.id,
+								comment: e.target.value,
+							}),
+						)
+					}
+					value={question.comment}
+					rows={5}
+				/>{" "}
+			</label>
 
 			<label>
-				<p> Автор</p>
+				<p>автор</p>
 				<input
 					placeholder="Автор"
 					type="text"

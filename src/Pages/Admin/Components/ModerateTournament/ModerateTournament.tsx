@@ -3,6 +3,9 @@ import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { useSetModerateTournament } from "./Hooks/useSetModerateTournament";
 import ModerateInfo from "./Components/ModerateInfo";
 import ModerateQuestions from "./Components/ModerateQuestions";
+import { ScrollToTop } from "Shared/Components/ScrollToTop/ScrollToTop";
+import ModerateButtonsBlock from "./Components/ModerateButtonsBlock";
+import { Back } from "Shared/Components/UI/Back/Back";
 
 export default function ModerateTournament() {
 	const { id } = useParams();
@@ -13,8 +16,11 @@ export default function ModerateTournament() {
 
 	return (
 		<div>
+			<Back />
+			<ModerateButtonsBlock />
 			<ModerateInfo />
 			<ModerateQuestions />
+			<ScrollToTop />
 		</div>
 	);
 }

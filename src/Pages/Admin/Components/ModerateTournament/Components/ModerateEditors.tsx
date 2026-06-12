@@ -6,6 +6,7 @@ import styles from "../moderate-tournament.module.css";
 interface Props {
 	editors: TournamentType["editors"];
 }
+
 export function ModerateEditors({ editors }: Props) {
 	const dispatch = useAppDispatch();
 
@@ -42,14 +43,14 @@ export function ModerateEditors({ editors }: Props) {
 				</div>
 			))}
 
-			<button
+			{/* <button
 				className={styles.addEditorBtn}
 				type="button"
 				title="Добавить редактора"
 				onClick={() => dispatch(moderateTournamentActions.addEditor())}
 			>
 				Добавить редактора
-			</button>
+			</button> */}
 		</div>
 	);
 }

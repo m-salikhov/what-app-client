@@ -69,6 +69,49 @@
 	margin-top: 1rem;
 }
 
+.question {
+	display: flex;
+	flex-direction: column;
+
+	border: var(--main-border-bold);
+	margin: 1rem 0;
+	padding: 0.5rem 0.5rem;
+
+	.questionHeader {
+		display: flex;
+		gap: 1rem;
+	}
+
+	label {
+		input {
+			min-height: 1.5rem;
+			padding-left: 0.3rem;
+			font-weight: 900;
+			border: var(--main-border);
+		}
+
+		input[type="text"] {
+			width: 50%;
+		}
+
+		input[type="number"] {
+			width: 10%;
+		}
+
+		textarea {
+			padding: 0.3rem;
+			border: var(--main-border);
+			width: 100%;
+			font-size: 1rem;
+			resize: vertical;
+		}
+
+		p {
+			font-size: 1rem;
+		}
+	}
+}
+
 /* MODERATE EDITORS */
 
 .editors {
@@ -93,4 +136,12 @@
 			font-weight: bold;
 		}
 	}
+}
+
+/* MODERATE BUTTONS */
+
+.buttonsBlock {
+	display: flex;
+	gap: 1rem;
+	margin: 1rem 0;
 }

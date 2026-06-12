@@ -4,6 +4,9 @@ import type { RootState } from "Store/store";
 export const moderateTournamentSelector = (state: RootState) =>
 	state.moderateTournamentReducer.tournament;
 
+export const isModeratedSelector = (state: RootState) =>
+	state.moderateTournamentReducer.isModerated;
+
 export const moderateInfoSelector = createSelector([moderateTournamentSelector], (tournament) => {
 	const { questions: _, ...info } = tournament;
 	return info;
