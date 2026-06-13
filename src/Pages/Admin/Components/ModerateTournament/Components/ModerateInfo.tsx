@@ -9,7 +9,6 @@ import styles from "../moderate-tournament.module.css";
 export default function ModerateInfo() {
 	const info = useAppSelector(moderateInfoSelector);
 	const dispatch = useAppDispatch();
-	console.log(info);
 
 	return (
 		<div className={styles.info}>

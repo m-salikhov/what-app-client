@@ -31,6 +31,23 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 			</label>
 
 			<label>
+				<p>раздатка</p>
+				<input
+					placeholder="нет раздатки"
+					type="text"
+					onChange={(e) =>
+						dispatch(
+							moderateTournamentActions.setQuestionAdd({
+								id: question.id,
+								add: e.target.value,
+							}),
+						)
+					}
+					value={question.add}
+				/>
+			</label>
+
+			<label>
 				<p>ответ</p>
 				<input
 					placeholder="Ответ"
