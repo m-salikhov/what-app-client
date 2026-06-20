@@ -114,6 +114,28 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 					value={question.author}
 				/>
 			</label>
+
+			<p>источники</p>
+
+			{question.source.length > 0 &&
+				question.source.map((source) => (
+					<label key={source.id}>
+						<textarea
+							placeholder="источник"
+							onChange={(e) =>
+								dispatch(
+									moderateTournamentActions.setSourceLink({
+										questionId: question.id,
+										sourceId: source.id,
+										link: e.target.value,
+									}),
+								)
+							}
+							value={source.link}
+							rows={1}
+						/>
+					</label>
+				))}
 		</div>
 	);
 }

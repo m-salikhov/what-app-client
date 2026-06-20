@@ -13,6 +13,9 @@ export const moderatedInfoFieldsSelector = (state: RootState) =>
 export const moderatedQuestionsSelector = (state: RootState) =>
 	state.moderateTournamentReducer.moderatedQuestions;
 
+export const moderatedSourcesSelector = (state: RootState) =>
+	state.moderateTournamentReducer.moderatedSources;
+
 export const moderateInfoSelector = createSelector([moderateTournamentSelector], (tournament) => {
 	const { questions: _, ...info } = tournament;
 	return info;
@@ -26,8 +29,8 @@ export const moderateQuestionsSelector = createSelector(
 );
 
 export const updatedFieldsSelector = createSelector(
-	[moderatedInfoFieldsSelector, moderatedQuestionsSelector],
-	(moderatedInfoFields, moderatedQuestions) => {
-		return { moderatedInfoFields, moderatedQuestions };
+	[moderatedInfoFieldsSelector, moderatedQuestionsSelector, moderatedSourcesSelector],
+	(moderatedInfoFields, moderatedQuestions, moderatedSources) => {
+		return { moderatedInfoFields, moderatedQuestions, moderatedSources };
 	},
 );

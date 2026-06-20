@@ -18,13 +18,18 @@ export default function ModerateButtonsBlock() {
 
 	const isModerated = useAppSelector(isModeratedSelector);
 	const tournament = useAppSelector(moderateTournamentSelector);
-	const { moderatedInfoFields, moderatedQuestions } = useAppSelector(updatedFieldsSelector);
+	const { moderatedInfoFields, moderatedQuestions, moderatedSources } =
+		useAppSelector(updatedFieldsSelector);
 
 	const { data: tournamentSource } = useGetTournamentQuery(tournament.id || skipToken);
 	const [updateTournament] = useUpdateTournamentMutation();
 
 	const handleSave = () => {
-		const dataObject: UpdateTournamentBody = { updateTournament: {}, updateQuestions: [] };
+		const dataObject: UpdateTournamentBody = {
+			updateTournament: {},
+			updateQuestions: [],
+			updateSources: [],
+		};
 
 		if (moderatedInfoFields.length > 0) {
 			dataObject.updateTournament.id = tournament.id;
@@ -43,6 +48,10 @@ export default function ModerateButtonsBlock() {
 				}
 				dataObject.updateQuestions.push(questionObject);
 			}
+		}
+
+		if (moderatedSources.length > 0) {
+			dataObject.updateSources = moderatedSources;
 		}
 
 		updateTournament(dataObject);

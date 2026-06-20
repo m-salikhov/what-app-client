@@ -9,6 +9,7 @@ export interface ModerateTournamentState {
 		id: number;
 		fields: (keyof QuestionType)[];
 	}[];
+	moderatedSources: { id: number; link: string }[];
 }
 
 const initialState: ModerateTournamentState = {
@@ -30,6 +31,7 @@ const initialState: ModerateTournamentState = {
 	isModerated: false,
 	moderatedInfoFields: [],
 	moderatedQuestions: [],
+	moderatedSources: [],
 };
 
 const ModerateTournamentSlice = createSlice({
@@ -52,17 +54,20 @@ const ModerateTournamentSlice = createSlice({
 		setDate: (state, action: PayloadAction<string>) => {
 			state.isModerated = true;
 			if (!state.moderatedInfoFields.includes("date")) state.moderatedInfoFields.push("date");
+
 			state.tournament.date = action.payload;
 		},
 		setTours: (state, action: PayloadAction<number>) => {
 			state.isModerated = true;
 			if (!state.moderatedInfoFields.includes("tours")) state.moderatedInfoFields.push("tours");
+
 			state.tournament.tours = action.payload;
 		},
 		setQuestionsQuantity: (state, action: PayloadAction<number>) => {
 			state.isModerated = true;
 			if (!state.moderatedInfoFields.includes("questionsQuantity"))
 				state.moderatedInfoFields.push("questionsQuantity");
+
 			state.tournament.questionsQuantity = action.payload;
 		},
 		setDifficulty: (state, action: PayloadAction<number>) => {
@@ -95,107 +100,115 @@ const ModerateTournamentSlice = createSlice({
 		setQuestionText: (state, action: PayloadAction<{ id: number; text: string }>) => {
 			state.isModerated = true;
 
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["text"] });
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("text")) moderatedQuestion.fields.push("text");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("text")) q.fields.push("text");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["text"] });
 			}
 
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id) return { ...question, text: action.payload.text };
-				return question;
-			});
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.text = action.payload.text;
+			}
 		},
+
 		setQuestionAnswer: (state, action: PayloadAction<{ id: number; answer: string }>) => {
 			state.isModerated = true;
 
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["answer"] });
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("answer")) moderatedQuestion.fields.push("answer");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("answer")) q.fields.push("answer");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["answer"] });
 			}
 
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id)
-					return { ...question, answer: action.payload.answer };
-				return question;
-			});
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.answer = action.payload.answer;
+			}
 		},
+
 		setQuestionAuthor: (state, action: PayloadAction<{ id: number; author: string }>) => {
 			state.isModerated = true;
 
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["author"] });
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("author")) moderatedQuestion.fields.push("author");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("author")) q.fields.push("author");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["author"] });
 			}
 
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id)
-					return { ...question, author: action.payload.author };
-				return question;
-			});
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.author = action.payload.author;
+			}
 		},
 		setQuestionComment: (state, action: PayloadAction<{ id: number; comment: string }>) => {
 			state.isModerated = true;
 
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["comment"] });
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("comment")) moderatedQuestion.fields.push("comment");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("comment")) q.fields.push("comment");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["comment"] });
 			}
 
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id)
-					return { ...question, comment: action.payload.comment };
-				return question;
-			});
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.comment = action.payload.comment;
+			}
 		},
 		setQuestionAlterAnswer: (state, action: PayloadAction<{ id: number; alterAnswer: string }>) => {
 			state.isModerated = true;
 
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["alterAnswer"] });
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("alterAnswer"))
+					moderatedQuestion.fields.push("alterAnswer");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("alterAnswer"))
-						q.fields.push("alterAnswer");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["alterAnswer"] });
 			}
 
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id)
-					return { ...question, alterAnswer: action.payload.alterAnswer };
-				return question;
-			});
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.alterAnswer = action.payload.alterAnswer;
+			}
 		},
 		setQuestionAdd: (state, action: PayloadAction<{ id: number; add: string }>) => {
 			state.isModerated = true;
-			if (!state.moderatedQuestions.find((q) => q.id === action.payload.id)) {
-				state.moderatedQuestions.push({ id: action.payload.id, fields: ["add"] });
+
+			const moderatedQuestion = state.moderatedQuestions.find((q) => q.id === action.payload.id);
+			if (moderatedQuestion) {
+				if (!moderatedQuestion.fields.includes("add")) moderatedQuestion.fields.push("add");
 			} else {
-				state.moderatedQuestions = state.moderatedQuestions.map((q) => {
-					if (q.id === action.payload.id && !q.fields.includes("add")) q.fields.push("add");
-					return q;
-				});
+				state.moderatedQuestions.push({ id: action.payload.id, fields: ["add"] });
 			}
-			state.tournament.questions = state.tournament.questions.map((question) => {
-				if (question.id === action.payload.id) return { ...question, add: action.payload.add };
-				return question;
-			});
+
+			const question = state.tournament.questions.find((q) => q.id === action.payload.id);
+			if (question) {
+				question.add = action.payload.add;
+			}
+		},
+
+		setSourceLink: (
+			state,
+			action: PayloadAction<{ questionId: number; sourceId: number; link: string }>,
+		) => {
+			state.isModerated = true;
+
+			const moderatedSource = state.moderatedSources.find((s) => s.id === action.payload.sourceId);
+			if (moderatedSource) {
+				moderatedSource.link = action.payload.link;
+			} else {
+				state.moderatedSources.push({ id: action.payload.sourceId, link: action.payload.link });
+			}
+
+			const question = state.tournament.questions.find((q) => q.id === action.payload.questionId);
+			const source = question?.source.find((s) => s.id === action.payload.sourceId);
+			if (source) {
+				source.link = action.payload.link;
+			}
 		},
 	},
 });
