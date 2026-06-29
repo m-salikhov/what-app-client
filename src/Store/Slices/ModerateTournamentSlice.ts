@@ -42,6 +42,7 @@ const ModerateTournamentSlice = createSlice({
 			state.isModerated = false;
 			state.moderatedInfoFields = [];
 			state.moderatedQuestions = [];
+			state.moderatedSources = [];
 			state.tournament = action.payload;
 		},
 		setTitle: (state, action: PayloadAction<string>) => {

@@ -18,6 +18,7 @@ export const tournamentAPI = baseApi.injectEndpoints({
 		getTournament: build.query<TournamentType, string | number>({
 			query: (id: string) => `/tournaments/${id}`,
 			responseSchema: TournamentTypeSchema,
+			providesTags: ["tournaments"],
 		}),
 
 		getTournamentsLastShort: build.query<
