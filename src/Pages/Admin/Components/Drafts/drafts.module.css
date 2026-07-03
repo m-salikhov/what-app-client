@@ -26,6 +26,10 @@
 		}
 	}
 
+	button {
+		color: var(--p-color);
+	}
+
 	button:hover {
 		background: var(--border-color-quiet);
 	}

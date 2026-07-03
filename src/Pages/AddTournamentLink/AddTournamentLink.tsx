@@ -97,7 +97,9 @@ function AddTournamentLink() {
 					</p>
 				))}
 
-			{isSuccessSave && <p className={styles.message}>{"Турнир успешно сохранён в базе"}</p>}
+			{isSuccessSave && (
+				<p className={styles.message}>{"Турнир сохранён. Появится в списке после проверки"}</p>
+			)}
 
 			{!!error && (
 				<p className={styles.errorMessage}>{getServerErrorMessage(error, "Ошибка сервера")}</p>

@@ -6,7 +6,11 @@ export default function AdminPage() {
 	return (
 		<main className={styles.container}>
 			<Drafts />
-			<Link to="/admin/edit-tournaments">Редактирование турниров</Link>
+			<div className={styles.editContainer}>
+				<Link to="/admin/edit-tournaments" className={styles.editLink}>
+					Редактирование турниров
+				</Link>
+			</div>
 		</main>
 	);
 }

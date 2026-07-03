@@ -1,4 +1,18 @@
-/* .container {
+.container {
+	color: var(--p-color);
+}
 
-} */
+.editContainer {
+	width: fit-content;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+	border: var(--main-border);
+}
 
+.editLink {
+	text-align: center;
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
