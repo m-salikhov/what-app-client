@@ -6,7 +6,7 @@ export const currentRowNumberSelector = (state: RootState) => state.wordleReduce
 export const lettersSelector = (state: RootState) => state.wordleReducer.letters;
 export const wrongWordFlagSelector = (state: RootState) => state.wordleReducer.wrongWordFlag;
 export const resultSelector = (state: RootState) => state.wordleReducer.result;
-export const wordsSelector = (state: RootState) => state.wordleReducer.words;
+export const usedWordsSelector = (state: RootState) => state.wordleReducer.usedWords;
 export const letterStateSelector = (state: RootState) => state.wordleReducer.letterState;
 export const isGameOverSelector = (state: RootState) => state.wordleReducer.isGameOver;
 export const currentLetterNumberSelector = (state: RootState) =>
@@ -18,7 +18,7 @@ export const boardSelector = createSelector(
 		currentLetterNumberSelector,
 		lettersSelector,
 		resultSelector,
-		wordsSelector,
+		usedWordsSelector,
 	],
 	(allowNextLetter, currentLetterNumber, letters, result, words) => ({
 		allowNextLetter,

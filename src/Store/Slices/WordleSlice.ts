@@ -1,9 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-type ClassName = "in-place" | "out-of-place" | "miss";
-
 export interface LetterState {
-	className: ClassName;
+	className: "in-place" | "out-of-place" | "miss";
 	value: string;
 }
 
@@ -12,7 +10,7 @@ export interface WordleState {
 	currentRowNumber: number;
 	letters: string[];
 	allowNextLetter: boolean;
-	words: string[];
+	usedWords: string[];
 	letterState: LetterState[];
 	wrongWordFlag: boolean;
 	result: "win" | "lose" | null;
@@ -24,16 +22,12 @@ const initialState: WordleState = {
 	currentRowNumber: 0,
 	letters: [],
 	allowNextLetter: true,
-	words: [],
+	usedWords: [],
 	letterState: [],
 	wrongWordFlag: false,
 	result: null,
 	isGameOver: false,
 };
-
-function pushState(value: string, className: ClassName, states: LetterState[]) {
-	states.push({ value, className });
-}
 
 const WordleSlice = createSlice({
 	name: "wordleSlice",
@@ -44,7 +38,7 @@ const WordleSlice = createSlice({
 			const letter = action.payload.toUpperCase();
 
 			if (letter === "DEL" || letter === "BACKSPACE") {
-				if (state.currentRowNumber === state.words.length) {
+				if (state.currentRowNumber === state.usedWords.length) {
 					return;
 				} else if (
 					state.letters.length > 0 &&
@@ -83,43 +77,36 @@ const WordleSlice = createSlice({
 
 			const states: LetterState[] = [];
 
-			for (let i = 0; i < 5; i++) {
-				const value = version[i];
+			const hash = new Map<string, number>();
+			for (const l of answer) hash.set(l, (hash.get(l) ?? 0) + 1);
 
-				if (!answer.includes(value)) {
-					pushState(value, "miss", states);
-				} else if (value === answer[i]) {
-					pushState(value, "in-place", states);
-				} else {
-					const regex = new RegExp(value, "g");
-					const answerEntries = [...answer.matchAll(regex)].map((v) => v.index);
-					const versionEntries = [...version.matchAll(regex)].map((v) => v.index);
+			for (let i = 0; i < version.length; i++) {
+				const letter = version[i];
 
-					if (answerEntries.length >= versionEntries.length) {
-						pushState(value, "out-of-place", states);
-					} else if (versionEntries.indexOf(i) + 1 > answerEntries.length) {
-						pushState(value, "miss", states);
-					} else if (answerEntries.length === 1) {
-						versionEntries.includes(answerEntries[0])
-							? pushState(value, "miss", states)
-							: pushState(value, "out-of-place", states);
-					} else if (answerEntries.length === 2) {
-						if (versionEntries.indexOf(i) === 0) {
-							versionEntries.filter((v) => answerEntries.includes(v)).length === 2
-								? pushState(value, "miss", states)
-								: pushState(value, "out-of-place", states);
-						} else if (versionEntries.indexOf(i) === 1) {
-							answerEntries.includes(versionEntries[2])
-								? pushState(value, "miss", states)
-								: pushState(value, "out-of-place", states);
-						}
-					}
+				if (!hash.has(letter)) states.push({ value: letter, className: "miss" });
+
+				if (version[i] === answer[i]) {
+					states.push({ value: letter, className: "in-place" });
+					hash.set(letter, (hash.get(letter) ?? 0) - 1);
+				}
+			}
+
+			for (let i = 0; i < version.length; i++) {
+				const letter = version[i];
+
+				if (hash.has(letter) && letter !== answer[i]) {
+					const count = hash.get(letter) ?? 0;
+
+					if (count > 0) {
+						states.splice(i, 0, { value: letter, className: "out-of-place" });
+						hash.set(letter, (hash.get(letter) ?? 0) - 1);
+					} else states.splice(i, 0, { value: letter, className: "miss" });
 				}
 			}
 
 			state.letterState.push(...states);
 
-			state.words.push(version);
+			state.usedWords.push(version);
 		},
 
 		setWrongWordFlag(state, action: PayloadAction<boolean>) {
