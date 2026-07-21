@@ -3,6 +3,7 @@ import { boardSelector } from "Store/Selectors/WordleSelectors";
 import { wordleActions } from "Store/Slices/WordleSlice";
 import { useGetRandomWordQuery, useVerifyWordInDBMutation } from "Store/ToolkitAPIs/wordleAPI";
 import { getWordToCheck } from "./getWordToCheck";
+import { useEffect, useRef } from "react";
 
 function normalizeInput(str: string) {
 	if (str === "del") return "Backspace";
@@ -15,10 +16,24 @@ export function useWordleInput() {
 
 	const { letters, allowNextLetter, currentLetterNumber, words, result } =
 		useAppSelector(boardSelector);
-	const { data: answer } = useGetRandomWordQuery(undefined);
+	const { data } = useGetRandomWordQuery(undefined);
+	const answer = data?.word;
 	const [verifyWordInDB] = useVerifyWordInDBMutation();
 
+	const inputLockedRef = useRef(false);
+	const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+	useEffect(() => {
+		return () => {
+			if (timeoutRef.current !== null) {
+				clearTimeout(timeoutRef.current);
+			}
+		};
+	}, []);
+
 	async function handleInput(str: string) {
+		if (inputLockedRef.current) return;
+
 		const normalizedInput = normalizeInput(str);
 
 		if (result || !answer) {
@@ -33,17 +48,17 @@ export function useWordleInput() {
 			case "Enter": {
 				if (allowNextLetter) return;
 
-				const word = getWordToCheck(letters, currentLetterNumber);
+				const version = getWordToCheck(letters, currentLetterNumber);
 
-				if (!word || words.includes(word)) {
+				if (!version || words.includes(version)) {
 					return;
 				}
 
-				if (word === answer.word) {
+				if (version === answer) {
 					dispatch(
-						wordleActions.setWords({
-							answer: answer.word,
-							version: word,
+						wordleActions.setLettersStates({
+							answer,
+							version,
 						}),
 					);
 					dispatch(wordleActions.setResult("win"));
@@ -52,24 +67,29 @@ export function useWordleInput() {
 				}
 
 				try {
-					const data = await verifyWordInDB(word).unwrap();
+					const { isExist, word } = await verifyWordInDB(version).unwrap();
 
-					if (data.isExist && currentLetterNumber === 30) {
+					if (!isExist) {
+						inputLockedRef.current = true;
+						dispatch(wordleActions.setWrongWordFlag(true));
+						timeoutRef.current = setTimeout(() => {
+							dispatch(wordleActions.setWrongWordFlag(false));
+							inputLockedRef.current = false;
+						}, 500);
+						return;
+					}
+
+					if (currentLetterNumber === 30) {
 						dispatch(wordleActions.setResult("lose"));
 						dispatch(wordleActions.setIsGameOver(true));
-					} else if (data.isExist) {
+					} else {
 						dispatch(wordleActions.setAllowNextLetter(true));
 						dispatch(
-							wordleActions.setWords({
-								answer: answer.word,
-								version: data.word,
+							wordleActions.setLettersStates({
+								answer: answer,
+								version: word,
 							}),
 						);
-					} else {
-						dispatch(wordleActions.setWrongWordFlag(true));
-						setTimeout(() => {
-							dispatch(wordleActions.setWrongWordFlag(false));
-						}, 500);
 					}
 				} catch (err) {
 					console.log(err);

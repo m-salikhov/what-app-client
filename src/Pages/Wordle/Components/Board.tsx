@@ -18,12 +18,16 @@ function getKeyboard(letterState: LetterState[], handleInput: (letter: string) =
 		arr.push(
 			<div key={i} className="board-row">
 				{keyboard[i as KeyboardRowIndex].map((letter) => {
-					const states = letterState.filter((v) => v.value === letter).map((v) => v.className);
-					let state: string | undefined;
-					if (states.length > 0) {
-						state = states.includes("in-place")
+					const letterClassNames = new Set<string>();
+					for (const { value, className } of letterState) {
+						if (value === letter) letterClassNames.add(className);
+					}
+
+					let priorityLetterClassName: string | undefined;
+					if (letterClassNames.size > 0) {
+						priorityLetterClassName = letterClassNames.has("in-place")
 							? "in-place"
-							: states.includes("out-of-place")
+							: letterClassNames.has("out-of-place")
 								? "out-of-place"
 								: "miss";
 					}
@@ -32,7 +36,7 @@ function getKeyboard(letterState: LetterState[], handleInput: (letter: string) =
 						<button
 							type="button"
 							onClick={() => handleInput(letter)}
-							className={state}
+							className={priorityLetterClassName}
 							key={letter}
 						>
 							{letter}

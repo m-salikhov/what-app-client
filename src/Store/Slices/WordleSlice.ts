@@ -72,10 +72,10 @@ const WordleSlice = createSlice({
 			state.allowNextLetter = action.payload;
 		},
 
-		setWords(state, action: PayloadAction<{ answer: string; version: string }>) {
+		setLettersStates(state, action: PayloadAction<{ answer: string; version: string }>) {
 			const { answer, version } = action.payload;
 
-			const states: LetterState[] = [];
+			const states: LetterState[] = Array(version.length);
 
 			const hash = new Map<string, number>();
 			for (const l of answer) hash.set(l, (hash.get(l) ?? 0) + 1);
@@ -83,10 +83,10 @@ const WordleSlice = createSlice({
 			for (let i = 0; i < version.length; i++) {
 				const letter = version[i];
 
-				if (!hash.has(letter)) states.push({ value: letter, className: "miss" });
+				if (!hash.has(letter)) states[i] = { value: letter, className: "miss" };
 
 				if (version[i] === answer[i]) {
-					states.push({ value: letter, className: "in-place" });
+					states[i] = { value: letter, className: "in-place" };
 					hash.set(letter, (hash.get(letter) ?? 0) - 1);
 				}
 			}
@@ -98,9 +98,9 @@ const WordleSlice = createSlice({
 					const count = hash.get(letter) ?? 0;
 
 					if (count > 0) {
-						states.splice(i, 0, { value: letter, className: "out-of-place" });
+						states[i] = { value: letter, className: "out-of-place" };
 						hash.set(letter, (hash.get(letter) ?? 0) - 1);
-					} else states.splice(i, 0, { value: letter, className: "miss" });
+					} else states[i] = { value: letter, className: "miss" };
 				}
 			}
 
