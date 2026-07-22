@@ -11,6 +11,9 @@ interface Props extends ComponentProps<"dialog"> {
 	onElementDestroyed?: () => void;
 }
 
+const focusableSelector =
+	'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
 export function Modal({
 	active,
 	onClose,
@@ -20,6 +23,7 @@ export function Modal({
 	...props
 }: Props) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
+	const focusableElementsRef = useRef<HTMLElement[]>([]);
 
 	const transition = useTransition(active, {
 		from: {
@@ -51,19 +55,43 @@ export function Modal({
 	const handleKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
 		if (onKeyDown) onKeyDown(event);
 
+		if (event.key === "Tab") {
+			const focusable = focusableElementsRef.current;
+
+			if (!focusable.length) return;
+
+			const first = focusable[0];
+			const last = focusable[focusable.length - 1];
+			const activeElement = document.activeElement as HTMLElement | null;
+
+			if (event.shiftKey) {
+				if (activeElement === first || !dialogRef.current?.contains(activeElement)) {
+					event.preventDefault();
+					last.focus();
+				}
+			} else {
+				if (activeElement === last) {
+					event.preventDefault();
+					first.focus();
+				}
+			}
+		}
+
 		if (event.key === "Escape") {
 			onClose();
 		}
 	};
 
 	useEffect(() => {
-		if (active) {
-			scrollVisibility("hide");
-		}
+		if (!active || !dialogRef.current) return;
 
-		if (dialogRef.current && active) {
-			dialogRef.current.focus();
-		}
+		scrollVisibility("hide");
+
+		focusableElementsRef.current = Array.from(
+			dialogRef.current.querySelectorAll<HTMLElement>(focusableSelector),
+		).filter((el) => !el.hasAttribute("disabled") && el.offsetParent !== null);
+
+		dialogRef.current.focus();
 	}, [active]);
 
 	return (
@@ -75,6 +103,7 @@ export function Modal({
 							className={styles.modal}
 							ref={dialogRef}
 							open={active}
+							tabIndex={-1}
 							onClick={(e) => {
 								if (e.target === e.currentTarget) {
 									onClose();

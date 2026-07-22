@@ -24,12 +24,13 @@ const isValidInput = (key: string): boolean => {
 
 const showToast = () => {
 	toast.error(
-		<p>Введите букву на русской раскладке (ё = е)</p>,
+		<p>Введите букву русского алфавита (ё = е)</p>,
 
 		{
 			hideProgressBar: true,
 			autoClose: 2000,
 			pauseOnHover: true,
+			toastId: 1,
 		},
 	);
 };
@@ -71,6 +72,8 @@ export default function Wordle() {
 			tabIndex={0}
 			ref={ref}
 			onKeyDown={(e) => {
+				if (isGameOver) return;
+
 				if (!isValidInput(e.key)) {
 					showToast();
 					return;

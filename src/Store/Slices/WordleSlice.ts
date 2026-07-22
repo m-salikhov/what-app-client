@@ -115,6 +115,7 @@ const WordleSlice = createSlice({
 
 		setResult(state, action: PayloadAction<"win" | "lose">) {
 			state.allowNextLetter = false;
+			state.isGameOver = true;
 			state.result = action.payload;
 		},
 

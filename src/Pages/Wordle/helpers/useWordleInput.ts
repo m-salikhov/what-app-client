@@ -62,7 +62,6 @@ export function useWordleInput() {
 						}),
 					);
 					dispatch(wordleActions.setResult("win"));
-					dispatch(wordleActions.setIsGameOver(true));
 					return;
 				}
 
@@ -81,7 +80,6 @@ export function useWordleInput() {
 
 					if (currentLetterNumber === 30) {
 						dispatch(wordleActions.setResult("lose"));
-						dispatch(wordleActions.setIsGameOver(true));
 					} else {
 						dispatch(wordleActions.setAllowNextLetter(true));
 						dispatch(

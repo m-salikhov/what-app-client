@@ -4,7 +4,7 @@ import { Modal } from "Shared/Components/UI/Modal/Modal";
 import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { useChangePasswordMutation } from "Store/ToolkitAPIs/userAPI";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useId, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../profile.module.css";
 import { ChangePassSchema, type ChangePassType } from "./ChangePassSchema";
@@ -14,6 +14,7 @@ export function ChangePass() {
 
 	const [changePass, setChangePass] = useState(false);
 	const [serverMessage, setServerMessage] = useState("");
+	const inputRef = useRef<HTMLInputElement>(null);
 
 	const { user } = useAuth();
 
@@ -39,6 +40,10 @@ export function ChangePass() {
 				.catch((error) => setServerMessage(getServerErrorMessage(error, "Произошла ошибка")));
 		}
 	};
+
+	useEffect(() => {
+		if (changePass && inputRef.current) inputRef.current.focus();
+	});
 
 	return (
 		<>
@@ -72,6 +77,7 @@ export function ChangePass() {
 								id={`newPassword-${id}`}
 								{...register("newPassword")}
 								autoComplete="off"
+								ref={inputRef}
 							/>
 						</label>
 						<label>
