@@ -2,22 +2,27 @@ import { useEffect, useState } from "react";
 import { BsArrowUpSquareFill as ArrowUp } from "react-icons/bs";
 import styles from "./scroll-to-top.module.css";
 
-export function ScrollToTop() {
+export function ScrollToTop(targetSelector = "header") {
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
-		const onScroll = () => {
-			const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			const windowHeight = window.innerHeight;
-			setVisible(scrollTop > windowHeight / 2);
-		};
+		const target = document.querySelector(targetSelector);
+		if (!target) return;
 
-		window.addEventListener("scroll", onScroll, { passive: true });
+		const observer = new IntersectionObserver(
+			([entry]) => {
+				// если header НЕ виден, показываем кнопку
+				setVisible(!entry.isIntersecting);
+			},
+			{
+				threshold: 0,
+			},
+		);
 
-		onScroll();
+		observer.observe(target);
 
-		return () => window.removeEventListener("scroll", onScroll);
-	}, []);
+		return () => observer.disconnect();
+	}, [targetSelector]);
 
 	const scrollToTop = () => {
 		window.scrollTo({
@@ -28,5 +33,14 @@ export function ScrollToTop() {
 
 	if (!visible) return null;
 
-	return <ArrowUp className={styles.scroll} onClick={scrollToTop} size={36} />;
+	return (
+		<button
+			type="button"
+			className={styles.scroll}
+			onClick={scrollToTop}
+			aria-label="Scroll to top"
+		>
+			<ArrowUp size={36} />
+		</button>
+	);
 }

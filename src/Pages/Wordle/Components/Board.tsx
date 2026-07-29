@@ -23,12 +23,13 @@ export function Board() {
 				continue;
 			}
 
+			if (state.className === "miss") continue;
+
 			const current = states.get(state.value);
-			if (current === "miss" && state.className !== "miss") {
+			if (current === "miss") {
 				states.set(state.value, state.className);
 				continue;
 			}
-
 			if (current === "out-of-place" && state.className === "in-place") {
 				states.set(state.value, "in-place");
 			}
