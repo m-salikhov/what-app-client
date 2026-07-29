@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BsArrowUpSquareFill as ArrowUp } from "react-icons/bs";
 import styles from "./scroll-to-top.module.css";
 
-export function ScrollToTop(targetSelector = "header") {
+export function ScrollToTop({ targetSelector = "header" }: { targetSelector?: string }) {
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
