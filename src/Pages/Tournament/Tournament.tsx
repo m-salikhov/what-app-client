@@ -29,7 +29,7 @@ export default function Tournament() {
 		<>
 			<TournamentHeader tournament={tournament} />
 
-			<TournamentContent tournament={tournament} />
+			<TournamentContent questions={tournament.questions} />
 
 			<ScrollToTop />
 		</>

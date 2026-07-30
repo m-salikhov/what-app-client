@@ -5,27 +5,30 @@ import { useRef } from "react";
 import styles from "../tournament.module.css";
 import { useTournamentScroll } from "../Helpers/useTournamentScroll";
 
-export default function TournamentContent({ tournament }: { tournament: TournamentType }) {
-	const ref = useRef(null);
+export default function TournamentContent({
+	questions,
+}: {
+	questions: TournamentType["questions"];
+}) {
+	const questionsNodeListRef = useRef<HTMLDivElement | null>(null);
 
-	const { toursParagraphs, scrollTournament } = useTournamentScroll(tournament);
+	const { tourNavigation } = useTournamentScroll(questions, questionsNodeListRef);
 
 	return (
-		<div ref={ref}>
+		<div>
 			<Back />
-			<button
-				type="button"
-				className={styles.tours}
-				onClick={(e) => scrollTournament(e, ref.current)}
-			>
-				{toursParagraphs}
-			</button>
+			<div className={styles.tours}>{tourNavigation}</div>
 
-			{tournament.questions.map((q, i) => (
-				<div key={q.id} className={`${styles.question} ${i <= 3 ? styles["question-enter"] : ""}`}>
-					<Question q={q} />
-				</div>
-			))}
+			<div className={styles.questions} ref={questionsNodeListRef}>
+				{questions.map((q, i) => (
+					<div
+						key={q.id}
+						className={`${styles.question} ${i <= 3 ? styles["question-enter"] : ""}`}
+					>
+						<Question q={q} />
+					</div>
+				))}
+			</div>
 		</div>
 	);
 }

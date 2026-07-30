@@ -1,14 +1,14 @@
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
-import { useMemo, type MouseEvent } from "react";
+import { useMemo, useCallback, type MouseEvent, type RefObject } from "react";
 
-export const useTournamentScroll = (tournament: TournamentType) => {
-	//номера первых вопросов в утре
+export const useTournamentScroll = (
+	questions: TournamentType["questions"],
+	questionsNodeListRef: RefObject<HTMLDivElement | null>,
+) => {
 	const toursAnchors = useMemo(() => {
-		return tournament.questions.reduce<{ tours: number[]; toursAnchors: number[] }>(
+		return questions.reduce<{ tours: number[]; toursAnchors: number[] }>(
 			(acc, question, index) => {
-				if (question.qNumber < 1) {
-					return acc;
-				}
+				if (question.qNumber < 1) return acc;
 
 				if (!acc.tours.includes(question.tourNumber)) {
 					acc.tours.push(question.tourNumber);
@@ -19,39 +19,35 @@ export const useTournamentScroll = (tournament: TournamentType) => {
 			},
 			{ tours: [], toursAnchors: [] },
 		).toursAnchors;
-	}, [tournament.questions]);
+	}, [questions]);
 
-	const toursParagraphs = useMemo(() => {
+	const scrollToTour = useCallback(
+		(e: MouseEvent<HTMLButtonElement>) => {
+			const id = Number(e.currentTarget.id);
+			const anchor = toursAnchors[id - 1];
+			const node = questionsNodeListRef.current;
+
+			if (!node || anchor === undefined) return;
+
+			node.children[anchor].scrollIntoView({ behavior: "smooth" });
+		},
+		[toursAnchors, questionsNodeListRef],
+	);
+
+	const tourNavigation = useMemo(() => {
 		const arr = [];
-		const tours =
-			tournament.questions.length > 0
-				? Math.max(...tournament.questions.map((q) => q.tourNumber))
-				: 0;
+		const tours = questions.length > 0 ? Math.max(...questions.map((q) => q.tourNumber)) : 0;
 
 		for (let i = 1; i <= tours; i++) {
-			arr.push(<p key={i} id={String(i)}>{`Тур ${i}`}</p>);
+			arr.push(
+				<button type="button" onClick={scrollToTour} key={i} id={String(i)}>
+					{`Тур ${i}`}
+				</button>,
+			);
 		}
 
 		return arr;
-	}, [tournament.questions]);
+	}, [questions, scrollToTour]);
 
-	const scrollTournament = (e: MouseEvent<HTMLButtonElement>, nodeList: HTMLDivElement | null) => {
-		let id: number;
-		if (e.target instanceof HTMLElement && e.target.id) {
-			id = Number(e.target.id);
-		} else {
-			return;
-		}
-
-		const anchor = toursAnchors[id - 1];
-
-		if (nodeList?.children[anchor + 2]) {
-			nodeList.children[anchor + 2].scrollIntoView({ behavior: "smooth" });
-		}
-	};
-
-	return {
-		toursParagraphs,
-		scrollTournament,
-	};
+	return { tourNavigation };
 };
