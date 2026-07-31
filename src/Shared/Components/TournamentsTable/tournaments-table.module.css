@@ -155,11 +155,8 @@
 
 	.headerCell {
 		.headerCellData {
-			span {
-				font-size: 0.8rem;
-			}
-
 			.headerCellIcon {
+				width: 10px;
 				svg {
 					width: 10px;
 					top: -5px;

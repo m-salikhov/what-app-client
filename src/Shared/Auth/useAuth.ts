@@ -46,8 +46,11 @@ export function useAuth() {
 		}
 	};
 
+	const isAuthorized = !!user && user.id;
+
 	return {
 		user,
+		isAuthorized,
 
 		handleLogin,
 		loginState,

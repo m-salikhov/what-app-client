@@ -1,29 +1,11 @@
 import { useWindowSize } from "Shared/Hooks/useWindowSize";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 export function useHeaderNavigation() {
 	const [isOpenMobMenu, setIsOpenMobMenu] = useState(false);
-	const navigate = useNavigate();
-	const { pathname } = useLocation();
 	const { isDesktop } = useWindowSize();
-
-	function logoNavigate() {
-		if (isDesktop && pathname === "/") {
-			return;
-		}
-
-		if (isOpenMobMenu) {
-			document.body.style.overflow = "visible";
-			setIsOpenMobMenu(false);
-		}
-
-		if (isOpenMobMenu && pathname === "/") {
-			return;
-		}
-
-		navigate("/");
-	}
+	const location = useLocation();
 
 	const handleMobMenu = () => {
 		if (isDesktop) return;
@@ -33,5 +15,21 @@ export function useHeaderNavigation() {
 		setIsOpenMobMenu((prev) => !prev);
 	};
 
-	return { isOpenMobMenu, logoNavigate, handleMobMenu, isDesktop };
+	useEffect(() => {
+		if (isDesktop) return;
+		if (location.pathname) setIsOpenMobMenu(false);
+	}, [location.pathname, isDesktop]);
+
+	useEffect(() => {
+		if (isDesktop) return;
+
+		const handleEscape = (event: KeyboardEvent) => {
+			if (event.key === "Escape") setIsOpenMobMenu(false);
+		};
+
+		document.addEventListener("keydown", handleEscape);
+		return () => document.removeEventListener("keydown", handleEscape);
+	}, [isDesktop]);
+
+	return { isOpenMobMenu, handleMobMenu, isDesktop };
 }
