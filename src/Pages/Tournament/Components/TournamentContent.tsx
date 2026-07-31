@@ -12,12 +12,19 @@ export default function TournamentContent({
 }) {
 	const questionsNodeListRef = useRef<HTMLDivElement | null>(null);
 
-	const { tourNavigation } = useTournamentScroll(questions, questionsNodeListRef);
+	const { tours, scrollToTour } = useTournamentScroll(questions, questionsNodeListRef);
 
 	return (
 		<div>
 			<Back />
-			<div className={styles.tours}>{tourNavigation}</div>
+
+			<div className={styles.tours}>
+				{tours.map((tour, i) => (
+					<button type="button" onClick={scrollToTour} key={tour} id={String(i)}>
+						{`Тур ${tour}`}
+					</button>
+				))}
+			</div>
 
 			<div className={styles.questions} ref={questionsNodeListRef}>
 				{questions.map((q, i) => (
