@@ -1,5 +1,6 @@
 import { type MouseEvent, useMemo, useState } from "react";
 import type { EnrichedTournamentType } from "./useEnrichTournaments";
+import * as z from "zod";
 
 const sortFieldMap = {
 	title: "title",
@@ -10,7 +11,10 @@ const sortFieldMap = {
 	difficulty: "difficulty",
 	uploader: "uploader",
 } as const;
-type SortFieldType = keyof typeof sortFieldMap;
+
+const sortFieldSchema = z.enum(Object.values(sortFieldMap));
+
+type SortFieldType = z.infer<typeof sortFieldSchema>;
 
 const compareDates = (str1: string, str2: string) => {
 	const [d1, m1, y1] = str1.split(".").map(Number);
@@ -48,13 +52,15 @@ export function useSortTournaments(tournaments: EnrichedTournamentType[]) {
 
 	function sortTournaments(e: MouseEvent<HTMLButtonElement | SVGElement>) {
 		const field = e.currentTarget.dataset.field;
+		const parsed = sortFieldSchema.safeParse(field);
 
-		if (field && field in sortFieldMap) {
-			setSortField(sortFieldMap[field as keyof typeof sortFieldMap]);
-			setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-		} else {
+		if (!parsed.success) {
 			console.error("Unknown field");
+			return;
 		}
+
+		setSortField(parsed.data);
+		setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
 	}
 
 	return {

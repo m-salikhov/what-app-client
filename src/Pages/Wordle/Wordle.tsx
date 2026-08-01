@@ -6,20 +6,14 @@ import { Board } from "./Components/Board";
 import { GameEndModal } from "./Components/GameEndModal";
 import { useLettersClassName } from "./helpers/useLetterClassName";
 import { useWordleInput } from "./helpers/useWordleInput";
-import { useLayoutEffect, useRef } from "react";
+import { useEffect } from "react";
 
 const isValidInput = (key: string): boolean => {
 	const allowedKeys = ["Enter", "Delete", "Escape", "Backspace", "Alt", "Control", "Shift"];
 
-	if (/^[а-яА-Я]$/.test(key)) {
+	if (/^[а-яА-Я]$/.test(key) || allowedKeys.includes(key)) {
 		return true;
-	}
-
-	if (allowedKeys.includes(key)) {
-		return true;
-	}
-
-	return false;
+	} else return false;
 };
 
 const showToast = () => {
@@ -35,54 +29,41 @@ const showToast = () => {
 	);
 };
 
-const useGetWordleContainer = () => {
-	const arr = [];
+export default function Wordle() {
+	const { handleInput } = useWordleInput();
+	const isGameOver = useAppSelector(isGameOverSelector);
 	const letters = useAppSelector(lettersSelector);
 	const classNames = useLettersClassName();
 
-	for (let i = 0; i < 30; i++) {
-		arr.push(
-			<div key={i} className={classNames[i]}>
-				{letters[i]}
-			</div>,
-		);
-	}
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (isGameOver) return;
 
-	return arr;
-};
+			if (!isValidInput(e.key)) {
+				showToast();
+				return;
+			}
 
-export default function Wordle() {
-	const { handleInput } = useWordleInput();
-	const wordleContainer = useGetWordleContainer();
-	const isGameOver = useAppSelector(isGameOverSelector);
+			handleInput(e.key);
+		};
 
-	const ref = useRef<HTMLDivElement>(null);
+		window.addEventListener("keydown", handleKeyDown);
 
-	useLayoutEffect(() => {
-		if (ref.current && !isGameOver) {
-			ref.current.focus();
-		}
-	}, [isGameOver]);
+		return () => {
+			window.removeEventListener("keydown", handleKeyDown);
+		};
+	}, [isGameOver, handleInput]);
 
 	return (
-		// biome-ignore lint/a11y/noStaticElementInteractions: toast
-		<div
-			className="wordle"
-			// biome-ignore lint/a11y/noNoninteractiveTabindex: toast
-			tabIndex={0}
-			ref={ref}
-			onKeyDown={(e) => {
-				if (isGameOver) return;
-
-				if (!isValidInput(e.key)) {
-					showToast();
-					return;
-				}
-
-				handleInput(e.key);
-			}}
-		>
-			<div className="wordle-container">{wordleContainer}</div>
+		<div className="wordle">
+			<div className="wordle-container">
+				{Array.from({ length: 30 }).map((_, i) => (
+					// biome-ignore lint/suspicious/noArrayIndexKey: <неизменяемая сетка>
+					<div key={i} className={classNames[i]}>
+						{letters[i] ?? null}
+					</div>
+				))}
+			</div>
 			<Board />
 			<GameEndModal />
 			<ToastContainer />
