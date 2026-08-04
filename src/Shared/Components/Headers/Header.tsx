@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/a11y/noStaticElementInteractions: todo */
 /** biome-ignore-all lint/a11y/useKeyWithClickEvents: todo */
 import { useAuth } from "Shared/Auth/useAuth";
 import { DarkMode } from "Shared/Components/DarkMode/DarkMode";

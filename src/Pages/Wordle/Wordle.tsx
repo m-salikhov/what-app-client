@@ -1,6 +1,6 @@
 import "./wordle.css";
 import { useAppSelector } from "Shared/Hooks/redux";
-import { lettersSelector, isGameOverSelector } from "Store/Selectors/WordleSelectors";
+import { lettersSelector } from "Store/Selectors/WordleSelectors";
 import { ToastContainer, toast } from "react-toastify";
 import { Board } from "./Components/Board";
 import { GameEndModal } from "./Components/GameEndModal";
@@ -31,14 +31,11 @@ const showToast = () => {
 
 export default function Wordle() {
 	const { handleInput } = useWordleInput();
-	const isGameOver = useAppSelector(isGameOverSelector);
 	const letters = useAppSelector(lettersSelector);
 	const classNames = useLettersClassName();
 
 	useEffect(() => {
 		const handleKeyDown = (e: KeyboardEvent) => {
-			if (isGameOver) return;
-
 			if (!isValidInput(e.key)) {
 				showToast();
 				return;
@@ -52,7 +49,7 @@ export default function Wordle() {
 		return () => {
 			window.removeEventListener("keydown", handleKeyDown);
 		};
-	}, [isGameOver, handleInput]);
+	}, [handleInput]);
 
 	return (
 		<div className="wordle">

@@ -53,6 +53,8 @@ export function Modal({
 	});
 
 	const handleKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
+		event.stopPropagation();
+
 		if (onKeyDown) onKeyDown(event);
 
 		if (event.key === "Tab") {
@@ -62,7 +64,7 @@ export function Modal({
 
 			const first = focusable[0];
 			const last = focusable[focusable.length - 1];
-			const activeElement = document.activeElement as HTMLElement | null;
+			const activeElement = document.activeElement;
 
 			if (event.shiftKey) {
 				if (activeElement === first || !dialogRef.current?.contains(activeElement)) {

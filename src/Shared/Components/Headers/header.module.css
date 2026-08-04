@@ -49,6 +49,10 @@
 	a {
 		padding: 0 0.5rem;
 	}
+
+	button {
+		padding-left: 0.5rem;
+	}
 }
 
 .navItem:hover {
