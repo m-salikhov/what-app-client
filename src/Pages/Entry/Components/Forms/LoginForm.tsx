@@ -1,6 +1,5 @@
 import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
-import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useId } from "react";
 import { useForm } from "react-hook-form";
@@ -16,14 +15,14 @@ const LoginForm = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors: formErrors },
 	} = useForm<LoginType>({
 		resolver: zodResolver(loginSchema),
 	});
 
 	const {
 		handleLogin,
-		loginState: { isLoading, isSuccess, error },
+		loginState: { isLoading, isSuccess, error: apiError },
 	} = useAuth();
 
 	const onSubmit = (data: LoginType) => {
@@ -53,7 +52,7 @@ const LoginForm = () => {
 				style={{ maxWidth: "380px" }}
 			/>
 
-			<FormError message={errors.email?.message} />
+			{formErrors.email && <FormError error={formErrors.email.message} />}
 
 			<div className={styles.formInput}>
 				<label htmlFor={`password-${id}`}>Пароль:</label>
@@ -65,9 +64,9 @@ const LoginForm = () => {
 				/>
 			</div>
 
-			<FormError message={errors.password?.message} />
+			{formErrors.password && <FormError error={formErrors.password.message} />}
 
-			{!!error && <FormError message={getServerErrorMessage(error, "Ошибка")} />}
+			{!!apiError && <FormError error={apiError} />}
 
 			<div className={styles.formButton}>
 				<Button type="submit" disabled={isLoading}>

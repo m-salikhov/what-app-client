@@ -1,6 +1,9 @@
-.errorFilling {
-	padding-top: 0.2rem;
-	color: rgb(206 66 124);
+.errorsSchema {
+	margin-bottom: 1rem;
+	p {
+		padding-top: 0.2rem;
+		color: rgb(206 66 124);
+	}
 }
 
 .message {
@@ -30,7 +33,7 @@
 .addlink {
 	display: flex;
 	justify-content: center;
-	padding-bottom: 2rem;
+	padding-bottom: 1.5rem;
 
 	input {
 		width: 60%;

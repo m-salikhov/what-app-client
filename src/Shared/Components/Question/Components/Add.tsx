@@ -20,6 +20,7 @@ export function Add({ add }: { add: string }) {
 							opacity: isImageLoaded ? 1 : 0,
 						}}
 						onLoad={() => setIsImageLoaded(true)}
+						loading="lazy"
 					/>
 				)}
 

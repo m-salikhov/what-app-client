@@ -1,6 +1,7 @@
 import { ExternalLinkText } from "Shared/Components/UI/ExternalLinkText/ExternalLinkText";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
 import styles from "./about.module.css";
+import { baseUrl } from "Shared/Constants/constants";
 
 function About() {
 	setDocTitle("О сайте");
@@ -47,7 +48,8 @@ function About() {
 			</p>
 			<h2>Об авторе</h2>
 			<div className={styles.aboutAuthor}>
-				<img src="https://andvarifserv.ru/public/photo_profile.jpg" alt="фото автора сайта" />
+				<img src={`${baseUrl}/public/photo_profile.jpg`} alt="фото автора сайта" />
+
 				<div className={styles.aboutInfo}>
 					<p>
 						Меня зовут Максим, мне 36 лет. Я начинающий разработчик.

@@ -1,13 +1,13 @@
 import { useAuth } from "Shared/Auth/useAuth";
 import { Button } from "Shared/Components/UI/Button/Button";
 import { Modal } from "Shared/Components/UI/Modal/Modal";
-import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { useChangePasswordMutation } from "Store/ToolkitAPIs/userAPI";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect, useId, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import styles from "../../profile.module.css";
 import { ChangePassSchema, type ChangePassType } from "./ChangePassSchema";
+import { extractApiErrorDetails } from "Shared/Helpers/extractApiErrorDetails";
 
 export function ChangePass() {
 	const id = useId();
@@ -37,7 +37,7 @@ export function ChangePass() {
 					setServerMessage("Пароль успешно изменён");
 					reset();
 				})
-				.catch((error) => setServerMessage(getServerErrorMessage(error, "Произошла ошибка")));
+				.catch((error: unknown) => setServerMessage(extractApiErrorDetails(error).message));
 		}
 	};
 

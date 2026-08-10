@@ -32,9 +32,8 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 
 			<label>
 				<p>раздатка</p>
-				<input
+				<textarea
 					placeholder="нет раздатки"
-					type="text"
 					onChange={(e) =>
 						dispatch(
 							moderateTournamentActions.setQuestionAdd({
@@ -44,6 +43,7 @@ export default function ModerateQuestion({ question }: { question: QuestionType 
 						)
 					}
 					value={question.add}
+					rows={1}
 				/>
 			</label>
 

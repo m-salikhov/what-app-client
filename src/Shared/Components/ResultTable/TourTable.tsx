@@ -6,9 +6,14 @@ import styles from "./result-table.module.css";
 interface Props {
 	tourResult: ResultElementClientType[] | undefined;
 	setSelectedQuestionNumber: (value: number) => void;
+	selectedQuestionNumber: number;
 }
 
-export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
+export function TourTable({
+	tourResult,
+	setSelectedQuestionNumber,
+	selectedQuestionNumber,
+}: Props) {
 	if (!tourResult) return null;
 
 	return (
@@ -17,7 +22,7 @@ export function TourTable({ tourResult, setSelectedQuestionNumber }: Props) {
 				return (
 					<button
 						type="button"
-						className={styles.tableElement}
+						className={`${styles.tableElement} ${v.num === selectedQuestionNumber ? styles.selected : ""}`}
 						key={v.num}
 						onClick={() => setSelectedQuestionNumber(v.num)}
 					>

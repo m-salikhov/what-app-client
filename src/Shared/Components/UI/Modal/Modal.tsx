@@ -6,7 +6,7 @@ import styles from "./modal.module.css";
 
 interface Props extends ComponentProps<"dialog"> {
 	active: boolean;
-	onClose: () => void;
+	onClose?: () => void;
 	onKeyDown?: (event: KeyboardEvent<HTMLDialogElement>) => void;
 	onElementDestroyed?: () => void;
 }
@@ -80,7 +80,7 @@ export function Modal({
 		}
 
 		if (event.key === "Escape") {
-			onClose();
+			if (onClose) onClose();
 		}
 	};
 
@@ -108,7 +108,7 @@ export function Modal({
 							tabIndex={-1}
 							onClick={(e) => {
 								if (e.target === e.currentTarget) {
-									onClose();
+									if (onClose) onClose();
 								}
 							}}
 							onKeyDown={handleKeyDown}

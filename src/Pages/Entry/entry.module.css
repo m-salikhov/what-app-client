@@ -67,15 +67,15 @@
 	margin-top: 0.5rem;
 	background-color: rgb(180 136 136 / 30%);
 
+	.errorBlock {
+		width: 1rem;
+		background-color: crimson;
+	}
+
 	p {
 		width: 100%;
 		padding-left: 0.4rem;
 	}
-}
-
-.errorBlock {
-	width: 1rem;
-	background-color: crimson;
 }
 
 .modal {

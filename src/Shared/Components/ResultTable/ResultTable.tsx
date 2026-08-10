@@ -14,7 +14,7 @@ interface Props {
 export function ResultTable({ result, tournamentId: id }: Props) {
 	const resByTour = Object.groupBy(result, (v) => v.tour);
 
-	const [selectedQuestionNumber, setSelectedQuestionNumber] = useState<number | null>(null);
+	const [selectedQuestionNumber, setSelectedQuestionNumber] = useState<number>(-1);
 
 	const { data: tournament } = useGetTournamentQuery(id ? String(id) : skipToken);
 
@@ -27,6 +27,7 @@ export function ResultTable({ result, tournamentId: id }: Props) {
 				key={i}
 				tourResult={resByTour[i]}
 				setSelectedQuestionNumber={setSelectedQuestionNumber}
+				selectedQuestionNumber={selectedQuestionNumber}
 			/>,
 		);
 	}

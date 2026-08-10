@@ -22,7 +22,7 @@ export function useAuth() {
 			const data = await login(loginData).unwrap();
 			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, data));
 			localStorage.setItem("rememberMe", "yes");
-		} catch (_e) {}
+		} catch (_err) {}
 	};
 
 	const handleRegistration = async (registrationData: RegistrationType) => {
@@ -31,16 +31,15 @@ export function useAuth() {
 			const data = await registration(userData).unwrap();
 			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, data));
 			localStorage.setItem("rememberMe", "yes");
-		} catch (_e) {}
+		} catch (_err) {}
 	};
 
 	const handleLogout = async () => {
 		try {
 			localStorage.removeItem("rememberMe");
+			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, undefined));
 
 			await logout(undefined);
-
-			dispatch(userAPI.util.upsertQueryData("getCurrentUser", undefined, undefined));
 		} catch (err) {
 			console.error(err);
 		}

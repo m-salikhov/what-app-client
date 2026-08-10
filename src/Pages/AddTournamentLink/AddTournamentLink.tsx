@@ -1,6 +1,5 @@
 import { Spinner } from "Shared/Components/Spinner/Spinner";
 import { Button } from "Shared/Components/UI/Button/Button";
-import { getServerErrorMessage } from "Shared/Helpers/getServerErrorMessage";
 import { setDocTitle } from "Shared/Helpers/setDocTitle";
 import { Activity, useReducer, useState } from "react";
 import { EditForm } from "./Components/EditForm/EditForm";
@@ -13,6 +12,7 @@ import { useParseTournament } from "./Hooks/useParseTournament";
 import type { TournamentType } from "Shared/Schemas/TournamentSchema";
 import { useCheckTournament } from "./Hooks/useCheckTournament";
 import styles from "./add-tournament-link.module.css";
+import { extractApiErrorDetails } from "Shared/Helpers/extractApiErrorDetails";
 
 function AddTournamentLink() {
 	setDocTitle("Добавить турнир");
@@ -32,7 +32,7 @@ function AddTournamentLink() {
 		useCheckTournament();
 
 	const isLoading = isLoadingParse || isLoadingSave;
-	const error = errorOnParse || errorOnSave;
+	const apiError = errorOnParse || errorOnSave;
 
 	const onClickSave = async (tournament: TournamentType) => {
 		const isValid = checkTournamentSchema(tournament);
@@ -43,7 +43,18 @@ function AddTournamentLink() {
 
 		if (isSuccess) {
 			resetParseState();
+			resetErrorsTournamentSchema();
 		}
+	};
+
+	const sendLink = () => {
+		if (!link.trim()) return;
+
+		const linkToParse = Number.isInteger(+link) ? `https://gotquestions.online/pack/${link}` : link;
+
+		handleParseLink(dispatch, linkToParse);
+		resetErrorsTournamentSchema();
+		resetSaveState();
 	};
 
 	if (showEditForm) {
@@ -70,39 +81,29 @@ function AddTournamentLink() {
 					value={link}
 					disabled={isLoading}
 					onKeyDown={(e) => {
-						if (e.key === "Enter") {
-							handleParseLink(dispatch, link);
-							resetErrorsTournamentSchema();
-							resetSaveState();
-						}
+						if (e.key === "Enter") sendLink();
 					}}
 				/>
-				<Button
-					title="Открыть"
-					onClick={() => {
-						handleParseLink(dispatch, link);
-						resetErrorsTournamentSchema();
-						resetSaveState();
-					}}
-					disabled={isLoading}
-				>
+				<Button title="Открыть" onClick={sendLink} disabled={isLoading}>
 					Открыть{" "}
 				</Button>
 			</div>
 
-			{errorsTournamentSchema.length > 0 &&
-				errorsTournamentSchema.map((error) => (
-					<p className={styles.errorFilling} key={error.id}>
-						{error.message}
-					</p>
-				))}
+			<div className={styles.errorsSchema}>
+				{errorsTournamentSchema.length > 0 &&
+					errorsTournamentSchema.map((error) => (
+						<p className={styles.errorFilling} key={error.id}>
+							{error.message}
+						</p>
+					))}
+			</div>
 
 			{isSuccessSave && (
 				<p className={styles.message}>{"Турнир сохранён. Появится в списке после проверки"}</p>
 			)}
 
-			{!!error && (
-				<p className={styles.errorMessage}>{getServerErrorMessage(error, "Ошибка сервера")}</p>
+			{!!apiError && (
+				<p className={styles.errorMessage}>{extractApiErrorDetails(apiError).message}</p>
 			)}
 
 			{isLoading && <Spinner />}

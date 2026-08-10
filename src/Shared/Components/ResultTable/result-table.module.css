@@ -16,6 +16,10 @@
 	border-right: 2px solid var(--border-color-quiet);
 	border-bottom: 2px solid var(--border-color-quiet);
 
+	&.selected {
+		background-color: var(--bg-hover-pm-table);
+	}
+
 	&:hover {
 		font-weight: bold;
 		background-color: var(--bg-hover-pm-table);

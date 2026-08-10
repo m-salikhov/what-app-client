@@ -20,4 +20,4 @@ export const serverRoutes = {
 	usersChangePassword: (id: string) => `users/${id}/change-password`,
 } as const;
 
-export const baseUrl = "https://andvarifserv.ru";
+export const baseUrl = "https://api.andvarif.ru";

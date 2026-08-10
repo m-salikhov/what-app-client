@@ -31,7 +31,7 @@ const sitemapOptions: Parameters<typeof Sitemap>[0] = {
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react(), svgr(), Sitemap(sitemapOptions),shouldAnalyze && analyzer(),],
+  plugins: [react(), svgr(), Sitemap(sitemapOptions), shouldAnalyze && analyzer(),],
 
   resolve: {
     alias: {
