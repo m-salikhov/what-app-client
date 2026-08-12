@@ -5,7 +5,7 @@ import { useAppSelector } from "Shared/Hooks/redux";
 import { currentQuestionSelector, withTimerSelector } from "Store/Selectors/PlayModeSelectors";
 import { useState } from "react";
 import styles from "../../../playmode.module.css";
-import { ButtonsBlock } from "./ButtonsBlock";
+import { ResultButtons } from "./ResultButtons";
 import { Timer } from "./Timer";
 
 export function PlayModeQuestion() {
@@ -25,11 +25,11 @@ export function PlayModeQuestion() {
 				</div>
 			)}
 
-			{showAnswer && <ButtonsBlock setShowAnswer={setShowAnswer} />}
+			{showAnswer && <ResultButtons setShowAnswer={setShowAnswer} />}
 
 			{currentQuestion.add && <Add add={currentQuestion.add} />}
 
-			<p className="pmq-text">{currentQuestion.text}</p>
+			<p>{currentQuestion.text}</p>
 
 			{showAnswer && <Answer q={currentQuestion} />}
 		</div>

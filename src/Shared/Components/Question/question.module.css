@@ -101,7 +101,9 @@
 /* ОТВЕТ */
 
 .answer {
+	margin: 0 0 0.5rem 0.5rem;
 	padding: 0 0.5rem;
+	border-left: var(--main-border);
 
 	p {
 		padding: 0.25rem 0;
@@ -112,9 +114,20 @@
 		}
 	}
 
-	& .answerText {
-		font-weight: bold;
-		color: #45877e;
+	.answerBlock {
+		display: flex;
+		align-items: center;
+		font-size: 1.125rem;
+
+		span {
+			font-weight: bold;
+		}
+
+		.answerText {
+			padding-left: 0.4rem;
+			font-weight: bold;
+			color: #45877e;
+		}
 	}
 }
 

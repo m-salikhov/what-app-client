@@ -240,11 +240,11 @@
 }
 
 .tourEnd {
-	text-align: center;
 	margin-top: 0.5rem;
 
 	.tourEndButton {
 		margin-top: 0.5rem;
+		text-align: center;
 	}
 }
 

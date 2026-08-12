@@ -5,7 +5,10 @@ import styles from "../question.module.css";
 export function Answer({ q }: { q: QuestionType }) {
 	return (
 		<div className={styles.answer}>
-			<p className={styles.answerText}>{q.answer}</p>
+			<div className={styles.answerBlock}>
+				<span>Ответ:</span>
+				<p className={styles.answerText}>{q.answer}</p>
+			</div>
 
 			{q.alterAnswer && (
 				<p>

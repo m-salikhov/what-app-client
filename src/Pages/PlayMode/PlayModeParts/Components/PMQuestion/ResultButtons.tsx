@@ -1,22 +1,18 @@
 import { Button } from "Shared/Components/UI/Button/Button";
 import { useAppDispatch } from "Shared/Hooks/redux";
 import { playModeActions } from "Store/Slices/PlayModeSlice";
-import { useState } from "react";
+import type { MouseEvent } from "react";
 import styles from "../../../playmode.module.css";
 
 interface Props {
 	setShowAnswer: (showAnswer: boolean) => void;
 }
 
-export function ButtonsBlock({ setShowAnswer }: Props) {
+export function ResultButtons({ setShowAnswer }: Props) {
 	const dispatch = useAppDispatch();
 
-	const [answer, setAnswer] = useState<boolean | undefined>(undefined);
-
-	const onClick = () => {
-		if (answer !== undefined) {
-			dispatch(playModeActions.setResult(answer));
-		}
+	const onClick = (e: MouseEvent<HTMLButtonElement>) => {
+		dispatch(playModeActions.setResult(e.currentTarget.id === "yes"));
 
 		dispatch(playModeActions.setStep());
 
@@ -25,15 +21,19 @@ export function ButtonsBlock({ setShowAnswer }: Props) {
 
 	return (
 		<div className={styles.buttonsBlock}>
-			{answer ?? (
+			{
 				<div className={styles.buttonBlockText}>
 					<p>Вы правильно ответили?</p>
-					<Button onClick={() => setAnswer(true)}> Да </Button>
-					<Button onClick={() => setAnswer(false)}> Нет </Button>
+					<Button id="yes" onClick={onClick}>
+						{" "}
+						Да{" "}
+					</Button>
+					<Button id="no" onClick={onClick}>
+						{" "}
+						Нет{" "}
+					</Button>
 				</div>
-			)}
-
-			{answer !== undefined && <Button onClick={onClick}> Следующий вопрос </Button>}
+			}
 		</div>
 	);
 }

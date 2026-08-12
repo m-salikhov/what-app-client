@@ -10,7 +10,8 @@ interface Props {
 export function Timer({ setShowAnswer }: Props) {
 	const { questionTimer, answerTimer } = useAppSelector(timerOptions);
 	const [time, setTime] = useState(questionTimer);
-	const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 	const isQuestionPhase = useRef(true);
 
 	useEffect(() => {
@@ -31,7 +32,6 @@ export function Timer({ setShowAnswer }: Props) {
 			});
 		}, 1000);
 
-		// Очистка при размонтировании
 		return () => {
 			if (intervalRef.current) {
 				clearInterval(intervalRef.current);

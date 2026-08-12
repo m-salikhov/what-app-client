@@ -31,7 +31,7 @@ export function Question({ q, random = false }: Props) {
 
 			<Disclosure isExpanded={isExpanded} className={styles.disclosure}>
 				<button type="button" onClick={() => setIsExpanded(!isExpanded)}>
-					<p>Ответ</p>
+					<p>{isExpanded ? "Скрыть ответ" : "Показать ответ"}</p>
 					<AiOutlineDown size={"30px"} />
 				</button>
 
