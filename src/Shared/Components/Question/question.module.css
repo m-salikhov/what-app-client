@@ -59,6 +59,14 @@
 
 		img {
 			max-width: 60%;
+			height: auto;
+			aspect-ratio: auto;
+			opacity: 0;
+			transition: opacity 0.2s ease-in-out;
+
+			&.loaded {
+				opacity: 1;
+			}
 		}
 
 		p {

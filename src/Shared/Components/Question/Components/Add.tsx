@@ -10,15 +10,11 @@ export function Add({ add }: { add: string }) {
 		<div className={styles.razdatkaContainer}>
 			<p>Раздаточный материал:</p>
 			<div className={styles.razdatka}>
-				{isImage && !isImageLoaded && <div style={{ height: "250px" }}></div>}
-
 				{isImage && (
 					<img
+						className={isImageLoaded ? styles.loaded : ""}
 						src={add}
 						alt="раздатка"
-						style={{
-							opacity: isImageLoaded ? 1 : 0,
-						}}
 						onLoad={() => setIsImageLoaded(true)}
 						loading="lazy"
 					/>
