@@ -1,11 +1,10 @@
 import { HiArrowNarrowLeft as LeftArrow, HiArrowNarrowRight as RightArrow } from "react-icons/hi";
 import styles from "./pagination-control.module.css";
-import type { Dispatch, SetStateAction } from "react";
 
 interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
-	setCurrentPage: Dispatch<SetStateAction<number>>;
+	setCurrentPage: (newPage: number) => void;
 	show?: boolean;
 	isFetching?: boolean;
 }
@@ -23,7 +22,7 @@ export function PaginationControl({
 		if (isFetching) return;
 
 		if (currentPage > 1) {
-			setCurrentPage((prev) => prev - 1);
+			setCurrentPage(currentPage - 1);
 		}
 	};
 
@@ -31,7 +30,7 @@ export function PaginationControl({
 		if (isFetching) return;
 
 		if (currentPage < totalPages) {
-			setCurrentPage((prev) => prev + 1);
+			setCurrentPage(currentPage + 1);
 		}
 	};
 
@@ -95,11 +94,7 @@ export function PaginationControl({
 			{currentPage > 3 && <span className={styles.dots}>...</span>}
 
 			{currentPage > 2 && (
-				<button
-					type="button"
-					onClick={() => setCurrentPage((prev) => prev - 1)}
-					className={styles.page}
-				>
+				<button type="button" onClick={handlePrev} className={styles.page}>
 					{currentPage - 1}
 				</button>
 			)}
@@ -111,11 +106,7 @@ export function PaginationControl({
 			)}
 
 			{currentPage < totalPages - 1 && (
-				<button
-					type="button"
-					onClick={() => setCurrentPage((prev) => prev + 1)}
-					className={styles.page}
-				>
+				<button type="button" onClick={handleNext} className={styles.page}>
 					{currentPage + 1}
 				</button>
 			)}

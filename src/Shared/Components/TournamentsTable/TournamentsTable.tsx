@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { RandomTournament } from "../RandomTournament/RandomTournament";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 import TableTooltipDF from "./Components/TableTooltipDF";
@@ -12,10 +12,13 @@ import { useTableManager } from "./Hooks/useTableManager";
 
 export function TournamentsTable({ amount }: { amount: number }) {
 	const id = useId();
-	const [currentPage, setCurrentPage] = useState(1);
 	const [loadedPage, setLoadedPage] = useState(1);
 	const [filterString, setFilterString] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
+
+	const [searchParams, setSearchParams] = useSearchParams();
+
+	const page = Number(searchParams.get("page") || "1");
 
 	const {
 		pageCount,
@@ -27,7 +30,13 @@ export function TournamentsTable({ amount }: { amount: number }) {
 		sortField,
 		sortDirection,
 		queryState,
-	} = useTableManager(amount, currentPage);
+	} = useTableManager(amount, page);
+
+	const handlePageChange = (newPage: number) => {
+		setSearchParams({ page: String(newPage) });
+		// Если есть другие параметры, их нужно сохранить:
+		// setSearchParams(prev => ({ ...Object.fromEntries(prev), page: String(newPage) }));
+	};
 
 	function handleInputClear() {
 		if (filterString.length > 0) {
@@ -60,9 +69,16 @@ export function TournamentsTable({ amount }: { amount: number }) {
 	useEffect(() => {
 		// чтобы нумерация не обновлялась вперед загрузки страницы
 		if (tournamentsSorted && !queryState.isFetching) {
-			setLoadedPage(currentPage);
+			setLoadedPage(page);
 		}
-	}, [tournamentsSorted, queryState.isFetching, currentPage]);
+	}, [tournamentsSorted, queryState.isFetching, page]);
+
+	useEffect(() => {
+		// проверка валидности номера страницы
+		if (page < 1 || page > pageCount) {
+			setSearchParams({ page: "1" });
+		}
+	}, [page, pageCount, setSearchParams]);
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
 
@@ -104,9 +120,9 @@ export function TournamentsTable({ amount }: { amount: number }) {
 				<RandomTournament size="40" />
 			</div>
 			<PaginationControl
-				currentPage={currentPage}
+				currentPage={page}
 				totalPages={pageCount}
-				setCurrentPage={setCurrentPage}
+				setCurrentPage={handlePageChange}
 				show={!showSearchResult}
 				isFetching={queryState.isFetching}
 			/>
@@ -249,9 +265,9 @@ export function TournamentsTable({ amount }: { amount: number }) {
 				))}
 			</div>
 			<PaginationControl
-				currentPage={currentPage}
+				currentPage={page}
 				totalPages={pageCount}
-				setCurrentPage={setCurrentPage}
+				setCurrentPage={handlePageChange}
 				show={!showSearchResult}
 				isFetching={queryState.isFetching}
 			/>
