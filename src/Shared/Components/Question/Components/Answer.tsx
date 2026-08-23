@@ -22,7 +22,7 @@ export function Answer({ q }: { q: QuestionType }) {
 				</p>
 			)}
 
-			{q.source?.length === 1 && (
+			{q.source.length === 1 && (
 				<p className={styles.answerSourceOne}>
 					<span>Источник: </span>{" "}
 					{q.source[0].link.startsWith("http") ? (
@@ -36,18 +36,16 @@ export function Answer({ q }: { q: QuestionType }) {
 			{q.source.length > 1 && (
 				<div>
 					<p className={styles.answerSourceMany}>Источники:</p>
-					{q.source.map((v, i) => {
-						return (
-							<p key={v.link}>
-								{++i}.{" "}
-								{v.link.startsWith("http") ? (
-									<ExternalLinkText text={v.link} href={v.link} />
-								) : (
-									v.link
-								)}
-							</p>
-						);
-					})}
+					{q.source.map((v, i) => (
+						<p key={v.id}>
+							{++i}.{" "}
+							{v.link.startsWith("http") ? (
+								<ExternalLinkText text={v.link} href={v.link} />
+							) : (
+								v.link
+							)}
+						</p>
+					))}
 				</div>
 			)}
 			<p>

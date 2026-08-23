@@ -1,126 +1,46 @@
-import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
+import { useId } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { Link, useSearchParams } from "react-router-dom";
-import { RandomTournament } from "../RandomTournament/RandomTournament";
+import { Link } from "react-router-dom";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
 import TableTooltipDF from "./Components/TableTooltipDF";
 import styles from "./tournaments-table.module.css";
-import { BsSearch as Search } from "react-icons/bs";
-import { RiCloseLargeFill as Clear } from "react-icons/ri";
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { useTableManager } from "./Hooks/useTableManager";
+import SearchByTitleInput from "./Components/SearchByTitleInput";
 
-export function TournamentsTable({ amount }: { amount: number }) {
+export function TournamentsTable({ amountTournamentsOnPage }: { amountTournamentsOnPage: number }) {
 	const id = useId();
-	const [loadedPage, setLoadedPage] = useState(1);
-	const [filterString, setFilterString] = useState("");
-	const inputRef = useRef<HTMLInputElement>(null);
-
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const page = Number(searchParams.get("page") || "1");
 
 	const {
-		pageCount,
-		handleSearch,
-		hideSearchResult,
-		showSearchResult,
-		tournamentsSorted,
+		enrichedTournaments,
 		sortTournaments,
 		sortField,
 		sortDirection,
 		queryState,
-	} = useTableManager(amount, page);
-
-	const handlePageChange = (newPage: number) => {
-		setSearchParams({ page: String(newPage) });
-		// Если есть другие параметры, их нужно сохранить:
-		// setSearchParams(prev => ({ ...Object.fromEntries(prev), page: String(newPage) }));
-	};
-
-	function handleInputClear() {
-		if (filterString.length > 0) {
-			setFilterString("");
-		}
-
-		if (queryState.searchSuccess) {
-			hideSearchResult();
-		}
-
-		if (inputRef.current) {
-			inputRef.current.focus();
-		}
-	}
-
-	function inputOnKeyDown(e: KeyboardEvent<HTMLInputElement>) {
-		if (e.key === "Enter") {
-			handleSearch(filterString);
-		}
-
-		if (e.key === "Escape") {
-			handleInputClear();
-		}
-
-		if (e.key === "Backspace" && filterString.length === 1) {
-			hideSearchResult();
-		}
-	}
-
-	useEffect(() => {
-		// чтобы нумерация не обновлялась вперед загрузки страницы
-		if (tournamentsSorted && !queryState.isFetching) {
-			setLoadedPage(page);
-		}
-	}, [tournamentsSorted, queryState.isFetching, page]);
-
-	useEffect(() => {
-		// проверка валидности номера страницы
-		if (page < 1 || page > pageCount) {
-			setSearchParams({ page: "1" });
-		}
-	}, [page, pageCount, setSearchParams]);
+		currentPage,
+		handlePageChange,
+		pageCount,
+		handleSearch,
+		showSearchResult,
+	} = useTableManager(amountTournamentsOnPage);
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
 
+	if (enrichedTournaments.length === 0)
+		return (
+			<>
+				<SearchByTitleInput handleSearch={handleSearch} />
+				<h2>Нет турниров по запросы</h2>{" "}
+			</>
+		);
+
+	console.log("render tournaments table");
+
 	return (
 		<>
-			{" "}
-			<div className={styles.header}>
-				<div className={styles.searchContainer}>
-					<label className={styles.searchLabel}>
-						<input
-							type="text"
-							name="tournaments-search"
-							value={filterString}
-							onChange={(e) => setFilterString(e.target.value)}
-							onKeyDown={inputOnKeyDown}
-							placeholder="поиск по названию"
-							autoComplete="off"
-							ref={inputRef}
-						/>
-					</label>
-					<button
-						className={styles.searchClear}
-						type="button"
-						title="очистить поиск"
-						onClick={handleInputClear}
-					>
-						<Clear size="20" />
-					</button>
-					<button
-						className={styles.searchIcon}
-						type="button"
-						title="поиск"
-						onClick={() => handleSearch(filterString)}
-					>
-						<Search size="28" color="var(--h-color)" />
-					</button>
-				</div>
-
-				<RandomTournament size="40" />
-			</div>
+			<SearchByTitleInput handleSearch={handleSearch} />
 			<PaginationControl
-				currentPage={page}
+				currentPage={currentPage}
 				totalPages={pageCount}
 				setCurrentPage={handlePageChange}
 				show={!showSearchResult}
@@ -241,31 +161,31 @@ export function TournamentsTable({ amount }: { amount: number }) {
 					</div>
 				</div>
 
-				{tournamentsSorted.map((item, i) => (
-					<div className={styles.line} key={item.id}>
-						{!showSearchResult && (
-							<div className={styles.cell}>{i + 1 + (loadedPage - 1) * amount}</div>
-						)}
-						{showSearchResult && <div className={styles.cell}>{i + 1}</div>}
+				{enrichedTournaments.length === 0 && <h2>Нет турниров</h2>}
 
-						<div className={styles.cell}>
-							<Link to={item.eternalLink}>{item.title}</Link>
+				{enrichedTournaments.length > 0 &&
+					enrichedTournaments.map((item) => (
+						<div className={styles.line} key={item.id}>
+							<div className={styles.cell}>{item.tableIndex}</div>
+
+							<div className={styles.cell}>
+								<Link to={item.eternalLink}>{item.title}</Link>
+							</div>
+							<div className={styles.cell}>{item.date}</div>
+							<div className={`${styles.cell} ${styles[item.background]}`}>
+								<p className={styles.difficultyText}>
+									{item.difficulty <= 0 ? "-" : item.difficulty}
+								</p>
+							</div>
+							<div className={styles.cell}>{item.questionsQuantity}</div>
+							<div className={styles.cell}>{item.tours}</div>
+							<div className={styles.cell}>{item.dateUpload}</div>
+							<div className={styles.cell}>{item.uploader}</div>
 						</div>
-						<div className={styles.cell}>{item.date}</div>
-						<div className={`${styles.cell} ${styles[item.background]}`}>
-							<p className={styles.difficultyText}>
-								{item.difficulty <= 0 ? "-" : item.difficulty}
-							</p>
-						</div>
-						<div className={styles.cell}>{item.questionsQuantity}</div>
-						<div className={styles.cell}>{item.tours}</div>
-						<div className={styles.cell}>{item.dateUpload}</div>
-						<div className={styles.cell}>{item.uploader}</div>
-					</div>
-				))}
+					))}
 			</div>
 			<PaginationControl
-				currentPage={page}
+				currentPage={currentPage}
 				totalPages={pageCount}
 				setCurrentPage={handlePageChange}
 				show={!showSearchResult}

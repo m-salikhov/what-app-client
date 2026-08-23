@@ -8,7 +8,7 @@ function List() {
 	return (
 		<>
 			<Back />
-			<TournamentsTable amount={50} />
+			<TournamentsTable amountTournamentsOnPage={50} />
 		</>
 	);
 }

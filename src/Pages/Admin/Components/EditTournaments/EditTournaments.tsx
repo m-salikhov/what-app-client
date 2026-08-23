@@ -6,7 +6,7 @@ export default function EditTournaments() {
 	return (
 		<>
 			<Back />
-			<TournamentsTable amount={20} />
+			<TournamentsTable amountTournamentsOnPage={20} />
 		</>
 	);
 }

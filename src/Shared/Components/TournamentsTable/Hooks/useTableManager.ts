@@ -1,8 +1,9 @@
+import { useEnrichTournaments } from "./useEnrichTournaments";
 import { usePaginationTournaments } from "./usePaginationTournaments";
-import { useSearchTournaments } from "./useSearchTournaments";
+import { useSearchByTitle } from "./useSearchByTitle";
 import { useSortTournaments } from "./useSortTournaments";
 
-export function useTableManager(amount: number, currentPage: number) {
+export function useTableManager(amountTournamentsOnPage: number) {
 	const {
 		tournamentsPaginated,
 		pageCount,
@@ -10,25 +11,35 @@ export function useTableManager(amount: number, currentPage: number) {
 		isError: paginationError,
 		isSuccess: paginationSuccess,
 		isLoading: paginationLoading,
-	} = usePaginationTournaments(amount, currentPage);
+		currentPage,
+		handlePageChange,
+	} = usePaginationTournaments(amountTournamentsOnPage);
 
 	const {
 		tournamentsSearched,
-		hideSearchResult,
 		handleSearch,
-		showSearchResult,
 		searchState: { isFetching: searchFetching, isError: searchError, isSuccess: searchSuccess },
-	} = useSearchTournaments();
+	} = useSearchByTitle();
 
-	const tournaments = showSearchResult ? tournamentsSearched : tournamentsPaginated;
+	const tournaments = Array.isArray(tournamentsSearched)
+		? tournamentsSearched
+		: tournamentsPaginated;
+	const showSearchResult = Array.isArray(tournamentsSearched);
 
 	const { tournamentsSorted, sortTournaments, sortField, sortDirection } =
 		useSortTournaments(tournaments);
 
+	const enrichedTournaments = useEnrichTournaments(
+		tournamentsSorted,
+		currentPage,
+		amountTournamentsOnPage,
+	);
+
 	return {
 		pageCount,
-		hideSearchResult,
 		handleSearch,
+		currentPage,
+		handlePageChange,
 		showSearchResult,
 
 		queryState: {
@@ -40,7 +51,7 @@ export function useTableManager(amount: number, currentPage: number) {
 			paginationSuccess,
 		},
 
-		tournamentsSorted,
+		enrichedTournaments,
 		sortTournaments,
 		sortField,
 		sortDirection,

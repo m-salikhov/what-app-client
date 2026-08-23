@@ -1,6 +1,6 @@
 import { type MouseEvent, useMemo, useState } from "react";
-import type { EnrichedTournamentType } from "./useEnrichTournaments";
 import * as z from "zod";
+import type { TournamentShortType } from "Shared/Schemas/TournamentSchema";
 
 const sortFieldMap = {
 	title: "title",
@@ -26,7 +26,7 @@ const compareDates = (str1: string, str2: string) => {
 	return 0;
 };
 
-export function useSortTournaments(tournaments: EnrichedTournamentType[]) {
+export function useSortTournaments(tournaments: TournamentShortType[]) {
 	const [sortField, setSortField] = useState<SortFieldType>("dateUpload");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 

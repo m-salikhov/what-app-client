@@ -6,19 +6,26 @@ import { useTheme, type ThemeType } from "Shared/Context/ThemeContext";
 export type EnrichedTournamentType = TournamentShortType & {
 	eternalLink: string;
 	background: string;
+	tableIndex: number;
 };
 
-export function useEnrichTournaments(tournaments: TournamentShortType[]) {
+export function useEnrichTournaments(
+	tournaments: TournamentShortType[],
+	currentPage: number,
+	amountTournamentsOnPage: number,
+) {
 	const { theme } = useTheme();
 	const { pathname } = useLocation();
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <изменение страницы не должно триггерить хук>
 	const enrichedTournaments: EnrichedTournamentType[] = useMemo(() => {
 		if (!tournaments.length) return [];
 
-		return tournaments.map((tournament) => ({
+		return tournaments.map((tournament, i) => ({
 			...tournament,
 			eternalLink: `${pathname}/${tournament.id}`,
 			background: getDifficultyClass(tournament.difficulty, theme),
+			tableIndex: i + 1 + (currentPage - 1) * amountTournamentsOnPage,
 		}));
 	}, [tournaments, pathname, theme]);
 

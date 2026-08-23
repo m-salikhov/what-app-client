@@ -10,6 +10,7 @@ import {
 } from "Shared/Schemas/TournamentSchema";
 import { baseApi } from "./baseApi";
 import { formatDate } from "Shared/Helpers/formatDate";
+import * as z from "zod";
 
 export const tournamentAPI = baseApi.injectEndpoints({
 	overrideExisting: false,
@@ -43,9 +44,9 @@ export const tournamentAPI = baseApi.injectEndpoints({
 			providesTags: ["tournaments"],
 		}),
 
-		search: build.query<TournamentShortType[], { title: string }>({
+		search: build.query<TournamentShortType[] | undefined, { title: string }>({
 			query: ({ title }) => `${serverRoutes.tournamentsSearch}?title=${title}`,
-			responseSchema: TournamentShortTypeSchema.array(),
+			responseSchema: z.union([TournamentShortTypeSchema.array(), z.undefined()]),
 			transformResponse: (tournaments: TournamentShortType[]) => {
 				return tournaments.map((tournament) => ({
 					...tournament,
