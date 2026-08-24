@@ -18,7 +18,13 @@ export function useTableManager(amountTournamentsOnPage: number) {
 	const {
 		tournamentsSearched,
 		handleSearch,
-		searchState: { isFetching: searchFetching, isError: searchError, isSuccess: searchSuccess },
+
+		searchState: {
+			isFetching: searchFetching,
+			isError: searchError,
+			isSuccess: searchSuccess,
+			isLoading: searchLoading,
+		},
 	} = useSearchByTitle();
 
 	const tournaments = Array.isArray(tournamentsSearched)
@@ -46,7 +52,7 @@ export function useTableManager(amountTournamentsOnPage: number) {
 			isFetching: paginationFetching || searchFetching,
 			isError: paginationError || searchError,
 			isSuccess: paginationSuccess || searchSuccess,
-			isLoading: paginationLoading,
+			isLoading: paginationLoading || searchLoading,
 			searchSuccess,
 			paginationSuccess,
 		},

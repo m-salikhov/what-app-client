@@ -26,11 +26,15 @@ const compareDates = (str1: string, str2: string) => {
 	return 0;
 };
 
-export function useSortTournaments(tournaments: TournamentShortType[]) {
+export function useSortTournaments(tournaments: TournamentShortType[] | undefined) {
 	const [sortField, setSortField] = useState<SortFieldType>("dateUpload");
 	const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
 	const tournamentsSorted = useMemo(() => {
+		if (!tournaments) return undefined;
+
+		if (tournaments.length === 0) return [];
+
 		if (sortField === "dateUpload" || sortField === "date") {
 			return [...tournaments].sort((a, b) =>
 				sortDirection === "asc"

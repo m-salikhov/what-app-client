@@ -119,6 +119,7 @@ export const {
 	useGetRandomQuery,
 	useLazyGetRandomTournamentQuery,
 	useLazySearchQuery,
+	useSearchQuery,
 	useAddTournamentMutation,
 	useParseLinkMutation,
 	useGetTournamentsAllShortQuery,

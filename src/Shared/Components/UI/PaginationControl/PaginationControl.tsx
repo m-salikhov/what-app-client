@@ -3,7 +3,7 @@ import styles from "./pagination-control.module.css";
 
 interface PaginationProps {
 	currentPage: number;
-	totalPages: number;
+	totalPages: number | undefined;
 	setCurrentPage: (newPage: number) => void;
 	show?: boolean;
 	isFetching?: boolean;
@@ -16,7 +16,7 @@ export function PaginationControl({
 	show = true,
 	isFetching = false,
 }: PaginationProps) {
-	if (!show) return null;
+	if (!show || !totalPages) return null;
 
 	const handlePrev = () => {
 		if (isFetching) return;

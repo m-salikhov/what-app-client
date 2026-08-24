@@ -17,14 +17,14 @@ export function usePaginationTournaments(amount: number) {
 		setSearchParams({ page: String(newPage) });
 	};
 
-	const pageCount = data?.pageCount ?? 1;
-	const hasMorePage = data?.hasMorePage ?? false;
-	const count = data?.count ?? 0;
+	const pageCount = data?.pageCount;
+	const hasMorePage = data?.hasMorePage;
+	const count = data?.count;
 
-	const tournamentsPaginated = data?.tournaments || [];
+	const tournamentsPaginated = data?.tournaments;
 
 	useEffect(() => {
-		if (pageCount !== 1 && currentPage > pageCount) {
+		if (pageCount && currentPage > pageCount) {
 			setSearchParams((prev) => ({ ...prev, page: String(pageCount) }));
 		}
 

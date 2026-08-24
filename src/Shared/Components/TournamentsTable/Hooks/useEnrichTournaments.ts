@@ -10,7 +10,7 @@ export type EnrichedTournamentType = TournamentShortType & {
 };
 
 export function useEnrichTournaments(
-	tournaments: TournamentShortType[],
+	tournaments: TournamentShortType[] | undefined,
 	currentPage: number,
 	amountTournamentsOnPage: number,
 ) {
@@ -18,8 +18,10 @@ export function useEnrichTournaments(
 	const { pathname } = useLocation();
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: <изменение страницы не должно триггерить хук>
-	const enrichedTournaments: EnrichedTournamentType[] = useMemo(() => {
-		if (!tournaments.length) return [];
+	const enrichedTournaments: EnrichedTournamentType[] | undefined = useMemo(() => {
+		if (!tournaments) return undefined;
+
+		if (tournaments.length === 0) return [];
 
 		return tournaments.map((tournament, i) => ({
 			...tournament,

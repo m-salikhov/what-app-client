@@ -7,6 +7,7 @@ import styles from "./tournaments-table.module.css";
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { useTableManager } from "./Hooks/useTableManager";
 import SearchByTitleInput from "./Components/SearchByTitleInput";
+import { Spinner } from "../Spinner/Spinner";
 
 export function TournamentsTable({ amountTournamentsOnPage }: { amountTournamentsOnPage: number }) {
 	const id = useId();
@@ -26,19 +27,20 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
 
+	if (enrichedTournaments === undefined) return <Spinner />;
+
 	if (enrichedTournaments.length === 0)
 		return (
-			<>
+			<div className={styles.container}>
 				<SearchByTitleInput handleSearch={handleSearch} />
 				<h2>Нет турниров по запросы</h2>{" "}
-			</>
+			</div>
 		);
 
-	console.log("render tournaments table");
-
 	return (
-		<>
+		<div className={styles.container}>
 			<SearchByTitleInput handleSearch={handleSearch} />
+
 			<PaginationControl
 				currentPage={currentPage}
 				totalPages={pageCount}
@@ -46,6 +48,7 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 				show={!showSearchResult}
 				isFetching={queryState.isFetching}
 			/>
+
 			<div className={styles.table}>
 				<div className={styles.headerLine}>
 					<div className={styles.headerCell}>
@@ -161,8 +164,6 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 					</div>
 				</div>
 
-				{enrichedTournaments.length === 0 && <h2>Нет турниров</h2>}
-
 				{enrichedTournaments.length > 0 &&
 					enrichedTournaments.map((item) => (
 						<div className={styles.line} key={item.id}>
@@ -184,6 +185,7 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 						</div>
 					))}
 			</div>
+
 			<PaginationControl
 				currentPage={currentPage}
 				totalPages={pageCount}
@@ -192,6 +194,6 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 				isFetching={queryState.isFetching}
 			/>
 			<ScrollToTop />
-		</>
+		</div>
 	);
 }
