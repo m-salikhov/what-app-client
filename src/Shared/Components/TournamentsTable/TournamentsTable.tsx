@@ -147,21 +147,6 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 							</div>{" "}
 						</button>
 					</div>
-
-					<div className={styles.headerCell}>
-						<button
-							type="button"
-							className={styles.headerCellBtn}
-							data-field="uploader"
-							onClick={sortTournaments}
-						>
-							<span>ДОБАВИЛ</span>
-							<div className={styles.headerCellIcon}>
-								{sortField === "uploader" && sortDirection === "asc" && <FaChevronDown />}
-								{sortField === "uploader" && sortDirection === "desc" && <FaChevronUp />}
-							</div>{" "}
-						</button>
-					</div>
 				</div>
 
 				{enrichedTournaments.length > 0 &&
@@ -181,7 +166,6 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 							<div className={styles.cell}>{item.questionsQuantity}</div>
 							<div className={styles.cell}>{item.tours}</div>
 							<div className={styles.cell}>{item.dateUpload}</div>
-							<div className={styles.cell}>{item.uploader}</div>
 						</div>
 					))}
 			</div>
