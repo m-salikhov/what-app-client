@@ -19,9 +19,10 @@
 }
 
 .info {
-	display: flex;
-
-	h3:nth-child(n + 2) {
-		padding-left: 3rem;
+	p {
+		font-size: 1rem;
+		span {
+			font-weight: bold;
+		}
 	}
 }

@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "types": [
-      "vite/client",
-      "node"
-    ],
-    "typeRoots": [
-      "node_modules/@types",
-      "src/global.d.ts"
+      "vite/client"
     ],
     "paths": {
       "Shared/*": [

@@ -16,22 +16,22 @@ export function TournamentHeader({ tournament }: Props) {
 			</div>
 
 			<div className={styles.info}>
-				<h3>
-					Дата отыгрыша: <span>{tournament.date ? formatDate(tournament.date) : null}</span>
-				</h3>
-				<h3>
-					Туры: <span>{tournament.tours}</span>
-				</h3>
-				<h3>
-					Вопросы: <span>{tournament.questionsQuantity}</span>
-				</h3>
+				<p>
+					<span>Дата отыгрыша:</span> {tournament.date ? formatDate(tournament.date) : "не указана"}
+				</p>
+				<p>
+					<span>Туры:</span> {tournament.tours}
+				</p>
+				<p>
+					<span>Вопросы:</span> {tournament.questionsQuantity}
+				</p>
+				<p>
+					<span>Сложность</span>: {tournament.difficulty ? tournament.difficulty : "не указана"}
+				</p>
+				<p>
+					<span>Редакция:</span> {tournament.editors.map((v) => v.name).join(", ")}
+				</p>
 			</div>
-			<h3>
-				Сложность: <span>{tournament.difficulty <= 0 ? "не указана" : tournament.difficulty}</span>
-			</h3>
-			<h3>
-				Редакция: <span>{tournament.editors.map((v) => v.name).join(", ")}</span>
-			</h3>
 		</div>
 	);
 }

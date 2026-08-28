@@ -40,17 +40,18 @@ label {
 }
 
 h1 {
-	font-family: Rubik-Medium, sans-serif;
+	font-family: Rubik-Medium, system-ui;
 	font-size: 2rem;
 }
 
 h2 {
-	font-family: Rubik-Medium, sans-serif;
+	font-family: Rubik-Medium, system-ui;
 	font-size: 1.25rem;
 }
 
 h3,
 h4 {
+  font-family: Rubik-Medium, system-ui;
 	font-size: 1.125rem;
 }
 

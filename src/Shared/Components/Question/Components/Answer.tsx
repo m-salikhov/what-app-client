@@ -6,8 +6,9 @@ export function Answer({ q }: { q: QuestionType }) {
 	return (
 		<div className={styles.answer}>
 			<div className={styles.answerBlock}>
-				<span>Ответ:</span>
-				<p className={styles.answerText}>{q.answer}</p>
+				<p className={styles.answerText}>
+					<span>Ответ:</span> {q.answer}
+				</p>
 			</div>
 
 			{q.alterAnswer && (
@@ -23,31 +24,33 @@ export function Answer({ q }: { q: QuestionType }) {
 			)}
 
 			{q.source.length === 1 && (
-				<p className={styles.answerSourceOne}>
-					<span>Источник: </span>{" "}
-					{q.source[0].link.startsWith("http") ? (
-						<ExternalLinkText text={q.source[0].link} href={q.source[0].link} />
-					) : (
-						q.source[0].link
-					)}
-				</p>
+				<div className={styles.answerSource}>
+					<p className={styles.answerSourceOne}>
+						<span>Источник: </span>{" "}
+						{q.source[0].link.startsWith("http") ? (
+							<ExternalLinkText text={q.source[0].link} href={q.source[0].link} />
+						) : (
+							q.source[0].link
+						)}
+					</p>
+				</div>
 			)}
 
 			{q.source.length > 1 && (
-				<div>
+				<div className={styles.answerSource}>
 					<p className={styles.answerSourceMany}>Источники:</p>
 					{q.source.map((v, i) => (
 						<p key={v.id}>
-							{++i}.{" "}
 							{v.link.startsWith("http") ? (
-								<ExternalLinkText text={v.link} href={v.link} />
+								<ExternalLinkText text={`${++i}.\xA0${v.link}`} href={v.link} />
 							) : (
-								v.link
+								`${++i}.\xA0${v.link}`
 							)}
 						</p>
 					))}
 				</div>
 			)}
+
 			<p>
 				<span>Автор:</span> {q.author}
 			</p>

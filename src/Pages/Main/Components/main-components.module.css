@@ -129,4 +129,10 @@
 	.tournaments {
 		margin-left: unset;
 	}
+
+	.line {
+		a {
+			font-size: 1rem;
+		}
+	}
 }

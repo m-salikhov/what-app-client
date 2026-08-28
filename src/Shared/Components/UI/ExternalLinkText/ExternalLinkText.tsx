@@ -7,6 +7,8 @@ interface Props {
 }
 
 export function ExternalLinkText({ text, href, extraClass }: Props) {
+	if (href.endsWith(".")) href = href.slice(0, -1);
+
 	return (
 		<a
 			className={extraClass ? `${styles.externalLink} ${extraClass}` : styles.externalLink}
