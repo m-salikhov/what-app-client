@@ -8,7 +8,8 @@ const rawBaseQuery = fetchBaseQuery({
 
 const baseQuery: BaseQueryFn = async (args, api, extraOptions) => {
 	// если не тест, то возвращаем оригинальную функцию
-	if (process.env.NODE_ENV !== "test") return rawBaseQuery(args, api, extraOptions);
+	const isTest = import.meta.env.MODE === "test";
+	if (!isTest) return rawBaseQuery(args, api, extraOptions);
 
 	// в простых GET args=url, в прочих args - объект со свойством url
 	let url = typeof args === "string" ? args : args.url;

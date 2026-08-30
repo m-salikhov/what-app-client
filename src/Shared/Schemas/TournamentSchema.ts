@@ -24,16 +24,24 @@ export const TournamentShortTypeSchema = z.object({
 	link: z.url(),
 });
 
+export const QuestionImageSchema = z.object({
+	id: z.number(),
+	width: z.number(),
+	height: z.number(),
+	type: z.string().max(50),
+});
+
 export const QuestionTypeSchema = z.object({
 	id: z.number(),
 	type: z.enum(["regular", "double", "triple", "other", "outside"]),
 	qNumber: z.number(),
 	tourNumber: z.number(),
-	add: z.string().optional(),
+	add: z.string(),
+	addMetadata: QuestionImageSchema.nullable(),
 	text: z.string().min(1, { message: "Нет текста вопроса" }),
 	answer: z.string().min(1, { message: "Нет правильного ответа" }),
-	alterAnswer: z.string().optional(),
-	comment: z.string().optional(),
+	alterAnswer: z.string(),
+	comment: z.string(),
 	answerRatio: z.string(),
 	source: z.array(SourceTypeSchema),
 	author: z.string().min(1, { message: "Нет автора" }),

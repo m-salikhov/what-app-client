@@ -13,6 +13,8 @@ export const questions: QuestionType[] = [
 		author: "Author 1",
 		tourNumber: 1,
 		answerRatio: `45/62 · 72.58%`,
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 56,
 			title: "tournament 1",
@@ -38,6 +40,8 @@ export const questions: QuestionType[] = [
 		author: "Author 2",
 		tourNumber: 1,
 		answerRatio: `45/62 · 72.58%`,
+		add: "",
+		addMetadata: null,
 
 		tournament: {
 			id: 57,
@@ -64,7 +68,8 @@ export const questions: QuestionType[] = [
 		author: "Author 3",
 		tourNumber: 1,
 		answerRatio: `45/62 · 72.58%`,
-
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 58,
 			title: "tournament 3",
@@ -90,7 +95,8 @@ export const questions: QuestionType[] = [
 		author: "Author 4",
 		tourNumber: 1,
 		answerRatio: `45/62 · 72.58%`,
-
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 59,
 			title: "tournament 4",
@@ -117,6 +123,8 @@ export const questions: QuestionType[] = [
 		author: "Author 5",
 		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 60,
 			title: "tournament 5",
@@ -143,6 +151,8 @@ export const questions: QuestionType[] = [
 		author: "Author 6",
 		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 61,
 			title: "tournament 6",
@@ -169,6 +179,8 @@ export const questions: QuestionType[] = [
 		author: "Author 7",
 		answerRatio: `45/62 · 72.58%`,
 		tourNumber: 1,
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 62,
 			title: "tournament 7",
@@ -195,6 +207,8 @@ export const questions: QuestionType[] = [
 		answerRatio: `45/62 · 72.58%`,
 		author: "Author 8",
 		tourNumber: 1,
+		add: "",
+		addMetadata: null,
 		tournament: {
 			id: 63,
 			title: "tournament 8",

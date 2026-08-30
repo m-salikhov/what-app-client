@@ -61,11 +61,11 @@ export function Header() {
 						</NavLink>
 					</li>
 
-					<li className={styles.navItem}>
+					{/* <li className={styles.navItem}>
 						<NavLink to="/addbylink" className={navLinkClassName}>
 							Добавить турнир
 						</NavLink>
-					</li>
+					</li> */}
 
 					<li
 						className={styles.navItem}
