@@ -18,6 +18,7 @@ export function useTableManager(amountTournamentsOnPage: number) {
 	const {
 		tournamentsSearched,
 		handleSearch,
+		searchString,
 
 		searchState: {
 			isFetching: searchFetching,
@@ -47,6 +48,7 @@ export function useTableManager(amountTournamentsOnPage: number) {
 		currentPage,
 		handlePageChange,
 		showSearchResult,
+		searchString,
 
 		queryState: {
 			isFetching: paginationFetching || searchFetching,

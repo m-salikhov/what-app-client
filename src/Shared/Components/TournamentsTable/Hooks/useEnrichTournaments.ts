@@ -17,7 +17,6 @@ export function useEnrichTournaments(
 	const { theme } = useTheme();
 	const { pathname } = useLocation();
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: <изменение страницы не должно триггерить хук>
 	const enrichedTournaments: EnrichedTournamentType[] | undefined = useMemo(() => {
 		if (!tournaments) return undefined;
 
@@ -29,7 +28,7 @@ export function useEnrichTournaments(
 			background: getDifficultyClass(tournament.difficulty, theme),
 			tableIndex: i + 1 + (currentPage - 1) * amountTournamentsOnPage,
 		}));
-	}, [tournaments, pathname, theme]);
+	}, [tournaments, pathname, theme, currentPage, amountTournamentsOnPage]);
 
 	return enrichedTournaments;
 }

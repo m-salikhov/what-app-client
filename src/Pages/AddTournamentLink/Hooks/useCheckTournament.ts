@@ -17,6 +17,7 @@ export function useCheckTournament() {
 		const parseResult = TournamentTypeSchema.safeParse(tournament);
 		if (parseResult.error) {
 			const errors = parseResult.error;
+			console.error(errors);
 
 			errors.issues.forEach((e) => {
 				const index = e.path[1];

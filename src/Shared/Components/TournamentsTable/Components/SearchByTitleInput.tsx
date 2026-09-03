@@ -1,24 +1,24 @@
-import { useEffect, useRef, useState, type KeyboardEvent } from "react";
+import { memo, useRef, useState, type KeyboardEvent } from "react";
 import styles from "../tournaments-table.module.css";
 import { BsSearch as Search } from "react-icons/bs";
 import { RiCloseLargeFill as Clear } from "react-icons/ri";
 import { RandomTournament } from "Shared/Components/RandomTournament/RandomTournament";
-import { useSearchParams } from "react-router-dom";
+// import { useSearchParams } from "react-router-dom";
 
 interface Props {
 	handleSearch: (value: string) => void;
+	searchString: string;
 }
 
-export default function SearchByTitleInput({ handleSearch }: Props) {
-	const [searchParams] = useSearchParams();
-	const [inputText, setInputText] = useState(() => searchParams.get("search") || "");
+export const SearchByTitleInput = memo(({ handleSearch, searchString }: Props) => {
+	const [inputText, setInputText] = useState(searchString);
+
 	const inputRef = useRef<HTMLInputElement>(null);
 
 	function handleInputClear() {
-		if (inputText.length > 0) {
-			setInputText("");
-			handleSearch("");
-		}
+		setInputText("");
+		handleSearch("");
+
 		if (inputRef.current) {
 			inputRef.current.focus();
 		}
@@ -33,10 +33,6 @@ export default function SearchByTitleInput({ handleSearch }: Props) {
 			handleInputClear();
 		}
 	}
-
-	useEffect(() => {
-		if (inputRef.current) inputRef.current.focus();
-	}, []);
 
 	return (
 		<div className={styles.header}>
@@ -74,4 +70,4 @@ export default function SearchByTitleInput({ handleSearch }: Props) {
 			<RandomTournament size="40" />
 		</div>
 	);
-}
+});

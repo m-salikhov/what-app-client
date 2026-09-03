@@ -2,12 +2,12 @@ import { useId } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { ScrollToTop } from "../ScrollToTop/ScrollToTop";
-import TableTooltipDF from "./Components/TableTooltipDF";
-import styles from "./tournaments-table.module.css";
+import { TableTooltipDF } from "./Components/TableTooltipDF";
 import { PaginationControl } from "../UI/PaginationControl/PaginationControl";
 import { useTableManager } from "./Hooks/useTableManager";
-import SearchByTitleInput from "./Components/SearchByTitleInput";
+import { SearchByTitleInput } from "./Components/SearchByTitleInput";
 import { Spinner } from "../Spinner/Spinner";
+import styles from "./tournaments-table.module.css";
 
 export function TournamentsTable({ amountTournamentsOnPage }: { amountTournamentsOnPage: number }) {
 	const id = useId();
@@ -23,6 +23,7 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 		pageCount,
 		handleSearch,
 		showSearchResult,
+		searchString,
 	} = useTableManager(amountTournamentsOnPage);
 
 	if (queryState.isError) return <h2>Ошибка при получении турниров</h2>;
@@ -32,14 +33,14 @@ export function TournamentsTable({ amountTournamentsOnPage }: { amountTournament
 	if (enrichedTournaments.length === 0)
 		return (
 			<div className={styles.container}>
-				<SearchByTitleInput handleSearch={handleSearch} />
+				<SearchByTitleInput handleSearch={handleSearch} searchString={searchString} />
 				<h2>Нет турниров по запросы</h2>{" "}
 			</div>
 		);
 
 	return (
 		<div className={styles.container}>
-			<SearchByTitleInput handleSearch={handleSearch} />
+			<SearchByTitleInput handleSearch={handleSearch} searchString={searchString} />
 
 			<PaginationControl
 				currentPage={currentPage}

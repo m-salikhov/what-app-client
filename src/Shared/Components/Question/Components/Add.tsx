@@ -16,7 +16,6 @@ export function Add({ add }: { add: string }) {
 						src={add}
 						alt="раздатка"
 						onLoad={() => setIsImageLoaded(true)}
-						loading="lazy"
 					/>
 				)}
 

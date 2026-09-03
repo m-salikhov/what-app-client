@@ -1,7 +1,7 @@
 import { Tooltip } from "react-tooltip";
 import styles from "../tournaments-table.module.css";
 
-export default function TableTooltipDF({ id }: { id: string }) {
+export function TableTooltipDF({ id }: { id: string }) {
 	return (
 		<Tooltip id={id} place="bottom" opacity={1}>
 			<div className={styles.tooltip}>
