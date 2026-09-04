@@ -33,6 +33,31 @@ export default defineConfig({
   base: '/',
   plugins: [react(), svgr(), Sitemap(sitemapOptions), shouldAnalyze && analyzer(),],
 
+    server: {
+    proxy: {
+      '/auth': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
+      '/tournaments': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
+      '/questions': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
+      '/users': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
+      '/wordle': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
+    },
+  },
+
   resolve: {
     alias: {
       Shared: '/src/Shared',

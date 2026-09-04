@@ -27,7 +27,9 @@ export function PlayModeQuestion() {
 
 			{showAnswer && <ResultButtons setShowAnswer={setShowAnswer} />}
 
-			{currentQuestion.add && <Add add={currentQuestion.add} />}
+			{currentQuestion.add && (
+				<Add add={currentQuestion.add} addMetadata={currentQuestion.addMetadata} />
+			)}
 
 			<p>{currentQuestion.text}</p>
 
