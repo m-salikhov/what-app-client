@@ -5,4 +5,7 @@
 	cursor: pointer;
 	z-index: 1000;
 	color: var(--nav-text-color);
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
 }

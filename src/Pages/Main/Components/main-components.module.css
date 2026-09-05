@@ -2,27 +2,33 @@
 
 .random {
 	width: 50%;
-}
+	.refreshContainer {
+		display: flex;
+		margin-bottom: 0.25rem;
+		.refresh {
+			display: flex;
 
-.refreshContainer {
-	display: flex;
-}
+			button {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
 
-.refresh {
-	display: flex;
+				-webkit-user-select: none;
+				user-select: none;
+				font-weight: 600;
+				font-size: 1.125rem;
 
-	h2 {
-		margin-right: 0.5rem;
-	}
-}
+				.refreshIcon {
+					transition: transform 1s;
+					color: var(--h-color);
+					margin-left: 0.25rem;
 
-.refreshIcon {
-	transition: transform 1s;
-	cursor: pointer;
-	color: var(--h-color);
-
-	&.rotate {
-		transform: rotate(-360deg);
+					&.rotate {
+						transform: rotate(-360deg);
+					}
+				}
+			}
+		}
 	}
 }
 
@@ -36,13 +42,12 @@
 }
 
 .tournaments {
-	padding-top: 0.9rem;
 	margin-left: 2rem;
 }
 
 .tournamentsHeader {
 	display: flex;
-	h2 {
+	.title {
 		margin: auto 0;
 	}
 }
@@ -118,12 +123,11 @@
 }
 
 @media (width <= 800px) {
-	.refreshContainer {
-		width: 100%;
-	}
-
 	.random {
 		width: 100%;
+		.refreshContainer {
+			width: 100%;
+		}
 	}
 
 	.tournaments {

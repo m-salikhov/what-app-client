@@ -27,7 +27,7 @@ export function LastTournaments() {
 	return (
 		<div className={styles.tournaments}>
 			<div className={styles.tournamentsHeader}>
-				<h2>Последние добавленные турниры</h2>
+				<h2 className={styles.title}>Последние добавленные турниры</h2>
 				<RandomTournament size="30" />
 			</div>
 

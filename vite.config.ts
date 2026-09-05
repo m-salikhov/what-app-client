@@ -55,6 +55,10 @@ export default defineConfig({
         target: 'https://api.andvarif.ru',
         changeOrigin: true,
       },
+      '/public': {
+        target: 'https://api.andvarif.ru',
+        changeOrigin: true,
+      },
     },
   },
 

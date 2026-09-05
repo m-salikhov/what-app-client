@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../question.module.css";
 import type { QuestionType } from "Shared/Schemas/TournamentSchema";
 
@@ -10,13 +10,16 @@ interface Props {
 export function AddImageWithSkeleton({ src, addMetadata }: Props) {
 	const [loaded, setLoaded] = useState(false);
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <нужен сброс при смене src>
+	useEffect(() => {
+		setLoaded(false);
+	}, [src]);
+
 	if (!addMetadata) {
 		return <img src={src} alt="раздаточный материал" style={{ maxWidth: "100%" }} />;
 	}
 
 	const { width, height } = addMetadata;
-	// Обработка ошибки загрузки: скрываем скелетон, показываем пустое место
-	const handleError = () => setLoaded(true);
 
 	return (
 		<div className={styles.imageContainer} style={{ aspectRatio: `${width} / ${height}` }}>
@@ -27,7 +30,10 @@ export function AddImageWithSkeleton({ src, addMetadata }: Props) {
 				className={styles.image}
 				style={{ display: loaded ? "block" : "none" }}
 				onLoad={() => setLoaded(true)}
-				onError={handleError}
+				onError={(e) => {
+					console.error(e);
+					setLoaded(true);
+				}}
 			/>
 		</div>
 	);

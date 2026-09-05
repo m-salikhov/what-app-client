@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BsArrowUpSquareFill as ArrowUp } from "react-icons/bs";
 import styles from "./scroll-to-top.module.css";
 
-export function ScrollToTop({ targetSelector = "header" }: { targetSelector?: string }) {
+export function ScrollToTop({ targetSelector = "#main-start" }: { targetSelector?: string }) {
 	const [visible, setVisible] = useState(false);
 
 	useEffect(() => {
@@ -11,11 +11,11 @@ export function ScrollToTop({ targetSelector = "header" }: { targetSelector?: st
 
 		const observer = new IntersectionObserver(
 			([entry]) => {
-				// если header НЕ виден, показываем кнопку
+				// если элемент div "#main-start" не виден, то показываем кнопку
 				setVisible(!entry.isIntersecting);
 			},
 			{
-				threshold: 0,
+				threshold: 1,
 			},
 		);
 

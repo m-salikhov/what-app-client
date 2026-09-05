@@ -2,7 +2,7 @@
 	display: flex;
 	justify-content: center;
 	flex-wrap: wrap;
-	margin: 0 auto;
+	margin-bottom: 0.5rem;
 
 	button {
 		padding: 0 0.5rem;
@@ -18,6 +18,7 @@
 .question {
 	display: flex;
 	justify-content: center;
+	scroll-margin-top: 3.5rem;
 }
 
 .question-enter {

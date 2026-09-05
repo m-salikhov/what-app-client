@@ -1,5 +1,5 @@
 .question {
-	margin: 1rem 0;
+	margin-bottom: 1rem;
 	overflow: hidden;
 	border: 2px solid var(--main-border-color);
 	border-radius: 10px;
@@ -9,7 +9,7 @@
 .questionHeader {
 	display: flex;
 	justify-content: space-between;
-	padding: 0.5rem;
+	padding: 0.125rem 0.5rem;
 	background-color: rgb(173 216 230 / 40%);
 	border-bottom: var(--main-border);
 
@@ -17,13 +17,24 @@
 		min-width: 98px;
 	}
 
+	p {
+		font-weight: bold;
+		color: var(--h-color);
+	}
+
 	a {
 		padding-left: 0.5rem;
-		font-size: 1.25rem;
-		color: var(--p-color);
+		font-size: 1rem;
+		color: var(--h-color);
+		margin: auto 0;
+		text-align: end;
 
 		&:hover {
 			font-weight: bold;
+		}
+
+		&:visited {
+			color: var(--h-color);
 		}
 	}
 }
@@ -64,7 +75,7 @@
 /* скелетон раздатки */
 .imageContainer {
 	position: relative;
-	width: 70%;
+	width: 60%;
 	max-width: 100%;
 	background-color: #f0f0f0;
 	overflow: hidden;
@@ -181,22 +192,6 @@
 					overflow-wrap: break-word;
 				}
 			}
-		}
-	}
-}
-
-@media (width <= 600px) {
-	.questionHeader {
-		padding: 0.5rem;
-
-		h3 {
-			font-size: 1rem;
-		}
-
-		a {
-			display: flex;
-			align-items: center;
-			font-size: 1rem;
 		}
 	}
 }

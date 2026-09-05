@@ -18,9 +18,9 @@ export function Question({ q, random = false }: Props) {
 	return (
 		<div className={styles.question}>
 			<div className={styles.questionHeader}>
-				<h3 className={styles.questionNumber}>Вопрос {q.qNumber}</h3>
+				<p className={styles.questionNumber}>Вопрос {q.qNumber}</p>
 				{random && <Link to={`/tournament/${q.tournament?.id}`}>{q.tournament?.title}</Link>}
-				{!random && <h3>Тур {q.tourNumber}</h3>}
+				{!random && <p>Тур {q.tourNumber}</p>}
 			</div>
 
 			{q.add && <Add add={q.add} addMetadata={q.addMetadata} />}

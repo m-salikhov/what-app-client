@@ -14,7 +14,7 @@ export function TourEnd() {
 	return (
 		<div className={styles.tourEnd}>
 			<div className={styles.tourEndButton}>
-				<Button onClick={onClick}> Следующий тур</Button>
+				<Button onClick={onClick}>Следующий тур</Button>
 			</div>
 			<ResBlock />
 		</div>

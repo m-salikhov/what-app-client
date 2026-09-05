@@ -11,12 +11,14 @@ interface Props {
 	tournamentId: number | string | undefined;
 }
 
-export function ResultTable({ result, tournamentId: id }: Props) {
+export function ResultTable({ result, tournamentId }: Props) {
 	const resByTour = Object.groupBy(result, (v) => v.tour);
 
 	const [selectedQuestionNumber, setSelectedQuestionNumber] = useState<number>(-1);
 
-	const { data: tournament } = useGetTournamentQuery(id ? String(id) : skipToken);
+	const { data: tournament } = useGetTournamentQuery(
+		tournamentId ? String(tournamentId) : skipToken,
+	);
 
 	const selectedQuestion = tournament?.questions.find((q) => q.qNumber === selectedQuestionNumber);
 

@@ -22,7 +22,6 @@ export function RandomQuestions() {
 				{" "}
 				<div className={styles.refresh}>
 					{" "}
-					<h2>Случайные вопросы</h2>
 					<button
 						type="button"
 						title="случайные вопросы"
@@ -31,6 +30,7 @@ export function RandomQuestions() {
 							setIsRandomRefetch(!isRandomRefetch);
 						}}
 					>
+						Случайные вопросы
 						<HiRefresh
 							size={24}
 							className={

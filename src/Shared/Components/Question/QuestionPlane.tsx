@@ -7,8 +7,8 @@ export function QuestionPlane({ q }: { q: QuestionType }) {
 	return (
 		<div className={styles.question}>
 			<div className={styles.questionHeader}>
-				<h3>Вопрос {q.qNumber}</h3>
-				<h3>Тур {q.tourNumber}</h3>
+				<p className={styles.questionNumber}>Вопрос {q.qNumber}</p>
+				<p>Тур {q.tourNumber}</p>
 			</div>
 
 			{q.add && <Add add={q.add} addMetadata={q.addMetadata} />}
